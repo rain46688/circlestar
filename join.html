@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="/css/header.css" type="text/css" rel="stylesheet" />
+    <link href="/css/joincontent.css" type="text/css" rel="stylesheet" />
+    <link href="/css/footer.css" type="text/css" rel="stylesheet" />
+    <title>와인 검색 사이트</title>
+</head>
+<body>
+    
+<header id="header">
+    <div class="contentcontainer">
+    <section>
+
+        <nav id="mainmenu">
+            <ul>
+                <li><a href="*">뉴스 News |</a></li>
+                <li><a href="*">이벤트 Event |</a></li>
+                <li><a href="*">검색 Search |</a></li>
+            </ul>
+
+        </nav>
+
+        <div class="submenu">
+
+            <section id="searchform">
+                <form action ="/course">
+                <fieldset>
+                    <label>와인 검색</label>
+                    <input type="text" name="q" value=""/>
+                    <input type="submit" value="검색"/>
+                </fieldset>
+                </form>
+            </section>
+
+            <nav id="acountmenu">
+                <ul>
+                <li><a href="/index.html">홈</a></li>
+                <li><a href="">로그인</a></li>
+                <li><a href="/join.html">회원가입</a></li>
+            </ul>
+            <ul>
+                <li><a href="">마이페이지</a></li>
+                <li><a href="">고객센터</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </section>
+</div>
+</header>
+
+<section id = "con">
+<article id="content">
+    <section class="contentcontainer">
+        <span class="title">20년 이상의 전통과 경험, 국내에서 인정받은 와인 검색 포털 사이트</span>
+    </section>
+</article>
+
+<article class="contentcontainer">
+
+    <ul class="banner">
+         <a href=""><img src="/images/wine.png"style="cursor: pinter;"/></a>
+    </ul>
+
+    <section class="content2">
+        <h1>회원가입<em> JOIN</em></h1>
+
+        <form action="winejoincontroller" method="post">
+
+        <article>
+            <input type="text" name="id" id="join" placeholder="아이디" title="아이디" />
+        </article>
+        <article>
+            <input type="password" name="pw" id="join" placeholder="비밀번호" title="비밀번호" />
+        </article>
+        <article>
+            <input type="text" name="name" id="join" placeholder="이름" title="이름" />
+        </article>
+        <article>
+            <input type="text" name="gender" id="join" placeholder="성별" title="성별" />
+        </article>
+        <article>
+            <input type="text" name="birthday" id="join" placeholder="생년월일" title="생년월일" />
+        </article>
+        <article>
+            <input type="text" name="phone" id="join" placeholder="전화번호" title="전화번호" />
+        </article>
+        <article>
+            <input type="text" name="email" id="join" placeholder="이메일" title="이메일" />
+        </article>
+        <article>
+            <!-- <a href="*" id="joinbtn">회 원 가 입</a> -->
+            <input type="submit" value="회원가입" id="joinbutton" />
+        </article>
+    </form>
+     </section>
+
+</article>
+</section>
+
+
+<footer id="footer">
+    <div class="contentcontainer">
+        <div id="companyinfo">
+            <dl>
+                <dt>주소:</dt>
+                <dd>서울시 강동구 상일로 152 </dd>
+                <dt>관리자 메일:</dt>
+                <dd>rain46688@kh.com</dd>
+            </dl>
+            <dl>
+                <dt>사업자 등록번호:</dt>
+                <dd>123-1234-12345</dd>
+                <dt>통신 판매업:</dt>
+                <dd>신고제 1234 호</dd>
+            </dl>
+            <dl>
+                <dt>상호:</dt>
+                <dd>CMS</dd>
+                <dt>대표 이사:</dt>
+                <dd>최민수</dd>
+                <dt>전화 번호:</dt>
+                <dd>010-8230-8775</dd>
+            </dl>
+            <div id="copyright" class="margin-top">Copyright ⓒ cms87750.com All right reserved since 1994</div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
