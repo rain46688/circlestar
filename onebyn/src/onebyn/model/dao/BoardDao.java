@@ -1,5 +1,6 @@
 package onebyn.model.dao;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,6 +90,35 @@ public class BoardDao {
 		}
 		
 		return count;
+	}
+
+	public int writeNotice(Connection conn, Board b) {
+		// TODO Auto-generated method stub
+		
+		int result = 0;
+		PreparedStatement pst = null;
+		
+		String sql = p.getProperty("writeboardlist");
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, b.getTitle());
+			pst.setString(2, b.getWriterId());
+			pst.setString(3, b.getContent());
+			pst.setString(4, b.getFiles());
+			result = pst.executeUpdate();
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pst);
+		}
+		
+		return result;
 	}
 
 }

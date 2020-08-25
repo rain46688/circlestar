@@ -27,4 +27,13 @@ public class BoardService {
 		return cnt;
 	}
 
+	public int writeNotice(Board b, ServletContext servletContext) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection(servletContext);
+		BoardDao bo = new BoardDao(servletContext);
+		int  result = bo.writeNotice(conn,b);
+		close(conn);
+		return result;
+	}
+
 }

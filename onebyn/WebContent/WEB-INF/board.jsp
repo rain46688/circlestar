@@ -11,6 +11,8 @@
 <title>semi1 board</title>
 <link href="<%=application.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 <link href="<%=application.getContextPath()%>/cms.css" rel="stylesheet">
+<script src="<%=application.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+<script src="<%=application.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
@@ -140,6 +142,14 @@
 
 
 	<div class="container">
+		<div class="form-group">
+			<h1> NOTITLE </h1>
+			<ul class="nav justify-content-end">
+			  <li class="nav-item">
+				<a class="btn btn-primary btn-lg" href="wn">게시글 작성!</a>
+			  </li>
+			</ul>
+			</div>
 		<div class="row">
 
 
@@ -216,7 +226,6 @@
 		</div>
 	</footer>
 
-	<script src="<%=application.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-	<script src="<%=application.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
