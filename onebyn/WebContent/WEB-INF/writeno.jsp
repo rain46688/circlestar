@@ -19,7 +19,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a href="">
+        <a href="notice">
             <img class="navbar-brand" src="<%=application.getContextPath()%>/images/b1.png">
         </a>
         <form class="form-inline" action="/action_page.php">
@@ -141,10 +141,10 @@
 
 
 
-    <div class="container">
+    <div class="container" id="writecontainer">
         <!-- <div class="row"> -->
             <div class="form-group">
-            <h1> 게시글 작성 </h1>
+            <h1> 게시글 작성! </h1>
             </div>
             
             <form method="post" action="wn" enctype="multipart/form-data">
@@ -155,7 +155,7 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlFile1">파일 선택 : </label>
-                    <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" accept=".gif, .jpg, .png .jpeg">
                 </div>
 
                 <div class="form-group">

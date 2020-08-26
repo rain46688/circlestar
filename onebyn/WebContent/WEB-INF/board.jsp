@@ -153,11 +153,12 @@
 		<div class="row">
 
 
-
 			<c:forEach var="n" items="${list}" varStatus="st">
 				<div class="col-md-4 mb-5">
 					<div class="card h-100">
-						<img class="card-img-top" src="<%= application.getContextPath() %>/${n.files}" alt="">
+
+						<img class="card-img-top" src="<%= application.getContextPath() %>/${n.files}" alt="" width="460px" height="460px">
+						
 						<div class="card-body">
 							<h4 class="card-title">${n.title}</h4>
 							<p class="card-text">${n.content}</p>
@@ -165,6 +166,7 @@
 						<div class="card-footer">
 							<a href="#" class="btn btn-success">나도 N빵하기!</a>
 						</div>
+						<!--  <p>!${n.files}!<br>!${noimg}!<br>!${empty(n.files)}!<br>!${!empty(n.files)}!</p>-->
 					</div>
 				</div>
 			</c:forEach>
