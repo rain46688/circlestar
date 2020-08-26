@@ -62,7 +62,7 @@ public class BoardServlet extends HttpServlet{
 		
 		req.setAttribute("list", list);
 		req.setAttribute("count", count);
-		req.getRequestDispatcher("/WEB-INF/board.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/board.jsp").forward(req, resp);
 	
 	}
 

@@ -9,9 +9,7 @@ body {
   /* min-width: 700px; */
 }
 
-/* #onebyn-nav-mid{
-  width: 100%;
-} */
+/* nav */
 
 @media(max-width: 1000px){
   .form-inline{
@@ -45,7 +43,7 @@ body {
   font-family: "배달의민족 도현","메이플스토리";
 }
 
-/* Main */
+/* board */
 
 .btn-toolbar {
   margin: auto;
