@@ -19,7 +19,8 @@ import onebyn.model.vo.Board;
 import onebyn.service.BoardService;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5, fileSizeThreshold = 1024 * 1024)
-@WebServlet("/board/wn")
+//@WebServlet("/board/wn")
+@WebServlet("/writenotice.do")
 public class WriteNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = -2971330747359854797L;
 	private static final String IMG = "images/";
@@ -105,7 +106,7 @@ public class WriteNoticeServlet extends HttpServlet {
 			System.out.println();
 		}
 
-		resp.sendRedirect(req.getContextPath()+"/board/notice");
+		resp.sendRedirect(req.getContextPath()+"/board.do");
 		//다시 게시판으로 이동 redirect를 해야 req,resp가 남지않으니 좋음
 	}
 

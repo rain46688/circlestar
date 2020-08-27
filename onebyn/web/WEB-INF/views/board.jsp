@@ -17,7 +17,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-		<a href="">
+		<a href="<%=application.getContextPath()%>/board.do">
 			<img class="navbar-brand" src="<%=application.getContextPath()%>/images/b1.png">
 		</a>
 		<form class="form-inline" action="/action_page.php">
@@ -39,7 +39,7 @@
 				<!-- <li class="nav-item active"> -->
 				<c:if test="${empty(m)}">
 				<li class="nav-item">
-					<a class="nav-link" href="<%=application.getContextPath()%>/login">로그인</a>
+					<a class="nav-link" href="<%=application.getContextPath()%>/login.do">로그인</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">회원가입</a>
@@ -50,7 +50,7 @@
 					<a class="nav-link">${m.id}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<%=application.getContextPath()%>/logout">로그아웃</a>
+					<a class="nav-link" href="<%=application.getContextPath()%>/logout.do">로그아웃</a>
 				</li>
 				</c:if>
 				<li class="nav-item">
@@ -61,7 +61,6 @@
 				</li>
 			</ul>
 		</div>
-
 
 
 
@@ -158,7 +157,9 @@
 			<h1> NOTITLE </h1>
 			<ul class="nav justify-content-end">
 			  <li class="nav-item">
-				<a class="btn btn-primary btn-lg" href="wn">게시글 작성!</a>
+			  <c:if test="${m.id == 'ADMIN'}">
+				<a class="btn btn-primary btn-lg" href="<%=application.getContextPath()%>/writenotice.do">게시글 작성!</a>
+			  </c:if>
 			  </li>
 			</ul>
 			</div>

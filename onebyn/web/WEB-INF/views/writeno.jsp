@@ -19,7 +19,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a href="notice">
+        <a href="<%=application.getContextPath()%>/board.do">
             <img class="navbar-brand" src="<%=application.getContextPath()%>/images/b1.png">
         </a>
         <form class="form-inline" action="/action_page.php">
@@ -147,7 +147,7 @@
             <h1> 게시글 작성! </h1>
             </div>
             
-            <form method="post" action="wn" enctype="multipart/form-data">
+            <form method="post" action="<%=application.getContextPath()%>/writenotice.do" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="formGroupExampleInput">제목 : </label>
                     <input type="text" name="title" class="form-control" id="formGroupExampleInput">
@@ -165,7 +165,7 @@
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="게시글 작성 완료!"></input>
-                    <a href="notice" class="btn btn-primary">게시글 작성 취소</a>
+                    <a href="<%=application.getContextPath()%>/board.do" class="btn btn-primary">게시글 작성 취소</a>
                 </div>
 
             </form>
