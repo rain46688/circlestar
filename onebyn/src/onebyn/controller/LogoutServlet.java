@@ -22,10 +22,12 @@ public class LogoutServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
 		Member m = (Member)session.getAttribute("m");
-		System.out.println(m.getId()+"님 로그아웃!");
+		
 //		session.invalidate();//현재 세션 삭제
+		
 		Ml ml = new Ml();
 		ml.removeSession(m.getId());
+		
 		resp.sendRedirect(req.getContextPath()+"/board.do");
 		
 	}
@@ -33,7 +35,7 @@ public class LogoutServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+		doGet(req, resp);
 	}
 	
 }

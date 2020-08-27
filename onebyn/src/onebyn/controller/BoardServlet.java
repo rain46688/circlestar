@@ -65,7 +65,7 @@ public class BoardServlet extends HttpServlet{
 		
 		Ml ml = new Ml();
 		System.out.println("접속 유저 수 : "+ml.getUserCount());
-		ml.printloginUsers();
+		ml.printLoginUsers();
 		
 		System.out.println();
 		req.setAttribute("list", list);

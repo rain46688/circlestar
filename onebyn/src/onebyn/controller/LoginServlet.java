@@ -46,16 +46,19 @@ public class LoginServlet extends HttpServlet {
 			//로그인 성공
 			System.out.println(m.getId()+" 로그인 성공");
 			//세션 받기
-			Ml ml = new Ml();
 			
-			if(ml.isUsing(m.getId())) {
+//			HttpSession session = req.getSession();
+//			session.setAttribute("m", m);
+			
+			Ml ml = new Ml();
+			if(ml.isUsing(m.getId())) {//중복로그인 안되!
 				ml.removeSession(m.getId());
 			}
-			
 			HttpSession session = req.getSession();
 			session.setAttribute("m", m);
-			ml.setSession(session, m.getId());			
+			ml.addSession(session, m.getId());			
 			System.out.println("접속 유저 아이디 : "+ml.getUserID(session));
+			
 			
 			//메인 페이지로
 			resp.sendRedirect(req.getContextPath()+"/board.do");
