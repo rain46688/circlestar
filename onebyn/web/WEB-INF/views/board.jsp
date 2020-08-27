@@ -32,15 +32,27 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<!-- 위치 조정용 -->
 		</div>
+		<!-- 세션에 따라 분기 처리 -->
+	
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto ">
 				<!-- <li class="nav-item active"> -->
+				<c:if test="${empty(m)}">
 				<li class="nav-item">
-					<a class="nav-link" href="#">로그인</a>
+					<a class="nav-link" href="<%=application.getContextPath()%>/login">로그인</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">회원가입</a>
 				</li>
+				</c:if>
+				<c:if test="${!empty(m)}">
+				<li class="nav-item">
+					<a class="nav-link">${m.id}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=application.getContextPath()%>/logout">로그아웃</a>
+				</li>
+				</c:if>
 				<li class="nav-item">
 					<a class="nav-link" href="#">고객센터</a>
 				</li>

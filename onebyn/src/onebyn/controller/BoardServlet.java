@@ -47,18 +47,20 @@ public class BoardServlet extends HttpServlet{
 
 		for (Board b : list) {
 			String dd = req.getServletContext().getRealPath(b.getFiles());
+//			System.out.println(dd);
 			File f = new File(dd);
-			if (!f.exists()) {
+			String check = dd.substring(dd.length() - 1, dd.length());
+//			System.out.println("check : "+check);
+			if (!f.exists() || check.equals("\\")) {
+				System.out.println("if문 들어옴?");
 				System.out.println(b);
 				b.setFiles("images/noimage.png");
 				System.out.println(b.getFiles() + " 그림 파일 없어서 대체됨!");
 			} else {
 				System.out.println(b);
 			}
-
 		}
 		System.out.println("==================================");
-
 		
 		req.setAttribute("list", list);
 		req.setAttribute("count", count);
