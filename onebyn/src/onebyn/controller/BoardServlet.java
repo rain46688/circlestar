@@ -3,15 +3,12 @@ package onebyn.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import onebyn.common.listener.MemberListener;
-import onebyn.common.listener.Ml;
 import onebyn.model.service.BoardService;
 import onebyn.model.vo.Board;
 
@@ -34,7 +31,7 @@ public class BoardServlet extends HttpServlet{
 		
 		BoardService bs = new BoardService();
 		List<Board> list = bs.getBoardList(getServletContext(),page);
-		int count = bs.getBoardCount(getServletContext());
+		int cnt = bs.getBoardCount(getServletContext());
 //		System.out.println("count : "+count);
 //		System.out.println("start : "+(page-(page - 1)%5));
 //		System.out.println("end : "+count/9.0);
@@ -50,7 +47,7 @@ public class BoardServlet extends HttpServlet{
 
 		for (Board b : list) {
 			String dd = req.getServletContext().getRealPath(b.getFiles());
-//			System.out.println(dd);
+			System.out.println(dd);
 			File f = new File(dd);
 			String check = dd.substring(dd.length() - 1, dd.length());
 //			System.out.println("check : "+check);
@@ -71,10 +68,7 @@ public class BoardServlet extends HttpServlet{
 		
 		System.out.println();
 		req.setAttribute("list", list);
-		req.setAttribute("count", count);
+		req.setAttribute("cnt", cnt);
 		req.getRequestDispatcher("/WEB-INF/views/board.jsp").forward(req, resp);
-	
 	}
-
-
 }

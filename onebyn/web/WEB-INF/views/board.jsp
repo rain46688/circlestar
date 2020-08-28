@@ -197,7 +197,7 @@
 
 	<c:set var="page" value="${(empty param.p)?1:param.p}" />
 	<c:set var="start" value="${page - (page - 1)%5}" />
-	<fmt:parseNumber var="end" value="${Math.ceil(count/9)}" integerOnly="true"/>
+	<fmt:parseNumber var="end" value="${Math.ceil(cnt/9)}" integerOnly="true"/>
 
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 

@@ -44,7 +44,7 @@ public class LoginDao {
 			rs = pst.executeQuery();
 			boolean r = rs.next();
 			System.out.println("rs.next() : "+r);
-			//Member 객체에 넣어야될듯?
+			//Member 객체에 넣어서 반환하게 고치기!!
 			
 			if(r) {
 				m.setId(rs.getString("id"));

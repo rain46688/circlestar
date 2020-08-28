@@ -1,6 +1,7 @@
 package onebyn.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import onebyn.common.listener.MemberListener;
-import onebyn.common.listener.Ml;
 import onebyn.model.service.LoginService;
 import onebyn.model.vo.Member;
 
@@ -32,6 +32,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		String page = "";
+		String alert="";
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
 		System.out.println("id : "+id +" pw : "+pw);
@@ -56,18 +58,20 @@ public class LoginServlet extends HttpServlet {
 			ml.addSession(session, m.getId());			
 			System.out.println("접속 유저 아이디 : "+ml.getUserId(session));
 			
-
-			
-			
-			
 			//메인 페이지로
-			resp.sendRedirect(req.getContextPath()+"/board.do");
+			page=req.getContextPath()+"/board.do";
+			alert="성공";
 			//메인없으니 게시판으로 이동 ㅋ
 		}else if(m.getId() == null) {
 			//로그인 실패
 			System.out.println("로그인 실패");
+			page=req.getContextPath()+"/login.do";
+			alert="실패";
 		}
-		
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.println("<script>alert('로그인 "+alert+"'); location.href='"+page+"';</script>");
+		out.flush();
 	}
 	
 }
