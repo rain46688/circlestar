@@ -1,4 +1,4 @@
-package onebyn.service;
+package onebyn.model.service;
 
 import static onebyn.common.JDBCtem.*;
 import java.sql.Connection;

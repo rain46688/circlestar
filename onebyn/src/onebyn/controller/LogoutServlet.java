@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 
+import onebyn.common.listener.MemberListener;
 import onebyn.common.listener.Ml;
 import onebyn.model.vo.Member;
 
@@ -24,8 +25,8 @@ public class LogoutServlet extends HttpServlet{
 		Member m = (Member)session.getAttribute("m");
 		
 //		session.invalidate();//현재 세션 삭제
-		
-		Ml ml = new Ml();
+		MemberListener ml = new MemberListener();
+//		Ml ml = new Ml();
 		ml.removeSession(m.getId());
 		
 		resp.sendRedirect(req.getContextPath()+"/board.do");

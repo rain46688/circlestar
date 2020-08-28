@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import onebyn.common.listener.MemberListener;
 import onebyn.common.listener.Ml;
+import onebyn.model.service.BoardService;
 import onebyn.model.vo.Board;
-import onebyn.service.BoardService;
 
 
 //@WebServlet("/board/notice")
@@ -63,9 +64,10 @@ public class BoardServlet extends HttpServlet{
 			}
 		}
 		
-		Ml ml = new Ml();
+//		Ml ml = new Ml();
+		MemberListener ml = new MemberListener();
 		System.out.println("접속 유저 수 : "+ml.getUserCount());
-		ml.printLoginUsers();
+		ml.printUsers();
 		
 		System.out.println();
 		req.setAttribute("list", list);

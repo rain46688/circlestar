@@ -1,9 +1,6 @@
 package onebyn.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,12 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
-import javax.websocket.Session;
 
+import onebyn.common.listener.MemberListener;
 import onebyn.common.listener.Ml;
+import onebyn.model.service.LoginService;
 import onebyn.model.vo.Member;
-import onebyn.service.LoginService;
 
 @WebServlet("/login.do")
 public class LoginServlet extends HttpServlet {
@@ -50,14 +46,18 @@ public class LoginServlet extends HttpServlet {
 //			HttpSession session = req.getSession();
 //			session.setAttribute("m", m);
 			
-			Ml ml = new Ml();
-			if(ml.isUsing(m.getId())) {//중복로그인 안되!
+			MemberListener ml = new MemberListener();
+//			Ml ml = new Ml();
+			if(ml.isDuplicate(m.getId())) {//중복로그인 안되!
 				ml.removeSession(m.getId());
 			}
 			HttpSession session = req.getSession();
 			session.setAttribute("m", m);
 			ml.addSession(session, m.getId());			
-			System.out.println("접속 유저 아이디 : "+ml.getUserID(session));
+			System.out.println("접속 유저 아이디 : "+ml.getUserId(session));
+			
+
+			
 			
 			
 			//메인 페이지로

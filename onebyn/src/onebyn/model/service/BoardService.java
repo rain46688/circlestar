@@ -1,4 +1,4 @@
-package onebyn.service;
+package onebyn.model.service;
 
 import java.sql.Connection;
 import java.util.List;
