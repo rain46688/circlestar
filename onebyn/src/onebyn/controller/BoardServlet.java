@@ -12,10 +12,9 @@ import onebyn.common.listener.MemberListener;
 import onebyn.model.service.BoardService;
 import onebyn.model.vo.Board;
 
-
 //@WebServlet("/board/notice")
 @WebServlet("/board.do")
-public class BoardServlet extends HttpServlet{
+public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 5185085230146159498L;
 
 	@Override
@@ -23,19 +22,12 @@ public class BoardServlet extends HttpServlet{
 
 		req.setCharacterEncoding("UTF-8");
 		String p = req.getParameter("p");
-		
-		int page = 1;
-		if(p != null&& !p.equals("")) {
-			page = Integer.parseInt(p);
-		}
-		
+
 		BoardService bs = new BoardService();
-		List<Board> list = bs.getBoardList(getServletContext(),page);
+		List<Board> list = bs.getBoardList(getServletContext(),(p != null && !p.equals(""))?Integer.parseInt(p):1);
 		int cnt = bs.getBoardCount(getServletContext());
-//		System.out.println("count : "+count);
-//		System.out.println("start : "+(page-(page - 1)%5));
-//		System.out.println("end : "+count/9.0);
-		
+
+
 //		String dd = req.getServletContext().getRealPath("/images/bs.jpg");
 //		File f = new File(dd);
 //		if(!f.exists()) {
@@ -45,6 +37,10 @@ public class BoardServlet extends HttpServlet{
 //		}
 //		System.out.println(dd);
 
+//		System.out.println("cnt : "+cnt);
+//		System.out.println("start : "+(Integer.parseInt(p)-(Integer.parseInt(p) - 1)%5));
+//		System.out.println("end : "+cnt/9.0);
+		
 		for (Board b : list) {
 			String dd = req.getServletContext().getRealPath(b.getFiles());
 			System.out.println(dd);
@@ -53,19 +49,20 @@ public class BoardServlet extends HttpServlet{
 //			System.out.println("check : "+check);
 			if (!f.exists() || check.equals("\\")) {
 //				System.out.println("if문 들어옴?");
-//				System.out.println(b);
+				System.out.println(b);
 				b.setFiles("images/noimage.png");
-//				System.out.println(b.getFiles() + " 그림 파일 없어서 대체됨!");
+				System.out.println(b.getFiles() + " 그림 파일 없어서 대체됨!");
 			} else {
-//				System.out.println(b);
+				System.out.println(b);
 			}
 		}
-		
+
 //		Ml ml = new Ml();
+		System.out.println();
 		MemberListener ml = new MemberListener();
-		System.out.println("접속 유저 수 : "+ml.getUserCount());
+		System.out.println("접속 유저 수 : " + ml.getUserCount());
 		ml.printUsers();
-		
+
 		System.out.println();
 		req.setAttribute("list", list);
 		req.setAttribute("cnt", cnt);

@@ -23,6 +23,23 @@ public class WriteNoticeServlet extends HttpServlet {
 	private static final String IMG = "images/";
 
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		req.getRequestDispatcher("/WEB-INF/views/writeno.jsp").forward(req, resp);
+	}
+
+	private String extractFileName(String partHeader) {
+		for (String cd : partHeader.split(";")) {
+			if (cd.trim().startsWith("filename")) {
+				String fileName = cd.substring(cd.indexOf("=") + 1).trim().replace("\"", "");
+				int index = fileName.lastIndexOf(File.separator);
+				return fileName.substring(index + 1);
+			}
+		}
+		return null;
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		resp.setContentType("/text/html; charset=utf-8;");
@@ -44,30 +61,25 @@ public class WriteNoticeServlet extends HttpServlet {
 			Collection<Part> parts = req.getParts();
 
 			for (Part part : parts) {
-				System.out.printf("파라미터 명 : %s, contentType :  %s,  size : %d bytes \n", part.getName(),
-						part.getContentType(), part.getSize());
-
 				if (part.getHeader("Content-Disposition").contains("filename=")) {
 					String fileName = extractFileName(part.getHeader("Content-Disposition"));
 
 					if (part.getSize() > 0) {
-						System.out.printf("업로드 파일 명 : %s  \n", fileName);
 						fileNameList.add(fileName);
 						part.write(DIR + File.separator + fileName);
 						part.delete();
 					}
 				} else {
 					String formValue = req.getParameter(part.getName());
-					System.out.printf("name : %s, value : %s  \n", part.getName(), formValue);
 				}
 			}
 
-			System.out.println("업로드 완료");
+			System.out.println("업로드 성공");
 		} else {
 			System.out.println("업로드 실패");
 		}
 
-		System.out.println("사이즈 : " + fileNameList.size());
+		System.out.println("fileNameList 사이즈 : " + fileNameList.size());
 
 		for (String s : fileNameList) {
 			if (!fileNameList.isEmpty()) {
@@ -107,22 +119,6 @@ public class WriteNoticeServlet extends HttpServlet {
 		//다시 게시판으로 이동 redirect를 해야 req,resp가 남지않으니 좋음
 	}
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		req.getRequestDispatcher("/WEB-INF/views/writeno.jsp").forward(req, resp);
-	}
 
-	private String extractFileName(String partHeader) {
-		for (String cd : partHeader.split(";")) {
-			if (cd.trim().startsWith("filename")) {
-				String fileName = cd.substring(cd.indexOf("=") + 1).trim().replace("\"", "");
-				;
-				int index = fileName.lastIndexOf(File.separator);
-				return fileName.substring(index + 1);
-			}
-		}
-		return null;
-	}
 
 }

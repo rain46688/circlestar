@@ -19,14 +19,9 @@ public class LogoutServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
 		Member m = (Member)session.getAttribute("m");
-		
-//		session.invalidate();//현재 세션 삭제
 		MemberListener ml = new MemberListener();
-//		Ml ml = new Ml();
 		ml.removeSession(m.getId());
-		
 		resp.sendRedirect(req.getContextPath()+"/board.do");
-		
 	}
 	
 	@Override
@@ -34,5 +29,4 @@ public class LogoutServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		doGet(req, resp);
 	}
-	
 }
