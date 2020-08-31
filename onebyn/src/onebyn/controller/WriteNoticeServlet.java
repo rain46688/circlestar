@@ -118,7 +118,4 @@ public class WriteNoticeServlet extends HttpServlet {
 		resp.sendRedirect(req.getContextPath()+"/board.do");
 		//다시 게시판으로 이동 redirect를 해야 req,resp가 남지않으니 좋음
 	}
-
-
-
 }

@@ -83,6 +83,8 @@ public class MemberListener implements HttpSessionBindingListener {
 		while(it.hasNext()) {
 			Map.Entry<HttpSession, String> s = it.next();
 			System.out.println(++i+" 번째 유저 아이디 : "+s.getValue());
+			if(s.getKey().getAttribute("m") != null)
+				System.out.println("key : "+s.getKey().getAttribute("m"));
 		}
 		System.out.println("==================================");
 	}

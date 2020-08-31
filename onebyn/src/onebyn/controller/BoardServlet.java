@@ -27,7 +27,6 @@ public class BoardServlet extends HttpServlet {
 		List<Board> list = bs.getBoardList(getServletContext(),(p != null && !p.equals(""))?Integer.parseInt(p):1);
 		int cnt = bs.getBoardCount(getServletContext());
 
-
 //		String dd = req.getServletContext().getRealPath("/images/bs.jpg");
 //		File f = new File(dd);
 //		if(!f.exists()) {

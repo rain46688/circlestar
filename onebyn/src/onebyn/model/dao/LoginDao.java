@@ -36,7 +36,7 @@ public class LoginDao {
 		ResultSet rs = null;
 		PreparedStatement pst = null;
 		String sql = p.getProperty("loginuser");
-		Member m = new Member();
+		Member m = null;
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
@@ -47,6 +47,7 @@ public class LoginDao {
 			//Member 객체에 넣어서 반환하게 고치기!!
 			
 			if(r) {
+				m = new Member();
 				m.setId(rs.getString("id"));
 				m.setPw(rs.getString("pwd"));
 				m.setName(rs.getString("name"));
