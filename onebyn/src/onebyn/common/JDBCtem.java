@@ -1,5 +1,6 @@
 package onebyn.common;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,17 +8,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-import javax.servlet.ServletContext;
 
 public class JDBCtem {
 	
 	// getconnection
 	
-	public static Connection getConnection(ServletContext s) {
+	public static Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
 		try {
-			prop.load(s.getResourceAsStream("/WEB-INF/resource/Driver.properties"));
+			String fileName =JDBCtem.class.getResource("/onebyn/driver/driver.properties").getPath();
+			prop.load(new FileReader(fileName));
 			String driver = prop.getProperty("driver");
 			Class.forName(driver);
 			String url = prop.getProperty("url");

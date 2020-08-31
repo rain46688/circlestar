@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		String pw = req.getParameter("pw");
 		System.out.println("id : " + id + " pw : " + pw);
 		LoginService ls = new LoginService();
-		Member m = ls.loginUser(getServletContext(), id, pw);
+		Member m = ls.loginUser(id, pw);
 //		System.out.println("m.getId() : "+m.getId());
 
 		if (m == null) {

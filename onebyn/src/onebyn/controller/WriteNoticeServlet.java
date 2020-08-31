@@ -103,7 +103,7 @@ public class WriteNoticeServlet extends HttpServlet {
 		b.setWriterId("ADMIN");
 
 		BoardService bs = new BoardService();
-		int result = bs.writeNotice(b, getServletContext());
+		int result = bs.writeNotice(b);
 
 		if (result == 1) {
 			System.out.println();

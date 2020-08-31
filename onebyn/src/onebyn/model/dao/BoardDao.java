@@ -19,14 +19,12 @@ public class BoardDao {
 	private Properties p = new Properties();
 	private final int maxcount = 9;
 	
+
 	public BoardDao() {
 		// TODO Auto-generated constructor stub
-	}
-	
-	public BoardDao(ServletContext s) {
-		// TODO Auto-generated constructor stub
 		try {
-			p.load(s.getResourceAsStream("/WEB-INF/resource/mquery.properties"));
+			String fileName = BoardDao.class.getResource("/onebyn/sql/board/board_sql.properties").getPath();
+			p.load(new FileReader(fileName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

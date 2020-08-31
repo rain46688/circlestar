@@ -9,10 +9,10 @@ import onebyn.model.vo.Member;
 public class LoginService {
 	
 
-	public Member loginUser(ServletContext servletContext, String id, String pw) {
+	public Member loginUser(String id, String pw) {
 		// TODO Auto-generated method stub
-		Connection conn = getConnection(servletContext);
-		LoginDao ld = new LoginDao(servletContext);
+		Connection conn = getConnection();
+		LoginDao ld = new LoginDao();
 		Member m = ld.loginUser(conn,id,pw);
 		close(conn);
 		return m;

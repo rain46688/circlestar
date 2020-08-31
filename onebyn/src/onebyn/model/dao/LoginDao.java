@@ -2,6 +2,7 @@ package onebyn.model.dao;
 
 import static onebyn.common.JDBCtem.close;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,14 +18,12 @@ public class LoginDao {
 
 	private Properties p = new Properties();
 
+
 	public LoginDao() {
 		// TODO Auto-generated constructor stub
-	}
-	
-	public LoginDao(ServletContext s) {
-		// TODO Auto-generated constructor stub
 		try {
-			p.load(s.getResourceAsStream("/WEB-INF/resource/mquery.properties"));
+			String fileName = LoginDao.class.getResource("/onebyn/sql/member/member_sql.properties").getPath();
+			p.load(new FileReader(fileName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
