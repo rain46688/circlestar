@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/login.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/member/login.jsp");
 		rd.forward(req, resp);
 
 	}
@@ -32,20 +32,20 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String page = "";
-		String alert = "";
+		String msg="";
+		String loc="/";
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
 		System.out.println("id : " + id + " pw : " + pw);
 		LoginService ls = new LoginService();
 		Member m = ls.loginUser(id, pw);
 //		System.out.println("m.getId() : "+m.getId());
-
+		
 		if (m == null) {
 			// 로그인 실패
 			System.out.println("로그인 실패");
-			page = req.getContextPath() + "/login.do";
-			alert = "실패";
+			loc="/login.do";
+			msg="로그인 실패";
 		}else if (m != null) {
 			// 로그인 성공
 			System.out.println(m.getId() + " 로그인 성공");
@@ -65,13 +65,13 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("접속 유저 아이디 : " + ml.getUserId(session));
 
 			// 메인 페이지로
-			page = req.getContextPath() + "/board.do";
-			alert = "성공";
+			loc="/board.do";
+			msg="로그인 성공";
 			// 메인없으니 게시판으로 이동 ㅋ
 		}
-		resp.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = resp.getWriter();
-		out.println("<script>alert('로그인 " + alert + "'); location.href='" + page + "';</script>");
-		out.flush();
+		req.setAttribute("msg", msg);
+		req.setAttribute("loc", loc);
+		req.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(req, resp);
+		
 	}
 }

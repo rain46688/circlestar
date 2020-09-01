@@ -20,7 +20,7 @@ public class BoardServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		req.setCharacterEncoding("UTF-8");
+//		req.setCharacterEncoding("UTF-8");
 		String p = req.getParameter("p");
 
 		BoardService bs = new BoardService();
@@ -65,6 +65,6 @@ public class BoardServlet extends HttpServlet {
 		System.out.println();
 		req.setAttribute("list", list);
 		req.setAttribute("cnt", cnt);
-		req.getRequestDispatcher("/WEB-INF/views/board.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(req, resp);
 	}
 }

@@ -25,7 +25,7 @@ public class WriteNoticeServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		req.getRequestDispatcher("/WEB-INF/views/writeno.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/board/writeno.jsp").forward(req, resp);
 	}
 
 	private String extractFileName(String partHeader) {
@@ -42,7 +42,7 @@ public class WriteNoticeServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		resp.setContentType("/text/html; charset=utf-8;");
+//		resp.setContentType("/text/html; charset=utf-8;");
 
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
