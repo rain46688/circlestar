@@ -5,6 +5,7 @@ import java.util.Scanner;
 import board.controller.BoardManager;
 
 public class BoardMenu {
+<<<<<<< HEAD
 
 	private Scanner sc = new Scanner(System.in);
 	private BoardManager bm = new BoardManager();
@@ -106,5 +107,7 @@ public class BoardMenu {
 	}
 	
 	
+=======
+>>>>>>> origin/jackson
 	
 }
