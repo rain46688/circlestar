@@ -3,7 +3,12 @@ package board.model.vo;
 import java.util.Date;
 
 public class Board {
+<<<<<<< HEAD
 	private static int boardNo;
+=======
+	
+	private int boardNo;
+>>>>>>> origin/inhee
 	private String boardTitle;
 	private String boardWriter;
 	private Date boardDate;
@@ -13,6 +18,7 @@ public class Board {
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
+<<<<<<< HEAD
 	
 	public Board(String boardTitle, String boardWriter, String boardContent) {
 		super();
@@ -23,6 +29,18 @@ public class Board {
 		this.boardDate = new Date();
 		this.readCount = 0;
 		
+=======
+
+	public Board(int boardNo, String boardTitle, String boardWriter, Date boardDate, String boardContent,
+			int readCount) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardWriter = boardWriter;
+		this.boardDate = boardDate;
+		this.boardContent = boardContent;
+		this.readCount = readCount;
+>>>>>>> origin/inhee
 	}
 
 	public int getBoardNo() {
@@ -72,6 +90,17 @@ public class Board {
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardWriter=" + boardWriter
+				+ ", boardDate=" + boardDate + ", boardContent=" + boardContent + ", readCount=" + readCount + "]";
+	}
+	
+	
+>>>>>>> origin/inhee
 
 	@Override
 	public String toString() {
