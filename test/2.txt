@@ -3,6 +3,6 @@ public class cms{
 		
 
 		
-		System.out.println("cms 브랜치");
+		System.out.println("마스터 브랜치");
 	}
 }
