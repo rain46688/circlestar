@@ -1,9 +1,9 @@
 package board.run;
 
-import board.controller.BoardManager;
+import board.view.BoardMenu;
 
 public class RunBoard {
 	public static void main(String[] args) {
-		new BoardManager().mainMenu();
+		new BoardMenu().mainMenu();
 	}
 }

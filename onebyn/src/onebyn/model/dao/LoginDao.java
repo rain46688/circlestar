@@ -47,10 +47,10 @@ public class LoginDao {
 			
 			if(r) {
 				m = new Member();
-				m.setId(rs.getString("id"));
-				m.setPw(rs.getString("pwd"));
-				m.setName(rs.getString("name"));
-				m.setPhone(rs.getString("phone"));
+				m.setId(rs.getString("MEMBER_ID"));
+				m.setPw(rs.getString("MEMBER_PWD"));
+				m.setName(rs.getString("MEMBER_NAME"));
+				m.setPhone(rs.getString("PHONE"));
 			}
 			
 			
