@@ -1,0 +1,14 @@
+package board.model.vo;
+
+import java.util.Date;
+
+public class Board {
+	private int boardNo;
+	private String boardTitle;
+	private String boardWriter;
+	private Date boardDate;
+	private String boardContent;
+	private int readCount;
+	
+	
+}

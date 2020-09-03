@@ -1,0 +1,9 @@
+package board.controller;
+
+import java.util.ArrayList;
+
+import board.model.vo.Board;
+
+public class BoardManager {
+	ArrayList<Board> list = new ArrayList<Board>();
+}

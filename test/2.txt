@@ -1,9 +1,9 @@
-public class cms{
+﻿public class cms{
 	public static void main(String[] args){
-		System.out.println("ggggg");
+		
 
 
-
+		System.out.println("다른계정 브랜치");
 
 	}
 }
