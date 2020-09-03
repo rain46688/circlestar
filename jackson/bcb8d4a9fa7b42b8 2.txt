@@ -1,0 +1,175 @@
+[컬렉션 실습문제]
+ - 프로젝트명 : boardProject
+
+<문제 1>
+ : ArrayList와 파일에 대한 Object입/출력 사용 - 생략
+
+ - 저장할 데이터 파일명 : board_list.dat
+ - 게시글 클래스 : board.model.vo.Board.java  --------------------------------- 지운
+	>> 직렬화 처리함
+	//Field
+	- boardNo : int	//게시글 번호
+	- boardTitle : String	//게시글 제목
+	- boardWriter : String	//작성자아이디
+	- boardDate : Date	//작성날짜
+	- boardContent : String	//글내용 
+	- readCount : int	//조회수
+
+	1> 기본생성자, 매개변수 있는 생성자 작성
+	2> 각 필드에 대한 getter and setter 추가
+	3> toString() 메소드 오버라이딩 : 필드값 문자열 합치기 후 리턴함
+
+ - java.util.Comparator 인터페이스를 상속받은 정렬용 클래스 작성함 - 도환
+	=> compare() 오버라이딩 처리
+	1> 글번호순 내림차순정렬 처리용 클래스 
+		board.model.vo.DescBoardNo.java
+	2> 글번호순 오름차순정렬 처리용 클래스
+		board.model.vo.AscBoardNo.java
+	3> 작성날짜순 내림차순정렬 처리용 클래스
+		board.model.vo.DescBoardDate.java
+	4> 작성날짜순 오름차순정렬 처리용 클래스
+		board.model.vo.AscBoardDate.java
+	5> 글제목순 오름차순정렬 처리용 클래스
+		board.model.vo.AscBoardTitle.java
+	6> 글제목순 내림차순정렬 처리용 클래스
+		board.model.vo.DescBoardTitle.java
+
+ - 게시글 관리용 클래스 : board.controller.BoardManager.java  -------------
+	//필드 - 지운
+	ArrayList<Board> list = new ArrayList<Board>();
+	Scanner sc = new Scanner(System.in);
+
+	//디폴트 생성자 작성
+		>> 구현내용 : board_list.dat 파일의 내용을 읽어서
+			list에 저장함
+			null 될 때까지 저장함
+
+
+	//메소드 작성
+	1. 게시글 쓰기 메소드 - 지운		
+	  public void writeBoard(){}
+		>> 구현내용
+		1> "새 게시글 쓰기 입니다." 출력
+		2> "글제목 : " >> 입력받음(공백포함)
+		3> "작성자 : " >> 이름 입력받음 (공백없이)
+		4> 작성날짜는 현재 날짜로 입력처리함
+		5> "글내용 : " >> 여러 줄로 입력받음
+				"exit" 입력하면 입력종료
+		6> Board 객체 생성시 초기값으로 사용함
+		7> list에 추가함
+
+
+	2. 게시글 전체 보기	메소드 - 도환
+	 pubic void displayAllList(){}
+		>> 구현내용
+		1> list 에 기록된 정보를 모두 화면에 출력시킴
+
+
+	3. 게시글 한개 보기	메소드 - 인희
+	 public void displayBoard(){}
+		>> 구현내용
+		1> "조회할 글번호 : " >> 입력받음
+		2> 해당 글번호에 대한 게시글을 화면에 출력시킴
+		3> 해당 글에 대한 조회수 1증가 처리함
+
+
+	4. 게시글 제목 수정	메소드 - 정현
+	 public void modifyTitle(){}
+		>> 구현내용
+		1> "수정할 글번호 : " >> 입력받음
+		2> 해당 글번호에 대한 게시글을 화면에 출력시킴
+		3> "변경할 제목 : " >> 새 제목 입력받음 >> 제목변경
+		4> 변경된 객체 정보를 list의 해당 번호 객체에 적용함
+		   
+
+	5. 게시글 내용 수정	메소드 - 도환
+	 public void modifyContent(){}
+		>> 구현내용
+		1> "수정할 글번호 : " >> 입력받음
+		2> 해당 글번호에 대한 게시글을 화면에 출력시킴
+		3> "변경할 내용 : " >> 새 내용 입력받음 >> 내용변경
+		4> 변경된 객체 정보를 list의 해당 번호 객체에 적용함
+
+
+	6. 게시글 삭제 메소드 - 인희
+	 public void deleteBoard(){}
+		>> 구현내용
+		1> "삭제할 글번호 : " >> 입력받음
+		2> 해당 글번호에 대한 게시글을 화면에 출력시킴
+		3> "정말로 삭제하시겠습니까? (y/n) : " 
+		    >> 'Y'입력시 list에서 해당 객체 삭제함
+		4> "oo번 글이 삭제되었습니다." 출력
+		
+
+	7. 게시글 검색 메소드 - 정현
+	 public void searchBoard(){}
+		>> 구현내용
+		1> "검색할 제목 : " >> 검색할 글자를 입력받음
+		2> 입력된 글자를 제목으로 포함하고 있는 객체들을 list에서
+		   찾음
+		3> 화면에 검색된 객체들을 출력함
+
+
+	8. 파일에 저장하기 메소드 - X
+	 public void saveListFile(){}
+		>> 구현내용
+		1> list에 저장된 정보를 board_list.dat 파일에 
+		   ObjectOutputStream 클래스 사용하여 기록 저장함
+		   try with resource 문 사용할 것
+		2> "board_list.dat 에 성공적으로 저장되었습니다." 출력
+
+	9. 정렬처리용 메소드 - 정현
+	 public void sortList(int item, boolean isDesc){}
+		>> 구현내용
+		1> item 이 1이면 번호순 정렬
+		    item 이 2이면 날짜순 정렬
+		    item 이 3이면 제목순 정렬 작동되게 정렬용 클래스 사용함
+		2> isDesc 가 true 이면 내림차순정렬 작동
+		    isDesc 가 false 이면 오름차순정렬 작동되게 함
+
+
+ - 게시글 메뉴 : board.view.BoardMenu.java  ---------------------------------- 민수
+	1. 필드 : Scanner 객체 생성
+	2. 생성자 : 디폴트생성자
+	3. public void mainMenu() 메소드 작성
+	  >> 출력내용
+
+	******* 게시글 서비스 프로그램 *******
+
+	1. 게시글 쓰기		//BoardManager의 writeBoard() 실행
+	2. 게시글 전체 보기		//		displayAllList()
+	3. 게시글 한개 보기		//		displayBoard()
+	4. 게시글 제목 수정		//		modifyTitle()
+	5. 게시글 내용 수정		//		modifyContent()
+	6. 게시글 삭제		//		deleteBoard()
+	7. 게시글 검색		//		searchBoard()
+	8. 파일에 저장하기		//		saveListFile()
+	9. 정렬하기		// BookMenu 의 sortSubMenu() 실행
+	9. 끝내기		//main() 으로 리턴함
+
+	메뉴 번호 선택 : 
+
+	  >> 구현내용
+		1. 메뉴 화면 반복 실행 처리
+		2. 해당 메뉴 번호에 따라 BoardManager 클래스 메소드 실행
+
+	4> sortSubMenu() 구현
+	public void sortSubMenu(){}
+	>> 출력내용
+
+	****** 게시글 정렬 메뉴 ******
+
+	1. 글번호순 오름차순정렬	//BookManager 의 	sortList(1, false) 실행
+	2. 글번호순 내림차순정렬	//		sortList(1, true) 실행
+	3. 작성날짜순 오름차순정렬	//		sortList(2, false) 실행		
+	4. 작성날짜순 내림차순정렬	//		sortList(2, true) 실행
+	5. 글제목순 오름차순정렬	//		sortList(3, false) 실행
+	6. 글제목순 내림차순정렬	//		sortList(3, true) 실행
+	7. 이전 메뉴로 이동		//return 처리
+
+	메뉴 번호 : 번호입력받음
+	>> 반복 출력되게 함
+
+ - 테스트용 클래스 : board.run.RunBoard.java (main() 포함) -------- 민수
+	1. BoardMenu 클래스 객체 생성함
+	2. BoardMenu 클래스의 mainMenu() 메소드 실행함
