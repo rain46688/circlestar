@@ -1,8 +1,11 @@
 package board.view;
 
+<<<<<<< HEAD
+=======
 import java.util.Scanner;
 
 import board.controller.BoardManager;
+>>>>>>> 78a3ca3ab00db2f15f6004950a44a11315e051e8
 
 public class BoardMenu {
 <<<<<<< HEAD
@@ -67,6 +70,11 @@ public class BoardMenu {
 		}
 	}
 
+<<<<<<< HEAD
+
+
+
+=======
 	public void sortSubMenu() {
 		
 		System.out.println("****** 게시글 정렬 메뉴 ******");
@@ -110,4 +118,5 @@ public class BoardMenu {
 =======
 >>>>>>> origin/jackson
 	
+>>>>>>> 78a3ca3ab00db2f15f6004950a44a11315e051e8
 }
