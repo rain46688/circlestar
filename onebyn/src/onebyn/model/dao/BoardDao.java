@@ -45,10 +45,10 @@ public class BoardDao {
 			rs = pst.executeQuery();
 			
 			while(rs.next()) {
-				int id = rs.getInt("ID");
-				String title = rs.getString("TITLE");
+				int id = rs.getInt("BOARD_ID");
+				String title = rs.getString("BOARD_TITLE");
 				String writerId = rs.getString("WRITER_ID");
-				Date regdate = rs.getDate("REGDATE");
+				Date regdate = rs.getDate("ENROLL_DATE");
 				String content = rs.getString("CONTENT");
 				String hit = rs.getString("HIT");
 				String files = rs.getString("FILES");
@@ -97,6 +97,7 @@ public class BoardDao {
 		PreparedStatement pst = null;
 		
 		String sql = p.getProperty("writeboardlist");
+		System.out.println("writeboardlist : "+sql); 
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, b.getTitle());
