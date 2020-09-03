@@ -9,5 +9,6 @@ public class Cms {
 		System.out.println("나는 인희야");
 		System.out.println("jeonghyun");
 		System.out.println("jackson");
+		System.out.println("김도환");
 	}
 }
