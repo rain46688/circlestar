@@ -2,8 +2,12 @@ package board.controller;
 
 import java.util.ArrayList;
 <<<<<<< HEAD
+import java.util.List;
 =======
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 093b4531fbad5542303c58371479fab8600d93a0
 import java.util.Scanner;
 
 import board.model.vo.Board;
@@ -36,7 +40,7 @@ public class BoardManager {
 	public void displayAllList() {
 
 		if (list.isEmpty()) {
-			System.out.println("°Ô½ÃÆÇÀÌ ºñ¾ú´Ù.");
+			System.out.println("g");
 		} else {
 			for (Board b : list) {
 				System.out.println(b);
@@ -47,9 +51,9 @@ public class BoardManager {
 	public void modifyContent() {
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("¼öÁ¤ÇÒ ±Û ¹øÈ£: ");
+		System.out.println("g");d
 		int num=sc.nextInt();
-		System.out.println("¼öÁ¤ÇÒ ³»¿ë : ");
+		System.out.println("g");
 		String newContent=sc.nextLine();
 		for(int i=0; i<list.size();i++) {
 			if(list.get(i).getBoardNo()==num) {
@@ -57,9 +61,7 @@ public class BoardManager {
 				
 			}
 		}
-//		list¸¦ for¹®À¸·Î µ¹¸é¼­ ¹æ±İ ÀÔ·Â¹ŞÀº ¼öÁ¤±Û ¹øÈ£¶û list¿¡ µé¾îÀÖ´Â ¹øÈ£¿Í ÀÏÄ¡ÇÏ¸é ¼öÁ¤À» ÇØ¼­ if¹®.
-//		if¹® ¾È¿¡¼­ º¯°æÇÒ ³»¿ëÀ» ¹Ş¾Æ¾ßÇÔ. System.out.println();
-//		exit¸¦ ÀÔ·Â¹Ş°Ô µÇ¸é ¹«ÇÑ·çÇÁ¸¦ ºüÁ®³ª°¡¾ßÇÔ. 
+
 	
 		
 
@@ -100,4 +102,65 @@ public class BoardManager {
 >>>>>>> origin/inhee
 >>>>>>> 78a3ca3ab00db2f15f6004950a44a11315e051e8
 	}
+	
+	public void modifyTitle() { //ê²Œì‹œê¸€ ì œëª© ìˆ˜ì •	
+		System.out.println("ìˆ˜ì •í•  ê¸€ ë²ˆí˜¸ :");
+		int num=sc.nextInt();
+		System.out.println("ìˆ˜ì •í•  ì œëª© : ");
+		String newtitle =sc.nextLine();
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getBoardNo()==num){
+				list.get(i).setBoardTitle(newtitle);
+			}
+			
+		}
+	}
+	
+	public void searchBoard() { //ê²Œì‹œê¸€ ê²€ìƒ‰
+		System.out.println("ê²€ìƒ‰í•  ì œëª© : ");
+		String boardTitle=sc.nextLine(); //ê²€ìƒ‰í•  ê¸€ìë¥¼ ì…ë ¥ë°›ìŒ
+		ArrayList<Board> list = new ArrayList<Board>();
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getBoardTitle().contains(boardTitle)) {
+				System.out.println(list);
+			}
+		}
+		
+//		for(Object b : list) {
+//		if(b instanceof list ) {
+//		}
+//		}
+		
+
+		
+		//ArrayList<Board> boardTitle= searchBoard(title);
+		//if(searchTitle.isEmpty()) {
+	//		System.out.println("ê²€ìƒ‰í•œ ê²Œì‹œê¸€ì´ ì—†ìŠµë‹ˆë‹¤.");
+	//	}else {
+	//		for(Board b : searchTitle) {
+	//			System.out.println(b);
+		
+	}
+		// boardNo boardDate boardTitle(ì œëª©ìˆœ >) 
+	
+	public void sortList(int item,boolean isDesc) {
+	System.out.print("ì •ë ¬í•  ê¸°ì¤€ì„ ì„ íƒí•˜ì„¸ìš” : (1:ë²ˆí˜¸ìˆœ , 2: ë‚ ì§œìˆœ, 3: ì œëª©ìˆœ");	
+	item=sc.nextInt();
+	System.out.print("true / false (true : ë‚´ë¦¼ì°¨ìˆœ, false : ì˜¤ë¦„ì°¨ìˆœ)");
+	isDesc=sc.nextBoolean();
+		if(item==1 && isDesc == true) {
+			
+		}else if(item==1 && isDesc ==false) {
+			
+		}else if(item==2 && isDesc == true) {
+			
+		}else if(item==2 && isDesc == true) {
+		
+		}else if(item==3 && isDesc == true) {
+			
+		}else if(item==3 && isDesc == true) {
+			
+		}
+	
+}
 }

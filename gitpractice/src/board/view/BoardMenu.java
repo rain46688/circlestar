@@ -116,8 +116,6 @@ public class BoardMenu {
 =======
 	
 	
-=======
->>>>>>> origin/jackson
 	
 >>>>>>> 78a3ca3ab00db2f15f6004950a44a11315e051e8
 >>>>>>> 5d1019eca3c744a17f85636bc04e9a7b2a721602
