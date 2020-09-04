@@ -1,6 +1,6 @@
 package onebyn.model.dao;
 
-import static onebyn.common.JDBCtem.close;
+import static onebyn.common.JDBCtem.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,15 +14,15 @@ import javax.servlet.ServletContext;
 
 import onebyn.model.vo.Member;
 
-public class LoginDao {
+public class MemberDao {
 
 	private Properties p = new Properties();
 
 
-	public LoginDao() {
+	public MemberDao() {
 		// TODO Auto-generated constructor stub
 		try {
-			String fileName = LoginDao.class.getResource("/onebyn/sql/member/member_sql.properties").getPath();
+			String fileName = MemberDao.class.getResource("/onebyn/sql/member/member_sql.properties").getPath();
 			p.load(new FileReader(fileName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -47,10 +47,10 @@ public class LoginDao {
 			
 			if(r) {
 				m = new Member();
-				m.setId(rs.getString("MEMBER_ID"));
-				m.setPw(rs.getString("MEMBER_PWD"));
-				m.setName(rs.getString("MEMBER_NAME"));
-				m.setPhone(rs.getString("PHONE"));
+				m.setMemberId(rs.getString("MEMBER_ID"));
+				m.setMemberPwd(rs.getString("MEMBER_PWD"));
+				m.setMemberName(rs.getString("MEMBER_NAME"));
+				m.setPhone(rs.getString("phone"));
 			}
 			
 			
@@ -63,6 +63,35 @@ public class LoginDao {
 		}
 		System.out.println("반환하기 전에 출력 ! : "+m);
 		return m;
+	}
+
+	public int insertMember(Connection conn, Member m) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		PreparedStatement pst = null;
+		String sql = p.getProperty("insertMem");
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, m.getMemberId());
+			pst.setString(2, m.getMemberPwd());
+			pst.setString(3, m.getMemberName());
+			pst.setString(4, m.getNickname());
+			pst.setString(5, m.getPhone());
+			pst.setString(6, m.getAddress());
+			pst.setString(7, m.getEmail());
+			result = pst.executeUpdate();
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pst);
+		}
+		return result;
 	}
 
 }

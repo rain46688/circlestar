@@ -10,16 +10,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>semi1 board</title>
-<link href="<%=application.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
-<link href="<%=application.getContextPath()%>/cms.css" rel="stylesheet">
-<script src="<%=application.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-<script src="<%=application.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/cms.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-		<a href="<%=application.getContextPath()%>/board.do">
-			<img class="navbar-brand" src="<%=application.getContextPath()%>/images/b1.png">
+		<a href="<%=request.getContextPath()%>/board.do">
+			<img class="navbar-brand" src="<%=request.getContextPath()%>/images/b1.png">
 		</a>
 		<form class="form-inline" action="/action_page.php">
 			<input class="form-control mr-sm-2" type="text" placeholder="검색">
@@ -40,7 +40,7 @@
 				<!-- <li class="nav-item active"> -->
 				<c:if test="${empty(m)}">
 				<li class="nav-item">
-					<a class="nav-link" href="<%=application.getContextPath()%>/login.do">로그인</a>
+					<a class="nav-link" href="<%=request.getContextPath()%>/login.do">로그인</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">회원가입</a>
@@ -48,10 +48,10 @@
 				</c:if>
 				<c:if test="${!empty(m)}">
 				<li class="nav-item">
-					<a class="nav-link">${m.id}</a>
+					<a class="nav-link">${m.memberId}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<%=application.getContextPath()%>/logout.do">로그아웃</a>
+					<a class="nav-link" href="<%=request.getContextPath()%>/logout.do">로그아웃</a>
 				</li>
 				</c:if>
 				<li class="nav-item">

@@ -1,4 +1,4 @@
-package onebyn.controller;
+package onebyn.controller.board;
 
 import java.io.File;
 import java.io.IOException;
@@ -97,7 +97,7 @@ public class WriteNoticeServlet extends HttpServlet {
 		System.out.println("파일 구분 : " + fileNameStr);
 
 		Board b = new Board();
-		b.setTitle(title);
+		b.setBoardTitle(title);
 		b.setContent(content);
 		b.setFiles(IMG + fileNameStr);
 		b.setWriterId("ADMIN");

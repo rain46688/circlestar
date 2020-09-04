@@ -1,18 +1,18 @@
-package onebyn.controller;
+package onebyn.controller.member;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import onebyn.common.listener.MemberListener;
-import onebyn.model.service.LoginService;
+import onebyn.model.service.MemberService;
 import onebyn.model.vo.Member;
 
 @WebServlet("/login.do")
@@ -35,11 +35,25 @@ public class LoginServlet extends HttpServlet {
 		String msg="";
 		String loc="/";
 		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
+		String pw = req.getParameter("password");
+		String saveId = req.getParameter("saveId");
 		System.out.println("id : " + id + " pw : " + pw);
-		LoginService ls = new LoginService();
-		Member m = ls.loginUser(id, pw);
+		MemberService ms = new MemberService();
+		Member m = ms.loginUser(id, pw);
 //		System.out.println("m.getId() : "+m.getId());
+		
+		
+		System.out.println("saveId : "+saveId);
+		if(saveId !=null) {
+			Cookie c = new Cookie("saveId", id);
+			c.setMaxAge(3*24*60*60);//3일간 저장
+			resp.addCookie(c);
+		}else {
+			Cookie c = new Cookie("saveId", "");
+			c.setMaxAge(0);
+			resp.addCookie(c);
+		}
+		
 		
 		if (m == null) {
 			// 로그인 실패
@@ -48,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 			msg="로그인 실패";
 		}else if (m != null) {
 			// 로그인 성공
-			System.out.println(m.getId() + " 로그인 성공");
+			System.out.println(m.getMemberId() + " 로그인 성공");
 			// 세션 받기
 
 //			HttpSession session = req.getSession();
@@ -56,12 +70,12 @@ public class LoginServlet extends HttpServlet {
 
 			MemberListener ml = new MemberListener();
 //			Ml ml = new Ml();
-			if (ml.isDuplicate(m.getId())) {// 중복로그인 안되!
-				ml.removeSession(m.getId());
+			if (ml.isDuplicate(m.getMemberId())) {// 중복로그인 안되!
+				ml.removeSession(m.getMemberId());
 			}
 			HttpSession session = req.getSession();
 			session.setAttribute("m", m);
-			ml.addSession(session, m.getId());
+			ml.addSession(session, m.getMemberId());
 			System.out.println("접속 유저 아이디 : " + ml.getUserId(session));
 
 			// 메인 페이지로

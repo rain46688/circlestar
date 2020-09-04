@@ -9,12 +9,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public @Data class Board {
 	
-	private int id;
-	private String title;
+	private int boardId;
+	private String boardTitle;
 	private String writerId;
 	private String content;
-	private Date regdate;
+	private Date enrollDate;
 	private String hit;
 	private String files;
+	private String productCategori;
+	private String productName;
+	private String delivertTime;
+	private String tradeArea;
+	private String maxMems;
+	private String curMemsList;
+	private String limitTradeTime;
+	private String tradeStage;
+	private String trageStart;
+	private String popularBoard;
 	
 }

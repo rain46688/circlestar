@@ -36,6 +36,7 @@ public class BoardDao {
 		List<Board> list = new ArrayList<Board>();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
+		Board b = null;
 		
 		try {
 			String sql = p.getProperty("getboardlist");
@@ -45,14 +46,23 @@ public class BoardDao {
 			rs = pst.executeQuery();
 			
 			while(rs.next()) {
+				b = new Board();
 				int id = rs.getInt("BOARD_ID");
 				String title = rs.getString("BOARD_TITLE");
 				String writerId = rs.getString("WRITER_ID");
-				Date regdate = rs.getDate("ENROLL_DATE");
+				Date enrollDate = rs.getDate("ENROLL_DATE");
 				String content = rs.getString("CONTENT");
 				String hit = rs.getString("HIT");
 				String files = rs.getString("FILES");
-				list.add(new Board(id, title, writerId, content, regdate, hit, files));
+				
+				b.setBoardTitle(title);
+				b.setWriterId(writerId);
+				b.setEnrollDate(enrollDate);
+				b.setContent(content);
+				b.setHit(hit);
+				b.setFiles(files);
+				
+				list.add(b);
 			}
 			
 		} catch (SQLException e) {
@@ -100,7 +110,7 @@ public class BoardDao {
 		System.out.println("writeboardlist : "+sql); 
 		try {
 			pst = conn.prepareStatement(sql);
-			pst.setString(1, b.getTitle());
+			pst.setString(1, b.getBoardTitle());
 			pst.setString(2, b.getWriterId());
 			pst.setString(3, b.getContent());
 			pst.setString(4, b.getFiles());

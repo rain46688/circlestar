@@ -1,4 +1,4 @@
-package onebyn.controller;
+package onebyn.controller.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -20,7 +20,7 @@ public class LogoutServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Member m = (Member)session.getAttribute("m");
 		MemberListener ml = new MemberListener();
-		ml.removeSession(m.getId());
+		ml.removeSession(m.getMemberId());
 		resp.sendRedirect(req.getContextPath()+"/board.do");
 	}
 	

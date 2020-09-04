@@ -1,4 +1,4 @@
-package onebyn.controller;
+package onebyn.controller.board;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,5 +67,15 @@ public class BoardServlet extends HttpServlet {
 		req.setAttribute("cnt", cnt);
 		req.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(req, resp);
 		
+		
+		
+		
+		
 	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
 }

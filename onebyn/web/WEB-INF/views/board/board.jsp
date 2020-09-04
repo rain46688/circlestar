@@ -12,7 +12,7 @@
 			<h1> NOTITLE </h1>
 			<ul class="nav justify-content-end">
 			  <li class="nav-item">
-			  <c:if test="${m.id == 'ADMIN'}">
+			  <c:if test="${m.memberId == 'ADMIN'}">
 				<a class="btn btn-primary btn-lg" href="<%=application.getContextPath()%>/writenotice.do">게시글 작성!</a>
 			  </c:if>
 			  </li>
@@ -28,7 +28,7 @@
 						<img class="card-img-top" src="<%= application.getContextPath() %>/${n.files}" alt="" width="460px" height="460px">
 						
 						<div class="card-body">
-							<h4 class="card-title">${n.title}</h4>
+							<h4 class="card-title">${n.boardTitle}</h4>
 							<p class="card-text">${n.content}</p>
 						</div>
 						<div class="card-footer">
