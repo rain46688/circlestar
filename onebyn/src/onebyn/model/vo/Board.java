@@ -26,5 +26,7 @@ public @Data class Board {
 	private String tradeStage;
 	private String trageStart;
 	private String popularBoard;
+	private int productPrice;
+	private String ownStatus;
 	
 }

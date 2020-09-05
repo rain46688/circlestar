@@ -33,6 +33,7 @@ public class BoardTradePageServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.getRequestDispatcher("/WEB-INF/views/board/boardtradepage.jsp").forward(request, response);
+		
 	}
 
 	/**

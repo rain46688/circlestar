@@ -12,9 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import onebyn.model.service.BoardService;
 import onebyn.model.vo.Board;
+import onebyn.model.vo.Member;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5, fileSizeThreshold = 1024 * 1024)
 @WebServlet("/writenotice.do")
@@ -43,9 +45,14 @@ public class WriteNoticeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		resp.setContentType("/text/html; charset=utf-8;");
-
+		HttpSession session = req.getSession();
+		Member m = (Member)session.getAttribute("m");
+		System.out.println("curuserid : "+m.getMemberId());
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
+		//게시판에서 다른 값 가져와서 DB에 넣는거 해야됨
+		
+		
 		PrintWriter out = resp.getWriter();
 		String DIR = req.getServletContext().getRealPath("/images");
 		String contentType = req.getContentType();
@@ -100,7 +107,7 @@ public class WriteNoticeServlet extends HttpServlet {
 		b.setBoardTitle(title);
 		b.setContent(content);
 		b.setFiles(IMG + fileNameStr);
-		b.setWriterId("ADMIN");
+		b.setWriterId(m.getMemberId());
 
 		BoardService bs = new BoardService();
 		int result = bs.writeNotice(b);

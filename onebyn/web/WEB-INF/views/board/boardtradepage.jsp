@@ -26,10 +26,17 @@
 			<div id="writecontainer">
 				<h2 class="display-4">제목</h2>
 				<p class="lead">작성자 : admin</p>
+				<p class="lead">작성 날짜 : 2020-09-05 <span style="float: right;">조회수 : 1</span></p>
+				<hr class="my-4">
+				<p class="lead">제품 카테고리 : 특가</p>
+				<p class="lead">제품 이름 : 오 그레놀라</p>
+				<p class="lead">거래지역 : 강동구 상일동 상일역앞</p>
+				<p class="lead">제품 가격 : 50,000원</p>
+				<p class="lead">제품 보유 상태 : 구매예정</p>
 				<hr class="my-4">
 
 				<div id="content">
-				
+						ㅋㅌㅊㅌㅋㅊ
 				</div>
 
 				<div id="writecontainer">
