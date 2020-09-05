@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=request.getContextPath()%>/tradeboard.css" rel="stylesheet">
 
-<div class="container" id="writecontainer">
+
 
 <!-- 
 작성자 아이디
@@ -18,26 +18,52 @@
 게시판 단계 상태 
 -->
 
-	<h2 class="display-4">제목</h2>
-	<p class="lead">작성자 : admin </p>
-	<hr class="my-4">
-	<div id="writecontainer">
-		<div class="status-upload">
-		<h3>댓글</h3>
-			<form>
-				<textarea placeholder="내용을 입력하세요." class="pb-cmnt-textarea"></textarea>
-				<div class="checkbox">
-					<input type="checkbox" name="secret" id="secret"> 비밀댓글
+
+<div class="container" id="boardtrade">
+	<div class="row">
+		<div class="col-10">
+
+			<div id="writecontainer">
+				<h2 class="display-4">제목</h2>
+				<p class="lead">작성자 : admin</p>
+				<hr class="my-4">
+
+				<div id="content">
+				
 				</div>
-				<button type="submit" class="btn btn-success green">
-					<i class="fa fa-share"></i> 댓글작성
-				</button>
-			</form>
+
+				<div id="writecontainer">
+					<div class="status-upload">
+						<h4>댓글</h4>
+						<form>
+							<textarea placeholder="내용을 입력하세요." class="pb-cmnt-textarea"></textarea>
+							<div class="checkbox">
+								<input type="checkbox" name="secret" id="secret"> 비밀댓글
+							</div>
+							<button type="submit" class="btn btn-success green">
+								<i class="fa fa-share"></i> 댓글작성
+							</button>
+						</form>
+					</div>
+				</div>
+					<div id="comment">
+							<br>
+							작성되어있는 댓글 없음.
+							<hr>
+					</div>
+			</div>
+		</div>
+
+
+		<div class="col-2">
+			<div class="sidebar">
+				<div class="sticky">
+					<div id="side"><h2>사이드바</h2></div>
+				</div>
+			</div>
 		</div>
 	</div>
-
 </div>
-
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
