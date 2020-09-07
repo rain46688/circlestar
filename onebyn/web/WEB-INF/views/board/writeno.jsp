@@ -14,21 +14,33 @@
 	</div>
 
 	<form method="post" action="<%=request.getContextPath()%>/writenotice.do" enctype="multipart/form-data">
-		<div class="form-group">
-			<label for="formGroupExampleInput">제목 : </label> 
-			<input type="text" name="title" class="form-control" id="formGroupExampleInput">
+		
+		
+		<div class="form-row form-group">
+			<div class="col">
+				<label for="formGroupExampleInput">제목 : </label> 
+			<input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="게시글 제목">
+			</div>
+			<div class="col">
+				<label for="formGroupExampleInput">거래 종류 : </label>
+				<select class="custom-select custom-select" name="select_trade" id="select_trade">
+					<option selected>종류</option>
+					<option value="직거래">직거래</option>
+					<option value="택배배송">택배배송</option>
+				</select>
+			</div>
 		</div>
 
 		<div class="form-row form-group">
 			<div class="col">
 				<label for="formGroupExampleInput">제품 카테고리 : </label>
-				<select class="custom-select custom-select" id="select_cate">
+				<select class="custom-select custom-select" name="select_cate" id="select_cate">
 					<option selected>분류</option>
-					<option value="cate1">특가</option>
-					<option value="cate2">식품</option>
-					<option value="cate3">패션잡화</option>
-					<option value="cate4">티켓</option>
-					<option value="cate5">애완용품</option>
+					<option value="특가">특가</option>
+					<option value="식품">식품</option>
+					<option value="패션잡화">패션잡화</option>
+					<option value="티켓">티켓</option>
+					<option value="애완용품">애완용품</option>
 				</select>
 			</div>
 			<div class="col">
@@ -37,10 +49,10 @@
 			</div>
 		</div>
 
-		<div class="form-row form-group"  id="select_mem">
+		<div class="form-row form-group" >
 			<div class="col">
 				<label for="formGroupExampleInput">N빵 인원수 : </label>
-				<select class="custom-select custom-select">
+				<select class="custom-select custom-select"  name="select_mem" id="select_mem">
 					<option selected>인원 선택</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
@@ -62,10 +74,10 @@
 		<div class="form-row form-group">
 			<div class="col">
 				<label for="formGroupExampleInput">제품 보유 상태 : </label>
-				<select class="custom-select custom-select" id="select_own">
+				<select class="custom-select custom-select" name="select_own" id="select_own">
 					<option selected>상태</option>
-					<option value="status1">구매 예정</option>
-					<option value="status2">보유중</option>
+					<option value="구매 예정">구매 예정</option>
+					<option value="제품 보유중">제품 보유중</option>
 				</select>
 			</div>
 			<div class="col">

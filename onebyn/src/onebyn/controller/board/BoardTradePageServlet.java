@@ -7,9 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import onebyn.common.AES;
-import onebyn.model.service.MemberService;
-import onebyn.model.vo.Member;
+
+import onebyn.model.service.BoardService;
+import onebyn.model.vo.Board;
 
 /**
  * Servlet implementation class DetailPageServlet
@@ -32,8 +32,15 @@ public class BoardTradePageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		request.getRequestDispatcher("/WEB-INF/views/board/boardtradepage.jsp").forward(request, response);
+		String id = request.getParameter("t");
+		System.out.println("게시글 아이디 : "+id);
 		
+		Board b = new BoardService().tradePageBoard(id);
+		
+		System.out.println("가져온 게시글 상세 페이지 요소 : "+b);
+		
+		request.setAttribute("b", b);
+		request.getRequestDispatcher("/WEB-INF/views/board/boardtradepage.jsp").forward(request, response);
 	}
 
 	/**

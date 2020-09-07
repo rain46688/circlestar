@@ -4,7 +4,12 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="container" id="writecontainer">
-    <h1> 회원가입 </h1>
+   <div class="form-data" style="text-align: center;">
+            <img src="<%=request.getContextPath()%>/images/logo.png" alt="" width="150px" height="150px">
+                <h1> 회원가입 </h1>
+                <br>
+                <br>
+        </div>
     <form class="form-horizontal" method="post" action="">
 
         <div class="form-group">

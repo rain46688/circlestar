@@ -51,6 +51,18 @@ public class WriteNoticeServlet extends HttpServlet {
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		//게시판에서 다른 값 가져와서 DB에 넣는거 해야됨
+		String cate = req.getParameter("select_cate");
+		String pname = req.getParameter("pname");
+		String mem = req.getParameter("select_mem");
+		int price = Integer.parseInt(req.getParameter("price"));
+		String own = req.getParameter("select_own");
+		String tradeloc = req.getParameter("tradeloc");
+		String tradekind = req.getParameter("select_trade");
+		
+//		System.out.println("select_cate : "+cate+", pname : "
+//		+pname+", mem : "+mem+", price : "+price+", ownstatus : "+own+
+//		", tradeloc : "+tradeloc);
+		
 		
 		
 		PrintWriter out = resp.getWriter();
@@ -108,6 +120,17 @@ public class WriteNoticeServlet extends HttpServlet {
 		b.setContent(content);
 		b.setFiles(IMG + fileNameStr);
 		b.setWriterId(m.getMemberId());
+		
+		b.setProductCategori(cate);//
+		b.setProductName(pname);//
+		b.setMaxMems(mem);//
+		b.setProductPrice(price);//
+		b.setOwnStatus(own);//
+		b.setTradeArea(tradeloc);//
+		b.setTradeKind(tradekind);//
+		
+		System.out.println(b);
+		
 
 		BoardService bs = new BoardService();
 		int result = bs.writeNotice(b);
