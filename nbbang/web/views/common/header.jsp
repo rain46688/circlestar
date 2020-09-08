@@ -18,3 +18,47 @@
 <link href="<%=request.getContextPath()%>/css/footer.css" rel="stylesheet">
 </head>
 <body>
+	<header>
+		<div id="topField">
+			<div id="logoContainer">
+				<img src="<%=request.getContextPath() %>/resources/logoTitle.png" id="logoTitle" alt="logoTitle">
+			</div>
+			<div id="topBtn">
+				<%if(loginnedMember==null) {%>
+					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
+					onclick="location.href='<%=request.getContextPath()%>/loginPage'">로그인</button>
+					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">회원가입</button>
+				<%}else{ %>
+					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
+					onclick>로그아웃</button>
+				<%} %>
+   				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">마이페이지</button>
+      			<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">고객센터</button>
+			</div>
+		</div>
+		<nav>
+			<ul class="nav justify-content-center">
+				<li class="nav-item">
+				  <a class="nav-link active" href="<%=request.getContextPath() %>/">홈</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="#">특가</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="#">식품</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">패션잡화</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">취미-문구</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">티켓</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">애완용품</a>
+				</li>
+			  </ul>
+		</nav>
+	</header>
