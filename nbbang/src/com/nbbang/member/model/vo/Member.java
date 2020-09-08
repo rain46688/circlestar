@@ -3,6 +3,7 @@ package com.nbbang.member.model.vo;
 import java.sql.Date;
 
 public class Member {
+
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
@@ -11,10 +12,12 @@ public class Member {
 	private String address;
 	private String email;
 	private Date enrollDate;
+
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 	public Member(String memberId, String memberPwd, String memberName, String nickname, String phone, String address,
 			String email, Date enrollDate) {
@@ -99,5 +102,6 @@ public class Member {
 				+ ", nickname=" + nickname + ", phone=" + phone + ", address=" + address + ", email=" + email
 				+ ", enrollDate=" + enrollDate + "]";
 	}
+
 	
 }

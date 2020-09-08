@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% Member loginnedMember=(Member)session.getAttribute("loginnedMember");%>
+<%-- <% Member loginnedMember=(Member)session.getAttribute("loginnedMember");%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,6 @@
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-
 <link href="<%=request.getContextPath()%>/css/section.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/header.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/footer.css" rel="stylesheet">
@@ -28,7 +27,7 @@
 				<img src="<%=request.getContextPath() %>/resources/logoTitle.png" id="logoTitle" alt="logoTitle">
 			</div>
 			<div id="topBtn">
-				<%if(loginnedMember==null) {%>
+				<%if(true) {%>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/loginPage'">로그인</button>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">회원가입</button>
