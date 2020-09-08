@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.nbbang.member.model.vo.Member;
+import com.nbbang.admin.model.service.AdminService;
 
 /**
  * Servlet implementation class MemberStatusPageServlet
@@ -27,7 +29,13 @@ public class MemberStatusPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("memstatuspage");
+		String userid = request.getParameter("uid");
+		AdminService as = new AdminService();
+		Member m = as.memstatuspage(userid);
+		request.setAttribute("m", m);
+		request.getRequestDispatcher("/views/admin/memstatuspage.jsp").forward(request, response);
+		
 	}
 
 	/**
