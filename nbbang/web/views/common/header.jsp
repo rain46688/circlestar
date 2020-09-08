@@ -17,6 +17,8 @@
 <link href="<%=request.getContextPath()%>/css/section.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/header.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/footer.css" rel="stylesheet">
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 </head>
 <body>
 	<header>

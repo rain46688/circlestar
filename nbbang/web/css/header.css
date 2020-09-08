@@ -1,2 +1,119 @@
 @charset "UTF-8";
 /* header 관련 css 추가할꺼 넣기*/
+
+/* 헤더부분 폰트 설정 */
+header{
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+header{
+	position:relative;
+}
+
+/* 로고와 버튼 들어가는 필드 */
+#topField{
+	display: flex;
+	margin: 10px;
+	align-items: center;
+	position:relative;
+}
+
+/* 로고 크기 및 위치 */
+#logoContainer img{
+	width: 20%;
+    height: auto;
+    float: left;
+}
+
+/* 상단 버튼 */
+#topBtn{
+	float:right;
+	right:0px;
+	bottom: 0px;
+	margin: 10px;
+	justify-content: right;
+	position:absolute;
+}
+div#topBtn>button{
+	background-color: #ecaf59;
+	margin-right: 5px;
+	color: white;
+	border: none;
+}
+
+/* 메뉴바 */
+.nav{
+	clear: both;
+	display: flex;
+	justify-content: center;
+	align-items: center;  
+	font-size: 30px;
+}
+
+.nav-link{
+	color: black;
+}
+
+nav>ul{
+	background-color: #FFC107;
+}
+
+
+/* 로그인 페이지 */
+
+#loginBox {
+	width: 800px;
+	padding: 8% 0 0;
+	margin: auto;
+}
+#loginField {
+	position: relative;
+	background: #FFFFFF;
+	max-width: 80%;
+	margin: 0 auto 200px;
+  	padding: 10px 45px 20px 45px;
+	text-align: center;
+/* 	border: 1px black solid; */
+/* 	border-radius: 20px; */
+}
+
+#loginField .input {
+	outline: none;
+	border: black solid 1px;
+	background-color: white;
+	width: 80%;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+#saveIdField{
+	width: 80%;
+	text-align: left;
+	margin: -15px 15px 0 60px;
+	padding: 15px;
+}
+
+#loginField button{
+	outline: none;
+	background: #735020;
+	width: 80%;
+	border: none;
+	margin: 0 0 15px;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	cursor: pointer;
+}
+#loginField img{
+	width: 40%;
+	height: auto;
+	text-align: center;
+	margin: 0 0 15px;
+}
+
+#loginField .loginSearch{
+	font-size: 15px;
+	cursor: pointer;
+}
