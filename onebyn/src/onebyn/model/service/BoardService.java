@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import onebyn.model.dao.BoardDao;
 import onebyn.model.vo.Board;
+import onebyn.model.vo.Member;
+
 import static onebyn.common.JDBCtem.*;
 
 public class BoardService {
@@ -34,6 +36,15 @@ public class BoardService {
 		int  result = bo.writeNotice(conn,b);
 		close(conn);
 		return result;
+	}
+
+	public Board tradePageBoard(String id) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		BoardDao bao = new BoardDao();
+		Board b = bao.tradePageBoard(conn,id);
+		close(conn);
+		return b;
 	}
 
 }
