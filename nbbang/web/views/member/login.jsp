@@ -29,8 +29,8 @@
               </div>
               <button type="submit">로그인</button>
               <div id="loginSearchField">
-              	<span id="findId" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/'">아이디찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              	<span id="findPw" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/'">비밀번호찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              	<span id="findId" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/member/findId'">아이디찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              	<span id="findPw" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/member/findPw'">비밀번호찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               	<span id="signIn" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/'">회원가입</span>
               </div>
             </form>
