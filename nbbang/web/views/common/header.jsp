@@ -13,7 +13,6 @@
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-
 <link href="<%=request.getContextPath()%>/css/section.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/header.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/footer.css" rel="stylesheet">
