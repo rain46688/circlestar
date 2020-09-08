@@ -25,7 +25,7 @@
 				<div class="col-md-4 mb-5">
 					<div class="card h-100">
 
-						<img class="card-img-top" src="<%= request.getContextPath() %>/${n.files}" alt="" width="460px" height="460px">
+						<img class="card-img-top" src="<%= request.getContextPath() %>/images/${n.files}" alt="" width="460px" height="460px">
 						
 						<div class="card-body">
 							<h4 class="card-title">${n.boardTitle}</h4>

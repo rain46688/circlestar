@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/* 콘텐츠 */
+
+#con{
+    height:700px;
+}
+
+.contentcontainer{
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+    height: inherit;
+    position: relative;
+}
+
+#content{
+    display: flex;
+    align-items: center;
+    height:30px;
+    line-height: 30px;
+    background: #4b0d0d;
+    min-width: 90px;
+}
+
+#content .contentcontainer{
+    padding-left: 34px;
+}
+
+.content2{
+    width:1000px;
+    height: 450px;
+    font-size: 20px;
+}

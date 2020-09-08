@@ -39,7 +39,7 @@
 				<hr class="my-4">
 				<div id="content">
 					<c:if test="${b.files!='images/'}">
-						<img class="card-img-top" src="<%= request.getContextPath() %>/${b.files}" alt="" width="100%" height="100%">
+						<img class="card-img-top" src="<%= request.getContextPath() %>/images/${b.files}" alt="" width="100%" height="100%">
 						<br>
 						<br>
 					</c:if>
