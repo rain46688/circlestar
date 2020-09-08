@@ -35,7 +35,6 @@ public class MemberStatusPageServlet extends HttpServlet {
 		Member m = as.memstatuspage(userid);
 		request.setAttribute("m", m);
 		request.getRequestDispatcher("/views/admin/memstatuspage.jsp").forward(request, response);
-		
 	}
 
 	/**
