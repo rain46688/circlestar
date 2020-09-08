@@ -10,10 +10,24 @@ div#carouselField{
 }
 
 /* cardSection */
-/* div#hotContents{ */
-/* 	ma */
-/* } */
-
+div#hotContents{
+	position: relative;
+	max-width: 90%;
+	margin: 0 auto 100px;
+	padding: 10px 45px 20px 45px;
+	text-align:center;
+}
+div>h2{
+	position:relateve;
+	margin: 0 auto 20px;
+}
+div.card{
+	position:relative;
+	width:70px;
+	margin:10px 10px 10px 10px;
+	display:inline-block;
+	padding: 10px 45px 20px 45px;
+}
 /* footer */
 footer{
 	clear:both;

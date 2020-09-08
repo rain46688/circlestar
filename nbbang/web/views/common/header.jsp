@@ -33,7 +33,7 @@
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">회원가입</button>
 				<%}else{ %>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
-					onclick>로그아웃</button>
+					onclick="location.href='<%=request.getContextPath()%>/member/memLogout.lo'">로그아웃</button>
 				<%} %>
    				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">마이페이지</button>
       			<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">고객센터</button>
