@@ -37,7 +37,7 @@
 	</div>
 
 
-<!-- card -->
+<!-- card 건들면 속상함 ㅠ.ㅠ-->
 <div id="hotContents" name="hotContents">
 	<h2 id="hotContentsH2" name="hotContentsH2">인기게시물</h1>
 	<div class="card" style="width: 20rem;">
@@ -72,20 +72,6 @@
 	    <a href="#" class="btn btn-primary">Go somewhere</a>
 	  </div>
 
-	<!-- card -->
-	<div id="hotContents" name="hotContents">
-		<h1 id="hotContentsH1" name="hotContentsH1">인기게시물</h1>
-		<div class="card" style="width: 18rem;">
-			<img src="<%=request.getContextPath()%>/resources/logo.png"
-				class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the
-					card title and make up the bulk of the card's content.</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-	</div>
 	<script>
 		$(function() {
 			$('#carouselInhee').carousel({
