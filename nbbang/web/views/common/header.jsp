@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- <% Member loginnedMember=(Member)session.getAttribute("loginnedMember");%> --%>
+<% Member loginnedMember=(Member)session.getAttribute("loginnedMember");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,7 @@
 				<img src="<%=request.getContextPath() %>/resources/logoTitle.png" id="logoTitle" alt="logoTitle">
 			</div>
 			<div id="topBtn">
-				<%if(true) {%>
+				<%if(loginnedMember==null) {%>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/loginPage'">로그인</button>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">회원가입</button>
