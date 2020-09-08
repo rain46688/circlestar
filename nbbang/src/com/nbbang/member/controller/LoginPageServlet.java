@@ -1,4 +1,4 @@
-package com.nbbang.admin.controller;
+package com.nbbang.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,20 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.nbbang.member.model.vo.Member;
-import com.nbbang.admin.model.service.AdminService;
 
 /**
- * Servlet implementation class MemberStatusPageServlet
+ * Servlet implementation class LoginPageServlet
  */
-@WebServlet("/admin/memStatusPage")
-public class MemberStatusPageServlet extends HttpServlet {
+@WebServlet("/loginPage")
+public class LoginPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberStatusPageServlet() {
+    public LoginPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +27,7 @@ public class MemberStatusPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("memstatuspage");
-		String userid = request.getParameter("uid");
-		AdminService as = new AdminService();
-		Member m = as.memstatuspage(userid);
-		request.setAttribute("m", m);
-		request.getRequestDispatcher("/views/admin/memstatuspage.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("/views/member/login.jsp").forward(request, response);
 	}
 
 	/**

@@ -1,2 +1,26 @@
 @charset "UTF-8";
 /* secssion 관련 css 추가할꺼 넣기*/
+/* carousel */
+div#carouselField{
+	position: relative;
+	width:80%;
+	margin: 0 auto 200px;
+  	padding: 10px 45px 20px 45px;
+	text-align: center;
+}
+
+/* cardSection */
+/* div#hotContents{ */
+/* 	ma */
+/* } */
+
+/* footer */
+footer{
+	clear:both;
+	text-align:center;
+}
+
+/* 배경구분용 */
+/* section{ */
+/* 	background-color:black; */
+/* } */
