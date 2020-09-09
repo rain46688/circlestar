@@ -38,3 +38,79 @@ footer{
 /* section{ */
 /* 	background-color:black; */
 /* } */
+
+
+/* memberList */
+
+section#memberList-container {
+	text-align: center;
+}
+
+section#memberList-container table#tbl-member {
+	width: 100%;
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
+
+section#memberList-container table#tbl-member th, table#tbl-member td {
+	border: 1px solid gray;
+	padding: 10px;
+}
+
+div#search-container {
+	margin: 0 0 10px 0;
+	padding: 3px;
+	background-color: rgba(0, 188, 212, 0.3);
+}
+
+div#search-userId {
+	display: inline-block;
+}
+
+div#search-userName {
+	display: none;
+}
+
+div#search-gender {
+	display: none;
+}
+
+div#nusection#memberList-container {
+	text-align: center;
+}
+
+section#memberList-container table#tbl-member {
+	width: 100%;
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
+
+section#memberList-container table#tbl-member th, table#tbl-member td {
+	border: 1px solid gray;
+	padding: 10px;
+}
+
+div#search-container {
+	margin: 0 0 10px 0;
+	padding: 3px;
+	background-color: rgba(0, 188, 212, 0.3);
+}
+
+div#search-userId {
+	display: inline-block;
+}
+
+div#search-userName {
+	display: none;
+}
+
+div#search-gender {
+	display: none;
+}
+
+div#numPerpage-container {
+	float: right;
+}mPerpage-container {
+	float: right;
+}
+

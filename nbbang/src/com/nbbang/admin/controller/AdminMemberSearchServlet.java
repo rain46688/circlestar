@@ -16,14 +16,14 @@ import com.nbbang.admin.model.service.AdminService;
 @WebServlet("/admin/memberSearch")
 public class AdminMemberSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminMemberSearchServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AdminMemberSearchServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,11 +43,13 @@ public class AdminMemberSearchServlet extends HttpServlet {
 		}catch(Exception e) {
 			cPage=1;
 		}
-		int numPerPage;
-		try {
-			numPerPage=Integer.parseInt(request.getParameter("numPerPage"));
-		}catch(NumberFormatException e) {
-			numPerPage=5;
+		int numPerPage = 5;
+		String line = request.getParameter("line");
+		
+		if(line != null) {
+			numPerPage = Integer.parseInt(line);
+		}else {
+			line = "5";
 		}
 		
 		List<Member> list = new AdminService().selectMemberSearch(type,keyword,cPage,numPerPage);
@@ -61,43 +63,42 @@ public class AdminMemberSearchServlet extends HttpServlet {
 		String pageBar="";
 		
 		if(pageNo==1) {
-			pageBar="<span>[이전]</span>";
+		pageBar="<span>[이전]</span>";
+	}else {
+		pageBar="<a href=' "+request.getContextPath()+"/admin/memberSearch?cPage="+(pageNo - 1)+"&searchType="+type+"&searchkeyword="+keyword+"&line="+line+" '>[이전]</a>";
+
+	}
+
+	while(!(pageNo > pageEnd || pageNo>totalPage)) {
+		if(cPage==pageNo) {
+			pageBar+="<span> "+pageNo+" </span>";
 		}else {
-			pageBar="<a href='"+request.getContextPath()
-					+ "/admin/memberSearch?cPage="+(pageNo-1)
-					+"&searchType="+type+"&searchkeyword="+keyword
-					+"&numPerPage="+numPerPage+"'>[이전]</a>";
+			pageBar+="<a href=' "+request.getContextPath()+"/admin/memberSearch?cPage="+pageNo+"&searchType="+type+"&searchkeyword="+keyword+"&line="+line+" '> "+pageNo+" </a>";
+
 		}
-		
-		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(pageNo==cPage) {
-				pageBar+="<span>"+pageNo+"</span>";
-			}else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/admin/memberSearch?cPage="+pageNo
-				+"&searchType="+type+"&searchkeyword="+keyword
-				+"&numPerPage="+numPerPage+"'>"+pageNo+"</a>";
-			}
-			pageNo++;
-		}
-		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
-		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/admin/memberSearch?cPage="+pageNo
-			+"&searchType="+type+"&searchkeyword="+keyword
-			+"&numPerPage="+numPerPage+"'>[다음]</a>";
-		}
-		
-		request.setAttribute("pageBar",pageBar);
+		pageNo++;
+	}
+	
+
+	if(pageNo > totalPage) {
+		pageBar+="<span>[다음]</span>";
+
+	}else {
+		pageBar+="<a href=' "+request.getContextPath()+"/admin/memberSearch?cPage="+pageNo+"&searchType="+type+"&searchkeyword="+keyword+"&line="+line+" '>[다음]</a>";
+	
+	}
+
+	request.setAttribute("pageBar", pageBar);   
 		request.setAttribute("members", list);
 		request.getRequestDispatcher("/views/admin/memberList.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
