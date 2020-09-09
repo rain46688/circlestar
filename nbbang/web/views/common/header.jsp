@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/resources/logo.png">
 <meta charset="UTF-8">
 <title>nbbang</title>
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
