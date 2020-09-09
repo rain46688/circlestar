@@ -71,7 +71,7 @@ public class AdminMemberSearchServlet extends HttpServlet {
 
 	while(!(pageNo > pageEnd || pageNo>totalPage)) {
 		if(cPage==pageNo) {
-			pageBar+="<span> "+pageNo+" </span>";/
+			pageBar+="<span> "+pageNo+" </span>";
 		}else {
 			pageBar+="<a href=' "+request.getContextPath()+"/admin/memberSearch?cPage="+pageNo+"&searchType="+type+"&searchkeyword="+keyword+"&line="+line+" '> "+pageNo+" </a>";
 

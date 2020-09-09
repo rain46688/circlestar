@@ -12,7 +12,7 @@ public class AdminService {
 	public List<Member> selectMemberList(int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		List<Member> list = dao.selectMemberList(conn,cPage,numPerPage);
+		List<Member> list = dao.selectMemberList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
@@ -20,7 +20,7 @@ public class AdminService {
 	public List<Member> selectMemberSearch(String type, String keyword, int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		List<Member> list = dao.selectMemberSearch(conn,type,keyword,cPage,numPerPage);
+		List<Member> list = dao.selectMemberSearch(conn, type, keyword, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
@@ -28,7 +28,7 @@ public class AdminService {
 	public int selectMemberCount() {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int cnt =  dao.selectMemberCount(conn);
+		int cnt = dao.selectMemberCount(conn);
 		close(conn);
 		return cnt;
 	}
@@ -36,17 +36,17 @@ public class AdminService {
 	public int selectMemberSearchCount(String type, String keyword) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int cnt =  dao.selectMemberSearchCount(conn,type,keyword);
+		int cnt = dao.selectMemberSearchCount(conn, type, keyword);
 		close(conn);
 		return cnt;
 	}
-	
+
 	public Member memstatuspage(String userid) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		Member m = dao.memstatuspage(conn,userid);
+		Member m = dao.memstatuspage(conn, userid);
 		close(conn);
 		return m;
 	}
-	
+
 }

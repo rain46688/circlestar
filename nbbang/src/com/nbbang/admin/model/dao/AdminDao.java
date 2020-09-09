@@ -18,7 +18,7 @@ public class AdminDao {
 
 	public AdminDao() {
 		// TODO Auto-generated constructor stub
-		String path = AdminDao.class.getResource("/sql/admin/admin_sql.properties").getPath();
+		String path = AdminDao.class.getResource("/sql/admin/admin.properties").getPath();
 		try {
 			p.load(new FileReader(path));
 		} catch (IOException e) {
@@ -35,7 +35,7 @@ public class AdminDao {
 		String sql = p.getProperty("selectMemberList");
 		try {
 			pst = conn.prepareStatement(sql);
-			pst.setInt(1, (cPage - 1) * numPerPage+1);
+			pst.setInt(1, (cPage - 1) * numPerPage + 1);
 			pst.setInt(2, cPage * numPerPage);
 			rs = pst.executeQuery();
 			list = printMember(list, rs);
@@ -53,16 +53,14 @@ public class AdminDao {
 		try {
 			while (rs.next()) {
 				Member m = new Member();
-				m.setUserId(rs.getString("userid"));
-				m.setPassword(rs.getString("password"));
-				m.setUserName(rs.getString("username"));
-				m.setAge(rs.getInt("age"));
-				m.setGender(rs.getString("gender"));
-				m.setEmail(rs.getString("email"));
-				m.setPhone(rs.getString("phone"));
-				m.setAddress(rs.getString("address"));
-				m.setHobby(rs.getString("hobby"));
-				m.setEnrolldate(rs.getDate("enrolldate"));
+				m.setMemberId(rs.getString("MEMBER_ID"));
+				m.setMemberPwd(rs.getString("MEMBER_PWD"));
+				m.setMemberName(rs.getString("MEMBER_NAME"));
+				m.setNickname(rs.getString("NICKNAME"));
+				m.setPhone(rs.getString("PHONE"));
+				m.setEmail(rs.getString("EMAIL"));
+				m.setAddress(rs.getString("ADDRESS"));
+				m.setEnrollDate(rs.getDate("ENROLL_DATE"));
 				list.add(m);
 			}
 		} catch (SQLException e) {
@@ -77,10 +75,8 @@ public class AdminDao {
 		ResultSet rs = null;
 		PreparedStatement pst = null;
 		List<Member> list = new ArrayList<Member>();
-		System.out.println("keyword : "+keyword +", type : "+type);
-		String sql = p.getProperty("selectSearchMember2").replace("$type", type);
-		
-		System.out.println("p.getProperty(\"selectSearchMember2\") : "+p.getProperty("selectSearchMember2"));
+		System.out.println("keyword : " + keyword + ", type : " + type);
+		String sql = p.getProperty("selectSearchMember").replace("$type", type);
 
 		try {
 			pst = conn.prepareStatement(sql);
@@ -104,24 +100,23 @@ public class AdminDao {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		int cnt = 0;
-		String sql =p.getProperty("selectMemberCount");
+		String sql = p.getProperty("selectMemberCount");
 		try {
 			pst = conn.prepareStatement(sql);
-			rs=pst.executeQuery();
-			if(rs.next()) {
-				cnt=rs.getInt(1);
-				//인덱스로 가져오기임!! 아니면 COUNT(*)불러오던지 별칭 as로 붙여주던지 하면됨!!
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pst);
 		}
 		return cnt;
 	}
-//위 카운트 함수랑 오버로딩하지말고 구분해줄 필요가 있다.
+
 	public int selectMemberSearchCount(Connection conn, String type, String keyword) {
 		// TODO Auto-generated method stub
 		PreparedStatement pst = null;
@@ -131,21 +126,19 @@ public class AdminDao {
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, "%" + keyword + "%");
-			rs=pst.executeQuery();
-			if(rs.next()) {
-				cnt=rs.getInt(1);
-				//인덱스로 가져오기임!! 아니면 COUNT(*)불러오던지 별칭 as로 붙여주던지 하면됨!!
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pst);
 		}
 		return cnt;
 	}
-
 
 	public Member memstatuspage(Connection conn, String userid) {
 		// TODO Auto-generated method stub
@@ -157,23 +150,21 @@ public class AdminDao {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, userid);
 			rs = pst.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				m = new Member();
-				m.setUserId(rs.getString("USERID"));
-				m.setPassword(rs.getString("PASSWORD"));
-				m.setUserName(rs.getString("USERNAME"));
-				m.setGender(rs.getString("GENDER"));
-				m.setAge(Integer.parseInt(rs.getString("AGE")));
-				m.setEmail(rs.getString("EMAIL"));
+				m.setMemberId(rs.getString("MEMBER_ID"));
+				m.setMemberPwd(rs.getString("MEMBER_PWD"));
+				m.setMemberName(rs.getString("MEMBER_NAME"));
+				m.setNickname(rs.getString("NICKNAME"));
 				m.setPhone(rs.getString("PHONE"));
+				m.setEmail(rs.getString("EMAIL"));
 				m.setAddress(rs.getString("ADDRESS"));
-				m.setHobby(rs.getString("HOBBY"));
-				m.setEnrolldate(rs.getDate("ENROLLDATE"));
+				m.setEnrollDate(rs.getDate("ENROLL_DATE"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pst);
 		}
