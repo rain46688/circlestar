@@ -15,7 +15,7 @@
         <tr>
             <th>작성자</th>
             <td><input type="text" name="writer" id="writer"
-             value="<%=loginnedmember.getUserId()%>" readonly></td>
+             value="<%=loginnedMember.getMemberId()%>" readonly></td>
         </tr>
         <tr>
             <th>첨부파일</th>
