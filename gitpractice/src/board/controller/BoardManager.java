@@ -1,13 +1,7 @@
 package board.controller;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 093b4531fbad5542303c58371479fab8600d93a0
 import java.util.Scanner;
 
 import board.model.vo.Board;
@@ -25,16 +19,13 @@ public class BoardManager {
 		System.out.print("글내용 : ");
 		String content = sc.nextLine();
 		list.add(new Board(title, author, content));
-=======
 import java.util.Iterator;
 import java.util.List;
->>>>>>> 78a3ca3ab00db2f15f6004950a44a11315e051e8
 import java.util.Scanner;
 
 import board.model.vo.Board;
 
 public class BoardManager {
-<<<<<<< HEAD
 	private ArrayList<Board> list = new ArrayList<Board>();
 
 	public void displayAllList() {
@@ -65,7 +56,6 @@ public class BoardManager {
 	
 		
 
-=======
 	
 	Scanner sc=new Scanner(System.in);
 
@@ -98,9 +88,6 @@ public class BoardManager {
 					System.out.println(deleteNo+"번 글이 삭제되었습니다.");
 			}
 		}
-		
->>>>>>> origin/inhee
->>>>>>> 78a3ca3ab00db2f15f6004950a44a11315e051e8
 	}
 	
 	public void modifyTitle() { //게시글 제목 수정	
