@@ -94,19 +94,16 @@ String cPage = request.getParameter("cPage");
 
 <script>
 		$(function(){
-			/* select가 변경될때 */
 			$("#searchType").change( e => {
 				
-				/* alert("select변경"); */
 				let userId=$("#search-userId");
 				let userName=$("#search-userName");
 				let gender=$("#search-gender");
 				userId.css("display","none");
 				userName.css("display","none");
 				gender.css("display","none");
-				/* 첨부터 전부 none으로 바꿔버림 */
 				
-				let value = $(e.target).val();//userId,userName,gender
+				let value = $(e.target).val();
 				$("#search-"+value).css("display","inline-block");
 			});
 			$("#searchType").change();
@@ -115,16 +112,10 @@ String cPage = request.getParameter("cPage");
 	$("#lineselect").change(e=>{
 				let type='<%=type%>';
 				let key='<%=keyword%>';
-				//console.log(type);
-				//console.log(key);
 				
 				if(key == 'null' && type == 'null'){
-					//console.log('둘다 null');
-					//console.log('눌린 숫자 : '+$(e.target).val());
 					location.replace('<%=request.getContextPath()%>/admin/memberList?cPage=<%=cPage%>&line='+$(e.target).val());
 				}else{
-					//console.log('둘다 null 아님');
-					//console.log('눌린 숫자 : '+$(e.target).val());
 					location.replace('<%=request.getContextPath()%>/admin/memberSearch?cPage=<%=cPage%>&searchType=<%=type%>&searchkeyword=<%=keyword%>&line='+$(e.target).val());
 				}
 			});
