@@ -18,6 +18,11 @@
 게시판 단계 상태 
 -->
 
+<style>
+.delcomment {
+	float: right;
+}
+</style>
 
 <div class="container" id="boardtrade">
 	<div class="row">
@@ -89,7 +94,16 @@
 </div>
 
 <script>
+
+
+
+
+
 	$(function(){
+		
+
+	
+
 		
 	 	function re(){
 			 console.log("printCom");
@@ -119,7 +133,13 @@
 	    	}
 	    })
 	    
+	    		
+	    
 	    function printCom(){
+	    	
+	    	const curuser = "${m.memberId}";
+	    	/* console.log(curuser); */
+	    	
 	    	$.ajax({
     			url: "<%=request.getContextPath()%>/board/addComment.do",
                 type: "POST",
@@ -135,11 +155,16 @@
     	                for (var j = 0; j < List[i].length; j++) {
     	                    var com = List[i][j];
     	                    if(j === 0){
+    	                   /*  	console.log("com.id : "+com.id); */
+    	                    	if(com.id == curuser){
+    	                    	print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp; <button type='button' onclick='del_fun(event);' class='btn btn-success green delcomment' name='del'><i class='fa fa-share'></i> 댓글삭제</button>";
+    	                    }else{
     	                    	print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp;";
+    	                    }
     	                    }else if(j === 1){
     	                    	print += "&nbsp;&nbsp;&nbsp;&nbsp;<label id='comlabel'>" + com.com_date+"</label>";
     	                    }else if(j === 2){
-    	                    	print += "<h4>" + com.com_content + "</h4></div><hr>";
+    	                    	print += "<h4>" + com.com_content + "</h4><hr></div>";
     	                    }
     	                };
     	        	};
@@ -148,8 +173,16 @@
                 }
 	    	})
 			}printCom(); 
-			
+	
 	});
+	
+	function del_fun(e){
+		e.target.parentNode.remove();
+	}
+	
+	
+	
+	
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

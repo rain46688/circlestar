@@ -5,21 +5,18 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-
-
-
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <div class="container" id="writecontainer">
 	<div class="form-group">
 		<h1>게시글 작성!</h1>
 	</div>
 
 	<form method="post" action="<%=request.getContextPath()%>/writenotice.do" enctype="multipart/form-data">
-		
-		
+
+
 		<div class="form-row form-group">
 			<div class="col">
-				<label for="formGroupExampleInput">제목 : </label> 
-			<input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="게시글 제목">
+				<label for="formGroupExampleInput">제목 : </label> <input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="게시글 제목">
 			</div>
 			<div class="col">
 				<label for="formGroupExampleInput">거래 종류 : </label>
@@ -44,15 +41,14 @@
 				</select>
 			</div>
 			<div class="col">
-				<label for="formGroupExampleInput">제품 상세 이름: </label> 
-				<input type="text" name="pname" class="form-control" placeholder="상세 제품명">
+				<label for="formGroupExampleInput">제품 상세 이름: </label> <input type="text" name="pname" class="form-control" placeholder="상세 제품명">
 			</div>
 		</div>
 
-		<div class="form-row form-group" >
+		<div class="form-row form-group">
 			<div class="col">
 				<label for="formGroupExampleInput">N빵 인원수 : </label>
-				<select class="custom-select custom-select"  name="select_mem" id="select_mem">
+				<select class="custom-select custom-select" name="select_mem" id="select_mem">
 					<option selected>인원 선택</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
@@ -66,8 +62,7 @@
 			</div>
 
 			<div class="col">
-				<label for="formGroupExampleInput">제품 가격 : </label> 
-				<input type="text" name="price" class="form-control" placeholder="단위 (원)">
+				<label for="formGroupExampleInput">제품 가격 : </label> <input type="text" name="price" class="form-control" placeholder="단위 (원)">
 			</div>
 		</div>
 
@@ -81,20 +76,18 @@
 				</select>
 			</div>
 			<div class="col">
-				<label for="formGroupExampleInput">거래 지역 : </label> 
-				<input type="text" name="tradeloc" class="form-control" id="formGroupExampleInput" placeholder="주소">
+				<label for="formGroupExampleInput">거래 지역 : </label> <input type="text" name="tradeloc" class="form-control" id="formGroupExampleInput" placeholder="주소">
 			</div>
 		</div>
 
 
 		<div class="form-group">
-			<label for="exampleFormControlFile1">파일 선택 : </label> 
-			<input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" accept=".gif, .jpg, .png .jpeg">
+			<label for="exampleFormControlFile1">파일 선택 : </label> <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" accept=".gif, .jpg, .png .jpeg">
 		</div>
 
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">작성 내용 : </label>
-			<textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="20"></textarea>
+			<textarea class="form-control" name="content" id="content" rows="20" ></textarea>
 		</div>
 
 		<div class="form-group">
@@ -102,11 +95,10 @@
 			<a href="<%=request.getContextPath()%>/board.do" class="btn btn-primary">게시글 작성 취소</a>
 		</div>
 
-
 	</form>
 </div>
-
-
-
+<script>
+	CKEDITOR.replace('content');
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
