@@ -1,4 +1,4 @@
-package com.nbbang.member.controller;
+package onebyn.comment.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.nbbang.member.model.service.MemberService;
-import com.nbbang.member.model.vo.Member;
+import onebyn.comment.model.service.CommentService;
+import onebyn.comment.model.vo.Comment;
 
 /**
- * Servlet implementation class FindIdServlet
+ * Servlet implementation class WriteComment
  */
-@WebServlet("/findId")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/board/writeComment.do")
+public class WriteComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdServlet() {
+    public WriteComment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +31,15 @@ public class FindIdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String memberName=request.getParameter("memberName");
-		String email=request.getParameter("email");
+//		System.out.println("request.getParameter(\"no\") : "+request.getParameter("no"));
+		Comment c = new Comment();
+		c.setCboardId(request.getParameter("no"));
+		c.setCwriterId(request.getParameter("id"));
+		c.setComment(request.getParameter("con"));
+		System.out.println(c);
+		CommentService cs = new CommentService();
+		cs.addComment(c);
 		
-		Member m=new MemberService().findId(memberName, email);
-		
-		request.setAttribute("findMember", m);
-		request.getRequestDispatcher("/views/member/findId.jsp").forward(request, response);
 	}
 
 	/**

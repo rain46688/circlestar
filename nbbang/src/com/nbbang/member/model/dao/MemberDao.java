@@ -52,4 +52,34 @@ private Properties prop=new Properties();
 		}
 		return m;
 	}
+
+	public Member findId(Connection conn, String memberName, String email) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("findId"));
+			pstmt.setString(1, memberName);
+			pstmt.setString(2, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPwd(rs.getString("member_pwd"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setNickname(rs.getString("nickname"));
+				m.setPhone(rs.getString("phone"));
+				m.setAddress(rs.getString("address"));
+				m.setEmail(rs.getString("email"));
+				m.setEnrollDate(rs.getDate("enroll_date"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 }

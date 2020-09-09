@@ -1,7 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.nbbang.member.model.vo.Member" %>
-<% Member loginnedMember=(Member)session.getAttribute("loginnedMember");%>
+<% 
+	Member loginnedMember=(Member)session.getAttribute("loginnedMember");
+	
+	Cookie[] cookies=request.getCookies();
+	String saveId=null;
+	if(cookies!=null){
+		for(Cookie c:cookies){
+			if(c.getName().equals("saveId")){
+				saveId=c.getValue();
+				break;
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,19 +35,38 @@
         <div id="loginField">
             <img src="<%=request.getContextPath() %>/resources/logo.png" alt="">
             <form action="<%=request.getContextPath()%>/login" method="post">
-              <input type="text" placeholder="아이디" class="input" id="memberId" name="memberId" maxlength=20>
+              <input type="text" placeholder="아이디" class="input" id="memberId" name="memberId" maxlength=20
+              value="<%=saveId!=null ? saveId : ""%>">
               <input type="password" placeholder="비밀번호" class="input" id="memberPwd" name="memberPwd" maxlength=16>
               <div id="saveIdField">
-                <input type="checkbox" id="saveId" name="saveId"><span><label for="saveId">&nbsp;아이디 저장하기</label></span>
+                <input type="checkbox" id="saveId" name="saveId" <%=saveId!=null ? "checked" : "" %>><span><label for="saveId">&nbsp;아이디 저장하기</label></span>
               </div>
               <button type="submit">로그인</button>
               <div id="loginSearchField">
-              	<span id="findId" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/member/findId'">아이디찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              	<span id="findPw" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/member/findPw'">비밀번호찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              	<span id="findId" class="loginSearch" onclick="fn_findId();">아이디찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              	<span id="findPw" class="loginSearch" onclick="fn_findPw();">비밀번호찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               	<span id="signIn" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/'">회원가입</span>
               </div>
             </form>
         </div>
     </div>
 </section>
+<script>
+	function fn_findId() {
+		const url="<%=request.getContextPath()%>/views/member/findId.jsp";
+		const title="findId";
+		const status="left=500px, top=500px, width=500px, height=500px";
+		
+		open(url,title,status);
+		
+		findId.target=title;
+		findId.action="<%=request.getContextPath()%>/findId";
+		findId.method="post";
+		findId.submit();
+		
+	}
+	function fn_findPw() {
+		
+	}
+</script>
 <%@ include file="/views/common/footer.jsp" %>

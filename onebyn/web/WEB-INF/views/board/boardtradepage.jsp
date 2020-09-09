@@ -169,7 +169,7 @@
     	                    }else if(j === 2){
     	                    	print += "<h4>" + com.com_content + "</h4>";
     	                    }else if(j === 3){
-    	                    	print +="<hr><input type='hidden' id='com"+(i+1)+" ' value='"+com.com_no+"'></div>";
+    	                    	print +="<hr><input type='hidden' id='com"+(i+1)+"' value='"+com.com_no+"'></div>";
     	                    }
     	                };
     	        	};
@@ -182,27 +182,25 @@
 	});
 	
 	function del_fun(e){
-		
-		console.log(e.target.parentNode.lastChild.nodeValue());
-		
-	<%-- 	  $.ajax({
+		const com = e.target.parentNode.lastChild.value;
+		console.log(com);
+		/* console.log($("#com1").val()); */
+		  $.ajax({
 	            type : "GET",
 	            url : "<%=request.getContextPath()%>/board/delcomment.do",
-	            dataType : "text",
+	            data: {cono : com},
 	            error : function(){
 	                alert('통신실패!!');
 	            },
 	            success : function(data){
-	                alert("통신데이터 값 : " + data) ;
+	                alert("댓글이 삭제되었습니다." + data) ;
 	                $("#dataArea").html(data) ;
+	                e.target.parentNode.remove(); 
 	            }
 	             
 	        });
-		 --%>
+	
 	}
-	
-	/* e.target.parentNode.remove(); */
-	
 	
 </script>
 
