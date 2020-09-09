@@ -18,7 +18,7 @@
 			<form action="<%=request.getContextPath()%>/findId" method="post">
 			<tr>
 				<td>
-					<h3>아이디 찾기^ㅇ^</h3>
+					<h3>^ㅇ^아이디 찾기^ㅇ^</h3>
 				</td>
 			</tr>
 			<tr>
