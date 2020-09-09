@@ -48,7 +48,6 @@ public class NoticeDao {
 				n.setStatus(rs.getString("status") == "Y" ? true : false);
 				list.add(n);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
