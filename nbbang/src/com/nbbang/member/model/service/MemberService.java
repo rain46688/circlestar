@@ -18,4 +18,11 @@ private MemberDao dao=new MemberDao();
 		close(conn);
 		return m;
 	}
+
+	public Member findId(String memberName, String email) {
+		Connection conn=getConnection();
+		Member m=dao.findId(conn, memberName, email);
+		close(conn);
+		return m;
+	}
 }
