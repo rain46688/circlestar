@@ -40,7 +40,6 @@ COMMENT ON COLUMN MEMBER.LEAVE_MEM IS '회원탈퇴여부 Boolean';
 COMMENT ON COLUMN MEMBER.CUR_TRADE_LIST IS '거래중인게시글리스트';
 COMMENT ON COLUMN MEMBER.TRADE_LIST IS '과거거래내역리스트';
 COMMENT ON COLUMN MEMBER.LIKE_LIST IS '추천게시글리스트';
-COMMIT;
 
 ------------------------------------------------------------------------------------------
 
@@ -135,3 +134,10 @@ DROP TABLE NOTICE;
     INSERT INTO NOTICE VALUES(SEQ_NOTICE_NO.NEXTVAL,'공지사항테스트','admin','공지사항테스트입니다',default,null,default);
 
 COMMIT;
+
+
+--멤버 테스트용 계정
+INSERT INTO MEMBER VALUES('admin','admin','관리자','관리자','01012345678','서울시 서초구', 'admin@admin', sysdate, default,
+default, default, default, default, default, default, default, default);
+COMMIT;
+SELECT * FROM MEMBER where member_id='admin' and member_pwd='admin';
