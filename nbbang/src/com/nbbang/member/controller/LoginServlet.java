@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 		Member m=new MemberService().loginMember(memberId,memberPwd);
 		
 		String saveId=request.getParameter("saveId");
+		System.out.println("saveId: "+saveId);
 		
 		if(saveId!=null) {
 			Cookie c=new Cookie("saveId",memberId);
