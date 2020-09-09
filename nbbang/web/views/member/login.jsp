@@ -53,17 +53,16 @@
 </section>
 <script>
 	function fn_findId() {
-		const url="<%=request.getContextPath()%>/member/findId";
+		const url="<%=request.getContextPath()%>/views/member/findId.jsp";
 		const title="findId";
 		const status="left=500px, top=500px, width=500px, height=500px";
 		
 		open(url,title,status);
 		
 		findId.target=title;
-		findId.action=url;
+		findId.action="<%=request.getContextPath()%>/findId";
 		findId.method="post";
-		
-		findId
+		findId.submit();
 		
 	}
 	function fn_findPw() {
