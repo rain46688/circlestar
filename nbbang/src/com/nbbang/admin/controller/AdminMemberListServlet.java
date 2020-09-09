@@ -39,11 +39,13 @@ public class AdminMemberListServlet extends HttpServlet {
 			cPage=1;
 		}
 		
-		int numPerPage;
-		try {
-			numPerPage=Integer.parseInt(request.getParameter("numPerPage"));
-		}catch(NumberFormatException e) {
-			numPerPage=5;
+		int numPerPage = 5;
+		String line = request.getParameter("line");
+		
+		if(line != null) {
+			numPerPage = Integer.parseInt(line);
+		}else {
+			line = "5";
 		}
 		
 		list = new AdminService().selectMemberList(cPage, numPerPage);
@@ -53,38 +55,30 @@ public class AdminMemberListServlet extends HttpServlet {
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 		int pageEnd = pageNo + pageBarSize - 1;
-		
-		for(Member m : list) {
-		System.out.println(m);
-	}
 
 		String pageBar = "";
 		
-		if(pageNo==1) {
-			pageBar="<span>[이전]</span>";
-		}else {
-			pageBar="<a href='"+request.getContextPath()
-			+"/admin/memberList?cPage="+(pageNo-1)+"&numPerPage="+numPerPage+"'>[이전]</a>";		
+		if (pageNo == 1) {
+		pageBar = "<span>[이전]</span>";
+	} else {
+		pageBar = "<a href=' " + request.getContextPath() + "/admin/memberList?cPage=" + (pageNo - 1)+ "&line="+line+" '>[이전]</a>";
+	}
+	while (!(pageNo > pageEnd || pageNo > totalPage)) {
+		if (cPage == pageNo) {
+			pageBar += "<span> " + pageNo + " </span>";
+		} else {
+			pageBar += "<a href=' " + request.getContextPath() + "/admin/memberList?cPage=" + pageNo+ "&line="+line+" '> " + pageNo + " </a>";
 		}
-		
-		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(cPage==pageNo) {
-				pageBar+="<span>"+pageNo+"</span>";
-			}else {
-				pageBar+="<a href='"+request.getContextPath()+
-						"/admin/memberList?cPage="+pageNo+"&numPerPage="+numPerPage+"'>"+pageNo+"</a>";
-			}
-			pageNo++;
-		}
-		
-		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
-			
-		}else {
-			pageBar+="<a href='"+request.getContextPath()+
-					"/admin/memberList?cPage="+pageNo+"&numPerPage="+numPerPage+"'>[다음]</a>";
-		}
-		request.setAttribute("pageBar", pageBar);
+		pageNo++;
+	}
+
+	if (pageNo > totalPage) {
+		pageBar += "<span>[다음]</span>";
+	} else {
+		pageBar += "<a href=' " + request.getContextPath() + "/admin/memberList?cPage=" + pageNo+ "&line="+line+" '>[다음]</a>";
+	}
+
+	request.setAttribute("pageBar", pageBar);
 		
 		System.out.println("========================");
 		System.out.println("cPage : " + cPage);
