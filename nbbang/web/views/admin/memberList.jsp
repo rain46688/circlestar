@@ -16,28 +16,28 @@ String cPage = request.getParameter("cPage");
 	<div id="search-container">
 		검색타입 :
 		<select id="searchType">
-			<option value="userId" <%=type != null && type.equals("userId") ? "selected" : ""%>>아이디</option>
-			<option value="userName" <%=type != null && type.equals("userName") ? "selected" : ""%>>이름</option>
-			<option value="gender" <%=type != null && type.equals("gender") ? "selected" : ""%>>성별</option>
+			<option value="MEMBER_ID" <%=type != null && type.equals("MEMBER_ID") ? "selected" : ""%>>아이디</option>
+			<option value="MEMBER_NAME" <%=type != null && type.equals("MEMBER_NAME") ? "selected" : ""%>>이름</option>
+			<option value="NICKNAME" <%=type != null && type.equals("NICKNAME") ? "selected" : ""%>>닉네임</option>
 		</select>
 
-		<div id="search-userId">
+		<div id="search-MEMBER_ID">
 			<form action="<%=request.getContextPath()%>/admin/memberSearch">
-				<input type="hidden" name="searchType" value="userId"> <input type="text" name="searchkeyword" size="25" placeholder="검색할 아이디를 입력하세요" value="<%=type != null && type.equals("userId") ? keyword : ""%>">
+				<input type="hidden" name="searchType" value="MEMBER_ID"> <input type="text" name="searchkeyword" size="25" placeholder="검색할 아이디를 입력하세요" value="<%=type != null && type.equals("MEMBER_ID") ? keyword : ""%>">
 				<button type="submit">검색</button>
 			</form>
 		</div>
 
-		<div id="search-userName">
+		<div id="search-MEMBER_NAME">
 			<form action="<%=request.getContextPath()%>/admin/memberSearch">
-				<input type="hidden" name="searchType" value="userName"> <input type="text" name="searchkeyword" size="25" placeholder="검색할 이름을 입력하세요" value="<%=type != null && type.equals("userName") ? keyword : ""%>">
+				<input type="hidden" name="searchType" value="MEMBER_NAME"> <input type="text" name="searchkeyword" size="25" placeholder="검색할 이름을 입력하세요" value="<%=type != null && type.equals("MEMBER_NAME") ? keyword : ""%>">
 				<button type="submit">검색</button>
 			</form>
 		</div>
 
-		<div id="search-gender">
-			<form action="<%=request.getContextPath()%>/admin/memberSearch">
-				<input type="hidden" name="searchType" value="gender"> <label><input type="radio" name="searchkeyword" value="M" <%=type != null && type.equals("gender") && keyword.equals("M") ? "checked" : ""%>>남</label> <label><input type="radio" name="searchkeyword" value="F" <%=type != null && type.equals("gender") && keyword.equals("F") ? "checked" : ""%>>여</label>
+		<div id="search-NICKNAME">
+		<form action="<%=request.getContextPath()%>/admin/memberSearch">
+				<input type="hidden" name="searchType" value="NICKNAME"> <input type="text" name="searchkeyword" size="25" placeholder="검색할 닉네임을 입력하세요" value="<%=type != null && type.equals("NICKNAME") ? keyword : ""%>">
 				<button type="submit">검색</button>
 			</form>
 		</div>
@@ -96,9 +96,9 @@ String cPage = request.getParameter("cPage");
 		$(function(){
 			$("#searchType").change( e => {
 				
-				let userId=$("#search-userId");
-				let userName=$("#search-userName");
-				let gender=$("#search-gender");
+				let userId=$("#search-MEMBER_ID");
+				let userName=$("#search-MEMBER_NAME");
+				let gender=$("#search-NICKNAME");
 				userId.css("display","none");
 				userName.css("display","none");
 				gender.css("display","none");
@@ -114,9 +114,9 @@ String cPage = request.getParameter("cPage");
 				let key='<%=keyword%>';
 				
 				if(key == 'null' && type == 'null'){
-					location.replace('<%=request.getContextPath()%>/admin/memberList?cPage=<%=cPage%>&line='+$(e.target).val());
+					location.replace('<%=request.getContextPath()%>/admin/memberList?cPage=<%=1%>&line='+$(e.target).val());
 				}else{
-					location.replace('<%=request.getContextPath()%>/admin/memberSearch?cPage=<%=cPage%>&searchType=<%=type%>&searchkeyword=<%=keyword%>&line='+$(e.target).val());
+					location.replace('<%=request.getContextPath()%>/admin/memberSearch?cPage=<%=1%>&searchType=<%=type%>&searchkeyword=<%=keyword%>&line='+$(e.target).val());
 				}
 			});
 		

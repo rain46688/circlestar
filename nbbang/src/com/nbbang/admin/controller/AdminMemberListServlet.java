@@ -47,14 +47,20 @@ public class AdminMemberListServlet extends HttpServlet {
 		}else {
 			line = "5";
 		}
-		
+		System.out.println("cPage : "+cPage+", numPerPage : "+numPerPage);
 		list = new AdminService().selectMemberList(cPage, numPerPage);
+		
 		int totalData;
 		totalData = new AdminService().selectMemberCount();
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 		int pageEnd = pageNo + pageBarSize - 1;
+		System.out.println("list : ");
+		for(Member b : list) {
+			System.out.println(list);
+		}
+		
 
 		String pageBar = "";
 		

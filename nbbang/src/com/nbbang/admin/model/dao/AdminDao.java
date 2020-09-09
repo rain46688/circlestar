@@ -38,7 +38,11 @@ public class AdminDao {
 			pst.setInt(1, (cPage - 1) * numPerPage + 1);
 			pst.setInt(2, cPage * numPerPage);
 			rs = pst.executeQuery();
-			list = printMember(list, rs);
+			printMember(list, rs);
+			System.out.println("list2 : ");
+			for(Member b : list) {
+				System.out.println(list);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,7 +53,7 @@ public class AdminDao {
 		return list;
 	}
 
-	private List<Member> printMember(List<Member> list, ResultSet rs) {
+	private void printMember(List<Member> list, ResultSet rs) {
 		try {
 			while (rs.next()) {
 				Member m = new Member();
@@ -67,7 +71,6 @@ public class AdminDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return list;
 	}
 
 	public List<Member> selectMemberSearch(Connection conn, String type, String keyword, int cPage, int numPerPage) {
@@ -84,7 +87,7 @@ public class AdminDao {
 			pst.setInt(2, (cPage - 1) * numPerPage + 1);
 			pst.setInt(3, cPage * numPerPage);
 			rs = pst.executeQuery();
-			list = printMember(list, rs);
+			printMember(list, rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
