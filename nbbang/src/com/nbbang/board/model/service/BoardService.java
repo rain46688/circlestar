@@ -20,4 +20,10 @@ public class BoardService {
 		return boardList;
 	}
 	
+	public Board boardPage(String boardId) {
+		Connection conn = getConnection();
+		Board b = dao.boardPage(conn, boardId);
+		close(conn);
+		return b;
+	}
 }
