@@ -19,13 +19,13 @@ import onebyn.model.vo.Comment;
  * Servlet implementation class AddComment
  */
 @WebServlet("/board/addComment.do")
-public class AddComment extends HttpServlet {
+public class AddCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddComment() {
+    public AddCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,6 +47,7 @@ public class AddComment extends HttpServlet {
 			Date date = list.get(i).getCenrollDate();
 			SimpleDateFormat df = new SimpleDateFormat("YY-MM-dd");
 			int com_no = Integer.parseInt(list.get(i).getComId());
+//			System.out.println("com_no : "+com_no);
 			jsonText += "[{\"id\":\"" + id + "\"},";
 			jsonText += "{\"com_date\":\"" + df.format(date) + "\"},";
 			jsonText += "{\"com_content\":\"" + com + "\"},";
