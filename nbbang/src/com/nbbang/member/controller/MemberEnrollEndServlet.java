@@ -29,15 +29,14 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id= request.getParameter("userId");
-		String pw= request.getParameter("password");
-		String name=request.getParameter("userName");
-		String nickname=request.getParameter("nickname");
-		String email=request.getParameter("email");
-		String phone=request.getParameter("phone");
-		String address=request.getParameter("address");
-		 
-		Member m = new Member(id, pw, name, nickname, phone, address, email);
+		Member m=new Member();
+		m.setMemberId(request.getParameter("userId"));
+		m.setMemberPwd(request.getParameter("password"));
+		m.setMemberName(request.getParameter("userName"));
+		m.setNickname(request.getParameter("nickname"));
+		m.setEmail(request.getParameter("email"));
+		m.setPhone(request.getParameter("phone"));
+		m.setAddress(request.getParameter("address"));
 		
 		int result=new MemberService().insertMember(m);
 		

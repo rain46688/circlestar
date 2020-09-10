@@ -32,7 +32,8 @@
 				<%if(loginnedMember==null) {%>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/loginPage'">로그인</button>
-					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">회원가입</button>
+					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
+					 onclick="location.href='<%=request.getContextPath()%>/enrollMember'">회원가입</button>
 				<%}else{ %>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/member/memLogout.lo'">로그아웃</button>
