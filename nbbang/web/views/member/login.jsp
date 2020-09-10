@@ -45,7 +45,7 @@
               <div id="loginSearchField">
               	<span id="findId" class="loginSearch" onclick="fn_findId();">아이디찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               	<span id="findPw" class="loginSearch" onclick="fn_findPw();">비밀번호찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              	<span id="signIn" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/'">회원가입</span>
+              	<span id="signIn" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/enrollMember'" >회원가입</span>
               </div>
             </form>
         </div>

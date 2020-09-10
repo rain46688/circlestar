@@ -46,4 +46,11 @@ private MemberDao dao=new MemberDao();
 		
 	}
 
+	public Member findPw(String memberName, String email, String memberId) {
+		Connection conn=getConnection();
+		Member m=dao.findPw(conn, memberName, email, memberId);
+		close(conn);
+		return m;
+	}
+
 }
