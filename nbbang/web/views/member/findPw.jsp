@@ -3,7 +3,7 @@
 <%@ page import="com.nbbang.member.model.vo.Member"%>
 
 <%
-	 Member m=(Member)request.getAttribute("findMember");
+	 Member m=(Member)request.getAttribute("findMemberPw");
 %>  
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="text" name="id" id="id" placeholder="아이디를 입력해주세요">
+					<input type="text" name="memberId" id="memberId" placeholder="아이디를 입력해주세요">
 				</td>
 			</tr>
 			<tr>
@@ -43,7 +43,7 @@
 			</tr>
 		</table>
 		<%} else{%>
-		<div>당신의 비밀번호는 <%=m.getMemberPwd()%>입니다.</div>
+		<div>당신의 비밀번호는 <%=m.getMemberPwd() %>입니다.</div>
 		<%} %>
 		</form>
 	</div>
@@ -51,7 +51,7 @@
 		function fn_validate() {
 			let name=document.getElementById("memberName").value;
 			let email=document.getElementById("email").value;
-			let id=document.getElementById("memberId").value;
+			let memberId=document.getElementById("memberId").value;
 			if(name.trim().length<1){
 				alert("이름을 입력해주세요");
 				document.getElementById("memberName").focus();
@@ -62,7 +62,7 @@
 				document.getElementById("email").focus();
 				return false;
 			}
-			if(id.trim().length<1){
+			if(memberId.trim().length<1){
 				alert("아이디를 입력해주세요");
 				document.getElementById("memberId").focus();
 				return false;
