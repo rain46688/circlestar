@@ -82,4 +82,46 @@ private Properties prop=new Properties();
 		}
 		return m;
 	}
+	public int insertMember(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertMember"));
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPwd());
+			pstmt.setString(3, m.getMemberName());
+			pstmt.setString(4, m.getNickname());
+			pstmt.setString(5, m.getPhone());
+			pstmt.setString(6, m.getAddress());
+			pstmt.setString(7, m.getEmail());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+
+	public int selectMember(Connection conn, String userId) throws SQLException {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		int result = 0;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberOne"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);//rs의 첫번째 컬럼의 값을 가져와라
+			}
+		
+			
+		}finally {
+			rs.close();
+			pstmt.close();
+		}
+		return result;
+			
+		
+		}
 }
