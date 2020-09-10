@@ -8813,3 +8813,23 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jdt.launching 1 0 2020-09-10 22:20:00.145
+!MESSAGE Installed JRE 'Java SE 8 [1.8.0_251]' removed due to missing VM type extension.
+
+!ENTRY org.eclipse.core.jobs 4 2 2020-09-10 22:20:00.212
+!MESSAGE An internal error occurred during: "Auto share git projects".
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 32: /Users/jackson/Desktop/Semi/.git:
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182)
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153)
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77)
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:94)
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:255)
+	at sun.nio.fs.AbstractPath.resolve(AbstractPath.java:53)
+	at org.eclipse.egit.core.RepositoryUtil.getAbsoluteRepositoryPath(RepositoryUtil.java:666)
+	at org.eclipse.egit.core.RepositoryUtil.toDirSet(RepositoryUtil.java:511)
+	at org.eclipse.egit.core.RepositoryUtil.getRepositories(RepositoryUtil.java:475)
+	at org.eclipse.egit.core.Activator$CheckProjectsToShare.visitConnect(Activator.java:740)
+	at org.eclipse.egit.core.Activator$CheckProjectsToShare.run(Activator.java:689)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

@@ -1,9 +1,12 @@
 package com.nbbang.member.model.service;
 
 import static com.nbbang.common.temp.JDBCTemplate.close;
+import static com.nbbang.common.temp.JDBCTemplate.commit;
 import static com.nbbang.common.temp.JDBCTemplate.getConnection;
+import static com.nbbang.common.temp.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import com.nbbang.member.model.dao.MemberDao;
 import com.nbbang.member.model.vo.Member;
