@@ -124,4 +124,34 @@ private Properties prop=new Properties();
 			
 		
 		}
+
+	public Member findPw(Connection conn, String memberName, String email, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("findPw"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberName);
+			pstmt.setString(3, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPwd(rs.getString("member_pwd"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setNickname(rs.getString("nickname"));
+				m.setPhone(rs.getString("phone"));
+				m.setAddress(rs.getString("address"));
+				m.setEmail(rs.getString("email"));
+				m.setEnrollDate(rs.getDate("enroll_date"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 }
