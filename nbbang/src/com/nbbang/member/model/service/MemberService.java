@@ -25,4 +25,22 @@ private MemberDao dao=new MemberDao();
 		close(conn);
 		return m;
 	}
+	public int insertMember(Member m) {
+		Connection conn=getConnection();
+		int result=dao.insertMember(conn,m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int selectMember(String userId) throws SQLException {
+		Connection conn=getConnection();
+		int result=dao.selectMember(conn,userId);
+		close(conn);
+		return result;
+		
+		
+	}
+
 }
