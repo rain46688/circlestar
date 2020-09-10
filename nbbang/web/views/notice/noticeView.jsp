@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-Notice n=(Notice)request.getAttribute("notice");
+Notice n=(Notice)request.getAttribute("noticeList");
 %>
 <section>
 <div id="notice-container">

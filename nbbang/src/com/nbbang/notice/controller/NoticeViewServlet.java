@@ -44,7 +44,7 @@ public class NoticeViewServlet extends HttpServlet {
 
 		} else {
 
-			request.setAttribute("notice", n);
+			request.setAttribute("noticeList", n);
 			view = "/views/notice/noticeView.jsp";
 		}
 		
