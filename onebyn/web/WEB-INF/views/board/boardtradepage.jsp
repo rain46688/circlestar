@@ -146,6 +146,7 @@
                 async : true, 
                 data: {board_id : ${b.boardId}},
                 success: function (data) { 
+                	/* console.log(data); */
                 	$("#commentbdiv").text("");
                 	var obj = JSON.parse(data); 
                 	var List = obj.List;
@@ -154,6 +155,8 @@
    	                    print += "<div class='w3-border w3-padding'>";
     	                for (var j = 0; j < List[i].length; j++) {
     	                    var com = List[i][j];
+    	                    /* console.log("com.com_no : "+com.com_no); */
+    	                /*     console.log(i+" "+j+" "+com.com_no+" "+com.id+" "+com.com_date+" "+com.com_content);  */
     	                    if(j === 0){
     	                   /*  	console.log("com.id : "+com.id); */
     	                    	if(com.id == curuser){
@@ -164,7 +167,9 @@
     	                    }else if(j === 1){
     	                    	print += "&nbsp;&nbsp;&nbsp;&nbsp;<label id='comlabel'>" + com.com_date+"</label>";
     	                    }else if(j === 2){
-    	                    	print += "<h4>" + com.com_content + "</h4><hr></div>";
+    	                    	print += "<h4>" + com.com_content + "</h4>";
+    	                    }else if(j === 3){
+    	                    	print +="<hr><input type='hidden' id='com"+(i+1)+"' value='"+com.com_no+"'></div>";
     	                    }
     	                };
     	        	};
@@ -177,11 +182,25 @@
 	});
 	
 	function del_fun(e){
-		e.target.parentNode.remove();
+		const com = e.target.parentNode.lastChild.value;
+		console.log(com);
+		/* console.log($("#com1").val()); */
+		  $.ajax({
+	            type : "GET",
+	            url : "<%=request.getContextPath()%>/board/delcomment.do",
+	            data: {cono : com},
+	            error : function(){
+	                alert('통신실패!!');
+	            },
+	            success : function(data){
+	                alert("댓글이 삭제되었습니다." + data) ;
+	                $("#dataArea").html(data) ;
+	                e.target.parentNode.remove(); 
+	            }
+	             
+	        });
+	
 	}
-	
-	
-	
 	
 </script>
 
