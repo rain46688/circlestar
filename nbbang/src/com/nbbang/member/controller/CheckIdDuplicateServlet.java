@@ -1,6 +1,7 @@
-package com.nbbang.board.controller;
+package com.nbbang.member.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.nbbang.board.model.service.BoardService;
-import com.nbbang.board.model.vo.Board;
+import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Member;
 
 /**
- * Servlet implementation class BoardPageServlet
+ * Servlet implementation class CheckIdDuplicateServlet
  */
-@WebServlet("/board/boardPage")
-public class BoardPageServlet extends HttpServlet {
+@WebServlet("/checkIdDuplicate")
+public class CheckIdDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardPageServlet() {
+    public CheckIdDuplicateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +31,21 @@ public class BoardPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String boardId = request.getParameter("boardId");
-		Board b = new BoardService().boardPage(boardId);
-		if(b==null) {
-			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
-			request.setAttribute("loc", "/views/board/bolist.jsp");
-			request.getRequestDispatcher("/views/common/msg.jsp");
-			
-		}else {
-			request.setAttribute("curBoard", b);
-			request.getRequestDispatcher("/views/board/boPage.jsp");
+		String userId=request.getParameter("userId");
+		
+		try {
+			int result=new MemberService().selectMember(userId);
+			request.setAttribute("result", result);
+			request.getRequestDispatcher("/views/member/checkIdDuplicate.jsp")
+			.forward(request,response);		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

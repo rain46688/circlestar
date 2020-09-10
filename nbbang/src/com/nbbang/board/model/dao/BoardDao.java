@@ -36,6 +36,7 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			list = new ArrayList<Board>();
 			while(rs.next()) {
 				Board b = new Board();
 				b.setBoardId(rs.getInt("BOARD_ID"));
