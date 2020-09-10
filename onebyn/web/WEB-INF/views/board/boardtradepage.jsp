@@ -99,108 +99,131 @@
 
 
 
-	$(function(){
-		
-
+$(function(){
 	
 
-		
-	 	function re(){
-			 console.log("printCom");
-			 printCom();
-			}
-			setInterval(re, 10000); 
-		
-	    $("#addcomment").click(function(){
-	    	if($("#commnetbox").val().trim() === ""){
-	    		alert("내용을 입력하세요.");
-	    		$("#commnetbox").val("").focus();
-	    	}else{
-	    		$.ajax({
-	    			url: "<%=request.getContextPath()%>/board/writeComment.do",
-	                type: "POST",
-	                data: {
-	                    no : $("#no").val(),
-	                    id : $("#id").val(),
-	                   con : $("#commnetbox").val()
-	                },
-	                success: function () {
-	                	alert("댓글이 등록되었습니다.");
-	                	$("#commnetbox").val("");
-	                	printCom();
-	                }
-	    		})
-	    	}
-	    })
-	    
-	    		
-	    
-	    function printCom(){
-	    	
-	    	const curuser = "${m.memberId}";
-	    	/* console.log(curuser); */
-	    	
-	    	$.ajax({
-    			url: "<%=request.getContextPath()%>/board/addComment.do",
+
+
+	
+ 	function re(){
+		 console.log("printCom");
+		 printCom();
+		}
+		setInterval(re, 10000); 
+	
+    $("#addcomment").click(function(){
+    	if($("#commnetbox").val().trim() === ""){
+    		alert("내용을 입력하세요.");
+    		$("#commnetbox").val("").focus();
+    	}else{
+    		$.ajax({
+    			url: "<%=request.getContextPath()%>/board/writeComment.do",
                 type: "POST",
-                async : true, 
-                data: {board_id : ${b.boardId}},
-                success: function (data) { 
-                	/* console.log(data); */
-                	$("#commentbdiv").text("");
-                	var obj = JSON.parse(data); 
-                	var List = obj.List;
-                	var print = ""; 
-                	for (var i = 0; i < List.length; i++) { 
-   	                    print += "<div class='w3-border w3-padding'>";
-    	                for (var j = 0; j < List[i].length; j++) {
-    	                    var com = List[i][j];
-    	                    /* console.log("com.com_no : "+com.com_no); */
-    	                /*     console.log(i+" "+j+" "+com.com_no+" "+com.id+" "+com.com_date+" "+com.com_content);  */
-    	                    if(j === 0){
-    	                   /*  	console.log("com.id : "+com.id); */
-    	                    	if(com.id == curuser){
-    	                    	print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp; <button type='button' onclick='del_fun(event);' class='btn btn-success green delcomment' name='del'><i class='fa fa-share'></i> 댓글삭제</button>";
-    	                    }else{
-    	                    	print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp;";
-    	                    }
-    	                    }else if(j === 1){
-    	                    	print += "&nbsp;&nbsp;&nbsp;&nbsp;<label id='comlabel'>" + com.com_date+"</label>";
-    	                    }else if(j === 2){
-    	                    	print += "<h4>" + com.com_content + "</h4>";
-    	                    }else if(j === 3){
-    	                    	print +="<hr><input type='hidden' id='com"+(i+1)+"' value='"+com.com_no+"'></div>";
-    	                    }
-    	                };
-    	        	};
-   	              	$("#commentbdiv").html(print); 
-   	              	$(".com_count").html(i);
+                data: {
+                    no : $("#no").val(),
+                    id : $("#id").val(),
+                   con : $("#commnetbox").val()
+                },
+                success: function () {
+                	alert("댓글이 등록되었습니다.");
+                	$("#commnetbox").val("");
+                	printCom();
                 }
-	    	})
-			}printCom(); 
-	
-	});
-	
-	function del_fun(e){
-		const com = e.target.parentNode.lastChild.value;
-		console.log(com);
-		/* console.log($("#com1").val()); */
-		  $.ajax({
-	            type : "GET",
-	            url : "<%=request.getContextPath()%>/board/delcomment.do",
-	            data: {cono : com},
-	            error : function(){
-	                alert('통신실패!!');
-	            },
-	            success : function(data){
-	                alert("댓글이 삭제되었습니다." + data) ;
-	                $("#dataArea").html(data) ;
-	                e.target.parentNode.remove(); 
-	            }
-	             
-	        });
-	
-	}
+    		})
+    	}
+    })
+    
+    		
+    
+    function printCom(){
+    	
+    	const curuser = "${m.memberId}";
+    	/* console.log(curuser); */
+    	
+    	$.ajax({
+			url: "<%=request.getContextPath()%>/board/addComment.do",
+            type: "POST",
+            async : true, 
+            data: {board_id : ${b.boardId}},
+            success: function (data) { 
+            	/* console.log(data); */
+            	$("#commentbdiv").text("");
+            	var obj = JSON.parse(data); 
+            	var List = obj.List;
+            	var print = ""; 
+            	for (var i = 0; i < List.length; i++) { 
+	                    print += "<div class='w3-border w3-padding'>";
+	                for (var j = 0; j < List[i].length; j++) {
+	                    var com = List[i][j];
+	                    /* console.log("com.com_no : "+com.com_no); */
+	                /*     console.log(i+" "+j+" "+com.com_no+" "+com.id+" "+com.com_date+" "+com.com_content);  */
+	                    if(j === 0){
+	                   /*  	console.log("com.id : "+com.id); */
+	                    	if(com.id == curuser){
+	                    	print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp; <button type='button' onclick='del_fun(event);' class='btn btn-success green delcomment' name='del'><i class='fa fa-share'></i> 댓글삭제</button>"; 
+	                    	/* print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp; <button type='button' class='btn btn-success green delcomment' name='del'><i class='fa fa-share'></i> 댓글삭제</button>"; */
+	                    	}else{
+	                    	print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp;";
+	                    }
+	                    }else if(j === 1){
+	                    	print += "&nbsp;&nbsp;&nbsp;&nbsp;<label id='comlabel'>" + com.com_date+"</label>";
+	                    }else if(j === 2){
+	                    	print += "<h4>" + com.com_content + "</h4>";
+	                    }else if(j === 3){
+	                    	print +="<hr><input type='hidden' id='com"+(i+1)+"' value='"+com.com_no+"'></div>";
+	                    }
+	                };
+	        	};
+	              	$("#commentbdiv").html(print); 
+	              	$(".com_count").html(i);
+            }
+    	})
+		}printCom(); 
+
+});
+
+
+
+function del_fun(e){
+	const com = e.target.parentNode.lastChild.value;
+	console.log(com);
+	/* console.log($("#com1").val()); */
+	  $.ajax({
+            type : "GET",
+            url : "<%=request.getContextPath()%>/board/delcomment.do",
+            data: {cono : com},
+            error : function(){
+                alert('통신실패!!');
+            },
+            success : function(data){
+                alert("댓글이 삭제되었습니다." + data) ;
+              /* $("#dataArea").html(data) ; */
+                e.target.parentNode.remove(); 
+            }
+             
+        });
+}
+
+<%-- 	console.log($(".delcomment"));
+
+	$(".delcomment").click(e=>{
+	const com = e.target.parentNode.lastChild.value;
+	console.log(com);
+	  $.ajax({
+            type : "GET",
+            url : "<%=request.getContextPath()%>/board/delcomment.do",
+            data: {cono : com},
+            error : function(){
+                alert('통신실패!!');
+            },
+            success : function(data){
+                alert("댓글이 삭제되었습니다." + data) ;
+                /* $("#dataArea").html(data) ; */
+                e.target.parentNode.remove(); 
+            }
+        });
+})  --%>
+
 	
 </script>
 
