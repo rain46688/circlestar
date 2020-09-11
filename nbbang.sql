@@ -86,7 +86,6 @@ COMMENT ON COLUMN MEMBER.LEAVE_MEM IS '회원탈퇴여부 Boolean';
 COMMENT ON COLUMN MEMBER.CUR_TRADE_LIST IS '거래중인게시글리스트';
 COMMENT ON COLUMN MEMBER.TRADE_LIST IS '과거거래내역리스트';
 COMMENT ON COLUMN MEMBER.LIKE_LIST IS '추천게시글리스트';
-COMMIT;
 
 ------------------------------------------------------------------------------------------
 
@@ -212,6 +211,14 @@ SELECT * FROM BOARD;
 DELETE FROM BOARD;
 COMMIT;
 
+<<<<<<< HEAD
+
+--멤버 테스트용 계정
+INSERT INTO MEMBER VALUES('admin','admin','관리자','관리자','01012345678','서울시 서초구', 'admin@admin', sysdate, default,
+default, default, default, default, default, default, default, default);
+COMMIT;
+SELECT * FROM MEMBER where member_id='admin' and member_pwd='admin';
+=======
 INSERT INTO BOARD(BOARD_ID,BOARD_TITLE,WRITER_ID,CONTENT,FILES,PRODUCT_CATEGORI,PRODUCT_NAME,TRADE_AREA,PRODUCT_PRICE,OWN_STATUS,TRADE_KIND) VALUES(SEQ_BOARD_NO.NEXTVAL,'NOTITLE1','user1','content1','3.jpg','특가','페이스핏','강동구 상일동','30000','구매예정','직거래');
 INSERT INTO BOARD(BOARD_ID,BOARD_TITLE,WRITER_ID,CONTENT,FILES,PRODUCT_CATEGORI,PRODUCT_NAME,TRADE_AREA,PRODUCT_PRICE,OWN_STATUS,TRADE_KIND) VALUES(SEQ_BOARD_NO.NEXTVAL,'NOTITLE2','user2','content2','3.jpg','특가','페이스핏','강동구 상일동','30000','구매예정','직거래');
 INSERT INTO BOARD(BOARD_ID,BOARD_TITLE,WRITER_ID,CONTENT,FILES,PRODUCT_CATEGORI,PRODUCT_NAME,TRADE_AREA,PRODUCT_PRICE,OWN_STATUS,TRADE_KIND) VALUES(SEQ_BOARD_NO.NEXTVAL,'NOTITLE3','user3','content3','1.jpg','특가','오! 그래놀라','강동구 상일동','10000','구매예정','직거래');
@@ -388,3 +395,4 @@ commit;
 
 
 
+>>>>>>> df68beb6f66eb0769ed4c782c76fdc95dbec6bc7

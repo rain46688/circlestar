@@ -33,17 +33,16 @@ public class BoardPageServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String boardId = request.getParameter("boardId");
 		Board b = new BoardService().boardPage(boardId);
-		if(b!=null) {
-			request.setAttribute("curBoard", b);
-			request.getRequestDispatcher("/views/board/boPage.jsp");
-			return;
-		}else {
+		if(b==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
 			request.setAttribute("loc", "/views/board/bolist.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp");
+			
+		}else {
+			request.setAttribute("curBoard", b);
+			request.getRequestDispatcher("/views/board/boPage.jsp");
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

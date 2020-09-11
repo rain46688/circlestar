@@ -45,7 +45,7 @@
               <div id="loginSearchField">
               	<span id="findId" class="loginSearch" onclick="fn_findId();">아이디찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               	<span id="findPw" class="loginSearch" onclick="fn_findPw();">비밀번호찾기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              	<span id="signIn" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/'">회원가입</span>
+              	<span id="signIn" class="loginSearch" onclick="location.href='<%=request.getContextPath()%>/enrollMember'" >회원가입</span>
               </div>
             </form>
         </div>
@@ -55,7 +55,7 @@
 	function fn_findId() {
 		const url="<%=request.getContextPath()%>/views/member/findId.jsp";
 		const title="findId";
-		const status="left=500px, top=500px, width=500px, height=500px";
+		const status="left=500px, top=500px, width=500px, height=300px";
 		
 		open(url,title,status);
 		
@@ -66,7 +66,16 @@
 		
 	}
 	function fn_findPw() {
+		const url="<%=request.getContextPath()%>/views/member/findPw.jsp";
+		const title="findPw";
+		const status="left=500px, top=500px, width=500px, height=300px";
 		
+		open(url,title,status);
+		
+		findPw.target=title;
+		findPw.action="<%=request.getContextPath()%>/findPw";
+		findPw.method="post";
+		findPw.submit();
 	}
 </script>
 <%@ include file="/views/common/footer.jsp" %>
