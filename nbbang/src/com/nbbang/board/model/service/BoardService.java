@@ -13,9 +13,9 @@ public class BoardService {
 	
 	BoardDao dao = new BoardDao();
 	
-	public List<Board> boardList(){
+	public List<Board> boardList(int cPage, int numPerPage){
 		Connection conn = getConnection();
-		List<Board> boardList = dao.boardList(conn);
+		List<Board> boardList = dao.boardList(conn, cPage, numPerPage);
 		close(conn);
 		return boardList;
 	}
@@ -25,5 +25,12 @@ public class BoardService {
 		Board b = dao.boardPage(conn, boardId);
 		close(conn);
 		return b;
+	}
+	
+	public int boardListCount() {
+		Connection conn = getConnection();
+		int result = dao.boardListCount(conn);
+		close(conn);
+		return result;
 	}
 }

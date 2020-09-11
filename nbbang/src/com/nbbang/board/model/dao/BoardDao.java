@@ -28,13 +28,15 @@ public class BoardDao {
 		}
 	}
 	
-	public List<Board> boardList(Connection conn){
+	public List<Board> boardList(Connection conn, int cPage, int numPerPage){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardList");
 		List<Board> list = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
 			rs = pstmt.executeQuery();
 			list = new ArrayList<Board>();
 			while(rs.next()) {
@@ -79,5 +81,24 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return b;
+	}
+	public int boardListCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("boardListCount");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} 
+		return result;
 	}
 }

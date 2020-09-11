@@ -38,26 +38,39 @@ public class BoardListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerPage = 5;
+		int numPerPage = 8;
 		
 		List<Board> blist = new BoardService().boardList(cPage, numPerPage);
 		
 		int totalData = new BoardService().boardListCount();
 		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
 		int pageBarSize = 5;
-		int pageNo = (cPage-1/pageBarSize)*pageBarSize+1;
-		int pageEnd = pageNo+pageBarSize+1;
+		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd = pageNo+pageBarSize-1;
 		String pageBar = "";
 		if(pageNo == 1) {
-			pageBar += "<span>이전</span>";
+			pageBar += "<button type='button' class='btn btn-secondary'>이전</button>";
 		}else {
-			pageBar += "<span><a href='" + request.getContextPath() + "/board/boardList?cPage=" + (pageNo-1) + "'>이전</a></span>";
+			pageBar += "<button type='button' class='btn btn-secondary' onclick='location.assign('"+ request.getContextPath() + "/board/boardList?cPage=" + (pageNo-1) + "')>이전</button>";
 		}
 		
 		while(pageNo <= pageEnd && pageNo <= totalPage) {
-			
+			if(cPage == pageNo) {
+				pageBar += "<button type='button' class='btn btn-secondary'>" + pageNo + "</button>";
+			}else {
+				pageBar+="<button type='button' class='btn btn-secondary' onclick='location.assign('" + request.getContextPath() + 
+				"/board/boardList?cPage="+(pageNo-1)+"')>"+pageNo+"</button>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo > totalPage) {
+			pageBar += "<button type='button' class='btn btn-secondary'>다음</button>";
+		}else {
+			pageBar += "<button type='button' class='btn btn-secondary' onclick='location.assign('" + request.getContextPath() + "/board/boardList?cPage=" + pageNo + "')>다음</button>";
 		}
 		request.setAttribute("boardList", blist);
+		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/board/bolist.jsp").forward(request, response);;
 	}
 
