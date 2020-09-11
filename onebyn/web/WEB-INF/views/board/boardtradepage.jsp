@@ -63,7 +63,7 @@
 							<div class="checkbox">
 								<input type="checkbox" name="secret" id="secret"> 비밀댓글
 							</div>
-							<button type="button" class="btn btn-success green" id="addcomment">
+							<button type="button" class="btn btn-success green addbtn" id="addcomment">
 								<i class="fa fa-share"></i> 댓글작성
 							</button>
 						</form>
@@ -184,7 +184,7 @@ $(function(){
 
 
 
-function del_fun(e){
+<%-- function del_fun(e){
 	const com = e.target.parentNode.lastChild.value;
 	console.log(com);
 	/* console.log($("#com1").val()); */
@@ -202,7 +202,21 @@ function del_fun(e){
             }
              
         });
-}
+} --%>
+
+
+
+/*  $(document).on("click", ".delcomment", function(e){
+	console.log('댓글 삭제'+e.target);
+}) */
+
+console.log($(".delcomment"));
+
+	$(".delcomment").click(e=>{
+	console.log('댓글 삭제'+e.target);
+	})
+
+
 
 <%-- 	console.log($(".delcomment"));
 
