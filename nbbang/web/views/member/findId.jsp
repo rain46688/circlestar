@@ -9,38 +9,55 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 찾기</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" type="text/css">
+<style>
+	/* 아이디 비번 찾기 */
+	div#findIdContainer{
+		width: 200px;
+		padding: 8% 0 0;
+		margin: auto;
+	}
+	
+	#findIdField{
+		position: relative;
+		background: #FFFFFF;
+		max-width: 90%;
+		margin: 50px auto;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 	<div id="findIdContainer">
 		<%if(m==null) {%>
-		<table>
+		<table id="findIdField">
 			<form action="<%=request.getContextPath()%>/findId" method="post">
-			<tr>
-				<td>
-					<h3>^ㅇ^아이디 찾기^ㅇ^</h3>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="text" name="memberName" id="memberName" placeholder="이름을 입력해주세요">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="text" name="email" id="email" placeholder="이메일을 입력해주세요">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="아이디 찾기" onclick="return fn_validate()">
-				</td>
-			</tr>
+				<tr>
+					<td>
+						<h4>^ㅇ^아이디 찾기^ㅇ^</h4>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="memberName" id="memberName" placeholder="이름을 입력해주세요">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="email" id="email" placeholder="이메일을 입력해주세요">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="아이디 찾기" onclick="return fn_validate()">
+					</td>
+				</tr>
+				<%} else{%>
+				<div>당신의 아이디는 <%=m.getMemberId() %>입니다.</div>
+				<%} %>
+			</form>
 		</table>
-		<%} else{%>
-		<div>당신의 아이디는 <%=m.getMemberId() %>입니다.</div>
-		<%} %>
-		</form>
 	</div>
 	<script>
 		function fn_validate() {
