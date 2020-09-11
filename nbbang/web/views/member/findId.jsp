@@ -11,20 +11,55 @@
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
 	/* 아이디 비번 찾기 */
 	div#findIdContainer{
-		width: 200px;
-		padding: 8% 0 0;
-		margin: auto;
+ 		width: 550px;
+ 		height:547px;
+		background-image: url("<%=request.getContextPath()%>/resources/rememberBread.png");
+		background-size: 101%;
+		position: absolute;
+	    background-repeat: no-repeat;
+	    top:0;
+	    left:0;
+	    bottom:0;
+	    right:0;
 	}
 	
 	#findIdField{
 		position: relative;
-		background: #FFFFFF;
-		max-width: 90%;
-		margin: 50px auto;
+		width: 50%;
 		text-align: center;
+		margin: 180px 40px 180px 150px;
+	}
+	
+	#findIdField p{
+		font-size: 30px;
+		font-family: 'Do Hyeon', sans-serif;
+		margin:15px;
+	}
+	
+	#findIdField input{
+		font-size: 20px;
+		font-family: 'Do Hyeon', sans-serif;
+		width:90%;
+	}
+	
+	#findIdField #findIdbtn{
+		border: none;
+		border-radius: 10px;
+		background-color: gold;
+	}
+	#resultField{
+		position: relative;
+		width:50%;
+		text-align: center;
+		margin: 240px 50px 100px 150px;
+	}
+	#resultField p{
+		font-size: 30px;
+		font-family: 'Do Hyeon', sans-serif;
 	}
 </style>
 </head>
@@ -35,7 +70,7 @@
 			<form action="<%=request.getContextPath()%>/findId" method="post">
 				<tr>
 					<td>
-						<h4>^ㅇ^아이디 찾기^ㅇ^</h4>
+						<p>^ㅇ^아이디 찾기^ㅇ^</p>
 					</td>
 				</tr>
 				<tr>
@@ -50,11 +85,13 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="submit" value="아이디 찾기" onclick="return fn_validate()">
+						<input type="submit" onclick="return fn_validate()" value="아이디 찾기" id="findIdbtn">
 					</td>
 				</tr>
 				<%} else{%>
-				<div>당신의 아이디는 <%=m.getMemberId() %>입니다.</div>
+				<div id="resultField">
+					<p>회원님의 아이디는<br>[<%=m.getMemberId() %>]입니다.</p>
+				</div>
 				<%} %>
 			</form>
 		</table>
