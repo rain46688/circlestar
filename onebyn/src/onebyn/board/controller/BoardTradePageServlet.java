@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +36,31 @@ public class BoardTradePageServlet extends HttpServlet {
 		String id = request.getParameter("t");
 		System.out.println("게시글 아이디 : "+id);
 		
-		Board b = new BoardService().tradePageBoard(id);
+		Cookie[] cookies = request.getCookies();
+		String boardHistory="";
+		boolean hasRead = false;
+		
+		if(cookies != null) {
+			for(Cookie c : cookies) {
+				String name = c.getName();
+				String value=c.getValue();
+				if(name.equals("BH")) {
+					boardHistory=value;
+					if(value.contains("#"+id+"#")) {
+						hasRead=true;
+						break;
+					}
+				}
+			}
+		}
+		if(!hasRead) {
+			Cookie c = new Cookie("BH", boardHistory+"#"+id+"#");
+			c.setMaxAge(-1);
+			response.addCookie(c);
+		}
+		
+		Board b = new BoardService().tradePageBoard(id,hasRead);
+		
 		
 		System.out.println("가져온 게시글 상세 페이지 요소 : "+b);
 		

@@ -22,11 +22,12 @@ public class BoardServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String p = req.getParameter("p");
-
+		String cPage = req.getParameter("cPage");
+		int numPerPage = 9;
+		int pageBarSize = 5;
 		BoardService bs = new BoardService();
-		List<Board> list = bs.getBoardList((p != null && !p.equals("")) ? Integer.parseInt(p) : 1);
-		int cnt = bs.getBoardCount();
+		List<Board> list = bs.getBoardList((cPage != null && !cPage.equals("")) ? Integer.parseInt(cPage) : 1,numPerPage);
+		int totalData = bs.getBoardCount();
 
 		for (Board b : list) {
 			String dd = req.getServletContext().getRealPath("/images/" + b.getFiles());
@@ -49,7 +50,9 @@ public class BoardServlet extends HttpServlet {
 
 		System.out.println();
 		req.setAttribute("list", list);
-		req.setAttribute("cnt", cnt);
+		req.setAttribute("totalData", totalData);
+		req.setAttribute("numPerPage", numPerPage);
+		req.setAttribute("pageBarSize", pageBarSize);
 		req.getRequestDispatcher("/WEB-INF/views/board/board.jsp").forward(req, resp);
 
 	}
