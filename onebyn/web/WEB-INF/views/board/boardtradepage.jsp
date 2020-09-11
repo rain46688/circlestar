@@ -84,9 +84,21 @@
 		<div class="col-2">
 			<div class="sidebar">
 				<div class="sticky">
+				
 					<div id="side">
-						<h2>사이드바</h2>
+						<!-- <h2>사이드바</h2> -->
+						<form>
+							<input type="text" value="익명" id="user"><br>
+							<br>
+							<input type="text" id="textMsg"><br>
+							<br>
+							<input type="button" value="Send" onclick="sendMessage()">
+							<input type="button" value="Disconnect" onclick="disconnect()">
+						</form>
+						<br>
+							<textarea id="msgTextArea" rows="5" cols="20"></textarea>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -99,10 +111,11 @@
 
 
 
+
+
+
 $(function(){
 	
-
-
 
 	
  	function re(){
