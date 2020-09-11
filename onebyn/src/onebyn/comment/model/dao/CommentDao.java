@@ -42,6 +42,7 @@ public class CommentDao {
 			pst.setString(1, c.getCboardId());
 			pst.setString(2, c.getComment());
 			pst.setString(3, c.getCwriterId());
+			pst.setBoolean(4, c.getSecret());
 			result = pst.executeUpdate();
 			if(result == 1) {
 				commit(conn);

@@ -112,6 +112,8 @@ $(function(){
 		setInterval(re, 10000); 
 	
     $("#addcomment").click(function(){
+    	/* console.log("secret : "+$("#secret").is(":checked")); */
+    	
     	if($("#commnetbox").val().trim() === ""){
     		alert("내용을 입력하세요.");
     		$("#commnetbox").val("").focus();
@@ -122,7 +124,8 @@ $(function(){
                 data: {
                     no : $("#no").val(),
                     id : $("#id").val(),
-                   con : $("#commnetbox").val()
+                   con : $("#commnetbox").val(),
+                   se : $("#secret").is(":checked")
                 },
                 success: function () {
                 	alert("댓글이 등록되었습니다.");
@@ -171,6 +174,8 @@ $(function(){
 	                    	print += "<h4>" + com.com_content + "</h4>";
 	                    }else if(j === 3){
 	                    	print +="<hr><input type='hidden' id='com"+(i+1)+"' value='"+com.com_no+"'></div>";
+	                    }else if(j === 4){
+	                    	
 	                    }
 	                };
 	        	};
