@@ -184,10 +184,9 @@ $(function(){
 
 
 
-<%-- function del_fun(e){
+ function del_fun(e){
 	const com = e.target.parentNode.lastChild.value;
 	console.log(com);
-	/* console.log($("#com1").val()); */
 	  $.ajax({
             type : "GET",
             url : "<%=request.getContextPath()%>/board/delcomment.do",
@@ -202,19 +201,45 @@ $(function(){
             }
              
         });
-} --%>
+} 
 
 
+
+
+/* $("[type=button]").click(e=>{
+	console.log('댓글 삭제'+e.target);
+})
+ */
 
 /*  $(document).on("click", ".delcomment", function(e){
 	console.log('댓글 삭제'+e.target);
 }) */
 
-console.log($(".delcomment"));
 
-	$(".delcomment").click(e=>{
+<%-- function del_fun(e){
+	const com = e.target.parentNode.lastChild.value;
+	console.log(com);
+	  $.ajax({
+            type : "GET",
+            url : "<%=request.getContextPath()%>/board/delcomment.do",
+            data: {cono : com},
+            error : function(){
+                alert('통신실패!!');
+            },
+            success : function(data){
+                alert("댓글이 삭제되었습니다." + data) ;
+                e.target.parentNode.remove(); 
+            }
+        }); --%>
+
+
+
+/* console.log($(".delcomment"));
+
+$(".delcomment").click(e=>{
 	console.log('댓글 삭제'+e.target);
-	})
+})
+ */
 
 
 
