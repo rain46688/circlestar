@@ -7,7 +7,9 @@
 			<p class="m-0 text-center text-white">통신 판매업 : 신고제 1234 호 상호 : CMS 대표 이사 : 최민수 전화 번호 : 010-8230-8775</p>
 			<p class="m-0 text-center text-white">Copyright &copy; cms87750.com All right reserved since 1994</p>
 			<p class="m-0 text-center text-white">end : ${end}</p>
-			<p class="m-0 text-center text-white">start : ${start}</p>
+			<p class="m-0 text-center text-white">pageNo : ${pageNo}</p>
+			<p class="m-0 text-center text-white">cPage : ${cPage}</p>
+			<p class="m-0 text-center text-white">pageBarSize : ${pageBarSize}</p>
 		</div>
 	</footer>
 

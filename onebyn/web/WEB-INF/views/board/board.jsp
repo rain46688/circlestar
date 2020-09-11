@@ -47,32 +47,32 @@
 
 
 
-	<c:set var="page" value="${(empty param.p)?1:param.p}" />
-	<c:set var="start" value="${page - (page - 1)%5}" />
-	<fmt:parseNumber var="end" value="${Math.ceil(cnt/9)}" integerOnly="true"/>
+	<c:set var="cPage" value="${(empty param.cPage)?1:param.cPage}" />
+ 	<c:set var="pageNo" value="${cPage - (cPage - 1)%5}"/>
+	<fmt:parseNumber var="pageEnd" value="${Math.ceil(totalData/numPerPage)}" integerOnly="true"/>
 
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 
 		<div class="btn-group mr-1" role="group">
-			<c:if test="${start > 1}">
-				<a type="button" href="?p=${start-1}" class="btn btn-secondary"><</a>
+			<c:if test="${pageNo > 1}">
+				<a type="button" href="?cPage=${pageNo-1}" class="btn btn-secondary"><</a>
 			</c:if>
-			<c:if test="${start <= 1}">
+			<c:if test="${pageNo <= 1}">
 				<a type="button" onclick="alert('페이지가 없다!');" class="btn btn-secondary"><</a>
 			</c:if>
 		</div>
 		<div class="btn-group mr-1" role="group">
 			<c:forEach var="i" begin="0" end="4">
-				<c:if test="${(start+i) <= end}">
-					<a type="button" href="?p=${start+i}" class="btn btn-secondary ${(page==(start+i))?'curpage':''}">${start+i}</a>
+				<c:if test="${(pageNo+i) <= pageEnd}">
+					<a type="button" href="?cPage=${pageNo+i}" class="btn btn-secondary ${(cPage==(pageNo+i))?'curpage':''}">${pageNo+i}</a>
 				</c:if>
 			</c:forEach>
 		</div>
 		<div class="btn-group mr-1" role="group">
-			<c:if test="${start < end-4}">
-				<a type="button" href="?p=${start+5}" class="btn btn-secondary">></a>
+			<c:if test="${pageNo < pageEnd-4}">
+				<a type="button" href="?cPage=${pageNo+5}" class="btn btn-secondary">></a>
 			</c:if>
-			<c:if test="${start >= end-4}">
+			<c:if test="${pageNo >= pageEnd-4}">
 				<a type="button" onclick="alert('페이지가 없다!');" class="btn btn-secondary">></a>
 			</c:if>
 		</div>

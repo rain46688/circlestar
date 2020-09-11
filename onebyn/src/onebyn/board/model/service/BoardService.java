@@ -11,11 +11,11 @@ import onebyn.board.model.vo.Board;
 
 public class BoardService {
 
-	public List<Board> getBoardList(int page) {
+	public List<Board> getBoardList(int page, int numPerPage) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
 		BoardDao bo = new BoardDao();
-		List<Board> list = bo.getBoardList(conn,page);
+		List<Board> list = bo.getBoardList(conn,page,numPerPage);
 		close(conn);
 		return list;
 	}
