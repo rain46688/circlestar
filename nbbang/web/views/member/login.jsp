@@ -55,7 +55,7 @@
 	function fn_findId() {
 		const url="<%=request.getContextPath()%>/views/member/findId.jsp";
 		const title="findId";
-		const status="left=500px, top=500px, width=500px, height=300px";
+		const status="left=100px, top=100px, width=550px, height=548px";
 		
 		open(url,title,status);
 		
@@ -68,7 +68,7 @@
 	function fn_findPw() {
 		const url="<%=request.getContextPath()%>/views/member/findPw.jsp";
 		const title="findPw";
-		const status="left=500px, top=500px, width=500px, height=300px";
+		const status="left=100px, top=100px, width=550px, height=548p";
 		
 		open(url,title,status);
 		

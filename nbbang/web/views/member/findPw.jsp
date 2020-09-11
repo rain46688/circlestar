@@ -9,16 +9,68 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 찾기</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<style>
+	/* 아이디 비번 찾기 */
+	div#findPwContainer{
+ 		width: 550px;
+ 		height:547px;
+		background-image: url("<%=request.getContextPath()%>/resources/rememberBread.png");
+		background-size: 101%;
+		position: absolute;
+	    background-repeat: no-repeat;
+	    top:0;
+	    left:0;
+	    bottom:0;
+	    right:0;
+	}
+	
+	#findPwField{
+		position: relative;
+		width: 50%;
+		text-align: center;
+		margin: 150px 40px 100px 150px;
+	}
+	
+	#findPwField p{
+		font-size: 30px;
+		font-family: 'Do Hyeon', sans-serif;
+		margin:15px;
+	}
+	
+	#findPwField input{
+		font-size: 20px;
+		font-family: 'Do Hyeon', sans-serif;
+		width:90%;
+	}
+	
+	#findPwField #findPwbtn{
+		border: none;
+		border-radius: 10px;
+		background-color: gold;
+	}
+	#resultField{
+		position: relative;
+		width:50%;
+		text-align: center;
+		margin: 240px 50px 100px 150px;
+	}
+	#resultField p{
+		font-size: 30px;
+		font-family: 'Do Hyeon', sans-serif;
+	}
+</style>
 </head>
 <body>
 	<div id="findPwContainer">
 		<%if(m==null) {%>
-		<table>
+		<table id="findPwField">
 			<form action="<%=request.getContextPath()%>/findPw" method="post">
 			<tr>
 				<td>
-					<h3>^ㅇ^비밀번호 찾기^ㅇ^</h3>
+					<p>비밀번호 찾기^ㅇ^</p>
 				</td>
 			</tr>
 			<tr>
@@ -38,12 +90,14 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="submit" value="비밀번호 찾기" onclick="return fn_validate()">
+					<input type="submit" value="비밀번호 찾기" onclick="return fn_validate()" id="findPwbtn">
 				</td>
 			</tr>
 		</table>
 		<%} else{%>
-		<div>당신의 비밀번호는 <%=m.getMemberPwd() %>입니다.</div>
+		<div id="resultField">
+					<p>회원님의 비밀번호는<br>[<%=m.getMemberPwd() %>]입니다.</p>
+				</div>
 		<%} %>
 		</form>
 	</div>
