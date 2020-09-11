@@ -40,8 +40,7 @@
 			</thead>
 		</table>
 		<hr/>
-		<a class="btn btn-default pull-right">글쓰기</a>
-		
+		<button onclick="location.assign('<%=request.getContextPath()%>/notice/noticeWrite')">글쓰기</button>
 		
 		
 		

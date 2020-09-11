@@ -1,5 +1,9 @@
 package com.nbbang.notice.model.dao;
 
+import static com.nbbang.common.temp.JDBCTemplate.close;
+
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,13 +11,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import static com.nbbang.common.temp.JDBCTemplate.close;
 
 import com.nbbang.notice.model.vo.Notice;
 
 public class NoticeDAO {
 
 	private Properties p = new Properties();
+	
+	public NoticeDAO() {
+		// TODO Auto-generated constructor stub
+		String path=NoticeDAO.class.getResource("/sql/notice/notice.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public List<Notice> selectNoticeList(Connection conn, int cPage, int numPerPage) {
 		
@@ -22,6 +36,7 @@ public class NoticeDAO {
 		List<Notice> list = new ArrayList();
 		try {
 			pstmt = conn.prepareStatement(p.getProperty("selectNoticeList"));
+			System.out.println("123123123123123"+p.getProperty("selectNoticeList"));
 			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
 			pstmt.setInt(2, cPage * numPerPage);
 			rs = pstmt.executeQuery();
@@ -93,6 +108,25 @@ public class NoticeDAO {
 			close(pstmt);
 		}
 		return n;
+	}
+
+	public int insertNotice(Connection conn, Notice n) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(p.getProperty("insertNotice"));
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeWriter());
+			pstmt.setString(3, n.getNoticeContent());
+			pstmt.setString(4, n.getFilePath());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
