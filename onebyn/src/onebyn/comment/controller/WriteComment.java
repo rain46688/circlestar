@@ -36,6 +36,8 @@ public class WriteComment extends HttpServlet {
 		c.setCboardId(request.getParameter("no"));
 		c.setCwriterId(request.getParameter("id"));
 		c.setComment(request.getParameter("con"));
+		c.setSecret(Boolean.parseBoolean(request.getParameter("se")));
+		System.out.println("se : "+request.getParameter("se"));
 		System.out.println(c);
 		CommentService cs = new CommentService();
 		cs.addComment(c);

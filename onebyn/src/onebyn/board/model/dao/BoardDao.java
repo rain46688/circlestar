@@ -20,7 +20,7 @@ import onebyn.board.model.vo.Board;
 public class BoardDao {
 
 	private Properties p = new Properties();
-	private final int maxcount = 9;
+
 
 	public BoardDao() {
 		// TODO Auto-generated constructor stub
@@ -33,7 +33,7 @@ public class BoardDao {
 		}
 	}
 
-	public List<Board> getBoardList(Connection conn, int page) {
+	public List<Board> getBoardList(Connection conn, int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
 		List<Board> list = new ArrayList<Board>();
 		PreparedStatement pst = null;
@@ -42,8 +42,8 @@ public class BoardDao {
 		try {
 			String sql = p.getProperty("getboardlist");
 			pst = conn.prepareStatement(sql);
-			pst.setInt(1, (page - 1) * maxcount + 1);
-			pst.setInt(2, page * maxcount);
+			pst.setInt(1, (cPage - 1) * numPerPage + 1);
+			pst.setInt(2, cPage * numPerPage);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				list.add(printBoard(rs));
@@ -191,6 +191,22 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 		return b;
+	}
+
+	public int updateReadCount(Connection conn, String id) {
+		// TODO Auto-generated method stub
+		PreparedStatement pst = null;
+		int result = 0;
+		try {
+			pst = conn.prepareStatement(p.getProperty("updateReadCount"));
+			pst.setString(1, id);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pst);
+		}
+		return result;
 	}
 
 }
