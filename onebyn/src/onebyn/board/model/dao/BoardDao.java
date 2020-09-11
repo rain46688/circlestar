@@ -193,4 +193,20 @@ public class BoardDao {
 		return b;
 	}
 
+	public int updateReadCount(Connection conn, String id) {
+		// TODO Auto-generated method stub
+		PreparedStatement pst = null;
+		int result = 0;
+		try {
+			pst = conn.prepareStatement(p.getProperty("updateReadCount"));
+			pst.setString(1, id);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pst);
+		}
+		return result;
+	}
+
 }
