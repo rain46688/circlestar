@@ -1,4 +1,4 @@
-package onebyn.comment.model.vo;
+package onebyn.board.model.vo;
 
 import java.util.Date;
 import lombok.AllArgsConstructor;

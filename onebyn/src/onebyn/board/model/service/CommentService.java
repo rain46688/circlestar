@@ -1,4 +1,4 @@
-package onebyn.comment.model.service;
+package onebyn.board.model.service;
 
 import static onebyn.common.JDBCtem.close;
 import static onebyn.common.JDBCtem.getConnection;
@@ -6,8 +6,8 @@ import static onebyn.common.JDBCtem.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import onebyn.comment.model.dao.CommentDao;
-import onebyn.comment.model.vo.Comment;
+import onebyn.board.model.dao.CommentDao;
+import onebyn.board.model.vo.Comment;
 
 public class CommentService {
 	

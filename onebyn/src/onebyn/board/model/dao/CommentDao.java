@@ -1,9 +1,8 @@
-package onebyn.comment.model.dao;
+package onebyn.board.model.dao;
 
 import static onebyn.common.JDBCtem.close;
 import static onebyn.common.JDBCtem.commit;
 import static onebyn.common.JDBCtem.rollback;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,9 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import onebyn.board.model.dao.BoardDao;
-import onebyn.comment.model.vo.Comment;
+import onebyn.board.model.vo.Comment;
 
 public class CommentDao {
 	
