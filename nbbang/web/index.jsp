@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="/views/common/header.jsp"%>
+
 <section>
 
 	<div id="carouselField" name="carouselField">
