@@ -154,4 +154,41 @@ private Properties prop=new Properties();
 		}
 		return m;
 	}
+
+	public Member myPage(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("myPage"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPwd(rs.getString("member_pwd"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setNickname(rs.getString("nickname"));
+				m.setPhone(rs.getString("phone"));
+				m.setAddress(rs.getString("address"));
+				m.setEmail(rs.getString("email"));
+				m.setEnrollDate(rs.getDate("enroll_date"));
+				m.setGrade(rs.getString("grade"));
+				m.setCurRoomCnt(rs.getString("cur_room_cnt"));
+				m.setMaxRoomCnt(rs.getString("max_room_cnt"));
+				m.setReportCnt(rs.getString("report_cnt"));
+				m.setPoint(rs.getString("point"));
+				m.setLeaveMem(rs.getString("leave_mem"));
+				m.setCurRoomCnt(rs.getString("cur_trade_list"));
+				m.setTradeList(rs.getString("trade_list"));
+				m.setLikeList(rs.getString("like_list"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 }

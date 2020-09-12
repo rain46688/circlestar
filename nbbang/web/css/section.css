@@ -114,3 +114,8 @@ div#numPerpage-container {
 	float: right;
 }
 
+/* 마이페이지 */
+table#memberInfoTable *{
+	border: 1px solid black;
+}
+
