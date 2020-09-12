@@ -31,6 +31,7 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\JeongHyun\realgit\circlestar\nbbang"/>
 			<item value="C:\Users\JeongHyun\Desktop\gitgitgit\circlestar"/>
 			<item value="/Users/jackson/Desktop/Semi/circlestar/nbbang"/>
 		</list>

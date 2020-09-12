@@ -29,6 +29,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		Member m=new Member();
 		m.setMemberId(request.getParameter("userId"));
 		m.setMemberPwd(request.getParameter("password"));
@@ -39,7 +41,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		m.setAddress(request.getParameter("address"));
 		
 		int result=new MemberService().insertMember(m);
-		
+		System.out.println("리절"+result);
 		response.sendRedirect(request.getContextPath());
 	}
 
