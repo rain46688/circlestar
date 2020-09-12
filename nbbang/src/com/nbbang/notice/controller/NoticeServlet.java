@@ -69,14 +69,15 @@ public class NoticeServlet extends HttpServlet {
 	      
 	      if(pageNo>totalPage) {
 	         pageBar+="<span>[다음]</span>";
-	      }else {
+	      }
+else {
 	         pageBar+="<a href='"+request.getContextPath()+"/notice/noticeList?cPage="+pageNo+"'>[다음]</a>";
 	      }
 	      
 	      request.setAttribute("list", list);
 	      request.setAttribute("pageBar", pageBar);
 	      
-	      request.getRequestDispatcher("/views/notice/notice.jsp").forward(request, response);
+	      request.getRequestDispatcher("/views/notice/noticeList.jsp").forward(request, response);
 	}
 
 	/**
