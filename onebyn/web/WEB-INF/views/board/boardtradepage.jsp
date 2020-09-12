@@ -184,9 +184,8 @@ $(function(){
 	                    	print += "<h4>" + com.com_content + "</h4>";
 	                    }else if(j === 3){
 	                    	print +="<hr><input type='hidden' id='com"+(i+1)+"' value='"+com.com_no+"'></div>";
-	                    }else if(j === 4){
-	                    	
 	                    }
+	                
 	                };
 	        	};
 	              	$("#commentbdiv").html(print); 

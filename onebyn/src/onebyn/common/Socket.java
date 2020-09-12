@@ -30,7 +30,6 @@ public class Socket extends HttpServlet {
 	// 접속 클라이언트 관리 session 리스트 동기화 문제를 해결하기 위해 저렇게 선언함
 	private static List<Session> sessionUsers = Collections.synchronizedList(new ArrayList<Session>());
 	// 메세지의 유저 이름을 거르기 위한 정규표현식
-//	private static Pattern p = Pattern.compile("^\\{\\{.*?\\}\\}");
 	private static Pattern p = Pattern.compile("^\\[.*?\\]");
 //	private int num=1;
 	// Session은 WebSocket의 커넥션 정보가 들어있는 인스턴스이다!!
@@ -47,7 +46,6 @@ public class Socket extends HttpServlet {
 		} else {
 			System.out.println("연결 할수없습니다!!");
 		}
-
 	}// 웹 소켓이 연결되면 호출되는 이벤트
 
 	@OnMessage
@@ -84,7 +82,6 @@ public class Socket extends HttpServlet {
 				e.printStackTrace();
 			}
 		});
-
 	}// 웹 소켓으로 부터 메세지가 오면 호출되는 이벤트
 
 	@OnClose
@@ -99,4 +96,5 @@ public class Socket extends HttpServlet {
 		t.printStackTrace();
 	}// 웹 소켓이 에러나면 호출되는 이벤트
 
+	
 }
