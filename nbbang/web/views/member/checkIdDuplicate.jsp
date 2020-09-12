@@ -3,7 +3,7 @@
 
 <%
 
-	int result=(int)request.getAttribute("result");
+	int result=(Integer)request.getAttribute("result");
 	System.out.println(result);
 %>    
 <!DOCTYPE html>
