@@ -40,8 +40,9 @@ body {
 }
 
 *{
-  font-family: "배달의민족 도현","메이플스토리";
+  font-family: "메이플스토리";
 }
+
 
 /* board */
 
@@ -78,4 +79,7 @@ body {
   padding: 20px;
   border: 1px rgba(128, 128, 128,0.5) solid;
   border-radius: 5px;
+}
+#comlabel{
+	font-size: 20px;
 }
