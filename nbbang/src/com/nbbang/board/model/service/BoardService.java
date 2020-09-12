@@ -17,6 +17,7 @@ public class BoardService {
 		Connection conn = getConnection();
 		List<Board> boardList = dao.boardList(conn, cPage, numPerPage);
 		close(conn);
+
 		return boardList;
 	}
 	

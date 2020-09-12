@@ -38,7 +38,7 @@ public class BoardListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerPage = 8;
+		int numPerPage = 24;
 		
 		List<Board> blist = new BoardService().boardList(cPage, numPerPage);
 		
@@ -49,25 +49,25 @@ public class BoardListServlet extends HttpServlet {
 		int pageEnd = pageNo+pageBarSize-1;
 		String pageBar = "";
 		if(pageNo == 1) {
-			pageBar += "<button type='button' class='btn btn-secondary'>이전</button>";
+			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>이전</a></li>";
 		}else {
-			pageBar += "<button type='button' class='btn btn-secondary' onclick='location.assign('"+ request.getContextPath() + "/board/boardList?cPage=" + (pageNo-1) + "')>이전</button>";
+			pageBar += "<li class='page-item'><a class='page-link' href='"+ request.getContextPath() + "/board/boList?cPage=" + (pageNo-1) + "'>이전</a></li>";
 		}
 		
 		while(pageNo <= pageEnd && pageNo <= totalPage) {
 			if(cPage == pageNo) {
-				pageBar += "<button type='button' class='btn btn-secondary'>" + pageNo + "</button>";
+				pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>" + pageNo + "</a></li>";
 			}else {
-				pageBar+="<button type='button' class='btn btn-secondary' onclick='location.assign('" + request.getContextPath() + 
-				"/board/boardList?cPage="+(pageNo-1)+"')>"+pageNo+"</button>";
+				pageBar+="<li class='page-item'><a class='page-link' href='" + request.getContextPath() + 
+				"/board/boList?cPage="+pageNo+"')>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 		}
 		
 		if(pageNo > totalPage) {
-			pageBar += "<button type='button' class='btn btn-secondary'>다음</button>";
+			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>다음</a></li>";
 		}else {
-			pageBar += "<button type='button' class='btn btn-secondary' onclick='location.assign('" + request.getContextPath() + "/board/boardList?cPage=" + pageNo + "')>다음</button>";
+			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/board/boList?cPage=" + pageNo + "'>다음</a></li>";
 		}
 		request.setAttribute("boardList", blist);
 		request.setAttribute("pageBar", pageBar);

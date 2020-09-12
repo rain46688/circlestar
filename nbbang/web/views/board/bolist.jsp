@@ -10,9 +10,10 @@
 	padding-left: 4rem;
 	padding-right: 4rem;
 }
-
-.center {
-	text-align: center;
+.pagination>li>.page-link {
+}
+.pagination>li>a {
+	color:black;
 }
 </style>
 <section>
@@ -36,14 +37,11 @@
 		%>
 	</div>
 	<br>
-	<div class="row">
-	<div class="col-sm-4"></div>
-	<div class="col-sm-4 btn-group">
-		<%=request.getAttribute("pageBar")%>
-	</div>
-	<div class="col-sm-4"></div>
-	</div>
-	<br>
+		<nav aria-lable="Page navigation">
+			<ul class="pagination justify-content-center">
+				<%=request.getAttribute("pageBar")%>
+			</ul>
+		</nav>
 	<br>
 </section>
 <%@ include file="/views/common/footer.jsp"%>
