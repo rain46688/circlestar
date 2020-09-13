@@ -84,17 +84,21 @@
 		<div class="col-2">
 			<div class="sidebar">
 				<div class="sticky">
-
 					<div id="side">
 						<!-- <h2>사이드바</h2> -->
-						<form>
-							<input type="text" value=${m.memberId } id="user" readonly><br> <br> <input type="text" id="textMsg"><br> <br> <input type="button" value="Send" onclick="sendMessage()">
+						<textarea id="msgTextArea" rows="10" cols="20" style="resize: none;"></textarea>
+							<br>
+												<form>
+					<%-- 		<input type="text" value=${m.memberId } id="user" readonly>
+							<br> <br>  --%>
+							<input type="text" id="textMsg">
+							<br> 
+							<br> 
+							<button type="button" onclick="sendMessage()">입력</button>
 							<!-- <input type="button" value="Disconnect" onclick="disconnect()"> -->
+						<button type="button" onclick="create()">소켓 생성</button>
 						</form>
-						<br>
-						<textarea id="msgTextArea" rows="5" cols="20" style="resize: none;"></textarea>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -193,6 +197,20 @@ $(function(){
             }
     	})
 		}printCom(); 
+		
+		
+<%-- 		$.ajax({
+
+			type: "GET",
+			url: "<%=request.getContextPath()%>/writenotice.do",
+			success:function(data){
+				console.log(data);
+				$("#side").html(data);
+			}
+		}) --%>
+		
+		// 다른 페이지 가져와서 뿌려줄수있음!! 
+		
 
 });
 
@@ -215,75 +233,20 @@ $(function(){
             }
              
         });
+	  
+	
 } 
 
 
+	 var webSocket;
 
-
-/* $("[type=button]").click(e=>{
-	console.log('댓글 삭제'+e.target);
-})
- */
-
-/*  $(document).on("click", ".delcomment", function(e){
-	console.log('댓글 삭제'+e.target);
-}) */
-
-
-<%-- function del_fun(e){
-	const com = e.target.parentNode.lastChild.value;
-	console.log(com);
-	  $.ajax({
-            type : "GET",
-            url : "<%=request.getContextPath()%>/board/delcomment.do",
-            data: {cono : com},
-            error : function(){
-                alert('통신실패!!');
-            },
-            success : function(data){
-                alert("댓글이 삭제되었습니다." + data) ;
-                e.target.parentNode.remove(); 
-            }
-        }); --%>
-
-
-
-/* console.log($(".delcomment"));
-
-$(".delcomment").click(e=>{
-	console.log('댓글 삭제'+e.target);
-})
- */
-
-
-
-<%-- 	console.log($(".delcomment"));
-
-	$(".delcomment").click(e=>{
-	const com = e.target.parentNode.lastChild.value;
-	console.log(com);
-	  $.ajax({
-            type : "GET",
-            url : "<%=request.getContextPath()%>/board/delcomment.do",
-            data: {cono : com},
-            error : function(){
-                alert('통신실패!!');
-            },
-            success : function(data){
-                alert("댓글이 삭제되었습니다." + data) ;
-                /* $("#dataArea").html(data) ; */
-                e.target.parentNode.remove(); 
-            }
-        });
-})  --%>
-	
-	
-	
-	
+		/* 웹소켓 생성해서 변수에 담음 */
+	function create(){
+		var msgTextArea = document.getElementById("msgTextArea");
+		webSocket = connectWebSocket("ws://localhost:9090/onebyn/socket",message,open,close,error);
+	}
 	
 
-	/* 웹소켓 생성해서 변수에 담음 */
-	var msgTextArea = document.getElementById("msgTextArea");
 
 	function connectWebSocket(url, message, open, close, error){
 		console.log("connectWebSocket실행");
@@ -321,7 +284,8 @@ $(".delcomment").click(e=>{
 
 	var open = function(){
 		console.log("open실행");
-		msgTextArea.value += "서버와 연결중...\n";
+		var user = "${m.memberId}";
+		msgTextArea.value += user+"님이 접속하셨습니다.\n";
 	}
 	var close = function(){
 		console.log("close실행");
@@ -340,15 +304,16 @@ $(".delcomment").click(e=>{
 		console.log("message실행");
 		msgTextArea.value += msg.data+"\n";
 	};
-	var webSocket = connectWebSocket("ws://localhost:9090/onebyn/socket",message,open,close,error);
+
 
 	//송신 버튼을 눌렸을때 이벤트 처리 함수
 	function sendMessage(){
 		console.log("sendMessage실행");
-		var user = document.getElementById("user");
+		/* var user = document.getElementById("user"); */
+		var user = "${m.memberId}";
 		var message = document.getElementById("textMsg");
-		msgTextArea.vlue += user.value + "(나) : "+message.value+"\n";
-		webSocket.send("["+ user.value +"]"+message.value);
+		msgTextArea.vlue += user + "(나) : "+message.value+"\n";
+		webSocket.send("["+ user +"]"+message.value);
 		message.value = "";
 	}
 
@@ -358,7 +323,7 @@ $(".delcomment").click(e=>{
 		webSocket.close();
 	}
  
-	
+
 	
 	
 

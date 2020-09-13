@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(value = {"/board.do","/writenotice.do","/boartrade.do"})
+@WebFilter(value = {"/board.do","/writenotice.do","/boartrade.do","/boartrade.do"})
 public class LoginFilter implements Filter {
 
     /**
