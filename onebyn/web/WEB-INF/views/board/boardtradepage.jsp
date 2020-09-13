@@ -3,6 +3,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=request.getContextPath()%>/tradeboard.css" rel="stylesheet">
 
+<%
+	String id = request.getParameter("id");
+%>
 
 
 <!-- 
@@ -17,12 +20,6 @@
 거래 지역
 게시판 단계 상태 
 -->
-
-<style>
-.delcomment {
-	float: right;
-}
-</style>
 
 <div class="container" id="boardtrade">
 	<div class="row">
@@ -86,7 +83,14 @@
 				<div class="sticky">
 					<div id="side">
 						<!-- <h2>사이드바</h2> -->
-
+						<h2>
+							정말 구매할꺼면 <br>누르세요
+						</h2>
+						<button onclick="fun_buy()">구매 확정!</button>
+						<c:if test="${m.memberId == b.writerId}">
+						<!-- 글쓴이만 방만들기 가능 -->
+						<button onclick="fun_createroom()">채팅방 열기!</button>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -188,18 +192,44 @@ $(function(){
 		}printCom(); 
 		
 		
-		$.ajax({
-			type: "GET",
-			url: "<%=request.getContextPath()%>/chatroom.do",
-			success:function(data){
-				console.log(data);
-				$("#side").html(data);
-			}
-		})
-		// 다른 페이지 가져와서 뿌려줄수있음!! 
+	
+		
 		
 
 });
+
+
+
+//구매 확정누르면 넘어감
+function fun_buy(){
+	
+}
+
+
+function fun_createroom(){
+<%-- 	var idd = <%=id%>;
+	console.log("idd : "+idd);
+	var id;
+	
+	if(idd == null){
+	id += "${m.memberId}";
+	}else{
+		id += (idd+",${m.memberId}");
+	} --%>
+	
+	$.ajax({
+		type: "GET",
+		url: "<%=request.getContextPath()%>/chatroom.do?id=${m.memberId}",
+		success:function(data){
+			console.log(data);
+			$("#side").html("");
+			$("#side").html(data);
+		}
+	})
+	// 다른 페이지 가져와서 뿌려줄수있음!! 
+}
+
+
 
 
 
