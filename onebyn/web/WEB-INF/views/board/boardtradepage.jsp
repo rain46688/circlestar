@@ -19,6 +19,19 @@
 배송 예정 날짜
 거래 지역
 게시판 단계 상태 
+
+처음에는 
+구매 확정 버튼이있음 게시글 작성자(방장)의 경우 채팅방 열기 버튼도있음
+구매 확정 버튼을 누르면 누른사람 아이디가 정산되고
+방장이 채팅방 열기를 누르면 js함수가 호출되며 ajax로 "/chatroom.do" 서블릿으로 전달됨
+전달된 값을 DB에 "현재 회원 리스트" 넣고 게시물 상태를 다음 단계로 변경함
+그리고 값을 분리해서  chatroom.jsp로 넘기고 
+Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
+이상 뇌피셜 해봐야안다...
+
+
+
+
 -->
 
 <div class="container" id="boardtrade">
@@ -83,14 +96,20 @@
 				<div class="sticky">
 					<div id="side">
 						<!-- <h2>사이드바</h2> -->
-						<h2>
-							정말 구매할꺼면 <br>누르세요
-						</h2>
-						<button onclick="fun_buy()">구매 확정!</button>
+						<div id="ctest">
+							<h2>
+								정말 구매할꺼면 <br>누르세요
+							</h2>
+							<c:if test="${m.memberId != b.writerId}">
+								<button onclick="fun_decidebuy()">구매 확정!</button>
+							</c:if>
+						</div>
 						<c:if test="${m.memberId == b.writerId}">
-						<!-- 글쓴이만 방만들기 가능 -->
-						<button onclick="fun_createroom()">채팅방 열기!</button>
+							<!-- 글쓴이만 방만들기 가능 -->
+							<button onclick="fun_createroom()">채팅방 열기!</button>
 						</c:if>
+
+
 					</div>
 				</div>
 			</div>
@@ -200,12 +219,29 @@ $(function(){
 
 
 
+
+
 //구매 확정누르면 넘어감
-function fun_buy(){
+function fun_decidebuy(){
+
+	$.ajax({
+		type: "GET",
+		data: {user : "${m.memberId}"},
+		url: "<%=request.getContextPath()%>/decidebuy.do",
+		success:function(data){
+			console.log(data);
+			$("#ctest").html("<h2>N빵 인원이 모일때까지 기다려주세요</h2><br><button onclick='fun_cancelbuy()'>취소하기</button>");
+			/*
+			$("#side").html("");
+			$("#side").html(data); 
+			*/
+			
+		}
+	})
 	
 }
 
-
+//채팅방 열기!
 function fun_createroom(){
 <%-- 	var idd = <%=id%>;
 	console.log("idd : "+idd);
@@ -229,8 +265,10 @@ function fun_createroom(){
 	// 다른 페이지 가져와서 뿌려줄수있음!! 
 }
 
-
-
+//취소할때
+function fun_cancelbuy(){
+	console.log("fun_cancelbuy");
+}
 
 
  function del_fun(e){
@@ -248,9 +286,7 @@ function fun_createroom(){
               /* $("#dataArea").html(data) ; */
                 e.target.parentNode.remove(); 
             }
-             
         });
-	  
 	
 } 
 

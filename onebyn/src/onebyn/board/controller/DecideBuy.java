@@ -1,12 +1,6 @@
 package onebyn.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,18 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ChatRoomServlet
+ * Servlet implementation class DecideBuy
  */
-@WebServlet("/chatroom.do")
-public class ChatRoomServlet extends HttpServlet {
+@WebServlet("/decidebuy.do")
+public class DecideBuy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static List<String> list = null;
-	
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChatRoomServlet() {
+    public DecideBuy() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +27,12 @@ public class ChatRoomServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("채팅방 서블릿 실행");
+		System.out.println("구매 확정 메소드");
+		System.out.println("user : "+request.getParameter("user"));
 		
-		Set<String> set = new HashSet<String>();
-		String id = request.getParameter("id");
-		set.add(id);
-		list = new ArrayList<>(set);
 		
-		for(String s : list) {
-			System.out.print(s+", ");
-		}
 		
-	
-		request.getRequestDispatcher("/WEB-INF/views/board/chatroom.jsp").forward(request, response);
+		
 	}
 
 	/**
