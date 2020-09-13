@@ -36,16 +36,17 @@ public class BoardPageServlet extends HttpServlet {
 		if(b==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
 			request.setAttribute("loc", "/views/board/bolist.jsp");
-			request.getRequestDispatcher("/views/common/msg.jsp");
-			
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			request.setAttribute("curBoard", b);
-			request.getRequestDispatcher("/views/board/boPage.jsp");
+			request.getRequestDispatcher("/views/board/boPage.jsp").forward(request, response);
 		}
 	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
