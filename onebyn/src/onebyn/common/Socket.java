@@ -85,6 +85,7 @@ public class Socket extends HttpServlet {
             	 String msg2 =username + " : " + msg;
             	 System.out.println("msg1 : "+msg1);
             	 System.out.println("msg2 : "+msg2);
+            	 //할 예정 : 유저 아이디를 비교해보면서 넘어온 멤버 id들이랑 비교해서 true이면 메세지를 보내도록 하기!!!
 				iterator.next().getBasicRemote().sendText(msg2);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
