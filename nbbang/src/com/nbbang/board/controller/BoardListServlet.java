@@ -40,6 +40,9 @@ public class BoardListServlet extends HttpServlet {
 		}
 		int numPerPage = 5;
 		
+		
+		
+		
 		List<Board> blist = new BoardService().boardList(cPage, numPerPage);
 		
 		int totalData = new BoardService().boardListCount();
