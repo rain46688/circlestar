@@ -56,4 +56,9 @@ public class BoardService {
 		return b;
 	}
 
+	public int decideBuyUserAdd(String parameter) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

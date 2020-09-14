@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import onebyn.board.model.service.BoardService;
+
 /**
  * Servlet implementation class DecideBuy
  */
@@ -30,7 +32,7 @@ public class DecideBuy extends HttpServlet {
 		System.out.println("구매 확정 메소드");
 		System.out.println("user : "+request.getParameter("user"));
 		
-		
+		int result = new BoardService().decideBuyUserAdd(request.getParameter("user"));
 		
 		
 	}
