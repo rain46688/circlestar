@@ -209,4 +209,35 @@ public class BoardDao {
 		return result;
 	}
 
+	@SuppressWarnings("resource")
+	public int decideBuyUserAdd(Connection conn, String user, String bid) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		ResultSet rs = null;
+		PreparedStatement pst = null;
+		String curUserList = "";
+		try {
+			pst = conn.prepareStatement(p.getProperty("decideBuyUserCurMemList"));
+			pst.setString(1, bid);
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				curUserList = rs.getString(1);
+			}
+			System.out.println("curUserList" + curUserList);
+			curUserList = curUserList+","+user;
+			System.out.println("curUserList2" + curUserList);
+			pst = conn.prepareStatement(p.getProperty("decideBuyUserAdd"));
+			pst.setString(1, curUserList);
+			pst.setString(2, bid);
+			result = pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pst);
+		}
+		return result;
+	}
+
 }

@@ -31,9 +31,16 @@ public class DecideBuy extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("구매 확정 메소드");
 		System.out.println("user : "+request.getParameter("user"));
-		
-		int result = new BoardService().decideBuyUserAdd(request.getParameter("user"));
-		
+		System.out.println("bid : "+request.getParameter("bid"));
+		String user = request.getParameter("user");
+		String bid = request.getParameter("bid");
+		int result = new BoardService().decideBuyUserAdd(user,bid);
+
+		if(result > 0) {
+			System.out.println("현재 방에 유저 추가");
+		}else {
+			System.out.println("현재 방에 유저 추가 실패!!!");
+		}
 		
 	}
 

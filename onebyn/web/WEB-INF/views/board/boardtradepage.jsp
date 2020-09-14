@@ -1,10 +1,13 @@
+<%@page import="onebyn.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link href="<%=request.getContextPath()%>/tradeboard.css" rel="stylesheet">
 
+
 <%
 	String id = request.getParameter("id");
+String[] blist = request.getParameterValues("blist");
 %>
 
 
@@ -33,6 +36,8 @@ Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
 
 
 -->
+
+
 
 <div class="container" id="boardtrade">
 	<div class="row">
@@ -96,19 +101,46 @@ Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
 				<div class="sticky">
 					<div id="side">
 						<!-- <h2>사이드바</h2> -->
+
+						<!-- 
+						여기서 if문으로 분기를 나눠야됨 
+						현재 방에 들어와서 db에 curlist에 이름이있으면 구매확정이 안보이고 채팅방 열기가 보이게
+						그러면 밑에 조건식은 필요없어짐 이미 글 작성자는 구매확정 리스트에 있으니
+						나중에 바꿔보기
+						 -->
 						<div id="ctest">
-							<h2>
-								정말 구매할꺼면 <br>누르세요
-							</h2>
-							<c:if test="${m.memberId != b.writerId}">
+
+							<c:set var="loop_flag" value="false" />
+							<c:set var="buser" value="false" />
+							<c:forEach var="bl" items="${blist}" varStatus="st">
+								<c:if test="${not loop_flag }">
+									<c:if test="${m.memberId == bl}">
+										<c:set var="buser" value="true" />
+										<c:set var="loop_flag" value="true" />
+									</c:if>
+									<c:if test="${m.memberId != bl}">
+										<c:set var="buser" value="false" />
+									</c:if>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${buser}">
+								<h2>N빵 인원이 모일때까지 기다려주세요</h2>
+								<button onclick="fun_createroom()">채팅방 열기!</button>
+							</c:if>
+							<c:if test="${!buser}">
+								<h2>
+									정말 구매할꺼면 <br>누르세요
+								</h2>
 								<button onclick="fun_decidebuy()">구매 확정!</button>
 							</c:if>
-						</div>
-						<c:if test="${m.memberId == b.writerId}">
-							<!-- 글쓴이만 방만들기 가능 -->
-							<button onclick="fun_createroom()">채팅방 열기!</button>
-						</c:if>
 
+						</div>
+						<br>
+						<div>
+							<label for="formControlRange">N빵 인원 수</label><br>
+							<progress value="${curnum}" max="${b.maxMems}"></progress>
+						</div>
 
 					</div>
 				</div>
@@ -128,6 +160,10 @@ Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
 
 $(function(){
 	//온로드
+	
+	/* $("#ctest"). */
+	
+	
 	
 	//텍스트 출력 창 글 못쓰게 막기
 	$("#msgTextArea").attr("readonly", true);
@@ -239,7 +275,7 @@ function del_fun(e){
             success : function(data){
                 alert("댓글이 삭제되었습니다." + data) ;
                 e.target.parentNode.remove(); 
-              console.log("프린트되라");
+           /*    console.log("프린트되라"); */
                 printCom();
             }
         });
@@ -250,11 +286,11 @@ function del_fun(e){
 function fun_decidebuy(){
 	$.ajax({
 		type: "GET",
-		data: {user : "${m.memberId}"},
+		data: {user : "${m.memberId}",bid:"${b.boardId}"},
 		url: "<%=request.getContextPath()%>/decidebuy.do",
 		success:function(data){
 			console.log(data);
-			$("#ctest").html("<h2>N빵 인원이 모일때까지 기다려주세요</h2><br><button onclick='fun_cancelbuy()'>취소하기</button>");
+
 			/*
 			$("#side").html("");
 			$("#side").html(data); 

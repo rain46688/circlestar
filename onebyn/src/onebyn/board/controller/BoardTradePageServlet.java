@@ -60,10 +60,19 @@ public class BoardTradePageServlet extends HttpServlet {
 		}
 		
 		Board b = new BoardService().tradePageBoard(id,hasRead);
+		String[] blist = b.getCurMemsList().split(",");
+		//스트링값으로 가져와서 나눈다음 리스트에 담던지 배열에 담아서 보내기 ! 이걸로 jsp에서 분기처리할꺼임
 		
-		
+		int num = 0;
+		for(String s : blist) {
+			num++;
+			System.out.print(s+" ");
+		}
+		System.out.println("curnum : "+num);
 		System.out.println("가져온 게시글 상세 페이지 요소 : "+b);
 		
+		request.setAttribute("blist", blist);
+		request.setAttribute("curnum", num);
 		request.setAttribute("b", b);
 		request.getRequestDispatcher("/WEB-INF/views/board/boardtradepage.jsp").forward(request, response);
 	}

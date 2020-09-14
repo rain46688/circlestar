@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -14,6 +13,8 @@
 <link href="<%=request.getContextPath()%>/cms.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
@@ -34,25 +35,25 @@
 			<!-- 위치 조정용 -->
 		</div>
 		<!-- 세션에 따라 분기 처리 -->
-	
+
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto ">
 				<!-- <li class="nav-item active"> -->
 				<c:if test="${empty(m)}">
-				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath()%>/login.do">로그인</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">회원가입</a>
-				</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath()%>/login.do">로그인</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">회원가입</a>
+					</li>
 				</c:if>
 				<c:if test="${!empty(m)}">
-				<li class="nav-item">
-					<a class="nav-link">${m.memberId}</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath()%>/logout.do">로그아웃</a>
-				</li>
+					<li class="nav-item">
+						<a class="nav-link">${m.memberId}</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath()%>/logout.do">로그아웃</a>
+					</li>
 				</c:if>
 				<li class="nav-item">
 					<a class="nav-link" href="#">고객센터</a>

@@ -56,9 +56,26 @@ public class BoardService {
 		return b;
 	}
 
-	public int decideBuyUserAdd(String parameter) {
+	public int decideBuyUserAdd(String user, String bid) {
 		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = getConnection();
+		int result = bo.decideBuyUserAdd(conn,user,bid);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public String curMemberList(String id) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		
+		
+		
+		return null;
 	}
 
 }

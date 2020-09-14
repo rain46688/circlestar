@@ -31,15 +31,15 @@ public class BoardServlet extends HttpServlet {
 
 		for (Board b : list) {
 			String dd = req.getServletContext().getRealPath("/images/" + b.getFiles());
-			System.out.println("dd : " + dd);
+			//System.out.println("dd : " + dd);
 			File f = new File(dd);
 			String check = dd.substring(dd.length() - 1, dd.length());
 			if (!f.exists() || check.equals("\\")) {
 				System.out.println(b);
 				b.setFiles("noimage.png");
-				System.out.println(b.getFiles() + " 그림 파일 없어서 대체됨!");
+				//System.out.println(b.getFiles() + " 그림 파일 없어서 대체됨!");
 			} else {
-				System.out.println(b);
+				//System.out.println(b);
 			}
 		}
 
