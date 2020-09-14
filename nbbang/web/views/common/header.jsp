@@ -48,26 +48,26 @@
 		</div>
 		<nav>
 			<ul class="nav justify-content-center">
-				<li class="nav-item">
+				<li class="nav-item" style="width:50px;">
 				  <a class="nav-link active" href="<%=request.getContextPath() %>/">홈</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" style="width:80px;">
 				  <a class="nav-link" href="<%=request.getContextPath() %>/board/boList">특가</a>
 				  <!-- 차후 게시판 분류대로 나눌 예정 -->
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" style="width:80px;">
 				  <a class="nav-link" href="<%=request.getContextPath() %>/board/boList">식품</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" style="width:140px;">
 					<a class="nav-link" href="<%=request.getContextPath() %>/board/boList">패션잡화</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" style="width:150px;">
 					<a class="nav-link" href="<%=request.getContextPath() %>/board/boList">취미-문구</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" style="width:80px;">
 					<a class="nav-link" href="<%=request.getContextPath() %>/board/boList">티켓</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" style="width:140px;">
 					<a class="nav-link" href="<%=request.getContextPath() %>/board/boList">애완용품</a>
 				</li>
 			  </ul>
