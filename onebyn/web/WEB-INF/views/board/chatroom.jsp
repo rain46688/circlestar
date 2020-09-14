@@ -16,12 +16,15 @@
 			<button type="button" onclick="sendMessage()">입력</button>
 			<!-- <input type="button" value="Disconnect" onclick="disconnect()"> -->
 			<button type="button" onclick="create()">소켓 생성</button>
+			
 		</form>
 	</div>
 
 
 	<script>
 		var webSocket;
+		
+		console.log("${blist}");
 
 		/* 웹소켓 생성해서 변수에 담음 */
 		function create() {
@@ -90,13 +93,14 @@
 		};
 
 		//송신 버튼을 눌렸을때 이벤트 처리 함수
-		function sendMessage() {
+		function sendMessage() { 
 			console.log("sendMessage실행");
 			/* var user = document.getElementById("user"); */
 			var user = "${m.memberId}";
 			var message = document.getElementById("textMsg");
 			msgTextArea.vlue += user + "(나) : " + message.value + "\n";
-			webSocket.send("[" + user + "]" + message.value);
+			webSocket.send("[" + user + "]" + message.value+"/${blist}");
+			/* 고민해보기 안되면 넘어가서 자바에서 디비 갔다와야됨! 궅이 여기서 이럴필요가 있긴함 ㅋㅋ */
 			message.value = "";
 		}
 

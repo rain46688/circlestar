@@ -240,4 +240,26 @@ public class BoardDao {
 		return result;
 	}
 
+	public String curMemberList(Connection conn, String id) {
+		// TODO Auto-generated method stub
+		String blist = "";
+		ResultSet rs = null;
+		PreparedStatement pst = null;
+		try {
+			pst = conn.prepareStatement(p.getProperty("decideBuyUserCurMemList"));
+			pst.setString(1, id);
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				blist = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pst);
+		}
+		return blist;
+	}
+
 }

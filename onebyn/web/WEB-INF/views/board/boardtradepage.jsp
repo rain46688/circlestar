@@ -126,7 +126,11 @@ Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
 
 							<c:if test="${buser}">
 								<h2>N빵 인원이 모일때까지 기다려주세요</h2>
-								<button onclick="fun_createroom()">채팅방 열기!</button>
+								<!-- 방장일때만 채팅방 열기가 보임!!
+								채팅이 열린 상태로 변경되면 채팅방 입장으로 다른 유저들도 볼수있게하기 -->
+								<c:if test="${m.memberId == b.writerId}">
+									<button onclick="fun_createroom()">채팅방 열기!</button>
+								</c:if>
 							</c:if>
 							<c:if test="${!buser}">
 								<h2>
@@ -155,13 +159,8 @@ Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
 
 
 
-
-
-
 $(function(){
 	//온로드
-	
-	/* $("#ctest"). */
 	
 	
 	
@@ -213,7 +212,9 @@ $(function(){
 function printCom(){
 	
 	const curuser = "${m.memberId}";
-	const boarduser = "${b.boardId}";
+	const boarduser = "${b.writerId}";
+/* 	console.log("boarduser : "+boarduser); */
+	/* writerId */
 	$.ajax({
 		url: "<%=request.getContextPath()%>/board/addComment.do",
         type: "POST",
@@ -275,7 +276,6 @@ function del_fun(e){
             success : function(data){
                 alert("댓글이 삭제되었습니다." + data) ;
                 e.target.parentNode.remove(); 
-           /*    console.log("프린트되라"); */
                 printCom();
             }
         });
@@ -314,14 +314,16 @@ function fun_createroom(){
 	
 	$.ajax({
 		type: "GET",
-		url: "<%=request.getContextPath()%>/chatroom.do?id=${m.memberId}",
+		data:{"bid":"${b.boardId}"},
+		url: "<%=request.getContextPath()%>/chatroom.do",
 		success:function(data){
 			console.log(data);
 			$("#side").html("");
 			$("#side").html(data);
 		}
 	})
-	// 다른 페이지 가져와서 뿌려줄수있음!! 
+	// 다른 페이지 가져와서 뿌려줄수있음!!
+	
 }
 
 //취소할때

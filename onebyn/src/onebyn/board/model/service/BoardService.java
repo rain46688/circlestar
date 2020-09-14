@@ -72,10 +72,9 @@ public class BoardService {
 	public String curMemberList(String id) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		
-		
-		
-		return null;
+		String blist = bo.curMemberList(conn,id);
+		close(conn);
+		return blist;
 	}
 
 }
