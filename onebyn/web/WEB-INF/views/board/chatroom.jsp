@@ -1,17 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="<%=request.getContextPath()%>/tradeboard.css" rel="stylesheet">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <style>
 .delcomment {
 	float: right;
 }
 </style>
-</head>
-<body>
 
 	<div>
 		<textarea id="msgTextArea" rows="10" cols="20" style="resize: none;"></textarea>
@@ -113,6 +106,3 @@
 			webSocket.close();
 		}
 	</script>
-
-</body>
-</html>

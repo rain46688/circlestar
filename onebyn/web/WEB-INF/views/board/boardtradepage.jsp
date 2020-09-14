@@ -73,8 +73,8 @@ Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
 							<div class="checkbox">
 								<input type="checkbox" name="secret" id="secret"> 비밀댓글
 							</div>
-							<button type="button" class="btn btn-success green addbtn" id="addcomment">
-								<i class="fa fa-share"></i> 댓글작성
+							<button type="button" class="btn btn-success green addbtn delcomment" id="addcomment">
+								<i class='fa fa-share'></i> 댓글작성
 							</button>
 						</form>
 					</div>
@@ -127,19 +127,20 @@ Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
 
 
 $(function(){
+	//온로드
 	
+	//텍스트 출력 창 글 못쓰게 막기
 	$("#msgTextArea").attr("readonly", true);
 
-	
+	//주기마다 댓글창 갱신 인터벌
  	function re(){
 		 console.log("printCom");
 		 printCom();
 		}
 		setInterval(re, 10000); 
 	
+		//댓글 등록하기
     $("#addcomment").click(function(){
-    	/* console.log("secret : "+$("#secret").is(":checked")); */
-    	
     	if($("#commnetbox").val().trim() === ""){
     		alert("내용을 입력하세요.");
     		$("#commnetbox").val("").focus();
@@ -164,66 +165,89 @@ $(function(){
     
     		
     
-    function printCom(){
-    	
-    	const curuser = "${m.memberId}";
-    	/* console.log(curuser); */
-    	
-    	$.ajax({
-			url: "<%=request.getContextPath()%>/board/addComment.do",
-            type: "POST",
-            async : true, 
-            data: {board_id : ${b.boardId}},
-            success: function (data) { 
-            	/* console.log(data); */
-            	$("#commentbdiv").text("");
-            	var obj = JSON.parse(data); 
-            	var List = obj.List;
-            	var print = ""; 
-            	for (var i = 0; i < List.length; i++) { 
-	                    print += "<div class='w3-border w3-padding'>";
-	                for (var j = 0; j < List[i].length; j++) {
-	                    var com = List[i][j];
-	                    /* console.log("com.com_no : "+com.com_no); */
-	                /*     console.log(i+" "+j+" "+com.com_no+" "+com.id+" "+com.com_date+" "+com.com_content);  */
-	                    if(j === 0){
-	                   /*  	console.log("com.id : "+com.id); */
-	                    	if(com.id == curuser){
-	                    	print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp; <button type='button' onclick='del_fun(event);' class='btn btn-success green delcomment' name='del'><i class='fa fa-share'></i> 댓글삭제</button>"; 
-	                    	/* print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp; <button type='button' class='btn btn-success green delcomment' name='del'><i class='fa fa-share'></i> 댓글삭제</button>"; */
-	                    	}else{
-	                    	print += "&nbsp;&nbsp; <label id='comlabel'>" + com.id + "</label>&nbsp;&nbsp;";
-	                    }
-	                    }else if(j === 1){
-	                    	print += "&nbsp;&nbsp;&nbsp;&nbsp;<label id='comlabel'>" + com.com_date+"</label>";
-	                    }else if(j === 2){
-	                    	print += "<h4>" + com.com_content + "</h4>";
-	                    }else if(j === 3){
-	                    	print +="<hr><input type='hidden' id='com"+(i+1)+"' value='"+com.com_no+"'></div>";
-	                    }
-	                
-	                };
-	        	};
-	              	$("#commentbdiv").html(print); 
-	              	$(".com_count").html(i);
-            }
-    	})
-		}printCom(); 
+
 		
 		
 	
+	
 		
-		
-
+//온로드 닫힘
 });
 
+function printCom(){
+	
+	const curuser = "${m.memberId}";
+	const boarduser = "${b.boardId}";
+	$.ajax({
+		url: "<%=request.getContextPath()%>/board/addComment.do",
+        type: "POST",
+        dataType:"json",
+        data: {board_id : ${b.boardId}},
+        success: function (data) { 
+        	$("#commentbdiv").text("");
+          	var print = ""; 
+          	var num=0;
+          	let d=$("<div>");
+        	$.each(data,function(i,v){
+        		num++;
+        		  print += "<div>";
+        		/* console.log(v["cwriterId"]+" "+curuser+" "+v["secret"]) */
+        		if(!v["secret"]){//시크릿 댓글이 아닌경우
+        			if(v["cwriterId"] == curuser || curuser == 'ADMIN'){
+        				//댓글 작성자 혹은 관리자는 댓글을 삭제할수있다.
+                		print += "&nbsp;&nbsp; <label id='comlabel'>" + v["cwriterId"] + "</label>&nbsp;&nbsp; <button type='button' onclick='del_fun(event);' class='btn btn-success green delcomment' name='del'><i class='fa fa-share'></i> 댓글삭제</button>"; 
+        			}else{
+        				print += "&nbsp;&nbsp; <label id='comlabel'>" + v["cwriterId"] + "</label>&nbsp;&nbsp;";
+        			}
+                	print += "&nbsp;&nbsp;&nbsp;&nbsp;<label id='comlabel'>" + v["cenrollDate"]+"</label>";
+                	print += "<h4>" + v["comment"] + "</h4>";
+                	print +="<hr><input type='hidden' id='com"+(num+1)+"' value='"+v["comId"]+"'></div>";
+        		}else{//시크릿 댓글인 경우
+        			if(v["cwriterId"] == curuser || curuser == 'ADMIN' || curuser == boarduser){
+        				//글 작성자 혹은 관리자 혹은 댓글 작성자는 볼수있다.
+        				if(v["cwriterId"] == curuser || curuser == 'ADMIN'){
+        					//댓글 작성자 혹은 관리자는 댓글을 삭제할수있다.
+                    		print += "&nbsp;&nbsp; <label id='comlabel'>" + v["cwriterId"] + "</label>&nbsp;&nbsp; <button type='button' onclick='del_fun(event);' class='btn btn-success green delcomment' name='del'><i class='fa fa-share'></i> 댓글삭제</button>"; 
+            			}else{
+            				print += "&nbsp;&nbsp; <label id='comlabel'>" + v["cwriterId"] + "</label>&nbsp;&nbsp;";
+            			}
+        			  	print += "&nbsp;&nbsp;&nbsp;&nbsp;<label id='comlabel'>" + v["cenrollDate"]+"</label>&nbsp;<label><small>- 비밀 댓글입니다 -</small></label>";
+                    	print += "<h4>" + v["comment"] + "</h4>";
+                    	print +="<hr><input type='hidden' id='com"+(num+1)+"' value='"+v["comId"]+"'></div>";
+        			}else{
+        				//자신이 댓글 작성자 관리자 글 작성자가 아니면 시크릿 댓글은 볼수없다.
+        			print += "<h4>" + "비밀 댓글입니다." + "</h4><br><hr>";
+        			}
+                	}
+        	})
+              	$("#commentbdiv").html(print); 
+              	$(".com_count").html(num);
+        }
+	})
+	}printCom(); 
 
-
+function del_fun(e){
+	const com = e.target.parentNode.lastChild.value;
+	console.log(com);
+	  $.ajax({
+            type : "GET",
+            url : "<%=request.getContextPath()%>/board/delcomment.do",
+            data: {cono : com},
+            error : function(){
+                alert('통신실패!!');
+            },
+            success : function(data){
+                alert("댓글이 삭제되었습니다." + data) ;
+                e.target.parentNode.remove(); 
+              console.log("프린트되라");
+                printCom();
+            }
+        });
+} 
 
 
 //구매 확정누르면 넘어감
 function fun_decidebuy(){
-
 	$.ajax({
 		type: "GET",
 		data: {user : "${m.memberId}"},
@@ -235,7 +259,6 @@ function fun_decidebuy(){
 			$("#side").html("");
 			$("#side").html(data); 
 			*/
-			
 		}
 	})
 	
@@ -271,24 +294,7 @@ function fun_cancelbuy(){
 }
 
 
- function del_fun(e){
-	const com = e.target.parentNode.lastChild.value;
-	console.log(com);
-	  $.ajax({
-            type : "GET",
-            url : "<%=request.getContextPath()%>/board/delcomment.do",
-            data: {cono : com},
-            error : function(){
-                alert('통신실패!!');
-            },
-            success : function(data){
-                alert("댓글이 삭제되었습니다." + data) ;
-              /* $("#dataArea").html(data) ; */
-                e.target.parentNode.remove(); 
-            }
-        });
-	
-} 
+
 
 
  
