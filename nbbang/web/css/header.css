@@ -57,6 +57,13 @@ div#topBtn>button{
 nav>ul{
 	background-color: #FFC107;
 }
+li.nav-item{
+	margin: 0% 2%;
+	text-align:center;
+}
+nav li a:hover{
+	color: white;
+}
 
 
 /* 로그인 페이지 */
