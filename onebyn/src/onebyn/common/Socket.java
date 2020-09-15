@@ -42,6 +42,7 @@ public class Socket extends HttpServlet {
 		http = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
 		Member m = (Member) http.getAttribute("m");
 		System.out.println("m : " + m.getMemberId()+", session : "+userSession);
+		smap.put(m.getMemberId(), userSession);
 //		if (m.getMemberId().equals("ADMIN")) {
 		sessionUsers.add(userSession);
 		System.out.println("연결중...handleOpen");
@@ -69,20 +70,31 @@ public class Socket extends HttpServlet {
 		}
 		System.out.println("userName : " + userName + ", content : " + content + "\n curSessionUser : " + curSessionUser + "\n curBoardUserList : " + curBoardUserList);
 		
+		String[] blist = curBoardUserList.split(",");
+		
+//		System.out.println("blist");
+//		for(String s : blist) {
+//			System.out.print(s+" ");
+//		}
 		
 		
-		Iterator<Session> iterator = sessionUsers.iterator();
-		while (iterator.hasNext()) {
-			try {
-				Session s = iterator.next();
-				s.getBasicRemote().sendText(content);
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		System.out.println("=======================");
+		System.out.println("map");
+		Iterator<String> it = smap.keySet().iterator();
+		while(it.hasNext()) {
+			String key = it.next();
+			//System.out.println("key : "+key+", value : "+smap.get(key));
+			for(String ss : blist) {
+				if(ss.equals(key)) {
+						
+				}
 			}
-
 		}
+		System.out.println("=======================");
+		
+		
+		
+	
 
 //		sessionUsers.forEach(session -> {
 ////			if(session == userSession) {
