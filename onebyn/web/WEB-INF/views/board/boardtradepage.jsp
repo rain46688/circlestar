@@ -128,9 +128,9 @@ Soket.java로 가져가서 if문으로 채팅을 분기해서 뿌려줌
 								<h2>N빵 인원이 모일때까지 기다려주세요</h2>
 								<!-- 방장일때만 채팅방 열기가 보임!!
 								채팅이 열린 상태로 변경되면 채팅방 입장으로 다른 유저들도 볼수있게하기 -->
-								<c:if test="${m.memberId == b.writerId}">
+								<%-- <c:if test="${m.memberId == b.writerId}"> --%>
 									<button onclick="fun_createroom()">채팅방 열기!</button>
-								</c:if>
+								<%-- </c:if> --%>
 							</c:if>
 							<c:if test="${!buser}">
 								<h2>

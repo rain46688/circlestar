@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <style>
 .delcomment {
 	float: right;
@@ -98,8 +99,8 @@
 			/* var user = document.getElementById("user"); */
 			var user = "${m.memberId}";
 			var message = document.getElementById("textMsg");
-			msgTextArea.vlue += user + "(나) : " + message.value + "\n";
-			webSocket.send("[" + user + "]" + message.value+"/${blist}");
+			//msgTextArea.vlue += user + "(나) : " + message.value + "\n";
+			webSocket.send(user+"/"+ message.value+"/${blist}");
 			/* 고민해보기 안되면 넘어가서 자바에서 디비 갔다와야됨! 궅이 여기서 이럴필요가 있긴함 ㅋㅋ */
 			message.value = "";
 		}

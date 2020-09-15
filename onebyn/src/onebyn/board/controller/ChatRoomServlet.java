@@ -38,7 +38,7 @@ public class ChatRoomServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("채팅방 서블릿 실행");
+		System.out.println("채팅방 서블릿 실행@@@@@@@@@@");
 
 //		Set<String> set = new HashSet<String>();
 		String bid = request.getParameter("bid");
