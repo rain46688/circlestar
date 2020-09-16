@@ -6,8 +6,8 @@
 
 <style>
     table {
-        width: 1200px;
-        height: 500px;
+        width: 800px;
+        height: 300px;
         margin-left: auto;
         margin-right: auto;
         margin-top: 6%;
@@ -19,22 +19,22 @@
         background-color: #eeeeee;
         font-weight: bolder;
         text-align: center;
-        font-size: 25px;
+        font-size: 18px;
     }
 
     td {
         text-align: center;
         padding-top: 0.7%;
-        font-size: 19px;
+        font-size: 14px;
     }
 
     h1 {
         background-color: lightsalmon;
-        font-size: 50px;
+        font-size: 22px;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 10%;
-        width: 900px;
+        margin-top: 1.8%;
+        width: 600px;
         height: 70px;
         padding-left: 24px;
     }
@@ -57,18 +57,24 @@
 	#fontBold{font-weight:bold;}
 </style>
 <section>
-				<div id="customer-submain">
-				<ul id="cstmt-menu">
-					<li class="cstmt-list" style="font-size:20px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
-					<li class="cstmt-list" style="font-size:20px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
-					<li class="cstmt-list" style="font-size:40px;" id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
-					<li class="cstmt-list" style="font-size:20px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
-				</ul>
-			</div>
+			    <div id="kdh-container">
+      <div id="kdh-header">
+      </div>
+      <div id="kdh-sidebar-left">
+        <h2>사이드</h2>
+        <ul>
+ 					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
+					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
+					<li class="cstmt-list" style="font-size:20px;"id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
+					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
+        </ul>
+      </div>
+       </div>
 </section>
 
 <!-- News테이블 -->
-<h1>N빵의 다양한 소식을 확인하세요! ^_^</h1>
+
+        <h1>각종 공지사항과 이벤트를 확인하세요.</h1>
 <section>
     <div class="coustomer-news">
         <table class="tbl-news" style="">

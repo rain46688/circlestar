@@ -47,14 +47,20 @@
     #fontBold{font-weight:bold;}
 </style>
 <section>
- 				<div id="customer-submain">
-				<ul id="cstmt-menu">
-					<li class="cstmt-list" style="font-size:20px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
-					<li class="cstmt-list" style="font-size:40px;" id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
-					<li class="cstmt-list" style="font-size:20px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
-					<li class="cstmt-list" style="font-size:20px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
-				</ul>
-			</div>
+			    <div id="kdh-container">
+      <div id="kdh-header">
+        <h1>궁금하시거나 불펴하신점 편하게 물어보세요.</h1>
+      </div>
+      <div id="kdh-sidebar-left">
+        <h2>사이드</h2>
+        <ul>
+ 					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
+					<li class="cstmt-list" style="font-size:20px;" id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
+					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
+					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
+        </ul>
+      </div>
+       </div>
 </section>
 <br>
 <br>
