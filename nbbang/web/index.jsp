@@ -14,15 +14,15 @@
 			</ol>
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
-					<img src="<%=request.getContextPath()%>/resources/logoTitle.png"
+					<img src="<%=request.getContextPath()%>/images/logoTitle.png"
 						class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/resources/logoTitle.png"
+					<img src="<%=request.getContextPath()%>/images/logoTitle.png"
 						class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/resources/logoTitle.png"
+					<img src="<%=request.getContextPath()%>/images/logoTitle.png"
 						class="d-block w-100" alt="...">
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 <div id="hotContents" name="hotContents">
 	<h2 id="hotContentsH2" name="hotContentsH2">인기게시물</h1>
 	<div class="card" style="width: 20rem;">
-	  <img src="<%=request.getContextPath() %>/resources/logo.png" class="card-img-top" alt="...">
+	  <img src="<%=request.getContextPath() %>/images/logo.png" class="card-img-top" alt="...">
 	  <div class="card-body">
 	    <h5 class="card-title">Card title</h5>
 	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -50,7 +50,7 @@
 	  </div>
 	</div>
 	<div class="card" style="width: 20rem;">
-	  <img src="<%=request.getContextPath() %>/resources/logo.png" class="card-img-top" alt="...">
+	  <img src="<%=request.getContextPath() %>/images/logo.png" class="card-img-top" alt="...">
 	  <div class="card-body">
 	    <h5 class="card-title">Card title</h5>
 	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -58,7 +58,7 @@
 	  </div>
 	</div>
 	<div class="card" style="width: 20rem;">
-	  <img src="<%=request.getContextPath() %>/resources/logo.png" class="card-img-top" alt="...">
+	  <img src="<%=request.getContextPath() %>/images/logo.png" class="card-img-top" alt="...">
 	  <div class="card-body">
 	    <h5 class="card-title">Card title</h5>
 	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -66,7 +66,7 @@
 	  </div>
 	</div>
 	<div class="card" style="width: 20rem;">
-	  <img src="<%=request.getContextPath() %>/resources/logo.png" class="card-img-top" alt="...">
+	  <img src="<%=request.getContextPath() %>/images/logo.png" class="card-img-top" alt="...">
 	  <div class="card-body">
 	    <h5 class="card-title">Card title</h5>
 	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
