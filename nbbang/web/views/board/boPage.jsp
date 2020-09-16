@@ -18,13 +18,25 @@
   #imageWrapper>img {
     border-radius: 1em;
   }
-  #content {
+  #userInfo {
     margin: 0 auto;
   	/* border: solid green; */
   	width:32em;
   	text-align:left;
   	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: large;
+  }
+
+  #userInfo>#level {
+    float: right;
+    margin-top: 0.5em;
+  }
+
+  .content{
+    border: 1px red solid;
+    width: 32em;
+    height: 50em;
+    margin: 0 auto;
   }
 	/* #carouselJackson {
 		width:50em;
@@ -66,12 +78,18 @@
 
   <div id="wrapper">
     <div id="imageWrapper">
-      <img src="<%= request.getContextPath() %>/resources/cute.png" alt="" width="500em" height="300em">
+      <img src="<%= request.getContextPath() %>/images/cute.png" alt="" width="500em" height="300em">
+      <!-- carousel 적용할 예정 -->
     </div>
-    <div id="content">
+    <div id="userInfo">
     	<hr><a href="">
     	<img src="<%= request.getContextPath() %>/resources/bread.png" alt="" width="40px" height="40px"></a>
-    	<%= b.getWriterId() %>
+      <%= b.getWriterId() %>
+      <!-- 프로필 사진 + id -->
+      <h5 id="level">신뢰 level</h5>
+      <hr>
+    </div>
+    <div class="content">
     </div>
   </div>
 </section>
