@@ -45,8 +45,13 @@
 					onclick="location.href='<%=request.getContextPath()%>/customer/customerMain'">고객센터</button>
 
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
-					onclick="location.href='<%=request.getContextPath()%>/member/myPage'">마이페이지</button>
+					onclick="location.href='<%=request.getContextPath()%>/notice/noticeList'">공지사항</button>
 
+				<%if(loginnedMember!=null) {%>		
+   				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
+   					onclick="location.href='<%=request.getContextPath()%>/member/myPage?memberId=<%=loginnedMember.getMemberId()%>'">마이페이지</button>
+   				<%} %>
+      			<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">고객센터</button>
 
 			</div>
 		</div>

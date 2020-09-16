@@ -53,4 +53,11 @@ private MemberDao dao=new MemberDao();
 		return m;
 	}
 
+	public Member myPage(String memberId) {
+		Connection conn=getConnection();
+		Member m=dao.myPage(conn, memberId);
+		close(conn);
+		return m;
+	}
+
 }
