@@ -68,6 +68,15 @@ p.text{
 p>button{
     margin:0;
 }
+p.title>span{
+	margin-bottom:5px;
+}
+button#chargebtn{
+	border:none;
+	border-radius: 10px;
+	background-color: rgb(236, 175, 89);
+	color:white;
+}
 </style>
 <section>
    <div id="infoContainer" name="infoContainer" class="infoContainer">
@@ -79,9 +88,10 @@ p>button{
          </div>
          <div id="memberInfo">
             <p class="title">ㅇㅇㅇ님의 마이페이지</p>
-            <span>회원등급:&nbsp;</span>&nbsp;&nbsp;<span>가용포인트:&nbsp;</span>&nbsp;<button type="button" class="btn btn-outline-warning btns">충전하기</button><br>
+            <span>회원등급:&nbsp;</span>&nbsp;&nbsp;<span>가용포인트:&nbsp;</span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
             <span>총 개설 가능한 방 개수:&nbsp;</span>&nbsp;&nbsp;<span>개설 중인 방 개수:&nbsp;</span><br>
-            <span>가입일:&nbsp;</span>&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;</span>
+            <span>가입일:&nbsp;</span>&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;</span><br>
+           
          </div>
       </div>
       <div class="item smallBox" id="crntList">
