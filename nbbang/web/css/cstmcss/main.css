@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+<style>
+section#customerMain-container{
+
+}
+
+ul#cstmt-menu{
+
+font-size:0;
+padding-top:3.6%; 
+/* width:650px;
+height:100px;
+list-style:none;
+display: table;
+  margin-left: auto;
+  margin-right: auto;  */
+  }
+
+li.cstmt-list{
+/* float:left;
+font-family: "휴먼모음T";
+border-left:1px solid brown;
+ display: inline;
+margin-right:auto;
+margin-left: auto;  
+margin:5px; */
+display: inline;
+border-left:3px solid #bcbcbc;
+border-bottom:3px solid #bcbcbc;
+padding:15px;
+/* font-size:16px; */   
+margin-left:100px;   
+ 
+ }
+
+ 
+/* 메뉴바 맨 왼쪽에 " | "없애기 */
+/*  ul li:first-child{border-left:none;}
+
+
+
+li.cstmt-list:firstchild{border-left:none;}  */
+
+.cstmt-list a{
+/* font-size:25px;
+font-weight:bold; */
+text-decoration:none;
+color:brown;
+}
+.cstmt-list a:hover{color:#ff0000;}
+
+div#main-content {
+	background-color: beige;
+	
+	display: table;
+	width: 1100px;
+	height: 500px;
+	margin-top:7%;
+	margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+div#sub-content{
+	background-color: orange;
+	display: table;
+	width: 1100px;
+	height: 300px;
+	margin-top:3%;
+	margin-left: auto;
+ 	margin-right: auto;
+  	margin-bottom: 5%;
+}
+</style>
