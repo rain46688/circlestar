@@ -40,7 +40,8 @@ public class LoginServlet extends HttpServlet {
 		
 		String saveId=request.getParameter("saveId");
 		System.out.println("saveId: "+saveId);
-		
+		System.out.println("hong");
+		System.out.println("jack");
 		if(saveId!=null) {
 			Cookie c=new Cookie("saveId",memberId);
 			c.setMaxAge(7*24*60*60);//일주일간 저장할거임
