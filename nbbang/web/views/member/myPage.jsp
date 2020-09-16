@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+<%Member m=(Member)request.getAttribute("member") %>
 <style>
 .infoContainer {
    display: grid;
@@ -87,7 +88,7 @@ button#chargebtn{
             </div>
          </div>
          <div id="memberInfo">
-            <p class="title">ㅇㅇㅇ님의 마이페이지</p>
+            <p class="title"><%=m.getMemberId() %>님의 마이페이지</p>
             <span>회원등급:&nbsp;</span>&nbsp;&nbsp;<span>가용포인트:&nbsp;</span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
             <span>총 개설 가능한 방 개수:&nbsp;</span>&nbsp;&nbsp;<span>개설 중인 방 개수:&nbsp;</span><br>
             <span>가입일:&nbsp;</span>&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;</span><br>
