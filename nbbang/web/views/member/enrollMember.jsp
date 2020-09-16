@@ -47,7 +47,8 @@
               <input type="text" placeholder="닉네임" class="input" id="nickname" name="nickname" >
               <input type="email" placeholder="이메일" class="input" id="email" name="email">
               <input type="tel" placeholder="휴대폰" class="input" id="phone" name="phone" >
-              <input type="text" placeholder="주소" class="input" id="address" name="address" >
+              <input type="text" placeholder="주소" class="input" id="address" name="address" required  style="width : 59%;"  >
+              <input type="button" value="주소찾기" class="button" onclick="fn_address_check();">
               <button type="submit" style="width:30%;">가입</button>
               <button type="reset" style="width:30%;">취소</button>
               
@@ -79,7 +80,7 @@
       
       //아이디 중복확인하는 함수
       function fn_id_duplicate(){
-         console.log("아")
+ 
          //중복확인 창을 출력하기
          //중복확인전 아이디는 기본 4글자 이상입력을 해야하기 때문에
          //입력된 아이디값이 4글자 이상인지 확인
@@ -109,6 +110,10 @@
          checkIdDuplicate.submit();      
          
          
+      }
+      
+      function fn_address_check(){
+    	  
       }
       
       
