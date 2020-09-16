@@ -12,15 +12,25 @@ public class Member {
 	private String address;
 	private String email;
 	private Date enrollDate;
-
+	private String grade;
+	private String curRoomCnt;
+	private String maxRoomCnt;
+	private String reportCnt;
+	private String point;
+	private String leaveMem;
+	private String curTradeList;
+	private String tradeList;
+	private String likeList;
+	private String memberPicture;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Member(String memberId, String memberPwd, String memberName, String nickname, String phone, String address,
-			String email, Date enrollDate) {
+			String email, Date enrollDate, String grade, String curRoomCnt, String maxRoomCnt, String reportCnt,
+			String point, String leaveMem, String curTradeList, String tradeList, String likeList,
+			String memberPicture) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
@@ -30,6 +40,16 @@ public class Member {
 		this.address = address;
 		this.email = email;
 		this.enrollDate = enrollDate;
+		this.grade = grade;
+		this.curRoomCnt = curRoomCnt;
+		this.maxRoomCnt = maxRoomCnt;
+		this.reportCnt = reportCnt;
+		this.point = point;
+		this.leaveMem = leaveMem;
+		this.curTradeList = curTradeList;
+		this.tradeList = tradeList;
+		this.likeList = likeList;
+		this.memberPicture = memberPicture;
 	}
 
 	public String getMemberId() {
@@ -96,12 +116,95 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getCurRoomCnt() {
+		return curRoomCnt;
+	}
+
+	public void setCurRoomCnt(String curRoomCnt) {
+		this.curRoomCnt = curRoomCnt;
+	}
+
+	public String getMaxRoomCnt() {
+		return maxRoomCnt;
+	}
+
+	public void setMaxRoomCnt(String maxRoomCnt) {
+		this.maxRoomCnt = maxRoomCnt;
+	}
+
+	public String getReportCnt() {
+		return reportCnt;
+	}
+
+	public void setReportCnt(String reportCnt) {
+		this.reportCnt = reportCnt;
+	}
+
+	public String getPoint() {
+		return point;
+	}
+
+	public void setPoint(String point) {
+		this.point = point;
+	}
+
+	public String getLeaveMem() {
+		return leaveMem;
+	}
+
+	public void setLeaveMem(String leaveMem) {
+		this.leaveMem = leaveMem;
+	}
+
+	public String getCurTradeList() {
+		return curTradeList;
+	}
+
+	public void setCurTradeList(String curTradeList) {
+		this.curTradeList = curTradeList;
+	}
+
+	public String getTradeList() {
+		return tradeList;
+	}
+
+	public void setTradeList(String tradeList) {
+		this.tradeList = tradeList;
+	}
+
+	public String getLikeList() {
+		return likeList;
+	}
+
+	public void setLikeList(String likeList) {
+		this.likeList = likeList;
+	}
+
+	public String getMemberPicture() {
+		return memberPicture;
+	}
+
+	public void setMemberPicture(String memberPicture) {
+		this.memberPicture = memberPicture;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
 				+ ", nickname=" + nickname + ", phone=" + phone + ", address=" + address + ", email=" + email
-				+ ", enrollDate=" + enrollDate + "]";
+				+ ", enrollDate=" + enrollDate + ", grade=" + grade + ", curRoomCnt=" + curRoomCnt + ", maxRoomCnt="
+				+ maxRoomCnt + ", reportCnt=" + reportCnt + ", point=" + point + ", leaveMem=" + leaveMem
+				+ ", curTradeList=" + curTradeList + ", tradeList=" + tradeList + ", likeList=" + likeList
+				+ ", memberPicture=" + memberPicture + "]";
 	}
-
+	
 	
 }
