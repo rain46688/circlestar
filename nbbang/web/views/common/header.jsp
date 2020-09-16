@@ -40,11 +40,18 @@
 				<%} %>
 				
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
+<<<<<<< HEAD
 					onclick="location.href='<%=request.getContextPath()%>/customer/customerMain'">고객센터</button>
 					
 					
    				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">마이페이지</button>
       			
+=======
+					onclick="location.href='<%=request.getContextPath()%>/notice/noticeList'">공지사항</button>		
+   				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
+   					onclick="location.href='<%=request.getContextPath()%>/member/myPage'">마이페이지</button>
+      			<button type="button" class="btn btn-outline-primary" style="font-size: 20px;">고객센터</button>
+>>>>>>> 5aab8ac160da6baea82f0919db6d14c026d08975
 			</div>
 		</div>
 		<nav>
