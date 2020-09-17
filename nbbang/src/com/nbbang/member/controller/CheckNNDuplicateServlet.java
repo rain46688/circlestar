@@ -13,16 +13,16 @@ import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
 
 /**
- * Servlet implementation class CheckIdDuplicateServlet
+ * Servlet implementation class CheckNNDuplicateServlet
  */
-@WebServlet("/checkIdDuplicate")
-public class CheckIdDuplicateServlet extends HttpServlet {
+@WebServlet("/checkNNDuplicate")
+public class CheckNNDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckIdDuplicateServlet() {
+    public CheckNNDuplicateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +31,13 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id=request.getParameter("userId");
-		System.out.println(id);
+		// TODO Auto-generated method stub
+		String nick=request.getParameter("nick");
+		System.out.println(nick);
 		Member m=null;
-		try {
-			m = new MemberService().selectMember(id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		m=new MemberService().nickDuplicate(nick);
 		request.setAttribute("result", m);
-		request.getRequestDispatcher("/views/member/checkIdDuplicate.jsp").forward(request, response);			
+		request.getRequestDispatcher("/views/member/checkNNDuplicate.jsp").forward(request, response);
 	}
 
 	/**

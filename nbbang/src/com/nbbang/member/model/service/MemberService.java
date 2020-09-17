@@ -42,8 +42,6 @@ private MemberDao dao=new MemberDao();
 		Member m=dao.selectMember(conn,userId);
 		close(conn);
 		return m;
-		
-		
 	}
 
 	public Member findPw(String memberName, String email, String memberId) {
@@ -56,6 +54,13 @@ private MemberDao dao=new MemberDao();
 	public Member myPage(String memberId) {
 		Connection conn=getConnection();
 		Member m=dao.myPage(conn, memberId);
+		close(conn);
+		return m;
+	}
+
+	public Member nickDuplicate(String nick) {
+		Connection conn=getConnection();
+		Member m=dao.nickDuplicate(conn,nick);
 		close(conn);
 		return m;
 	}

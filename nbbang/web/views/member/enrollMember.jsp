@@ -57,7 +57,7 @@
 		<div id="loginField">
 			<h2 style="margin-bottom: 50px;">회원가입</h2>
 			<form name="memberEnrollFrm" action="<%=request.getContextPath() %>/memberEnrollEnd" method="post">
-				<input type="email" id="id" name="id" class="input" placeholder="이메일" required style="width : 59%;">
+				<input type="email" id="id" name="userId" class="input" placeholder="이메일" required style="width : 59%;">
 				<input type="button" value="중복검사" class="button" id="idbtn" onclick="fn_id_duplicate();">
 				<input type="hidden" name="checked_id" value="">
 				<div class="constrain" id="idConstrain"></div>
@@ -67,7 +67,7 @@
 				<input type="password" placeholder="비밀번호 확인" class="input" id="pw2">
 				<div class="constrain" id="pw2Constrain"></div>
 				
-				<input type="text" placeholder="닉네임" class="input" id="nickname" name="nickname" maxlength="10" required style="width : 59%;">
+				<input type="text" placeholder="닉네임" class="input" id="nickname" name="nick" maxlength="10" required style="width : 59%;">
 				<input type="button" value="중복검사" class="button" id="nnbtn" onclick="fn_nickname_duplicate();">
 				<input type="hidden" name="checked_nn" value="">
 				<div class="constrain" id="nnConstrain"></div>
@@ -117,19 +117,85 @@
 				<input type="tel" placeholder="휴대폰" class="input checkLength" id="phone" name="phone" maxlength="11" required>
 				<div class="constrain" id="pnConstrain"></div>
 				
-				<input type="text" placeholder="주소찾기 버튼을 눌러주세요" class="input" id="address" name="address" required readonly style="width : 59%;"  >
-				<input type="button" value="주소찾기" class="button" onclick="fn_address_check();">
+				<div style="text-align: left; margin: 0 15px 10px 56px;">주소</div>
+				<input type="text" class="input" id="sample4_postcode" placeholder="우편번호" style="width : 59%;" readonly>
+				<input type="button" class="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" class="input" id="sample4_roadAddress" placeholder="도로명주소" style="width : 40%;" readonly>
+				<input type="text" class="input" id="sample4_jibunAddress" placeholder="지번주소" style="width : 39%;" readonly>
+				<span id="guide" style="color:#999;display:none"></span>
+				<input type="text" class="input" id="sample4_detailAddress" placeholder="상세주소" style="width : 40%;">
+				<input type="text" class="input" id="sample4_extraAddress" placeholder="참고항목" style="width : 39%;" readonly>
 				<div class="constrain" id="adConstrain"></div>
 				
 				<button class="bottombtns" type="button" style="width:40%; margin-top: 30px;" onclick="fn_enroll();">가입</button>
 				<button class="bottombtns" type="reset" style="width:40%; margin-top: 30px;">취소</button>
 			</form>
-			<form action="<%=request.getContextPath() %>/checkIdDuplicate" name="checkIdDuplicate">
+			<form action="" name="checkIdDuplicate">
 				<input type="hidden" name="userId">
+			</form>
+			<form action="" name="checkNNDuplicate">
+				<input type="hidden" name="nick">
 			</form>
 		</div>
 	</div>
-	      
+
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+		function sample4_execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete: function(data) {
+					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+					// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 참고 항목 변수
+
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if(data.buildingName !== '' && data.apartment === 'Y'){
+					extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if(extraRoadAddr !== ''){
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('sample4_postcode').value = data.zonecode;
+					document.getElementById("sample4_roadAddress").value = roadAddr;
+					document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+					
+					// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+					if(roadAddr !== ''){
+						document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+					} else {
+						document.getElementById("sample4_extraAddress").value = '';
+					}
+
+					var guideTextBox = document.getElementById("guide");
+					// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+					if(data.autoRoadAddress) {
+						var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+						guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+						guideTextBox.style.display = 'block';
+
+					} else if(data.autoJibunAddress) {
+						var expJibunAddr = data.autoJibunAddress;
+						guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+						guideTextBox.style.display = 'block';
+					} else {
+						guideTextBox.innerHTML = '';
+						guideTextBox.style.display = 'none';
+					}
+				}
+			}).open();
+		}
+	</script>
 	<script>
 		// id제약조건
 		$(function(){
@@ -153,12 +219,13 @@
 		});
 		
 		function fn_id_duplicate(){
+			let id=$("#id").val().trim();
 			const url="<%=request.getContextPath()%>/checkIdDuplicate";
 			const title="chekcIdDuplicate";
 			const status="left=500px,top=100px,width=300px,height=200px";
 
 			open("",title,status);
-
+	
 			checkIdDuplicate.target=title;
 			checkIdDuplicate.action=url;
 			checkIdDuplicate.method="post";
@@ -166,7 +233,7 @@
 			checkIdDuplicate.userId.value=id;
 			checkIdDuplicate.submit();
 			$("input[name=checked_id]").val('y');
-		}
+		};
 
 		// pw제약조건
 		$(function(){
@@ -241,6 +308,18 @@
 
 		function fn_nickname_duplicate(){
 			let nn=$("#nickname").val().trim();
+			const url="<%=request.getContextPath()%>/checkNNDuplicate";
+			const title="checkNNDuplicate";
+			const status="left=500px,top=100px,width=300px,height=200px";
+
+			open("",title,status);
+
+			checkNNDuplicate.target=title;
+			checkNNDuplicate.action=url;
+			checkNNDuplicate.method="post";
+
+			checkNNDuplicate.nick.value=nn;
+			checkNNDuplicate.submit();
 			$("input[name=checked_nn]").val('y');
 		};
 
@@ -369,6 +448,28 @@
 			});
 		});
 
+		//주소 제약조건
+		$(function(){
+			$("#sample4_detailAddress").blur(e=>{
+				const address=$("#sample4_detailAddress").val().trim();
+				if(address===""){
+					$("#adConstrain").html("상세주소를 입력해주세요.");
+					$("#adConstrain").css({"display":"block"});
+				}else{
+					$("#adConstrain").css({"display":"none"});
+				}
+			});
+			$("#sample4_detailAddress").keyup(function(e){
+				const address=$("#sample4_detailAddress").val().trim();
+				if(address===""){
+					$("#adConstrain").html("상세주소를 입력해주세요.");
+					$("#adConstrain").css({"display":"block"});
+				}else{
+					$("#adConstrain").css({"display":"none"});
+				}
+			});
+		});
+
 		//유효성 확인
 		function fn_enroll(){
 			//아이디
@@ -426,9 +527,9 @@
 				$("#pnConstrain").css({"display":"block"});
 			}
 			//주소
-			const address=$("#address").val().trim();
+			const address=$("#sample4_detailAddress").val().trim();
 			if(address===""){
-				$("#adConstrain").html("필수 입력 항목입니다.");
+				$("#adConstrain").html("상세주소를 입력해주세요.");
 				$("#adConstrain").css({"display":"block"});
 			}
 			//중복확인을 했나요
@@ -439,6 +540,13 @@
 				alert('닉네임 중복 확인을 해주세요.');
 			}
 			//제약조건을 만족했나요
+			if(id!=="" && pw!=="" && pw2!=="" && nn!=="" && name!=="" && (gender.length=1||gender.length>1)
+				&& yy!=="" && mm!=="" && mm!=="월" && dd!=="" && phone!=="" && address!==""
+				&& $("input[name='checked_id']").val()!='' && $("input[name='checked_nn']").val()!=''){
+				alert("성공");
+			}else{
+				alert("실패");
+			}
 
 		}
 

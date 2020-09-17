@@ -220,4 +220,24 @@ private Properties prop=new Properties();
 		}
 		return m;
 	}
+
+	public Member nickDuplicate(Connection conn, String nick) {
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("nickDuplicate"));
+			pstmt.setString(1, nick);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=inputData(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 }
