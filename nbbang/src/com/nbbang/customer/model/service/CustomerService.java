@@ -30,11 +30,21 @@ public class CustomerService {
 		close(conn);
 		return count;
 	}
-	public int addCustomerQnA(CustomerCenter cc) {
+//	public int addCustomerQnA(CustomerCenter cc) {
+//		// TODO Auto-generated method stub
+//		Connection conn=getConnection();
+//		int result=dao.addCustomerQna(conn,cc);
+//		if(result>0) commit(conn);
+//		else rollback(conn);
+//		close(conn);
+//		return result;
+//	}
+
+	public int insertQna(CustomerCenter c) {
 		// TODO Auto-generated method stub
 		Connection conn=getConnection();
-		int result=dao.addCustomerQna(conn,cc);
-		if(result>0) commit(conn);
+		int result=dao.insertQna(conn,c);
+		if(result>0)commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;

@@ -2,10 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<%
 
-CustomerCenter c = (CustomerCenter) request.getAttribute("center");
-%>
 <section>
    
     <div id='board-container'>
@@ -17,11 +14,11 @@ CustomerCenter c = (CustomerCenter) request.getAttribute("center");
                     <th>문의유형</th>
                     <td>
                         <input type="radio" name="qnaType" id="type0" value="회원정보"
-                        <%=c.getCsType().equals("회원정보")?"checked":"" %>>
+                        >
                         <label for="type0">회원정보</label>
                         
                         <input type="radio" name="qnaType" id="type1" value="신고"
-                        <%=c.getCsType().equals("신고")?"checked":"" %>>
+                        >
                         <label for="type1">신고</label>
                     </td>
                 </tr>
@@ -29,10 +26,13 @@ CustomerCenter c = (CustomerCenter) request.getAttribute("center");
 					<th>제목</th>
 					<td><input type="text" name="title" id="title"></td>
 				</tr>
-<%-- 				<tr>
+				<tr>
 					<th>작성자</th>
-					<td><input type="text" name="writer" value="<%=loginnedMember.getMemberId() %>" readonly></td>
-				</tr> --%>
+					<td><input type="text" name="writer"  value="9999" readonly></td>
+				<!-- 9999는 Admin에 USID 이다.USID는 회원가입을 하잖아 회원가입을 하면 시퀀스 넘버에 의해 
+						자동으로 증가한다. 일단은 9999로 해놓고 나중에 세션값을 받아와서 닉네임을 조회한 다음에 
+							넘겨서 DB에 넣어라. -->
+				</tr> 
                 <tr>
                     <th>내용</th>
                     <td><textarea name="content" cols="50" rows="3"></textarea></td>
@@ -40,6 +40,7 @@ CustomerCenter c = (CustomerCenter) request.getAttribute("center");
 				<tr>
 					<th>첨부파일</th>
 					<td><input type="file" name="csFile"></td>
+					
 				</tr>
 								<tr>
 					<th colspan="2">

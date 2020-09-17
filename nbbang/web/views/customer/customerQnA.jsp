@@ -50,8 +50,6 @@ div#container-qna {
 </style>
 <%
 
-
-CustomerCenter cc = new CustomerCenter();
 List<CustomerCenter> list = (List) request.getAttribute("list");
 %>
 <section>
@@ -108,7 +106,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 			</ul>
 			<%
 				} else {
-				for (CustomerCenter c : list) {
+				for (CustomerCenter cc : list) {
 			%>
 			<ul class="cstmt-qna2">
 				<li class="qna-list2"><%=cc.getCsNo()%></li>

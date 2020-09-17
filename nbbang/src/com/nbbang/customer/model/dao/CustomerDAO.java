@@ -83,18 +83,17 @@ public class CustomerDAO {
 		return result;
 	}
 
-	public int addCustomerQna(Connection conn, CustomerCenter cc) {
+	public int insertQna(Connection conn, CustomerCenter c) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("addQnA"));
-			pstmt.setString(1, cc.getCsWriter());
-			pstmt.setString(2, cc.getCsType());
-			pstmt.setString(3, cc.getCsTitle());
-			pstmt.setString(4, cc.getCsContent());
-			pstmt.setDate(5, cc.getCsDate());
-			pstmt.setString(6, cc.getCsFile());
+			pstmt = conn.prepareStatement(prop.getProperty("insertQnA"));
+			pstmt.setInt(1, Integer.parseInt(c.getCsWriter()));
+			pstmt.setString(2, c.getCsType());
+			pstmt.setString(3, c.getCsTitle());
+			pstmt.setString(4, c.getCsContent());
+			pstmt.setString(5, c.getCsFile());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -104,5 +103,7 @@ public class CustomerDAO {
 		}
 		return result;
 	}
+
+
 
 }

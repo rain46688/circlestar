@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.nbbang.customer.model.service.CustomerService;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
@@ -33,7 +32,6 @@ public class CustomerQnAServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -44,7 +42,9 @@ public class CustomerQnAServlet extends HttpServlet {
 		
 		
 		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage);
-		
+		for(CustomerCenter c : list) {
+			System.out.println(c);
+		}
 		int totalData=new CustomerService().qnACount();
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
 		int pageBarSize=5;
@@ -77,7 +77,6 @@ public class CustomerQnAServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/customer/customerQnA.jsp").forward(request,response);
-		
 		
 //		request.getRequestDispatcher("/views/customer/customerQnA.jsp").forward(request, response);
 	}
