@@ -7,7 +7,7 @@ public class CustomerCenter {
 
 	private int csNo;
 	private String csWriter;
-	private String[] csType;
+	private String csType;
 	private String csTitle;
 	private String csContent;
 	private Date csDate;
@@ -17,7 +17,7 @@ public class CustomerCenter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CustomerCenter(int csNo, String csWriter, String[] csType, String csTitle, String csContent, Date csDate,
+	public CustomerCenter(int csNo, String csWriter, String csType, String csTitle, String csContent, Date csDate,
 			String csFile) {
 		super();
 		this.csNo = csNo;
@@ -45,11 +45,11 @@ public class CustomerCenter {
 		this.csWriter = csWriter;
 	}
 
-	public String[] getCsType() {
+	public String getCsType() {
 		return csType;
 	}
 
-	public void setCsType(String[] csType) {
+	public void setCsType(String csType) {
 		this.csType = csType;
 	}
 
@@ -87,10 +87,11 @@ public class CustomerCenter {
 
 	@Override
 	public String toString() {
-		return "CustomerCenter [csNo=" + csNo + ", csWriter=" + csWriter + ", csType=" + Arrays.toString(csType)
-				+ ", csTitle=" + csTitle + ", csContent=" + csContent + ", csDate=" + csDate + ", csFile=" + csFile
-				+ "]";
+		return "CustomerCenter [csNo=" + csNo + ", csWriter=" + csWriter + ", csType=" + csType + ", csTitle=" + csTitle
+				+ ", csContent=" + csContent + ", csDate=" + csDate + ", csFile=" + csFile + "]";
 	}
+
+	
 	
 	
 }
