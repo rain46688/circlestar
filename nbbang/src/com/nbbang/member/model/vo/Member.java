@@ -4,60 +4,68 @@ import java.sql.Date;
 
 public class Member {
 
-	private String memberId;
+	private int usid;
 	private String memberPwd;
 	private String memberName;
 	private String nickname;
+	private String gender;
+	private int age;
 	private String phone;
 	private String address;
-	private String email;
+	private String memberId;
 	private Date enrollDate;
 	private String grade;
-	private String curRoomCnt;
-	private String maxRoomCnt;
-	private String reportCnt;
-	private String point;
-	private String leaveMem;
+	private int maxRoomCount;
+	private int reportCount;
+	private int point;
+	private int leaveMem;
 	private String curTradeList;
+	private String curCreateList;
+	private String deliveryList;
 	private String tradeList;
 	private String likeList;
+	private int nbbangScore;
 	private String memberPicture;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String memberId, String memberPwd, String memberName, String nickname, String phone, String address,
-			String email, Date enrollDate, String grade, String curRoomCnt, String maxRoomCnt, String reportCnt,
-			String point, String leaveMem, String curTradeList, String tradeList, String likeList,
-			String memberPicture) {
+	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, int age, String phone,
+			String address, String memberId, Date enrollDate, String grade, int maxRoomCount, int reportCount,
+			int point, int leaveMem, String curTradeList, String curCreateList, String deliveryList, String tradeList,
+			String likeList, int nbbangScore, String memberPicture) {
 		super();
-		this.memberId = memberId;
+		this.usid = usid;
 		this.memberPwd = memberPwd;
 		this.memberName = memberName;
 		this.nickname = nickname;
+		this.gender = gender;
+		this.age = age;
 		this.phone = phone;
 		this.address = address;
-		this.email = email;
+		this.memberId = memberId;
 		this.enrollDate = enrollDate;
 		this.grade = grade;
-		this.curRoomCnt = curRoomCnt;
-		this.maxRoomCnt = maxRoomCnt;
-		this.reportCnt = reportCnt;
+		this.maxRoomCount = maxRoomCount;
+		this.reportCount = reportCount;
 		this.point = point;
 		this.leaveMem = leaveMem;
 		this.curTradeList = curTradeList;
+		this.curCreateList = curCreateList;
+		this.deliveryList = deliveryList;
 		this.tradeList = tradeList;
 		this.likeList = likeList;
+		this.nbbangScore = nbbangScore;
 		this.memberPicture = memberPicture;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public int getUsid() {
+		return usid;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setUsid(int usid) {
+		this.usid = usid;
 	}
 
 	public String getMemberPwd() {
@@ -84,6 +92,22 @@ public class Member {
 		this.nickname = nickname;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -100,12 +124,12 @@ public class Member {
 		this.address = address;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public Date getEnrollDate() {
@@ -124,43 +148,35 @@ public class Member {
 		this.grade = grade;
 	}
 
-	public String getCurRoomCnt() {
-		return curRoomCnt;
+	public int getMaxRoomCount() {
+		return maxRoomCount;
 	}
 
-	public void setCurRoomCnt(String curRoomCnt) {
-		this.curRoomCnt = curRoomCnt;
+	public void setMaxRoomCount(int maxRoomCount) {
+		this.maxRoomCount = maxRoomCount;
 	}
 
-	public String getMaxRoomCnt() {
-		return maxRoomCnt;
+	public int getReportCount() {
+		return reportCount;
 	}
 
-	public void setMaxRoomCnt(String maxRoomCnt) {
-		this.maxRoomCnt = maxRoomCnt;
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
 	}
 
-	public String getReportCnt() {
-		return reportCnt;
-	}
-
-	public void setReportCnt(String reportCnt) {
-		this.reportCnt = reportCnt;
-	}
-
-	public String getPoint() {
+	public int getPoint() {
 		return point;
 	}
 
-	public void setPoint(String point) {
+	public void setPoint(int point) {
 		this.point = point;
 	}
 
-	public String getLeaveMem() {
+	public int getLeaveMem() {
 		return leaveMem;
 	}
 
-	public void setLeaveMem(String leaveMem) {
+	public void setLeaveMem(int leaveMem) {
 		this.leaveMem = leaveMem;
 	}
 
@@ -170,6 +186,22 @@ public class Member {
 
 	public void setCurTradeList(String curTradeList) {
 		this.curTradeList = curTradeList;
+	}
+
+	public String getCurCreateList() {
+		return curCreateList;
+	}
+
+	public void setCurCreateList(String curCreateList) {
+		this.curCreateList = curCreateList;
+	}
+
+	public String getDeliveryList() {
+		return deliveryList;
+	}
+
+	public void setDeliveryList(String deliveryList) {
+		this.deliveryList = deliveryList;
 	}
 
 	public String getTradeList() {
@@ -188,6 +220,14 @@ public class Member {
 		this.likeList = likeList;
 	}
 
+	public int getNbbangScore() {
+		return nbbangScore;
+	}
+
+	public void setNbbangScore(int nbbangScore) {
+		this.nbbangScore = nbbangScore;
+	}
+
 	public String getMemberPicture() {
 		return memberPicture;
 	}
@@ -198,13 +238,13 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
-				+ ", nickname=" + nickname + ", phone=" + phone + ", address=" + address + ", email=" + email
-				+ ", enrollDate=" + enrollDate + ", grade=" + grade + ", curRoomCnt=" + curRoomCnt + ", maxRoomCnt="
-				+ maxRoomCnt + ", reportCnt=" + reportCnt + ", point=" + point + ", leaveMem=" + leaveMem
-				+ ", curTradeList=" + curTradeList + ", tradeList=" + tradeList + ", likeList=" + likeList
+		return "Member [usid=" + usid + ", memberPwd=" + memberPwd + ", memberName=" + memberName + ", nickname="
+				+ nickname + ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address
+				+ ", memberId=" + memberId + ", enrollDate=" + enrollDate + ", grade=" + grade + ", maxRoomCount="
+				+ maxRoomCount + ", reportCount=" + reportCount + ", point=" + point + ", leaveMem=" + leaveMem
+				+ ", curTradeList=" + curTradeList + ", curCreateList=" + curCreateList + ", deliveryList="
+				+ deliveryList + ", tradeList=" + tradeList + ", likeList=" + likeList + ", nbbangScore=" + nbbangScore
 				+ ", memberPicture=" + memberPicture + "]";
 	}
-	
 	
 }
