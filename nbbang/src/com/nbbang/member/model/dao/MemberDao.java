@@ -154,4 +154,42 @@ private Properties prop=new Properties();
 		}
 		return m;
 	}
+
+	public Member myPage(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("myPage"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPwd(rs.getString("member_pwd"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setNickname(rs.getString("nickname"));
+				m.setPhone(rs.getString("phone"));
+				m.setAddress(rs.getString("address"));
+				m.setEmail(rs.getString("email"));
+				m.setEnrollDate(rs.getDate("enroll_date"));
+				m.setGrade(rs.getString("grade"));
+				m.setCurRoomCnt(rs.getString("CUR_ROOM_CNT"));
+				m.setMaxRoomCnt(rs.getString("MAX_ROOM_CNT"));
+				m.setReportCnt(rs.getString("REPORT_CNT"));
+				m.setPoint(rs.getString("POINT"));
+				m.setLeaveMem(rs.getString("LEAVE_MEM"));
+				m.setCurTradeList(rs.getString("CUR_TRADE_LIST"));
+				m.setTradeList(rs.getString("TRADE_LIST"));
+				m.setLikeList(rs.getString("LIKE_LIST"));
+				m.setMemberPicture(rs.getString("MEMBER_PICTURE"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		return m;
+	}
 }

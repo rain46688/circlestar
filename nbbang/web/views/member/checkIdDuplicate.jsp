@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%
-
 	int result=(Integer)request.getAttribute("result");
 	System.out.println(result);
 %>    
@@ -42,11 +41,9 @@
 			}
 		}
 		function setUserId(){
-			//입력된 id를 부모창에 대입
 			const id='<%=request.getParameter("userId")%>';
 			opener.memberEnrollFrm.userId.value=id;
 			opener.memberEnrollFrm.password.focus();
-			//팝업창 닫아주기
 			close();
 		}
 	</script>

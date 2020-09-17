@@ -38,7 +38,7 @@ public class BoardListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerPage = 24;
+		int numPerPage = 40;
 		
 		List<Board> blist = new BoardService().boardList(cPage, numPerPage);
 		

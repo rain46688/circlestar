@@ -43,7 +43,8 @@ public class BoardDao {
 				Board b = new Board();
 				b.setBoardId(rs.getInt("BOARD_ID"));
 				b.setBoardTitle(rs.getString("BOARD_TITLE"));
-				b.setWriterId(rs.getString("WRITER_ID"));
+				b.setWriterUsid(rs.getInt("WRITER_USID"));
+				b.setContent(rs.getString("CONTENT"));
 				b.setEnrollDate(rs.getDate("ENROLL_DATE"));
 				list.add(b);
 			}
@@ -70,7 +71,7 @@ public class BoardDao {
 				b = new Board();
 				b.setBoardId(rs.getInt("BOARD_ID"));
 				b.setBoardTitle(rs.getString("BOARD_TITLE"));
-				b.setWriterId(rs.getString("WRITER_ID"));
+				b.setWriterUsid(rs.getInt("WRITER_USID"));
 				b.setEnrollDate(rs.getDate("ENROLL_DATE"));
 			}
 		} catch (SQLException e) {

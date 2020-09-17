@@ -7,29 +7,44 @@
 %>
 <style>
 .card-wrapper {
-	padding-left: 4rem;
+	padding-top: 3rem;
+	padding-left: 5rem;
 	padding-right: 4rem;
+	margin:0 auto;
+	width:80em;
 }
+
 .pagination>li>.page-link {
 }
+
 .pagination>li>a {
 	color:black;
+}
+.card-price {
+	float: right;
+	margin-top: 0;
+}
+.card-body {
+	padding: 0.5em;
 }
 </style>
 <section>
 	<div class="card-wrapper">
+		<h1>게시판 이름</h1>
 		<%
 			for (Board b : bolist) {
 		%>
 		<div class="card"
 			onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=b.getBoardId()%>'"
-			style="width: 18rem; cursor: pointer;">
-			<img src="<%=request.getContextPath()%>/resources/cute.png"
-				class="card-img-top" alt="...">
+			style="width: 15rem; cursor: pointer; padding:0px">
+			<img src="<%=request.getContextPath()%>/images/cute.png"
+				class="card-img-top" alt="제품이미지" width="120em" height="160em">
 			<div class="card-body">
 				<input type="hidden" value="<%=b.getBoardId()%>">
-				<h5 class="card-title"><%=b.getBoardTitle()%></h5>
-				<p class="card-text"><%=b.getContent()%></p>
+				<h5 class="card-title"><%= b.getBoardTitle() %>제목</h5>
+				<p><%= b.getTradeArea() %>주소</p>
+				<p><%= b.getLikeCount() %> 관심수 , <%= b.getHit() %> 조회수</p>
+				<h4 class="card-price"><%= b.getProductPrice() %>가격</h4>
 			</div>
 		</div>
 		<%
