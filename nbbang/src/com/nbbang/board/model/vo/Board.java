@@ -7,7 +7,8 @@ public class Board {
 
 	private int boardId;
 	private String boardTitle;
-	private int writerUid;
+	private int writerUsid;
+	private String writerNickname;
 	private String content;
 	private Date enrollDate;
 	private int hit;
@@ -33,15 +34,16 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int boardId, String boardTitle, int writerUid, String content, Date enrollDate, int hit,
-			String[] files, String productCategory, String productName, String tradeArea, String maxMems,
+	public Board(int boardId, String boardTitle, int writerUsid, String writerNickname, String content, Date enrollDate,
+			int hit, String[] files, String productCategory, String productName, String tradeArea, String maxMems,
 			String[] curMemsList, String[] payMemsList, String[] deliveryMemsList, String limitTime, int tradeStage,
 			int likeCount, int reportCount, boolean popularBoard, int productPrice, String ownStatus, String tradeKind,
 			String productUrl) {
 		super();
 		this.boardId = boardId;
 		this.boardTitle = boardTitle;
-		this.writerUid = writerUid;
+		this.writerUsid = writerUsid;
+		this.writerNickname = writerNickname;
 		this.content = content;
 		this.enrollDate = enrollDate;
 		this.hit = hit;
@@ -80,12 +82,20 @@ public class Board {
 		this.boardTitle = boardTitle;
 	}
 
-	public int getWriterUid() {
-		return writerUid;
+	public int getWriterUsid() {
+		return writerUsid;
 	}
 
-	public void setWriterUid(int writerUid) {
-		this.writerUid = writerUid;
+	public void setWriterUsid(int writerUsid) {
+		this.writerUsid = writerUsid;
+	}
+
+	public String getWriterNickname() {
+		return writerNickname;
+	}
+
+	public void setWriterNickname(String writerNickname) {
+		this.writerNickname = writerNickname;
 	}
 
 	public String getContent() {
@@ -250,13 +260,14 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardId=" + boardId + ", boardTitle=" + boardTitle + ", writerUid=" + writerUid + ", content="
-				+ content + ", enrollDate=" + enrollDate + ", hit=" + hit + ", files=" + Arrays.toString(files)
-				+ ", productCategory=" + productCategory + ", productName=" + productName + ", tradeArea=" + tradeArea
-				+ ", maxMems=" + maxMems + ", curMemsList=" + Arrays.toString(curMemsList) + ", payMemsList="
-				+ Arrays.toString(payMemsList) + ", deliveryMemsList=" + Arrays.toString(deliveryMemsList)
-				+ ", limitTime=" + limitTime + ", tradeStage=" + tradeStage + ", likeCount=" + likeCount
-				+ ", reportCount=" + reportCount + ", popularBoard=" + popularBoard + ", productPrice=" + productPrice
-				+ ", ownStatus=" + ownStatus + ", tradeKind=" + tradeKind + ", productUrl=" + productUrl + "]";
+		return "Board [boardId=" + boardId + ", boardTitle=" + boardTitle + ", writerUsid=" + writerUsid
+				+ ", writerNickname=" + writerNickname + ", content=" + content + ", enrollDate=" + enrollDate
+				+ ", hit=" + hit + ", files=" + Arrays.toString(files) + ", productCategory=" + productCategory
+				+ ", productName=" + productName + ", tradeArea=" + tradeArea + ", maxMems=" + maxMems
+				+ ", curMemsList=" + Arrays.toString(curMemsList) + ", payMemsList=" + Arrays.toString(payMemsList)
+				+ ", deliveryMemsList=" + Arrays.toString(deliveryMemsList) + ", limitTime=" + limitTime
+				+ ", tradeStage=" + tradeStage + ", likeCount=" + likeCount + ", reportCount=" + reportCount
+				+ ", popularBoard=" + popularBoard + ", productPrice=" + productPrice + ", ownStatus=" + ownStatus
+				+ ", tradeKind=" + tradeKind + ", productUrl=" + productUrl + "]";
 	}
 }

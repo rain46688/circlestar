@@ -8,8 +8,10 @@
 <style>
 .card-wrapper {
 	padding-top: 3rem;
-	padding-left: 4rem;
+	padding-left: 5rem;
 	padding-right: 4rem;
+	margin:0 auto;
+	width:80em;
 }
 
 .pagination>li>.page-link {
@@ -34,15 +36,15 @@
 		%>
 		<div class="card"
 			onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=b.getBoardId()%>'"
-			style="width: 12rem; cursor: pointer; padding:0px">
+			style="width: 15rem; cursor: pointer; padding:0px">
 			<img src="<%=request.getContextPath()%>/images/cute.png"
-				class="card-img-top" alt="제품이미지" width="120em" height="120em">
+				class="card-img-top" alt="제품이미지" width="120em" height="160em">
 			<div class="card-body">
 				<input type="hidden" value="<%=b.getBoardId()%>">
-				<h6 class="card-title">제품이름</h5>
-				<p>아이디, 주소</p>
-				<h4 class="card-price">제품가격</h6>
-				<p class="card-text"></p>
+				<h5 class="card-title"><%= b.getBoardTitle() %>제목</h5>
+				<p><%= b.getTradeArea() %>주소</p>
+				<p><%= b.getLikeCount() %> 관심수 , <%= b.getHit() %> 조회수</p>
+				<h4 class="card-price"><%= b.getProductPrice() %>가격</h4>
 			</div>
 		</div>
 		<%

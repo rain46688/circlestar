@@ -9,7 +9,7 @@
     margin: 0 auto;
     margin-top: 3em;
     padding-top: 1em;
-    width: 40em;
+    width: 45em;
     text-align: center;
     align-items: center;
     margin-bottom: 3em;
@@ -29,7 +29,7 @@
   #userInfo {
     margin: 0 auto;
   	/* border: solid green; */
-  	width:32em;
+  	width:34em;
   	text-align:left;
   	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: large;
@@ -41,7 +41,7 @@
   }
 
   .content{
-    width: 36em;
+    width: 40em;
     margin: 0 auto;
     padding: 0.5em;
     overflow: auto;
@@ -49,35 +49,28 @@
 
   #title {
     text-align: left;
-    float: left;
     width: 100%;
-    /* border: 1px hotpink solid; */
-
+    overflow: auto;
+    font-weight: bolder;
   }
 
   #priceAndLikeBtn {
-    float: right;
-    height: 4em;
-    padding: 1em;
-    /* border: 1px red solid; */
+    text-align: left;
+    padding-top: 0.5em;
+    overflow: auto;
   }
 
-  #priceAndLikeBtn>ul>li {
-    display: inline-block;
-  }
-
-  #text {
+  #contentText {
     float: left;
     text-align: left;
     position: relative;
     width: 100%;
-    height: 30em;
-    border: 1px blue solid;
+    margin-bottom: 2.5em;
   }
 
-  #report {
-    text-align: right;
-    border: 1px red solid;
+  #etcInfo {
+    text-align: left;
+    font-size: small;
   }
   
   #commentSection {
@@ -123,33 +116,63 @@
     position: relative;
     border: 1px red solid;
   }
+  #likeBtn {
+  	/* margin-bottom:0.5em; */
+  }
+  #userThumb {
+    float: left;
+    margin-right: 4px;
+  }
+  #userIdAndAddress {
+    float: left;
+  }
+  #userId {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  #userAddress {
+    font-size: 16px;
+  }
+
+  #date {
+    text-align: left;
+    color: darkgray;
+  }
+
+  #chattingRoom {
+    border: 1px red solid;
+  }
 </style>
 <section>
   <div id="wrapper">
     <div id="imageWrapper">
-      <img src="<%= request.getContextPath() %>/images/cute.png" alt="" width="600em" height="400em">
+      <img src="<%= request.getContextPath() %>/images/cute.png" alt="" width="700em" height="400em">
       <!-- carousel 적용할 예정 -->
     </div>
     <div id="userInfo">
-    	<hr><a href="">
-    	<img src="<%= request.getContextPath() %>/images/bread.png" alt="" width="40px" height="40px"></a>
-      <%= b.getWriterId() %>
+    	<hr>
+      <div id="userThumb"><img src="<%= request.getContextPath() %>/images/bread.png" alt="" width="40px" height="40px"></div>
+        <div id="userIdAndAddress">
+          <div id="userId"><%= b.getWriterNickname() %>닉네임</div>
+          <div id="userAddress"><%= b.getTradeArea()%>거래지</div>
+        </div>
       <!-- 프로필 사진 + id -->
       <h5 id="level">신뢰 level</h5>
-      <hr>
     </div>
     <div class="content">
+      <hr>
       <div id="title">
-        <h3>제목</h3>
+        <h4>제목</h4>
       </div>
+      <div id="date">날짜</div>
+      <!-- 가격과 좋아요 버튼 -->
       <div id="priceAndLikeBtn">
-        <ul>
-          <li><h3>30000원</h3></li>
-          <li><a href=""><img src="<%= request.getContextPath() %>/images/logo.png" alt="LikeBtn" width="30px" height="30px"></a></li>
-        </ul>
+          <h5>30,000원</h5>
+          <!-- <a href=""><img src="<%= request.getContextPath() %>/images/heart.png" alt="LikeBtn" width="30px" height="30px"></a> -->
       </div>
-      <div id="text">asdsad</div>
-      <!-- <div id="report">신고하기</div> -->
+      <br>
+      <div id="contentText">내용</div>
+      <div id="etcInfo">관심 , 조회수, 신고하기</div>
     </div>
     <div id="commentSection">
       <div id="commentInsert">
@@ -167,15 +190,15 @@
         <li class="comment_item">
           <div class="comment_area">
             <div class="comment_thumb">
-            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
+            <img id="likeBtn" src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
             </div>
             <div class="comment_box">
-              아이디     ㅁㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㄴasdasdasdasdasdsad
+              아이디
             <div class="comment_text">
-              내용 asdasdasdasdsadsa
+              내용
             </div>
             <div class="comment_info">
-              날짜 시간 asdasdasdasd
+              날짜 시간
             </div>
           </div>
           </div>
@@ -199,6 +222,9 @@
       </ul>
     </div>
     </div>
+  </div>
+  <div id="chattingRoom">
+
   </div>
 </section>
 

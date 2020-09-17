@@ -9,10 +9,10 @@
 
 			    <div id="kdh-container">
       <div id="kdh-header">
-        <h1>NBBANG에 오신것을 환영합니다.^^</h1>
+        <h1>NBBANG에 오신것을 환영합니다.</h1>
       </div>
       <div id="kdh-sidebar-left">
-        <h2>사이드</h2>
+        <h2>ㅎㅇ</h2>
         <ul>
  					<li class="cstmt-list" style="font-size:20px;" id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
 					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
