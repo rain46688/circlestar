@@ -37,11 +37,11 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
-	public int selectMember(String userId) throws SQLException {
+	public Member selectMember(String userId) throws SQLException {
 		Connection conn=getConnection();
-		int result=dao.selectMember(conn,userId);
+		Member m=dao.selectMember(conn,userId);
 		close(conn);
-		return result;
+		return m;
 		
 		
 	}

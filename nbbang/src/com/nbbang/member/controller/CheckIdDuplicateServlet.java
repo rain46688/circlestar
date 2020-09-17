@@ -31,19 +31,16 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId=request.getParameter("userId");
-		
+		String userId=request.getParameter("id");
+		Member m;
 		try {
-			int result=new MemberService().selectMember(userId);
-			request.setAttribute("result", result);
-			request.getRequestDispatcher("/views/member/checkIdDuplicate.jsp")
-			.forward(request,response);		
+			m = new MemberService().selectMember(userId);
+			request.setAttribute("result", m);
+			request.getRequestDispatcher("/views/member/checkIdDuplicate.jsp").forward(request, response);			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	/**

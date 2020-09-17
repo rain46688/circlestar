@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.nbbang.member.model.vo.Member" %>
 <%
-	int result=(Integer)request.getAttribute("result");
-	System.out.println(result);
+	Member m=(Member)request.getAttribute("result");
 %>    
 <!DOCTYPE html>
 <html>
@@ -17,14 +16,13 @@
 </head>
 <body>
 	<div id="checkId-container">
-		<%if(result==0) {%>
-			사용가능합니다
+		<%if(m==null) {%>
+			[<span><%=request.getParameter("id") %></span>]는 사용 가능한 이메일입니다.	
 			<br><br>
-			<button type="button" onclick="setUserId();">닫기</button>
+			<button type="button" onclick="setMemberId();">닫기</button>
 		<%} else{%>
-			사용중인 아이디 입니다.
+			사용중인 이메일입니다.
 			<br><br>
-			<!-- 아이디 재입력창 구성 -->
 			<form action="<%=request.getContextPath() %>/checkIdDuplicate" method="post">
 				<input type="text" name="userId" id="userId">
 				<input type="submit" value="중복검사" onclick="return fn_validate();">

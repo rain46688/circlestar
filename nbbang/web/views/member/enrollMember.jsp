@@ -58,7 +58,8 @@
 			<h2 style="margin-bottom: 50px;">회원가입</h2>
 			<form name="memberEnrollFrm" action="<%=request.getContextPath() %>/memberEnrollEnd" method="post">
 				<input type="email" id="id" name="id" class="input" placeholder="이메일" required style="width : 59%;">
-				<input type="button" value="중복검사" class="button" id="idbtn" onclick="fn_id_duplicate();">  
+				<input type="button" value="중복검사" class="button" id="idbtn" onclick="fn_id_duplicate();">
+				<input type="hidden" name="checked_id" value="">
 				<div class="constrain" id="idConstrain"></div>
 
 				<input type="password" placeholder="비밀번호" class="input" id="pw" name="password" minlength="4" maxlength="16" required>
@@ -68,6 +69,7 @@
 				
 				<input type="text" placeholder="닉네임" class="input" id="nickname" name="nickname" maxlength="10" required style="width : 59%;">
 				<input type="button" value="중복검사" class="button" id="nnbtn" onclick="fn_nickname_duplicate();">
+				<input type="hidden" name="checked_nn" value="">
 				<div class="constrain" id="nnConstrain"></div>
 
 
@@ -129,10 +131,6 @@
 	</div>
 	      
 	<script>
-		//변수
-		var checkIdCount=0;
-		var checkNNCount=0;
-
 		// id제약조건
 		$(function(){
 			$("#id").blur(e=>{
@@ -167,7 +165,7 @@
 
 			checkIdDuplicate.userId.value=id;
 			checkIdDuplicate.submit();
-			checkIdCount=1;    
+			$("input[name=checked_id]").val('y');
 		}
 
 		// pw제약조건
@@ -242,7 +240,8 @@
 		});
 
 		function fn_nickname_duplicate(){
-			checkNNCount=1;
+			let nn=$("#nickname").val().trim();
+			$("input[name=checked_nn]").val('y');
 		};
 
 		//이름 제약조건
@@ -268,19 +267,13 @@
 			});
 		});
 
-		//성별제약조건
-		// $(function(){
-		// 	$("input:radio[name=gender]").blur(e=>{
-		// 		const gender=$("input:radio[name=gender]");
-		// 		if(gender.is(":checked")==null){
-		// 			$("#gdConstrain").html("필수 입력 항목입니다.");
-		// 			$("#gdConstrain").css({"display":"block"});
-		// 			$("#gdConstrain").css({"color":"red"});
-		// 		}else{
-		// 			$("#gdConstrain").css({"display":"none"});
-		// 		}
-		// 	});
-		// })
+		//성별
+		$("#male").click(function(e){
+			$("#gdConstrain").css({"display":"none"});
+		});
+		$("#female").click(function(e){
+			$("#gdConstrain").css({"display":"none"});
+		});
 
 		//생년월일 제약조건
 		var yyPattern=/[0-9]{4}/;
@@ -296,12 +289,29 @@
 				}
 			});
 			$("#date").keyup(function(e){
+				const mm=$("#month").val();
 				const dd=$("#date").val().trim();
-				if(!ddPattern.test(dd) || dd>31){
-					$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
-					$("#bdConstrain").css({"display":"block"});
+				if(mm==="01" || mm==="03" || mm==="05" || mm==="07" || mm==="08" || mm==="10" || mm==="12"){
+					if(!ddPattern.test(dd) || Number(dd)>31){
+						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").css({"display":"block"});
+					}else{
+						$("#bdConstrain").css({"display":"none"});
+					}
+				}else if(mm==="02"){
+					if(!ddPattern.test(dd) || Number(dd)>29){
+						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").css({"display":"block"});
+					}else{
+						$("#bdConstrain").css({"display":"none"});
+					}
 				}else{
-					$("#bdConstrain").css({"display":"none"});
+					if(!ddPattern.test(dd) || Number(dd)>30){
+						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").css({"display":"block"});
+					}else{
+						$("#bdConstrain").css({"display":"none"});
+					}
 				}
 			});
 			$(".birthdate").blur(e=>{
@@ -312,8 +322,28 @@
 					$("#bdConstrain").html("필수 입력 항목입니다.");
 					$("#bdConstrain").css({"display":"block"});
 					$("#bdConstrain").css({"color":"red"});
+				}
+				if(mm==="01" || mm==="03" || mm==="05" || mm==="07" || mm==="08" || mm==="10" || mm==="12"){
+					if(!ddPattern.test(dd) || Number(dd)>31){
+						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").css({"display":"block"});
+					}else{
+						$("#bdConstrain").css({"display":"none"});
+					}
+				}else if(mm==="02"){
+					if(!ddPattern.test(dd) || Number(dd)>29){
+						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").css({"display":"block"});
+					}else{
+						$("#bdConstrain").css({"display":"none"});
+					}
 				}else{
-					$("#bdConstrain").css({"display":"none"});
+					if(!ddPattern.test(dd) || Number(dd)>30){
+						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").css({"display":"block"});
+					}else{
+						$("#bdConstrain").css({"display":"none"});
+					}
 				}
 			});	
 		});
@@ -401,6 +431,15 @@
 				$("#adConstrain").html("필수 입력 항목입니다.");
 				$("#adConstrain").css({"display":"block"});
 			}
+			//중복확인을 했나요
+			if($("input[name='checked_id']").val()==''){
+				alert('아이디 중복 확인을 해주세요.');
+			}
+			if($("input[name='checked_nn']").val()==''){
+				alert('닉네임 중복 확인을 해주세요.');
+			}
+			//제약조건을 만족했나요
+
 		}
 
 	</script>

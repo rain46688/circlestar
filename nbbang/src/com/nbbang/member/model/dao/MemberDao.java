@@ -102,28 +102,56 @@ private Properties prop=new Properties();
 		}return result;
 	}
 
-	public int selectMember(Connection conn, String userId) throws SQLException {
+	public Member selectMember(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs= null;
-		int result = 0;
 		Member m=null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectMemberOne"));
 			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				result=rs.getInt(1);//rs의 첫번째 컬럼의 값을 가져와라
+				m=inputData(rs);
 			}
-		
-			
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}finally {
-			rs.close();
-			pstmt.close();
+			close(rs);
+			close(pstmt);
 		}
-		return result;
-			
-		
+		return m;		
+	}
+
+	private Member inputData(ResultSet rs) {
+		Member m=new Member();
+		try {
+			m.setUsid(rs.getInt("USID"));
+			m.setMemberId(rs.getString("MEMBER_ID"));
+			m.setMemberPwd(rs.getString("MEMBER_PWD"));
+			m.setMemberName(rs.getString("MEMBER_NAME"));
+			m.setNickname(rs.getString("NICKNAME"));
+			m.setGender(rs.getString("GENDER"));
+			m.setBirthday(rs.getTimestamp("BIRTHDAY"));
+			m.setPhone(rs.getString("PHONE"));
+			m.setAddress(rs.getString("ADDRESS"));
+			m.setEnrollDate(rs.getDate("ENROLL_DATE"));
+			m.setGrade(rs.getString("GRADE"));
+			m.setMaxRoomCount(rs.getInt("MAX_ROOM_COUNT"));
+			m.setReportCount(rs.getInt("REPORT_COUNT"));
+			m.setPoint(rs.getInt("POINT"));
+			m.setLeaveMem(rs.getInt("LEAVE_MEM"));
+			m.setCurTradeList(rs.getString("CUR_TRADE_LIST"));
+			m.setCurCreateList(rs.getString("CUR_CREATE_LIST"));
+			m.setDeliveryList(rs.getString("DELIVERY_LIST"));
+			m.setTradeList(rs.getString("TRADE_LIST"));
+			m.setLikeList(rs.getString("LIKE_LIST"));
+			m.setNbbangScore(rs.getInt("NBBANG_SCORE"));
+			m.setMemberPicture(rs.getString("MEMBER_PICTURE"));
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
+		return m;
+	}
 
 	public Member findPw(Connection conn, String memberName, String email, String memberId) {
 		PreparedStatement pstmt=null;
