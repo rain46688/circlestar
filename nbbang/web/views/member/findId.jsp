@@ -17,7 +17,7 @@
 	div#findIdContainer{
  		width: 550px;
  		height:547px;
-		background-image: url("<%=request.getContextPath()%>/resources/rememberBread.png");
+		background-image: url("<%=request.getContextPath()%>/images/rememberBread.png");
 		background-size: 101%;
 		position: absolute;
 	    background-repeat: no-repeat;

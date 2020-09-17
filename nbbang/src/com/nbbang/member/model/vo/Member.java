@@ -1,6 +1,7 @@
 package com.nbbang.member.model.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Member {
 
@@ -9,7 +10,7 @@ public class Member {
 	private String memberName;
 	private String nickname;
 	private String gender;
-	private int age;
+	private Timestamp birthday;
 	private String phone;
 	private String address;
 	private String memberId;
@@ -31,17 +32,17 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, int age, String phone,
-			String address, String memberId, Date enrollDate, String grade, int maxRoomCount, int reportCount,
-			int point, int leaveMem, String curTradeList, String curCreateList, String deliveryList, String tradeList,
-			String likeList, int nbbangScore, String memberPicture) {
+	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, Timestamp birthday,
+			String phone, String address, String memberId, Date enrollDate, String grade, int maxRoomCount,
+			int reportCount, int point, int leaveMem, String curTradeList, String curCreateList, String deliveryList,
+			String tradeList, String likeList, int nbbangScore, String memberPicture) {
 		super();
 		this.usid = usid;
 		this.memberPwd = memberPwd;
 		this.memberName = memberName;
 		this.nickname = nickname;
 		this.gender = gender;
-		this.age = age;
+		this.birthday = birthday;
 		this.phone = phone;
 		this.address = address;
 		this.memberId = memberId;
@@ -100,12 +101,12 @@ public class Member {
 		this.gender = gender;
 	}
 
-	public int getAge() {
-		return age;
+	public Timestamp getBirthday() {
+		return birthday;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setBirthday(Timestamp birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getPhone() {
@@ -239,12 +240,11 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [usid=" + usid + ", memberPwd=" + memberPwd + ", memberName=" + memberName + ", nickname="
-				+ nickname + ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address
-				+ ", memberId=" + memberId + ", enrollDate=" + enrollDate + ", grade=" + grade + ", maxRoomCount="
-				+ maxRoomCount + ", reportCount=" + reportCount + ", point=" + point + ", leaveMem=" + leaveMem
-				+ ", curTradeList=" + curTradeList + ", curCreateList=" + curCreateList + ", deliveryList="
+				+ nickname + ", gender=" + gender + ", birthday=" + birthday + ", phone=" + phone + ", address="
+				+ address + ", memberId=" + memberId + ", enrollDate=" + enrollDate + ", grade=" + grade
+				+ ", maxRoomCount=" + maxRoomCount + ", reportCount=" + reportCount + ", point=" + point + ", leaveMem="
+				+ leaveMem + ", curTradeList=" + curTradeList + ", curCreateList=" + curCreateList + ", deliveryList="
 				+ deliveryList + ", tradeList=" + tradeList + ", likeList=" + likeList + ", nbbangScore=" + nbbangScore
 				+ ", memberPicture=" + memberPicture + "]";
-	}
-	
+	}	
 }
