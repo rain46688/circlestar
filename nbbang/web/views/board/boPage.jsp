@@ -6,18 +6,26 @@
 %>
 <style>
   #wrapper {
+    margin: 0 auto;
     margin-top: 3em;
+    padding-top: 1em;
+    width: 40em;
     text-align: center;
     align-items: center;
     margin-bottom: 3em;
-    border: solid red;
+    border: 0.5px solid rgb(224, 224, 224);
+    border-radius: 1em;
+    overflow: auto;
   }
+
   #imageWrapper {
     margin-bottom: 2em;
   }
+
   #imageWrapper>img {
     border-radius: 1em;
   }
+
   #userInfo {
     margin: 0 auto;
   	/* border: solid green; */
@@ -33,69 +41,165 @@
   }
 
   .content{
+    width: 36em;
+    margin: 0 auto;
+    padding: 0.5em;
+    overflow: auto;
+  }
+
+  #title {
+    text-align: left;
+    float: left;
+    width: 100%;
+    /* border: 1px hotpink solid; */
+
+  }
+
+  #priceAndLikeBtn {
+    float: right;
+    height: 4em;
+    padding: 1em;
+    /* border: 1px red solid; */
+  }
+
+  #priceAndLikeBtn>ul>li {
+    display: inline-block;
+  }
+
+  #text {
+    float: left;
+    text-align: left;
+    position: relative;
+    width: 100%;
+    height: 30em;
+    border: 1px blue solid;
+  }
+
+  #report {
+    text-align: right;
     border: 1px red solid;
-    width: 32em;
-    height: 50em;
+  }
+  
+  #commentSection {
+    text-align: left;
+    margin: 0 auto;
+    border: 1px green solid;
+    width: 38em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  #commentInsert {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #Comments {
+    width: 100%;
+  }
+
+  #Comments>ul {
+    padding-left: 0.5em;
+    list-style: none;
     margin: 0 auto;
   }
-	/* #carouselJackson {
-		width:50em;
-	}
-	
-	.carousel-inner img {
-		margin:0 auto;
-	} */
+
+  .comment_area {
+    width: 100%;
+    height: 10em;
+    border: 1px red solid;
+  }
+  .comment_thumb {
+    text-align: center;
+    position: relative;
+    width: 5em;
+    float: left;
+    border: 1px red solid;
+  }
+  .comment_box {
+    word-break: break-all;
+    width: 29em;
+    float: left;
+    position: relative;
+    border: 1px red solid;
+  }
 </style>
 <section>
-<!-- <div id="carouselJackson" class="carousel slide" data-ride="carousel" data-interval="false">
-  <ol class="carousel-indicators center-block">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="<%= request.getContextPath() %>/resources/cute.png" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div> -->
-
-
-
   <div id="wrapper">
     <div id="imageWrapper">
-      <img src="<%= request.getContextPath() %>/images/cute.png" alt="" width="500em" height="300em">
+      <img src="<%= request.getContextPath() %>/images/cute.png" alt="" width="600em" height="400em">
       <!-- carousel 적용할 예정 -->
     </div>
     <div id="userInfo">
     	<hr><a href="">
-    	<img src="<%= request.getContextPath() %>/resources/bread.png" alt="" width="40px" height="40px"></a>
+    	<img src="<%= request.getContextPath() %>/images/bread.png" alt="" width="40px" height="40px"></a>
       <%= b.getWriterId() %>
       <!-- 프로필 사진 + id -->
       <h5 id="level">신뢰 level</h5>
       <hr>
     </div>
     <div class="content">
+      <div id="title">
+        <h3>제목</h3>
+      </div>
+      <div id="priceAndLikeBtn">
+        <ul>
+          <li><h3>30000원</h3></li>
+          <li><a href=""><img src="<%= request.getContextPath() %>/images/logo.png" alt="LikeBtn" width="30px" height="30px"></a></li>
+        </ul>
+      </div>
+      <div id="text">asdsad</div>
+      <!-- <div id="report">신고하기</div> -->
+    </div>
+    <div id="commentSection">
+      <div id="commentInsert">
+        <form action="">
+          <select name="commentTo" id="commentTo">
+            <option value="openComment" selected>전체댓글</option>
+            <option value="secretComment">비밀댓글</option>
+          </select>
+          <input type="text" size="48">
+          <button>댓글입력</button>
+        </form>
+      </div>
+    <div id="Comments">
+      <ul class="comment_list">
+        <li class="comment_item">
+          <div class="comment_area">
+            <div class="comment_thumb">
+            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
+            </div>
+            <div class="comment_box">
+              아이디     ㅁㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㄴasdasdasdasdasdsad
+            <div class="comment_text">
+              내용 asdasdasdasdsadsa
+            </div>
+            <div class="comment_info">
+              날짜 시간 asdasdasdasd
+            </div>
+          </div>
+          </div>
+        </li>
+        <li class="comment_item">
+          <div class="comment_area">
+            <div class="comment_thumb">
+            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
+            </div>
+            <div class="comment_box">
+              아이디     ㅁㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㄴasdasdasdasdasdsad
+            <div class="comment_text">
+              내용 asdasdasdasdsadsa
+            </div>
+            <div class="comment_info">
+              날짜 시간 asdasdasdasd
+            </div>
+          </div>
+          </div>
+        </li>
+      </ul>
+    </div>
     </div>
   </div>
 </section>
-
-
-
-
 
 <%@ include file="/views/common/footer.jsp" %>
