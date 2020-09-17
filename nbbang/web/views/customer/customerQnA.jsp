@@ -65,7 +65,7 @@
 <br>
 <br>
 <section>
-    <button type="submit" id="btn-sbmit">문의하기</button>
+    <button type="submit" id="btn-sbmit" onclick="location.href='<%=request.getContextPath()%>/customer/customerQnAWriting'">문의하기</button>
     <div id="container-qna">
         <li id="title-1">1:1문의</li>
         <li id="title-2">*개인정보를 기입하지마세요.</li>
@@ -78,6 +78,14 @@
                 <li class="qna-list">문의날짜</li>
                 <li class="qna-list">답변상태</li>
             </ul>
+            
+             <ul class="cstmt-qna2">
+                <li class="qna-list2"><%=c.getQnaType %></li>
+                <li class="qna-list2"><a href="<%=request.getContextPath()%>/customer/customerQnAWriting?no=<%=c.getQnaNo()%>"><%=c.getQnaTitle() %>오늘 이벤트는?</a></li>
+                <li class="qna-list2"><%=c.getCstmDate %></li>
+                <li class="qna-list2"><%=c.getQnaStatus %></li>
+            </ul>
+            
             <ul class="cstmt-qna2">
                 <li class="qna-list2">이벤트</li>
                 <li class="qna-list2"><a href="">오늘 이벤트는?</a></li>
