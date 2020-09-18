@@ -80,7 +80,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="text" name="email" id="email" placeholder="이메일을 입력해주세요">
+					<input type="text" name="phone" id="phone" placeholder="휴대폰 번호를 입력해주세요">
 				</td>
 			</tr>
 			<tr>
@@ -104,7 +104,7 @@
 	<script>
 		function fn_validate() {
 			let name=document.getElementById("memberName").value;
-			let email=document.getElementById("email").value;
+			let phone=document.getElementById("phone").value;
 			let memberId=document.getElementById("memberId").value;
 			if(name.trim().length<1){
 				alert("이름을 입력해주세요");
@@ -112,8 +112,8 @@
 				return false;
 			}
 			if(email.trim().length<1){
-				alert("이메일을 입력해주세요");
-				document.getElementById("email").focus();
+				alert("휴대폰 번호를 입력해주세요");
+				document.getElementById("phone").focus();
 				return false;
 			}
 			if(memberId.trim().length<1){

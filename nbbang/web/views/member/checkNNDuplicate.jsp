@@ -18,7 +18,7 @@
 		<%if(m==null) {%>
 			[<span><%=request.getParameter("nick") %></span>]은(는)<br>사용 가능한 닉네임입니다.	
 			<br><br>
-			<button type="button" onclick="setNickname();">닫기</button>
+			<button type="button" onclick="setNickname();">사용하기</button>
 		<%} else{%>
 			사용중인 닉네임입니다.
 			<br><br>
@@ -40,6 +40,7 @@
 		function setNickname(){
 			const nn='<%=request.getParameter("nick")%>';
 			opener.memberEnrollFrm.nick.value=nn;
+			opener.memberEnrollFrm.checked_nn.value='y';
 			close();
 		}
 	</script>

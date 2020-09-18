@@ -248,4 +248,6 @@ public class Member {
 				+ ", memberPicture=" + memberPicture + "]";
 	}
 
+	
+
 }
