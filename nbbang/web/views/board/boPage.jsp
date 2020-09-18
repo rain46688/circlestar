@@ -62,6 +62,10 @@
     font-size: 20px;
   }
 
+  #startBtn>button {
+    width: 5em;
+  }
+
   #priceAndLikeBtn {
     text-align: left;
     padding-top: 0.5em;
