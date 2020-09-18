@@ -165,12 +165,6 @@
     color: darkgray;
     overflow: auto;
   }
-  #chattingRoom {
-    float: right;
-    border: 1px red solid;
-    height: 605px;
-    width: 400px;
-  }
 </style>
 <section>
   <div id="wrapper">
@@ -279,9 +273,6 @@
       </ul>
     </div>
     </div>
-  </div>
-  <div id="chattingRoom">
-
   </div>
 </section>
 
