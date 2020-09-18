@@ -33,6 +33,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardList");
 		List<Board> list = null;
+		System.out.println();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
