@@ -1,7 +1,12 @@
 package com.nbbang.member.controller;
 
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,13 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+@WebServlet(name = "login", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,16 +40,20 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String memberId=request.getParameter("memberId");
+		String memberIdStr=request.getParameter("memberId");
+		String memberId;
+		try {
+			memberId = AESCrypto.encrypt(memberIdStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			memberId=memberIdStr;
+		}
 		String memberPwd=request.getParameter("memberPwd");
 		Member m=new MemberService().loginMember(memberId,memberPwd);
 		
 		String saveId=request.getParameter("saveId");
-		System.out.println("saveId: "+saveId);
-		System.out.println("hong");
-		System.out.println("jack");
 		if(saveId!=null) {
-			Cookie c=new Cookie("saveId",memberId);
+			Cookie c=new Cookie("saveId",memberIdStr);
 			c.setMaxAge(7*24*60*60);//일주일간 저장할거임
 			response.addCookie(c);
 		}else {

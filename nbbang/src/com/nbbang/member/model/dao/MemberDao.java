@@ -34,15 +34,7 @@ private Properties prop=new Properties();
 			pstmt.setString(2, memberPwd);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				m=new Member();
-				m.setMemberId(rs.getString("member_id"));
-				m.setMemberPwd(rs.getString("member_pwd"));
-				m.setMemberName(rs.getString("member_name"));
-				m.setNickname(rs.getString("nickname"));
-				m.setPhone(rs.getString("phone"));
-				m.setAddress(rs.getString("address"));
-				m.setEmail(rs.getString("email"));
-				m.setEnrollDate(rs.getDate("enroll_date"));
+				m=inputData(rs);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -64,15 +56,7 @@ private Properties prop=new Properties();
 			pstmt.setString(2, email);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				m=new Member();
-				m.setMemberId(rs.getString("member_id"));
-				m.setMemberPwd(rs.getString("member_pwd"));
-				m.setMemberName(rs.getString("member_name"));
-				m.setNickname(rs.getString("nickname"));
-				m.setPhone(rs.getString("phone"));
-				m.setAddress(rs.getString("address"));
-				m.setEmail(rs.getString("email"));
-				m.setEnrollDate(rs.getDate("enroll_date"));
+				m=inputData(rs);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
