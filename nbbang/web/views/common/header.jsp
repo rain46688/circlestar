@@ -13,6 +13,8 @@
 	<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/logo.png">
 	<meta charset="UTF-8">
 	<title>nbbang</title>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/ckeditor/config.js"></script>
 	<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>

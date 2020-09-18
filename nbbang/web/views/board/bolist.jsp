@@ -13,9 +13,9 @@
 	margin:0 auto;
 	width:80em;
 }
-
+/* 
 .pagination>li>.page-link {
-}
+} */
 
 .pagination>li>a {
 	color:black;
@@ -43,7 +43,7 @@
 		<h1>게시판 이름</h1>
 		</div>
 		<div id="writeBoard">
-			<button>글쓰기</button>
+			<button onclick="fn_boWrite();">글쓰기</button>
 		</div>
 		<%
 			for (Board b : bolist) {
@@ -73,4 +73,9 @@
 		</nav>
 	<br>
 </section>
+<script>
+	function fn_boWrite(){
+		location.assign("<%= request.getContextPath() %>/board/boardWrite");
+	}
+</script>
 <%@ include file="/views/common/footer.jsp"%>
