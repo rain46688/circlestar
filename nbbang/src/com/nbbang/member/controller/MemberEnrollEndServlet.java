@@ -40,7 +40,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		m.setMemberName(request.getParameter("name"));
 		m.setGender(request.getParameter("gender"));
 		
-		String strbirthday=request.getParameter("year")+request.getParameter("month")+request.getParameter("date");
+		String strbirthday=request.getParameter("year")+"-"+request.getParameter("month")+"-"+request.getParameter("date");
 		Date birthday=Date.valueOf(strbirthday);
 		m.setBirthday(birthday);
 		
@@ -57,7 +57,19 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		}
 		
 		int result=new MemberService().memberEnroll(m);
-
+		
+		String msg="";
+		String loc="/";
+		if(result>0) {
+			msg="회원가입에 성공하였습니다.";
+		}else {
+			msg="회원가입에 실패하였습니다.";
+			loc="/enrollMember";
+		}
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

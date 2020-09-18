@@ -112,7 +112,7 @@ private Properties prop=new Properties();
 			m.setMemberName(rs.getString("MEMBER_NAME"));
 			m.setNickname(rs.getString("NICKNAME"));
 			m.setGender(rs.getString("GENDER"));
-			m.setBirthday(rs.getTimestamp("BIRTHDAY"));
+			m.setBirthday(rs.getDate("BIRTHDAY"));
 			m.setPhone(rs.getString("PHONE"));
 			m.setAddress(rs.getString("ADDRESS"));
 			m.setEnrollDate(rs.getDate("ENROLL_DATE"));
@@ -225,6 +225,22 @@ private Properties prop=new Properties();
 	public int memberEnroll(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
 		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("memberEnroll"));
+			pstmt.setString(1, m.getMemberPwd());
+			pstmt.setString(2, m.getMemberName());
+			pstmt.setString(3, m.getNickname());
+			pstmt.setString(4, m.getGender());
+			pstmt.setDate(5, m.getBirthday());
+			pstmt.setString(6, m.getPhone());
+			pstmt.setString(7, m.getAddress());
+			pstmt.setString(8, m.getMemberId());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 }

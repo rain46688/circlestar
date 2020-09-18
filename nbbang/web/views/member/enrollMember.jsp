@@ -552,7 +552,7 @@
 				&& $("input[name='checked_ad']").val()!=''){
 				$("#memberEnrollFrm").submit();
 			}else{
-				alert("실패");
+				alert("필수 입력 항목을 작성해주세요.");
 			}
 
 		}
