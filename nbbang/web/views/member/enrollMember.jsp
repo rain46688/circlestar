@@ -56,7 +56,7 @@
 	<div id="loginBox" style="padding-top: 50px;">
 		<div id="loginField">
 			<h2 style="margin-bottom: 50px;">회원가입</h2>
-			<form name="memberEnrollFrm" action="<%=request.getContextPath() %>/memberEnrollEnd" method="post">
+			<form id="memberEnrollFrm" name="memberEnrollFrm" action="<%=request.getContextPath() %>/memberEnrollEnd" method="post">
 				<input type="email" id="id" name="userId" class="input" placeholder="이메일" required style="width : 59%;">
 				<input type="button" value="중복검사" class="button" id="idbtn" onclick="fn_id_duplicate();">
 				<input type="hidden" name="checked_id" value="">
@@ -120,10 +120,11 @@
 				<div style="text-align: left; margin: 0 15px 10px 56px;">주소</div>
 				<input type="text" class="input" id="sample4_postcode" placeholder="우편번호" style="width : 59%;" readonly>
 				<input type="button" class="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" class="input" id="sample4_roadAddress" placeholder="도로명주소" style="width : 40%;" readonly>
+				<input type="hidden" name="checked_ad" value="">
+				<input type="text" class="input" id="sample4_roadAddress" name="address1" placeholder="도로명주소" style="width : 40%;" readonly>
 				<input type="text" class="input" id="sample4_jibunAddress" placeholder="지번주소" style="width : 39%;" readonly>
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" class="input" id="sample4_detailAddress" placeholder="상세주소" style="width : 40%;">
+				<input type="text" class="input" id="sample4_detailAddress" name="address2" placeholder="상세주소" style="width : 40%;">
 				<input type="text" class="input" id="sample4_extraAddress" placeholder="참고항목" style="width : 39%;" readonly>
 				<div class="constrain" id="adConstrain"></div>
 				
@@ -192,6 +193,7 @@
 						guideTextBox.innerHTML = '';
 						guideTextBox.style.display = 'none';
 					}
+				$("input[name=checked_ad]").val('y');
 				}
 			}).open();
 		}
@@ -209,6 +211,7 @@
 			$("#id").keyup(function(e){
 				const id=$("#id").val().trim();
 				var idPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+				$("input[name=checked_id]").val('');
 				if(id.length!=0&&!idPattern.test(id)){
 					$("#idConstrain").html("이메일 형식을 지켜주세요.");
 					$("#idConstrain").css({"display":"block"});
@@ -232,7 +235,6 @@
 
 			checkIdDuplicate.userId.value=id;
 			checkIdDuplicate.submit();
-			$("input[name=checked_id]").val('y');
 		};
 
 		// pw제약조건
@@ -298,6 +300,7 @@
 			$("#nickname").keyup(function(e){
 				// var nnPattern= /[0-9]|[a-z]|[A-Z]|[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{1,10}/;
 				const nn=$("#nickname").val().trim();
+				$("input[name=checked_nn]").val('');
 				if(nn!==""){
 					$("#nnConstrain").html("10자 이하의 한글, 영문, 숫자입력이 가능합니다.");
 					$("#nnConstrain").css({"display":"block"});
@@ -320,7 +323,6 @@
 
 			checkNNDuplicate.nick.value=nn;
 			checkNNDuplicate.submit();
-			$("input[name=checked_nn]").val('y');
 		};
 
 		//이름 제약조건
@@ -539,13 +541,18 @@
 			if($("input[name='checked_nn']").val()==''){
 				alert('닉네임 중복 확인을 해주세요.');
 			}
+			//주소 확인을 했나요
+			if($("input[name='checked_ad']").val()==''){
+				alert('주소 입력을 해주세요.');
+			}
 			//제약조건을 만족했나요
 			if(id!=="" && pw!=="" && pw2!=="" && nn!=="" && name!=="" && (gender.length=1||gender.length>1)
 				&& yy!=="" && mm!=="" && mm!=="월" && dd!=="" && phone!=="" && address!==""
-				&& $("input[name='checked_id']").val()!='' && $("input[name='checked_nn']").val()!=''){
-				alert("성공");
+				&& $("input[name='checked_id']").val()!='' && $("input[name='checked_nn']").val()!=''
+				&& $("input[name='checked_ad']").val()!=''){
+				$("#memberEnrollFrm").submit();
 			}else{
-				alert("실패");
+				alert("필수 입력 항목을 작성해주세요.");
 			}
 
 		}

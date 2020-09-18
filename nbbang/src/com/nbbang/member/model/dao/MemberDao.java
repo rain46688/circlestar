@@ -34,15 +34,7 @@ private Properties prop=new Properties();
 			pstmt.setString(2, memberPwd);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				m=new Member();
-				m.setMemberId(rs.getString("member_id"));
-				m.setMemberPwd(rs.getString("member_pwd"));
-				m.setMemberName(rs.getString("member_name"));
-				m.setNickname(rs.getString("nickname"));
-				m.setPhone(rs.getString("phone"));
-				m.setAddress(rs.getString("address"));
-				m.setEmail(rs.getString("email"));
-				m.setEnrollDate(rs.getDate("enroll_date"));
+				m=inputData(rs);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -64,15 +56,7 @@ private Properties prop=new Properties();
 			pstmt.setString(2, email);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				m=new Member();
-				m.setMemberId(rs.getString("member_id"));
-				m.setMemberPwd(rs.getString("member_pwd"));
-				m.setMemberName(rs.getString("member_name"));
-				m.setNickname(rs.getString("nickname"));
-				m.setPhone(rs.getString("phone"));
-				m.setAddress(rs.getString("address"));
-				m.setEmail(rs.getString("email"));
-				m.setEnrollDate(rs.getDate("enroll_date"));
+				m=inputData(rs);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -81,25 +65,6 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}
 		return m;
-	}
-	public int insertMember(Connection conn, Member m) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("insertMember"));
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getMemberPwd());
-			pstmt.setString(3, m.getMemberName());
-			pstmt.setString(4, m.getNickname());
-			pstmt.setString(5, m.getPhone());
-			pstmt.setString(6, m.getAddress());
-			pstmt.setString(7, m.getEmail());
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
 	}
 
 	public Member selectMember(Connection conn, String userId) {
@@ -131,7 +96,7 @@ private Properties prop=new Properties();
 			m.setMemberName(rs.getString("MEMBER_NAME"));
 			m.setNickname(rs.getString("NICKNAME"));
 			m.setGender(rs.getString("GENDER"));
-			m.setBirthday(rs.getTimestamp("BIRTHDAY"));
+			m.setBirthday(rs.getDate("BIRTHDAY"));
 			m.setPhone(rs.getString("PHONE"));
 			m.setAddress(rs.getString("ADDRESS"));
 			m.setEnrollDate(rs.getDate("ENROLL_DATE"));
@@ -159,20 +124,12 @@ private Properties prop=new Properties();
 		Member m=null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("findPw"));
-			pstmt.setString(1, memberId);
-			pstmt.setString(2, memberName);
-			pstmt.setString(3, email);
+			pstmt.setString(1, memberName);
+			pstmt.setString(2, email);
+			pstmt.setString(3, memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				m=new Member();
-				m.setMemberId(rs.getString("member_id"));
-				m.setMemberPwd(rs.getString("member_pwd"));
-				m.setMemberName(rs.getString("member_name"));
-				m.setNickname(rs.getString("nickname"));
-				m.setPhone(rs.getString("phone"));
-				m.setAddress(rs.getString("address"));
-				m.setEmail(rs.getString("email"));
-				m.setEnrollDate(rs.getDate("enroll_date"));
+				m=inputData(rs);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -239,5 +196,27 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}
 		return m;
+	}
+
+	public int memberEnroll(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("memberEnroll"));
+			pstmt.setString(1, m.getMemberPwd());
+			pstmt.setString(2, m.getMemberName());
+			pstmt.setString(3, m.getNickname());
+			pstmt.setString(4, m.getGender());
+			pstmt.setDate(5, m.getBirthday());
+			pstmt.setString(6, m.getPhone());
+			pstmt.setString(7, m.getAddress());
+			pstmt.setString(8, m.getMemberId());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

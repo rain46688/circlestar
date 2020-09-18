@@ -28,13 +28,12 @@ private MemberDao dao=new MemberDao();
 		close(conn);
 		return m;
 	}
-	public int insertMember(Member m) {
+	
+	public Member findPw(String memberName, String email, String memberId) {
 		Connection conn=getConnection();
-		int result=dao.insertMember(conn,m);
-		if(result>0) commit(conn);
-		else rollback(conn);
+		Member m=dao.findPw(conn, memberName, email, memberId);
 		close(conn);
-		return result;
+		return m;
 	}
 
 	public Member selectMember(String userId) throws SQLException {
@@ -44,12 +43,6 @@ private MemberDao dao=new MemberDao();
 		return m;
 	}
 
-	public Member findPw(String memberName, String email, String memberId) {
-		Connection conn=getConnection();
-		Member m=dao.findPw(conn, memberName, email, memberId);
-		close(conn);
-		return m;
-	}
 
 	public Member myPage(String memberId) {
 		Connection conn=getConnection();
@@ -63,6 +56,15 @@ private MemberDao dao=new MemberDao();
 		Member m=dao.nickDuplicate(conn,nick);
 		close(conn);
 		return m;
+	}
+
+	public int memberEnroll(Member m) {
+		Connection conn=getConnection();
+		int result=dao.memberEnroll(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 
 }

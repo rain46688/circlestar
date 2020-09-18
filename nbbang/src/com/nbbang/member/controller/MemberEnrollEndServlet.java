@@ -1,19 +1,22 @@
 package com.nbbang.member.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberEnrollEndServlet
  */
-@WebServlet("/memberEnrollEnd")
+@WebServlet(name = "memberEnroll",urlPatterns = "/memberEnrollEnd")
 public class MemberEnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,17 +33,43 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member m=new Member();
-		m.setMemberId(request.getParameter("userId"));
+		String memberId=request.getParameter("userId");
+		
 		m.setMemberPwd(request.getParameter("password"));
-		m.setMemberName(request.getParameter("userName"));
-		m.setNickname(request.getParameter("nickname"));
-		m.setEmail(request.getParameter("email"));
-		m.setPhone(request.getParameter("phone"));
-		m.setAddress(request.getParameter("address"));
+		m.setNickname(request.getParameter("nick"));
+		m.setMemberName(request.getParameter("name"));
+		m.setGender(request.getParameter("gender"));
 		
-		int result=new MemberService().insertMember(m);
+		String strbirthday=request.getParameter("year")+"-"+request.getParameter("month")+"-"+request.getParameter("date");
+		Date birthday=Date.valueOf(strbirthday);
+		m.setBirthday(birthday);
 		
-		response.sendRedirect(request.getContextPath());
+		String phone=request.getParameter("phone");
+		String address=request.getParameter("address1")+" "+request.getParameter("address2");
+		
+		//암호화 삼형제
+		try {
+			m.setMemberId(AESCrypto.encrypt(memberId));
+			m.setPhone(AESCrypto.encrypt(phone));
+			m.setAddress(AESCrypto.encrypt(address));			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		int result=new MemberService().memberEnroll(m);
+		
+		String msg="";
+		String loc="/";
+		if(result>0) {
+			msg="회원가입에 성공하였습니다.";
+		}else {
+			msg="회원가입에 실패하였습니다.";
+			loc="/enrollMember";
+		}
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
