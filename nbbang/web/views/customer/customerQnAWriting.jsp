@@ -3,9 +3,42 @@
 pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
+<style>
+
+
+    h1 {
+        background-color: lightsalmon;
+        font-size: 22px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.8%;
+        width: 600px;
+        height: 70px;
+        padding-left: 24px;
+    }
+
+    button {
+        width: 100px;
+        background-color:sandybrown;
+        border: none;
+        color: rgb(22, 19, 19);
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        margin: 4px;
+        cursor: pointer;
+        padding: 15px 0;
+        text-align: center;
+
+    }
+	
+	#fontBold{font-weight:bold;}
+	</style>
 <section>
-   
-    <div id='board-container'>
+
+	   
+
+     <div id='board-container'>
 		<h2>게시판 작성</h2>
 		<form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
 		enctype="multipart/form-data">
@@ -50,8 +83,7 @@ pageEncoding="UTF-8"%>
 				</tr>
 			</table>
 		</form>
-	</div>
-
+	</div> 
 
 </section>
 <%@ include file="/views/common/footer.jsp"%>

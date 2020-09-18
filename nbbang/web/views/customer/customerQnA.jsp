@@ -18,14 +18,19 @@ div#container-qna {
 	margin-bottom: 7%;
 }
 
-.qna-list, .qna-list2 {
+.qna-list, .qna-list2  {
 	text-align: center;
 	list-style: none;
 	/* border-left: 2px solid bisque; */
 	display: inline;
 	padding-top: 5%;
-	margin-left: 15%;
+	margin-left: 9%;
+	
 }
+/* .qna-list2: first-child{
+content: "●";
+
+} */
 
 .qna-list:first {
 	border-left: none;
@@ -101,8 +106,12 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 			<%
 				if (list.isEmpty()) {
 			%>
-			<ul>
-				<p>zzzzzzzz</p>
+						<ul class="cstmt-qna2">
+				<li class="qna-list2">1</li>
+				<li class="qna-list2">신고</li>
+				<li class="qna-list2"><a href="">너 신고합니다.</a></li>
+				<li class="qna-list2">김똑환</li>
+				<li class="qna-list2">2020-09-18</li>
 			</ul>
 			<%
 				} else {
@@ -114,7 +123,8 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 				<li class="qna-list2"><a href=""><%=cc.getCsTitle()%></a></li>
 				<li class="qna-list2"><%=cc.getCsWriter()%></li>
 				<li class="qna-list2"><%=cc.getCsDate()%></li>
-			</ul>
+							</ul>
+
 			<%
 				}
 			}
