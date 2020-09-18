@@ -211,6 +211,7 @@
 			$("#id").keyup(function(e){
 				const id=$("#id").val().trim();
 				var idPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+				$("input[name=checked_id]").val('');
 				if(id.length!=0&&!idPattern.test(id)){
 					$("#idConstrain").html("이메일 형식을 지켜주세요.");
 					$("#idConstrain").css({"display":"block"});
@@ -234,7 +235,6 @@
 
 			checkIdDuplicate.userId.value=id;
 			checkIdDuplicate.submit();
-			$("input[name=checked_id]").val('y');
 		};
 
 		// pw제약조건
@@ -300,6 +300,7 @@
 			$("#nickname").keyup(function(e){
 				// var nnPattern= /[0-9]|[a-z]|[A-Z]|[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{1,10}/;
 				const nn=$("#nickname").val().trim();
+				$("input[name=checked_nn]").val('');
 				if(nn!==""){
 					$("#nnConstrain").html("10자 이하의 한글, 영문, 숫자입력이 가능합니다.");
 					$("#nnConstrain").css({"display":"block"});
@@ -322,7 +323,6 @@
 
 			checkNNDuplicate.nick.value=nn;
 			checkNNDuplicate.submit();
-			$("input[name=checked_nn]").val('y');
 		};
 
 		//이름 제약조건

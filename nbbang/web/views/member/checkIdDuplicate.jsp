@@ -18,7 +18,7 @@
 		<%if(m==null) {%>
 			[<span><%=request.getParameter("userId") %></span>]은(는)<br>사용 가능한 이메일입니다.	
 			<br><br>
-			<button type="button" onclick="setMemberId();">닫기</button>
+			<button type="button" onclick="setMemberId();">사용하기</button>
 		<%} else{%>
 			사용중인 이메일입니다.
 			<br><br>
@@ -42,6 +42,7 @@
 			const id='<%=request.getParameter("userId")%>';
 			opener.memberEnrollFrm.userId.value=id;
 			opener.memberEnrollFrm.pw.focus();
+			opener.memberEnrollFrm.checked_id.value='y';
 			close();
 		}
 	</script>
