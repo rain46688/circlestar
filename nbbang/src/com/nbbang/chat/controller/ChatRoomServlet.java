@@ -43,8 +43,8 @@ public class ChatRoomServlet extends HttpServlet {
 		String boardId = request.getParameter("boardId");
 		String curMemsList = request.getParameter("curMemsList");
 		
-		System.out.println("maxMems : "+maxMems+", tradeStage : "+tradeStage+"\n"
-				+ "writerUsid : "+writerUsid+", boardId : "+boardId+", curMemsList : "+curMemsList);
+		System.out.println("maxMems : "+maxMems+", writerUsid : "+writerUsid+"\n"
+				+"boardId : "+boardId+", curMemsList : "+curMemsList);
 		
 		//구매확정한 유저수 curNum
 		int curNum = 0;
