@@ -82,25 +82,6 @@ private Properties prop=new Properties();
 		}
 		return m;
 	}
-	public int insertMember(Connection conn, Member m) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("insertMember"));
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getMemberPwd());
-			pstmt.setString(3, m.getMemberName());
-			pstmt.setString(4, m.getNickname());
-			pstmt.setString(5, m.getPhone());
-			pstmt.setString(6, m.getAddress());
-			pstmt.setString(7, m.getEmail());
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
 
 	public Member selectMember(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
@@ -239,5 +220,11 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}
 		return m;
+	}
+
+	public int memberEnroll(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		return result;
 	}
 }

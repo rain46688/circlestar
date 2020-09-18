@@ -10,7 +10,7 @@ public class Member {
 	private String memberName;
 	private String nickname;
 	private String gender;
-	private Timestamp birthday;
+	private Date birthday;
 	private String phone;
 	private String address;
 	private String memberId;
@@ -32,7 +32,7 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, Timestamp birthday,
+	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, Date birthday,
 			String phone, String address, String memberId, Date enrollDate, String grade, int maxRoomCount,
 			int reportCount, int point, int leaveMem, String curTradeList, String curCreateList, String deliveryList,
 			String tradeList, String likeList, int nbbangScore, String memberPicture) {
@@ -101,11 +101,11 @@ public class Member {
 		this.gender = gender;
 	}
 
-	public Timestamp getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Timestamp birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
@@ -246,5 +246,6 @@ public class Member {
 				+ leaveMem + ", curTradeList=" + curTradeList + ", curCreateList=" + curCreateList + ", deliveryList="
 				+ deliveryList + ", tradeList=" + tradeList + ", likeList=" + likeList + ", nbbangScore=" + nbbangScore
 				+ ", memberPicture=" + memberPicture + "]";
-	}	
+	}
+
 }
