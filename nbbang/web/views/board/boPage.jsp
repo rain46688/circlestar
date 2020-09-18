@@ -28,7 +28,6 @@
 
   #userInfo {
     margin: 0 auto;
-  	/* border: solid green; */
   	width:34em;
   	text-align:left;
   	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -52,6 +51,15 @@
     width: 100%;
     overflow: auto;
     font-weight: bolder;
+    font-size: 1.7em;
+  }
+
+  #likeBtn, #startBtn {
+    /* width: 5em; */
+    margin-left: 2.5px;
+    text-align: right;
+    float: right;
+    font-size: 20px;
   }
 
   #priceAndLikeBtn {
@@ -76,15 +84,18 @@
   #commentSection {
     text-align: left;
     margin: 0 auto;
-    border: 1px green solid;
     width: 38em;
     padding-left: 0.5em;
     padding-right: 0.5em;
+    margin-bottom: 2em;
   }
 
   #commentInsert {
+    width: fluid;
     margin: 0 auto;
     text-align: center;
+    height: 2em;
+    overflow: auto;
   }
 
   #Comments {
@@ -95,30 +106,41 @@
     padding-left: 0.5em;
     list-style: none;
     margin: 0 auto;
+    overflow: auto;
   }
 
   .comment_area {
+    padding-top: 0.5em;
     width: 100%;
-    height: 10em;
-    border: 1px red solid;
+    overflow: auto;
   }
   .comment_thumb {
     text-align: center;
     position: relative;
     width: 5em;
     float: left;
-    border: 1px red solid;
   }
   .comment_box {
     word-break: break-all;
     width: 29em;
     float: left;
     position: relative;
-    border: 1px red solid;
   }
-  #likeBtn {
-  	/* margin-bottom:0.5em; */
+  .comment_id {
+    font-size: small;
+    font-weight: bold;
   }
+
+  .comment_text {
+    font-size: 16px;
+  }
+
+  .comment_info {
+    font-size: small;
+    color: darkgray;
+    margin-top: 0.25em;
+  }
+  
   #userThumb {
     float: left;
     margin-right: 4px;
@@ -137,10 +159,13 @@
   #date {
     text-align: left;
     color: darkgray;
+    overflow: auto;
   }
-
   #chattingRoom {
+    float: right;
     border: 1px red solid;
+    height: 605px;
+    width: 400px;
   }
 </style>
 <section>
@@ -162,8 +187,11 @@
     <div class="content">
       <hr>
       <div id="title">
-        <h4>제목</h4>
+        제목
+        <div id="startBtn"><button>n빵하기</button></div>
+        <div id="likeBtn"><button>❤️</button></div>
       </div>
+      
       <div id="date">날짜</div>
       <!-- 가격과 좋아요 버튼 -->
       <div id="priceAndLikeBtn">
@@ -172,7 +200,7 @@
       </div>
       <br>
       <div id="contentText">내용</div>
-      <div id="etcInfo">관심 , 조회수, 신고하기</div>
+      <div id="etcInfo">관심, 조회수, 신고하기, 제품 페이지</div>
     </div>
     <div id="commentSection">
       <div id="commentInsert">
@@ -188,33 +216,58 @@
     <div id="Comments">
       <ul class="comment_list">
         <li class="comment_item">
-          <div class="comment_area">
-            <div class="comment_thumb">
-            <img id="likeBtn" src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
-            </div>
-            <div class="comment_box">
-              아이디
-            <div class="comment_text">
-              내용
-            </div>
-            <div class="comment_info">
-              날짜 시간
-            </div>
-          </div>
-          </div>
-        </li>
-        <li class="comment_item">
+          <hr>
           <div class="comment_area">
             <div class="comment_thumb">
             <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
             </div>
             <div class="comment_box">
-              아이디     ㅁㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㄴasdasdasdasdasdsad
+              <div class="comment_id">
+                아이디
+              </div>
             <div class="comment_text">
-              내용 asdasdasdasdsadsa
+              내용
             </div>
             <div class="comment_info">
-              날짜 시간 asdasdasdasd
+              1993.01.11 19:33 답글쓰기 
+            </div>
+          </div>
+          </div>
+        </li>
+        <li class="comment_item">
+          <hr>
+          <div class="comment_area">
+            <div class="comment_thumb">
+            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
+            </div>
+            <div class="comment_box">
+              <div class="comment_id">
+                아이디
+              </div>
+            <div class="comment_text">
+              내용
+            </div>
+            <div class="comment_info">
+              1993.01.11 19:33 답글쓰기 
+            </div>
+          </div>
+          </div>
+        </li>
+        <li class="comment_item">
+          <hr>
+          <div class="comment_area">
+            <div class="comment_thumb">
+            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
+            </div>
+            <div class="comment_box">
+              <div class="comment_id">
+                아이디
+              </div>
+            <div class="comment_text">
+              내용
+            </div>
+            <div class="comment_info">
+              1993.01.11 19:33 답글쓰기 
             </div>
           </div>
           </div>
