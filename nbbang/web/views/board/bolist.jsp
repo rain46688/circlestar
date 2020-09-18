@@ -9,7 +9,7 @@
 .card-wrapper {
 	padding-top: 3rem;
 	padding-left: 5rem;
-	padding-right: 4rem;
+	padding-right: 9rem;
 	margin:0 auto;
 	width:80em;
 }
@@ -27,10 +27,24 @@
 .card-body {
 	padding: 0.5em;
 }
+
+#writeBoard {
+	text-align: right;
+	padding-right: 1em;
+}
+#writeBoard>button {
+	height: 2em;
+	width: 5em;
+}
 </style>
 <section>
 	<div class="card-wrapper">
+		<div id="boardTitle">
 		<h1>게시판 이름</h1>
+		</div>
+		<div id="writeBoard">
+			<button>글쓰기</button>
+		</div>
 		<%
 			for (Board b : bolist) {
 		%>
