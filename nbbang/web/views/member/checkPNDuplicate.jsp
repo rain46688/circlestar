@@ -31,6 +31,12 @@
 	<script>
 		function fn_validate(){
 			let pn=document.getElementById("phone").value;
+			var pnPattern = /^[0-9]{10,11}$/;
+			if(!pnPattern.test(pn)){
+				alert("휴대폰 번호를 입력해주세요.");
+				document.getElementById("phone").focus();
+				return false;
+			}
 			if(pn.length==0 || pn.length>11){
 				alert("-를 제외하고 11자 이하로 입력해주세요.");
 				document.getElementById("phone").focus();

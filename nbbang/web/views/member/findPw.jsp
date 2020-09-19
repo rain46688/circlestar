@@ -55,10 +55,10 @@
 		position: relative;
 		width:50%;
 		text-align: center;
-		margin: 240px 50px 100px 150px;
+		margin: 240px 50px 100px 140px;
 	}
 	#resultField p{
-		font-size: 30px;
+		font-size: 24px;
 		font-family: 'Do Hyeon', sans-serif;
 	}
 </style>
@@ -96,7 +96,7 @@
 		</table>
 		<%} else{%>
 		<div id="resultField" style="width: 275px; word-break:normal; white-space:nowrap;">
-					<p style="width: 275px; word-break:normal; white-space:nowrap;">회원님의 비밀번호는<br>[<%=m.getMemberPwd() %>]입니다.</p>
+					<p style="width: 275px; word-break:normal; white-space:nowrap;">회원님의 임시 비밀번호는<br><%=m.getMemberPwd() %>입니다. <br> 로그인 후 비밀번호를 변경해주세요</p>
 				</div>
 		<%} %>
 		</form>

@@ -466,21 +466,23 @@
 
 		function fn_phone_duplicate(){
 			let pn=$("#phone").val().trim();
-			if(pn.length==0){
-				alert("이메일을 입력해주세요.");
+			var pnPattern = /^[0-9]{10,11}$/;
+			if(pn.length==0 || !pnPattern.test(pn)){
+				alert("휴대폰 번호를 입력해주세요.");
 			}else{
-			const url="<%=request.getContextPath()%>/checkPNDuplicate";
-			const title="checkPNDuplicate";
-			const status="left=500px,top=100px,width=500px,height=200px";
+				const url="<%=request.getContextPath()%>/checkPNDuplicate";
+				const title="checkPNDuplicate";
+				const status="left=500px,top=100px,width=500px,height=200px";
 
-			open("",title,status);
+				open("",title,status);
 
-			checkPNDuplicate.target=title;
-			checkPNDuplicate.action=url;
-			checkPNDuplicate.method="post";
+				checkPNDuplicate.target=title;
+				checkPNDuplicate.action=url;
+				checkPNDuplicate.method="post";
 
-			checkPNDuplicate.phone.value=pn;
-			checkPNDuplicate.submit();
+				checkPNDuplicate.phone.value=pn;
+				checkPNDuplicate.submit();
+			}
 		};
 
 		//주소 제약조건

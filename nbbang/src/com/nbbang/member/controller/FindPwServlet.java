@@ -3,16 +3,19 @@ package com.nbbang.member.controller;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nbbang.common.filter.EncryptorWrapper;
 import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
@@ -58,17 +61,20 @@ public class FindPwServlet extends HttpServlet {
 			request.setAttribute("msg",msg);
 			request.getRequestDispatcher("/views/member/msgFindMember.jsp").forward(request, response);
 		}else {
-			String pwStr;
-			try {
-				pwStr=AESCrypto.decrypt(m.getMemberPwd());
-			} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
-					| BadPaddingException e) {
-				// TODO Auto-generated catch block
-				pwStr=m.getMemberPwd();
-			}
-			m.setMemberPwd(pwStr);
+			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		    uuid = uuid.substring(0, 8); //uuid를 앞에서부터 6자리 잘라줌.
+		    System.out.println(uuid);
+		    m.setMemberPwd(uuid);
+		    int pwIsUuid=1;
 			request.setAttribute("findMemberPw", m);
 			request.getRequestDispatcher("/views/member/findPw.jsp").forward(request, response);
+			
+			UuidEncryptor ue=new UuidEncryptor();
+			String encryptedUuid=ue.getSha512(uuid);
+			System.out.println("제대로 된건지 확인"+encryptedUuid);
+			int usid=m.getUsid();
+			MemberService ms=new MemberService();
+			ms.updateFindPwMember(encryptedUuid,pwIsUuid, usid);
 		}		
 	}
 

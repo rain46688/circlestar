@@ -28,6 +28,7 @@ public class Member {
 	private int nbbangScore;
 	private String memberPicture;
 	private String curRoomBid;
+	private boolean pwIsUuid; //임시비번임을 알려주는 용도의 변수^!^
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
@@ -36,7 +37,8 @@ public class Member {
 	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, Date birthday,
 			String phone, String address, String memberId, Date enrollDate, String grade, int maxRoomCount,
 			int reportCount, int point, int leaveMem, String curTradeList, String curCreateList, String deliveryList,
-			String tradeList, String likeList, int nbbangScore, String memberPicture, String curRoomBid) {
+			String tradeList, String likeList, int nbbangScore, String memberPicture, String curRoomBid,
+			boolean pwIsUuid) {
 		super();
 		this.usid = usid;
 		this.memberPwd = memberPwd;
@@ -61,6 +63,7 @@ public class Member {
 		this.nbbangScore = nbbangScore;
 		this.memberPicture = memberPicture;
 		this.curRoomBid = curRoomBid;
+		this.pwIsUuid = pwIsUuid;
 	}
 
 	public int getUsid() {
@@ -247,6 +250,14 @@ public class Member {
 		this.curRoomBid = curRoomBid;
 	}
 
+	public boolean isPwIsUuid() {
+		return pwIsUuid;
+	}
+
+	public void setPwIsUuid(boolean pwIsUuid) {
+		this.pwIsUuid = pwIsUuid;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [usid=" + usid + ", memberPwd=" + memberPwd + ", memberName=" + memberName + ", nickname="
@@ -255,6 +266,7 @@ public class Member {
 				+ ", maxRoomCount=" + maxRoomCount + ", reportCount=" + reportCount + ", point=" + point + ", leaveMem="
 				+ leaveMem + ", curTradeList=" + curTradeList + ", curCreateList=" + curCreateList + ", deliveryList="
 				+ deliveryList + ", tradeList=" + tradeList + ", likeList=" + likeList + ", nbbangScore=" + nbbangScore
-				+ ", memberPicture=" + memberPicture + ", curRoomBid=" + curRoomBid + "]";
+				+ ", memberPicture=" + memberPicture + ", curRoomBid=" + curRoomBid + ", pwIsUuid=" + pwIsUuid + "]";
 	}
+	
 }

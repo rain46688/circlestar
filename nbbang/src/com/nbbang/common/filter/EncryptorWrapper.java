@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -14,7 +15,7 @@ public class EncryptorWrapper extends HttpServletRequestWrapper {
 		super(request);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public String getParameter(String name) {
 		String returnValue="";
@@ -27,7 +28,7 @@ public class EncryptorWrapper extends HttpServletRequestWrapper {
 		}
 		return returnValue;
 	}
-	
+
 	private String getSha512(String value) {
 		String encPwd=null;
 		MessageDigest md=null;
