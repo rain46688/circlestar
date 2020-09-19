@@ -27,6 +27,7 @@ public class Member {
 	private String likeList;
 	private int nbbangScore;
 	private String memberPicture;
+	private String curRoomBid;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
@@ -35,7 +36,7 @@ public class Member {
 	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, Date birthday,
 			String phone, String address, String memberId, Date enrollDate, String grade, int maxRoomCount,
 			int reportCount, int point, int leaveMem, String curTradeList, String curCreateList, String deliveryList,
-			String tradeList, String likeList, int nbbangScore, String memberPicture) {
+			String tradeList, String likeList, int nbbangScore, String memberPicture, String curRoomBid) {
 		super();
 		this.usid = usid;
 		this.memberPwd = memberPwd;
@@ -59,6 +60,7 @@ public class Member {
 		this.likeList = likeList;
 		this.nbbangScore = nbbangScore;
 		this.memberPicture = memberPicture;
+		this.curRoomBid = curRoomBid;
 	}
 
 	public int getUsid() {
@@ -237,6 +239,14 @@ public class Member {
 		this.memberPicture = memberPicture;
 	}
 
+	public String getCurRoomBid() {
+		return curRoomBid;
+	}
+
+	public void setCurRoomBid(String curRoomBid) {
+		this.curRoomBid = curRoomBid;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [usid=" + usid + ", memberPwd=" + memberPwd + ", memberName=" + memberName + ", nickname="
@@ -245,9 +255,6 @@ public class Member {
 				+ ", maxRoomCount=" + maxRoomCount + ", reportCount=" + reportCount + ", point=" + point + ", leaveMem="
 				+ leaveMem + ", curTradeList=" + curTradeList + ", curCreateList=" + curCreateList + ", deliveryList="
 				+ deliveryList + ", tradeList=" + tradeList + ", likeList=" + likeList + ", nbbangScore=" + nbbangScore
-				+ ", memberPicture=" + memberPicture + "]";
+				+ ", memberPicture=" + memberPicture + ", curRoomBid=" + curRoomBid + "]";
 	}
-
-	
-
 }

@@ -95,8 +95,8 @@
 			</tr>
 		</table>
 		<%} else{%>
-		<div id="resultField">
-					<p>회원님의 비밀번호는<br>[<%=m.getMemberPwd() %>]입니다.</p>
+		<div id="resultField" style="width: 275px; word-break:normal; white-space:nowrap;">
+					<p style="width: 275px; word-break:normal; white-space:nowrap;">회원님의 비밀번호는<br>[<%=m.getMemberPwd() %>]입니다.</p>
 				</div>
 		<%} %>
 		</form>

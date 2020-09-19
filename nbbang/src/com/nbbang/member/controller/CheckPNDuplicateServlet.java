@@ -18,16 +18,16 @@ import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
 
 /**
- * Servlet implementation class MyPageServlet
+ * Servlet implementation class checkPNDuplicate
  */
-@WebServlet("/member/myPage")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/checkPNDuplicate")
+public class CheckPNDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageServlet() {
+    public CheckPNDuplicateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,28 +37,19 @@ public class MyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String usid=request.getParameter("usid");
-		Member m=new MemberService().myPage(usid);
-		String memberId;
+		String phoneStr=request.getParameter("phone");
 		String phone;
-		String address;
 		try {
-			phone=AESCrypto.decrypt(m.getPhone());
-			address=AESCrypto.decrypt(m.getAddress());
-			memberId=AESCrypto.decrypt(m.getMemberId());
+			phone = AESCrypto.encrypt(phoneStr);
 		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
 				| BadPaddingException e) {
 			// TODO Auto-generated catch block
-			phone=m.getPhone();
-			address=m.getAddress();
-			memberId=m.getMemberId();
+			phone=phoneStr;
 		}
-		m.setPhone(phone);
-		m.setAddress(address);
-		m.setMemberId(memberId);
-		
-		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
+		Member m=null;
+		m=new MemberService().phoneDuplicate(phone);
+		request.setAttribute("result", m);
+		request.getRequestDispatcher("/views/member/checkPNDuplicate.jsp").forward(request, response);
 	}
 
 	/**

@@ -31,6 +31,11 @@
 	<script>
 		function fn_validate(){
 			let nn=document.getElementById("nick").value;
+			if(nn.length==0){
+				alert("닉네임을 입력해주세요.");
+				document.getElementById("nick").focus();
+				return false;
+			}
 			if(nn.length>10){
 				alert("10자 이하의 한글, 영문, 숫자입력이 가능합니다.");
 				document.getElementById("nick").focus();
