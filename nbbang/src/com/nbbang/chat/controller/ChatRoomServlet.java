@@ -63,6 +63,7 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("curMemsList", curMemsList);
 		request.setAttribute("x", 450);
 		request.setAttribute("y", 660);
+		request.setAttribute("m", m);
 		request.getRequestDispatcher("/views/board/chatRoom.jsp").forward(request, response);
 	}
 
