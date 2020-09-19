@@ -52,45 +52,50 @@ content: "●";
 #fontBold {
 	font-weight: bold;
 }
+div#kdh-header h1{
+	margin-left:15%;
+	
+	
+}
 </style>
 <%
 
 List<CustomerCenter> list = (List) request.getAttribute("list");
 %>
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cstmcss/main.css" type="text/css">
+<style>
+/*  */
+</style>
 <section>
-	<div id="kdh-container">
-		<div id="kdh-header">
-			<h1>궁금하시거나 불펴하신점 편하게 물어보세요.</h1>
-		</div>
-		<div id="kdh-sidebar-left">
-			<h2>사이드</h2>
-			<ul>
-				<li class="cstmt-list" style="font-size: 16px;"><a
-					class="main-a"
-					href="<%=request.getContextPath()%>/customer/customerMain">N빵
-						가이드</a></li>
-				<li class="cstmt-list" style="font-size: 20px;" id="fontBold"><a
-					class="main-a"
-					href="<%=request.getContextPath()%>/customer/customerQnA">N빵
-						문의</a></li>
-				<li class="cstmt-list" style="font-size: 16px;"><a
-					class="main-a"
-					href="<%=request.getContextPath()%>/customer/customerNews">N빵
-						소식</a></li>
-				<li class="cstmt-list" style="font-size: 16px;"><a
-					class="main-a"
-					href="<%=request.getContextPath()%>/customer/customerAsk">N빵
-						질문</a></li>
-			</ul>
-		</div>
-	</div>
+<aside class="sidebar">
+  <img id="logo" src="<%=request.getContextPath()%>/images/logoTitle.png" alt="">
+  <ul class="ul-first">
+    <li class="cstmt-list" style="font-size:20px;" id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
+   <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
+   <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
+   <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
+ </ul>
+ <ul class="ul-second">
+   <li class="list-hiper"><a href="" class="hiper-tag">홈</a></li>
+   <li class="list-hiper"><a href="" class="hiper-tag">구경하기</a></li>
+   <li class="list-hiper"><a href="" class="hiper-tag">해외직구</a></li>
+   <li class="list-hiper"><a href="" class="hiper-tag">마이페이지</a></li>
+ </ul>
+ <ul class="ul-third">
+   <li id="list-image1"><a href=""><image src="<%=request.getContextPath()%>/images/we.png" width="190px" height="55px"></a></li>
+   <li id="list-image2"><a href=""><image src="<%=request.getContextPath()%>/images/pang.png" width="190px" height="55px"></a></li>
+   <li id="list-image3"><a href=""><image src="<%=request.getContextPath()%>/images/llist1.png" width="205px" height="60px"></a></li>
+ 
+ </ul>
+</aside>
 </section>
-<br>
-<br>
+	
+
 <section>
+	<div id="container-qna">
 	<button type="button" id="btn-frm"
 		onclick="location.assign('<%=request.getContextPath()%>/customer/customerQnAFrm')">문의하기</button>
-	<div id="container-qna">
 		<li id="title-1">1:1문의</li>
 		<li id="title-2">*개인정보를 기입하지마세요.</li>
 		<li id="title-3">*허위정보를 기입하지마세요.</li>
