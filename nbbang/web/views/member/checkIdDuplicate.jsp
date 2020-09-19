@@ -32,6 +32,11 @@
 		function fn_validate(){
 			let id=document.getElementById("userId").value;
 			var idPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			if(id.length==0){
+				alert("이메일을 입력해주세요.");
+				document.getElementById("userId").focus();
+				return false;
+			}
 			if(id.length!=0&&!idPattern.test(id)){
 				alert("이메일 형식을 지켜주세요.");
 				document.getElementById("userId").focus();

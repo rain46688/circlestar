@@ -114,7 +114,9 @@
 				</div>
 				<div class="constrain" id="bdConstrain"></div>
 
-				<input type="tel" placeholder="휴대폰" class="input checkLength" id="phone" name="phone" maxlength="11" required>
+				<input type="tel" placeholder="휴대폰" class="input checkLength" id="phone" name="phone" maxlength="11" required style="width : 59%;">
+				<input type="button" value="중복검사" class="button" id="pnbtn" onclick="fn_phone_duplicate();">
+				<input type="hidden" name="checked_pn" value="">
 				<div class="constrain" id="pnConstrain"></div>
 				
 				<div style="text-align: left; margin: 0 15px 10px 56px;">주소</div>
@@ -136,6 +138,9 @@
 			</form>
 			<form action="" name="checkNNDuplicate">
 				<input type="hidden" name="nick">
+			</form>
+			<form action="" name="checkPNDuplicate">
+				<input type="hidden" name="phone">
 			</form>
 		</div>
 	</div>
@@ -223,18 +228,22 @@
 		
 		function fn_id_duplicate(){
 			let id=$("#id").val().trim();
-			const url="<%=request.getContextPath()%>/checkIdDuplicate";
-			const title="chekcIdDuplicate";
-			const status="left=500px,top=100px,width=300px,height=200px";
-
-			open("",title,status);
+			if(id.length==0){
+				alert("이메일을 입력해주세요.");
+			}else{
+				const url="<%=request.getContextPath()%>/checkIdDuplicate";
+				const title="chekcIdDuplicate";
+				const status="left=500px,top=100px,width=500px,height=200px";
 	
-			checkIdDuplicate.target=title;
-			checkIdDuplicate.action=url;
-			checkIdDuplicate.method="post";
-
-			checkIdDuplicate.userId.value=id;
-			checkIdDuplicate.submit();
+				open("",title,status);
+		
+				checkIdDuplicate.target=title;
+				checkIdDuplicate.action=url;
+				checkIdDuplicate.method="post";
+	
+				checkIdDuplicate.userId.value=id;
+				checkIdDuplicate.submit();
+			}
 		};
 
 		// pw제약조건
@@ -311,18 +320,22 @@
 
 		function fn_nickname_duplicate(){
 			let nn=$("#nickname").val().trim();
-			const url="<%=request.getContextPath()%>/checkNNDuplicate";
-			const title="checkNNDuplicate";
-			const status="left=500px,top=100px,width=300px,height=200px";
+			if(nn.length==0){
+				alert("닉네임을 입력해주세요.");
+			}else{
+				const url="<%=request.getContextPath()%>/checkNNDuplicate";
+				const title="checkNNDuplicate";
+				const status="left=500px,top=100px,width=500px,height=200px";
 
-			open("",title,status);
+				open("",title,status);
 
-			checkNNDuplicate.target=title;
-			checkNNDuplicate.action=url;
-			checkNNDuplicate.method="post";
+				checkNNDuplicate.target=title;
+				checkNNDuplicate.action=url;
+				checkNNDuplicate.method="post";
 
-			checkNNDuplicate.nick.value=nn;
-			checkNNDuplicate.submit();
+				checkNNDuplicate.nick.value=nn;
+				checkNNDuplicate.submit();
+			}
 		};
 
 		//이름 제약조건
@@ -442,6 +455,7 @@
 			});
 			$("#phone").keyup(function(e){
 				const phone=$("#phone").val().trim();
+				$("input[name=checked_pn]").val('');
 				if(phone!==""){
 					$("#pnConstrain").html("-를 제외하고 11자 이하로 입력해주세요.");
 					$("#pnConstrain").css({"display":"block"});
@@ -449,6 +463,27 @@
 				}
 			});
 		});
+
+		function fn_phone_duplicate(){
+			let pn=$("#phone").val().trim();
+			var pnPattern = /^[0-9]{10,11}$/;
+			if(pn.length==0 || !pnPattern.test(pn)){
+				alert("휴대폰 번호를 입력해주세요.");
+			}else{
+				const url="<%=request.getContextPath()%>/checkPNDuplicate";
+				const title="checkPNDuplicate";
+				const status="left=500px,top=100px,width=500px,height=200px";
+
+				open("",title,status);
+
+				checkPNDuplicate.target=title;
+				checkPNDuplicate.action=url;
+				checkPNDuplicate.method="post";
+
+				checkPNDuplicate.phone.value=pn;
+				checkPNDuplicate.submit();
+			}
+		};
 
 		//주소 제약조건
 		$(function(){
@@ -541,6 +576,9 @@
 			if($("input[name='checked_nn']").val()==''){
 				alert('닉네임 중복 확인을 해주세요.');
 			}
+			if($("input[name='checked_pn']").val()==''){
+				alert('휴대폰 번호 중복 확인을 해주세요.');
+			}
 			//주소 확인을 했나요
 			if($("input[name='checked_ad']").val()==''){
 				alert('주소 입력을 해주세요.');
@@ -549,7 +587,7 @@
 			if(id!=="" && pw!=="" && pw2!=="" && nn!=="" && name!=="" && (gender.length=1||gender.length>1)
 				&& yy!=="" && mm!=="" && mm!=="월" && dd!=="" && phone!=="" && address!==""
 				&& $("input[name='checked_id']").val()!='' && $("input[name='checked_nn']").val()!=''
-				&& $("input[name='checked_ad']").val()!=''){
+				&& $("input[name='checked_ad']").val()!='' && $("input[name='checked_pn']").val()!=''){
 				$("#memberEnrollFrm").submit();
 			}else{
 				alert("필수 입력 항목을 작성해주세요.");

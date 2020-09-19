@@ -13,12 +13,11 @@
 	<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/logo.png">
 	<meta charset="UTF-8">
 	<title>nbbang</title>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/ckeditor/config.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 	<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 	<script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>
 	<link href="<%=request.getContextPath()%>/css/section.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/header.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/footer.css" rel="stylesheet">
@@ -51,10 +50,8 @@
 
 				<%if(loginnedMember!=null) {%>		
    				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
-   					onclick="location.href='<%=request.getContextPath()%>/member/myPage?memberId=<%=loginnedMember.getMemberId()%>'">마이페이지</button>
+   					onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>'">마이페이지</button>
    				<%} %>
-      			
-
 			</div>
 		</div>
 		<nav>

@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%Member m=(Member)request.getAttribute("member") %>
+<%
+	Member m=(Member)request.getAttribute("member");
+%>
 <style>
 .infoContainer {
    display: grid;
    grid-template-columns: repeat(2, 1fr);
-   grid-template-rows: repeat(5, 1fr);
+   grid-template-rows: repeat(6, 1fr);
    column-gap: 2%;
    row-gap: 5%;
    margin: 5% 30%;
@@ -82,22 +84,32 @@ button#chargebtn{
 <section>
    <div id="infoContainer" name="infoContainer" class="infoContainer">
       <div class="item" id="headContainer">
-         <div id="profilePicDiv">
-            <div id="profilePicField">
+         <div id="profilePicDiv" style="min-width: 150px;">
+            <div id="profilePicField" style="min-width: 130px;">
                <div id="profilePic">^^</div>
             </div>
          </div>
          <div id="memberInfo">
             <p class="title"><%=m.getMemberId() %>님의 마이페이지</p>
-            <span>회원등급:&nbsp;</span>&nbsp;&nbsp;<span>가용포인트:&nbsp;</span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
-            <span>총 개설 가능한 방 개수:&nbsp;</span>&nbsp;&nbsp;<span>개설 중인 방 개수:&nbsp;</span><br>
-            <span>가입일:&nbsp;</span>&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;</span><br>
+            <span>회원등급:&nbsp;<%=m.getGrade() %></span>&nbsp;&nbsp;<span>가용포인트:&nbsp;<%=m.getPoint() %></span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
+            <span>개설 가능한 방 개수:&nbsp;<%=m.getMaxRoomCount() %></span><br>
+            <span>가입일:&nbsp;<%=m.getEnrollDate() %></span>&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;<%=m.getReportCount() %></span><br>
            
          </div>
       </div>
       <div class="item smallBox" id="crntList">
-         <p class="title">거래 중인 게시물</p>
-         <p class="text">거래 중인 게시물 목록으로 이동합니다.</p>
+         <p class="title">참여 중인 거래</p>
+         <p class="text">참여 중인 거래 게시물 목록으로 이동합니다.</p>
+         <p><button type="button" class="btn btn-outline-warning">이동하기</button></p>
+      </div>
+      <div class="item smallBox" id="crntList">
+         <p class="title">내가 만든 거래</p>
+         <p class="text">내가 만든 거래 게시물 목록으로 이동합니다.</p>
+         <p><button type="button" class="btn btn-outline-warning">이동하기</button></p>
+      </div>
+      <div class="item smallBox" id="crntList">
+         <p class="title">진행 중인 거래</p>
+         <p class="text">진행 중인 거래 게시물 목록으로 이동합니다.</p>
          <p><button type="button" class="btn btn-outline-warning">이동하기</button></p>
       </div>
       <div class="item smallBox" id="pastList">
@@ -113,7 +125,8 @@ button#chargebtn{
       <div class="item smallBox" id="pwModify">
          <p class="title">비밀번호 수정하기</p>
          <p class="text">비밀번호 수정으로 개인정보를 보호하세요.</p>
-         <p><button type="button" class="btn btn-outline-warning">수정하기</button></p>
+         <p><button type="button" class="btn btn-outline-warning" 
+         	onclick="location.href='<%=request.getContextPath()%>/updatePw'">수정하기</button></p>
       </div>
       <div class="item smallBox" id="commuModify">
          <p class="title">연락처 수정하기</p>
