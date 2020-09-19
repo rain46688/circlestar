@@ -12,7 +12,7 @@ public class Board {
 	private String content;
 	private Date enrollDate;
 	private int hit;
-	private String[] files;
+	private String files;
 	private String productCategory;
 	private String productName;
 	private String tradeArea;
@@ -35,7 +35,7 @@ public class Board {
 	}
 
 	public Board(int boardId, String boardTitle, int writerUsid, String writerNickname, String content, Date enrollDate,
-			int hit, String[] files, String productCategory, String productName, String tradeArea, int maxMems,
+			int hit, String files, String productCategory, String productName, String tradeArea, int maxMems,
 			String[] curMemsList, String[] payMemsList, String[] deliveryMemsList, String limitTime, int tradeStage,
 			int likeCount, int reportCount, boolean popularBoard, int productPrice, String ownStatus, String tradeKind,
 			String productUrl) {
@@ -122,11 +122,11 @@ public class Board {
 		this.hit = hit;
 	}
 
-	public String[] getFiles() {
+	public String getFiles() {
 		return files;
 	}
 
-	public void setFiles(String[] files) {
+	public void setFiles(String files) {
 		this.files = files;
 	}
 
@@ -262,7 +262,7 @@ public class Board {
 	public String toString() {
 		return "Board [boardId=" + boardId + ", boardTitle=" + boardTitle + ", writerUsid=" + writerUsid
 				+ ", writerNickname=" + writerNickname + ", content=" + content + ", enrollDate=" + enrollDate
-				+ ", hit=" + hit + ", files=" + Arrays.toString(files) + ", productCategory=" + productCategory
+				+ ", hit=" + hit + ", files=" + files + ", productCategory=" + productCategory
 				+ ", productName=" + productName + ", tradeArea=" + tradeArea + ", maxMems=" + maxMems
 				+ ", curMemsList=" + Arrays.toString(curMemsList) + ", payMemsList=" + Arrays.toString(payMemsList)
 				+ ", deliveryMemsList=" + Arrays.toString(deliveryMemsList) + ", limitTime=" + limitTime

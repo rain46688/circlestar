@@ -34,4 +34,11 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public int boardInsert(Board b) {
+		Connection conn = getConnection();
+		int result = dao.boardInsert(conn, b);
+		close(conn);
+		return result;
+	}
 }
