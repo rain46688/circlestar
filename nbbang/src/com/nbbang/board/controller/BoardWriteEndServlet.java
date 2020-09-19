@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.nbbang.board.model.service.BoardService;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.common.temp.uploadRename;
 
@@ -49,20 +50,22 @@ public class BoardWriteEndServlet extends HttpServlet {
 		if (!fileSaveDir.exists())
 			fileSaveDir.mkdirs();
 		
-		String fileNames = null;
+		String fileNames = "";
+		int index = 0;
 		for (Part part : request.getParts()) {
-			int index = 0;
 			if (part.getName().equals("file")) {
+				String renamed = new uploadRename().randomString(getFileName(part));
+				part.write(uploadPath + File.separator + renamed);
 				if (index == 0)
-					fileNames += getFileName(part);
+					fileNames += renamed;
 				else
-					fileNames += ";" + getFileName(part);
+					{fileNames += ";" + renamed;}
+				
 				index++;
-				part.write(uploadPath + File.separator + new uploadRename().randomString(getFileName(part)));
 			}
 		}
 		
-		if(fileNames == null) {//파일 업로드가 됐는지 확인
+		if(fileNames.equals("")) {//파일 업로드가 됐는지 확인
 			request.setAttribute("msg", "파일 업로드 오류입니다. 관리자에게 문의하세요.");
 			request.setAttribute("loc", "/board/boardWrite");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
@@ -77,7 +80,18 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setTradeKind(request.getParameter("tradeMethod"));
 		b.setContent(request.getParameter("content"));
 		b.setProductUrl(request.getParameter("url"));
+		b.setFiles(fileNames);
 		
+		int result = new BoardService().boardInsert(b);
+		if(result > 0) {
+			//업로드 성공
+			request.setAttribute("msg", "업로드 완료!");
+			request.setAttribute("loc", "/board/boList");
+		}else {
+			request.setAttribute("msg", "업로드에 실패하였습니다.");
+			request.setAttribute("loc", "board/boWrite");
+		}
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

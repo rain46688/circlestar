@@ -84,6 +84,7 @@ public class BoardDao {
 		}
 		return b;
 	}
+	
 	public int boardListCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -101,6 +102,30 @@ public class BoardDao {
 			close(rs);
 			close(pstmt);
 		} 
+		return result;
+	}
+	
+	public int boardInsert(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println(b);
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardInsert"));
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getContent());
+			pstmt.setString(3, b.getFiles());
+			pstmt.setString(4, b.getProductCategory());
+			pstmt.setInt(5, b.getMaxMems());
+			pstmt.setInt(6, b.getMaxMems());
+			pstmt.setString(7, "구매예정");
+			pstmt.setString(8, b.getTradeKind());
+			pstmt.setString(9, b.getProductUrl());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 }

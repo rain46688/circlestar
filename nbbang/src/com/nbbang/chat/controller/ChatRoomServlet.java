@@ -43,14 +43,13 @@ public class ChatRoomServlet extends HttpServlet {
 		String boardId = request.getParameter("boardId");
 		String curMemsList = request.getParameter("curMemsList");
 		
-		System.out.println("maxMems : "+maxMems+", tradeStage : "+tradeStage+"\n"
-				+ "writerUsid : "+writerUsid+", boardId : "+boardId+", curMemsList : "+curMemsList);
+		System.out.println("maxMems : "+maxMems+", writerUsid : "+writerUsid+"\n"
+				+"boardId : "+boardId+", curMemsList : "+curMemsList);
 		
 		//구매확정한 유저수 curNum
 		int curNum = 0;
 		if(m != null && boardId != null) 
 			m.setCurRoomBid(boardId);
-		//인희야 추가해줘. 각자 분담한게있으니 부탁한다.
 		if(!curMemsList.equals(""))
 			for(String user : curMemsList.split(",")) curNum++;
 		
@@ -61,6 +60,9 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("boardId", boardId);
 		request.setAttribute("curNum", curNum);
 		request.setAttribute("curMemsList", curMemsList);
+		request.setAttribute("x", 450);
+		request.setAttribute("y", 660);
+		request.setAttribute("m", m);
 		request.getRequestDispatcher("/views/board/chatRoom.jsp").forward(request, response);
 	}
 
