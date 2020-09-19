@@ -75,8 +75,9 @@
 		<div id="title"><h4>N빵 글쓰기</h4></div>
 		<hr color="black">
 		<div id="editor">
-			<form action="">
-				<select class="custom-select custom-select-sm" name="" id="">
+			<form action="<%= request.getContextPath() %>/board/boardWriteEnd" method="POST"
+				enctype="multipart/form-data">
+				<select class="custom-select custom-select-sm" name="category" id="">
 					<option value="" selected>게시판을 선택하세요</option>
 					<option value="식품">식품</option>
 					<option value="패션잡화">패션잡화</option>
@@ -85,11 +86,11 @@
 					<option value="애완용품">애완용품</option>
 				</select>
 				<div class="input-group marginTop">
-				<input class="form-control" type="text" name="" id="" placeholder="제목을 입력하세요">
+				<input class="form-control" type="text" name="title" id="" placeholder="제목을 입력하세요">
 				</div>
 				<div class="input-group marginTop">	
 				<input class="form-control" type="text" name="price" id="price" placeholder="가격" required>
-				<select class="custom-select custom-select-md" name="" id="">
+				<select class="custom-select custom-select-md" name="maxMems" id="">
 					<option value="" selected>n빵 인원</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -107,36 +108,36 @@
 					<option value="14">14</option>
 					<option value="15">15</option>
 				</select>
-				<select class="custom-select custom-select-md" name="" id="">
+				<select class="custom-select custom-select-md" name="tradeMethod" id="">
 					<option value="">거래방식</option>
 					<option value="직거래">직거래</option>
 					<option value="택배거래">택배거래</option>
 				</select>
 				</div>
 				<div id="textEditor" class="marginTop">
-					<textarea name="editor1" id="editor1" rows="20" cols="80" placeholder="내용을 입력해주세요.">
+					<textarea name="content" id="content" rows="20" cols="80" placeholder="내용을 입력해주세요.">
 						내용을 입력해주세요
 					</textarea>
 				</div>
 				<div id="imageUpload" class="marginTop">
 					<label id="uploadBtn" class="btn btn-lg btn-outline-secondary" for="file"><p>이미지</p>업로드</label>
-					<input style="display: none;" type="file" name="file" id="file" multiple>
+					<input style="display: none;" type="file" name="file" id="file" multiple="true">
 					<div id="image-prev">
 						<!-- 이미지 미리보기 -->
 					</div>
 				</div>
 				<div id="urlInsert" class="input-group marginTop">
-					<input type="text" class="form-control" name="" id="" placeholder="제품 URL">
+					<input type="text" class="form-control" name="url" id="" placeholder="제품 URL">
+				</div>
+				<div id="submitBtn">
+					<button class="marginTop btn btn-outline-secondary" type="submit">글 등록</button>
 				</div>
 			</form>
-			<div id="submitBtn">
-				<button class="marginTop btn btn-outline-secondary" type="submit">글 등록</button>
-			</div>
 		</div>
 	</div>
 </section>
 <script>
-	CKEDITOR.replace('editor1');
+	CKEDITOR.replace('content');
 	CKEDITOR.editorConfig = function( config ) {
 	config.uiColor = red;
 	config.height = 600;
@@ -153,12 +154,14 @@
 		var filesArr = Array.prototype.slice.call(files);
 		if(filesArr.length>5) {
 			alert("파일은 최대 5개까지 업로드 가능합니다");
+			document.getElementById("file").value = null;
 			return;
 		}
 
 		filesArr.forEach(function(f){
 			if(!f.type.match("image.*")){
 				alert("이미지파일만 업로드 가능합니다.")
+				document.getElementById("file").value = null;
 				return;
 			}
 			$("#image-prev").html("");

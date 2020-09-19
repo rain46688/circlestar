@@ -16,7 +16,7 @@ public class Board {
 	private String productCategory;
 	private String productName;
 	private String tradeArea;
-	private String maxMems;
+	private int maxMems;
 	private String[] curMemsList;
 	private String[] payMemsList;
 	private String[] deliveryMemsList;
@@ -35,7 +35,7 @@ public class Board {
 	}
 
 	public Board(int boardId, String boardTitle, int writerUsid, String writerNickname, String content, Date enrollDate,
-			int hit, String[] files, String productCategory, String productName, String tradeArea, String maxMems,
+			int hit, String[] files, String productCategory, String productName, String tradeArea, int maxMems,
 			String[] curMemsList, String[] payMemsList, String[] deliveryMemsList, String limitTime, int tradeStage,
 			int likeCount, int reportCount, boolean popularBoard, int productPrice, String ownStatus, String tradeKind,
 			String productUrl) {
@@ -154,11 +154,11 @@ public class Board {
 		this.tradeArea = tradeArea;
 	}
 
-	public String getMaxMems() {
+	public int getMaxMems() {
 		return maxMems;
 	}
 
-	public void setMaxMems(String maxMems) {
+	public void setMaxMems(int maxMems) {
 		this.maxMems = maxMems;
 	}
 
