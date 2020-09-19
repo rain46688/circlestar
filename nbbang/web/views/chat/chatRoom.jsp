@@ -11,10 +11,26 @@
 
 </style>
 
-<div>
-
+<div id="side">
+	<div id="chat">
+			<c:if test="${tradeStage == 2}">
+					<div id="ChatArea"></div>
+					<div id="inputDiv">
+						<textarea id="msgText" rows="3" cols="33"></textarea>
+						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
+					</div>
+			</c:if>
+	</div>
 </div>
 
 <script>
+
+/* 메인 Window 사이즈 조절 막기 */
+
+$(this).resize(fixedSize);
+function fixedSize() {
+		this.resizeTo()
+}
+
 
 </script>
