@@ -61,16 +61,22 @@ public class LoginServlet extends HttpServlet {
 			c.setMaxAge(0);
 			response.addCookie(c);
 		}
-		
 		if(m!=null) {
+			System.out.println("호옹"+m.isPwIsUuid());
 			HttpSession session=request.getSession();
 			session.setAttribute("loginnedMember",m);
-			response.sendRedirect(request.getContextPath());
+			if(m.isPwIsUuid()==true) {
+				request.setAttribute("msg", "임시 비밀번호를 사용 중입니다. 비밀번호를 변경해주세요.");
+				request.setAttribute("loc", "/");
+				RequestDispatcher rd=request.getRequestDispatcher("/views/common/msg.jsp");
+				rd.forward(request,response);
+			}else{
+				response.sendRedirect(request.getContextPath());				
+			}
 		}else {
 			request.setAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다!");
 			request.setAttribute("loc", "/");
-			RequestDispatcher rd=request.getRequestDispatcher("/views/common/msg.jsp");
-			rd.forward(request,response);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}
 
