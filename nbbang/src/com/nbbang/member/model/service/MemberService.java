@@ -44,9 +44,9 @@ private MemberDao dao=new MemberDao();
 	}
 
 
-	public Member myPage(String memberId) {
+	public Member myPage(String usid) {
 		Connection conn=getConnection();
-		Member m=dao.myPage(conn, memberId);
+		Member m=dao.myPage(conn, usid);
 		close(conn);
 		return m;
 	}
@@ -65,6 +65,13 @@ private MemberDao dao=new MemberDao();
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+
+	public Member phoneDuplicate(String phone) {
+		Connection conn=getConnection();
+		Member m=dao.phoneDuplicate(conn,phone);
+		close(conn);
+		return m;
 	}
 
 }

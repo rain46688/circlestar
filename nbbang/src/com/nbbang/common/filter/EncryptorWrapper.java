@@ -25,7 +25,7 @@ public class EncryptorWrapper extends HttpServletRequestWrapper {
 		}else {
 			returnValue=super.getParameter(name);
 		}
-		return super.getParameter(name);
+		return returnValue;
 	}
 	
 	private String getSha512(String value) {
