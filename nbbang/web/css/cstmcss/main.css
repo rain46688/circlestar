@@ -7,19 +7,15 @@
 	margin-left:auto;
   	margin-right:auto;
   } 
-  #kdh-header {
-	padding: 20px;
-	margin-bottom: 20px;
-	
-  }  
+
   #kdh-sidebar-left {
 	width: 200px;
 	height: 600px;
-	margin-left: 10%;
-    float: left;
-	
-	background-color:#beige;
+	margin-left: 6%;
+	float: left;
+	margin-bottom: 6%;
   }
+
   #kdh-sidebar-left ul{
   	padding:10px;
   	margin-left:auto;
@@ -42,7 +38,7 @@
 #list-image2,
 #list-image3{
 margin-bottom:3%;
-width: 20%;
+
 }
 
  div#kdh-sidebar-left ul li{
@@ -62,12 +58,10 @@ width: 20%;
 .list-hiper:before{
 	content:"●"
 } */
-#kdh-header h1{
-	margin-top:10%;
-	margin-left:15%;
-	color:brown;
-} 
 
+div#kdh-content1{
+	margin-left: 14%;
+}
 
 
 

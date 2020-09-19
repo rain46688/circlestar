@@ -8,15 +8,16 @@ figure.snip1200 {
   font-family: 'Raleway', Arial, sans-serif;
   position: relative;
   overflow: hidden;
-  margin: 10px;
-  min-width: 220px;
-  max-width: 800px;
-  max-height: 800px;
-  width: 100%;
-  background: #000000;
-  color: #ffffff;
+  margin-top: 15px;
+  margin-left: 15%;
+  
+  width: 700px;
+  height: 600px;
+  
+  background: white;
+  color: black;
   text-align: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+ 
   font-size: 16px;
 }
 figure.snip1200 * {
@@ -26,7 +27,8 @@ figure.snip1200 * {
   transition: all 0.45s ease-in-out;
 }
 figure.snip1200 img {
-  max-width: 100%;
+  width: 550px;
+  height: 600px;
   position: relative;
   opacity: 0.9;
 }
@@ -121,22 +123,22 @@ figure.snip1200.hover p {
     <div id="kdh-container">
 <div id="kdh-sidebar-left">
   <h2></h2>
-  <ul>
+  <ul class="side-bar-kdh">
      <li class="cstmt-list" style="font-size:20px;" id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
     <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
     <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
     <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
   </ul>
-  <ul>
+  <ul class="side-bar-kdh">
     <li class="list-hiper"><a href="" class="hiper-tag">홈</a></li>
     <li class="list-hiper"><a href="" class="hiper-tag">구경하기</a></li>
     <li class="list-hiper"><a href="" class="hiper-tag">해외직구</a></li>
     <li class="list-hiper"><a href="" class="hiper-tag">마이페이지</a></li>
   </ul>
-  <ul>
-    <li id="list-image1"><a href=""><image src="<%=request.getContextPath()%>/images/we.png" width="190px" height="55px"></a></li>
-    <li id="list-image2"><a href=""><image src="<%=request.getContextPath()%>/images/pang.png" width="190px" height="55px"></a></li>
-    <li id="list-image3"><a href=""><image src="<%=request.getContextPath()%>/images/llist1.png" width="205px" height="60px"></a></li>
+  <ul class="side-bar-kdh">
+    <li id="list-image1"><a href=""><image src="<%=request.getContextPath()%>/images/we.png" style="width: 150px; height: auto;" ></a></li>
+    <li id="list-image2"><a href=""><image src="<%=request.getContextPath()%>/images/pang.png" style="width: 150px; height: auto;"></a></li>
+    <li id="list-image3"><a href=""><image src="<%=request.getContextPath()%>/images/llist1.png" style="width: 150px; height: auto;"></a></li>
   
   </ul>
 </div>
@@ -148,9 +150,9 @@ figure.snip1200.hover p {
   <figure class="snip1200">
     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
     <figcaption>
-      <p>I say, if your knees aren't green by the end of the day, you ought to seriously re-examine your life.</p>
+      <p>NbbangNbbangNbbangNbbangNbbangNbbangNbbangNbbangNbbangNbbang</p>
       <div class="heading">
-        <h2>My<span> Hobby</span></h2>
+        <h2>Nbbang<span> Guide</span></h2>
       </div>
     </figcaption>
     <a href="#"></a>

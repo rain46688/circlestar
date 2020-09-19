@@ -41,38 +41,87 @@ pageEncoding="UTF-8"%>
 <style>
 /*  */
 </style>
-<section>
-<aside class="sidebar">
-  <img id="logo" src="<%=request.getContextPath()%>/images/logoTitle.png" alt="">
-  <ul class="ul-first">
-    <li class="cstmt-list" style="font-size:20px;" id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
-   <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
-   <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
-   <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
- </ul>
- <ul class="ul-second">
-   <li class="list-hiper"><a href="" class="hiper-tag">홈</a></li>
-   <li class="list-hiper"><a href="" class="hiper-tag">구경하기</a></li>
-   <li class="list-hiper"><a href="" class="hiper-tag">해외직구</a></li>
-   <li class="list-hiper"><a href="" class="hiper-tag">마이페이지</a></li>
- </ul>
- <ul class="ul-third">
-   <li id="list-image1"><a href=""><image src="<%=request.getContextPath()%>/images/we.png" width="190px" height="55px"></a></li>
-   <li id="list-image2"><a href=""><image src="<%=request.getContextPath()%>/images/pang.png" width="190px" height="55px"></a></li>
-   <li id="list-image3"><a href=""><image src="<%=request.getContextPath()%>/images/llist1.png" width="205px" height="60px"></a></li>
- 
- </ul>
-</aside>
-</section>
+<div id="kdh-container">
+    <div id="kdh-sidebar-left">
+      <h2></h2>
+      <ul class="side-bar-kdh">
+         <li class="cstmt-list" style="font-size:20px;" id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
+        <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
+        <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
+        <li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
+      </ul>
+      <ul class="side-bar-kdh">
+        <li class="list-hiper"><a href="" class="hiper-tag">홈</a></li>
+        <li class="list-hiper"><a href="" class="hiper-tag">구경하기</a></li>
+        <li class="list-hiper"><a href="" class="hiper-tag">해외직구</a></li>
+        <li class="list-hiper"><a href="" class="hiper-tag">마이페이지</a></li>
+      </ul>
+      <ul class="side-bar-kdh">
+        <li id="list-image1"><a href=""><image src="<%=request.getContextPath()%>/images/we.png" style="width: 150px; height: auto;" ></a></li>
+        <li id="list-image2"><a href=""><image src="<%=request.getContextPath()%>/images/pang.png" style="width: 150px; height: auto;"></a></li>
+        <li id="list-image3"><a href=""><image src="<%=request.getContextPath()%>/images/llist1.png" style="width: 150px; height: auto;"></a></li>
+      
+      </ul>
+    </div>
+    </div>
 
     	
 
 
 
 	   
+    <style>
+         table {
+        width: 800px;
+        height: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 6%;
+        margin-bottom: 10%;
+        
+    }
 
+    th {
+        background-color: #eeeeee;
+        font-weight: bolder;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    td {
+        text-align: center;
+        padding-top: 0.7%;
+        font-size: 14px;
+    }
+
+    h1 {
+        background-color: lightsalmon;
+        font-size: 22px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.8%;
+        width: 600px;
+        height: 70px;
+        padding-left: 24px;
+    }
+
+    button {
+        width: 100px;
+        background-color:sandybrown;
+        border: none;
+        color: rgb(22, 19, 19);
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        margin: 4px;
+        cursor: pointer;
+        padding: 15px 0;
+        text-align: center;
+
+    }
+    </style>
      <div id='board-container'>
-		<h2></h2>
+		<h2>문의를 작성하시오.</h2>
 		<form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
 		enctype="multipart/form-data">
 			<table id='tbl-board'>
