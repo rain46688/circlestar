@@ -61,6 +61,8 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("boardId", boardId);
 		request.setAttribute("curNum", curNum);
 		request.setAttribute("curMemsList", curMemsList);
+		request.setAttribute("x", 450);
+		request.setAttribute("y", 660);
 		request.getRequestDispatcher("/views/board/chatRoom.jsp").forward(request, response);
 	}
 
