@@ -90,7 +90,7 @@
 					</td>
 				</tr>
 				<%} else{%>
-				<div class="resultField">
+				<div class="resultField" style="max-width: 275px;">
 					<p>회원님의 아이디는<br>[<%=m.getMemberId()%>]입니다.</p>
 				</div>
 				<%} %>

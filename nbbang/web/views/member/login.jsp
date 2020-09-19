@@ -37,7 +37,7 @@
             <form action="<%=request.getContextPath()%>/login" method="post">
               <input type="text" placeholder="아이디" class="input" id="memberId" name="memberId" maxlength=20
               value="<%=saveId!=null ? saveId : ""%>">
-              <input type="password" placeholder="비밀번호" class="input" id="memberPwd" name="memberPwd" maxlength=16>
+              <input type="password" placeholder="비밀번호" class="input" id="memberPwd" name="password" maxlength=16>
               <div id="saveIdField">
                 <input type="checkbox" id="saveId" name="saveId" <%=saveId!=null ? "checked" : "" %>><span><label for="saveId">&nbsp;아이디 저장하기</label></span>
               </div>
