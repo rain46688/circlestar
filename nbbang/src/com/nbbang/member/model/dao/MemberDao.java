@@ -221,4 +221,22 @@ private Properties prop=new Properties();
 		}
 		return m;
 	}
+
+	public int updateFindPwMember(Connection conn, String encryptedUuid, int pwIsUuid, int usid) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updatePassword"));
+			pstmt.setString(1, encryptedUuid);
+			pstmt.setInt(2, pwIsUuid);
+			pstmt.setInt(3, usid);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }
