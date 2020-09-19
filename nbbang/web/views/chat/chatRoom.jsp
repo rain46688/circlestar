@@ -9,6 +9,131 @@
 
 <style>
 
+/* === 채팅 구현 부분  === */
+
+/* 사이드바 사이즈  */
+#side {
+	height: 80%;
+	width: 80%;
+	margin: 30px auto;
+	border: 2px black solid;
+	border-radius: 10px;
+	background-color:#B2C7D9;
+}
+
+/* 텍스트 출력되는 하얀부분 위 박스 */
+#msgTextArea{
+/* 아래 스크롤바 감추기 */
+	overflow-x:hidden;
+	height:80%;
+	width:100%;
+/* 스크롤 바 투명하게 만들기 */	
+	-ms-overflow-style: none;
+}
+
+/* 스크롤 바 투명하게 만들기 */
+::-webkit-scrollbar { display: none; }
+
+/* 밑에 입력하는 하얀부분 */
+#inputdiv{
+	height:20%;
+	width:100%;
+	background-color:white;
+	border-radius-bottom-left: 10px;
+	border-radius-bottom-right: 10px;
+}
+
+/* 하얀부분 안에들어가는 입력하는 곳 텍스트 */
+#textMsg{
+	resize: none;
+	border: none;
+	padding: 10px 0px 10px 0px;
+	width:80%;
+}
+
+/* 위 텍스트 영역 눌르면 옆에 테두리 생기는거 지우는 용도 */
+textarea:focus{
+	outline:none;
+}
+
+/* 전송 버튼 걍 부트스트랩*/
+#chatBtn{
+	margin-bottom:80px;
+	margin-right:1px;
+}
+
+/* 접속부분 글자색 */
+.conn{
+	color:#272728;
+	margin-bottom:10px;
+	margin-top:10px;
+	text-align:center;
+}
+
+/* 관리자 전용 접속부분 글자색 */
+.admin{
+	color:red;
+ 	margin-bottom:10px;
+	margin-top:10px;
+	text-align:center;
+}
+
+/* 프로필 둥글게보이기 radius 70%하면됨  */
+.profile{
+ 	width:50px; 
+	height:50px;
+	border-radius: 70%;
+	background-color:#272728;
+	 float: left;
+	 margin:10px;
+}
+
+/* 세션과 채팅쓴 사람이 같은경우 노란색에 오른쪽 정렬 */
+.mymsg{
+	/* width:170px;  */
+	/* margin-left:180px; */
+	/* float: right; */
+	width:auto; 
+	overflow:hidden;
+	height:auto;
+	background-color:#FFEB33;
+	border-radius: 10px;
+	margin:15px;
+	padding:10px;
+	margin-left:180px;
+}
+
+/* 각각 채팅을 감싸는 div 배경색과 같은 테투리를 갖고있음 */
+.tmp{
+/* border:1px black solid; */
+border:1px #B2C7D9 solid;
+}
+
+/* 다른 사람껀 프로필이랑 이름 보여주고 왼쪽 */
+.othermsg{
+	/*float: left; */
+	width:auto; 
+	overflow:hidden;
+	height:auto;
+	background-color:white;
+	border-radius: 10px;
+	margin:15px;
+	padding:10px;
+	margin-right:120px;
+	margin-left:-50px;
+	margin-top:25px;
+}
+
+/* 닉네임 div */
+.nick{
+	 float: left;
+}
+/* 현재 방번호 상단에 보여주기 위해 */
+/* #roomno{
+text-align:center;
+margin-top:10px;
+} */
+
 </style>
 
 <div id="side">
@@ -70,6 +195,7 @@ if("${tradeStage}"=="2"){
 		}else if(msg["msg"] == "SYS2"){
 			html="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 퇴장하였습니다." + "</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
+			//관리자인 경우 분기 처리
 		}else if(msg["sendNickName"] == "ADMIN"){
 			let html="<div class='tmp'><div class='admin'> 시스템 관리자 : "+msg["msg"] + "</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 

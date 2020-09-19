@@ -50,7 +50,6 @@ public class ChatRoomServlet extends HttpServlet {
 		int curNum = 0;
 		if(m != null && boardId != null) 
 			m.setCurRoomBid(boardId);
-		//인희야 추가해줘. 각자 분담한게있으니 부탁한다.
 		if(!curMemsList.equals(""))
 			for(String user : curMemsList.split(",")) curNum++;
 		
