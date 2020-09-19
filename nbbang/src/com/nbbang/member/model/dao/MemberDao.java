@@ -112,6 +112,7 @@ private Properties prop=new Properties();
 			m.setLikeList(rs.getString("LIKE_LIST"));
 			m.setNbbangScore(rs.getInt("NBBANG_SCORE"));
 			m.setMemberPicture(rs.getString("MEMBER_PICTURE"));
+			m.setPwIsUuid(rs.getBoolean("PW_IS_UUID"));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

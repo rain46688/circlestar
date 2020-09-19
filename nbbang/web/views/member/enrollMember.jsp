@@ -228,7 +228,8 @@
 		
 		function fn_id_duplicate(){
 			let id=$("#id").val().trim();
-			if(id.length==0){
+			var idPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			if(id.length==0 || !idPattern.test(id)){
 				alert("이메일을 입력해주세요.");
 			}else{
 				const url="<%=request.getContextPath()%>/checkIdDuplicate";
@@ -311,7 +312,7 @@
 				const nn=$("#nickname").val().trim();
 				$("input[name=checked_nn]").val('');
 				if(nn!==""){
-					$("#nnConstrain").html("10자 이하의 한글, 영문, 숫자입력이 가능합니다.");
+					$("#nnConstrain").html("10자 이하의 입력이 가능합니다.");
 					$("#nnConstrain").css({"display":"block"});
 					$("#nnConstrain").css({"color":"green"});
 				}
