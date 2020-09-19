@@ -128,6 +128,7 @@ border:1px #B2C7D9 solid;
 .nick{
 	 float: left;
 }
+
 /* 현재 방번호 상단에 보여주기 위해 */
 /* #roomno{
 text-align:center;
@@ -138,6 +139,9 @@ margin-top:10px;
 
 <div id="side">
 	<div id="chat">
+	<!-- tradeStage 방의 상태가 2단계인경우
+	게시판 상세페이지에서 방이 생성될때 정보를 변경 후 Attribute 보내줘야됨 
+	-->
 			<c:if test="${tradeStage == 2}">
 					<div id="ChatArea"></div>
 					<div id="inputDiv">
@@ -150,7 +154,7 @@ margin-top:10px;
 
 <script>
 
-/* 메인 Window 사이즈 조절 막기 */
+/* 메인 Window 사이즈 조절 막기 x,y는 chatRoomServlet에서 파라미터로 받아와야됨*/
 
 $(this).resize(fixedSize);
 function fixedSize() {
@@ -161,7 +165,9 @@ function fixedSize() {
 
 // 게시글 상태가 2단계일때 실행
 if("${tradeStage}"=="2"){
+	//소켓 생성
 	var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket");
+	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
 		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}")));
@@ -231,6 +237,7 @@ if("${tradeStage}"=="2"){
 			sendMessage();
 		}
 	});
+	
 	//메세지 객체
 	function Message(sendNickName,msg,curMemsList,boardId){
 		this.sendNickName=sendNickName;
