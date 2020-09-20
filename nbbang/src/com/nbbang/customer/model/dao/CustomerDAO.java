@@ -104,6 +104,27 @@ public class CustomerDAO {
 		return result;
 	}
 
+	public int viewDetailRead(Connection conn, CustomerCenter c) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertQnA"));
+			
+			pstmt.setString(1, c.getCsType());
+			pstmt.setString(2, c.getCsContent());
+			pstmt.setString(3, c.getCsFile());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 }

@@ -58,7 +58,7 @@ pageEncoding="UTF-8"%>
 
 
 
-<div id='board-container'>
+<div id='writing-container'>
   <h3>문의를 작성하시오.</h3>
   <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
     enctype="multipart/form-data">

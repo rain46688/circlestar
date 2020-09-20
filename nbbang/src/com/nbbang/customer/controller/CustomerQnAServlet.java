@@ -43,7 +43,7 @@ public class CustomerQnAServlet extends HttpServlet {
 		
 		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage);
 		for(CustomerCenter c : list) {
-			System.out.println(c);
+			System.out.println(list);
 		}
 		int totalData=new CustomerService().qnACount();
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
