@@ -22,7 +22,7 @@
 }
 
 /* 텍스트 출력되는 하얀부분 위 박스 */
-#msgTextArea{
+#ChatArea{
 /* 아래 스크롤바 감추기 */
 	overflow-x:hidden;
 	height:80%;
@@ -35,7 +35,7 @@
 ::-webkit-scrollbar { display: none; }
 
 /* 밑에 입력하는 하얀부분 */
-#inputdiv{
+#inputDiv{
 	height:20%;
 	width:100%;
 	background-color:white;
@@ -44,7 +44,7 @@
 }
 
 /* 하얀부분 안에들어가는 입력하는 곳 텍스트 */
-#textMsg{
+#msgText{
 	resize: none;
 	border: none;
 	padding: 10px 0px 10px 0px;
@@ -205,7 +205,7 @@ if("${tradeStage}"=="2"){
 		}else if(msg["sendNickName"] == "ADMIN"){
 			let html="<div class='tmp'><div class='admin'> 시스템 관리자 : "+msg["msg"] + "</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
-		}else if(msg["sendNickName"] == "${m.memberId}"){
+		}else if(msg["sendNickName"] == "${m.nickname}"){
 			//자기 메세지일 경우 분기처리
 	 		let html="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
