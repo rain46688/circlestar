@@ -14,9 +14,27 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cstmcss/main.css" type="text/css">
-<style>
 
+<style>
+	#btn-news {
+		float: right;
+		margin-top: 11%;
+		margin-right: 16%;
+	}
+
+	.btn_1 {
+		color: #f87d09;
+		text-align: center;
+		width: 130px;
+		background-color: white;
+		border: 3px solid #647503;
+		border-top-left-radius: 40%;
+		border-bottom-right-radius: 40%;
+	}
+
+	.btn_1:hover {
+		color: red;
+	}
 </style>
 
 <div id="kdh-container">
@@ -62,27 +80,6 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 	</div>
 </div>
 
-<style>
-	#btn-news {
-		float: right;
-		margin-top: 11%;
-		margin-right: 16%;
-	}
-
-	.btn_1 {
-		color: #f87d09;
-		text-align: center;
-		width: 130px;
-		background-color: white;
-		border: 3px solid #647503;
-		border-top-left-radius: 40%;
-		border-bottom-right-radius: 40%;
-	}
-
-	.btn_1:hover {
-		color: red;
-	}
-</style>
 
 <!-- 작성버튼 -->
 <div id="btn-news">
@@ -91,22 +88,23 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 <section class="qnaSection">
 	<div class="cs-alert">
 		<div class="cs-alert__title">
-			<image  src="<%=request.getContextPath()%>/images/war.png" style="width: 40px;" ><a>불법거래 유도 관련 문의</a> <br>
-				
-			</div>
-					<div class="cs-alert__content">
-						<a>더 빠른 안내를 위하여 불법거래 유도 관련 문의는 <br> <span>엔빵 불법거래 신고센터 (031-112)</span>로 문의를 해 주시기 바랍니다.</a>
-					</div>
+			<image src="<%=request.getContextPath()%>/images/war.png" style="width: 40px;"><a>불법거래 유도 관련 문의</a> <br>
+
+		</div>
+		<div class="cs-alert__content">
+			<a>더 빠른 안내를 위하여 불법거래 유도 관련 문의는 <br> <span>엔빵 불법거래 신고센터 (031-112)</span>로 문의를 해 주시기 바랍니다.</a>
+		</div>
 	</div>
 	<div class="qna-caution">
 		<ul>
 			<li class="caution-li caution-first ">1:1문의</li>
-			<li class="caution-li caution-c">●전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있으니, 문의 시 입력하지 않도록 주의해 주시기 바랍니다.</li>
+			<li class="caution-li caution-c">●전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있으니, 문의 시 입력하지 않도록 주의해 주시기
+				바랍니다.</li>
 			<li class="caution-li caution-c">●개인정보를 기입하지 마세요.</li>
 		</ul>
 	</div>
 	<div class="coustomer-news">
-		<table class="tbl-news" >
+		<table class="tbl-news">
 			<colgroup>
 				<col width="15%">
 				<col width="15%">
@@ -123,69 +121,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 					<th>문의날짜</th>
 				</tr>
 				<% if(list.isEmpty()){ %>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
+
 				<tr>
 					<td>1</td>
 					<td>공지</td>
@@ -198,9 +134,20 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
                     for(CustomerCenter cc : list) { %>
 				<tr>
 					<td> <%=cc.getCsNo()%> </td>
+
 					<td><%=cc.getCsType()%></td>
-					<td><a href=""><%=cc.getCsTitle()%></td>
+
+					<td>
+						<a
+							href="javascript:openWindowPop('<%=request.getContextPath()%>/customer/customerReadFrm','NbbangQnAContent')">
+							<%=cc.getCsTitle()%>
+							<div class="container">
+
+					</td>
+
+
 					<td><%=cc.getCsWriter()%></td>
+
 					<td><%=cc.getCsDate()%></td>
 				</tr>
 				<%
@@ -210,12 +157,18 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 
 			</thead>
 		</table>
-				<div class="page_wrap">
-					<%=request.getAttribute("pageBar")%>
-				</div>
+		<div class="page_wrap">
+			<%=request.getAttribute("pageBar")%>
+		</div>
 	</div>
 
+	<script>
+		function openWindowPop(url, name) {
+			var options = 'top=10, left=10, width=800, height=600, status=no, menubar=no, toolbar=no, resizable=no';
+			window.open(url, name, options);
+		}
 
+	</script>
 
 
 </section>

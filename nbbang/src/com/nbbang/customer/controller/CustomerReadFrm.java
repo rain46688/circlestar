@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CustomerMainService
+ * Servlet implementation class CustomerRead
  */
-@WebServlet("/customerMain")
-public class CustomerMainService extends HttpServlet {
+@WebServlet("/customer/customerReadFrm")
+public class CustomerReadFrm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CustomerMainService() {
+    public CustomerReadFrm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class CustomerMainService extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/customer/customerMain.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/customer/customerRead.jsp").forward(request, response);
 	}
 
 	/**

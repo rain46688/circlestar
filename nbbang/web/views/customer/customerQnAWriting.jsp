@@ -5,10 +5,6 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/main.css" type="text/css">
 <style>
 
-
-  #fontBold {
-    font-weight: bold;
-  }
 </style>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/cstmcss/main.css" type="text/css">

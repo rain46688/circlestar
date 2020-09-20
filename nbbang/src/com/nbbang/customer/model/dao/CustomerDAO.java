@@ -20,7 +20,7 @@ public class CustomerDAO {
 
 	public CustomerDAO() {
 		// TODO Auto-generated constructor stub
-		String filePath = BoardDao.class.getResource("/sql/customer/customer.properties").getPath();
+		String filePath = CustomerDAO.class.getResource("/sql/customer/customer.properties").getPath();
 		try {
 			prop.load(new FileReader(filePath));
 		} catch (Exception e) {

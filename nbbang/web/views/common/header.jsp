@@ -43,7 +43,7 @@
 				<%} %>
 
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
-					onclick="location.href='<%=request.getContextPath()%>/customer/customerMain'">고객센터</button>
+					onclick="location.href='<%=request.getContextPath()%>/customerMain'">고객센터</button>
 
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/notice/noticeList'">공지사항</button>

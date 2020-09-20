@@ -139,11 +139,11 @@
   <div id="kdh-sidebar-left">
     <h2></h2>
     <ul class="side-bar-kdh">
-
-      <li class="cstmt-list" ><a class="main-a"
+	
+		      <li class="cstmt-list" ><a class="main-a"
           style="font-family: 'Gothic A1', sans-serif;"
           href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
-
+	
       <li class="cstmt-list"> <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
           href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
 
@@ -152,7 +152,7 @@
 
       <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
           href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
-
+	
     </ul>
     <ul class="side-bar-kdh">
       <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">홈</a>

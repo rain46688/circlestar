@@ -54,7 +54,7 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		String csWriter=mPr.getParameter("writer");
 		String csType=mPr.getParameter("qnaType");
 		String csTitle=mPr.getParameter("title");
-		String csContent=mPr.getParameter("content");
+		String csContent=mPr.getParameter("contentwrite");
 		String csFile=mPr.getFilesystemName("csFile");
 		System.out.println(csWriter+" " +csType+" "+csTitle+" "+csContent+" "+csFile+" ");
 		CustomerCenter c=new CustomerCenter(0,csWriter,csType,csTitle,csContent,null,csFile);
