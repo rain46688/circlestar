@@ -68,8 +68,7 @@ public class LoginServlet extends HttpServlet {
 			if(m.isPwIsUuid()==true) {
 				request.setAttribute("msg", "임시 비밀번호를 사용 중입니다. 비밀번호를 변경해주세요.");
 				request.setAttribute("loc", "/");
-				RequestDispatcher rd=request.getRequestDispatcher("/views/common/msg.jsp");
-				rd.forward(request,response);
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			}else{
 				response.sendRedirect(request.getContextPath());				
 			}
