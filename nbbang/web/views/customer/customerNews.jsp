@@ -85,7 +85,7 @@
         <h1>각종 공지사항과 이벤트를 확인하세요.</h1>
 <section>
     <div class="coustomer-news">
-        <table class="tbl-news" style="">
+        <table class="tbl-news" >
             <colgroup>
                 <col width="15%">
                 <col width="15%">
