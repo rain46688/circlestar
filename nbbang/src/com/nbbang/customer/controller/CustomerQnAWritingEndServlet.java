@@ -51,12 +51,12 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 	
 		MultipartRequest mPr=new MultipartRequest(request,path,maxSize,encode,new DefaultFileRenamePolicy());
 		
-		String csWriter=mPr.getParameter("wirter");
+		String csWriter=mPr.getParameter("writer");
 		String csType=mPr.getParameter("qnaType");
 		String csTitle=mPr.getParameter("title");
 		String csContent=mPr.getParameter("content");
 		String csFile=mPr.getFilesystemName("csFile");
-		
+		System.out.println(csWriter+" " +csType+" "+csTitle+" "+csContent+" "+csFile+" ");
 		CustomerCenter c=new CustomerCenter(0,csWriter,csType,csTitle,csContent,null,csFile);
 		int result=new CustomerService().insertQna(c);
 		
