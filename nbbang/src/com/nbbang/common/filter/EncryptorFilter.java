@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet Filter implementation class EncryptorFilter
  */
-@WebFilter(servletNames = {"memberEnroll","login"})
+@WebFilter(servletNames = {"memberEnroll","login","updatePassword"})
 public class EncryptorFilter implements Filter {
 
     /**

@@ -91,9 +91,9 @@ button#chargebtn{
          </div>
          <div id="memberInfo">
             <p class="title"><%=m.getMemberId() %>님의 마이페이지</p>
-            <span>회원등급:&nbsp;<%=m.getGrade() %></span>&nbsp;&nbsp;<span>가용포인트:&nbsp;<%=m.getPoint() %></span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
+            <span>회원등급:&nbsp;<%=m.getGrade() %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>가용포인트:&nbsp;<%=m.getPoint() %></span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
             <span>개설 가능한 방 개수:&nbsp;<%=m.getMaxRoomCount() %></span><br>
-            <span>가입일:&nbsp;<%=m.getEnrollDate() %></span>&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;<%=m.getReportCount() %></span><br>
+            <span>가입일:&nbsp;<%=m.getEnrollDate() %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;<%=m.getReportCount() %></span><br>
            
          </div>
       </div>
@@ -126,7 +126,7 @@ button#chargebtn{
          <p class="title">비밀번호 수정하기</p>
          <p class="text">비밀번호 수정으로 개인정보를 보호하세요.</p>
          <p><button type="button" class="btn btn-outline-warning" 
-         	onclick="location.href='<%=request.getContextPath()%>/updatePw'">수정하기</button></p>
+         	onclick="location.href='<%=request.getContextPath()%>/updatePw?usid=<%=loginnedMember.getUsid()%>'">수정하기</button></p>
       </div>
       <div class="item smallBox" id="commuModify">
          <p class="title">연락처 수정하기</p>

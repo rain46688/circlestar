@@ -19,7 +19,7 @@ public class EncryptorWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getParameter(String name) {
 		String returnValue="";
-		if(name.equals("password")) {
+		if(name.equals("password") || name.equals("newPw")) {
 			String pw=super.getParameter(name);
 			String encPw=getSha512(pw);
 			returnValue=encPw;
