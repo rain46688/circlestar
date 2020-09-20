@@ -6,10 +6,15 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script> 
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
 
 /* === 채팅 구현 부분  === */
+
+*{
+font-family: 'Jua', sans-serif;
+}
 
 /* 사이드바 사이즈  */
 #side {
@@ -197,7 +202,7 @@ if("${tradeStage}"=="2"){
 			}else{ 
 				html="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 합류하였습니다." + "</div></div>";
 			}
-				$("#ChatArea").html($("#ChatArea").html()+html); 
+			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else if(msg["msg"] == "SYS2"){
 			html="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 퇴장하였습니다." + "</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
@@ -226,8 +231,8 @@ if("${tradeStage}"=="2"){
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}")));
-		txt.val("");
-		console.log(txt.val());
+		txt.val('');
+		txt.val(txt.replace(/\r\n/g, ''));
 			}
 		};
 		

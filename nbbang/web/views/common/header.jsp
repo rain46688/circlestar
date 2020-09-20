@@ -45,9 +45,6 @@
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/customer/customerMain'">고객센터</button>
 
-				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
-					onclick="location.href='<%=request.getContextPath()%>/notice/noticeList'">공지사항</button>
-
 				<%if(loginnedMember!=null) {%>		
    				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
    					onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>'">마이페이지</button>
