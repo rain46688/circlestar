@@ -12,13 +12,15 @@ public class CustomerCenter {
 	private String csContent;
 	private Date csDate;
 	private String csFile;
+	private Boolean csIscheck;
+	private String csNickname;
 	
 	public CustomerCenter() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public CustomerCenter(int csNo, String csWriter, String csType, String csTitle, String csContent, Date csDate,
-			String csFile) {
+			String csFile, Boolean csIscheck, String csNickname) {
 		super();
 		this.csNo = csNo;
 		this.csWriter = csWriter;
@@ -27,6 +29,8 @@ public class CustomerCenter {
 		this.csContent = csContent;
 		this.csDate = csDate;
 		this.csFile = csFile;
+		this.csIscheck = csIscheck;
+		this.csNickname = csNickname;
 	}
 
 	public int getCsNo() {
@@ -85,11 +89,32 @@ public class CustomerCenter {
 		this.csFile = csFile;
 	}
 
+	public Boolean getCsIscheck() {
+		return csIscheck;
+	}
+
+	public void setCsIscheck(Boolean csIscheck) {
+		this.csIscheck = csIscheck;
+	}
+
+	public String getCsNickname() {
+		return csNickname;
+	}
+
+	public void setCsNickname(String csNickname) {
+		this.csNickname = csNickname;
+	}
+
 	@Override
 	public String toString() {
 		return "CustomerCenter [csNo=" + csNo + ", csWriter=" + csWriter + ", csType=" + csType + ", csTitle=" + csTitle
-				+ ", csContent=" + csContent + ", csDate=" + csDate + ", csFile=" + csFile + "]";
+				+ ", csContent=" + csContent + ", csDate=" + csDate + ", csFile=" + csFile + ", csIscheck=" + csIscheck
+				+ ", csNickname=" + csNickname + "]";
 	}
+
+	
+
+
 
 	
 	

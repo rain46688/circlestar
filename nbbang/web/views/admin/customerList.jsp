@@ -4,7 +4,8 @@
 <style>
 #writecontainer {
 	border-radius: 5px;
-	border: 1px rgba(128, 128, 128, 0.5) solid;
+	/* border: 1px rgba(128, 128, 128, 0.5) solid; */
+	border: 1px #ECAF59 solid;
 	padding: 20px;
 }
 
@@ -49,6 +50,11 @@
 	display: table-row-group;
 }
 
+.nav-link{
+	font-size:20px;
+}
+
+
 </style>
 
 <div class="container" id="writecontainer">
@@ -61,12 +67,12 @@
 			<li class="nav-item">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</li>
 			<li class="nav-item">
 				<a class="nav-link active" href="#">
-					<small>처리</small>
+					<small>미처리</small>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">
-					<small>미처리</small>
+					<small>처리</small>
 				</a>
 			</li>
 		</ul>
@@ -85,29 +91,35 @@
 			</div>
 
 			<div class="divRow">
-				<div class="divCell">1</div>
-				<div class="divCell">2</div>
-				<div class="divCell">3</div>
-				<div class="divCell">4</div>
-			</div>
-			
-			<div class="divRow">
-				<div class="divCell">1</div>
-				<div class="divCell">2</div>
-				<div class="divCell">3</div>
-				<div class="divCell">4</div>
-			</div>
-			
-			<div class="divRow">
-				<div class="divCell">1</div>
-				<div class="divCell">2</div>
-				<div class="divCell">3</div>
-				<div class="divCell">4</div>
+				<div class="divCell">111111111111111111111111</div>
+				<div class="divCell">2222222222222222</div>
+				<div class="divCell">33333333333333334444444444444333</div>
+				<div class="divCell">4444444444444444</div>
 			</div>
 
+			<div class="divRow">
+				<div class="divCell">1</div>
+				<div class="divCell">2</div>
+				<div class="divCell">3</div>
+				<div class="divCell">4</div>
+			</div>
+			
+			<div class="divRow">
+				<div class="divCell">1</div>
+				<div class="divCell">2</div>
+				<div class="divCell">3</div>
+				<div class="divCell">4</div>
+			</div>
+	<br><br><br>
+		<br>
+		<nav aria-lable="Page navigation">
+			<ul class="pagination justify-content-center">
+				<%=request.getAttribute("pageBar")%>
+			</ul>
+		</nav>
+	<br>
 		</div>
 	</div>
-	<!-- DivTable.com -->
 
 </div>
 
