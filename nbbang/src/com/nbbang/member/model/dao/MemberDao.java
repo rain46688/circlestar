@@ -141,13 +141,13 @@ private Properties prop=new Properties();
 		return m;
 	}
 
-	public Member myPage(Connection conn, String usid) {
+	public Member myPage(Connection conn, int usid) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Member m=null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("myPage"));
-			pstmt.setString(1, usid);
+			pstmt.setInt(1, usid);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				m=inputData(rs);
