@@ -36,29 +36,33 @@ div#headContainer{
 }
 div#profilePicDiv{
    position: relative;
-   width: 20%;
+   width: 30%;
    float: left;
    display: flex;
    justify-content: center;
    align-items: center;
 }
 div#memberInfo{
-   width: 80%;
+   width: 70%;
    float: right;
 }
 div#profilePicField{
    position: relative;
    margin: auto;
    border-radius: 50%;
-   height: 9em;
+   height: 10em;
    width: 10em;
    border: 1px black solid;
    display: flex;
    justify-content: center;
    align-items: center;
    margin-left: 1em;
+   margin-right: 1em;
 }
-div#memberInfo, div.smallBox{
+div#memberInfo{
+   padding: 5% 3%;
+}
+div.smallBox{
    padding: 5%;
 }
 p.title{
@@ -84,13 +88,13 @@ button#chargebtn{
 <section>
    <div id="infoContainer" name="infoContainer" class="infoContainer">
       <div class="item" id="headContainer">
-         <div id="profilePicDiv" style="min-width: 150px;">
-            <div id="profilePicField" style="min-width: 130px;">
+         <div id="profilePicDiv" style="min-width: 180px;">
+            <div id="profilePicField" style="min-width: 150px;">
                <div id="profilePic">^^</div>
             </div>
          </div>
          <div id="memberInfo">
-            <p class="title"><%=m.getMemberId() %>님의 마이페이지</p>
+            <p class="title"><%=m.getNickname() %>님의 마이페이지</p>
             <span>회원등급:&nbsp;<%=m.getGrade() %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>가용포인트:&nbsp;<%=m.getPoint() %></span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
             <span>개설 가능한 방 개수:&nbsp;<%=m.getMaxRoomCount() %></span><br>
             <span>가입일:&nbsp;<%=m.getEnrollDate() %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;<%=m.getReportCount() %></span><br>
@@ -129,9 +133,10 @@ button#chargebtn{
          	onclick="location.href='<%=request.getContextPath()%>/updatePw?usid=<%=loginnedMember.getUsid()%>'">수정하기</button></p>
       </div>
       <div class="item smallBox" id="commuModify">
-         <p class="title">연락처 수정하기</p>
-         <p class="text">이름, 전화번호, 주소, 이메일 수정이 가능합니다.</p>
-         <p><button type="button" class="btn btn-outline-warning">수정하기</button></p>
+         <p class="title">개인정보</p>
+         <p class="text">개인정보를 확인 및 수정할 수 있습니다.</p>
+         <p><button type="button" class="btn btn-outline-warning"
+         	onclick="location.href='<%=request.getContextPath()%>/memberInfo?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
       </div>
       <div></div>
    </div>

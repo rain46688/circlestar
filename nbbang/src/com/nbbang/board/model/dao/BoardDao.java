@@ -47,6 +47,7 @@ public class BoardDao {
 				b.setWriterUsid(rs.getInt("WRITER_USID"));
 				b.setContent(rs.getString("CONTENT"));
 				b.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				b.setFiles(rs.getString("FILES"));
 				list.add(b);
 			}
 		} catch (SQLException e) {
