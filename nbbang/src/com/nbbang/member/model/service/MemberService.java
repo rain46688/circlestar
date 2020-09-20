@@ -44,7 +44,7 @@ private MemberDao dao=new MemberDao();
 	}
 
 
-	public Member myPage(String usid) {
+	public Member myPage(int usid) {
 		Connection conn=getConnection();
 		Member m=dao.myPage(conn, usid);
 		close(conn);
@@ -74,12 +74,13 @@ private MemberDao dao=new MemberDao();
 		return m;
 	}
 
-	public void updateFindPwMember(String encryptedUuid, int pwIsUuid, int usid) {
+	public int updateFindPwMember(String encryptedUuid, int pwIsUuid, int usid) {
 		Connection conn=getConnection();
 		int result=dao.updateFindPwMember(conn,encryptedUuid,pwIsUuid,usid);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
+		return result;
 	}
 
 }

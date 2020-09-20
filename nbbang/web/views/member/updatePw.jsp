@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+<%
+	Member m=(Member)request.getAttribute("member");
+%>
 <style>
     div#updatePwContainer{
         position: relative;
@@ -44,9 +47,9 @@
         text-align: left;
     }
     div.constrain{
-        margin-top: -10px;
+        margin-top: -15px;
         margin-bottom: 15px;
-        margin-left: 60px;
+        margin-left: 70px;
         font-size: 12px;
         color: red;
         display: none;
@@ -54,7 +57,7 @@
 	}
 </style>
 <section>
-    <form id="updatePwForm" action="">
+    <form id="updatePwForm" action="<%=request.getContextPath() %>/updatePwCpl" method="post"">
         <div id="updatePwContainer" style="padding-top: 50px;">
             <div class="item textField" id="containerTitle">
                 <h2 id="updatePwTitle" style="margin-bottom: 40px;" >비밀번호 변경하기</h2>
@@ -76,58 +79,87 @@
             <div class="constrain" id="newPwConstrain2"></div>
 
             <div id="btnsField" class="item button">
-                <button>변경하기</button>
-                <button>취소</button>
+                <button type="button" onclick="fn_updatePw();">변경하기</button>
+                <button type="button" onclick="history.back();">취소</button>
             </div>
+            <input type="hidden" name="usid" value="<%=m.getUsid()%>">
+            <input type="hidden" name="realPw" value="<%=m.getMemberPwd()%>">
         </div>
     </form>
     <script>
 		var pwPattern = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,16}$/;
 		$(function(){
-		// 	$("#pw").blur(e=>{
-		// 		const pw=$("#pw").val().trim();
-		// 		if(pw===""){
-		// 			$("#pwConstrain").html("필수 입력 항목입니다.");
-		// 			$("#pwConstrain").css({"display":"block"});
-		// 		}
-		// 	})
-		// 	$("#pw").keyup(function(e){
-		// 		const pw=$("#pw").val().trim();
-		// 		const pw2=$("#pw2").val().trim();
-		// 		if(!pwPattern.test(pw)){
-		// 			$("#pwConstrain").html("4~16자 영문, 숫자를 혼합하여 입력해주세요");
-		// 			$("#pwConstrain").css({"display":"block"});
-		// 		}else{
-		// 			$("#pwConstrain").css({"display":"none"});
-		// 		}				
-		// 		if(pw!=pw2){
-		// 			$("#pw2Constrain").html("비밀번호 확인을 해주세요.");
-		// 			$("#pw2Constrain").css({"display":"block"});
-		// 		}
-		// 	});
-		// 	$("#pw2").blur(e=>{
-		// 		const pw=$("#pw").val().trim();
-		// 		const pw2=$("#pw2").val().trim();
-		// 		if(pw2===""){
-		// 			$("#pw2Constrain").html("비밀번호 확인을 해주세요.");
-		// 			$("#pw2Constrain").css({"display":"block"});
-		// 		}else if(pw!=pw2){
-		// 			$("#pw2Constrain").html("비밀번호가 일치하지 않습니다.");
-		// 			$("#pw2Constrain").css({"display":"block"});
-		// 		}
-		// 	})
-		// 	$("#pw2").keyup(function(e){
-		// 		const pw=$("#pw").val().trim();
-		// 		const pw2=$("#pw2").val().trim();
-		// 		if(pw!=pw2){
-		// 			$("#pw2Constrain").html("비밀번호가 일치하지 않습니다.");
-		// 			$("#pw2Constrain").css({"display":"block"});
-		// 		}else{
-		// 			$("#pw2Constrain").css({"display":"none"});
-		// 		}
-
-		// 	});
+            $("#crtPw").blur(e=>{
+				const crtPw=$("#crtPw").val().trim();
+				if(crtPw===""){
+					$("#crtPwConstrain").html("필수 입력 항목입니다.");
+					$("#crtPwConstrain").css({"display":"block"});
+				}else{
+                    $("#crtPwConstrain").css({"display":"none"});
+                }
+			});
+            $("#crtPw").keyup(function(e){
+				const crtPw=$("#crtPw").val().trim();
+				if(crtPw===""){
+					$("#crtPwConstrain").html("필수 입력 항목입니다.");
+					$("#crtPwConstrain").css({"display":"block"});
+				}else{
+                    $("#crtPwConstrain").css({"display":"none"});
+                }
+			});
+            $("#newPw").blur(e=>{
+				const newPw=$("#newPw").val().trim();
+				if(newPw===""){
+					$("#newPwConstrain").html("필수 입력 항목입니다.");
+					$("#newPwConstrain").css({"display":"block"});
+				}
+			})
+			$("#newPw").keyup(function(e){
+				const newPw=$("#newPw").val().trim();
+				const newPw2=$("#newPw2").val().trim();
+				if(!pwPattern.test(newPw)){
+					$("#newPwConstrain").html("4~16자 영문, 숫자를 혼합하여 입력해주세요");
+					$("#newPwConstrain").css({"display":"block"});
+				}else{
+					$("#newPwConstrain").css({"display":"none"});
+				}				
+				if(newPw!=newPw2){
+					$("#newPwConstrain2").html("비밀번호 확인을 해주세요.");
+					$("#newPwConstrain2").css({"display":"block"});
+				}
+			});
+			$("#newPw2").blur(e=>{
+				const newPw=$("#newPw").val().trim();
+				const newPw2=$("#newPw2").val().trim();
+				if(newPw2===""){
+					$("#newPwConstrain2").html("비밀번호 확인을 해주세요.");
+					$("#newPwConstrain2").css({"display":"block"});
+				}else if(newPw!=newPw2){
+					$("#newPwConstrain2").html("비밀번호가 일치하지 않습니다.");
+					$("#newPwConstrain2").css({"display":"block"});
+				}
+			})
+			$("#newPw2").keyup(function(e){
+				const newPw=$("#newPw").val().trim();
+				const newPw2=$("#newPw2").val().trim();
+				if(newPw!=newPw2){
+					$("#newPwConstrain2").html("비밀번호가 일치하지 않습니다.");
+					$("#newPwConstrain2").css({"display":"block"});
+				}else{
+					$("#newPwConstrain2").css({"display":"none"});
+				}
+			});
 		});
+        function fn_updatePw(){
+            const crtPw=$("#crtPw").val().trim();
+            const newPw=$("#newPw").val().trim();
+			const newPw2=$("#newPw2").val().trim();
+            if(crtPw!=="" && (newPw!==""&&pwPattern.test(newPw)) && (newPw2!==""&&newPw===newPw2)){
+                $("#updatePwForm").submit();
+            }else{
+				alert("필수 입력 항목을 확인해주세요.");
+			}
+        };
     </script>
 </section>
 <%@ include file="/views/common/footer.jsp" %>

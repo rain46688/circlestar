@@ -1,11 +1,15 @@
 package com.nbbang.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Member;
 
 /**
  * Servlet implementation class UpdatePwPageServlet
@@ -26,7 +30,9 @@ public class UpdatePwPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		Member m=new MemberService().myPage(usid);
+		request.setAttribute("member", m);
 		request.getRequestDispatcher("/views/member/updatePw.jsp").forward(request, response);
 	}
 

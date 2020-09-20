@@ -37,7 +37,7 @@ public class MyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String usid=request.getParameter("usid");
+		int usid=Integer.parseInt(request.getParameter("usid"));
 		Member m=new MemberService().myPage(usid);
 		String memberId;
 		String phone;
