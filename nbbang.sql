@@ -35,6 +35,7 @@ CREATE TABLE MEMBER
     UNIQUE(PHONE,EMAIL),PRIMARY KEY(MEMBER_ID)
 );
 
+select * from member;
 
 ------------------------------------------------------------------------------------------
 

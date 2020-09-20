@@ -248,6 +248,7 @@
 		};
 
 		// pw제약조건
+		var pwPattern = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,16}$/;
 		$(function(){
 			$("#pw").blur(e=>{
 				const pw=$("#pw").val().trim();
@@ -257,7 +258,6 @@
 				}
 			})
 			$("#pw").keyup(function(e){
-				var pwPattern = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,16}$/;
 				const pw=$("#pw").val().trim();
 				const pw2=$("#pw2").val().trim();
 				if(!pwPattern.test(pw)){
@@ -296,6 +296,7 @@
 		});
 
 		// 닉네임 제약조건
+		var nnPattern= /[0-9]|[a-z]|[A-Z]|[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{1,10}/;
 		$(function(){
 			$("#nickname").blur(e=>{
 				const nn=$("#nickname").val().trim();
@@ -308,7 +309,6 @@
 				}
 			});
 			$("#nickname").keyup(function(e){
-				// var nnPattern= /[0-9]|[a-z]|[A-Z]|[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{1,10}/;
 				const nn=$("#nickname").val().trim();
 				$("input[name=checked_nn]").val('');
 				if(nn!==""){
@@ -340,6 +340,7 @@
 		};
 
 		//이름 제약조건
+		var namePattern= /[a-zA-Z가-힣]{2,5}$/;
 		$(function(){
 			$("#name").blur(e=>{
 				const name=$("#name").val().trim();
@@ -347,17 +348,22 @@
 					$("#nameConstrain").html("필수 입력 항목입니다.");
 					$("#nameConstrain").css({"display":"block"});
 					$("#nameConstrain").css({"color":"red"});
+				}else if(name!==""&&!namePattern.test(name)){
+					$("#nameConstrain").html("2~5자의 한글, 영문 입력이 가능합니다.");
+					$("#nameConstrain").css({"display":"block"});
+					$("#nameConstrain").css({"color":"green"});
 				}else{
 					$("#nameConstrain").css({"display":"none"});
 				}
 			});
 			$("#name").keyup(function(e){
-				var namePattern= /[a-z]|[A-Z]|[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}/;
 				const name=$("#name").val().trim();
-				if(name!==""){
+				if(!namePattern.test(name)){
 					$("#nameConstrain").html("2~5자의 한글, 영문 입력이 가능합니다.");
 					$("#nameConstrain").css({"display":"block"});
 					$("#nameConstrain").css({"color":"green"});
+				}else{
+					$("#nameConstrain").css({"display":"none"});
 				}
 			});
 		});
@@ -371,13 +377,17 @@
 		});
 
 		//생년월일 제약조건
-		var yyPattern=/[0-9]{4}/;
-		var ddPattern=/[0-9]{1,2}/;
+		var yyPattern=/[0-9]{4}$/;
+		var ddPattern=/[0-9]{2}$/;
 		$(function(){
 			$("#year").keyup(function(e){
 				const yy=$("#year").val().trim();
+				const mm=$("#month").val();
 				if(!yyPattern.test(yy)){
 					$("#bdConstrain").html("태어난 년도 네 자리를 입력해주세요");
+					$("#bdConstrain").css({"display":"block"});
+				}else if(yyPattern.test(yy)&& (mm==="월"||mm==="")){
+					$("#bdConstrain").html("태어난 월을 선택해주세요");
 					$("#bdConstrain").css({"display":"block"});
 				}else{
 					$("#bdConstrain").css({"display":"none"});
@@ -388,21 +398,21 @@
 				const dd=$("#date").val().trim();
 				if(mm==="01" || mm==="03" || mm==="05" || mm==="07" || mm==="08" || mm==="10" || mm==="12"){
 					if(!ddPattern.test(dd) || Number(dd)>31){
-						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").html("태어난 날을 두 자리로 입력해주세요");
 						$("#bdConstrain").css({"display":"block"});
 					}else{
 						$("#bdConstrain").css({"display":"none"});
 					}
 				}else if(mm==="02"){
 					if(!ddPattern.test(dd) || Number(dd)>29){
-						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").html("태어난 날을 두 자리로 입력해주세요");
 						$("#bdConstrain").css({"display":"block"});
 					}else{
 						$("#bdConstrain").css({"display":"none"});
 					}
 				}else{
 					if(!ddPattern.test(dd) || Number(dd)>30){
-						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").html("태어난 날을 두 자리로 입력해주세요");
 						$("#bdConstrain").css({"display":"block"});
 					}else{
 						$("#bdConstrain").css({"display":"none"});
@@ -417,24 +427,27 @@
 					$("#bdConstrain").html("필수 입력 항목입니다.");
 					$("#bdConstrain").css({"display":"block"});
 					$("#bdConstrain").css({"color":"red"});
-				}
-				if(mm==="01" || mm==="03" || mm==="05" || mm==="07" || mm==="08" || mm==="10" || mm==="12"){
+				}else if(!yyPattern.test(yy)){
+					$("#bdConstrain").html("태어난 년도 네 자리를 입력해주세요.");
+					$("#bdConstrain").css({"display":"block"});
+					$("#bdConstrain").css({"color":"red"});
+				}else if(yy!==""&&(mm==="01" || mm==="03" || mm==="05" || mm==="07" || mm==="08" || mm==="10" || mm==="12")){
 					if(!ddPattern.test(dd) || Number(dd)>31){
-						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").html("태어난 날을 두 자리로 입력해주세요");
 						$("#bdConstrain").css({"display":"block"});
 					}else{
 						$("#bdConstrain").css({"display":"none"});
 					}
-				}else if(mm==="02"){
+				}else if(yy!==""&&mm==="02"){
 					if(!ddPattern.test(dd) || Number(dd)>29){
-						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").html("태어난 날을 두 자리로 입력해주세요");
 						$("#bdConstrain").css({"display":"block"});
 					}else{
 						$("#bdConstrain").css({"display":"none"});
 					}
 				}else{
 					if(!ddPattern.test(dd) || Number(dd)>30){
-						$("#bdConstrain").html("태어난 날 두 자리를 입력해주세요");
+						$("#bdConstrain").html("태어난 날을 두 자리로 입력해주세요");
 						$("#bdConstrain").css({"display":"block"});
 					}else{
 						$("#bdConstrain").css({"display":"none"});
@@ -444,6 +457,7 @@
 		});
 
 		//전화번호 제약조건
+		var pnPattern = /^[0-9]{10,11}$/;
 		$(function(){
 			$("#phone").blur(e=>{
 				const phone=$("#phone").val().trim();
@@ -467,7 +481,6 @@
 
 		function fn_phone_duplicate(){
 			let pn=$("#phone").val().trim();
-			var pnPattern = /^[0-9]{10,11}$/;
 			if(pn.length==0 || !pnPattern.test(pn)){
 				alert("휴대폰 번호를 입력해주세요.");
 			}else{
@@ -585,13 +598,13 @@
 				alert('주소 입력을 해주세요.');
 			}
 			//제약조건을 만족했나요
-			if(id!=="" && pw!=="" && pw2!=="" && nn!=="" && name!=="" && (gender.length=1||gender.length>1)
-				&& yy!=="" && mm!=="" && mm!=="월" && dd!=="" && phone!=="" && address!==""
+			if(id!=="" && (pw!==""&&pwPattern.test(pw)) && (pw2!==""&&pw===pw2) && (nn!==""&&nnPattern.test(nn)) && (name!==""&&namePattern.test(name)) && (gender.length=1||gender.length>1)
+				&& (yy!=="" && yyPattern.test(yy)) && mm!=="" && mm!=="월" && (dd!==""&&ddPattern.test(dd)) && (phone!==""&&pnPattern.test(phone)) && address!==""
 				&& $("input[name='checked_id']").val()!='' && $("input[name='checked_nn']").val()!=''
 				&& $("input[name='checked_ad']").val()!='' && $("input[name='checked_pn']").val()!=''){
 				$("#memberEnrollFrm").submit();
 			}else{
-				alert("필수 입력 항목을 작성해주세요.");
+				alert("필수 입력 항목을 확인해주세요.");
 			}
 
 		}
