@@ -65,7 +65,8 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		c.setCsTitle(mPr.getParameter("title"));
 		c.setCsContent(mPr.getParameter("contentwrite"));
 		c.setCsFile(mPr.getParameter("csFile"));
-		
+		c.setCsNickname(mPr.getParameter("nickname"));
+		c.setCsAnswer(mPr.getParameter("answer"));
 		
 		System.out.println(mPr.getParameter("writer")+mPr.getParameter("qnaType")+mPr.getParameter("title")+mPr.getParameter("contentwrite")+mPr.getParameter("csFile"));
 		

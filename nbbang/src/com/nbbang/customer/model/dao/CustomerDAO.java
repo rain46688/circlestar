@@ -45,13 +45,14 @@ public class CustomerDAO {
 				CustomerCenter cc = new CustomerCenter();
 				cc.setCsNo(rs.getInt("cs_id"));
 				cc.setCsWriter(rs.getString("cs_writer_usid"));
-				cc.setCsType(rs.getString("cs_tpye"));
+				cc.setCsType(rs.getString("cs_type"));
 				cc.setCsTitle(rs.getString("cs_title"));
 				cc.setCsContent(rs.getString("cs_content"));
 				cc.setCsDate(rs.getDate("cs_date"));
 				cc.setCsFile(rs.getString("cs_file"));
 				cc.setCsIscheck(rs.getBoolean("cs_ischeck"));
 				cc.setCsNickname(rs.getString("cs_nickname"));
+				cc.setCsAnswer(rs.getString("cs_answer"));
 				list.add(cc);
 			}
 		} catch (SQLException e) {
@@ -96,6 +97,8 @@ public class CustomerDAO {
 			pstmt.setString(3, c.getCsTitle());
 			pstmt.setString(4, c.getCsContent());
 			pstmt.setString(5, c.getCsFile());
+			pstmt.setString(6, c.getCsNickname());
+			
 			
 			result = pstmt.executeUpdate();
 

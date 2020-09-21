@@ -14,74 +14,11 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
 	rel="stylesheet">
 
-
-<style>
-	#btn-news {
-		float: right;
-		margin-top: 11%;
-		margin-right: 16%;
-	}
-
-	.btn_1 {
-		color: #f87d09;
-		text-align: center;
-		width: 130px;
-		background-color: white;
-		border: 3px solid #647503;
-		border-top-left-radius: 40%;
-		border-bottom-right-radius: 40%;
-	}
-
-	.btn_1:hover {
-		color: red;
-	}
-</style>
-
-<div id="kdh-container">
-	<div id="kdh-sidebar-left">
-		<h2></h2>
-		<ul class="side-bar-kdh">
-
-			<li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
-					href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
-
-			<li class="cstmt-list"> <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
-					href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
-
-			<li class="cstmt-list"><a class="main-a" style="font-family:  'Gothic A1', sans-serif;"
-					href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
-
-			<li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
-					href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
-
-		</ul>
-		<ul class="side-bar-kdh">
-			<li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">홈</a>
-			</li>
-			<li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">구경하기</a>
-			</li>
-			<li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">해외직구</a>
-			</li>
-			<li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">마이페이지</a>
-			</li>
-		</ul>
-		<ul class="side-bar-kdh">
-			<li id="list-image1"><a href="">
-					<image src="<%=request.getContextPath()%>/images/we.png" style="width: 150px; height: auto;">
-				</a></li>
-			<li id="list-image2"><a href="">
-					<image src="<%=request.getContextPath()%>/images/pang.png" style="width: 150px; height: auto;">
-				</a></li>
-			<li id="list-image3"><a href="">
-					<image src="<%=request.getContextPath()%>/images/llist1.png" style="width: 150px; height: auto;">
-				</a></li>
-
-		</ul>
-	</div>
-</div>
+<jsp:include page="maincss.jsp"></jsp:include>
 
 
-<!-- 작성버튼 -->
+
+
 <div id="btn-news">
 	<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm" class="btn_1">문의하기</a>
 </div>
@@ -92,7 +29,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 
 		</div>
 		<div class="cs-alert__content">
-			<a>더 빠른 안내를 위하여 불법거래 유도 관련 문의는 <br> <span>엔빵 불법거래 신고센터 (031-112)</span>로 문의를 해 주시기 바랍니다.</a>
+			<a>더 빠른 안내를 위하여 불법거래 유도 관련 문의는  <br> <span>엔빵 불법거래 신고센터 (031-112)</span>로 문의를 해 주시기 바랍니다.</a>
 		</div>
 	</div>
 	<div class="qna-caution">
@@ -140,7 +77,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 					<td>
 						<a
 							href="<%=request.getContextPath()%>/customer/customerReadFrm">
-							<%=cc.getCsTitle()%>
+							<%=cc.getCsTitle()%> </a>
 							<div class="container">
 
 					</td>
@@ -160,6 +97,10 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 		<div class="page_wrap">
 			<%=request.getAttribute("pageBar")%>
 		</div>
+		<!-- <div class="ad-content">
+		<a href="http://handscoffee.com/new_hands//board/new_board.php?bo_table=new_event&wr_id=173"><image src="<%=request.getContextPath()%>/images/ha1.jpg"></image>
+		</a>
+		</div> -->
 	</div>
 
 	<script>

@@ -1,0 +1,118 @@
+	<div id="container-qna">
+		<button type="button" id="btn-frm"
+			onclick="location.assign('<%=request.getContextPath()%>/customer/customerQnAFrm')">문의하기</button>
+		<li id="title-1">1:1문의</li>
+		<li id="title-2">*개인정보를 기입하지마세요.</li>
+		<li id="title-3">*허위정보를 기입하지마세요.</li>
+
+		<div id="customer-QNAlist">
+			<colgroup>
+				<col width="15%">
+				<col width="15%">
+				<col width="35%">
+				<col width="15%">
+				<col width="20%">
+			</colgroup>
+			<div class="qna-header">
+				<ul class="cstmt-qna">
+					<li class="qna-list">글번호</li>
+					<li class="qna-list">문의유형</li>
+					<li class="qna-list">제목</li>
+					<li class="qna-list">작성자</li>
+					<li class="qna-list">문의날짜</li>
+				</ul>
+			</div>
+
+			<div class="customer-QNAlist2">
+				<%
+				if (list.isEmpty()) {
+					%>
+				<ul class="cstmt-qna2">
+					<li class="qna-list2">1</li>
+					<li class="qna-list2">신고</li>
+					<li class="qna-list2"><a href="">너 신고합니다.</a></li>
+					<li class="qna-list2">김똑환</li>
+					<li class="qna-list2">2020-09-18</li>
+				</ul>
+				<%
+				} else {
+					for (CustomerCenter cc : list) {
+						%>
+				<ul class="cstmt-qna2">
+					<li class="qna-list2"><%=cc.getCsNo()%></li>
+					<li class="qna-list2"><%=cc.getCsType()%></li>
+					<li class="qna-list2"><a href=""><%=cc.getCsTitle()%></a></li>
+					<li class="qna-list2"><%=cc.getCsWriter()%></li>
+					<li class="qna-list2"><%=cc.getCsDate()%></li>
+				</ul>
+
+				<%
+					}
+				}
+				%>
+			</div>
+		</div>
+	</div>
+
+
+
+
+div#container-qna {
+    width: 800px;
+    height: 300px;
+    margin-left: 23%;
+    margin-right: auto;
+    margin-top: 6%;
+    margin-bottom: 10%;
+}
+ ul.cstmt-qna li.qna-list{
+    background-color: #eeeeee;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 18px;
+}
+.qna-list{
+    list-style: none;
+    display: inline;
+}
+ .qna-list2  {
+	text-align: center;
+	list-style: none;
+	
+	display: inline;
+	padding-top: 5%;
+	margin-left: 6%;
+	
+}
+
+
+.qna-list:first {
+	border-left: none;
+}
+
+#fontBold {
+	font-weight: bold;
+}
+
+#title-1, #title-2, #title-3 {
+	margin-left: 6%;
+	border-bottom: 10px;
+}
+
+#customer-QNAlist {
+    margin-top: 3%;
+    border: 1px solid black;
+    text-align: left;
+    width: auto;
+    height: 500px;
+    
+}
+
+#fontBold {
+	font-weight: bold;
+}
+div#kdh-header h1{
+	margin-left:15%;
+	
+	
+}
