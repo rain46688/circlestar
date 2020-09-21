@@ -464,6 +464,7 @@
 				if(phone===""){
 					$("#pnConstrain").html("필수 입력 항목입니다.");
 					$("#pnConstrain").css({"display":"block"});
+					$("#pnConstrain").css({"color":"red"});
 				}else{
 					$("#pnConstrain").css({"display":"none"});
 				}

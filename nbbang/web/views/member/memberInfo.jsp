@@ -9,108 +9,138 @@
         position: relative;
 	    background: #FFFFFF;
 	    text-align: center;
-        margin: 5% 35%;
+        margin: 5% 30%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
         justify-items: stretch;
-        width: 30%;
-        
+        width: 40%;
     }
     div .item *{
         width:100%;
-        text-align: center;
+        text-align: left;
+        font-size: 16px;
     }
-    form#memberInfoForm button{
+    button.button{
         outline: none;
         background: #735020;
-        width: 38%;
+        width: 10%;
+        min-width: 40px;
         border: none;
-        margin: 0 1% 20%;
-        padding: 15px;
+        padding: 5px;
         color: #FFFFFF;
         font-size: 14px;
         cursor: pointer;
-    }
-    div#memberInfoContainer .textField{
-        padding: 1%;
-    }
-    div#memberInfoContainer .input{
-        outline: none;
-        border: black solid 1px;
-        background-color: white;
-        width: 80%;
-        margin: 0 0 15px;
-        padding: 15px;
-        box-sizing: border-box;
-        font-size: 14px;
-        text-align: left;
+        text-align: center;
+        margin: 5px 0;
     }
     div.constrain{
-        margin-top: -15px;
-        margin-bottom: 15px;
-        margin-left: 70px;
+        margin-top: -10px;
+        margin-bottom: -15px;
+        margin-left: 5px;
         font-size: 12px;
         color: red;
         display: none;
         text-align: left;
 	}
+    div.fieldCapsule{
+        display: flex;
+        position: relative;
+    }
+    div.capsuleLeft{
+        width: 20%;
+        min-height: 70px;
+        float: left;
+        /* border-right: black 1px solid; */
+        border-bottom: black 1px solid;
+        padding: 10px;
+    }
+    div.capsuleRight{
+        width: 70%;
+        min-height: 70px;
+        float: right;
+        border-bottom: black 1px solid;
+        padding: 10px;
+    }
 </style>
 <section>
-    <form id="memberInfoForm" action="<%=request.getContextPath()%>/memberInfoCpl" method="post"">
-        <div id="memberInfoContainer" style="padding-top: 50px;">
-            <div class="item textField" id="containerTitle">
-                <h2 id="updatePwTitle" style="margin-bottom: 40px;" >나의 정보</h2>
-            </div>
-
-            <div class="item textField">
-                <div>
-                    <div>아이디</div>
-                    <div><%=m.getMemberId()%></div>
-                </div>
-            </div>
-
-            <div class="item textField">
-                <div>
-                    <div>이름</div>
-                    <div><%=m.getMemberName()%></div>
-                </div>
-            </div>
-
-            <div class="item textField">
-                <div>
-                    <div>성별</div>
-                    <div><%=m.getGender()%></div>
-                </div>
-            </div>
-
-            <div class="item textField">
-                <div>
-                    <div>생년월일</div>
-                    <div><%=m.getBirthday()%></div>
-                </div>
-            </div>
-
-            <div class="item textField">
-                <div>휴대폰 번호</div>
-                <div><%=m.getPhone()%></div>
-            </div>
-
-            <div class="item textField">
-                <div>주소</div>
-                <div><%=m.getAddress()%></div>
-            </div>
-
-            <div id="btnsField" class="item button">
-                <button type="button" onclick="fn_modifyInfo();">수정하기</button>
-                <button type="button" onclick="history.back();">뒤로가기</button>
-            </div>
-            <input type="hidden" name="usid" value="<%=m.getUsid()%>">
-            <input type="hidden" name="realPw" value="<%=m.getMemberPwd()%>">
+    <div id="memberInfoContainer">
+        <div class="item textField" id="containerTitle">
+            <div id="updatePwTitle" style="margin-bottom: 20px; font-size: 24px; padding: 5px;" >나의 정보</div>
         </div>
-    </form>
+
+        <div class="item textField">
+            <div class="fieldCapsule">
+                <div class="capsuleLeft" style="border-top: black 1px solid;">아이디</div>
+                <div class="capsuleRight" style="border-top: black 1px solid;"><%=m.getMemberId()%></div>
+            </div>
+        </div>
+
+        <div class="item textField">
+            <div class="fieldCapsule">
+                <div class="capsuleLeft">이름</div>
+                <div class="capsuleRight"><%=m.getMemberName()%></div>
+            </div>
+        </div>
+
+        <div class="item textField">
+            <div class="fieldCapsule">
+                <div class="capsuleLeft">성별</div>
+                <div class="capsuleRight"><%=m.getGender()%></div>
+            </div>
+        </div>
+
+        <div class="item textField">
+            <div class="fieldCapsule">
+                <div class="capsuleLeft">생년월일</div>
+                <div class="capsuleRight"><%=m.getBirthday()%></div>
+            </div>
+        </div>
+
+        <div class="item textField">
+            <div class="fieldCapsule">
+                <div class="capsuleLeft">휴대폰 번호</div>
+                <div class="capsuleRight">
+                    <div>
+                        <%=m.getPhone()%>
+                    </div>
+                    <div>
+                        <button type="button" class="button" id="phoneBtn">수정</button>
+                    </div>
+                    <div id="updatePhone"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="item textField">
+            <div class="fieldCapsule">
+                <div class="capsuleLeft">주소</div>
+                <div class="capsuleRight">
+                    <div>
+                        <%=m.getAddress()%>
+                    </div>
+                    <div>
+                        <button type="button" class="button">수정</button>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-		
+	    $("#phoneBtn").click(e=>{
+	    	$.ajax({
+                url:"<%=request.getContextPath()%>/ajax/updatePhone",
+                type:"get",
+                dataType:"html",
+                success: data =>{
+                    $("div#updatePhone").html(data);
+                }
+            })
+            $("#phoneBtn").css({"display":"none"});
+            $("#updatePhone").css({"display":"block"});
+	    })
     </script>
 </section>
 <%@ include file="/views/common/footer.jsp" %>

@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberInfoServlet
+ * Servlet implementation class UpdatePhone
  */
-@WebServlet("/memberInfoCpl")
-public class MemberInfoServlet extends HttpServlet {
+@WebServlet("/ajax/updatePhone")
+public class UpdatePhoneDiv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInfoServlet() {
+    public UpdatePhoneDiv() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,8 @@ public class MemberInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("phoneDiv가 보이게 해주세요");
+		request.getRequestDispatcher("/views/member/updatePhone.jsp").forward(request, response);
 	}
 
 	/**

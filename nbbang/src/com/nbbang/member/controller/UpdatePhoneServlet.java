@@ -15,19 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
-import com.nbbang.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberInfoPageServlet
+ * Servlet implementation class UpdatePhoneServlet
  */
-@WebServlet("/memberInfo")
-public class MemberInfoPageServlet extends HttpServlet {
+@WebServlet("/updatePhoneCpl")
+public class UpdatePhoneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInfoPageServlet() {
+    public UpdatePhoneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,28 +35,17 @@ public class MemberInfoPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int usid=Integer.parseInt(request.getParameter("usid"));
-		Member m=new MemberService().myPage(usid);
-		String memberIdStr;
-		String phoneStr;
-		String addressStr;
+		// TODO Auto-generated method stub
+		String phoneStr=request.getParameter("phone");
+		String usid=request.getParameter("usid");
+		String phone;
 		try {
-			memberIdStr=AESCrypto.decrypt(m.getMemberId());
-			String phoneDec=AESCrypto.decrypt(m.getPhone());
-			addressStr=AESCrypto.decrypt(m.getAddress());
-			phoneStr=phoneDec.substring(0,3)+"-"+phoneDec.substring(3,7)+"-"+phoneDec.substring(7);
+			phone=AESCrypto.encrypt(phoneStr);
 		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
 				| BadPaddingException e) {
-			memberIdStr=m.getMemberId();
-			phoneStr=m.getPhone();
-			addressStr=m.getAddress();
+			phone=phoneStr;
 		}
-		m.setMemberId(memberIdStr);
-		m.setPhone(phoneStr);
-		m.setAddress(addressStr);
-		
-		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/member/memberInfo.jsp").forward(request, response);
+		int result=new MemberService().updatePhone(usid, phone);
 	}
 
 	/**
