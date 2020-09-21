@@ -1,11 +1,20 @@
 package com.nbbang.member.controller;
 
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.nbbang.common.temp.AESCrypto;
+import com.nbbang.member.model.service.MemberService;
 
 /**
  * Servlet implementation class UpdatePhoneServlet
@@ -27,7 +36,16 @@ public class UpdatePhoneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String phoneStr=request.getParameter("phone");
+		String usid=request.getParameter("usid");
+		String phone;
+		try {
+			phone=AESCrypto.encrypt(phoneStr);
+		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+				| BadPaddingException e) {
+			phone=phoneStr;
+		}
+		int result=new MemberService().updatePhone(usid, phone);
 	}
 
 	/**

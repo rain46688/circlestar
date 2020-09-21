@@ -34,6 +34,7 @@
 		<div class="constrain" id="pnConstrain"></div><br>
 		<button type="button" class="pnbtn" onclick="fn_updatePhone();">수정완료</button>
 		<button type="button" class="pnbtn" onclick="fn_resetTheForm();">수정취소</button>
+		<input type="hidden" name="usid" value="<%=m.getUsid()%>">
 	</form>
 	<form action="" name="checkPNDuplicate">
         <input type="hidden" name="phone">

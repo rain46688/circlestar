@@ -240,4 +240,13 @@ private Properties prop=new Properties();
 		return result;
 	}
 
+	public int updatePhone(Connection conn, String usid, String phone) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updatePhone"));
+			
+		}
+	}
+
 }

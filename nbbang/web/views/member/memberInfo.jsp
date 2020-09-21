@@ -126,8 +126,6 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" name="usid" value="<%=m.getUsid()%>">
-        <input type="hidden" name="realPw" value="<%=m.getMemberPwd()%>">
     </div>
 
     <script>
