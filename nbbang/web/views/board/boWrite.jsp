@@ -73,12 +73,12 @@
 
 <section>
 	<div id="wrapper">
-		<div id="title"><h4>N빵 글쓰기</h4></div>
+		<div id="title"><h4>글쓰기</h4></div>
 		<hr color="black">
 		<div id="editor">
 			<form action="<%= request.getContextPath() %>/board/boardWriteEnd" method="POST"
 				enctype="multipart/form-data">
-				<select class="custom-select custom-select-sm" name="category" id="">
+				<select class="custom-select custom-select-sm" name="category" id="category">
 					<option value="" selected>게시판을 선택하세요</option>
 					<option value="식품">식품</option>
 					<option value="패션잡화">패션잡화</option>
@@ -89,11 +89,11 @@
 				<input type="hidden" name="writerNickname" value="<%= loginnedMember.getNickname() %>" >
 				<input type="hidden" name="writerUsid" value="<%= loginnedMember.getUsid() %>" >
 				<div class="input-group marginTop">
-				<input class="form-control" type="text" name="title" id="" placeholder="제목을 입력하세요">
+				<input class="form-control" type="text" name="title" id="titleInput" placeholder="제목을 입력하세요">
 				</div>
 				<div class="input-group marginTop">	
-				<input class="form-control" type="text" name="price" id="price" placeholder="가격" required>
-				<select class="custom-select custom-select-md" name="maxMems" id="">
+				<input class="form-control" type="text" name="price" id="price" placeholder="가격">
+				<select class="custom-select custom-select-md" name="maxMems" id="maxMems">
 					<option value="" selected>n빵 인원</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -111,19 +111,19 @@
 					<option value="14">14</option>
 					<option value="15">15</option>
 				</select>
-				<select class="custom-select custom-select-md" name="tradeMethod" id="">
+				<select class="custom-select custom-select-md" name="tradeMethod" id="tradeMethod">
 					<option value="">거래방식</option>
 					<option value="직거래">직거래</option>
 					<option value="택배배송">택배배송</option>
 				</select>
-				<select class="custom-select custom-select-md" name="ownStatus" id="">
+				<select class="custom-select custom-select-md" name="ownStatus" id="ownStatus">
 					<option value="구매예정">구매예정</option>
 					<option value="개인보유">개인보유</option>
 				</select>
 				</div>
 				<div id="textEditor" class="marginTop">
 					<textarea name="content" id="content" rows="20" cols="80" placeholder="내용을 입력해주세요.">
-						내용을 입력해주세요
+
 					</textarea>
 				</div>
 				<div id="imageUpload" class="marginTop">
@@ -134,10 +134,10 @@
 					</div>
 				</div>
 				<div id="urlInsert" class="input-group marginTop">
-					<input type="text" class="form-control" name="url" id="" placeholder="제품 URL">
+					<input type="text" class="form-control" name="url" id="url" placeholder="제품 URL">
 				</div>
 				<div id="submitBtn">
-					<button class="marginTop btn btn-outline-secondary" type="submit">글 등록</button>
+					<button class="marginTop btn btn-outline-secondary" type="button" onclick="fn_submit();">글 등록</button>
 				</div>
 			</form>
 		</div>
@@ -165,6 +165,8 @@
 			return;
 		}
 
+		e.target.closest("#imageUpload").style.border="1px rgb(224, 224, 224) solid";
+
 		filesArr.forEach(function(f){
 			if(!f.type.match("image.*")){
 				alert("이미지파일만 업로드 가능합니다.")
@@ -180,7 +182,61 @@
 				$("<img>").attr("src", e.target.result).appendTo($("#image-prev"))
 			}
 			reader.readAsDataURL(f);
+
+		
 		});
 	}
+	function fn_submit(){
+		if(document.getElementById("category").value == "") {
+			alert("카테고리를 선택해주세요.");
+			document.getElementById("category").focus();
+			return;
+		}
+
+		if(document.getElementById("titleInput").value == "") {
+			alert("제목을 입력해주세요.");
+			document.getElementById("titleInput").focus();
+			return;
+		}
+
+		if(document.getElementById("price").value == "") {
+			alert("가격을 입력해주세요.");
+			document.getElementById("price").focus();
+			return;
+		}
+
+		if(document.getElementById("maxMems").value == "") {
+			alert("n빵 인원을 결정해주세요.");
+			document.getElementById("maxMems").focus();
+			return;
+		}
+
+		if(document.getElementById("tradeMethod").value == "") {
+			alert("거래방식을 설정해주세요.");
+			document.getElementById("tradeMethod").focus();
+			return;
+		}
+
+		if(document.getElementById("content").value == null) {
+			alert("내용을 입력해주세요.");
+			document.getElementById("content").focus();
+			return;
+		}
+
+		files = document.querySelector("#file").files;
+		filesArr = Array.prototype.slice.call(files)
+		if(filesArr < 1) {
+			alert("파일은 1개 이상 첨부해주세요.");
+			document.querySelector("#imageUpload").style.border = "1px red solid";
+			return;
+		}	
+	}
+
+	function printContent() {
+		// console.log(document.getElementById("content").value);
+		// document.getElementsByTagName("section").append(document.getElementById("content").value);
+	}
+
+	setInterval(printContent, 500);
 </script>
 <%@ include file="/views/common/footer.jsp"%>
