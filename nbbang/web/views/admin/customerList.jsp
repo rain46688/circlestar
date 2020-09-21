@@ -1,6 +1,11 @@
+<%@page import="java.util.List"%>
+<%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
+<%
+	List<CustomerCenter> list = (List) request.getAttribute("list");
+%>
 <style>
 #writecontainer {
 	border-radius: 5px;
@@ -54,6 +59,10 @@
 	font-size:20px;
 }
 
+#bar{
+
+
+}
 
 </style>
 
@@ -89,38 +98,28 @@
 				<div class="divCell">제목</div>
 				<div class="divCell">문의 날짜</div>
 			</div>
-
+<%			for (CustomerCenter c : list) { %>
 			<div class="divRow">
-				<div class="divCell">111111111111111111111111</div>
-				<div class="divCell">2222222222222222</div>
-				<div class="divCell">33333333333333334444444444444333</div>
-				<div class="divCell">4444444444444444</div>
+				<div class="divCell"><%=c.getCsNo() %></div>
+				<div class="divCell"><%=c.getCsNickname() %></div>
+				<div class="divCell"><%=c.getCsTitle() %></div>
+				<div class="divCell"><%=c.getCsDate() %></div>
 			</div>
 
-			<div class="divRow">
-				<div class="divCell">1</div>
-				<div class="divCell">2</div>
-				<div class="divCell">3</div>
-				<div class="divCell">4</div>
-			</div>
-			
-			<div class="divRow">
-				<div class="divCell">1</div>
-				<div class="divCell">2</div>
-				<div class="divCell">3</div>
-				<div class="divCell">4</div>
-			</div>
-	<br><br><br>
-		<br>
-		<nav aria-lable="Page navigation">
+<%} %>
+
+		<br>	
+			<div id="bar">
+				<nav aria-lable="Page navigation">
 			<ul class="pagination justify-content-center">
 				<%=request.getAttribute("pageBar")%>
 			</ul>
 		</nav>
-	<br>
-		</div>
-	</div>
+</div>
 
+		
+	</div>
+	</div>
 </div>
 
 <%@ include file="/views/common/footer.jsp"%>
