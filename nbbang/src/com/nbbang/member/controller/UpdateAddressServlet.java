@@ -17,16 +17,16 @@ import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
 
 /**
- * Servlet implementation class UpdatePhoneServlet
+ * Servlet implementation class UpdateAddressServlet
  */
-@WebServlet("/updatePhoneCpl")
-public class UpdatePhoneServlet extends HttpServlet {
+@WebServlet("/updateAddressCpl")
+public class UpdateAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatePhoneServlet() {
+    public UpdateAddressServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,23 +36,22 @@ public class UpdatePhoneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String phoneStr=request.getParameter("phone");
+		String addressStr=request.getParameter("address1")+" "+request.getParameter("address2");
 		int usid=Integer.parseInt(request.getParameter("usid"));
-		String phone;
+		String address;
 		try {
-			phone=AESCrypto.encrypt(phoneStr);
-		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+			address=AESCrypto.encrypt(addressStr);
+		}catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
 				| BadPaddingException e) {
-			phone=phoneStr;
+			address=addressStr;
 		}
-		int result=new MemberService().updatePhone(usid, phone);
-		
+		int result=new MemberService().updateAddress(usid,address);
 		if(result>0) {
-			request.setAttribute("msg", "휴대폰 번호 변경에 성공했습니다.");
+			request.setAttribute("msg", "주소 변경에 성공했습니다.");
 			request.setAttribute("loc", "/memberInfo?usid="+usid);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "휴대폰 번호 변경에 실패했습니다.");
+			request.setAttribute("msg", "주소 변경에 실패했습니다.");
 			request.setAttribute("loc", "/memberInfo?usid="+usid);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}

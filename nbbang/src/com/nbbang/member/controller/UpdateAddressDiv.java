@@ -1,4 +1,4 @@
-package com.nbbang.board.controller;
+package com.nbbang.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Member;
+
 /**
- * Servlet implementation class BoardWriteServlet
+ * Servlet implementation class UpdateAddressServlet
  */
-@WebServlet("/board/boWrite")
-public class BoardWriteServlet extends HttpServlet {
+@WebServlet("/member/updateAddress")
+public class UpdateAddressDiv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteServlet() {
+    public UpdateAddressDiv() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +30,10 @@ public class BoardWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/board/boWrite.jsp").forward(request, response);
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		Member m=new MemberService().myPage(usid);
+		request.setAttribute("member", m);
+		request.getRequestDispatcher("/views/member/updateAddress.jsp").forward(request, response);
 	}
 
 	/**

@@ -83,9 +83,18 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
-	public int updatePhone(String usid, String phone) {
+	public int updatePhone(int usid, String phone) {
 		Connection conn=getConnection();
 		int result=dao.updatePhone(conn,usid,phone);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int updateAddress(int usid, String address) {
+		Connection conn=getConnection();
+		int result=dao.updateAddress(conn,usid,address);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

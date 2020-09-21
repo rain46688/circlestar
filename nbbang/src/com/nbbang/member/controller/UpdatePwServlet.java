@@ -32,15 +32,12 @@ public class UpdatePwServlet extends HttpServlet {
 		int usid=Integer.parseInt(request.getParameter("usid"));
 		int pwIsUuid=0;
 		String realPw=request.getParameter("realPw");
-		System.out.println(realPw);
 		
 		String crtPw=request.getParameter("crtPw");
 		UuidEncryptor ue=new UuidEncryptor();
 		String encCrtPw=ue.getSha512(crtPw);
-		System.out.println(encCrtPw);
 		
 		String newPw=request.getParameter("newPw");
-		System.out.println(newPw);
 		
 		if(encCrtPw.equals(realPw)) {
 			int result=new MemberService().updateFindPwMember(newPw, pwIsUuid, usid);

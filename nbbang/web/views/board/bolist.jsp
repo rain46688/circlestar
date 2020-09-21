@@ -85,7 +85,7 @@
 </section>
 <script>
 	function fn_boWrite(){
-		location.assign("<%= request.getContextPath() %>/board/boardWrite");
+		location.assign("<%= request.getContextPath() %>/board/boWrite");
 	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>
