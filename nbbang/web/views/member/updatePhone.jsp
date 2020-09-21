@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.nbbang.member.model.vo.Member" %>
-
+<%
+	Member m=(Member)request.getAttribute("member");
+%>
 <style>
     .input {
         outline: none;
@@ -16,7 +18,7 @@
     button.pnbtn{
         outline: none;
         background: #735020;
-        min-width: 50px;
+        min-width: 100px;
         width: 15%;
         height: 36px;
         border: none;
