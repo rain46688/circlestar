@@ -74,6 +74,7 @@ public class BoardWriteEndServlet extends HttpServlet {
 		
 		Board b = new Board();
 		b.setProductCategory(request.getParameter("category"));
+		b.setWriterNickname(request.getParameter("writer"));
 		b.setBoardTitle(request.getParameter("title"));
 		b.setProductPrice(Integer.parseInt(request.getParameter("price")));
 		b.setMaxMems(Integer.parseInt(request.getParameter("maxMems")));
@@ -89,7 +90,7 @@ public class BoardWriteEndServlet extends HttpServlet {
 			request.setAttribute("loc", "/board/boList");
 		}else {
 			request.setAttribute("msg", "업로드에 실패하였습니다.");
-			request.setAttribute("loc", "board/boWrite");
+			request.setAttribute("loc", "/board/boWrite");
 		}
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}

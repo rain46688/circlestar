@@ -54,13 +54,6 @@
     font-size: 1.7em;
   }
 
-  #likeBtn, #startBtn {
-    /* width: 5em; */
-    margin-left: 2.5px;
-    text-align: right;
-    float: right;
-    font-size: 20px;
-  }
 
   #startBtn>button {
     width: 5em;
@@ -72,6 +65,7 @@
     overflow: auto;
   }
 
+  
   #contentText {
     float: left;
     text-align: left;
@@ -165,19 +159,41 @@
     color: darkgray;
     overflow: auto;
   }
+  
+  #etcInfo a {
+  	color:black;
+  }
+  #titleContent {
+    width: 17em;
+    height: 2em;
+    float: left;
+  }
+  #titleContent>p {
+    font-size: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #likeBtn, #startBtn {
+    /* width: 5em; */
+    margin-left: 2.5px;
+    text-align: right;
+    float: right;
+    font-size: 20px;
+  }
 </style>
 <section>
   <div id="wrapper">
     <div id="imageWrapper">
-      <img src="<%= request.getContextPath() %>/images/cute.png" alt="" width="700em" height="400em">
+      <img src="<%= request.getContextPath() %>/upload/images/<%= b.getFiles() %>" alt="" width="700em" height="400em">
       <!-- carousel 적용할 예정 -->
     </div>
     <div id="userInfo">
     	<hr>
       <div id="userThumb"><img src="<%= request.getContextPath() %>/images/bread.png" alt="" width="40px" height="40px"></div>
         <div id="userIdAndAddress">
-          <div id="userId"><%= b.getWriterNickname() %>닉네임</div>
-          <div id="userAddress"><%= b.getTradeArea()%>거래지</div>
+          <div id="userId"><%= b.getWriterNickname() %></div>
+          <div id="userAddress"><%= b.getTradeArea()%></div>
         </div>
       <!-- 프로필 사진 + id -->
       <h5 id="level">신뢰 level</h5>
@@ -185,20 +201,20 @@
     <div class="content">
       <hr>
       <div id="title">
-        제목
+        <div id="titleContent"><p><%= b.getBoardTitle() %>가나다라마바사아만아답자당마자다나아자</p></div>
         <div id="startBtn"><button>n빵하기</button></div>
         <div id="likeBtn"><button>❤️</button></div>
       </div>
       
-      <div id="date">날짜</div>
+      <div id="date"><%= b.getEnrollDate() %> <%= b.getLikeCount() %> 관심 <%= b.getHit() %> 조회수 </div>
       <!-- 가격과 좋아요 버튼 -->
       <div id="priceAndLikeBtn">
-          <h5>30,000원</h5>
+          <h5><%= b.getProductPrice() %>원</h5>
           <!-- <a href=""><img src="<%= request.getContextPath() %>/images/heart.png" alt="LikeBtn" width="30px" height="30px"></a> -->
       </div>
       <br>
-      <div id="contentText">내용</div>
-      <div id="etcInfo">관심, 조회수, 신고하기, 제품 페이지</div>
+      <div id="contentText"></div>
+      <div id="etcInfo"><a href="#">신고하기</a> <a href="#">제품 페이지</a></div>
     </div>
     <div id="commentSection">
       <div id="commentInsert">

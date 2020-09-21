@@ -262,12 +262,12 @@ public class Board {
 	public String toString() {
 		return "Board [boardId=" + boardId + ", boardTitle=" + boardTitle + ", writerUsid=" + writerUsid
 				+ ", writerNickname=" + writerNickname + ", content=" + content + ", enrollDate=" + enrollDate
-				+ ", hit=" + hit + ", files=" + files + ", productCategory=" + productCategory
-				+ ", productName=" + productName + ", tradeArea=" + tradeArea + ", maxMems=" + maxMems
-				+ ", curMemsList=" + Arrays.toString(curMemsList) + ", payMemsList=" + Arrays.toString(payMemsList)
-				+ ", deliveryMemsList=" + Arrays.toString(deliveryMemsList) + ", limitTime=" + limitTime
-				+ ", tradeStage=" + tradeStage + ", likeCount=" + likeCount + ", reportCount=" + reportCount
-				+ ", popularBoard=" + popularBoard + ", productPrice=" + productPrice + ", ownStatus=" + ownStatus
-				+ ", tradeKind=" + tradeKind + ", productUrl=" + productUrl + "]";
+				+ ", hit=" + hit + ", files=" + files + ", productCategory=" + productCategory + ", productName="
+				+ productName + ", tradeArea=" + tradeArea + ", maxMems=" + maxMems + ", curMemsList="
+				+ Arrays.toString(curMemsList) + ", payMemsList=" + Arrays.toString(payMemsList) + ", deliveryMemsList="
+				+ Arrays.toString(deliveryMemsList) + ", limitTime=" + limitTime + ", tradeStage=" + tradeStage
+				+ ", likeCount=" + likeCount + ", reportCount=" + reportCount + ", popularBoard=" + popularBoard
+				+ ", productPrice=" + productPrice + ", ownStatus=" + ownStatus + ", tradeKind=" + tradeKind
+				+ ", productUrl=" + productUrl + "]";
 	}
 }

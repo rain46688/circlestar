@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			memberId=memberIdStr;
 		}
+		System.out.println(memberId);
 		String memberPwd=request.getParameter("password");
 		Member m=new MemberService().loginMember(memberId,memberPwd);
 		

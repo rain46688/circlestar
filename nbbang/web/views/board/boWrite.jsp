@@ -64,6 +64,7 @@
 	width: 7.05em;
 	height: 100%;
 }
+
 .marginTop{
 	margin-top: 0.5em;
 }
@@ -85,6 +86,8 @@
 					<option value="티켓">티켓</option>
 					<option value="애완용품">애완용품</option>
 				</select>
+				<input type="hidden" name="writerNickname" value="<%= loginnedMember.getNickname() %>" >
+				<input type="hidden" name="writerUsid" value="<%= loginnedMember.getUsid() %>" >
 				<div class="input-group marginTop">
 				<input class="form-control" type="text" name="title" id="" placeholder="제목을 입력하세요">
 				</div>
@@ -111,7 +114,7 @@
 				<select class="custom-select custom-select-md" name="tradeMethod" id="">
 					<option value="">거래방식</option>
 					<option value="직거래">직거래</option>
-					<option value="택배거래">택배거래</option>
+					<option value="택배배송">택배배송</option>
 				</select>
 				</div>
 				<div id="textEditor" class="marginTop">
