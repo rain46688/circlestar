@@ -6,10 +6,15 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script> 
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
 
 /* === 채팅 구현 부분  === */
+
+*{
+font-family: 'Jua', sans-serif;
+}
 
 /* 사이드바 사이즈  */
 #side {
@@ -22,7 +27,7 @@
 }
 
 /* 텍스트 출력되는 하얀부분 위 박스 */
-#msgTextArea{
+#ChatArea{
 /* 아래 스크롤바 감추기 */
 	overflow-x:hidden;
 	height:80%;
@@ -35,7 +40,7 @@
 ::-webkit-scrollbar { display: none; }
 
 /* 밑에 입력하는 하얀부분 */
-#inputdiv{
+#inputDiv{
 	height:20%;
 	width:100%;
 	background-color:white;
@@ -44,7 +49,7 @@
 }
 
 /* 하얀부분 안에들어가는 입력하는 곳 텍스트 */
-#textMsg{
+#msgText{
 	resize: none;
 	border: none;
 	padding: 10px 0px 10px 0px;
@@ -197,7 +202,7 @@ if("${tradeStage}"=="2"){
 			}else{ 
 				html="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 합류하였습니다." + "</div></div>";
 			}
-				$("#ChatArea").html($("#ChatArea").html()+html); 
+			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else if(msg["msg"] == "SYS2"){
 			html="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 퇴장하였습니다." + "</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
@@ -205,7 +210,7 @@ if("${tradeStage}"=="2"){
 		}else if(msg["sendNickName"] == "ADMIN"){
 			let html="<div class='tmp'><div class='admin'> 시스템 관리자 : "+msg["msg"] + "</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
-		}else if(msg["sendNickName"] == "${m.memberId}"){
+		}else if(msg["sendNickName"] == "${m.nickname}"){
 			//자기 메세지일 경우 분기처리
 	 		let html="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
@@ -226,8 +231,8 @@ if("${tradeStage}"=="2"){
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}")));
-		txt.val("");
-		console.log(txt.val());
+		txt.val('');
+		txt.val(txt.replace(/\r\n/g, ''));
 			}
 		};
 		

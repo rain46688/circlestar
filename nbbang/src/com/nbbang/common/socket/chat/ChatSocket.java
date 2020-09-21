@@ -37,7 +37,7 @@ public class ChatSocket {
 				// Map이 isEmpty인경우 바로 넣어줌
 				if (user.isEmpty()) {
 					user.put(m, session);
-					System.out.println(" === user.isEmpty() 분기문 진입 == ");
+					System.out.println(" === user.isEmpty() 분기문 진입 name : "+m.getNickname()+" === ");
 				} else {
 					// 중복적으로 접근한 경우 차단시켜서 Map에 넣지않도록 필터링
 					System.out.println(" === !user.isEmpty() 분기문 진입 == ");
@@ -45,6 +45,7 @@ public class ChatSocket {
 					while (useriterator.hasNext()) {
 						Member key = useriterator.next();
 						if (!key.equals(m)) {
+							System.out.println(" === 멤버 user에 추가 name :"+m.getNickname()+" === ");
 							user.put(m, session);
 						}
 					}
@@ -96,26 +97,31 @@ public class ChatSocket {
 		System.out.println(" === onClose 메소드 실행 === ");
 		String name = "";
 		List<Member> keyList = new ArrayList<Member>();
+		Member key = null;
+		Iterator<Member> userIterator = user.keySet().iterator();
 		try {
-			Iterator<Member> userIterator = user.keySet().iterator();
 			while (userIterator.hasNext()) {
-				Member key = userIterator.next();
-				name = key.getNickname();
-				System.out.println(" === 소켓 연결 종료 name : " + name + " === ");
+				key = userIterator.next();
+				System.out.println(" === 진입 여부 확인용 0 === ");
 				// 세션이 끊어진 유저를 user Map에서 삭제하는 과정
 				if (user.get(key).equals(session)) {
+					name = key.getNickname();
 					// 세션이 끊어진 유저 이외에 다른 유저에게 메세지를 전송시켜주도록 필터링하는 과정
 					Iterator<Member> exitterator = user.keySet().iterator();
 					while (exitterator.hasNext()) {
+						key = exitterator.next();
 						if (!user.get(key).equals(session)) {
+							System.out.println(" === 진입 여부 확인용 1 === ");
 							user.get(key).getBasicRemote().sendObject(new Message(key.getNickname(), "SYS2", "", ""));
 						}
 					}
+					System.out.println(" === 소켓 연결 종료 name : " + name + " === ");
 					keyList.add(key);
 				}
 			}
-			for (Member key : keyList) {
-				user.remove(key);
+			for (Member listkey : keyList) {
+				System.out.println(" === 진입 여부 확인용 2 === ");
+				user.remove(listkey);
 			}
 		} catch (Exception e) {
 			System.out.println(" === onClose 예외, name : "+name+" === ");

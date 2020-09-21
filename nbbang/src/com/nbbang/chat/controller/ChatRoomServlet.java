@@ -38,13 +38,18 @@ public class ChatRoomServlet extends HttpServlet {
 		//새로운 창이 생성되면서 이쪽으로 파라미터가 POST방식으로 넘어옴
 		//받아서 채팅방 JSP로 값을 넘겨준다.
 		String maxMems = request.getParameter("maxMems");
-		//String tradeStage = request.getParameter("tradeStage");
+		String tradeStage = request.getParameter("tradeStage");
 		String writerUsid = request.getParameter("writerUsid");
 		String boardId = request.getParameter("boardId");
 		String curMemsList = request.getParameter("curMemsList");
 		
 		System.out.println("maxMems : "+maxMems+", writerUsid : "+writerUsid+"\n"
 				+"boardId : "+boardId+", curMemsList : "+curMemsList);
+		
+		//*** 나중에 디비에서 방번호로 조회해서 받아와야됨 임시 ***
+		curMemsList="ADMIN,user01,user02";
+		//======================================================
+	
 		
 		//구매확정한 유저수 curNum
 		int curNum = 0;
@@ -55,7 +60,7 @@ public class ChatRoomServlet extends HttpServlet {
 		
 		// 게시자가 정해놓은 N빵 최대 인원
 		request.setAttribute("maxMems", maxMems);
-		//request.setAttribute("tradeStage", tradeStage);
+		request.setAttribute("tradeStage", tradeStage);
 		request.setAttribute("writerUsid", writerUsid);
 		request.setAttribute("boardId", boardId);
 		request.setAttribute("curNum", curNum);
@@ -63,7 +68,7 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("x", 450);
 		request.setAttribute("y", 660);
 		request.setAttribute("m", m);
-		request.getRequestDispatcher("/views/board/chatRoom.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/chat/chatRoom.jsp").forward(request, response);
 	}
 
 	/**
