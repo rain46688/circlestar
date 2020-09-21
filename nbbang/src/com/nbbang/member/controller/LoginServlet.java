@@ -42,11 +42,15 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String memberIdStr=request.getParameter("memberId");
 		String memberId;
-		try {
-			memberId = AESCrypto.encrypt(memberIdStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			memberId=memberIdStr;
+		if(memberIdStr.equals("admin@kh.com")) {
+			memberId="admin@kh.com";
+		}else {
+			try {
+				memberId = AESCrypto.encrypt(memberIdStr);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				memberId=memberIdStr;
+			}			
 		}
 		String memberPwd=request.getParameter("password");
 		Member m=new MemberService().loginMember(memberId,memberPwd);
