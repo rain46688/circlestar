@@ -50,8 +50,8 @@ pageEncoding="UTF-8"%>
 
       </div> -->
       <div class="type-wrap">
-          <select class="type-select" name="qnaType" style="width:581px;">
-                <option value="" selected>문의유형</option>
+          <select class="type-select" name="type" style="width:581px;">
+                <option value="" selected>문의유형을 선택하세요.</option>
                 <option value="">회원정보관련</option>
                 <option value="">거래배송관련</option>
                 <option value="">불법거래</option>

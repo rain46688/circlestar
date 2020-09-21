@@ -61,14 +61,15 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 
 		CustomerCenter c=new CustomerCenter();
 		c.setCsWriter(mPr.getParameter("writer"));
-		c.setCsType(mPr.getParameter("qnaType"));
+		c.setCsType(mPr.getParameter("type"));
 		c.setCsTitle(mPr.getParameter("title"));
 		c.setCsContent(mPr.getParameter("contentwrite"));
-		c.setCsFile(mPr.getParameter("csFile"));
+		c.setCsFile(mPr.getFilesystemName("csFile"));
 		c.setCsNickname(mPr.getParameter("nickname"));
 		c.setCsAnswer(mPr.getParameter("answer"));
 		
-		System.out.println(mPr.getParameter("writer")+mPr.getParameter("qnaType")+mPr.getParameter("title")+mPr.getParameter("contentwrite")+mPr.getParameter("csFile"));
+		System.out.println(mPr.getParameter("writer")+mPr.getParameter("type")+mPr.getParameter("title")+
+				mPr.getParameter("contentwrite")+mPr.getParameter("csFile")+mPr.getParameter("nickname")+mPr.getParameter("answer"));
 		
 		int result=new CustomerService().insertQna(c);
 		
