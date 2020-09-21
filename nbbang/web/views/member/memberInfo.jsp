@@ -131,7 +131,7 @@
     <script>
 	    $("#phoneBtn").click(e=>{
 	    	$.ajax({
-                url:"<%=request.getContextPath()%>/ajax/updatePhone",
+                url:"<%=request.getContextPath()%>/ajax/updatePhone?usid="+<%=m.getUsid()%>,
                 type:"get",
                 dataType:"html",
                 success: data =>{
