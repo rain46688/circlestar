@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.nbbang.chat.model.service.ChatService;
 import com.nbbang.member.model.vo.Member;
 
 /**
@@ -47,7 +48,7 @@ public class ChatRoomServlet extends HttpServlet {
 				+"boardId : "+boardId+", curMemsList : "+curMemsList);
 		
 		//*** 나중에 디비에서 방번호로 조회해서 받아와야됨 임시 ***
-		curMemsList=new chatService().;
+		curMemsList=new ChatService().selectCurMemsList(boardId);
 		//curMemsList="ADMIN,user01,user02";
 		//======================================================
 	
