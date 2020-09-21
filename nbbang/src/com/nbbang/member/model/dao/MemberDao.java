@@ -10,8 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.nbbang.board.model.vo.TradeList;
 import com.nbbang.member.model.vo.Grade;
+import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
+import com.nbbang.member.model.vo.Report;
 
 public class MemberDao {
 private Properties prop=new Properties();
@@ -90,7 +93,6 @@ private Properties prop=new Properties();
 
 	private Member inputData(ResultSet rs) {
 		Member m=new Member();
-		Grade g=new Grade();
 		try {
 			m.setUsid(rs.getInt("USID"));
 			m.setMemberId(rs.getString("MEMBER_ID"));
@@ -102,16 +104,8 @@ private Properties prop=new Properties();
 			m.setPhone(rs.getString("PHONE"));
 			m.setAddress(rs.getString("ADDRESS"));
 			m.setEnrollDate(rs.getDate("ENROLL_DATE"));
-			m.setGrade(rs.getString("GRADE")); //Grade
-			m.setMaxRoomCount(rs.getInt("MAX_ROOM_COUNT")); //Grade
-			m.setReportCount(rs.getInt("REPORT_COUNT")); //Report
 			m.setPoint(rs.getInt("POINT"));
 			m.setLeaveMem(rs.getBoolean("LEAVE_MEM"));
-			m.setCurTradeList(rs.getString("CUR_TRADE_LIST")); //TradeList
-			m.setCurCreateList(rs.getString("CUR_CREATE_LIST")); //TradeList
-			m.setDeliveryList(rs.getString("DELIVERY_LIST")); //TradeList
-			m.setTradeList(rs.getString("TRADE_LIST")); //TradeList
-			m.setLikeList(rs.getString("LIKE_LIST"));//LikeList
 			m.setNbbangScore(rs.getInt("NBBANG_SCORE"));
 			m.setMemberPicture(rs.getString("MEMBER_PICTURE"));
 			m.setPwIsUuid(rs.getBoolean("PW_IS_UUID"));
