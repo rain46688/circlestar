@@ -83,7 +83,7 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
-	public int updatePhone(String usid, String phone) {
+	public int updatePhone(int usid, String phone) {
 		Connection conn=getConnection();
 		int result=dao.updatePhone(conn,usid,phone);
 		if(result>0) commit(conn);
