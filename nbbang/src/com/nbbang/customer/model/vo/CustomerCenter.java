@@ -14,13 +14,14 @@ public class CustomerCenter {
 	private String csFile;
 	private Boolean csIscheck;
 	private String csNickname;
+	private String csAnswer;
 	
 	public CustomerCenter() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public CustomerCenter(int csNo, String csWriter, String csType, String csTitle, String csContent, Date csDate,
-			String csFile, Boolean csIscheck, String csNickname) {
+			String csFile, Boolean csIscheck, String csNickname, String csAnswer) {
 		super();
 		this.csNo = csNo;
 		this.csWriter = csWriter;
@@ -31,6 +32,7 @@ public class CustomerCenter {
 		this.csFile = csFile;
 		this.csIscheck = csIscheck;
 		this.csNickname = csNickname;
+		this.csAnswer = csAnswer;
 	}
 
 	public int getCsNo() {
@@ -105,19 +107,20 @@ public class CustomerCenter {
 		this.csNickname = csNickname;
 	}
 
+	public String getCsAnswer() {
+		return csAnswer;
+	}
+
+	public void setCsAnswer(String csAnswer) {
+		this.csAnswer = csAnswer;
+	}
+
 	@Override
 	public String toString() {
 		return "CustomerCenter [csNo=" + csNo + ", csWriter=" + csWriter + ", csType=" + csType + ", csTitle=" + csTitle
 				+ ", csContent=" + csContent + ", csDate=" + csDate + ", csFile=" + csFile + ", csIscheck=" + csIscheck
-				+ ", csNickname=" + csNickname + "]";
+				+ ", csNickname=" + csNickname + ", csAnswer=" + csAnswer + "]";
 	}
-
-
-
-
-
-	
-
 
 
 	

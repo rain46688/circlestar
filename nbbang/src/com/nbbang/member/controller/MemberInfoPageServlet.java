@@ -20,7 +20,7 @@ import com.nbbang.member.model.vo.Member;
 /**
  * Servlet implementation class MemberInfoPageServlet
  */
-@WebServlet("/memberInfo")
+@WebServlet("/member/memberInfo")
 public class MemberInfoPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

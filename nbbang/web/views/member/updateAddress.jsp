@@ -32,7 +32,7 @@
     }
 </style>
 <div>
-	<form id="updateAddressForm" action="<%=request.getContextPath()%>/updateAddressCpl" method="post">
+	<form id="updateAddressForm" action="<%=request.getContextPath()%>/member/updateAddressCpl" method="post">
 		<input type="text" class="input" id="sample4_postcode" placeholder="우편번호" style="width : 59%;" readonly>
 		<input type="button" class="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="min-width:100px;"><br>
 		<input type="hidden" name="checked_ad" value="">

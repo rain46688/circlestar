@@ -1,27 +1,49 @@
 @charset "UTF-8";
+*{ text-decoration:none}
 div.writing-container{
-    margin-left: 25%;
+    margin-left: 30%;
     margin-top: 3%;
-   
-    width: 850px;
-    height: 700px;
+    margin-bottom: 4%;
+    
+    width: 70%;
     
 }
 div.writing-wrap{
-    margin-left: 25%;
-    margin-top: 5%;
-    
+    margin-left: 10%;
+    margin-top: 1%;
+    border: 1px solid #eeeeee;
+    width: 65%;
+    box-shadow: 2px 2px 2px 2px #eef1d7ee;
+    text-align: center;
+    border-radius: 5%;
 }
 div.type-wrap{
-    width: 800px;
+    margin-top: 2%;
     
-    margin-left: 10%;
+    
     
 }
 div.fix-writer{
-    width: 800px;
-    margin-left: 10%;
+    margin-top: 2%;
+    
+    
 }
-div.write-tile{
-    width: 800px;
+div.write-title{
+    margin-top: 2%;
+    
+}
+div.write-content{
+    margin-top: 2%;
+    
+}
+div.file-upload{
+    margin-top: 2%;
+    padding-bottom: 5px;
+}
+div#submitBtn-kdh{
+    margin-top: 4%;
+    
+    
+    
+   
 }
