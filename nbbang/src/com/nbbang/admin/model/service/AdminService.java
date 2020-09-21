@@ -1,11 +1,13 @@
 package com.nbbang.admin.model.service;
 
+import static com.nbbang.common.temp.JDBCTemplate.close;
+import static com.nbbang.common.temp.JDBCTemplate.getConnection;
+
 import java.sql.Connection;
 import java.util.List;
-import static com.nbbang.common.temp.JDBCTemplate.*;
+
 import com.nbbang.admin.model.dao.AdminDao;
 import com.nbbang.customer.model.vo.CustomerCenter;
-import com.nbbang.member.model.vo.Member;
 
 public class AdminService {
 	private AdminDao aa = new AdminDao();
@@ -17,7 +19,7 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
-	
+
 	public int customerListCount() {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
@@ -25,7 +27,6 @@ public class AdminService {
 		close(conn);
 		return cnt;
 	}
-	
 
 //	public List<Member> selectMemberSearch(String type, String keyword, int cPage, int numPerPage) {
 //		// TODO Auto-generated method stub
