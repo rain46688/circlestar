@@ -5,29 +5,20 @@ import java.sql.Timestamp;
 
 public class Member {
 
-	private int usid;
-	private String memberPwd;
-	private String memberName;
-	private String nickname;
-	private String gender;
-	private Date birthday;
-	private String phone;
-	private String address;
-	private String memberId;
-	private Date enrollDate;
-	private String grade;
-	private int maxRoomCount;
-	private int reportCount;
-	private int point;
-	private int leaveMem;
-	private String curTradeList;
-	private String curCreateList;
-	private String deliveryList;
-	private String tradeList;
-	private String likeList;
-	private int nbbangScore;
-	private String memberPicture;
-	private String curRoomBid;
+	private int usid; //유저식별값
+	private String memberPwd; //회원 비밀번호(단방향) 영문,숫자 혼합 4~16자
+	private String memberName; //회원 이름 한글 기준 2~5자
+	private String nickname; //회원 닉네임 한글 기준 10자
+	private String gender; //성별 M or F
+	private Date birthday; //생년월일
+	private String phone; //전화번호(양방향) -없이 11자
+	private String address; //주소(양방향)
+	private String memberId; //이메일&아이디
+	private Date enrollDate; //가입일
+	private int point; //포인트수치(현금화 포인트임 등급이랑은 무관)
+	private Boolean leaveMem; //회원 탈퇴여부 (1은 탈퇴유저, 0은 탈퇴 안한 유저)
+	private int nbbangScore; //N빵 점수 (일정 이상 모을 수록 회원 등급 상승)
+	private String memberPicture; //회원 프로필 사진 (파일 이름, 확장자명)
 	private boolean pwIsUuid; //임시비번임을 알려주는 용도의 변수^!^
 	
 	public Member() {
@@ -35,10 +26,8 @@ public class Member {
 	}
 
 	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, Date birthday,
-			String phone, String address, String memberId, Date enrollDate, String grade, int maxRoomCount,
-			int reportCount, int point, int leaveMem, String curTradeList, String curCreateList, String deliveryList,
-			String tradeList, String likeList, int nbbangScore, String memberPicture, String curRoomBid,
-			boolean pwIsUuid) {
+			String phone, String address, String memberId, Date enrollDate, int point, Boolean leaveMem,
+			int nbbangScore, String memberPicture, boolean pwIsUuid) {
 		super();
 		this.usid = usid;
 		this.memberPwd = memberPwd;
@@ -50,19 +39,10 @@ public class Member {
 		this.address = address;
 		this.memberId = memberId;
 		this.enrollDate = enrollDate;
-		this.grade = grade;
-		this.maxRoomCount = maxRoomCount;
-		this.reportCount = reportCount;
 		this.point = point;
 		this.leaveMem = leaveMem;
-		this.curTradeList = curTradeList;
-		this.curCreateList = curCreateList;
-		this.deliveryList = deliveryList;
-		this.tradeList = tradeList;
-		this.likeList = likeList;
 		this.nbbangScore = nbbangScore;
 		this.memberPicture = memberPicture;
-		this.curRoomBid = curRoomBid;
 		this.pwIsUuid = pwIsUuid;
 	}
 
@@ -146,30 +126,6 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-
-	public int getMaxRoomCount() {
-		return maxRoomCount;
-	}
-
-	public void setMaxRoomCount(int maxRoomCount) {
-		this.maxRoomCount = maxRoomCount;
-	}
-
-	public int getReportCount() {
-		return reportCount;
-	}
-
-	public void setReportCount(int reportCount) {
-		this.reportCount = reportCount;
-	}
-
 	public int getPoint() {
 		return point;
 	}
@@ -178,52 +134,12 @@ public class Member {
 		this.point = point;
 	}
 
-	public int getLeaveMem() {
+	public Boolean getLeaveMem() {
 		return leaveMem;
 	}
 
-	public void setLeaveMem(int leaveMem) {
+	public void setLeaveMem(Boolean leaveMem) {
 		this.leaveMem = leaveMem;
-	}
-
-	public String getCurTradeList() {
-		return curTradeList;
-	}
-
-	public void setCurTradeList(String curTradeList) {
-		this.curTradeList = curTradeList;
-	}
-
-	public String getCurCreateList() {
-		return curCreateList;
-	}
-
-	public void setCurCreateList(String curCreateList) {
-		this.curCreateList = curCreateList;
-	}
-
-	public String getDeliveryList() {
-		return deliveryList;
-	}
-
-	public void setDeliveryList(String deliveryList) {
-		this.deliveryList = deliveryList;
-	}
-
-	public String getTradeList() {
-		return tradeList;
-	}
-
-	public void setTradeList(String tradeList) {
-		this.tradeList = tradeList;
-	}
-
-	public String getLikeList() {
-		return likeList;
-	}
-
-	public void setLikeList(String likeList) {
-		this.likeList = likeList;
 	}
 
 	public int getNbbangScore() {
@@ -242,14 +158,6 @@ public class Member {
 		this.memberPicture = memberPicture;
 	}
 
-	public String getCurRoomBid() {
-		return curRoomBid;
-	}
-
-	public void setCurRoomBid(String curRoomBid) {
-		this.curRoomBid = curRoomBid;
-	}
-
 	public boolean isPwIsUuid() {
 		return pwIsUuid;
 	}
@@ -262,11 +170,10 @@ public class Member {
 	public String toString() {
 		return "Member [usid=" + usid + ", memberPwd=" + memberPwd + ", memberName=" + memberName + ", nickname="
 				+ nickname + ", gender=" + gender + ", birthday=" + birthday + ", phone=" + phone + ", address="
-				+ address + ", memberId=" + memberId + ", enrollDate=" + enrollDate + ", grade=" + grade
-				+ ", maxRoomCount=" + maxRoomCount + ", reportCount=" + reportCount + ", point=" + point + ", leaveMem="
-				+ leaveMem + ", curTradeList=" + curTradeList + ", curCreateList=" + curCreateList + ", deliveryList="
-				+ deliveryList + ", tradeList=" + tradeList + ", likeList=" + likeList + ", nbbangScore=" + nbbangScore
-				+ ", memberPicture=" + memberPicture + ", curRoomBid=" + curRoomBid + ", pwIsUuid=" + pwIsUuid + "]";
+				+ address + ", memberId=" + memberId + ", enrollDate=" + enrollDate + ", point=" + point + ", leaveMem="
+				+ leaveMem + ", nbbangScore=" + nbbangScore + ", memberPicture=" + memberPicture + ", pwIsUuid="
+				+ pwIsUuid + "]";
 	}
+
 	
 }

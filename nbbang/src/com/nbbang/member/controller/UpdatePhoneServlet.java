@@ -19,7 +19,7 @@ import com.nbbang.member.model.service.MemberService;
 /**
  * Servlet implementation class UpdatePhoneServlet
  */
-@WebServlet("/updatePhoneCpl")
+@WebServlet("/member/updatePhoneCpl")
 public class UpdatePhoneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,11 +49,11 @@ public class UpdatePhoneServlet extends HttpServlet {
 		
 		if(result>0) {
 			request.setAttribute("msg", "휴대폰 번호 변경에 성공했습니다.");
-			request.setAttribute("loc", "/memberInfo?usid="+usid);
+			request.setAttribute("loc", "/member/memberInfo?usid="+usid);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "휴대폰 번호 변경에 실패했습니다.");
-			request.setAttribute("loc", "/memberInfo?usid="+usid);
+			request.setAttribute("loc", "/member/memberInfo?usid="+usid);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}

@@ -5,17 +5,29 @@
 	Member m=(Member)request.getAttribute("member");
 %>
 <style>
+    div#myPageSideBar{
+        position: relative;
+        background: #FFFFFF;
+        text-align: center;
+        margin: 3%;
+        /* 세로정렬꽉차게 가운데:center */
+        align-items: stretch;
+        /* 가로정렬꽉차게 가운데:center */
+        justify-items: stretch;
+        width: 14%;
+        float: left;
+    }
     div#updatePwContainer{
         position: relative;
 	    background: #FFFFFF;
 	    text-align: center;
-        margin: 5% 35%;
+        margin: 5% 35% 5% 15%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
         justify-items: stretch;
         width: 30%;
-        
+        float: right;
     }
     div .item *{
         width:100%;
@@ -57,35 +69,53 @@
 	}
 </style>
 <section>
-    <form id="updatePwForm" action="<%=request.getContextPath() %>/updatePwCpl" method="post"">
-        <div id="updatePwContainer" style="padding-top: 50px;">
-            <div class="item textField" id="containerTitle">
-                <h2 id="updatePwTitle" style="margin-bottom: 40px;" >비밀번호 변경하기</h2>
-            </div>
-
-            <div class="item textField">
-                <input type="password" class="input" id="crtPw" name="crtPw" placeholder="현재 비밀번호">
-            </div>
-            <div class="constrain" id="crtPwConstrain"></div>
-
-            <div class="item textField">
-                <input type="password" class="input" id="newPw" name="newPw" placeholder="새로운 비밀번호">
-            </div>
-            <div class="constrain" id="newPwConstrain"></div>
-
-            <div class="item textField">
-                <input type="password" class="input" id="newPw2" name="newPw2" placeholder="새로운 비밀번호 확인">
-            </div>
-            <div class="constrain" id="newPwConstrain2"></div>
-
-            <div id="btnsField" class="item button">
-                <button type="button" onclick="fn_updatePw();">변경하기</button>
-                <button type="button" onclick="history.back();">취소</button>
-            </div>
-            <input type="hidden" name="usid" value="<%=m.getUsid()%>">
-            <input type="hidden" name="realPw" value="<%=m.getMemberPwd()%>">
+    <div id="myPageWrapper">
+        <div id="myPageSideBar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
         </div>
-    </form>
+        <div id="updatePwContainer" style="padding-top: 50px;">
+            <form id="updatePwForm" action="<%=request.getContextPath() %>/member/updatePwCpl" method="post"">
+                <div class="item textField" id="containerTitle">
+                    <h2 id="updatePwTitle" style="margin-bottom: 40px;" >비밀번호 변경하기</h2>
+                </div>
+
+                <div class="item textField">
+                    <input type="password" class="input" id="crtPw" name="crtPw" placeholder="현재 비밀번호">
+                </div>
+                <div class="constrain" id="crtPwConstrain"></div>
+
+                <div class="item textField">
+                    <input type="password" class="input" id="newPw" name="newPw" placeholder="새로운 비밀번호">
+                </div>
+                <div class="constrain" id="newPwConstrain"></div>
+
+                <div class="item textField">
+                    <input type="password" class="input" id="newPw2" name="newPw2" placeholder="새로운 비밀번호 확인">
+                </div>
+                <div class="constrain" id="newPwConstrain2"></div>
+
+                <div id="btnsField" class="item button">
+                    <button type="button" onclick="fn_updatePw();">변경하기</button>
+                    <button type="button" onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=m.getUsid()%>'">취소</button>
+                </div>
+                <input type="hidden" name="usid" value="<%=m.getUsid()%>">
+                <input type="hidden" name="realPw" value="<%=m.getMemberPwd()%>">
+            </form>
+        </div>
+    </div>
     <script>
 		var pwPattern = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,16}$/;
 		$(function(){
