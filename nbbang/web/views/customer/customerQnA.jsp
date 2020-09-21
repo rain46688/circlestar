@@ -14,28 +14,6 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
 	rel="stylesheet">
 
-
-<style>
-	#btn-news {
-		float: right;
-		margin-top: 11%;
-		margin-right: 16%;
-	}
-
-	.btn_1 {
-		color: #f87d09;
-		text-align: center;
-		width: 130px;
-		background-color: white;
-		border: 3px solid #647503;
-		border-top-left-radius: 40%;
-		border-bottom-right-radius: 40%;
-	}
-
-	.btn_1:hover {
-		color: red;
-	}
-</style>
 <jsp:include page="maincss.jsp"></jsp:include>
 
 
@@ -51,7 +29,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 
 		</div>
 		<div class="cs-alert__content">
-			<a>더 빠른 안내를 위하여 불법거래 유도 관련 문의는 <br> <span>엔빵 불법거래 신고센터 (031-112)</span>로 문의를 해 주시기 바랍니다.</a>
+			<a>더 빠른 안내를 위하여 불법거래 유도 관련 문의는  <br> <span>엔빵 불법거래 신고센터 (031-112)</span>로 문의를 해 주시기 바랍니다.</a>
 		</div>
 	</div>
 	<div class="qna-caution">
@@ -119,6 +97,10 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 		<div class="page_wrap">
 			<%=request.getAttribute("pageBar")%>
 		</div>
+		<!-- <div class="ad-content">
+		<a href="http://handscoffee.com/new_hands//board/new_board.php?bo_table=new_event&wr_id=173"><image src="<%=request.getContextPath()%>/images/ha1.jpg"></image>
+		</a>
+		</div> -->
 	</div>
 
 	<script>

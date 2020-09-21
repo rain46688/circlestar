@@ -3,166 +3,154 @@
 <%@ include file="/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/cstmcss/main.css" type="text/css">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap" rel="stylesheet">
+<jsp:include page="maincss.jsp"></jsp:include>
 <style>
-  
 
-  figure.snip1200 {
-    font-family: 'Raleway', Arial, sans-serif;
-    position: relative;
-    overflow: hidden;
-    margin-top: 3%;
-    margin-left: 25%;
+ @import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+figure.snip1384 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin-left: 40%;
+  margin-top: 3%;
+  width: 600px;
+  height: 700px;
+  color: #ffffff;
+  text-align: left;
+  font-size: 16px;
+  background-color: white;
+}
+figure.snip1384 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+figure.snip1384 img {
+  width: 600px;
+  height: 700px;
+  backface-visibility: hidden;
+  vertical-align: top;
+}
+figure.snip1384:after,
+figure.snip1384 figcaption {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+figure.snip1384:after {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.35);
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+  opacity: 0;
+}
+figure.snip1384 figcaption {
+  z-index: 1;
+  padding: 40px;
+}
+figure.snip1384 h3,
+figure.snip1384 .links {
+  width: 100%;
+  margin: 5px 0;
+  padding: 0;
+}
+figure.snip1384 h3 {
+  line-height: 1.1em;
+  font-weight: 700;
+  font-size: 1.4em;
+  text-transform: uppercase;
+  opacity: 0;
+}
+figure.snip1384 p {
+  font-size: 0.8em;
+  font-weight: 300;
+  letter-spacing: 1px;
+  opacity: 0;
+  top: 50%;
+  -webkit-transform: translateY(40px);
+  transform: translateY(40px);
+}
+figure.snip1384 i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 20px 25px;
+  font-size: 34px;
+  opacity: 0;
+  -webkit-transform: translateX(-10px);
+  transform: translateX(-10px);
+}
+figure.snip1384 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+figure.snip1384:hover img,
+figure.snip1384.hover img {
+  zoom: 1;
+  filter: alpha(opacity=50);
+  -webkit-opacity: 0.5;
+  opacity: 0.5;
+}
+figure.snip1384:hover:after,
+figure.snip1384.hover:after {
+  opacity: 1;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+figure.snip1384:hover h3,
+figure.snip1384.hover h3,
+figure.snip1384:hover p,
+figure.snip1384.hover p,
+figure.snip1384:hover i,
+figure.snip1384.hover i {
+  -webkit-transform: translate(0px, 0px);
+  transform: translate(0px, 0px);
+  opacity: 1;
+} */
 
-    width: 700px;
-    height: 600px;
-
-    background: white;
-    color: black;
-    text-align: center;
-
-    font-size: 16px;
-  }
-
-  figure.snip1200 * {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-transition: all 0.45s ease-in-out;
-    transition: all 0.45s ease-in-out;
-  }
-
-  figure.snip1200 img {
-    width: 650px;
-    height: 600px;
-    position: relative;
-    opacity: 0.9;
-  }
-
-  figure.snip1200 figcaption {
-    position: absolute;
-    top: 45%;
-    left: 7%;
-    right: 7%;
-    bottom: 45%;
-    border: 1px solid white;
-    border-width: 1px 1px 0;
-  }
-
-  figure.snip1200 .heading {
-    overflow: hidden;
-    -webkit-transform: translateY(50%);
-    transform: translateY(50%);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-
-  figure.snip1200 h2 {
-    display: table;
-    margin: 0 auto;
-    padding: 0 10px;
-    position: relative;
-    text-align: center;
-    width: auto;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-
-  figure.snip1200 h2 span {
-    font-weight: 800;
-  }
-
-  figure.snip1200 h2:before,
-  figure.snip1200 h2:after {
-    position: absolute;
-    display: block;
-    width: 1000%;
-    height: 1px;
-    content: '';
-    background: white;
-    top: 50%;
-  }
-
-  figure.snip1200 h2:before {
-    left: -1000%;
-  }
-
-  figure.snip1200 h2:after {
-    right: -1000%;
-  }
-
-  figure.snip1200 p {
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    position: absolute;
-    width: 100%;
-    padding: 0 20px;
-    margin: 0;
-    opacity: 0;
-    line-height: 1.6em;
-    font-size: 0.9em;
-  }
-
-  figure.snip1200 a {
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    z-index: 1;
-  }
-
-  figure.snip1200:hover img,
-  figure.snip1200.hover img {
-    opacity: 0.25;
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-  }
-
-  figure.snip1200:hover figcaption,
-  figure.snip1200.hover figcaption {
-    top: 7%;
-    bottom: 7%;
-  }
-
-  figure.snip1200:hover p,
-  figure.snip1200.hover p {
-    opacity: 1;
-    -webkit-transition-delay: 0.35s;
-    transition-delay: 0.35s;
-  }
 </style>
 
 
 
-<jsp:include page="maincss.jsp"></jsp:include>
 
 
-<section class="content">
-  <div id="kdh-content1">
-    <figure class="snip1200">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
-      <figcaption>
-        <p>NbbangNbbangNbbangNbbangNbbangNbbangNbbangNbbangNbbangNbbang</p>
-        <div class="heading">
-          <h2>Nbbang<span> Guide</span></h2>
-        </div>
-      </figcaption>
-      <a href="#"></a>
-    </figure>
-  </div>
-</section>
+ <div class="kdh-main1">
+  <figure class="snip1384">
+    <img src="<%=request.getContextPath()%>/images/logo.png" alt="sample83" />
+    <figcaption>
+      <h3>Fleece Marigold</h3>
+      <p>Which is worse, that everyone has his price, or that the price is always so low.</p><i class="ion-ios-arrow-right"></i>
+    </figcaption>
+    <a href="#"></a>
+  </figure>
+</div> 
+
+<!-- <button type="button" class="btn-qna" style="font-size: 20px;"
+  onclick="location.href='<%=request.getContextPath()%>/customer/customerQnA'">고객센터 바로가기</button> -->
+
+  
 
 
 
 
 
 <script>
-  $(".hover").mouseleave(
-    function () {
-      $(this).removeClass("hover");
-    }
-  );
+$(".hover").mouseleave(
+  function () {
+    $(this).removeClass("hover");
+  }
+);
 </script>
 
 

@@ -1,9 +1,11 @@
 @charset "UTF-8";
-
+*{
+    text-decoration:none
+}
 table {
     width: 800px;
     height: 300px;
-    margin-left: 20%;
+    margin-left: 35%;
 
     
 }
@@ -22,6 +24,7 @@ td {
 }
 .qna-caution{
     margin-top: 4.5%;
+    margin-left: 33%;
 }
 .qna-caution .caution-li{
     list-style: none;
@@ -37,13 +40,13 @@ td {
     padding-top: 5px;
 }
 .page_wrap{
-    margin-top: 3%;
+    margin-top: 5%;
     margin-left: 56.0%;
     margin-bottom: 5%;
 }
 .cs-alert{
     width: 1200px;
-    margin-left: 30%;
+    margin-left: 35%;
     margin-top: 4%;
 }
 .cs-alert .cs-alert__title a{
@@ -57,48 +60,33 @@ td {
     font-weight: bold;
 } 
 
-/* /* Dropdown Button */
-.dropbtn {
- 
-    color: black;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-} */
-
-/* /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-    
+div.ad-content *{
+    width: 800px;
+    height: 200px;
+    margin-left:15%;
+}
+#btn-news {
+    float: right;
+    margin-top: 11%;
+    margin-right: 16%;
 }
 
-The container <div> - needed to position the dropdown content
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-Dropdown Content (Hidden by Default)
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-   width: 700px;
-   height: 500px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-Links inside the dropdown
-.dropdown-content #drop-content #drop-file {
-    color: black;
+.btn_1 {
+    color: #f87d09;
     text-align: center;
-    text-decoration: none;
-    display: block;
-    margin-right: 2%;
+    width: 130px;
+    background-color: white;
+    border: 4px solid #f1da06;
+    border-radius: 13%;
+    
+    font-weight: bold;
 }
-
-Change color of dropdown links on hover
-.dropdown-content div:hover {background-color: #f1f1f1}
-
-Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button)
-.show {display:block;} */
+#btn-news a{
+    text-decoration: none;
+}
+.btn_1:hover {
+    color: orange;
+}
+ul.side-bar-kdh p#img-title{
+    padding-bottom: 10px;
+}
