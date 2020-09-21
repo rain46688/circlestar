@@ -256,4 +256,20 @@ private Properties prop=new Properties();
 		return result;
 	}
 
+	public int updateAddress(Connection conn, int usid, String address) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateAddress"));
+			pstmt.setString(1, address);
+			pstmt.setInt(2, usid);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

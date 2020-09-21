@@ -18,7 +18,7 @@
     button.pnbtn{
         outline: none;
         background: #735020;
-        min-width: 50px;
+        min-width: 100px;
         width: 15%;
         height: 36px;
         border: none;

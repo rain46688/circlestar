@@ -86,7 +86,13 @@
         <div class="item textField">
             <div class="fieldCapsule">
                 <div class="capsuleLeft">성별</div>
-                <div class="capsuleRight"><%=m.getGender()%></div>
+                <div class="capsuleRight">
+                	<%if(m.getGender().equals("F")){%>
+                		여성
+                	<%}else{%>
+                		남성
+                	<%}%>
+                </div>
             </div>
         </div>
 
@@ -122,7 +128,7 @@
                     <div>
                         <button type="button" class="button" id="addressBtn">수정</button>
                     </div>
-                    <div></div>
+                    <div id="updateAddress"></div>
                 </div>
             </div>
         </div>
@@ -140,7 +146,20 @@
             })
             $("#phoneBtn").css({"display":"none"});
             $("#updatePhone").css({"display":"block"});
-	    })
+	    });
+	    
+	    $("#addressBtn").click(e=>{
+	    	$.ajax({
+                url:"<%=request.getContextPath()%>/member/updateAddress?usid="+<%=m.getUsid()%>,
+                type:"get",
+                dataType:"html",
+                success: data =>{
+                    $("div#updateAddress").html(data);
+                }
+            })
+            $("#addressBtn").css({"display":"none"});
+            $("#updateAddress").css({"display":"block"});
+	    });
     </script>
 </section>
 <%@ include file="/views/common/footer.jsp" %>
