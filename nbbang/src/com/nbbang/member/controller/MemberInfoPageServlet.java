@@ -43,8 +43,9 @@ public class MemberInfoPageServlet extends HttpServlet {
 		String addressStr;
 		try {
 			memberIdStr=AESCrypto.decrypt(m.getMemberId());
-			phoneStr=AESCrypto.decrypt(m.getPhone());
+			String phoneDec=AESCrypto.decrypt(m.getPhone());
 			addressStr=AESCrypto.decrypt(m.getAddress());
+			phoneStr=phoneDec.substring(0,3)+"-"+phoneDec.substring(3,7)+"-"+phoneDec.substring(7);
 		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
 				| BadPaddingException e) {
 			memberIdStr=m.getMemberId();
