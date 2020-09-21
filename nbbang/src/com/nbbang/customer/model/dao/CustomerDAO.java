@@ -50,6 +50,8 @@ public class CustomerDAO {
 				cc.setCsContent(rs.getString("cs_content"));
 				cc.setCsDate(rs.getDate("cs_date"));
 				cc.setCsFile(rs.getString("cs_file"));
+				cc.setCsIscheck(rs.getBoolean("cs_ischeck"));
+				cc.setCsNickname(rs.getString("cs_nickname"));
 				list.add(cc);
 			}
 		} catch (SQLException e) {
@@ -94,6 +96,7 @@ public class CustomerDAO {
 			pstmt.setString(3, c.getCsTitle());
 			pstmt.setString(4, c.getCsContent());
 			pstmt.setString(5, c.getCsFile());
+			
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -109,7 +112,7 @@ public class CustomerDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("insertQnA"));
+			pstmt = conn.prepareStatement(prop.getProperty("viewRead"));
 			
 			pstmt.setString(1, c.getCsType());
 			pstmt.setString(2, c.getCsContent());

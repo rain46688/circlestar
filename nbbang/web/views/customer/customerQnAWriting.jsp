@@ -62,7 +62,7 @@ pageEncoding="UTF-8"%>
   <h3>문의를 작성하시오.</h3>
   <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
     enctype="multipart/form-data">
-    <div class="type-select">
+    문의유형<div class="type-select">
     <input type="radio" name="qnaType" id="type0" value="회원정보">
     <label for="type0">회원정보</label>
 
@@ -74,21 +74,21 @@ pageEncoding="UTF-8"%>
       <option value="">회원정보관련</option>
       <option value="">신고</option>
     </select> -->
-    <div class="fix-writer">
+    문의작성자<div class="fix-writer">
       <input value="9999" class="writing-input" name="writer" id="" readonly>
       <!-- 9999는 Admin에 USID 이다.USID는 회원가입을 하잖아 회원가입을 하면 시퀀스 넘버에 의해 
             자동으로 증가한다. 일단은 9999로 해놓고 나중에 세션값을 받아와서 닉네임을 조회한 다음에 
                 넘겨서 DB에 넣어라. -->
     </div>
-    <div class="wrtie-title">
+    제목<div class="wrtie-title">
       <input type="text" class="writing-input" name="title" placeholder="제목을 입력하쇼.">
     </div>
-    <div class="wrtie-content">
+    내용<div class="wrtie-content">
       <textarea name="contentwrite" rows="5" cols="50" placeholder="내용을 입력하쇼">
 
 					</textarea>
     </div>
-    <div class="file-upload">
+    첨부파일<div class="file-upload">
 
       <input type="file" name="csFile" multiple="true">
 
