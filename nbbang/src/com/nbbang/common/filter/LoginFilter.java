@@ -39,9 +39,7 @@ public class LoginFilter implements Filter {
 		// TODO Auto-generated method stub
 		HttpSession session=((HttpServletRequest)request).getSession(false);
         if(session.getAttribute("loginnedMember") == null) {
-        	request.setAttribute("msg", "로그인이 필요합니다.");
-            request.setAttribute("loc", "/loginPage");
-            request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+            request.getRequestDispatcher("/loginPage").forward(request, response);
             return;
         }
         System.out.println("지나가니");

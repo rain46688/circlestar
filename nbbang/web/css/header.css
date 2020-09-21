@@ -36,7 +36,7 @@ header{
 }
 div#topBtn>button{
 	background-color: #ecaf59;
-	margin-right: 5px;
+	margin-right: 0.25em;
 	color: white;
 	border: none;
 }
@@ -56,6 +56,18 @@ div#topBtn>button{
 
 header>nav>ul{
 	background-color: #FFC107;
+}
+
+header>nav>ul>li{
+	margin-left: 1.25em;
+	margin-right: 1.25em;
+	text-align:center
+}
+header>nav>ul>li>a {
+	width:5em;
+}
+header>nav>ul>li>a:hover {
+	color:white;
 }
 
 
