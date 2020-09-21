@@ -2,14 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-
-
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/main.css" type="text/css">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
   rel="stylesheet">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/qnawriting.css" type="text/css">
-
-
 
 <div id="kdh-container">
   <div id="kdh-sidebar-left">
@@ -53,77 +48,105 @@ pageEncoding="UTF-8"%>
   </div>
 </div>
 
+<style>
+  div#QA-container {
+    margin-top: 1.4%;
+    margin-left: 35%;
+    margin-bottom: 4%;
+    width: 50%;
+    height: 100%;
+    box-shadow: 5px 5px 5px 5px #ecd051;
+  }
 
-
-
-
-
-
-<div class="writing-container">
-  <div class="writing-wrap">
+  div.question-container {
+    height: 300px;
     
-    <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
-      enctype="multipart/form-data">
+  }
+
+  div.answer-container {
+    height: 300px;
+    
+  }
+  div.content-write p, div.answer-content p{
+    text-align: center;
+  }
+  div.file-upload{
+    margin-left: 5%;
+    margin-top: 26%;
+    
+    width: 200px;
+  }
+  div.answer-date{
+    float: right;
+   margin-top: 25%;
+   margin-right: 4%;
+  }
+  div.hr-line{
+    box-shadow: 1px 1px 1px 1px #ecd051;
+    color: white;
+    
+    width: 100%;
+  }
+  div#submitBtn{
+    margin-top:35%;
+  }
+</style>
+
+<div id="QA-container">
+
+  <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
+    enctype="multipart/form-data">
+    <div class="question-container">
       
-    <!--  <div class="type-select">
+      <div class="write-content">
         
-        <input type="hidden" id="type-sel">
-        <label for="type-sel">문의 유형</label>
-       
-        <input type="radio" name="qnaType" id="type0" value="회원정보">
-        <label for="type0">회원정보</label>
-
-        <input type="radio" name="qnaType" id="type1" value="신고">
-        <label for="type1">신고</label>
-
-        <input type="radio" name="qnaType" id="type2" value="불법거래">
-        <label for="type2">불법거래</label>
+        <image src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
         
-        <input type="radio" name="qnaType" id="type3" value="신고">
-        <label for="type3">신고</label>
-        
-        <input type="radio" name="qnaType" id="type4" value="신고">
-        <label for="type4">신고</label>
-        
-        <input type="radio" name="qnaType" id="type5" value="신고">
-        <label for="type5">신고</label>
-
-      </div> -->
-      <div class="type-wrap">
-          <select class="type-select" name="qnaType">
-      <option value="" selected>문의유형</option>
-      <option value="">회원정보관련</option>
-      <option value="">거래배송관련</option>
-      <option value="">불법거래</option>
-      <option value="">성희롱</option>
-      <option value="">신고</option>
-    </select> 
-  </div>
-    <hr>
-     <div class="fix-writer">
-        <input value="9999" class="writing-input" name="writer" id="" readonly>
-        <!-- 9999는 Admin에 USID 이다.USID는 회원가입을 하잖아 회원가입을 하면 시퀀스 넘버에 의해 
-            자동으로 증가한다. 일단은 9999로 해놓고 나중에 세션값을 받아와서 닉네임을 조회한 다음에 
-                넘겨서 DB에 넣어라. -->
+        <div class="content-write" name="contentwrite">
+          <p> zzzzzzzzzzzzzzzz</p>        
+        </div>
       </div>
-      <div class="write-title">
-        <input type="hidden" class="writing-input" name="title" placeholder="제목을 입력하쇼.">
-        <label for="title">문의 유형</label>
-      </div>
-      <div class="wrtie-content">
-        <textarea name="contentwrite" rows="2" cols="100" placeholder="내용을 입력하쇼">
-
-					</textarea>
-      </div>
+      
       <div class="file-upload">
+        <a href="">첨부파일</a>
+      </div>
+    </div>
+    
+    <div class="hr-line">
+      <hr id="hr-line">
+    </div>
 
-        <input type="file" name="csFile" multiple="true">
 
+    <div class="answer-container">
+      <image src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
+      <div class="answer-content">
+        <p> GGGGGGGGGGGGGGGGGGGGGGGG</p>  
+      </div>
+      <div class="answer-date">
+        2020.09.21 12:16pm
       </div>
       <div id="submitBtn">
-        <button type="submit" class="btn-submit">문의등록</button>
+        <button type="reset" class="btn-submit">닫기</button>
       </div>
-    </form>
-  </div>
+    </div>
+
+
+
+
+    <%--              <%for(CustomerCenter cc : list){%>
+    <div class="wrtie-content">
+      <textarea name="contentwrite" rows="5" cols="50">
+                <%=cc.getCsContent()%>
+                          </textarea>
+    </div>
+    <div class="file-upload">
+      <div>
+        <%=cc.getCsDate()%>
+      </div>
+      <%}%>
+      
+          </div> --%>
+
+        </form>
 </div>
 <%@ include file="/views/common/footer.jsp"%>

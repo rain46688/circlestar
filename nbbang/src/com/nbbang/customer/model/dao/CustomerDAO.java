@@ -20,7 +20,7 @@ public class CustomerDAO {
 
 	public CustomerDAO() {
 		// TODO Auto-generated constructor stub
-		String filePath = BoardDao.class.getResource("/sql/customer/customer.properties").getPath();
+		String filePath = CustomerDAO.class.getResource("/sql/customer/customer.properties").getPath();
 		try {
 			prop.load(new FileReader(filePath));
 		} catch (Exception e) {
@@ -50,6 +50,8 @@ public class CustomerDAO {
 				cc.setCsContent(rs.getString("cs_content"));
 				cc.setCsDate(rs.getDate("cs_date"));
 				cc.setCsFile(rs.getString("cs_file"));
+				cc.setCsIscheck(rs.getBoolean("cs_ischeck"));
+				cc.setCsNickname(rs.getString("cs_nickname"));
 				list.add(cc);
 			}
 		} catch (SQLException e) {
@@ -94,6 +96,28 @@ public class CustomerDAO {
 			pstmt.setString(3, c.getCsTitle());
 			pstmt.setString(4, c.getCsContent());
 			pstmt.setString(5, c.getCsFile());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int viewDetailRead(Connection conn, CustomerCenter c) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("viewRead"));
+			
+			pstmt.setString(1, c.getCsType());
+			pstmt.setString(2, c.getCsContent());
+			pstmt.setString(3, c.getCsFile());
+			
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {

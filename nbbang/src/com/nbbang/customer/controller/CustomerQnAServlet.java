@@ -78,7 +78,7 @@ public class CustomerQnAServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/views/customer/customerQnA.jsp").forward(request,response);
 		
-//		request.getRequestDispatcher("/views/customer/customerQnA.jsp").forward(request, response);
+//		request.getRequestDispatcher("/views/customer/customerRead.jsp").forward(request, response);
 	}
 
 	/**

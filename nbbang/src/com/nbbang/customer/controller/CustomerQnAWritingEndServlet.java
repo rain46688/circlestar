@@ -51,13 +51,24 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 	
 		MultipartRequest mPr=new MultipartRequest(request,path,maxSize,encode,new DefaultFileRenamePolicy());
 		
-		String csWriter=mPr.getParameter("writer");
-		String csType=mPr.getParameter("qnaType");
-		String csTitle=mPr.getParameter("title");
-		String csContent=mPr.getParameter("content");
-		String csFile=mPr.getFilesystemName("csFile");
-		System.out.println(csWriter+" " +csType+" "+csTitle+" "+csContent+" "+csFile+" ");
-		CustomerCenter c=new CustomerCenter(0,csWriter,csType,csTitle,csContent,null,csFile);
+//		String csWriter=mPr.getParameter("writer");
+//		String csType=mPr.getParameter("qnaType");
+//		String csTitle=mPr.getParameter("title");
+//		String csContent=mPr.getParameter("contentwrite");
+//		String csFile=mPr.getFilesystemName("csFile");
+//		String csNickName=mPr.getParameter("nickname");
+//		CustomerCenter c=new CustomerCenter(0,csWriter,csType,csTitle,csContent,null,csFile,0,csNickName);
+
+		CustomerCenter c=new CustomerCenter();
+		c.setCsWriter(mPr.getParameter("writer"));
+		c.setCsType(mPr.getParameter("qnaType"));
+		c.setCsTitle(mPr.getParameter("title"));
+		c.setCsContent(mPr.getParameter("contentwrite"));
+		c.setCsFile(mPr.getParameter("csFile"));
+		
+		
+		System.out.println(mPr.getParameter("writer")+mPr.getParameter("qnaType")+mPr.getParameter("title")+mPr.getParameter("contentwrite")+mPr.getParameter("csFile"));
+		
 		int result=new CustomerService().insertQna(c);
 		
 		String msg="";

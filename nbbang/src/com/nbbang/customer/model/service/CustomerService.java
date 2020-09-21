@@ -50,6 +50,16 @@ public class CustomerService {
 		return result;
 	}
 
+	public int viewDetailRead(CustomerCenter c) {
+		// TODO Auto-generated method stub
+		Connection conn=getConnection();
+		int result=dao.viewDetailRead(conn,c);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 
 
 
