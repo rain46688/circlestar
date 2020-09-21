@@ -129,10 +129,11 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("boardInsert"));
 			pstmt.setString(1, b.getBoardTitle());
-			pstmt.setString(2, b.getContent());
-			pstmt.setInt(3, b.getWriterUsid());
-			pstmt.setString(4, b.getWriterNickname());
-			pstmt.setString(5, b.getProductCategory());
+			pstmt.setInt(2, b.getWriterUsid());
+			pstmt.setString(3, b.getWriterNickname());
+			pstmt.setString(4, b.getContent());
+			pstmt.setString(5, b.getFiles());
+			pstmt.setString(6, b.getProductCategory());
 			pstmt.setInt(6, b.getMaxMems());
 			pstmt.setInt(7, b.getMaxMems());
 			pstmt.setString(8, "구매예정");

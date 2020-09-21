@@ -116,6 +116,10 @@
 					<option value="직거래">직거래</option>
 					<option value="택배배송">택배배송</option>
 				</select>
+				<select class="custom-select custom-select-md" name="ownStatus" id="">
+					<option value="구매예정">구매예정</option>
+					<option value="개인보유">개인보유</option>
+				</select>
 				</div>
 				<div id="textEditor" class="marginTop">
 					<textarea name="content" id="content" rows="20" cols="80" placeholder="내용을 입력해주세요.">

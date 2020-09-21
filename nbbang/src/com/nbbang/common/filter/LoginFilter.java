@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class CustomerLoginFilter
  */
-@WebFilter(urlPatterns= {"/customer/*","/board/*"})
+@WebFilter(urlPatterns= {"/customer/*","/board/*","/member/*"})
 public class LoginFilter implements Filter {
 
     /**
@@ -42,8 +42,6 @@ public class LoginFilter implements Filter {
             request.getRequestDispatcher("/loginPage").forward(request, response);
             return;
         }
-        System.out.println("지나가니");
-
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}

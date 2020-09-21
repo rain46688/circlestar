@@ -82,8 +82,8 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setContent(request.getParameter("content"));
 		b.setProductUrl(request.getParameter("url"));
 		b.setFiles(fileNames);
-		b.setWriterNickname(request.getParameter("WriterNickname"));
-		b.setWriterUsid(Integer.parseInt(request.getParameter("WriterUsid")));
+		b.setWriterNickname(request.getParameter("writerNickname"));
+		b.setWriterUsid(Integer.parseInt(request.getParameter("writerUsid")));
 		
 		int result = new BoardService().boardInsert(b);
 		if(result > 0) {
