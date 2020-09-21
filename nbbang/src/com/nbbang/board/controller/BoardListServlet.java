@@ -15,7 +15,7 @@ import com.nbbang.board.model.vo.Board;
 /**
  * Servlet implementation class BoardListServlet
  */
-@WebServlet("/board/boList")
+@WebServlet("/boList")
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

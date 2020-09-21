@@ -33,7 +33,6 @@ public class BoardDao {
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardList");
 		List<Board> list = null;
-		System.out.println();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
@@ -131,13 +130,14 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(prop.getProperty("boardInsert"));
 			pstmt.setString(1, b.getBoardTitle());
 			pstmt.setString(2, b.getContent());
-			pstmt.setString(3, b.getFiles());
-			pstmt.setString(4, b.getProductCategory());
-			pstmt.setInt(5, b.getMaxMems());
+			pstmt.setInt(3, b.getWriterUsid());
+			pstmt.setString(4, b.getWriterNickname());
+			pstmt.setString(5, b.getProductCategory());
 			pstmt.setInt(6, b.getMaxMems());
-			pstmt.setString(7, "구매예정");
-			pstmt.setString(8, b.getTradeKind());
-			pstmt.setString(9, b.getProductUrl());
+			pstmt.setInt(7, b.getMaxMems());
+			pstmt.setString(8, "구매예정");
+			pstmt.setString(9, b.getTradeKind());
+			pstmt.setString(10, b.getProductUrl());
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
