@@ -20,6 +20,7 @@ public class Member {
 	private int nbbangScore; //N빵 점수 (일정 이상 모을 수록 회원 등급 상승)
 	private String memberPicture; //회원 프로필 사진 (파일 이름, 확장자명)
 	private boolean pwIsUuid; //임시비번임을 알려주는 용도의 변수^!^
+	private String curRoomBid; //민수꺼 지우지 말기^^
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
@@ -27,7 +28,7 @@ public class Member {
 
 	public Member(int usid, String memberPwd, String memberName, String nickname, String gender, Date birthday,
 			String phone, String address, String memberId, Date enrollDate, int point, Boolean leaveMem,
-			int nbbangScore, String memberPicture, boolean pwIsUuid) {
+			int nbbangScore, String memberPicture, boolean pwIsUuid, String curRoomBid) {
 		super();
 		this.usid = usid;
 		this.memberPwd = memberPwd;
@@ -44,6 +45,7 @@ public class Member {
 		this.nbbangScore = nbbangScore;
 		this.memberPicture = memberPicture;
 		this.pwIsUuid = pwIsUuid;
+		this.curRoomBid = curRoomBid;
 	}
 
 	public int getUsid() {
@@ -166,13 +168,21 @@ public class Member {
 		this.pwIsUuid = pwIsUuid;
 	}
 
+	public String getCurRoomBid() {
+		return curRoomBid;
+	}
+
+	public void setCurRoomBid(String curRoomBid) {
+		this.curRoomBid = curRoomBid;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [usid=" + usid + ", memberPwd=" + memberPwd + ", memberName=" + memberName + ", nickname="
 				+ nickname + ", gender=" + gender + ", birthday=" + birthday + ", phone=" + phone + ", address="
 				+ address + ", memberId=" + memberId + ", enrollDate=" + enrollDate + ", point=" + point + ", leaveMem="
 				+ leaveMem + ", nbbangScore=" + nbbangScore + ", memberPicture=" + memberPicture + ", pwIsUuid="
-				+ pwIsUuid + "]";
+				+ pwIsUuid + ", curRoomBid=" + curRoomBid + "]";
 	}
 
 	
