@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.Member;
 
 public class MemberDao {
@@ -89,6 +90,7 @@ private Properties prop=new Properties();
 
 	private Member inputData(ResultSet rs) {
 		Member m=new Member();
+		Grade g=new Grade();
 		try {
 			m.setUsid(rs.getInt("USID"));
 			m.setMemberId(rs.getString("MEMBER_ID"));
