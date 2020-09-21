@@ -47,7 +47,8 @@ public class ChatRoomServlet extends HttpServlet {
 				+"boardId : "+boardId+", curMemsList : "+curMemsList);
 		
 		//*** 나중에 디비에서 방번호로 조회해서 받아와야됨 임시 ***
-		curMemsList="ADMIN,user01,user02";
+		curMemsList=new chatService().;
+		//curMemsList="ADMIN,user01,user02";
 		//======================================================
 	
 		
