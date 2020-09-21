@@ -240,13 +240,20 @@ private Properties prop=new Properties();
 		return result;
 	}
 
-	public int updatePhone(Connection conn, String usid, String phone) {
+	public int updatePhone(Connection conn, int usid, String phone) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("updatePhone"));
-			
+			pstmt.setString(1, phone);
+			pstmt.setInt(2, usid);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
+		return result;
 	}
 
 }

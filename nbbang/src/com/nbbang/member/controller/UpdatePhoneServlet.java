@@ -37,7 +37,7 @@ public class UpdatePhoneServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String phoneStr=request.getParameter("phone");
-		String usid=request.getParameter("usid");
+		int usid=Integer.parseInt(request.getParameter("usid"));
 		String phone;
 		try {
 			phone=AESCrypto.encrypt(phoneStr);
@@ -46,6 +46,16 @@ public class UpdatePhoneServlet extends HttpServlet {
 			phone=phoneStr;
 		}
 		int result=new MemberService().updatePhone(usid, phone);
+		
+		if(result>0) {
+			request.setAttribute("msg", "휴대폰 번호 변경에 성공했습니다.");
+			request.setAttribute("loc", "/memberInfo?usid="+usid);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "휴대폰 번호 변경에 실패했습니다.");
+			request.setAttribute("loc", "/memberInfo?usid="+usid);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

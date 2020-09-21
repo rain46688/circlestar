@@ -120,7 +120,7 @@
                         <%=m.getAddress()%>
                     </div>
                     <div>
-                        <button type="button" class="button">수정</button>
+                        <button type="button" class="button" id="addressBtn">수정</button>
                     </div>
                     <div></div>
                 </div>
@@ -131,7 +131,7 @@
     <script>
 	    $("#phoneBtn").click(e=>{
 	    	$.ajax({
-                url:"<%=request.getContextPath()%>/ajax/updatePhone",
+                url:"<%=request.getContextPath()%>/ajax/updatePhone?usid="+<%=m.getUsid()%>,
                 type:"get",
                 dataType:"html",
                 success: data =>{
