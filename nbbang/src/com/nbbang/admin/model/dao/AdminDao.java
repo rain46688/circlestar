@@ -1,5 +1,6 @@
 package com.nbbang.admin.model.dao;
 
+import static com.nbbang.common.temp.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,10 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import com.nbbang.customer.model.vo.CustomerCenter;
-import com.nbbang.member.model.vo.Member;
-import static com.nbbang.common.temp.JDBCTemplate.*;
 
 public class AdminDao {
 
@@ -93,6 +91,8 @@ public class AdminDao {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	
 	
