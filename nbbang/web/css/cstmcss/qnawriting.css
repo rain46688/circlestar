@@ -1,0 +1,27 @@
+@charset "UTF-8";
+div.writing-container{
+    margin-left: 25%;
+    margin-top: 3%;
+   
+    width: 850px;
+    height: 700px;
+    
+}
+div.writing-wrap{
+    margin-left: 25%;
+    margin-top: 5%;
+    
+}
+div.type-wrap{
+    width: 800px;
+    
+    margin-left: 10%;
+    
+}
+div.fix-writer{
+    width: 800px;
+    margin-left: 10%;
+}
+div.write-tile{
+    width: 800px;
+}

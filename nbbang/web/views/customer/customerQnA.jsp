@@ -139,16 +139,16 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 
 					<td>
 						<a
-							href="javascript:openWindowPop('<%=request.getContextPath()%>/customer/customerReadFrm','NbbangQnAContent')">
+							href="<%=request.getContextPath()%>/customer/customerReadFrm">
 							<%=cc.getCsTitle()%>
 							<div class="container">
 
 					</td>
 
 
-					<td><%=cc.getCsWriter()%></td>
+<%-- 					<td><%=cc.getCsWriter()%></td>
 
-					<td><%=cc.getCsDate()%></td>
+					<td><%=cc.getCsDate()%></td> --%>
 				</tr>
 				<%
 					}
