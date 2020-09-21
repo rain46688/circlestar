@@ -15,13 +15,13 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class CustomerLoginFilter
  */
-@WebFilter("/customer/*")
-public class CustomerLoginFilter implements Filter {
+@WebFilter(urlPatterns= {"/customer/*","/board/*"})
+public class LoginFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public CustomerLoginFilter() {
+    public LoginFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -39,14 +39,12 @@ public class CustomerLoginFilter implements Filter {
 		// TODO Auto-generated method stub
 		HttpSession session=((HttpServletRequest)request).getSession(false);
         if(session.getAttribute("loginnedMember") == null) {
-
-//            String msg="로그인이 필요합니다.";
-            String loc="/loginPage";
-//            request.setAttribute("msg", msg);
-            request.setAttribute("loc", loc);
-            request.getRequestDispatcher("/views/member/login.jsp").forward(request, response);
+        	request.setAttribute("msg", "로그인이 필요합니다.");
+            request.setAttribute("loc", "/loginPage");
+            request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
             return;
         }
+        System.out.println("지나가니");
 
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
