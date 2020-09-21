@@ -6,7 +6,8 @@
 	width: 100%;
 	height: 100%;
 	margin-left:auto;
-  	margin-right:auto;
+	  margin-right:auto;
+	  
   } 
 
   #kdh-sidebar-left {
@@ -15,7 +16,7 @@
 	margin-top: 1%;
 	margin-left: 18.5%;
 	float: left;
-	margin-bottom: 6%;
+	margin-bottom: 10%;
 	
   }
 
@@ -40,7 +41,8 @@
   } */
 #list-image1,
 #list-image2,
-#list-image3{
+#list-image3,
+#list-image4{
 margin-bottom:3%;
 
 }
