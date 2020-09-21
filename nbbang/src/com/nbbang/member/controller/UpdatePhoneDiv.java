@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Member;
+
 /**
  * Servlet implementation class UpdatePhone
  */
@@ -27,7 +30,9 @@ public class UpdatePhoneDiv extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("phoneDiv가 보이게 해주세요");
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		Member m=new MemberService().myPage(usid);
+		request.setAttribute("member", m);
 		request.getRequestDispatcher("/views/member/updatePhone.jsp").forward(request, response);
 	}
 

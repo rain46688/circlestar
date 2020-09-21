@@ -52,7 +52,6 @@ public class LoginServlet extends HttpServlet {
 				memberId=memberIdStr;
 			}			
 		}
-		System.out.println(memberId);
 		String memberPwd=request.getParameter("password");
 		Member m=new MemberService().loginMember(memberId,memberPwd);
 		
@@ -67,7 +66,6 @@ public class LoginServlet extends HttpServlet {
 			response.addCookie(c);
 		}
 		if(m!=null) {
-			System.out.println("호옹"+m.isPwIsUuid());
 			HttpSession session=request.getSession();
 			session.setAttribute("loginnedMember",m);
 			if(m.isPwIsUuid()==true) {
