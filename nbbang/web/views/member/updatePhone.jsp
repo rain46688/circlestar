@@ -31,7 +31,7 @@
     }
 </style>
 <div>
-	<form id="memberEnrollFrm" action="<%=request.getContextPath()%>/updatePhoneCpl" method="post">
+	<form id="memberEnrollFrm" action="<%=request.getContextPath()%>/member/updatePhoneCpl" method="post">
 		<input type="tel" placeholder="변경할 휴대폰 번호를 입력해주세요." class="input checkLength" id="phone" name="phone" maxlength="11" required style="width : 59%;">
 		<button type="button" class="pnbtn" onclick="fn_phone_duplicate();">중복검사</button>
 		<input type="hidden" name="checked_pn" value="">

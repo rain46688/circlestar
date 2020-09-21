@@ -124,19 +124,20 @@ button#chargebtn{
       <div class="item smallBox" id="profileModify">
          <p class="title">프로필 수정하기</p>
          <p class="text">닉네임 및 프로필 사진을 수정해보세요.</p>
-         <p><button type="button" class="btn btn-outline-warning">수정하기</button></p>
+         <p><button type="button" class="btn btn-outline-warning"
+         	onclick="location.href='<%=request.getContextPath()%>/member/modifyProfile?usid=<%=loginnedMember.getUsid()%>'">수정하기</button></p>
       </div>
       <div class="item smallBox" id="pwModify">
          <p class="title">비밀번호 수정하기</p>
          <p class="text">비밀번호 수정으로 개인정보를 보호하세요.</p>
-         <p><button type="button" class="btn btn-outline-warning" 
-         	onclick="location.href='<%=request.getContextPath()%>/updatePw?usid=<%=loginnedMember.getUsid()%>'">수정하기</button></p>
+         <p><button type="button" class="btn btn-outline-warning"
+         	onclick="location.href='<%=request.getContextPath()%>/member/updatePw?usid=<%=loginnedMember.getUsid()%>'">수정하기</button></p>
       </div>
       <div class="item smallBox" id="commuModify">
-         <p class="title">개인정보</p>
+         <p class="title">개인정보 확인하기</p>
          <p class="text">개인정보를 확인 및 수정할 수 있습니다.</p>
          <p><button type="button" class="btn btn-outline-warning"
-         	onclick="location.href='<%=request.getContextPath()%>/memberInfo?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
+         	onclick="location.href='<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
       </div>
       <div></div>
    </div>

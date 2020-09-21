@@ -5,16 +5,29 @@
 	Member m=(Member)request.getAttribute("member");
 %>
 <style>
-    div#memberInfoContainer{
+    div#myPageSideBar{
         position: relative;
-	    background: #FFFFFF;
-	    text-align: center;
-        margin: 5% 30%;
+        background: #FFFFFF;
+        text-align: center;
+        margin: 3%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
         justify-items: stretch;
-        width: 40%;
+        width: 14%;
+        float: left;
+    }
+    div#memberInfoContainer{
+        position: relative;
+	    background: #FFFFFF;
+	    text-align: center;
+        margin: 5% 33% 5% 17%;
+        /* 세로정렬꽉차게 가운데:center */
+        align-items: stretch;
+        /* 가로정렬꽉차게 가운데:center */
+        justify-items: stretch;
+        width: 30%;
+        float: right;
     }
     div .item *{
         width:100%;
@@ -64,80 +77,93 @@
     }
 </style>
 <section>
-    <div id="memberInfoContainer">
-        <div class="item textField" id="containerTitle">
-            <div id="updatePwTitle" style="margin-bottom: 20px; font-size: 24px; padding: 5px;" >나의 정보</div>
-        </div>
-
-        <div class="item textField">
-            <div class="fieldCapsule">
-                <div class="capsuleLeft" style="border-top: black 1px solid;">아이디</div>
-                <div class="capsuleRight" style="border-top: black 1px solid;"><%=m.getMemberId()%></div>
+    <div id="myPageWrapper">
+        <div id="myPageSideBar">
+            <div>
+                <p>게시글 리스트</p>
+                <a class="postList" href="#">참여 중인 거래</a>
+                <a class="postList" href="#">내가 만든 거래</a>
+                <a class="postList" href="#">진행 중인 거래</a>
+                <a class="postList" href="#">과거 거래 내역</a>
+                <br>
+                <a class="nav-link" href="#">프로필 수정하기</a>
+                <a class="nav-link" href="#">비밀번호 수정하기</a>
+                <a class="nav-link" href="#">개인정보 확인하기</a>
             </div>
         </div>
-
-        <div class="item textField">
-            <div class="fieldCapsule">
-                <div class="capsuleLeft">이름</div>
-                <div class="capsuleRight"><%=m.getMemberName()%></div>
+        <div id="memberInfoContainer">
+            <div class="item textField" id="containerTitle">
+                <div id="updatePwTitle" style="margin-bottom: 20px; font-size: 24px; padding: 5px;" >나의 정보</div>
             </div>
-        </div>
 
-        <div class="item textField">
-            <div class="fieldCapsule">
-                <div class="capsuleLeft">성별</div>
-                <div class="capsuleRight">
-                	<%if(m.getGender().equals("F")){%>
-                		여성
-                	<%}else{%>
-                		남성
-                	<%}%>
+            <div class="item textField">
+                <div class="fieldCapsule">
+                    <div class="capsuleLeft" style="border-top: black 1px solid;">아이디</div>
+                    <div class="capsuleRight" style="border-top: black 1px solid;"><%=m.getMemberId()%></div>
                 </div>
             </div>
-        </div>
 
-        <div class="item textField">
-            <div class="fieldCapsule">
-                <div class="capsuleLeft">생년월일</div>
-                <div class="capsuleRight"><%=m.getBirthday()%></div>
-            </div>
-        </div>
-
-        <div class="item textField">
-            <div class="fieldCapsule">
-                <div class="capsuleLeft">휴대폰 번호</div>
-                <div class="capsuleRight">
-                    <div>
-                        <%=m.getPhone()%>
-                    </div>
-                    <div>
-                        <button type="button" class="button" id="phoneBtn">수정</button>
-                    </div>
-                    <div id="updatePhone"></div>
+            <div class="item textField">
+                <div class="fieldCapsule">
+                    <div class="capsuleLeft">이름</div>
+                    <div class="capsuleRight"><%=m.getMemberName()%></div>
                 </div>
             </div>
-        </div>
 
-        <div class="item textField">
-            <div class="fieldCapsule">
-                <div class="capsuleLeft">주소</div>
-                <div class="capsuleRight">
-                    <div>
-                        <%=m.getAddress()%>
+            <div class="item textField">
+                <div class="fieldCapsule">
+                    <div class="capsuleLeft">성별</div>
+                    <div class="capsuleRight">
+                        <%if(m.getGender().equals("F")){%>
+                            여성
+                        <%}else{%>
+                            남성
+                        <%}%>
                     </div>
-                    <div>
-                        <button type="button" class="button" id="addressBtn">수정</button>
+                </div>
+            </div>
+
+            <div class="item textField">
+                <div class="fieldCapsule">
+                    <div class="capsuleLeft">생년월일</div>
+                    <div class="capsuleRight"><%=m.getBirthday()%></div>
+                </div>
+            </div>
+
+            <div class="item textField">
+                <div class="fieldCapsule">
+                    <div class="capsuleLeft">휴대폰 번호</div>
+                    <div class="capsuleRight">
+                        <div>
+                            <%=m.getPhone()%>
+                        </div>
+                        <div>
+                            <button type="button" class="button" id="phoneBtn">수정</button>
+                        </div>
+                        <div id="updatePhone"></div>
                     </div>
-                    <div id="updateAddress"></div>
+                </div>
+            </div>
+            <div class="item textField">
+                <div class="fieldCapsule">
+                    <div class="capsuleLeft">주소</div>
+                    <div class="capsuleRight">
+                        <div>
+                            <%=m.getAddress()%>
+                        </div>
+                        <div>
+                            <button type="button" class="button" id="addressBtn">수정</button>
+                        </div>
+                        <div id="updateAddress"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script>
 	    $("#phoneBtn").click(e=>{
 	    	$.ajax({
-                url:"<%=request.getContextPath()%>/ajax/updatePhone?usid="+<%=m.getUsid()%>,
+                url:"<%=request.getContextPath()%>/member/updatePhone?usid="+<%=m.getUsid()%>,
                 type:"get",
                 dataType:"html",
                 success: data =>{

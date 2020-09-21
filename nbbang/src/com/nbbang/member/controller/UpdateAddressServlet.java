@@ -19,7 +19,7 @@ import com.nbbang.member.model.service.MemberService;
 /**
  * Servlet implementation class UpdateAddressServlet
  */
-@WebServlet("/updateAddressCpl")
+@WebServlet("/member/updateAddressCpl")
 public class UpdateAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,11 +48,11 @@ public class UpdateAddressServlet extends HttpServlet {
 		int result=new MemberService().updateAddress(usid,address);
 		if(result>0) {
 			request.setAttribute("msg", "주소 변경에 성공했습니다.");
-			request.setAttribute("loc", "/memberInfo?usid="+usid);
+			request.setAttribute("loc", "/member/memberInfo?usid="+usid);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "주소 변경에 실패했습니다.");
-			request.setAttribute("loc", "/memberInfo?usid="+usid);
+			request.setAttribute("loc", "/member/memberInfo?usid="+usid);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}

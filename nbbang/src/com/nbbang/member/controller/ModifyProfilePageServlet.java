@@ -11,16 +11,16 @@ import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
 
 /**
- * Servlet implementation class UpdatePhone
+ * Servlet implementation class ModifyProfilePageServlet
  */
-@WebServlet("/member/updatePhone")
-public class UpdatePhoneDiv extends HttpServlet {
+@WebServlet("/member/modifyProfile")
+public class ModifyProfilePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatePhoneDiv() {
+    public ModifyProfilePageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class UpdatePhoneDiv extends HttpServlet {
 		int usid=Integer.parseInt(request.getParameter("usid"));
 		Member m=new MemberService().myPage(usid);
 		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/member/updatePhone.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/modifyProfile.jsp").forward(request, response);
 	}
 
 	/**
