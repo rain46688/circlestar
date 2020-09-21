@@ -92,11 +92,13 @@
             </div>
 
             <div class="item textField">
-                <input type="text" class="input">
+                <div>휴대폰 번호</div>
+                <div><%=m.getPhone()%></div>
             </div>
 
             <div class="item textField">
-                <input type="text" class="input">
+                <div>주소</div>
+                <div><%=m.getAddress()%></div>
             </div>
 
             <div id="btnsField" class="item button">
