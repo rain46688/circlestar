@@ -46,7 +46,6 @@ public class CheckPNDuplicateServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			phone=phoneStr;
 		}
-		System.out.println("폰번호암호화확인"+phone);
 		Member m=null;
 		m=new MemberService().phoneDuplicate(phone);
 		request.setAttribute("result", m);
