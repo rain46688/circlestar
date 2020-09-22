@@ -1,17 +1,17 @@
 package com.nbbang.member.model.vo;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class LikeList {
 	
 	private int likeUsid; //좋아요 누른 사람 식별값 (Member primaryKey)
-	private int[] likeBoardId; //좋아요 누른 게시판들
+	private List<Integer> likeBoardId; //좋아요 누른 게시판들
 	
 	public LikeList() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LikeList(int likeUsid, int[] likeBoardId) {
+	public LikeList(int likeUsid, List<Integer> likeBoardId) {
 		super();
 		this.likeUsid = likeUsid;
 		this.likeBoardId = likeBoardId;
@@ -25,17 +25,16 @@ public class LikeList {
 		this.likeUsid = likeUsid;
 	}
 
-	public int[] getLikeBoardId() {
+	public List<Integer> getLikeBoardId() {
 		return likeBoardId;
 	}
 
-	public void setLikeBoardId(int[] likeBoardId) {
+	public void setLikeBoardId(List<Integer> likeBoardId) {
 		this.likeBoardId = likeBoardId;
 	}
 
 	@Override
 	public String toString() {
-		return "LikeList [likeUsid=" + likeUsid + ", likeBoardId=" + Arrays.toString(likeBoardId) + "]";
+		return "LikeList [likeUsid=" + likeUsid + "]";
 	}
-	
 }
