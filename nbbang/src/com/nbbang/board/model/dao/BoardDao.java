@@ -122,16 +122,17 @@ public class BoardDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("boardInsert"));
-			pstmt.setString(1, b.getBoardTitle());
-			pstmt.setInt(2, b.getWriterUsid());
+			pstmt.setInt(1, b.getWriterUsid());
+			pstmt.setString(2, b.getBoardTitle());
 			pstmt.setString(3, b.getWriterNickname());
 			pstmt.setString(4, b.getContent());
-			pstmt.setString(6, b.getProductCategory());
-			pstmt.setInt(6, b.getMaxMems());
+			pstmt.setString(5, b.getProductCategory());
+			pstmt.setString(6, b.getTradeArea());
 			pstmt.setInt(7, b.getMaxMems());
-			pstmt.setString(8, "구매예정");
-			pstmt.setString(9, b.getTradeKind());
-			pstmt.setString(10, b.getProductUrl());
+			pstmt.setInt(8, b.getProductPrice());
+			pstmt.setString(9, b.getOwnStatus());
+			pstmt.setString(10, b.getTradeKind());
+			pstmt.setString(11, b.getProductUrl());
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -147,9 +148,9 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("boardFileInsert"));
 			for(String s : bf.getFileName()) {
-				
+				pstmt.setString(1, s);
+				result += pstmt.executeUpdate();
 			}
-			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
