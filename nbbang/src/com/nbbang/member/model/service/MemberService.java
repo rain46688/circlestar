@@ -83,9 +83,9 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
-	public int memberInsertGrade(int usid) {
+	public int memberInsertGrade(String nickname) {
 		Connection conn=getConnection();
-		int result=dao.memberInsertGrade(conn, usid);
+		int result=dao.memberInsertGrade(conn, nickname);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -126,8 +126,6 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
-	
-	
 	
 
 

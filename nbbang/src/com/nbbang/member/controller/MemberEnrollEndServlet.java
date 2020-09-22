@@ -58,13 +58,12 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		int result=new MemberService().memberEnroll(m);
 		
-		int usid=m.getUsid();
-		
-		int resultGrade=new MemberService().memberInsertGrade(usid);
+		String nickname=m.getNickname();
+		System.out.println("닉네임 들어오는지 확인"+nickname);
 		
 		String msg="";
 		String loc="/";
-		if(result>0 && resultGrade>0) {
+		if(result>0) {
 			msg="회원가입에 성공하였습니다.";
 		}else {
 			msg="회원가입에 실패하였습니다.";
@@ -72,8 +71,14 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		}
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc", loc);
-		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
+		int resultGrade=new InsertGrade().insertGrade(nickname);
+		if(resultGrade>0) {
+			System.out.println("insertGrade성공");
+		}else {
+			System.out.println("insertGrade 실패");
+		}
 	}
 
 	/**

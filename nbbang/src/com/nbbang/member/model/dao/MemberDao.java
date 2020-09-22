@@ -201,12 +201,13 @@ private Properties prop=new Properties();
 		return result;
 	}
 
-	public int memberInsertGrade(Connection conn, int usid) {
+	public int memberInsertGrade(Connection conn, String nickname) {
 		PreparedStatement pstmt=null;
 		int resultGrade=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("memberInsertGrade"));
-			pstmt.setInt(1, usid);
+			pstmt.setString(1, nickname);
+			System.out.println("1번"+nickname);
 			resultGrade=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
