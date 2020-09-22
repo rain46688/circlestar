@@ -36,12 +36,10 @@ public class ModifyPicServelt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int usid=Integer.parseInt(request.getParameter("usid"));
-		Member m=new MemberService().myPage(usid);
 		
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("msg", "업로드 오류(form:enctype)");
-			request.setAttribute("loc", "/member/modifyProfile?usid="+usid);
+			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		
@@ -52,11 +50,12 @@ public class ModifyPicServelt extends HttpServlet {
 			multi=new MultipartRequest(request, savePath, fileMaxSize, "UTF-8", new DefaultFileRenamePolicy());
 		}catch(Exception e) {
 			request.setAttribute("msg", "파일의 크기는 10MB를 넘을 수 없습니다.");
-			request.setAttribute("loc", "/member/modifyProfile?usid="+usid);
+			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		
-		String usidStr=multi.getParameter("usid");
+		int usid=Integer.parseInt(multi.getParameter("usid"));
+		Member m=new MemberService().myPage(usid);
 		String fileName="";
 		File file=multi.getFile("userProfile");
 		if(file !=null) {
@@ -75,6 +74,16 @@ public class ModifyPicServelt extends HttpServlet {
 				request.setAttribute("msg", "이미지 파일만 업로드 가능합니다.");
 				request.setAttribute("loc", "/member/modifyProfile?usid="+usid);
 				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			}
+			int result=new MemberService().modifyPic(usid,fileName);
+			if(result>0) {
+				request.setAttribute("msg", "프로필 사진 업로드에 성공하였습니다.");
+				request.setAttribute("loc", "/member/modifyProfile?usid="+usid);
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);				
+			}else {
+				request.setAttribute("msg", "프로필 사진 업로드에 실패하였습니다.");
+				request.setAttribute("loc", "/member/modifyProfile?usid="+usid);
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
 			}
 		}
 	}

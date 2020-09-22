@@ -35,12 +35,15 @@
 		<span class="btn btn-default btn-file">
 			클릭하여 이미지를 업로드하세요. <input type="file" name="userProfile">
 		</span>
-		<button type="button" class="pcbtn">수정</button>
+		<button type="button" class="pcbtn" onclick="fn_modifyPic();">수정</button>
 		<button type="button" class="pcbtn" onclick="fn_resetTheForm();">수정취소</button>
 		<input type="hidden" name="usid" value="<%=m.getUsid()%>">
 	</form>
 </div>
 <script>
+	function fn_modifyPic(){
+		$("#modifyProfilePic").submit();
+	}
 	function fn_resetTheForm(){
 		$("#picBtn").css({"display":"block"});
 		$("#updatePic").css({"display":"none"});

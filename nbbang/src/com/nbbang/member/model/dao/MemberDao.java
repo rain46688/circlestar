@@ -346,6 +346,22 @@ private Properties prop=new Properties();
 		return result;
 	}
 
+	public int modifyPic(Connection conn, int usid, String fileName) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("modifyPic"));
+			pstmt.setString(1, fileName);
+			pstmt.setInt(2, usid);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 	
 }

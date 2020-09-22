@@ -135,6 +135,15 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
+	public int modifyPic(int usid, String fileName) {
+		Connection conn=getConnection();
+		int result=dao.modifyPic(conn,usid,fileName);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 	
 
 
