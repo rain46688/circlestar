@@ -58,6 +58,10 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		int result=new MemberService().memberEnroll(m);
 		
+		int usid=m.getUsid();
+		
+		int resultGrade=new MemberService().memberInsertGrade(usid);
+		
 		String msg="";
 		String loc="/";
 		if(result>0) {

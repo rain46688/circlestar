@@ -95,9 +95,9 @@ button#chargebtn{
          </div>
          <div id="memberInfo">
             <p class="title"><%=m.getNickname() %>님의 마이페이지</p>
-            <span>회원등급:&nbsp;<%=m.getGrade() %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>가용포인트:&nbsp;<%=m.getPoint() %></span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
-            <span>개설 가능한 방 개수:&nbsp;<%=m.getMaxRoomCount() %></span><br>
-            <span>가입일:&nbsp;<%=m.getEnrollDate() %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;<%=m.getReportCount() %></span><br>
+            <span>회원등급:&nbsp;<%=request.getAttribute("grade") %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>가용포인트:&nbsp;<%=m.getPoint() %></span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
+            <span>개설 가능한 방 개수:&nbsp;<%=request.getAttribute("maxRoomCount") %></span><br>
+            <span>가입일:&nbsp;<%=m.getEnrollDate() %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;<%=request.getAttribute("reportCount") %></span><br>
            
          </div>
       </div>

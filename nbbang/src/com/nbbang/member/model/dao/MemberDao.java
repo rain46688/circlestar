@@ -16,6 +16,8 @@ import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
 import com.nbbang.member.model.vo.Report;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 public class MemberDao {
 private Properties prop=new Properties();
 	
@@ -267,5 +269,53 @@ private Properties prop=new Properties();
 		}
 		return result;
 	}
+
+	public Grade methodForGrade(Connection conn, int usid) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Grade g=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("methodForGrade"));
+			pstmt.setInt(1, usid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				g.setGradeId(rs.getInt("GRADE_ID"));
+				g.setGradeUsid(rs.getInt("GRADE_USID"));
+				g.setMaxRoomCount(rs.getInt("MAX_ROOM_COUNT"));
+				g.setReliabilityScore(rs.getInt("RELIABILITY_SCORE"));
+				g.setGradeLevel(rs.getInt("GRADE_LEVEL"));
+				g.setGradeNickname(rs.getString("GRADE_NICKNAME"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return g;
+	}
+
+	public int myPageReport(Connection conn, int usid) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int reportCount=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("myPageReport"));
+			pstmt.setInt(1, usid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				reportCount=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return reportCount;
+	}
+
+
+	
 
 }
