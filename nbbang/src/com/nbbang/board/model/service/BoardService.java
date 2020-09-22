@@ -19,6 +19,7 @@ public class BoardService {
 	public List<Board> boardList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Board> boardList = dao.boardList(conn, cPage, numPerPage);
+		List<Board> fileList = dao.fileList(conn, cPage, numPerPage);
 		close(conn);
 
 		return boardList;
@@ -49,7 +50,7 @@ public class BoardService {
 		Connection conn = getConnection();
 		int result = dao.boardInsert(conn, b);
 		result += dao.boardInsert(conn, bf);
-		if(result > 0) {
+		if(result > 1) {
 			commit(conn);
 		}else {
 			rollback(conn);
