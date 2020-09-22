@@ -54,7 +54,7 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		MultipartRequest mr = new MultipartRequest(request, uploadPath, maxSize, "UTF-8",
 				new DefaultFileRenamePolicy());
 		System.out.println(mr.getParameter("type"));
-		System.out.println(mr.getParameter("contentWrite"));
+		System.out.println(mr.getParameter("contentwrite"));
 		System.out.println(mr.getParameter("title"));
 		System.out.println(mr.getParameter("writer"));
 		// 멀티플로 보낸 파일 받기
@@ -62,22 +62,14 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		List<CustomerFile> fileList = new ArrayList<CustomerFile>();
 		while (e.hasMoreElements()) {
 			CustomerFile ctF = new CustomerFile();
+			ctF.setCsFileId(Integer.parseInt(mr.getParameter("writer")));
 			ctF.setCsFileName(mr.getFilesystemName(e.nextElement()));
 			fileList.add(ctF);
 		}
 
 		System.out.println(fileList);
 
-//		int index = 0;
-//		for (Part part : request.getParts()) {
-//			if (part.getName().equals("file")) {
-//				String renamed = new uploadRename().randomString(getFileName(part));
-//				part.write(uploadPath + File.separator + renamed);
-//				fileNames.add(renamed);
-//			}
-//		}
-
-//				
+			
 		if (fileNames.size() == 0) {// 파일 업로드가 됐는지 확인
 			request.setAttribute("msg", "파일 업로드 오류입니다. 관리자에게 문의하세요.");
 			request.setAttribute("loc", "/customer/customerQnAWritingEnd");
@@ -85,7 +77,7 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 			return;
 		}
 		CustomerCenter c = new CustomerCenter();
-		CustomerFile cf = new CustomerFile();
+		
 
 		c.setCsWriter(mr.getParameter("writer"));
 		c.setCsType(mr.getParameter("type"));
@@ -93,11 +85,12 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		c.setCsContent(mr.getParameter("contentwrite"));
 		c.setCsNickname(mr.getParameter("nickname"));
 		c.setCsAnswer(mr.getParameter("answer"));
-		cf.setCsFileName(fileNames.toArray(new String[fileNames.size()]));
+		
+		
 		// csFileId는 NULL
 
-		int result = new CustomerService().insertQnA(c, cf);
-		if (result > 1) {
+		int result = new CustomerService().insertQnA(c,fileList);
+		if (result > 0) {
 			// 업로드 성공
 			request.setAttribute("msg", "업로드 완료!");
 			request.setAttribute("loc", "/customer/customerQnA.jsp");
@@ -118,14 +111,14 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private String getFileName(Part part) {
-		String contentDisp = part.getHeader("content-disposition");
-		String[] tokens = contentDisp.split(";");
-		for (String token : tokens) {
-			if (token.trim().startsWith("filename")) {
-				return token.substring(token.indexOf("=") + 2, token.length() - 1);
-			}
-		}
-		return "";
-	}
+//	private String getFileName(Part part) {
+//		String contentDisp = part.getHeader("content-disposition");
+//		String[] tokens = contentDisp.split(";");
+//		for (String token : tokens) {
+//			if (token.trim().startsWith("filename")) {
+//				return token.substring(token.indexOf("=") + 2, token.length() - 1);
+//			}
+//		}
+//		return "";
+//	}
 }

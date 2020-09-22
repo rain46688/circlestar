@@ -33,11 +33,11 @@ public class CustomerService {
 	}
 
 
-	public int insertQnA(CustomerCenter c, CustomerFile cf) {
+	public int insertQnA(CustomerCenter c, List<CustomerFile> fileList) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int result = dao.insertQna(conn, c);
-		result += dao.insertQna(conn, cf);
+		int result = dao.insertQna(conn, c, fileList);
+		
 		if(result > 0) {
 			commit(conn);
 		}else {
