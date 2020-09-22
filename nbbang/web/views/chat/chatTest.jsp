@@ -4,6 +4,7 @@
 
 	<!-- 채팅창 관련 로직  -->
 				<form name="form">
+				<!-- 객체를 받아와서 다시 넣어야됨 일단은 리터럴로 넘김 -->
 					<input type="hidden" name="boardId" value="2"> 
 					<input type="hidden" name="maxMems" value="3"> 
 					<input type="hidden" name="tradeStage" value="2"> 
@@ -47,6 +48,7 @@ function fun_createroom() {
 
 	$.ajax({
 		type: "GET",
+		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
 		data: {"boardId":"2"},
 		dataType: "json",
 		url: "<%=request.getContextPath()%>/chat/createRoom",
@@ -66,8 +68,9 @@ function fun_decidebuy(){
 	/* 컨트롤 f주의 여기 틀어짐 컨텍스트 부분 */
 	$.ajax({
 		type: "GET",
-		data: {user : "${m.memberId}",bid:"${bid}","flag":"1"},
-		url: "<%=request.getContextPath()%>/decidebuy.do",
+		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
+		data: {user : "${loginnedMember.memberId}","boardId":"2","flag":"1"},
+		url: "<%=request.getContextPath()%>/chat/decidebuy",
 			success : function(data) {
 				location.reload();
 			}
@@ -80,8 +83,9 @@ function fun_cancelbuy() {
 	alert('취소 되었습니다.');
 	$.ajax({
 		type: "GET",
-		data: {user : "${m.memberId}",bid:"${bid}","flag":"2"},
-		url: "<%=request.getContextPath()%>/cancelbuy.do",
+		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
+		data: {user : "${loginnedMember.memberId}","boardId":"2","flag":"2"},
+		url: "<%=request.getContextPath()%>/chat/cancelbuy",
 			success : function(data) {
 				location.reload();
 			}
