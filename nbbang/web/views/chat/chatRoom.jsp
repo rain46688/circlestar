@@ -162,7 +162,45 @@ margin-top:10px;
 $(function(){
 	
 	/* 여기서 댓글 처럼 채팅 리스트를 가져와서 쏴주기만하면됨  */
-	
+	$.ajax({
+		type: "POST",
+		data: {"boardId":"${boardId}"},
+		dataType: "json",
+		url: "<%=request.getContextPath()%>/chat/getChatList",
+			success : function(data) {
+				console.log("success 부분");
+				let html ="";
+				$.each(data,function(i,msg){
+					
+					/* if(msg["msg"] == 'SYS1'){
+						html='true'+msg["msg"] ;	
+						
+					}else{
+						html='false'+msg["msg"] ;
+					} */
+			
+					if(msg["msg"] == "SYS1"){
+						 if(msg["sendNickName"] == "ADMIN"){
+								html+="<div class='tmp'><div class='admin'> ADMIN 관리자가 접속하였습니다." + "</div></div>";
+						}else{ 
+							html+="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 합류하였습니다." + "</div></div>";
+						}
+					}else if(msg["msg"] == "SYS2"){
+						html+="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 퇴장하였습니다." + "</div></div>";
+					}else if(msg["sendNickName"] == "ADMIN"){
+						 html+="<div class='tmp'><div class='admin'> 시스템 관리자 : "+msg["msg"] + "</div></div>";
+					}else if(msg["sendNickName"] == "${m.nickname}"){
+				 		 html+="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div></div>";
+					}else{
+						 html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
+					}
+					//$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
+					console.log(i+" : "+html);
+				});
+				$("#ChatArea").html(html);
+			}
+		})
+		
 	
 })
 

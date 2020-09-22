@@ -67,6 +67,14 @@ public class ChatService {
 		return result;
 	}
 
+	public List<Message> getChatList(String boardId) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		List<Message> list = cd.getChatList(conn,boardId);
+		close(conn);
+		return list;
+	}
+
 	
 	
 	

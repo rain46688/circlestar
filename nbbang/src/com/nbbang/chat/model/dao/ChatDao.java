@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -163,6 +164,34 @@ public class ChatDao {
 		}
 			
 		return 0;
+	}
+
+	public List<Message> getChatList(Connection conn, String boardId) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		List<Message> list = new ArrayList<Message>();
+		Message m = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getChatList"));
+			pstmt.setString(1, boardId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				m = new Message();
+				m.setBoardId(rs.getString("CHAT_BOARD_ID"));
+				m.setSendNickName(rs.getString("CHAT_WRITER_NICKNAME"));
+				m.setMsg(rs.getString("CHAT_CONTENT"));
+				m.setChatProfile(rs.getString("CHAT_PROFILE_IMAGE"));
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
 
 	
