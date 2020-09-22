@@ -3,6 +3,7 @@ package com.nbbang.customer.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,10 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.nbbang.common.temp.uploadRename;
 import com.nbbang.customer.model.service.CustomerService;
 import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.customer.model.vo.CustomerFile;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class CustomerQnAWritingEndServlet
@@ -23,82 +25,99 @@ import com.nbbang.customer.model.vo.CustomerFile;
 @WebServlet("/customer/customerQnAWritingEnd")
 public class CustomerQnAWritingEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	private static final String UPLOAD_FOLDER = "customerImages";
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CustomerQnAWritingEndServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public CustomerQnAWritingEndServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String uploadPath = request.getServletContext().getRealPath("/upload/") + UPLOAD_FOLDER;
 
 		File fileSaveDir = new File(uploadPath);// 경로 없으면 생성
 		if (!fileSaveDir.exists())
 			fileSaveDir.mkdirs();
-		
+		int maxSize = 1024 * 1024 * 100;// 100MB
 		List<String> fileNames = new ArrayList<String>();
-		int index = 0;
-		for (Part part : request.getParts()) {
-			if (part.getName().equals("file")) {
-				String renamed = new uploadRename().randomString(getFileName(part));
-				part.write(uploadPath + File.separator + renamed);
-				fileNames.add(renamed);
-				
-				
-			}
+
+		MultipartRequest mr = new MultipartRequest(request, uploadPath, maxSize, "UTF-8",
+				new DefaultFileRenamePolicy());
+		System.out.println(mr.getParameter("type"));
+		System.out.println(mr.getParameter("contentWrite"));
+		System.out.println(mr.getParameter("title"));
+		System.out.println(mr.getParameter("writer"));
+		// 멀티플로 보낸 파일 받기
+		Enumeration<String> e = mr.getFileNames();// type파일로 온 data의 이름을 가져오는 메소드
+		List<CustomerFile> fileList = new ArrayList<CustomerFile>();
+		while (e.hasMoreElements()) {
+			CustomerFile ctF = new CustomerFile();
+			ctF.setCsFileName(mr.getFilesystemName(e.nextElement()));
+			fileList.add(ctF);
 		}
-		
-		if(fileNames.size()==0) {//파일 업로드가 됐는지 확인
+
+		System.out.println(fileList);
+
+//		int index = 0;
+//		for (Part part : request.getParts()) {
+//			if (part.getName().equals("file")) {
+//				String renamed = new uploadRename().randomString(getFileName(part));
+//				part.write(uploadPath + File.separator + renamed);
+//				fileNames.add(renamed);
+//			}
+//		}
+
+//				
+		if (fileNames.size() == 0) {// 파일 업로드가 됐는지 확인
 			request.setAttribute("msg", "파일 업로드 오류입니다. 관리자에게 문의하세요.");
 			request.setAttribute("loc", "/customer/customerQnAWritingEnd");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-		CustomerCenter c=new CustomerCenter();
-		CustomerFile cf=new CustomerFile();
-		
-		c.setCsWriter(request.getParameter("writer"));
-		c.setCsType(request.getParameter("type"));
-		c.setCsTitle(request.getParameter("title"));
-		c.setCsContent(request.getParameter("contentwrite"));
-		c.setCsNickname(request.getParameter("nickname"));
-		c.setCsAnswer(request.getParameter("answer"));
+		CustomerCenter c = new CustomerCenter();
+		CustomerFile cf = new CustomerFile();
+
+		c.setCsWriter(mr.getParameter("writer"));
+		c.setCsType(mr.getParameter("type"));
+		c.setCsTitle(mr.getParameter("title"));
+		c.setCsContent(mr.getParameter("contentwrite"));
+		c.setCsNickname(mr.getParameter("nickname"));
+		c.setCsAnswer(mr.getParameter("answer"));
 		cf.setCsFileName(fileNames.toArray(new String[fileNames.size()]));
-		//나머지 csFile,csFileId는 NULL
-		
-		int result=new CustomerService().insertQnA(c);
-		int result2=new CustomerService().insertQnA2(cf);
-		
-		String msg="";
-		String loc="";
-		if(result>0) {
-			msg="등록 성공";
-			loc="/customer/customerQnA";
-		}else {
-			msg="등록 실패";
-			loc="/customer/customerQnAWritingEnd";
+		// csFileId는 NULL
+
+		int result = new CustomerService().insertQnA(c, cf);
+		if (result > 1) {
+			// 업로드 성공
+			request.setAttribute("msg", "업로드 완료!");
+			request.setAttribute("loc", "/customer/customerQnA.jsp");
+		} else {
+			request.setAttribute("msg", "업로드에 실패하였습니다.");
+			request.setAttribute("loc", "/customer/customerQnAWriting.jsp");
 		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
-	
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 	private String getFileName(Part part) {
 		String contentDisp = part.getHeader("content-disposition");
 		String[] tokens = contentDisp.split(";");

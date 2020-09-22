@@ -111,6 +111,23 @@ public class CustomerDAO {
 		return result;
 	}
 
+	public int insertQna(Connection conn, CustomerFile cf) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("CsFileInsert"));
+			for(String s : cf.getCsFileName()) {
+				pstmt.setString(1, s);
+				result += pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	public int viewDetailRead(Connection conn, CustomerCenter c) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -132,26 +149,8 @@ public class CustomerDAO {
 		return result;
 	}
 
-	public int insertQnA2(Connection conn, CustomerFile cf) {
-		// TODO Auto-generated method stub
-		PreparedStatement pstmt = null;
-		int result = 0;
-		try {
-			pstmt = conn.prepareStatement(prop.getProperty("insertCustomerFile"));
-			for(String s : cf.getCsFileName()) {
-				
-			}
-			result = pstmt.executeUpdate();
-			
-			result = pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
+
 
 
 
