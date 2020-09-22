@@ -11,24 +11,23 @@ import java.util.List;
 import com.nbbang.board.model.dao.BoardDao;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
+import com.nbbang.board.model.vo.Card;
 
 public class BoardService {
 
 	BoardDao dao = new BoardDao();
 
-	public List<Board> boardList(int cPage, int numPerPage) {
+	public List<Card> boardList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Board> boardList = dao.boardList(conn, cPage, numPerPage);
-		List<Board> fileList = dao.fileList(conn, cPage, numPerPage);
+		List<Card> boardList = dao.boardList(conn, cPage, numPerPage);
 		close(conn);
-
 		return boardList;
 	}
 
-	public Board boardPage(String boardId, boolean hasRead) {
+	public Card boardPage(String boardId, boolean hasRead) {
 		Connection conn = getConnection();
-		Board b = dao.boardPage(conn, boardId);
-		if (b != null && !hasRead) {
+		Card c = dao.boardPage(conn, boardId);
+		if (c != null && !hasRead) {
 			int result = dao.updateReadCount(conn, Integer.parseInt(boardId));
 			if (result > 0)
 				commit(conn);
@@ -36,7 +35,7 @@ public class BoardService {
 				rollback(conn);
 		}
 		close(conn);
-		return b;
+		return c;
 	}
 
 	public int boardListCount() {
