@@ -18,4 +18,28 @@ public class ChatService {
 		return list;
 	}
 
+	public int getMaxMems(String boardId) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int maxMems = cd.getMaxMems(conn,boardId);
+		close(conn);
+		return maxMems;
+	}
+
+	public int creatRoom(String boardId) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int result = cd.creatRoom(conn,boardId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	
+	
+	
 }

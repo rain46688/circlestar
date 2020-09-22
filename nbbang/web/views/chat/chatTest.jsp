@@ -10,6 +10,8 @@
 					<input type="hidden" name="writerUsid" value="9999">
 					<button onclick="nbbang(this.form)" class="btn btn-success">N빵하기</button>
 				</form>
+				
+				<button onclick="fun_createroom()" class="btn btn-success">인원 차서 방장이 방열기</button>
 
 
 <script>
@@ -35,6 +37,28 @@ function nbbang(f){
 	  f.action = url;
 	  f.method = "post";
 	  f.submit();    
+}
+
+
+function fun_createroom() {
+/*  	const max = 3;
+	const curnum = "${curnum}"; */
+
+	$.ajax({
+		type: "GET",
+		data: {"boardId":"2"},
+		dataType: "json",
+		url: "<%=request.getContextPath()%>/chat/createRoom",
+			success : function(data) {
+					console.log("data : "+data);
+				if (data == 1) {
+					//방의 상태를 바꿔야되니 ajax로 갔따오자 방의 상태를 2로 변경함
+					nbbang(this.form);
+				} else {
+					alert('N빵 인원이 다 체워지지 않았습니다.');
+				} 
+			}
+		})
 }
 
 </script>

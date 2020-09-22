@@ -3,7 +3,11 @@ package com.nbbang.chat.model.dao;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
+import static com.nbbang.common.temp.JDBCTemplate.*;
 
 public class ChatDao {
 	
@@ -23,7 +27,70 @@ public class ChatDao {
 
 	public String selectCurMemsList(Connection conn, String boardId) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String list = "";
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectCurMemsList"));
+			pstmt.setString(1, boardId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list += rs.getString(1)+",";
+			}
+			list = list.substring(0, list.length()-1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
 	}
+
+	public int getMaxMems(Connection conn, String boardId) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		int maxMems = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("getMaxMems"));
+			pstmt.setString(1, boardId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				maxMems = Integer.parseInt(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return maxMems;
+	}
+
+	public int creatRoom(Connection conn, String boardId) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("creatRoom"));
+			pstmt.setString(1, "2");
+			pstmt.setString(2, boardId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
 
 }
