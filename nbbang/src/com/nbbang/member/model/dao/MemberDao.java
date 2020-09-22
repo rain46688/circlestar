@@ -201,6 +201,21 @@ private Properties prop=new Properties();
 		return result;
 	}
 
+	public int memberInsertGrade(Connection conn, int usid) {
+		PreparedStatement pstmt=null;
+		int resultGrade=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("memberInsertGrade"));
+			pstmt.setInt(1, usid);
+			resultGrade=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return resultGrade;
+	}
+	
 	public Member phoneDuplicate(Connection conn, String phone) {
 		PreparedStatement pstmt=null;
 		ResultSet rs= null;
@@ -317,5 +332,4 @@ private Properties prop=new Properties();
 
 
 	
-
 }

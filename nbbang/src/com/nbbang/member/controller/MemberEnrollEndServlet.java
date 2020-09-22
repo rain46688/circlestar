@@ -61,14 +61,10 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		int usid=m.getUsid();
 		
 		int resultGrade=new MemberService().memberInsertGrade(usid);
-		int resultAlarm=new MemberService().memberInsertAlarm(usid);
-		int resultReport=new MemberService().memberInsertReport(usid);
-		int resultLikeList=new MemberService().memberInsertLikeList(usid);
-		int resultComment=new MemberService().memberInsertComment(usid);
 		
 		String msg="";
 		String loc="/";
-		if(result>0) {
+		if(result>0 && resultGrade>0) {
 			msg="회원가입에 성공하였습니다.";
 		}else {
 			msg="회원가입에 실패하였습니다.";
