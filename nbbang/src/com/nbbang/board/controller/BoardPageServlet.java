@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.board.model.service.BoardService;
-import com.nbbang.board.model.vo.Board;
+import com.nbbang.board.model.vo.Card;
 
 /**
  * Servlet implementation class BoardPageServlet
@@ -59,13 +59,13 @@ public class BoardPageServlet extends HttpServlet {
 			c.setMaxAge(-1);
 			response.addCookie(c);
 		}
-		Board b = new BoardService().boardPage(boardId, hasRead);
-		if(b==null) {
+		Card c = new BoardService().boardPage(boardId, hasRead);
+		if(c==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
 			request.setAttribute("loc", "/views/board/bolist.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
-			request.setAttribute("curBoard", b);
+			request.setAttribute("curCard", c);
 			request.getRequestDispatcher("/views/board/boPage.jsp").forward(request, response);
 		}
 	}
