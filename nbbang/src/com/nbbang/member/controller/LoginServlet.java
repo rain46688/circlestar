@@ -77,7 +77,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		}else {
 			request.setAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다!");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/loginPage");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}
