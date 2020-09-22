@@ -83,6 +83,15 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
+	public int memberInsertGrade(String nickname) {
+		Connection conn=getConnection();
+		int result=dao.memberInsertGrade(conn, nickname);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	public Member phoneDuplicate(String phone) {
 		Connection conn=getConnection();
 		Member m=dao.phoneDuplicate(conn,phone);
@@ -116,6 +125,8 @@ private MemberDao dao=new MemberDao();
 		close(conn);
 		return result;
 	}
+
+	
 
 
 

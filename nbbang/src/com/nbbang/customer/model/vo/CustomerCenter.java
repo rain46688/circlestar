@@ -11,7 +11,6 @@ public class CustomerCenter {
 	private String csTitle;
 	private String csContent;
 	private Date csDate;
-	private String csFile;
 	private Boolean csIscheck;
 	private String csNickname;
 	private String csAnswer;
@@ -21,7 +20,7 @@ public class CustomerCenter {
 	}
 
 	public CustomerCenter(int csNo, String csWriter, String csType, String csTitle, String csContent, Date csDate,
-			String csFile, Boolean csIscheck, String csNickname, String csAnswer) {
+			Boolean csIscheck, String csNickname, String csAnswer) {
 		super();
 		this.csNo = csNo;
 		this.csWriter = csWriter;
@@ -29,7 +28,6 @@ public class CustomerCenter {
 		this.csTitle = csTitle;
 		this.csContent = csContent;
 		this.csDate = csDate;
-		this.csFile = csFile;
 		this.csIscheck = csIscheck;
 		this.csNickname = csNickname;
 		this.csAnswer = csAnswer;
@@ -83,14 +81,6 @@ public class CustomerCenter {
 		this.csDate = csDate;
 	}
 
-	public String getCsFile() {
-		return csFile;
-	}
-
-	public void setCsFile(String csFile) {
-		this.csFile = csFile;
-	}
-
 	public Boolean getCsIscheck() {
 		return csIscheck;
 	}
@@ -118,9 +108,10 @@ public class CustomerCenter {
 	@Override
 	public String toString() {
 		return "CustomerCenter [csNo=" + csNo + ", csWriter=" + csWriter + ", csType=" + csType + ", csTitle=" + csTitle
-				+ ", csContent=" + csContent + ", csDate=" + csDate + ", csFile=" + csFile + ", csIscheck=" + csIscheck
-				+ ", csNickname=" + csNickname + ", csAnswer=" + csAnswer + "]";
+				+ ", csContent=" + csContent + ", csDate=" + csDate + ", csIscheck=" + csIscheck + ", csNickname="
+				+ csNickname + ", csAnswer=" + csAnswer + "]";
 	}
+
 
 
 	

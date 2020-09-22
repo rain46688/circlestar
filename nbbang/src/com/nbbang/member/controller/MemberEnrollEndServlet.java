@@ -58,13 +58,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		int result=new MemberService().memberEnroll(m);
 		
-		int usid=m.getUsid();
-		
-		int resultGrade=new MemberService().memberInsertGrade(usid);
-		int resultAlarm=new MemberService().memberInsertAlarm(usid);
-		int resultReport=new MemberService().memberInsertReport(usid);
-		int resultLikeList=new MemberService().memberInsertLikeList(usid);
-		int resultComment=new MemberService().memberInsertComment(usid);
+		String nickname=m.getNickname();
 		
 		String msg="";
 		String loc="/";
@@ -76,8 +70,14 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		}
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc", loc);
-		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
+		int resultGrade=new InsertGrade().insertGrade(nickname);
+		if(resultGrade>0) {
+			System.out.println("insertGrade성공");
+		}else {
+			System.out.println("insertGrade 실패");
+		}
 	}
 
 	/**

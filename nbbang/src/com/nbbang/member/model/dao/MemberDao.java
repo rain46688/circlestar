@@ -201,6 +201,22 @@ private Properties prop=new Properties();
 		return result;
 	}
 
+	public int memberInsertGrade(Connection conn, String nickname) {
+		PreparedStatement pstmt=null;
+		int resultGrade=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("memberInsertGrade"));
+			pstmt.setString(1, nickname);
+			pstmt.setString(2, nickname);
+			resultGrade=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return resultGrade;
+	}
+	
 	public Member phoneDuplicate(Connection conn, String phone) {
 		PreparedStatement pstmt=null;
 		ResultSet rs= null;
@@ -273,13 +289,12 @@ private Properties prop=new Properties();
 	public Grade methodForGrade(Connection conn, int usid) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		Grade g=null;
+		Grade g=new Grade();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("methodForGrade"));
 			pstmt.setInt(1, usid);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				g.setGradeId(rs.getInt("GRADE_ID"));
 				g.setGradeUsid(rs.getInt("GRADE_USID"));
 				g.setMaxRoomCount(rs.getInt("MAX_ROOM_COUNT"));
 				g.setReliabilityScore(rs.getInt("RELIABILITY_SCORE"));
@@ -317,5 +332,4 @@ private Properties prop=new Properties();
 
 
 	
-
 }
