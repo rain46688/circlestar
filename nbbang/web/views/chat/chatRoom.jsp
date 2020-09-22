@@ -159,6 +159,15 @@ margin-top:10px;
 
 <script>
 
+$(function(){
+	
+	/* 여기서 댓글 처럼 채팅 리스트를 가져와서 쏴주기만하면됨  */
+	
+	
+})
+
+
+
 /* 메인 Window 사이즈 조절 막기 x,y는 chatRoomServlet에서 파라미터로 받아와야됨*/
 
 $(this).resize(fixedSize);

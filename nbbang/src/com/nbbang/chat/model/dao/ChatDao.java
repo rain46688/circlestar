@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
+
+import com.nbbang.chat.model.vo.Message;
+
 import static com.nbbang.common.temp.JDBCTemplate.*;
 
 public class ChatDao {
@@ -128,4 +132,66 @@ public class ChatDao {
 		return result;
 	}
 
+	public int insertChatMsg(Connection conn, List<Message> list) {
+		// TODO Auto-generated method stub
+		
+		
+		for(Message s : list) {
+			System.out.println(s);
+		}
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			for(Message m : list) {
+				pstmt = conn.prepareStatement(prop.getProperty("insertChatMsg"));
+				pstmt.setString(1, m.getBoardId());
+				pstmt.setString(2, m.getSendNickName());
+				pstmt.setString(3, m.getMsg());
+				pstmt.setString(4, m.getChatProfile());
+				result=pstmt.executeUpdate();
+			}
+			list.clear();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+			
+		return 0;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
