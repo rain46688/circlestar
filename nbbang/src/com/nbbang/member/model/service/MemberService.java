@@ -126,6 +126,15 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
+	public int modifyNick(int usid, String nick) {
+		Connection conn=getConnection();
+		int result=dao.modifyNick(conn,usid,nick);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 	
 
 

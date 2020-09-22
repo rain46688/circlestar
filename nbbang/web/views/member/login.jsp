@@ -33,7 +33,9 @@
 <section>
     <div id="loginBox">
         <div id="loginField">
-            <img src="<%=request.getContextPath() %>/images/logo.png" alt="">
+			<a href="<%=request.getContextPath()%>/">
+				<img src="<%=request.getContextPath() %>/images/logo.png" alt="">
+			</a>
             <form action="<%=request.getContextPath()%>/login" method="post">
               <input type="text" placeholder="아이디" class="input" id="memberId" name="memberId" maxlength=20
               value="<%=saveId!=null ? saveId : ""%>">

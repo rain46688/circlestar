@@ -27,8 +27,6 @@ div#infoContainer .item:nth-child(1) {
 .infoContainer>.item{
    min-height: 200px;
    border: 1px solid rgb(236, 175, 89);
-   border-radius: 3px
-   ;
    background-color: white;
 }
 div#headContainer{
@@ -45,6 +43,7 @@ div#profilePicDiv{
 div#memberInfo{
    width: 70%;
    float: right;
+   padding: 3%;
 }
 div#profilePicField{
    position: relative;
@@ -59,9 +58,6 @@ div#profilePicField{
    margin-left: 1em;
    margin-right: 1em;
 }
-div#memberInfo{
-   padding: 5% 3%;
-}
 div.smallBox{
    padding: 5%;
 }
@@ -75,8 +71,10 @@ p.text{
 p>button{
     margin:0;
 }
-p.title>span{
-	margin-bottom:5px;
+.memberInfoText{
+   margin-bottom:15px;
+   margin-right: 20px;
+   display: inline-block;
 }
 button#chargebtn{
 	border:none;
@@ -95,10 +93,9 @@ button#chargebtn{
          </div>
          <div id="memberInfo">
             <p class="title"><%=m.getNickname() %>님의 마이페이지</p>
-            <span>회원등급:&nbsp;<%=request.getAttribute("grade") %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>가용포인트:&nbsp;<%=m.getPoint() %></span>&nbsp;<button type="button" id="chargebtn">충전하기</button><br>
-            <span>개설 가능한 방 개수:&nbsp;<%=request.getAttribute("maxRoomCount") %></span><br>
-            <span>가입일:&nbsp;<%=m.getEnrollDate() %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>신고당한 횟수:&nbsp;<%=request.getAttribute("reportCount") %></span><br>
-           
+            <p class="memberInfoText">&nbsp;회원등급:&nbsp;<%=request.getAttribute("grade") %></p><span class="memberInfoText">가용포인트:&nbsp;<%=m.getPoint() %>&nbsp;&nbsp;<button type="button" id="chargebtn">충전하기</button></span><br>
+            <p class="memberInfoText">&nbsp;개설 가능한 방 개수:&nbsp;<%=request.getAttribute("maxRoomCount") %></p><br>
+            <p class="memberInfoText">&nbsp;가입일:&nbsp;<%=m.getEnrollDate() %></p><span class="memberInfoText">신고당한 횟수:&nbsp;<%=request.getAttribute("reportCount") %></span><br>
          </div>
       </div>
       <div class="item smallBox" id="crntList">
@@ -119,6 +116,11 @@ button#chargebtn{
       <div class="item smallBox" id="pastList">
          <p class="title">과거 거래 내역</p>
          <p class="text">과거 거래 내역을 확인합니다.</p>
+         <p><button type="button" class="btn btn-outline-warning">이동하기</button></p>
+      </div>
+      <div class="item smallBox" id="LikeList">
+         <p class="title">좋아요 한 게시글</p>
+         <p class="text">좋아요를 누른 게시글 내역을 확인합니다.</p>
          <p><button type="button" class="btn btn-outline-warning">이동하기</button></p>
       </div>
       <div class="item smallBox" id="profileModify">

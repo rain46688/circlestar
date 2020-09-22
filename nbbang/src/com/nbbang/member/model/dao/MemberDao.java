@@ -154,7 +154,7 @@ private Properties prop=new Properties();
 			e.printStackTrace();
 		}finally {
 			close(rs);
-			close(conn);
+			close(pstmt);
 		}
 		return m;
 	}
@@ -328,6 +328,22 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}
 		return reportCount;
+	}
+
+	public int modifyNick(Connection conn, int usid, String nick) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateNick"));
+			pstmt.setString(1, nick);
+			pstmt.setInt(2, usid);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 
