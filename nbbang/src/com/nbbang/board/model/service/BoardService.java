@@ -55,4 +55,16 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public int boardInsert(BoardFile bf) {
+		Connection conn = getConnection();
+		int result = dao.boardInsert(conn, bf);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }
