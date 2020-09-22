@@ -35,10 +35,10 @@ public class ChatCreateRoomServlet extends HttpServlet {
 		System.out.println(" === ChatCreateRoomServlet 실행 === ");
 		String boardId = request.getParameter("boardId");
 		System.out.println("boardId : "+boardId);
-		//bid로 현재 방의 맥스 인원을 알아오고
+		//boardId로 현재 방의 맥스 인원을 알아오고
 		int maxMems = new ChatService().getMaxMems(boardId);
 		
-		//bid로 검색되는 현재 방의 인원을 알아와야됨
+		//boardId로 검색되는 현재 방의 인원을 알아와야됨
 		String curMemsList=new ChatService().selectCurMemsList(boardId);
 		int curNum = 0;
 		if(!curMemsList.equals(""))
@@ -51,6 +51,11 @@ public class ChatCreateRoomServlet extends HttpServlet {
 			flag="0";
 		}else {
 			int result  = new ChatService().creatRoom(boardId);
+			if(result > 0) {
+				System.out.println(" === 방 TRADE_STAGE 변경됨 === ");
+			}else {
+				System.out.println(" === 방 TRADE_STAGE 변경안됨!! === ");
+			}
 		}
 		
 		response.setContentType("application/json;charset=utf-8");

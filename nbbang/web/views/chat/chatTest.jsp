@@ -8,11 +8,12 @@
 					<input type="hidden" name="maxMems" value="3"> 
 					<input type="hidden" name="tradeStage" value="2"> 
 					<input type="hidden" name="writerUsid" value="9999">
-					<button onclick="nbbang(this.form)" class="btn btn-success">N빵하기</button>
+					<button onclick="fun_decidebuy()" class="btn btn-success">N빵하기</button>
+							<button onclick="fun_cancelbuy()" class="btn btn-success">취소기</button>
 				</form>
 				
 				<button onclick="fun_createroom()" class="btn btn-success">인원 차서 방장이 방열기</button>
-
+						<button onclick="nbbang(this.form)" class="btn btn-success">채팅방 접속하기</button>
 
 <script>
 
@@ -57,6 +58,32 @@ function fun_createroom() {
 				} else {
 					alert('N빵 인원이 다 체워지지 않았습니다.');
 				} 
+			}
+		})
+}
+
+function fun_decidebuy(){
+	/* 컨트롤 f주의 여기 틀어짐 컨텍스트 부분 */
+	$.ajax({
+		type: "GET",
+		data: {user : "${m.memberId}",bid:"${bid}","flag":"1"},
+		url: "<%=request.getContextPath()%>/decidebuy.do",
+			success : function(data) {
+				location.reload();
+			}
+		}) 	
+
+	}
+
+//취소할때
+function fun_cancelbuy() {
+	alert('취소 되었습니다.');
+	$.ajax({
+		type: "GET",
+		data: {user : "${m.memberId}",bid:"${bid}","flag":"2"},
+		url: "<%=request.getContextPath()%>/cancelbuy.do",
+			success : function(data) {
+				location.reload();
 			}
 		})
 }
