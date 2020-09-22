@@ -39,6 +39,19 @@ public class ChatService {
 		return result;
 	}
 
+	public int decideBuyUser(String usid, String nickname, String boardId, String flag) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int result = cd.decideBuyUser(conn,usid,nickname,boardId,flag);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 	
 	
 	
