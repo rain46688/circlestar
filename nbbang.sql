@@ -37,7 +37,13 @@ CREATE TABLE MEMBER
 
 select * from member;
 select * from report;
+select * from grade;
+SELECT NICKNAME FROM MEMBER WHERE USID=8;
+INSERT INTO GRADE (GRADE_USID, MAX_ROOM_COUNT,RELIABILITY_SCORE,GRADE_LEVEL,GRADE_NICKNAME) VALUES (4,3,1,1,(SELECT NICKNAME FROM MEMBER WHERE USID=4));
+INSERT INTO GRADE (GRADE_USID, MAX_ROOM_COUNT,RELIABILITY_SCORE,GRADE_LEVEL,GRADE_NICKNAME) VALUES (7,3,1,1,'¹Ú¼Ò¿¬');
 select count(*) from report where REPORT_TARGET_USID=6;
+select seq_member_usid.currval from member;
+INSERT INTO GRADE (GRADE_USID, MAX_ROOM_COUNT,RELIABILITY_SCORE,GRADE_LEVEL,GRADE_NICKNAME) VALUES (seq_member_usid.currval,3,1,1,(SELECT NICKNAME FROM MEMBER WHERE USID=seq_member_usid.currval));
 ------------------------------------------------------------------------------------------
 
 

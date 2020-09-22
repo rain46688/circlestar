@@ -60,10 +60,9 @@ public class MyPageServlet extends HttpServlet {
 		m.setMemberId(memberId);
 		
 		Grade g=new MemberService().methodForGrade(usid);
-		int grade=g.getGradeId();
+		int grade=g.getGradeLevel();
 		int maxRoomCount=g.getMaxRoomCount();
 		int reportCount=new MemberService().myPageReport(usid);
-		
 		request.setAttribute("member", m);
 		request.setAttribute("grade", grade);
 		request.setAttribute("maxRoomCount", maxRoomCount);
