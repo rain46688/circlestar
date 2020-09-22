@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.nbbang.board.model.dao.BoardDao;
 import com.nbbang.customer.model.vo.CustomerCenter;
+import com.nbbang.customer.model.vo.CustomerFile;
 
 public class CustomerDAO {
 
@@ -120,6 +121,27 @@ public class CustomerDAO {
 			pstmt.setString(1, c.getCsType());
 			pstmt.setString(2, c.getCsContent());
 			pstmt.setString(3, c.getCsFile());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertQnA2(Connection conn, CustomerFile cf) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertCustomerFile"));
+			for(String s : cf.getCsFileName()) {
+				
+			}
+			result = pstmt.executeUpdate();
 			
 			result = pstmt.executeUpdate();
 

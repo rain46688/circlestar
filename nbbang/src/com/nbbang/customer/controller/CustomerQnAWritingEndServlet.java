@@ -1,19 +1,21 @@
 package com.nbbang.customer.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
+import com.nbbang.common.temp.uploadRename;
 import com.nbbang.customer.model.service.CustomerService;
 import com.nbbang.customer.model.vo.CustomerCenter;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.nbbang.customer.model.vo.CustomerFile;
 
 /**
  * Servlet implementation class CustomerQnAWritingEndServlet
@@ -22,6 +24,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class CustomerQnAWritingEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private static final String UPLOAD_FOLDER = "customerImages";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,43 +38,44 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(!ServletFileUpload.isMultipartContent(request)) {
+		String uploadPath = request.getServletContext().getRealPath("/upload/") + UPLOAD_FOLDER;
+
+		File fileSaveDir = new File(uploadPath);// 경로 없으면 생성
+		if (!fileSaveDir.exists())
+			fileSaveDir.mkdirs();
 		
-			request.setAttribute("msg", "오류");
-			request.setAttribute("loc", "/");
+		List<String> fileNames = new ArrayList<String>();
+		int index = 0;
+		for (Part part : request.getParts()) {
+			if (part.getName().equals("file")) {
+				String renamed = new uploadRename().randomString(getFileName(part));
+				part.write(uploadPath + File.separator + renamed);
+				fileNames.add(renamed);
+				
+				
+			}
+		}
+		
+		if(fileNames.size()==0) {//파일 업로드가 됐는지 확인
+			request.setAttribute("msg", "파일 업로드 오류입니다. 관리자에게 문의하세요.");
+			request.setAttribute("loc", "/customer/customerQnAWritingEnd");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-
-		System.out.println(getServletContext().getRealPath("/"));
-
-		String path=getServletContext().getRealPath("/")+"css/cstmcss"; 
-		int maxSize=1024*1024*10;
-		String encode="UTF-8";
-	
-		MultipartRequest mPr=new MultipartRequest(request,path,maxSize,encode,new DefaultFileRenamePolicy());
-		
-//		String csWriter=mPr.getParameter("writer");
-//		String csType=mPr.getParameter("qnaType");
-//		String csTitle=mPr.getParameter("title");
-//		String csContent=mPr.getParameter("contentwrite");
-//		String csFile=mPr.getFilesystemName("csFile");
-//		String csNickName=mPr.getParameter("nickname");
-//		CustomerCenter c=new CustomerCenter(0,csWriter,csType,csTitle,csContent,null,csFile,0,csNickName);
-
 		CustomerCenter c=new CustomerCenter();
-		c.setCsWriter(mPr.getParameter("writer"));
-		c.setCsType(mPr.getParameter("type"));
-		c.setCsTitle(mPr.getParameter("title"));
-		c.setCsContent(mPr.getParameter("contentwrite"));
-		c.setCsFile(mPr.getFilesystemName("csFile"));
-		c.setCsNickname(mPr.getParameter("nickname"));
-		c.setCsAnswer(mPr.getParameter("answer"));
+		CustomerFile cf=new CustomerFile();
 		
-		System.out.println(mPr.getParameter("writer")+mPr.getParameter("type")+mPr.getParameter("title")+
-				mPr.getParameter("contentwrite")+mPr.getParameter("csFile")+mPr.getParameter("nickname")+mPr.getParameter("answer"));
+		c.setCsWriter(request.getParameter("writer"));
+		c.setCsType(request.getParameter("type"));
+		c.setCsTitle(request.getParameter("title"));
+		c.setCsContent(request.getParameter("contentwrite"));
+		c.setCsNickname(request.getParameter("nickname"));
+		c.setCsAnswer(request.getParameter("answer"));
+		cf.setCsFileName(fileNames.toArray(new String[fileNames.size()]));
+		//나머지 csFile,csFileId는 NULL
 		
-		int result=new CustomerService().insertQna(c);
+		int result=new CustomerService().insertQnA(c);
+		int result2=new CustomerService().insertQnA2(cf);
 		
 		String msg="";
 		String loc="";
@@ -95,5 +99,14 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	private String getFileName(Part part) {
+		String contentDisp = part.getHeader("content-disposition");
+		String[] tokens = contentDisp.split(";");
+		for (String token : tokens) {
+			if (token.trim().startsWith("filename")) {
+				return token.substring(token.indexOf("=") + 2, token.length() - 1);
+			}
+		}
+		return "";
+	}
 }
