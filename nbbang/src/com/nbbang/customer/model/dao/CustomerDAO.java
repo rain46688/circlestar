@@ -50,7 +50,7 @@ public class CustomerDAO {
 				cc.setCsTitle(rs.getString("cs_title"));
 				cc.setCsContent(rs.getString("cs_content"));
 				cc.setCsDate(rs.getDate("cs_date"));
-				cc.setCsFile(rs.getString("cs_file"));
+				
 				cc.setCsIscheck(rs.getBoolean("cs_ischeck"));
 				cc.setCsNickname(rs.getString("cs_nickname"));
 				cc.setCsAnswer(rs.getString("cs_answer"));
@@ -97,8 +97,8 @@ public class CustomerDAO {
 			pstmt.setString(2, c.getCsType());
 			pstmt.setString(3, c.getCsTitle());
 			pstmt.setString(4, c.getCsContent());
-			pstmt.setString(5, c.getCsFile());
-			pstmt.setString(6, c.getCsNickname());
+			
+			pstmt.setString(5, c.getCsNickname());
 			
 			
 			result = pstmt.executeUpdate();
@@ -120,7 +120,7 @@ public class CustomerDAO {
 			
 			pstmt.setString(1, c.getCsType());
 			pstmt.setString(2, c.getCsContent());
-			pstmt.setString(3, c.getCsFile());
+			
 			
 			result = pstmt.executeUpdate();
 
