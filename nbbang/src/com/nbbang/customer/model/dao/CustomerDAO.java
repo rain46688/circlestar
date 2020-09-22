@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.nbbang.board.model.dao.BoardDao;
 import com.nbbang.customer.model.vo.CustomerCenter;
+import com.nbbang.customer.model.vo.CustomerFile;
 
 public class CustomerDAO {
 
@@ -45,11 +46,11 @@ public class CustomerDAO {
 				CustomerCenter cc = new CustomerCenter();
 				cc.setCsNo(rs.getInt("cs_id"));
 				cc.setCsWriter(rs.getString("cs_writer_usid"));
-				cc.setCsType(rs.getString("cs_type"));
+				cc.setCsType(rs.getString("cs_tpye"));
 				cc.setCsTitle(rs.getString("cs_title"));
 				cc.setCsContent(rs.getString("cs_content"));
 				cc.setCsDate(rs.getDate("cs_date"));
-				cc.setCsFile(rs.getString("cs_file"));
+				
 				cc.setCsIscheck(rs.getBoolean("cs_ischeck"));
 				cc.setCsNickname(rs.getString("cs_nickname"));
 				cc.setCsAnswer(rs.getString("cs_answer"));
@@ -86,7 +87,7 @@ public class CustomerDAO {
 		return result;
 	}
 
-	public int insertQna(Connection conn, CustomerCenter c) {
+	public int insertQna(Connection conn, CustomerCenter c, List<CustomerFile> fileList) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -96,8 +97,13 @@ public class CustomerDAO {
 			pstmt.setString(2, c.getCsType());
 			pstmt.setString(3, c.getCsTitle());
 			pstmt.setString(4, c.getCsContent());
-			pstmt.setString(5, c.getCsFile());
-			pstmt.setString(6, c.getCsNickname());
+			pstmt.setString(5, c.getCsNickname());
+			
+			pstmt=conn.prepareStatement(prop.getProperty("insertFile"));
+		    for(CustomerFile cf : fileList ) {
+		    	pstmt.setInt(1, cf.getCsFileId());
+		    	pstmt.setString(2, cf.getCsFileName());
+		    }
 			
 			
 			result = pstmt.executeUpdate();
@@ -110,6 +116,21 @@ public class CustomerDAO {
 		return result;
 	}
 
+//	public int insertQna(Connection conn, CustomerFile cf) {
+//		// TODO Auto-generated method stub
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		try {
+//			pstmt = conn.prepareStatement(prop.getProperty("CsFileInsert"));
+//			pstmt.setString(1, cf.getCsFileName());
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(pstmt);
+//		}
+//		return result;
+//	}
 	public int viewDetailRead(Connection conn, CustomerCenter c) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -119,7 +140,7 @@ public class CustomerDAO {
 			
 			pstmt.setString(1, c.getCsType());
 			pstmt.setString(2, c.getCsContent());
-			pstmt.setString(3, c.getCsFile());
+			
 			
 			result = pstmt.executeUpdate();
 
@@ -130,6 +151,9 @@ public class CustomerDAO {
 		}
 		return result;
 	}
+
+
+
 
 
 

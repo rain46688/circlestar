@@ -4,7 +4,9 @@
 <%@ include file="/views/common/header.jsp"%>
 
 <%
+
 	List<CustomerCenter> list = (List) request.getAttribute("list");
+
 %>
 <style>
 #writecontainer {

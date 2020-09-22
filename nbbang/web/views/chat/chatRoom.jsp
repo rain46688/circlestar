@@ -159,6 +159,53 @@ margin-top:10px;
 
 <script>
 
+$(function(){
+	
+	/* 여기서 댓글 처럼 채팅 리스트를 가져와서 쏴주기만하면됨  */
+	$.ajax({
+		type: "POST",
+		data: {"boardId":"${boardId}"},
+		dataType: "json",
+		url: "<%=request.getContextPath()%>/chat/getChatList",
+			success : function(data) {
+				console.log("success 부분");
+				let html ="";
+				$.each(data,function(i,msg){
+					
+					/* if(msg["msg"] == 'SYS1'){
+						html='true'+msg["msg"] ;	
+						
+					}else{
+						html='false'+msg["msg"] ;
+					} */
+			
+					if(msg["msg"] == "SYS1"){
+						 if(msg["sendNickName"] == "ADMIN"){
+								html+="<div class='tmp'><div class='admin'> ADMIN 관리자가 접속하였습니다." + "</div></div>";
+						}else{ 
+							html+="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 합류하였습니다." + "</div></div>";
+						}
+					}else if(msg["msg"] == "SYS2"){
+						html+="<div class='tmp'><div class='conn'>"+msg["sendNickName"]+" 이(가) 퇴장하였습니다." + "</div></div>";
+					}else if(msg["sendNickName"] == "ADMIN"){
+						 html+="<div class='tmp'><div class='admin'> 시스템 관리자 : "+msg["msg"] + "</div></div>";
+					}else if(msg["sendNickName"] == "${m.nickname}"){
+				 		 html+="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div></div>";
+					}else{
+						 html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
+					}
+					//$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
+					console.log(i+" : "+html);
+				});
+				$("#ChatArea").html(html);
+			}
+		})
+		
+	
+})
+
+
+
 /* 메인 Window 사이즈 조절 막기 x,y는 chatRoomServlet에서 파라미터로 받아와야됨*/
 
 $(this).resize(fixedSize);
@@ -175,7 +222,7 @@ if("${tradeStage}"=="2"){
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
-		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}")));
+		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}","")));
 	};
 	socket.onclose = function(e) {
 		console.log("onclose 실행");
@@ -216,7 +263,7 @@ if("${tradeStage}"=="2"){
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else{
 			//상대방 메세지일 경우 분기처리
-			let html="<div class='tmp'><div class='profile'></div><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
+			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
 		}
 		/* 스크롤 아래로 유지해주는 것  채팅이 입력되면 가장 아래로 스크롤을 고정시켜야된다.
@@ -230,9 +277,11 @@ if("${tradeStage}"=="2"){
 		let txt = $("#msgText");
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
-		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}")));
-		txt.val('');
-		txt.val(txt.replace(/\r\n/g, ''));
+		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}")));
+		txt.val(' ');//칸 비워주기
+		txt.html(' ');
+		//txt.val(txt.replace(/\r\n/g, ''));
+		//엔터키 없애주기
 			}
 		};
 		
@@ -244,11 +293,12 @@ if("${tradeStage}"=="2"){
 	});
 	
 	//메세지 객체
-	function Message(sendNickName,msg,curMemsList,boardId){
+	function Message(sendNickName,msg,curMemsList,boardId,chatProfile){
 		this.sendNickName=sendNickName;
 		this.msg=msg;
 		this.curMemsList=curMemsList;
 		this.boardId = boardId;
+		this.chatProfile = chatProfile;
 	};
 	
 }

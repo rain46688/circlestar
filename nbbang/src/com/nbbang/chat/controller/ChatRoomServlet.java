@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.nbbang.chat.model.service.ChatService;
 import com.nbbang.member.model.vo.Member;
 
 /**
@@ -42,21 +43,18 @@ public class ChatRoomServlet extends HttpServlet {
 		String writerUsid = request.getParameter("writerUsid");
 		String boardId = request.getParameter("boardId");
 		String curMemsList = request.getParameter("curMemsList");
-		
+		String memberPicture = request.getParameter("memberPicture");
+		curMemsList=new ChatService().selectCurMemsList(boardId);
 		System.out.println("maxMems : "+maxMems+", writerUsid : "+writerUsid+"\n"
 				+"boardId : "+boardId+", curMemsList : "+curMemsList);
 		
-		//*** 나중에 디비에서 방번호로 조회해서 받아와야됨 임시 ***
-		curMemsList="ADMIN,user01,user02";
-		//======================================================
-	
-		
-		//구매확정한 유저수 curNum
+//		//구매확정한 유저수 curNum
 		int curNum = 0;
 		if(m != null && boardId != null) 
 			m.setCurRoomBid(boardId);
+		//현재 방의 boardId를 넣어줌!! 이부분 중요!
 		if(!curMemsList.equals(""))
-			for(String user : curMemsList.split(",")) curNum++;
+			for(String user : curMemsList.split(",")) {curNum++;}
 		
 		// 게시자가 정해놓은 N빵 최대 인원
 		request.setAttribute("maxMems", maxMems);
@@ -68,6 +66,7 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("x", 450);
 		request.setAttribute("y", 660);
 		request.setAttribute("m", m);
+		request.setAttribute("memberPicture", memberPicture);
 		request.getRequestDispatcher("/views/chat/chatRoom.jsp").forward(request, response);
 	}
 

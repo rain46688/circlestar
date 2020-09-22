@@ -12,6 +12,8 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+
+import com.nbbang.chat.model.service.ChatService;
 import com.nbbang.chat.model.vo.Message;
 import com.nbbang.member.model.vo.Member;
 
@@ -22,6 +24,7 @@ public class ChatSocket {
 	private static Map<Member, Session> user = new HashMap<Member, Session>();
 	// HttpSession 객체 생성
 	public static HttpSession httpSession = null;
+	private static List<Message> list = new ArrayList<Message>();
 
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig con) {
@@ -63,15 +66,21 @@ public class ChatSocket {
 		System.out.println(" === onMessage 메소드 실행 === ");
 		// Message객체 가져옴
 		if (msg != null) {
-			String nickName = msg.getSendNickName();
-			String userMessage = msg.getMsg();
-			String boardId = msg.getBoardId();
-			String curMemsList = msg.getCurMemsList();
-
-			System.out.println("nickName : " + nickName + ", userMessage : " + userMessage + "\n" + "boardId : "
-					+ boardId + ", curMemsList : " + curMemsList);
 			String name = "";
 			try {
+
+				String nickName = msg.getSendNickName();
+				String userMessage = msg.getMsg();
+				String boardId = msg.getBoardId();
+				String memberPicture = msg.getChatProfile();
+				String curMemsList = msg.getCurMemsList();
+				
+
+				
+				
+//				System.out.println("nickName : " + nickName + ", userMessage : " + userMessage + "\n" + "boardId : "
+//						+ boardId + ", curMemsList : " + curMemsList+", memberPicture : "+memberPicture);
+		
 				Iterator<Member> userIterator = user.keySet().iterator();
 				while (userIterator.hasNext()) {
 					Member key = userIterator.next();
@@ -80,10 +89,26 @@ public class ChatSocket {
 						if (user.get(key) != null && user.get(key).isOpen()) {
 							name = key.getNickname();
 							System.out.println(" === Null이 아니고 세션 열려있음, 메세지 : " + msg + " === ");
-							user.get(key).getBasicRemote().sendObject(msg);
+							
+							if(list.size() != 10) {
+								System.out.println("리스트 10 아님 list.size() : "+list.size());
+								System.out.println("msg : "+msg);
+								list.add(msg);
+								user.get(key).getBasicRemote().sendObject(msg);
+							}else {
+								//디비에 넣고 클리어
+								System.out.println("리스트 10됨 list.size() : "+list.size());
+							int result = new ChatService().insertChatMsg(list);
+								System.out.println("리스트 클리어됨 list.size() : "+list.size());
+							}
+							
 						}
 					}
 				}
+		
+			
+			
+			
 			} catch (Exception e) {
 				System.out.println(" === onMessage 예외, name : "+name+" === ");
 			}
@@ -112,7 +137,7 @@ public class ChatSocket {
 						key = exitterator.next();
 						if (!user.get(key).equals(session)) {
 							System.out.println(" === 진입 여부 확인용 1 === ");
-							user.get(key).getBasicRemote().sendObject(new Message(key.getNickname(), "SYS2", "", ""));
+							user.get(key).getBasicRemote().sendObject(new Message(key.getNickname(), "SYS2", "", "",""));
 						}
 					}
 					System.out.println(" === 소켓 연결 종료 name : " + name + " === ");

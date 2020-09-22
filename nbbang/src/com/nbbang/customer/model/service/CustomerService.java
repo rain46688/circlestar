@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.nbbang.customer.model.dao.CustomerDAO;
 import com.nbbang.customer.model.vo.CustomerCenter;
+import com.nbbang.customer.model.vo.CustomerFile;
 
 public class CustomerService {
 
@@ -30,25 +31,22 @@ public class CustomerService {
 		close(conn);
 		return count;
 	}
-//	public int addCustomerQnA(CustomerCenter cc) {
-//		// TODO Auto-generated method stub
-//		Connection conn=getConnection();
-//		int result=dao.addCustomerQna(conn,cc);
-//		if(result>0) commit(conn);
-//		else rollback(conn);
-//		close(conn);
-//		return result;
-//	}
 
-	public int insertQna(CustomerCenter c) {
+
+	public int insertQnA(CustomerCenter c, List<CustomerFile> fileList) {
 		// TODO Auto-generated method stub
-		Connection conn=getConnection();
-		int result=dao.insertQna(conn,c);
-		if(result>0)commit(conn);
-		else rollback(conn);
+		Connection conn = getConnection();
+		int result = dao.insertQna(conn, c, fileList);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
+	
 
 	public int viewDetailRead(CustomerCenter c) {
 		// TODO Auto-generated method stub
@@ -59,6 +57,10 @@ public class CustomerService {
 		close(conn);
 		return result;
 	}
+
+
+
+
 
 
 

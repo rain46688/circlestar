@@ -1,9 +1,10 @@
+<%@page import="com.nbbang.board.model.vo.Card"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.nbbang.board.model.vo.Board, java.util.List"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<Board> bolist = (List<Board>) request.getAttribute("boardList");
+	List<Card> bolist = (List<Card>) request.getAttribute("boardList");
 %>
 <style>
 .card-wrapper {
@@ -50,24 +51,24 @@
 			<button onclick="fn_boWrite();">글쓰기</button>
 		</div>
 		<%
-			for (Board b : bolist) {
+			for (Card c : bolist) {
 		%>
 		<div class="card"
-			onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=b.getBoardId()%>'"
+			onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=c.getCardBoard().getBoardId()%>'"
 			style="width: 15rem; cursor: pointer; padding:0px">
 			<!-- file의 갯수 분기처리 -->
 			<%-- <% if(files.length==1) {%> --%>
-			<img src="<%=request.getContextPath()%>/upload/images/cute.png" class="card-img-top" alt="제품이미지" width="120em" height="160em">
+			<img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em">
 			<%-- <% }else { %> --%>
 			<%-- <img src="<%=request.getContextPath()%>/upload/images/<%= files[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em"> --%>
 		<%-- 	<%} %> --%>
 				
 			<div class="card-body">
-				<input type="hidden" value="<%=b.getBoardId()%>">
-				<h5 class="card-title"><%= b.getBoardTitle() %></h5>
-				<p><%= b.getTradeArea() %></p>
-				<p id="interest"><%= b.getLikeCount() %> 관심 <%= b.getHit() %> 조회</p>
-				<h4 class="card-price"><%= b.getProductPrice() %></h4>
+				<input type="hidden" value="<%= c.getCardBoard().getBoardId()%>">
+				<h5 class="card-title"><%= c.getCardBoard().getBoardTitle() %></h5>
+				<p><%= c.getCardBoard().getTradeArea() %></p>
+				<p id="interest"><%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회</p>
+				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= c.getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
 			</div>
 		</div>
 		<%

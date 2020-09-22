@@ -50,13 +50,13 @@ pageEncoding="UTF-8"%>
 
       </div> -->
       <div class="type-wrap">
-          <select class="type-select" name="qnaType" style="width:581px;">
-                <option value="" selected>문의유형</option>
-                <option value="">회원정보관련</option>
-                <option value="">거래배송관련</option>
-                <option value="">불법거래</option>
-                <option value="">성희롱</option>
-                <option value="">신고</option>
+          <select class="type-select" name="type" style="width:581px;">
+                <option value="" selected>문의유형을 선택하세요.</option>
+                <option value="회원정보">회원정보관련</option>
+                <option value="거래배송">거래배송관련</option>
+                <option value="불법거래">불법거래</option>
+                <option value="성희롱">성희롱</option>
+                <option value="신고">신고</option>
            </select> 
       </div>
     
@@ -73,23 +73,50 @@ pageEncoding="UTF-8"%>
       </div>
       
       <div class="write-content">
-        <textarea name="contentwrite" rows="16" cols="80" placeholder="내용을 입력하쇼" >
-
-					</textarea>
+        <textarea name="contentwrite" rows="16" cols="80" placeholder="내용을 입력하쇼" ></textarea>
       </div>
      
       <div class="file-upload">
         <input type="file" name="csFile" multiple="true" >
       </div>
-      <div class="file-upload">
-        <input type="file" name="csFile" multiple="true" >
-        </div>
      
       <div id="submitBtn-kdh">
-        <button type="submit" class="btn-submit">문의등록</button>
+        <button type="button" class="btn-submit">문의등록</button>
       </div>
     
     </form>
   </div>
 </div>
+
+
+  <script>
+    $(".btn-submit").click(e => {
+      let form=new FormData();
+      //일반파일 넣기
+      form.append("type",$("[name=type]").val());
+      form.append("writer",$("[name=writer]").val());
+      form.append("contentwrite",$("[name=contentwrite]").val());
+      form.append("title",$("[name=title]").val());
+      let filesdata=$("[name=csFile]")[0];
+      console.log(filesdata)
+      for(let i=0;i<filesdata.files.length;i++){
+        form.append("test"+i, filesdata.files[i]);
+      }
+      $.ajax({
+        url:"<%=request.getContextPath() %>/customer/customerQnAWritingEnd",
+        data:form,
+        type:"post",
+        processData:false,
+        contentType:false,
+        success:data=>{
+          console.log(data);
+          alert("등록성공!");
+        }
+      
+      })
+    })
+
+
+  </script>
+
 <%@ include file="/views/common/footer.jsp"%>

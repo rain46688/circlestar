@@ -14,13 +14,13 @@ import com.nbbang.customer.model.vo.CustomerCenter;
 
 public class AdminDao {
 
-	private Properties p = new Properties();
+	private Properties prop = new Properties();
 
 	public AdminDao() {
 		// TODO Auto-generated constructor stub
 		String path = AdminDao.class.getResource("/sql/admin/admin.properties").getPath();
 		try {
-			p.load(new FileReader(path));
+			prop.load(new FileReader(path));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,34 +30,34 @@ public class AdminDao {
 	public List<CustomerCenter> customerList(Connection conn, int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
-		PreparedStatement pst = null;
+		PreparedStatement pstmt = null;
 		List<CustomerCenter> list = new ArrayList<CustomerCenter>();
-		String sql = p.getProperty("customerList");
+		String sql = prop.getProperty("customerList");
 		try {
-			pst = conn.prepareStatement(sql);
-			pst.setInt(1, (cPage - 1) * numPerPage + 1);
-			pst.setInt(2, cPage * numPerPage);
-			rs = pst.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(2, cPage * numPerPage);
+			rs = pstmt.executeQuery();
 			print(list, rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(pst);
+			close(pstmt);
 		}
 		return list;
 	}
 	
 	public int customerListCount(Connection conn) {
 		// TODO Auto-generated method stub
-		PreparedStatement pst = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int cnt = 0;
-		String sql = p.getProperty("customerListCount");
+		String sql = prop.getProperty("customerListCount");
 		try {
-			pst = conn.prepareStatement(sql);
-			rs = pst.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				cnt = rs.getInt(1);
 			}
@@ -66,7 +66,7 @@ public class AdminDao {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(pst);
+			close(pstmt);
 		}
 		return cnt;
 	}
