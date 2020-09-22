@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -35,6 +37,7 @@ public class ModifyPicServelt extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int usid=Integer.parseInt(request.getParameter("usid"));
+		Member m=new MemberService().myPage(usid);
 		
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("msg", "업로드 오류(form:enctype)");
@@ -56,6 +59,24 @@ public class ModifyPicServelt extends HttpServlet {
 		String usidStr=multi.getParameter("usid");
 		String fileName="";
 		File file=multi.getFile("userProfile");
+		if(file !=null) {
+			String ext=file.getName().substring(file.getName().lastIndexOf(".")+1);
+			if(ext.equals("jpg") || ext.equals("png") || ext.equals("gif")) {
+				String prev=m.getMemberPicture();
+				File prevFile=new File(savePath+"/"+prev);
+				if(prevFile.exists()) {
+					prevFile.delete();
+				}
+				fileName=file.getName();
+			}else {
+				if(file.exists()) {
+					file.delete();
+				}
+				request.setAttribute("msg", "이미지 파일만 업로드 가능합니다.");
+				request.setAttribute("loc", "/member/modifyProfile?usid="+usid);
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			}
+		}
 	}
 
 	/**
