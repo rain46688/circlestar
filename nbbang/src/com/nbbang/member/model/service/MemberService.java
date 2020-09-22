@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.nbbang.member.model.dao.MemberDao;
+import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.Member;
+import com.nbbang.member.model.vo.Report;
 
 
 public class MemberService {
@@ -51,6 +53,20 @@ private MemberDao dao=new MemberDao();
 		return m;
 	}
 
+	public Grade methodForGrade(int usid) {
+		Connection conn=getConnection();
+		Grade g=dao.methodForGrade(conn,usid);
+		close(conn);
+		return g;
+	}
+	
+	public int myPageReport(int usid) {
+		Connection conn=getConnection();
+		int reportCount=dao.myPageReport(conn, usid);
+		close(conn);
+		return reportCount;
+	}
+	
 	public Member nickDuplicate(String nick) {
 		Connection conn=getConnection();
 		Member m=dao.nickDuplicate(conn,nick);
@@ -100,5 +116,7 @@ private MemberDao dao=new MemberDao();
 		close(conn);
 		return result;
 	}
+
+
 
 }
