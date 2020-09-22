@@ -2,6 +2,8 @@ package com.nbbang.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -13,6 +15,7 @@ import javax.servlet.http.Part;
 
 import com.nbbang.board.model.service.BoardService;
 import com.nbbang.board.model.vo.Board;
+import com.nbbang.board.model.vo.BoardFile;
 import com.nbbang.common.temp.uploadRename;
 
 /**
@@ -50,28 +53,24 @@ public class BoardWriteEndServlet extends HttpServlet {
 		if (!fileSaveDir.exists())
 			fileSaveDir.mkdirs();
 		
-		String fileNames = "";
+		List<String> fileNames = new ArrayList<String>();
 		int index = 0;
 		for (Part part : request.getParts()) {
 			if (part.getName().equals("file")) {
 				String renamed = new uploadRename().randomString(getFileName(part));
 				part.write(uploadPath + File.separator + renamed);
-				if (index == 0)
-					fileNames += renamed;
-				else
-					{fileNames += ";" + renamed;}
-				
-				index++;
+				fileNames.add(renamed);
 			}
 		}
 		
-		if(fileNames.equals("")) {//파일 업로드가 됐는지 확인
+		if(fileNames.size()==0) {//파일 업로드가 됐는지 확인
 			request.setAttribute("msg", "파일 업로드 오류입니다. 관리자에게 문의하세요.");
 			request.setAttribute("loc", "/board/boardWrite");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
 		
+		BoardFile bg = new BoardFile();
 		Board b = new Board();
 		b.setProductCategory(request.getParameter("category"));
 		b.setWriterNickname(request.getParameter("writer"));
@@ -81,12 +80,14 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setTradeKind(request.getParameter("tradeMethod"));
 		b.setContent(request.getParameter("content"));
 		b.setProductUrl(request.getParameter("url"));
-		b.setFiles(fileNames);
 		b.setWriterNickname(request.getParameter("writerNickname"));
 		b.setWriterUsid(Integer.parseInt(request.getParameter("writerUsid")));
+		bg.setFileName(fileNames.toArray(new String[fileNames.size()]));
 		
-		int result = new BoardService().boardInsert(b);
-		if(result > 0) {
+		
+		int result1 = new BoardService().boardInsert(b);
+		int result2 = new BoardService().boardInsert(bg);
+		if(result1 > 0) {
 			//업로드 성공
 			request.setAttribute("msg", "업로드 완료!");
 			request.setAttribute("loc", "/board/boList");
