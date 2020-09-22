@@ -216,7 +216,7 @@ if("${tradeStage}"=="2"){
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else{
 			//상대방 메세지일 경우 분기처리
-			let html="<div class='tmp'><div class='profile'></div><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
+			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
 		}
 		/* 스크롤 아래로 유지해주는 것  채팅이 입력되면 가장 아래로 스크롤을 고정시켜야된다.

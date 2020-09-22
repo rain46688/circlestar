@@ -67,9 +67,10 @@ public class ChatSocket {
 			String userMessage = msg.getMsg();
 			String boardId = msg.getBoardId();
 			String curMemsList = msg.getCurMemsList();
+			String memberPicture = msg.getChatProfile();
 
 			System.out.println("nickName : " + nickName + ", userMessage : " + userMessage + "\n" + "boardId : "
-					+ boardId + ", curMemsList : " + curMemsList);
+					+ boardId + ", curMemsList : " + curMemsList+", memberPicture : "+memberPicture);
 			String name = "";
 			try {
 				Iterator<Member> userIterator = user.keySet().iterator();
