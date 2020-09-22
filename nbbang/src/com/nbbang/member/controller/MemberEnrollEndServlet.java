@@ -59,7 +59,6 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		int result=new MemberService().memberEnroll(m);
 		
 		String nickname=m.getNickname();
-		System.out.println("닉네임 들어오는지 확인"+nickname);
 		
 		String msg="";
 		String loc="/";
