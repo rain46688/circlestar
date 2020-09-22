@@ -208,13 +208,13 @@
       </div>
       
       <div id="date"><%= c.getCardBoard().getEnrollDate() %> <%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회수 </div>
-      <!-- 가격과 좋아요 버튼 -->
+      <!-- 가격 -->
       <div id="priceAndLikeBtn">
           <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
           <!-- <a href=""><img src="<%= request.getContextPath() %>/images/heart.png" alt="LikeBtn" width="30px" height="30px"></a> -->
       </div>
       <br>
-      <div id="contentText"></div>
+      <div id="contentText"><%= c.getCardBoard().getContent() %></div>
       <div id="etcInfo"><a href="#">신고하기</a> <a href="#">제품 페이지</a></div>
     </div>
     <div id="commentSection">
@@ -292,5 +292,21 @@
     </div>
   </div>
 </section>
-
+<script>
+  $("#likeBtn").click(function(e){
+    $.ajax({
+      url:"<%=request.getContextPath()%>/board/boardLike",
+      type:"post",
+      dataType:"text",
+      data : {
+        'userUsid':'<%= loginnedMember.getUsid() %>',
+        'boardId':'<%= c.getCardBoard().getBoardId() %>'
+      },
+      success : function(data){
+        $("#likeBtn>button").css("background-color","yellow");
+        console.log(data);
+      }
+    })
+  })
+</script>
 <%@ include file="/views/common/footer.jsp" %>

@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
 import com.nbbang.board.model.vo.Card;
+import com.nbbang.member.model.vo.LikeList;
 
 public class BoardDao {
 	
@@ -170,6 +171,21 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("updateReadCount"));
 			pstmt.setInt(1, boardId);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int boardLikeInsert(Connection conn, LikeList list) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardLikeInsert"));
+			pstmt.setInt(1, list.getLikeUsid());
+			pstmt.setInt(1, list.getLikeBoardId().get(0));
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
