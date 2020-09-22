@@ -8,11 +8,18 @@
 				<button onclick="fun_createroom()" class="btn btn-success">인원 차서 방장이 방열기</button>
 					<!-- 채팅창 관련 로직  -->
 				<form name="form">
-				<!-- 객체를 받아와서 다시 넣어야됨 일단은 리터럴로 넘김 -->
+				<!-- 디비에서 객체를 받아와서 다시 넣어야됨 일단은 리터럴로 넘김 -->
+				
+					<!-- BOARD 컬럼의  BOARD_ID -->
 					<input type="hidden" name="boardId" value="2"> 
+					<!-- BOARD 컬럼의  MAX_MEMS -->
 					<input type="hidden" name="maxMems" value="3"> 
+					<!-- BOARD 컬럼의  TRADE_STAGE -->
 					<input type="hidden" name="tradeStage" value="2"> 
+					<!-- BOARD 컬럼의  WRITER_USID -->
 					<input type="hidden" name="writerUsid" value="9999">
+					<!-- MEMBER 컬럼의  MEMBER_PICTURE -->
+					<input type="hidden" name="memberPicture" value="cute.png">
 					<button onclick="nbbang(this.form)" class="btn btn-success">채팅방 접속하기</button>	
 				</form>
 					

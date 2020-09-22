@@ -175,7 +175,7 @@ if("${tradeStage}"=="2"){
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
-		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}")));
+		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}","")));
 	};
 	socket.onclose = function(e) {
 		console.log("onclose 실행");
@@ -230,9 +230,11 @@ if("${tradeStage}"=="2"){
 		let txt = $("#msgText");
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
-		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}")));
-		txt.val('');
-		txt.val(txt.replace(/\r\n/g, ''));
+		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}")));
+		txt.val(' ');//칸 비워주기
+		txt.html(' ');
+		//txt.val(txt.replace(/\r\n/g, ''));
+		//엔터키 없애주기
 			}
 		};
 		
@@ -244,11 +246,12 @@ if("${tradeStage}"=="2"){
 	});
 	
 	//메세지 객체
-	function Message(sendNickName,msg,curMemsList,boardId){
+	function Message(sendNickName,msg,curMemsList,boardId,chatProfile){
 		this.sendNickName=sendNickName;
 		this.msg=msg;
 		this.curMemsList=curMemsList;
 		this.boardId = boardId;
+		this.chatProfile = chatProfile;
 	};
 	
 }
