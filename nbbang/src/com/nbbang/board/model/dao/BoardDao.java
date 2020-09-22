@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.nbbang.board.model.vo.Board;
+import com.nbbang.board.model.vo.BoardFile;
 
 public class BoardDao {
 	
@@ -44,7 +45,6 @@ public class BoardDao {
 				b.setBoardId(rs.getInt("BOARD_ID"));
 				b.setBoardTitle(rs.getString("BOARD_TITLE"));
 				b.setWriterUsid(rs.getInt("WRITER_USID"));
-				b.setFiles(rs.getString("FILES"));
 				b.setHit(rs.getInt("HIT"));
 				b.setLikeCount(rs.getInt("LIKE_COUNT"));
 				list.add(b);
@@ -77,17 +77,11 @@ public class BoardDao {
 				b.setContent(rs.getString("CONTENT"));
 				b.setEnrollDate(rs.getDate("ENROLL_DATE"));
 				b.setHit(rs.getInt("HIT"));
-				b.setFiles(rs.getString("FILES"));
 				b.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
-				b.setProductName(rs.getString("PRODUCT_NAME"));
 				b.setTradeArea(rs.getString("TRADE_AREA"));
 				b.setMaxMems(rs.getInt("MAX_MEMS"));
-				b.setCurMemsList(stringToArr(rs.getString("CUR_MEMS_LIST")));
-				b.setPayMemsList(stringToArr(rs.getString("PAY_MEMS_LIST")));
-				b.setDeliveryMemsList(stringToArr(rs.getString("DELIVERY_MEMS_LIST")));
-				b.setLimitTime(rs.getString("LIMIT_TIME"));
+				b.setLimitTime(rs.getDate("LIMIT_TIME"));
 				b.setTradeStage(rs.getInt("LIKE_COUNT"));
-				b.setReportCount(rs.getInt("REPORT_COUNT"));
 				b.setPopularBoard(rs.getBoolean("POPULAR_BOARD"));
 				b.setProductPrice(rs.getInt("PRODUCT_PRICE"));
 				b.setOwnStatus(rs.getString("TRADE_KIND"));
@@ -132,13 +126,29 @@ public class BoardDao {
 			pstmt.setInt(2, b.getWriterUsid());
 			pstmt.setString(3, b.getWriterNickname());
 			pstmt.setString(4, b.getContent());
-			pstmt.setString(5, b.getFiles());
 			pstmt.setString(6, b.getProductCategory());
 			pstmt.setInt(6, b.getMaxMems());
 			pstmt.setInt(7, b.getMaxMems());
 			pstmt.setString(8, "구매예정");
 			pstmt.setString(9, b.getTradeKind());
 			pstmt.setString(10, b.getProductUrl());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardInsert(Connection conn, BoardFile bf) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardFileInsert"));
+			for(String s : bf.getFileName()) {
+				
+			}
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
