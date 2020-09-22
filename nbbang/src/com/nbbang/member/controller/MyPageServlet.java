@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.Member;
+import com.nbbang.member.model.vo.Report;
 
 /**
  * Servlet implementation class MyPageServlet
@@ -57,7 +59,15 @@ public class MyPageServlet extends HttpServlet {
 		m.setAddress(address);
 		m.setMemberId(memberId);
 		
+		Grade g=new MemberService().methodForGrade(usid);
+		int grade=g.getGradeId();
+		int maxRoomCount=g.getMaxRoomCount();
+		int reportCount=new MemberService().myPageReport(usid);
+		
 		request.setAttribute("member", m);
+		request.setAttribute("grade", grade);
+		request.setAttribute("maxRoomCount", maxRoomCount);
+		request.setAttribute("reportCount", reportCount);
 		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
 	}
 

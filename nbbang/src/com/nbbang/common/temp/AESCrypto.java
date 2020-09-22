@@ -26,6 +26,7 @@ public class AESCrypto {
 	
 	public AESCrypto() {
 		this.path=AESCrypto.class.getResource("/").getPath();
+		this.path=path.substring(0,path.indexOf("classes"));
 		File f=new File(this.path+"/nbbang.nb");
 		
 		if(f.exists()) {

@@ -36,7 +36,8 @@ CREATE TABLE MEMBER
 );
 
 select * from member;
-
+select * from report;
+select count(*) from report where REPORT_TARGET_USID=6;
 ------------------------------------------------------------------------------------------
 
 
