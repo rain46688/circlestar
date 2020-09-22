@@ -1,8 +1,8 @@
 package com.nbbang.board.model.service;
 
-import static com.nbbang.common.temp.JDBCTemplate.getConnection;
 import static com.nbbang.common.temp.JDBCTemplate.close;
 import static com.nbbang.common.temp.JDBCTemplate.commit;
+import static com.nbbang.common.temp.JDBCTemplate.getConnection;
 import static com.nbbang.common.temp.JDBCTemplate.rollback;
 
 import java.sql.Connection;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.nbbang.board.model.dao.BoardDao;
 import com.nbbang.board.model.vo.Board;
+import com.nbbang.board.model.vo.BoardFile;
 
 public class BoardService {
 
@@ -44,21 +45,10 @@ public class BoardService {
 		return result;
 	}
 
-	public int boardInsert(Board b) {
+	public int boardInsert(Board b, BoardFile bf) {
 		Connection conn = getConnection();
 		int result = dao.boardInsert(conn, b);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
-	
-	public int boardInsert(BoardFile bf) {
-		Connection conn = getConnection();
-		int result = dao.boardInsert(conn, bf);
+		result += dao.boardInsert(conn, bf);
 		if(result > 0) {
 			commit(conn);
 		}else {

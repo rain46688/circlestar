@@ -77,17 +77,18 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setBoardTitle(request.getParameter("title"));
 		b.setProductPrice(Integer.parseInt(request.getParameter("price")));
 		b.setMaxMems(Integer.parseInt(request.getParameter("maxMems")));
+		b.setTradeArea(request.getParameter("tradeArea"));
 		b.setTradeKind(request.getParameter("tradeMethod"));
 		b.setContent(request.getParameter("content"));
 		b.setProductUrl(request.getParameter("url"));
 		b.setWriterNickname(request.getParameter("writerNickname"));
 		b.setWriterUsid(Integer.parseInt(request.getParameter("writerUsid")));
+		b.setOwnStatus(request.getParameter("ownStatus"));
 		bg.setFileName(fileNames.toArray(new String[fileNames.size()]));
 		
 		
-		int result1 = new BoardService().boardInsert(b);
-		int result2 = new BoardService().boardInsert(bg);
-		if(result1 > 0) {
+		int result = new BoardService().boardInsert(b,bg);
+		if(result > 1) {
 			//업로드 성공
 			request.setAttribute("msg", "업로드 완료!");
 			request.setAttribute("loc", "/board/boList");

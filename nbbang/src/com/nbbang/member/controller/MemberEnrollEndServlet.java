@@ -61,6 +61,10 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		int usid=m.getUsid();
 		
 		int resultGrade=new MemberService().memberInsertGrade(usid);
+		int resultAlarm=new MemberService().memberInsertAlarm(usid);
+		int resultReport=new MemberService().memberInsertReport(usid);
+		int resultLikeList=new MemberService().memberInsertLikeList(usid);
+		int resultComment=new MemberService().memberInsertComment(usid);
 		
 		String msg="";
 		String loc="/";
