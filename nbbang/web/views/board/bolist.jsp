@@ -51,17 +51,16 @@
 		</div>
 		<%
 			for (Board b : bolist) {
-			String[] files = b.getFiles().split(";");
 		%>
 		<div class="card"
 			onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=b.getBoardId()%>'"
 			style="width: 15rem; cursor: pointer; padding:0px">
 			<!-- file의 갯수 분기처리 -->
-			<% if(files.length==1) {%>
-			<img src="<%=request.getContextPath()%>/upload/images/<%= b.getFiles() %>" class="card-img-top" alt="제품이미지" width="120em" height="160em">
-			<% }else { %>
-			<img src="<%=request.getContextPath()%>/upload/images/<%= files[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em">
-			<%} %>
+			<%-- <% if(files.length==1) {%> --%>
+			<img src="<%=request.getContextPath()%>/upload/images/cute.png" class="card-img-top" alt="제품이미지" width="120em" height="160em">
+			<%-- <% }else { %> --%>
+			<%-- <img src="<%=request.getContextPath()%>/upload/images/<%= files[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em"> --%>
+		<%-- 	<%} %> --%>
 				
 			<div class="card-body">
 				<input type="hidden" value="<%=b.getBoardId()%>">

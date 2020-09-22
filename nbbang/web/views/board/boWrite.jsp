@@ -76,7 +76,7 @@
 		<div id="title"><h4>글쓰기</h4></div>
 		<hr color="black">
 		<div id="editor">
-			<form action="<%= request.getContextPath() %>/board/boardWriteEnd" method="POST"
+			<form id="frm" action="<%= request.getContextPath() %>/board/boardWriteEnd" method="POST"
 				enctype="multipart/form-data">
 				<select class="custom-select custom-select-sm" name="category" id="category">
 					<option value="" selected>게시판을 선택하세요</option>
@@ -88,6 +88,7 @@
 				</select>
 				<input type="hidden" name="writerNickname" value="<%= loginnedMember.getNickname() %>" >
 				<input type="hidden" name="writerUsid" value="<%= loginnedMember.getUsid() %>" >
+				<input type="hidden" name="tradeArea" value="<%= loginnedMember.getAddress() %>" >
 				<div class="input-group marginTop">
 				<input class="form-control" type="text" name="title" id="titleInput" placeholder="제목을 입력하세요">
 				</div>
@@ -118,7 +119,7 @@
 				</select>
 				<select class="custom-select custom-select-md" name="ownStatus" id="ownStatus">
 					<option value="구매예정">구매예정</option>
-					<option value="개인보유">개인보유</option>
+					<option value="제품소유중">개인보유</option>
 				</select>
 				</div>
 				<div id="textEditor" class="marginTop">
@@ -230,13 +231,9 @@
 			document.querySelector("#imageUpload").style.border = "1px red solid";
 			return;
 		}	
-	}
 
-	function printContent() {
-		// console.log(document.getElementById("content").value);
-		// document.getElementsByTagName("section").append(document.getElementById("content").value);
+		document.getElementById("frm").submit();
+		
 	}
-
-	setInterval(printContent, 500);
 </script>
 <%@ include file="/views/common/footer.jsp"%>
