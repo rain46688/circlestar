@@ -1,5 +1,6 @@
 package com.nbbang.member.model.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LikeList {
@@ -9,6 +10,7 @@ public class LikeList {
 	
 	public LikeList() {
 		// TODO Auto-generated constructor stub
+		likeBoardId = new ArrayList<Integer>();
 	}
 
 	public LikeList(int likeUsid, List<Integer> likeBoardId) {
