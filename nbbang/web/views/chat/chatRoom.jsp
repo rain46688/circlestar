@@ -147,6 +147,10 @@ border:1px #B2C7D9 solid;
 	 float: left;
 }
 
+.date{
+	float:left;
+}
+
 /* 현재 방번호 상단에 보여주기 위해 */
 /* #roomno{
 text-align:center;
@@ -202,7 +206,7 @@ $(function(){
 					}else if(msg["sendNickName"] == "${m.nickname}"){
 				 		 html+="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div></div>";
 					}else{
-						 html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
+						 html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div>";
 					}
 				});
 				$("#ChatArea").html(html);
@@ -275,7 +279,7 @@ if("${tradeStage}"=="2"){
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else{
 			//상대방 메세지일 경우 분기처리
-			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
+			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date'>"+"11:23"+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
 		}
 		/* 스크롤 아래로 유지해주는 것  채팅이 입력되면 가장 아래로 스크롤을 고정시켜야된다.
