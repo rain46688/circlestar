@@ -140,10 +140,10 @@ public class ChatDao {
 		// TODO Auto-generated method stub
 		
 		
-		for(Message s : list) {
-			System.out.println(s);
-		}
-		
+		/*
+		 * for(Message s : list) { System.out.println(s); }
+		 */
+		System.out.println();
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
@@ -155,6 +155,8 @@ public class ChatDao {
 				pstmt.setString(4, m.getChatProfile());
 				pstmt.setString(5, m.getChatTime());
 				result=pstmt.executeUpdate();
+				System.out.println(m);
+				System.out.println("result : "+result);
 			}
 			System.out.println("여기 실행안됨??");
 			list.clear();
@@ -166,7 +168,7 @@ public class ChatDao {
 			close(pstmt);
 		}
 			
-		return 0;
+		return result;
 	}
 
 	public List<Message> getChatList(Connection conn, String boardId) {
