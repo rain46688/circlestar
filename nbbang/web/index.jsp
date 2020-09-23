@@ -6,23 +6,33 @@
 <section>
 
 	<div id="carouselField" name="carouselField">
-		<div id="carouselInhee" class="carousel slide" data-ride="carousel">
+		<div class="carousel slide carouselInhee" data-ride="carousel">
 			<ol class="carousel-indicators">
-				<li data-target="#carouselInhee" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselInhee" data-slide-to="1"></li>
-				<li data-target="#carouselInhee" data-slide-to="2"></li>
+				<li data-target=".carouselInhee" data-slide-to="0" class="active"></li>
+				<li data-target=".carouselInhee" data-slide-to="1"></li>
+				<li data-target=".carouselInhee" data-slide-to="2"></li>
+				<li data-target=".carouselInhee" data-slide-to="3"></li>
+				<li data-target=".carouselInhee" data-slide-to="4"></li>
 			</ol>
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
-					<img src="<%=request.getContextPath()%>/images/logoTitle.png"
+					<img src="<%=request.getContextPath()%>/images/main1.jpg"
 						class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/images/logoTitle.png"
+					<img src="<%=request.getContextPath()%>/images/main2.jpg"
 						class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/images/logoTitle.png"
+					<img src="<%=request.getContextPath()%>/images/main3.jpg"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/images/main4.jpg"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/images/main5.jpg"
 						class="d-block w-100" alt="...">
 				</div>
 			</div>
@@ -39,44 +49,12 @@
 
 
 <!-- card 건들면 속상함 ㅠ.ㅠ-->
-<div id="hotContents" name="hotContents">
-	<h2 id="hotContentsH2" name="hotContentsH2">인기게시물</h1>
-	<div class="card" style="width: 20rem;">
-	  <img src="<%=request.getContextPath() %>/images/logo.png" class="card-img-top" alt="...">
-	  <div class="card-body">
-	    <h5 class="card-title">Card title</h5>
-	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	    <a href="#" class="btn btn-primary">Go somewhere</a>
-	  </div>
-	</div>
-	<div class="card" style="width: 20rem;">
-	  <img src="<%=request.getContextPath() %>/images/logo.png" class="card-img-top" alt="...">
-	  <div class="card-body">
-	    <h5 class="card-title">Card title</h5>
-	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	    <a href="#" class="btn btn-primary">Go somewhere</a>
-	  </div>
-	</div>
-	<div class="card" style="width: 20rem;">
-	  <img src="<%=request.getContextPath() %>/images/logo.png" class="card-img-top" alt="...">
-	  <div class="card-body">
-	    <h5 class="card-title">Card title</h5>
-	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	    <a href="#" class="btn btn-primary">Go somewhere</a>
-	  </div>
-	</div>
-	<div class="card" style="width: 20rem;">
-	  <img src="<%=request.getContextPath() %>/images/logo.png" class="card-img-top" alt="...">
-	  <div class="card-body">
-	    <h5 class="card-title">Card title</h5>
-	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	    <a href="#" class="btn btn-primary">Go somewhere</a>
-	  </div>
+	
 
 	<script>
 		$(function() {
-			$('#carouselInhee').carousel({
-				interval : 1000,
+			$('.carouselInhee').carousel({
+				interval : 5000,
 				pause : "hover",
 				wrap : true,
 				keyboard : true

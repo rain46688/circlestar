@@ -99,9 +99,13 @@ button#chargebtn{
          </div>
          <div id="memberInfo">
             <p class="title"><%=m.getNickname() %>님의 마이페이지</p>
-            <p class="memberInfoText">&nbsp;회원등급:&nbsp;<%=request.getAttribute("grade") %></p><span class="memberInfoText">가용포인트:&nbsp;<%=m.getPoint() %>&nbsp;&nbsp;<button type="button" id="chargebtn">충전하기</button></span><br>
+            <p class="memberInfoText">&nbsp;회원등급:&nbsp;<%=request.getAttribute("grade") %></p>
+            <span class="memberInfoText">가용포인트:&nbsp;<%=m.getPoint() %>&nbsp;&nbsp;<button type="button" id="chargebtn" onclick="fn_chargePoint();">충전하기</button></span><br>
             <p class="memberInfoText">&nbsp;개설 가능한 방 개수:&nbsp;<%=request.getAttribute("maxRoomCount") %></p><br>
-            <p class="memberInfoText">&nbsp;가입일:&nbsp;<%=m.getEnrollDate() %></p><span class="memberInfoText">신고당한 횟수:&nbsp;<%=request.getAttribute("reportCount") %></span><br>
+            <p class="memberInfoText">&nbsp;가입일:&nbsp;<%=m.getEnrollDate() %></p>
+            <span class="memberInfoText">신고당한 횟수:&nbsp;<%=request.getAttribute("reportCount") %></span><br>
+            <form action="" name="chargePoint">
+            </form>
          </div>
       </div>
       <div class="item smallBox" id="crntList">
@@ -149,5 +153,20 @@ button#chargebtn{
       </div>
       <div></div>
    </div>
+   <script>
+      function fn_chargePoint(){
+         const url="<%=request.getContextPath()%>/member/chargePoint";
+			const title="chargePoint";
+			const status="left=500px,top=100px,width=500px,height=500px";
+
+			open("",title,status);
+
+			chargePoint.target=title;
+			chargePoint.action=url;
+			chargePoint.method="post";
+
+			chargePoint.submit();
+      }
+   </script>
 </section>
 <%@ include file="/views/common/footer.jsp" %>
