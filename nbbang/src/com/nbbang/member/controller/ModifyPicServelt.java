@@ -61,7 +61,8 @@ public class ModifyPicServelt extends HttpServlet {
 		File file=multi.getFile("userProfile");
 		if(file !=null) {
 			String ext=file.getName().substring(file.getName().lastIndexOf(".")+1);
-			if(ext.equals("jpg") || ext.equals("png") || ext.equals("gif")) {
+			if(ext.equals("jpg") || ext.equals("png") || ext.equals("gif")
+					||ext.equals("JPG")||ext.equals("PNG")||ext.equals("GIF")) {
 				String prev=m.getMemberPicture();
 				File prevFile=new File(savePath+"/"+prev);
 				if(prevFile.exists()) {

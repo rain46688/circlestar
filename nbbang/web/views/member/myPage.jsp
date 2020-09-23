@@ -33,18 +33,13 @@ div#infoContainer .item:nth-child(1) {
 div#headContainer{
    display: flex;
 }
-div#profilePicDiv{
+div.profilePicDiv{
    position: relative;
    width: 30%;
    float: left;
    display: flex;
    justify-content: center;
    align-items: center;
-}
-div#memberInfo{
-   width: 70%;
-   float: right;
-   padding: 3%;
 }
 #profilePicField{
    position: relative;
@@ -58,6 +53,11 @@ div#memberInfo{
    align-items: center;
    margin-left: 1em;
    margin-right: 1em;
+}
+div#memberInfo{
+   width: 70%;
+   float: right;
+   padding: 3%;
 }
 div.smallBox{
    padding: 5%;
@@ -87,7 +87,7 @@ button#chargebtn{
 <section>
    <div id="infoContainer" name="infoContainer" class="infoContainer">
       <div class="item" id="headContainer">
-         <div id="profilePicDiv" style="min-width: 180px;">
+         <div class="profilePicDiv" style="min-width: 180px;">
             <img id="profilePicField" src="<%=memberPic+m.getMemberPicture() %>" alt="프사">
          </div>
          <div id="memberInfo">
