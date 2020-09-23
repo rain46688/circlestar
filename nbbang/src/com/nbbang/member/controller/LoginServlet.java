@@ -66,13 +66,24 @@ public class LoginServlet extends HttpServlet {
 			c.setMaxAge(0);
 			response.addCookie(c);
 		}
-		if(m!=null) {
+		
+		if(m!=null) {//멤버가 존재한다면
 			int usid=m.getUsid();
+			//LikeList 받아오기
 			LikeList ll=new MemberService().methodForLikelist(usid);
-			
+			//memberPic(사진) 받아오기
+			String memberPic;
+			if(m.getMemberPicture()==null) {
+				memberPic=request.getContextPath()+"/upload/profilePic/profileNone.png";
+			}else {
+				memberPic=request.getContextPath()+"/upload/profilePic/"+m.getMemberPicture();
+			}
+			//세션에 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("loginnedMember",m);
 			session.setAttribute("likeList", ll.getLikeBoardId());
+			session.setAttribute("memberPic", memberPic);
+			//임시비번 알림
 			if(m.isPwIsUuid()==true) {
 				request.setAttribute("msg", "임시 비밀번호를 사용 중입니다. 비밀번호를 변경해주세요.");
 				request.setAttribute("loc", "/");
@@ -80,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 			}else{
 				response.sendRedirect(request.getContextPath());				
 			}
-		}else {
+		}else {//없는 멤버면
 			request.setAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다!");
 			request.setAttribute("loc", "/loginPage");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

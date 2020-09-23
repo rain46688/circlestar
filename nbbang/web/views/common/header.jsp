@@ -4,7 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% Member loginnedMember=(Member)session.getAttribute("loginnedMember");%>
+<%
+Member loginnedMember=(Member)session.getAttribute("loginnedMember");
+String memberPic=(String)session.getAttribute("memberPic");
+%>
 <!DOCTYPE html>
 <html>
 
