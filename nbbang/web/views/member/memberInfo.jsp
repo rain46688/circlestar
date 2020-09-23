@@ -9,18 +9,18 @@
         position: relative;
         background: white;
         text-align: center;
-        margin: 3% 4% 3% 20%;
+        margin: 3% 3% 3% 20%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
         justify-items: stretch;
         width: 13%;
+        float: left;
     }
     div#sideBarTitleContainer{
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
-        min-width: 240px;
     }
     p#sideBarTitle{
         font-size: 2em;
@@ -36,7 +36,6 @@
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
-        min-width: 240px;
     }
     .postList{
         font-size: 1em;
@@ -50,13 +49,13 @@
         position: relative;
 	    background: #FFFFFF;
 	    text-align: center;
-        margin: 5% 22% 5% 1%;
+        margin: 5% 22% 5% 2%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
         justify-items: stretch;
         width: 40%;
-        float: right;
+        float: left;
     }
     div .item *{
         width:100%;
