@@ -53,14 +53,17 @@ public class BoardLikeServlet extends HttpServlet {
 		
 		//Session에 추가
 		HttpSession session = request.getSession();
-		if(session==null) {
-			LikeList listToGet = new BoardService().boardLikeList(userUsid);
-			session.setAttribute("likeList", listToGet.getLikeBoardId());
+		if(session.getAttribute("likeList") == null) {
+			
 		}else {
-			LikeList listToGet = (LikeList)session.getAttribute("likeList");
-			listToGet.getLikeBoardId().add(boardId);
-			session.setAttribute("listList", listToGet.getLikeBoardId());
+			
 		}
+		LikeList listToGet = (LikeList)session.getAttribute("likeList");
+		listToGet.getLikeBoardId().add(boardId);
+		session.setAttribute("listList", listToGet.getLikeBoardId());
+		
+		PrintWriter pw = response.getWriter();
+		pw.append("success");
 		
 	}
 
