@@ -71,18 +71,11 @@ public class LoginServlet extends HttpServlet {
 			int usid=m.getUsid();
 			//LikeList 받아오기
 			LikeList ll=new MemberService().methodForLikelist(usid);
-			//memberPic(사진) 받아오기
-			String memberPic;
-			if(m.getMemberPicture()==null) {
-				memberPic=request.getContextPath()+"/upload/profilePic/profileNone.png";
-			}else {
-				memberPic=request.getContextPath()+"/upload/profilePic/"+m.getMemberPicture();
-			}
+			
 			//세션에 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("loginnedMember",m);
 			session.setAttribute("likeList", ll.getLikeBoardId());
-			session.setAttribute("memberPic", memberPic);
 			//임시비번 알림
 			if(m.isPwIsUuid()==true) {
 				request.setAttribute("msg", "임시 비밀번호를 사용 중입니다. 비밀번호를 변경해주세요.");

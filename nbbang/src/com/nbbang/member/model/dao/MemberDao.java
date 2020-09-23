@@ -376,7 +376,6 @@ private Properties prop=new Properties();
 			if(rs.next()) {
 				ll.setLikeUsid(usid);
 				String result=rs.getString("LISTAGG(LIKE_BOARD_ID,',')WITHINGROUP(ORDERBYLIKE_BOARD_ID)");
-				System.out.println(result);
 				String[] splitResult=result.split(",");
 				
 				int[] intResult=new int[splitResult.length];

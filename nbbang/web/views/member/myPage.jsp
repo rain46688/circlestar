@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+<%@ page import="com.nbbang.member.model.vo.Member" %>
 <%
 	Member m=(Member)request.getAttribute("member");
 %>
@@ -45,13 +46,13 @@ div#memberInfo{
    float: right;
    padding: 3%;
 }
-div#profilePicField{
+#profilePicField{
    position: relative;
    margin: auto;
-   border-radius: 50%;
+   border-radius: 70%;
    height: 10em;
    width: 10em;
-   border: 1px black solid;
+   border: none;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -87,9 +88,7 @@ button#chargebtn{
    <div id="infoContainer" name="infoContainer" class="infoContainer">
       <div class="item" id="headContainer">
          <div id="profilePicDiv" style="min-width: 180px;">
-            <div id="profilePicField" style="min-width: 150px;">
-               <div id="profilePic">^^</div>
-            </div>
+            <img id="profilePicField" src="<%=memberPic+m.getMemberPicture() %>" alt="프사">
          </div>
          <div id="memberInfo">
             <p class="title"><%=m.getNickname() %>님의 마이페이지</p>
