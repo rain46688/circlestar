@@ -88,6 +88,7 @@ public class CustomerDAO {
 	}
 
 	public int insertQna(Connection conn, CustomerCenter c) {
+		System.out.println("insertQna 정보부분 실행됨");
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -148,11 +149,9 @@ public class CustomerDAO {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		int result = 0;
-
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("insertFile"));
 			pstmt.setString(1, cf.getCsFileName());
-			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
