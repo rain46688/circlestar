@@ -20,7 +20,6 @@
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
-        min-width: 240px;
     }
     p#sideBarTitle{
         font-size: 2em;
@@ -36,7 +35,6 @@
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
-        min-width: 240px;
     }
     .postList{
         font-size: 1em;
