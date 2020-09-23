@@ -20,7 +20,10 @@ font-weight:bold;
 }
 
 body{
-	background-color:#FFC107;
+	/* background-color:#FFC107; */
+	background-image:url('<%=request.getContextPath()%>/images/rememberBread.png');
+	background-repeat:no-repeat;
+	background-size: 100% 100%;
 }
 
 /* 사이드바 사이즈  */
@@ -28,7 +31,8 @@ body{
 	height: 80%;
 	width: 80%;
 	margin: 30px auto;
-	border: 3px black solid;
+	border: 4px black solid;
+	padding:1px;
 	border-radius: 10px;
 	background-color:#B2C7D9;
 }
@@ -80,6 +84,7 @@ textarea:focus{
 	margin-bottom:10px;
 	margin-top:10px;
 	text-align:center;
+	font-size:20px;
 }
 
 /* 관리자 전용 접속부분 글자색 */
@@ -88,14 +93,15 @@ textarea:focus{
  	margin-bottom:10px;
 	margin-top:10px;
 	text-align:center;
+	font-size:20px;
 }
 
 /* 프로필 둥글게보이기 radius 70%하면됨  */
 .profile{
  	width:50px; 
 	height:50px;
+	border:1px solid #FFC107;
 	border-radius: 70%;
-	background-color:#272728;
 	 float: left;
 	 margin:10px;
 }
@@ -181,9 +187,8 @@ $(function(){
 				let html ="";
 				
 				if(data != null && data != ''){
-					console.log('데이터 부분 널아님 data : '+data);
+					console.log('data null 인지 아닌지? : '+data);
 				$.each(data,function(i,msg){
-	
 					if(msg["msg"] == "SYS1"){
 						 if(msg["sendNickName"] == "ADMIN"){
 								html+="<div class='tmp'><div class='admin'> ADMIN 관리자가 접속하였습니다." + "</div></div>";
@@ -199,9 +204,9 @@ $(function(){
 					}else{
 						 html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
 					}
-					$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
 				});
 				$("#ChatArea").html(html);
+				$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
 				}
 				
 				
@@ -285,10 +290,18 @@ if("${tradeStage}"=="2"){
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}")));
+		
+		
 		txt.val(' ');//칸 비워주기
-		txt.html(' ');
-		//txt.val(txt.replace(/\r\n/g, ''));
-		//엔터키 없애주기
+		txt.html(' ');//html 비워주기
+		//txt.html(txt.val().trim());
+		//txt.html(txt.html.trim());
+		//txt.val(txt.html.trim());
+		//txt.val(txt.val().trim());
+		//txt.val(txt.replace(/\r\n/g, ''));		//엔터키 없애주기
+
+		
+		
 			}
 		};
 		
@@ -296,6 +309,8 @@ if("${tradeStage}"=="2"){
 	$("#msgText").keydown(function(key) {
 		if (key.keyCode == 13) {
 			sendMessage();
+			//txt.val('');//칸 비워주기
+			//txt.html('');//html 비워주기
 		}
 	});
 	

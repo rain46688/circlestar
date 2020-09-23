@@ -46,6 +46,7 @@ public class ChatListGetServlet extends HttpServlet {
 			// System.out.println(m.getSendNickName()+" : "+m.getMsg());
 			m.setCurMemsList(curMemsList);
 		}
+		list = null;
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("loginnedMember");
 		if (!curMemsList.equals(""))

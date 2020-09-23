@@ -153,7 +153,7 @@ public class ChatDao {
 				result=pstmt.executeUpdate();
 			}
 			list.clear();
-			
+			System.out.println(" === 리스트 쌓인거 전송하고 클리어 dao === ");
 			
 			
 		} catch (SQLException e) {
