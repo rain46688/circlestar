@@ -6,7 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -150,13 +153,20 @@ public class ChatDao {
 				pstmt.setString(2, m.getSendNickName());
 				pstmt.setString(3, m.getMsg());
 				pstmt.setString(4, m.getChatProfile());
+				Date date = null;
+				SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd a HH:mm");
+				 date = format.parse(m.getChatTime());
+				System.out.println("date : "+date);
+				pstmt.setDate(5, (java.sql.Date) date);
 				result=pstmt.executeUpdate();
 			}
 			list.clear();
 			System.out.println(" === 리스트 쌓인거 전송하고 클리어 dao === ");
 			
-			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {

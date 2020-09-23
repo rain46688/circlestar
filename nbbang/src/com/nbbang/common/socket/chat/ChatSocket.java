@@ -1,6 +1,8 @@
 package com.nbbang.common.socket.chat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +18,7 @@ import javax.websocket.server.ServerEndpoint;
 import com.nbbang.chat.model.service.ChatService;
 import com.nbbang.chat.model.vo.Message;
 import com.nbbang.member.model.vo.Member;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @ServerEndpoint(value = "/socket", configurator = GetHttpSession.class, encoders = {
 		MessageEncoder.class }, decoders = { MessageDecoder.class })
@@ -70,6 +73,9 @@ public class ChatSocket {
 			try {
 				String boardId = msg.getBoardId();
 				String curMemsList = msg.getCurMemsList();
+				String day = msg.getChatTime();
+				
+
 				//System.out.println("boardId : "+boardId+", curMemsList : " + curMemsList);
 
 				Iterator<Member> userIterator = user.keySet().iterator();
@@ -81,16 +87,16 @@ public class ChatSocket {
 							name = key.getNickname();
 							//System.out.println(" === Null이 아니고 세션 열려있음, 메세지 : " + msg + " === ");
 							
-							//if(list.size() != 10) {
-								//System.out.println(" === ChatSocket 리스트 안참 list.size() : "+list.size()+" === ");
+							if(list.size() != 10) {
+								System.out.println(" === ChatSocket 리스트 안참 list.size() : "+list.size()+" === ");
 								System.out.println("msg : "+msg);
-								//list.add(msg);
+								list.add(msg);
 								user.get(key).getBasicRemote().sendObject(msg);
-							//}else {
+							}else {
 								//디비에 넣고 클리어
-								//System.out.println(" === ChatSocket 리스트 꽉참 list.size() : "+list.size()+" === ");
-								//int result = new ChatService().insertChatMsg(list);
-							//}
+								System.out.println(" === ChatSocket 리스트 꽉참 list.size() : "+list.size()+" === ");
+								int result = new ChatService().insertChatMsg(list);
+							}
 							
 						}
 					}
