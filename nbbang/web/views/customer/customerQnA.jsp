@@ -77,13 +77,13 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 
 					<td>
 						
-							<a href="<%=request.getContextPath()%>/customer/customerReadFrm">
+							<a href="<%=request.getContextPath()%>/customer/customerReadFrm?num=<%=cc.getCsId()%>">
 							<%=cc.getCsTitle()%> 
 							</a>
 							<!-- <div class="container"> -->
 
 					</td>
-
+					
 					<td><%=cc.getCsNickname()%></td>
 
 					<td><%=cc.getCsDate()%></td> 

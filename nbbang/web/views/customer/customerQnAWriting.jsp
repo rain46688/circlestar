@@ -25,30 +25,7 @@ pageEncoding="UTF-8"%>
     <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
       enctype="multipart/form-data">
       
-    <!--  <div class="type-select">
-        
-        <input type="hidden" id="type-sel">
-        <label for="type-sel">문의 유형</label>
-       
-        <input type="radio" name="qnaType" id="type0" value="회원정보">
-        <label for="type0">회원정보</label>
 
-        <input type="radio" name="qnaType" id="type1" value="신고">
-        <label for="type1">신고</label>
-
-        <input type="radio" name="qnaType" id="type2" value="불법거래">
-        <label for="type2">불법거래</label>
-        
-        <input type="radio" name="qnaType" id="type3" value="신고">
-        <label for="type3">신고</label>
-        
-        <input type="radio" name="qnaType" id="type4" value="신고">
-        <label for="type4">신고</label>
-        
-        <input type="radio" name="qnaType" id="type5" value="신고">
-        <label for="type5">신고</label>
-
-      </div> -->
       <div class="type-wrap">
           <select class="type-select" name="csType" style="width:581px;">
                 <option value="" selected>문의유형을 선택하세요.</option>

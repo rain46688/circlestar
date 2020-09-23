@@ -88,7 +88,7 @@ public class CustomerDAO {
 	}
 
 	public int insertQna(Connection conn, CustomerCenter c) {
-		System.out.println("insertQna 정보부분 실행됨");
+		System.out.println("insertQna 실행됨");
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -110,21 +110,7 @@ public class CustomerDAO {
 		return result;
 	}
 
-//	public int insertQna(Connection conn, CustomerFile cf) {
-//		// TODO Auto-generated method stub
-//		PreparedStatement pstmt = null;
-//		int result = 0;
-//		try {
-//			pstmt = conn.prepareStatement(prop.getProperty("CsFileInsert"));
-//			pstmt.setString(1, cf.getCsFileName());
-//			
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(pstmt);
-//		}
-//		return result;
-//	}
+
 	public int viewDetailRead(Connection conn, CustomerCenter c) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -176,6 +162,47 @@ public class CustomerDAO {
 
 		}
 		return result;
+	}
+
+	public CustomerCenter viewDetailRead(Connection conn, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		CustomerCenter cc = null;
+		
+		System.out.println("num in dao: " + num);
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("viewRead"));
+
+			pstmt.setInt(1,num);
+
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+			
+				cc = new CustomerCenter();
+				cc.setCsId(rs.getInt("cs_id"));
+				cc.setCsWriterUsid(rs.getInt("cs_writer_usid"));
+				cc.setCsType(rs.getString("cs_type"));
+				cc.setCsTitle(rs.getString("cs_title"));
+				cc.setCsContent(rs.getString("cs_content"));
+				cc.setCsDate(rs.getDate("cs_date"));
+				cc.setCsIscheck(rs.getBoolean("cs_ischeck"));
+				cc.setCsNickname(rs.getString("cs_nickname"));
+				cc.setCsAnswer(rs.getString("cs_answer"));
+								
+				
+				CustomerFile cf = new CustomerFile();
+				cf.setCsFileId(rs.getInt(1));
+				cf.setCsFileName(rs.getString(2));
+				cc.cf = cf;
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return cc;
 	}
 
 }

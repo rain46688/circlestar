@@ -11,9 +11,12 @@ pageEncoding="UTF-8"%>
 <jsp:include page="maincss.jsp"></jsp:include>
 <%
 
-CustomerCenter c=(CustomerCenter)request.getAttribute("c");
+ CustomerCenter c=(CustomerCenter)request.getAttribute("cc");
+System.out.println("1: "+ c);
 List<CustomerCenter> list = (List) request.getAttribute("list");
 CustomerFile cf=(CustomerFile)request.getAttribute("cf");
+System.out.println("2: "+cf);
+System.out.println(c+" : "+list+" : "+cf+": ");
 %>
 <style>
   div#QA-container {
@@ -73,21 +76,21 @@ CustomerFile cf=(CustomerFile)request.getAttribute("cf");
       <div class="write-content">
 
         <image src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
-
-
+		<input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
+			<%for(CustomerCenter cc : list) { %>
           <div class="content-write" name="csContent">
-            <p><%=c.getCsContent()%></p>
+            
+            <p><%=cc.getCsContent() %></p>
           </div>
       </div>
       <div>
-        <p></p>
+        	<p><%=cc.getCsDate() %></p>
       </div>
       <div class="file-upload">
-        <p id="file">첨부파일 <%=cf.getCsFileName()%>
-              
-          </p>
+         <p id="file">첨부파일 <%-- <%=cf.getCsFileName()%> --%></p> 
         </div>
-
+	<%}
+			%>
 
         <div class="comment-container">
           <div class="comment-editor">

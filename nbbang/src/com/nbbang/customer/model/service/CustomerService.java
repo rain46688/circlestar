@@ -76,4 +76,13 @@ public class CustomerService {
 		return result;
 	}
 
+	public CustomerCenter viewDetailRead(int num) {
+		Connection conn = getConnection();
+		System.out.println("num in service: " + num);
+		CustomerCenter cc= dao.viewDetailRead(conn, num);
+		
+		close(conn);
+		return cc;
+	}
+
 }
