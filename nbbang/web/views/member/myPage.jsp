@@ -8,7 +8,7 @@
 .infoContainer {
    display: grid;
    grid-template-columns: repeat(2, 1fr);
-   grid-template-rows: repeat(6, 1fr);
+   grid-template-rows: repeat(7, 1fr);
    column-gap: 2%;
    row-gap: 5%;
    margin: 5% 30%;
