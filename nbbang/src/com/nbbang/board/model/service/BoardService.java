@@ -11,24 +11,24 @@ import java.util.List;
 import com.nbbang.board.model.dao.BoardDao;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
+import com.nbbang.board.model.vo.Card;
+import com.nbbang.member.model.vo.LikeList;
 
 public class BoardService {
 
 	BoardDao dao = new BoardDao();
 
-	public List<Board> boardList(int cPage, int numPerPage) {
+	public List<Card> boardList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Board> boardList = dao.boardList(conn, cPage, numPerPage);
-		List<Board> fileList = dao.fileList(conn, cPage, numPerPage);
+		List<Card> boardList = dao.boardList(conn, cPage, numPerPage);
 		close(conn);
-
 		return boardList;
 	}
 
-	public Board boardPage(String boardId, boolean hasRead) {
+	public Card boardPage(String boardId, boolean hasRead) {
 		Connection conn = getConnection();
-		Board b = dao.boardPage(conn, boardId);
-		if (b != null && !hasRead) {
+		Card c = dao.boardPage(conn, boardId);
+		if (c != null && !hasRead) {
 			int result = dao.updateReadCount(conn, Integer.parseInt(boardId));
 			if (result > 0)
 				commit(conn);
@@ -36,7 +36,7 @@ public class BoardService {
 				rollback(conn);
 		}
 		close(conn);
-		return b;
+		return c;
 	}
 
 	public int boardListCount() {
@@ -50,6 +50,18 @@ public class BoardService {
 		Connection conn = getConnection();
 		int result = dao.boardInsert(conn, b);
 		result += dao.boardInsert(conn, bf);
+		if(result > 1) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int boardLikeInsert(LikeList list) {
+		Connection conn = getConnection();
+		int result = dao.boardLikeInsert(conn, list);
 		if(result > 1) {
 			commit(conn);
 		}else {

@@ -1,4 +1,4 @@
-package com.nbbang.chat.controller;
+package com.nbbang.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Member;
+
 /**
- * Servlet implementation class CancelBuyServlet
+ * Servlet implementation class ModifyNickDiv
  */
-@WebServlet("/chat/cancelbuy")
-public class CancelBuyServlet extends HttpServlet {
+@WebServlet("/member/modifyNick")
+public class ModifyNickDiv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CancelBuyServlet() {
+    public ModifyNickDiv() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +29,10 @@ public class CancelBuyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		Member m=new MemberService().myPage(usid);
+		request.setAttribute("member", m);
+		request.getRequestDispatcher("/views/member/modifyNick.jsp").forward(request, response);
 	}
 
 	/**

@@ -1,8 +1,9 @@
+<%@page import="com.nbbang.board.model.vo.Card"%>
 <%@page import="com.nbbang.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 <% 
-	Board b = (Board)request.getAttribute("curBoard");
+	Card c = (Card)request.getAttribute("curCard");
 %>
 <style>
   #wrapper {
@@ -185,15 +186,15 @@
 <section>
   <div id="wrapper">
     <div id="imageWrapper">
-      <img src="<%= request.getContextPath() %>/upload/images/<%= b.getFiles() %>" alt="" width="700em" height="400em">
+      <img src="<%= request.getContextPath() %>/upload/images/<%= c.getCardFile().getFileName()[0] %>" alt="" width="700em" height="400em">
       <!-- carousel 적용할 예정 -->
     </div>
     <div id="userInfo">
     	<hr>
       <div id="userThumb"><img src="<%= request.getContextPath() %>/images/bread.png" alt="" width="40px" height="40px"></div>
         <div id="userIdAndAddress">
-          <div id="userId"><%= b.getWriterNickname() %></div>
-          <div id="userAddress"><%= b.getTradeArea()%></div>
+          <div id="userId"><%= c.getCardBoard().getWriterNickname() %></div>
+          <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div>
         </div>
       <!-- 프로필 사진 + id -->
       <h5 id="level">신뢰 level</h5>
@@ -201,19 +202,19 @@
     <div class="content">
       <hr>
       <div id="title">
-        <div id="titleContent"><p><%= b.getBoardTitle() %>가나다라마바사아만아답자당마자다나아자</p></div>
+        <div id="titleContent"><p><%= c.getCardBoard().getBoardTitle() %>가나다라마바사아만아답자당마자다나아자</p></div>
         <div id="startBtn"><button>n빵하기</button></div>
         <div id="likeBtn"><button>❤️</button></div>
       </div>
       
-      <div id="date"><%= b.getEnrollDate() %> <%= b.getLikeCount() %> 관심 <%= b.getHit() %> 조회수 </div>
-      <!-- 가격과 좋아요 버튼 -->
+      <div id="date"><%= c.getCardBoard().getEnrollDate() %> <%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회수 </div>
+      <!-- 가격 -->
       <div id="priceAndLikeBtn">
-          <h5><%= b.getProductPrice() %>원</h5>
+          <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
           <!-- <a href=""><img src="<%= request.getContextPath() %>/images/heart.png" alt="LikeBtn" width="30px" height="30px"></a> -->
       </div>
       <br>
-      <div id="contentText"></div>
+      <div id="contentText"><%= c.getCardBoard().getContent() %></div>
       <div id="etcInfo"><a href="#">신고하기</a> <a href="#">제품 페이지</a></div>
     </div>
     <div id="commentSection">
@@ -291,5 +292,21 @@
     </div>
   </div>
 </section>
-
+<script>
+  $("#likeBtn").click(function(e){
+    $.ajax({
+      url:"<%=request.getContextPath()%>/board/boardLike",
+      type:"post",
+      dataType:"text",
+      data : {
+        'userUsid':'<%= loginnedMember.getUsid() %>',
+        'boardId':'<%= c.getCardBoard().getBoardId() %>'
+      },
+      success : function(data){
+        $("#likeBtn>button").css("background-color","yellow");
+        console.log(data);
+      }
+    })
+  })
+</script>
 <%@ include file="/views/common/footer.jsp" %>

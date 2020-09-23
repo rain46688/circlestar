@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import com.nbbang.member.model.dao.MemberDao;
 import com.nbbang.member.model.vo.Grade;
+import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
 import com.nbbang.member.model.vo.Report;
 
@@ -126,8 +127,29 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
-	
+	public int modifyNick(int usid, String nick) {
+		Connection conn=getConnection();
+		int result=dao.modifyNick(conn,usid,nick);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 
+	public int modifyPic(int usid, String fileName) {
+		Connection conn=getConnection();
+		int result=dao.modifyPic(conn,usid,fileName);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 
+	public LikeList methodForLikelist(int usid) {
+		Connection conn=getConnection();
+		LikeList ll=dao.methodForLikelist(conn, usid);
+		close(conn);
+		return ll;
+	}
 
 }

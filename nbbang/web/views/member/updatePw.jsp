@@ -7,21 +7,50 @@
 <style>
     div#myPageSideBar{
         position: relative;
-        background: #FFFFFF;
+        background: white;
         text-align: center;
-        margin: 3%;
+        margin: 3% 4% 3% 20%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
         justify-items: stretch;
-        width: 14%;
-        float: left;
+        width: 13%;
     }
+    div#sideBarTitleContainer{
+        background-color: rgb(243, 183, 24);
+        padding: 6%;
+        color: white;
+        min-width: 240px;
+    }
+    p#sideBarTitle{
+        font-size: 2em;
+        font-weight: bold;
+        margin-top: 10%;
+    }
+    p#sideBarText{
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 10%;
+    }
+    div#sideBarLinkContainer{
+        border: darkgrey 1px solid;
+        border-top: none;
+        padding: 10%;
+        min-width: 240px;
+    }
+    .postList{
+        font-size: 1em;
+        text-align: left;
+    }
+    .postList:hover{
+        color: rgb(243, 183, 24);
+    }
+
     div#updatePwContainer{
         position: relative;
 	    background: #FFFFFF;
 	    text-align: center;
-        margin: 5% 35% 5% 15%;
+        margin: 5% 32% 5% 1%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
@@ -71,22 +100,38 @@
 <section>
     <div id="myPageWrapper">
         <div id="myPageSideBar">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
+            <div id="sideBarTitleContainer">
+                <p id="sideBarTitle">마이 페이지</p>
+                <p class="sideBarText">N빵은 고객님의 돈과 시간을<br>N빵해드립니다.</p>
+            </div>
+            <div id="sideBarLinkContainer">
+                <div>
+                    <a class="nav-link postList" href="#">참여 중인 거래</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="#">내가 만든 거래</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="#">진행 중인 거래</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="#">과거 거래 내역</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="#">좋아요 한 게시글</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/modifyProfile?usid=<%=loginnedMember.getUsid()%>">프로필 수정하기</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/updatePw?usid=<%=loginnedMember.getUsid()%>">비밀번호 수정하기</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>">개인정보 확인하기</a>
+                </div>
+            </div>
         </div>
-        <div id="updatePwContainer" style="padding-top: 50px;">
+        <div id="updatePwContainer">
             <form id="updatePwForm" action="<%=request.getContextPath() %>/member/updatePwCpl" method="post"">
                 <div class="item textField" id="containerTitle">
                     <h2 id="updatePwTitle" style="margin-bottom: 40px;" >비밀번호 변경하기</h2>

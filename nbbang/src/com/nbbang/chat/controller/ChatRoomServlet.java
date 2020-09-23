@@ -43,12 +43,10 @@ public class ChatRoomServlet extends HttpServlet {
 		String writerUsid = request.getParameter("writerUsid");
 		String boardId = request.getParameter("boardId");
 		String curMemsList = request.getParameter("curMemsList");
-		
+		String memberPicture = request.getParameter("memberPicture");
+		curMemsList=new ChatService().selectCurMemsList(boardId);
 		System.out.println("maxMems : "+maxMems+", writerUsid : "+writerUsid+"\n"
 				+"boardId : "+boardId+", curMemsList : "+curMemsList);
-		
-		curMemsList=new ChatService().selectCurMemsList(boardId);
-		System.out.println("curMemsList : "+curMemsList);
 		
 //		//구매확정한 유저수 curNum
 		int curNum = 0;
@@ -68,6 +66,7 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("x", 450);
 		request.setAttribute("y", 660);
 		request.setAttribute("m", m);
+		request.setAttribute("memberPicture", memberPicture);
 		request.getRequestDispatcher("/views/chat/chatRoom.jsp").forward(request, response);
 	}
 

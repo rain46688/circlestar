@@ -8,15 +8,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
-import com.nbbang.board.model.vo.TradeList;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
-import com.nbbang.member.model.vo.Report;
-
-import oracle.jdbc.proxy.annotation.Pre;
 
 public class MemberDao {
 private Properties prop=new Properties();
@@ -154,7 +154,7 @@ private Properties prop=new Properties();
 			e.printStackTrace();
 		}finally {
 			close(rs);
-			close(conn);
+			close(pstmt);
 		}
 		return m;
 	}
@@ -330,6 +330,74 @@ private Properties prop=new Properties();
 		return reportCount;
 	}
 
+	public int modifyNick(Connection conn, int usid, String nick) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateNick"));
+			pstmt.setString(1, nick);
+			pstmt.setInt(2, usid);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int modifyPic(Connection conn, int usid, String fileName) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("modifyPic"));
+			pstmt.setString(1, fileName);
+			pstmt.setInt(2, usid);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public LikeList methodForLikelist(Connection conn, int usid) {
+		LikeList ll=new LikeList();
+		List<Integer> lbi=new LikeList().getLikeBoardId();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("methodForLikelist"));
+			pstmt.setInt(1, usid);
+			pstmt.setInt(2, usid);
+			pstmt.setInt(3, usid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				ll.setLikeUsid(usid);
+				String result=rs.getString("LISTAGG(LIKE_BOARD_ID,',')WITHINGROUP(ORDERBYLIKE_BOARD_ID)");
+				System.out.println(result);
+				String[] splitResult=result.split(",");
+				
+				int[] intResult=new int[splitResult.length];
+				for(int i=0; i<splitResult.length; i++) {
+					intResult[i]=Integer.parseInt(splitResult[i]);
+				}
+				
+				for(int i=0; i<intResult.length; i++) {
+					lbi.add(intResult[i]);
+				}
+				
+				ll.setLikeBoardId(lbi);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return ll;
+	}
 
 	
 }

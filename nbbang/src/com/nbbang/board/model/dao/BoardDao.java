@@ -13,6 +13,8 @@ import java.util.Properties;
 
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
+import com.nbbang.board.model.vo.Card;
+import com.nbbang.member.model.vo.LikeList;
 
 public class BoardDao {
 	
@@ -29,25 +31,28 @@ public class BoardDao {
 		}
 	}
 	
-	public List<Board> boardList(Connection conn, int cPage, int numPerPage){
+	public List<Card> boardList(Connection conn, int cPage, int numPerPage){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardList");
-		List<Board> list = null;
+		List<Card> list = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
 			pstmt.setInt(2, cPage*numPerPage);
 			rs = pstmt.executeQuery();
-			list = new ArrayList<Board>();
+			list = new ArrayList<Card>();
 			while(rs.next()) {
-				Board b = new Board();
-				b.setBoardId(rs.getInt("BOARD_ID"));
-				b.setBoardTitle(rs.getString("BOARD_TITLE"));
-				b.setWriterUsid(rs.getInt("WRITER_USID"));
-				b.setHit(rs.getInt("HIT"));
-				b.setLikeCount(rs.getInt("LIKE_COUNT"));
-				list.add(b);
+				Card c = new Card(new Board(), new BoardFile());
+				c.getCardBoard().setBoardId(rs.getInt("BOARD_ID"));
+				c.getCardBoard().setBoardTitle(rs.getString("BOARD_TITLE"));
+				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
+				c.getCardBoard().setHit(rs.getInt("HIT"));
+				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
+				c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
+				list.add(c);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -59,33 +64,34 @@ public class BoardDao {
 		return list;
 	}
 	
-	public Board boardPage(Connection conn, String boardId) {
+	public Card boardPage(Connection conn, String boardId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardPage");
-		Board b = null;
+		Card c = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardId);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				b = new Board();
-				b.setBoardId(rs.getInt("BOARD_ID"));
-				b.setBoardTitle(rs.getString("BOARD_TITLE"));
-				b.setWriterUsid(rs.getInt("WRITER_USID"));
-				b.setWriterNickname(rs.getString("WRITER_NICKNAME"));
-				b.setContent(rs.getString("CONTENT"));
-				b.setEnrollDate(rs.getDate("ENROLL_DATE"));
-				b.setHit(rs.getInt("HIT"));
-				b.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
-				b.setTradeArea(rs.getString("TRADE_AREA"));
-				b.setMaxMems(rs.getInt("MAX_MEMS"));
-				b.setLimitTime(rs.getDate("LIMIT_TIME"));
-				b.setTradeStage(rs.getInt("LIKE_COUNT"));
-				b.setPopularBoard(rs.getBoolean("POPULAR_BOARD"));
-				b.setProductPrice(rs.getInt("PRODUCT_PRICE"));
-				b.setOwnStatus(rs.getString("TRADE_KIND"));
-				b.setProductUrl(rs.getString("PRODUCT_URL"));
+				c = new Card(new Board(), new BoardFile());
+				c.getCardBoard().setBoardId(rs.getInt("BOARD_ID"));
+				c.getCardBoard().setBoardTitle(rs.getString("BOARD_TITLE"));
+				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
+				c.getCardBoard().setWriterNickname(rs.getString("WRITER_NICKNAME"));
+				c.getCardBoard().setContent(rs.getString("CONTENT"));
+				c.getCardBoard().setEnrollDate(rs.getDate("ENROLL_DATE"));
+				c.getCardBoard().setHit(rs.getInt("HIT"));
+				c.getCardBoard().setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+				c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				c.getCardBoard().setMaxMems(rs.getInt("MAX_MEMS"));
+				c.getCardBoard().setLimitTime(rs.getDate("LIMIT_TIME"));
+				c.getCardBoard().setTradeStage(rs.getInt("LIKE_COUNT"));
+				c.getCardBoard().setPopularBoard(rs.getBoolean("POPULAR_BOARD"));
+				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				c.getCardBoard().setOwnStatus(rs.getString("TRADE_KIND"));
+				c.getCardBoard().setProductUrl(rs.getString("PRODUCT_URL"));
+				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -94,7 +100,7 @@ public class BoardDao {
 			close(rs);
 			close(pstmt);
 		}
-		return b;
+		return c;
 	}
 	
 	public int boardListCount(Connection conn) {
@@ -173,12 +179,27 @@ public class BoardDao {
 		}return result;
 	}
 	
+	public int boardLikeInsert(Connection conn, LikeList list) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardLikeInsert"));
+			pstmt.setInt(1, list.getLikeUsid());
+			pstmt.setInt(1, list.getLikeBoardId().get(0));
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}return result;
+	}
+	
 	private String[] stringToArr(String str) {
 		if(str==null) {
 			return new String[1];
 		}else {
-			if(str.contains(";")) {
-				return str.split(";");
+			if(str.contains(",")) {
+				return str.split(",");
 			}
 			else {
 				String[] arr = {str};
