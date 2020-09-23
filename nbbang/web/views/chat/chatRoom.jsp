@@ -17,6 +17,7 @@
 *{
 font-family: 'Jua', sans-serif;
 font-weight:bold;
+/* text-shadow: -1px 0 #FFC107, 0 0.5px #FFC107, 0.5px 0 #FFC107, 0 -1px #FFC107; */
 }
 
 body{
@@ -118,12 +119,14 @@ textarea:focus{
 	border-radius: 10px;
 	margin:15px;
 	padding:10px;
-	margin-left:180px;
+	/* margin-left:180px; */
+	margin-left:60%;
+	margin-bottom:5px;
 }
 
 /* 각각 채팅을 감싸는 div 배경색과 같은 테투리를 갖고있음 */
 .tmp{
-/* border:1px black solid; */
+border:1px black solid;
 border:1px #B2C7D9 solid;
 }
 
@@ -137,9 +140,12 @@ border:1px #B2C7D9 solid;
 	border-radius: 10px;
 	margin:15px;
 	padding:10px;
-	margin-right:120px;
-	margin-left:-50px;
+	/* margin-right:120px; */
+	margin-right:40%;
+/* 	margin-left:-50px; */
+	margin-left:25%;
 	margin-top:25px;
+	margin-bottom:5px;
 }
 
 /* 닉네임 div */
@@ -148,7 +154,17 @@ border:1px #B2C7D9 solid;
 }
 
 .date{
-	float:left;
+	display:inline;
+	color:black;
+	margin-left:85%;
+		font-size:12px;
+}
+
+.date2{
+	display:inline;
+	color:black;
+	margin-left:30%;
+		font-size:12px;
 }
 
 /* 현재 방번호 상단에 보여주기 위해 */
@@ -275,11 +291,11 @@ if("${tradeStage}"=="2"){
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else if(msg["sendNickName"] == "${m.nickname}"){
 			//자기 메세지일 경우 분기처리
-	 		let html="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div></div>";
+	 		let html="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div><div class='date'>11:23</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else{
 			//상대방 메세지일 경우 분기처리
-			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date'>"+"11:23"+"</div></div>";
+			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>11:23</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
 		}
 		/* 스크롤 아래로 유지해주는 것  채팅이 입력되면 가장 아래로 스크롤을 고정시켜야된다.
