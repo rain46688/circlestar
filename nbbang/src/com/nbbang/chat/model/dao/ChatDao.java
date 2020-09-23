@@ -153,20 +153,13 @@ public class ChatDao {
 				pstmt.setString(2, m.getSendNickName());
 				pstmt.setString(3, m.getMsg());
 				pstmt.setString(4, m.getChatProfile());
-				Date date = null;
-				SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd a HH:mm");
-				 date = format.parse(m.getChatTime());
-				System.out.println("date : "+date);
-				pstmt.setDate(5, (java.sql.Date) date);
+				pstmt.setString(5, m.getChatTime());
 				result=pstmt.executeUpdate();
 			}
+			System.out.println("여기 실행안됨??");
 			list.clear();
 			System.out.println(" === 리스트 쌓인거 전송하고 클리어 dao === ");
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
