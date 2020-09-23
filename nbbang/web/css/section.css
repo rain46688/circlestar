@@ -3,16 +3,14 @@
 /* carousel */
 div#carouselField{
 	position: relative;
-	width:80%;
-	margin: 0 auto 200px;
-  	padding: 10px 45px 20px 45px;
+	width:100%;
 	text-align: center;
 }
 
 /* cardSection */
 div#hotContents{
 	position: relative;
-	max-width: 90%;
+	max-width: 100%;
 	margin: 0 auto 100px;
 	padding: 10px 45px 20px 45px;
 	text-align:center;
