@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
@@ -7,7 +8,11 @@ pageEncoding="UTF-8"%>
   rel="stylesheet">
 
 <jsp:include page="maincss.jsp"></jsp:include>
+<%
 
+CustomerCenter c=(CustomerCenter)request.getAttribute("c");
+List<CustomerCenter> list = (List) request.getAttribute("list");
+%>
 <style>
   div#QA-container {
     margin-top: 1.4%;
@@ -60,7 +65,7 @@ pageEncoding="UTF-8"%>
 
 <div id="QA-container">
 
-  <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
+  <form action="#" method="post"
     enctype="multipart/form-data">
     <div class="question-container">
 
@@ -68,14 +73,28 @@ pageEncoding="UTF-8"%>
 
         <image src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
 
+          
           <div class="content-write" name="contentwrite">
-            <p> zzzzzzzzzzzzzzzz</p>
+            <p>zzzzzzzfddddz</p>
           </div>
-      </div>
+        </div>
+        
+        <div class="file-upload">
+          <p id="file">첨부파일
+              
+          </p>
+        </div>
 
-      <div class="file-upload">
-        <a href="">첨부파일</a>
-      </div>
+
+        <div class="comment-container">
+          <div class="comment-editor">
+            <form action="<%=request.getContextPath()%>/customer/CustmerAnswer" method="post">
+              <textarea name="admin-answer"  cols="60" rows="10"></textarea>
+              
+              <button type="submit" id="btn-insert">등록</button>
+            </form>
+          </div>
+        </div>
     </div>
 
     <div class="hr-line">
@@ -85,12 +104,26 @@ pageEncoding="UTF-8"%>
 
     <div class="answer-container">
       <image src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
+        
+        <% if(list.isEmpty()) {%>
         <div class="answer-content">
-          <p> GGGGGGGGGGGGGGGGGGGGGGGG</p>
+          <p>zzzzzzzzzzzzzzzzzz</p>
         </div>
         <div class="answer-date">
-          2020.09.21 12:16pm
+          zzzzzzzzzzzzzzzzzzzzzz
         </div>
+        <%}else{
+            for(CustomerCenter cc : list) {%>
+        <div class="answer-content">
+          <p><%=c.getCsAnswer()%></p>
+        </div>
+        <div class="answer-date">
+          <%=c.getCsDate()%>
+        </div>
+        <%
+      }
+    }
+    %>
     </div>
 
 

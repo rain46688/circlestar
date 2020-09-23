@@ -46,7 +46,7 @@ public class CustomerDAO {
 				CustomerCenter cc = new CustomerCenter();
 				cc.setCsNo(rs.getInt("cs_id"));
 				cc.setCsWriter(rs.getString("cs_writer_usid"));
-				cc.setCsType(rs.getString("cs_tpye"));
+				cc.setCsType(rs.getString("cs_type"));
 				cc.setCsTitle(rs.getString("cs_title"));
 				cc.setCsContent(rs.getString("cs_content"));
 				cc.setCsDate(rs.getDate("cs_date"));
@@ -87,23 +87,20 @@ public class CustomerDAO {
 		return result;
 	}
 
-	public int insertQna(Connection conn, CustomerCenter c, List<CustomerFile> fileList) {
+	public int insertQna(Connection conn, CustomerCenter c) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("insertQnA"));
-			pstmt.setInt(1, Integer.parseInt(c.getCsWriter()));
+			pstmt.setInt(1,Integer.parseInt(c.getCsWriter()));
 			pstmt.setString(2, c.getCsType());
 			pstmt.setString(3, c.getCsTitle());
 			pstmt.setString(4, c.getCsContent());
 			pstmt.setString(5, c.getCsNickname());
+			System.out.println(c.getCsWriter()+c.getCsType()+c.getCsTitle()+"ZZZZZZZZZZZZ"+c.getCsContent()+c.getCsNickname());
 			
-			pstmt=conn.prepareStatement(prop.getProperty("insertFile"));
-		    for(CustomerFile cf : fileList ) {
-		    	pstmt.setInt(1, cf.getCsFileId());
-		    	pstmt.setString(2, cf.getCsFileName());
-		    }
+
 			
 			
 			result = pstmt.executeUpdate();
@@ -115,7 +112,7 @@ public class CustomerDAO {
 		}
 		return result;
 	}
-
+	
 //	public int insertQna(Connection conn, CustomerFile cf) {
 //		// TODO Auto-generated method stub
 //		PreparedStatement pstmt = null;
@@ -148,6 +145,42 @@ public class CustomerDAO {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertQna(Connection conn, CustomerFile cf) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertFile"));
+			pstmt.setString(1,cf.getCsFileName());
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertAnswer(Connection conn, CustomerCenter c) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertAnswer"));
+			pstmt.setString(1, c.getCsAnswer());
+			
+			result = pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
 		}
 		return result;
 	}
