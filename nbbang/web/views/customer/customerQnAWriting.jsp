@@ -84,7 +84,7 @@ pageEncoding="UTF-8"%>
       </div>
      
       <div id="submitBtn-kdh">
-        <button type="button" class="btn-submit">문의등록</button>
+        <button type="button" class="btn-submit" onclick=" movingPage('<%=request.getContextPath()%>/customer/customerQnAWritingEnd')">문의등록</button>
       </div>
     
     </form>
@@ -93,24 +93,28 @@ pageEncoding="UTF-8"%>
 
 
   <script>
-    $(".btn-submit").click(e => {
-      let form=new FormData();
+    // $(".btn-submit").click(e => {
+
+      function movingPage(url){
+      var form=new FormData();
       //일반파일 넣기
       form.append("csNickname",$("[name=csNickname]").val());
       form.append("csType",$("[name=csType]").val());
       form.append("csWriterUsid",$("[name=csWriterUsid]").val());
       form.append("csContent",$("[name=csContent]").val());
       form.append("csTitle",$("[name=csTitle]").val());
-      let filesdata=$("[name=csFile]")[0];
-      console.log(filesdata)
+      var filesdata=$("[name=csFile]")[0];
+      console.log("print: "+filesdata)
       for(let i=0;i<filesdata.files.length;i++){
         form.append("test"+i, filesdata.files[i]);
-      }
+      } 
       $.ajax({
-        url:"<%=request.getContextPath() %>/customer/customerQnAWritingEnd",
+        // url:"<%=request.getContextPath() %>/customer/customerQnAWritingEnd",
+        url:url,
         data:form,
         type:"post",
         processData:false,
+       
         contentType:false,
         success:data=>{
           console.log(data);
@@ -118,7 +122,8 @@ pageEncoding="UTF-8"%>
         }
       
       })
-    })
+      location.href ="<%=request.getContextPath()%>/customer/customerQnA"; 
+    }
 
 
   </script>

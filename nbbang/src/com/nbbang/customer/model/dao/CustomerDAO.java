@@ -132,8 +132,7 @@ public class CustomerDAO {
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("viewRead"));
 
-			pstmt.setString(1, c.getCsType());
-			pstmt.setString(2, c.getCsContent());
+			pstmt.setString(1, c.getCsContent());
 
 			result = pstmt.executeUpdate();
 

@@ -1,3 +1,4 @@
+<%@page import="com.nbbang.customer.model.vo.CustomerFile"%>
 <%@page import="java.util.List"%>
 <%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,6 +13,7 @@ pageEncoding="UTF-8"%>
 
 CustomerCenter c=(CustomerCenter)request.getAttribute("c");
 List<CustomerCenter> list = (List) request.getAttribute("list");
+CustomerFile cf=(CustomerFile)request.getAttribute("cf");
 %>
 <style>
   div#QA-container {
@@ -65,22 +67,23 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 
 <div id="QA-container">
 
-  <form action="#" method="post"
-    enctype="multipart/form-data">
+  <form action="#" method="post" enctype="multipart/form-data">
     <div class="question-container">
 
       <div class="write-content">
 
         <image src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
 
-          
-          <div class="content-write" name="contentwrite">
-            <p>zzzzzzzfddddz</p>
+
+          <div class="content-write" name="csContent">
+            <p><%=c.getCsContent()%></p>
           </div>
-        </div>
-        
-        <div class="file-upload">
-          <p id="file">첨부파일
+      </div>
+      <div>
+        <p></p>
+      </div>
+      <div class="file-upload">
+        <p id="file">첨부파일 <%=cf.getCsFileName()%>
               
           </p>
         </div>
@@ -89,57 +92,48 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
         <div class="comment-container">
           <div class="comment-editor">
             <form action="<%=request.getContextPath()%>/customer/CustmerAnswer" method="post">
-              <textarea name="admin-answer"  cols="60" rows="10"></textarea>
-              
-              <button type="submit" id="btn-insert">등록</button>
-            </form>
-          </div>
-        </div>
+          <textarea name="admin-answer" cols="60" rows="10"></textarea>
+
+          <button type="submit" id="btn-insert">등록</button>
+  </form>
+</div>
+</div>
+</div>
+
+<div class="hr-line">
+  <hr id="hr-line">
+</div>
+
+
+<div class="answer-container">
+  <image src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
+
+
+    <div class="answer-content">
+
+      <p>ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ</p>
+    </div>
+    <div class="answer-date">
+
+      2020.09.11
     </div>
 
-    <div class="hr-line">
-      <hr id="hr-line">
-    </div>
-
-
-    <div class="answer-container">
-      <image src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
-        
-        <% if(list.isEmpty()) {%>
-        <div class="answer-content">
-          <p>zzzzzzzzzzzzzzzzzz</p>
-        </div>
-        <div class="answer-date">
-          zzzzzzzzzzzzzzzzzzzzzz
-        </div>
-        <%}else{
-            for(CustomerCenter cc : list) {%>
-        <div class="answer-content">
-          <p><%=c.getCsAnswer()%></p>
-        </div>
-        <div class="answer-date">
-          <%=c.getCsDate()%>
-        </div>
-        <%
-      }
-    }
-    %>
-    </div>
+</div>
 
 
 
 
-    <%--              <%for(CustomerCenter cc : list){%>
-    <div class="wrtie-content">
-      <textarea name="contentwrite" rows="5" cols="50">
+<%--              <%for(CustomerCenter cc : list){%>
+<div class="wrtie-content">
+  <textarea name="contentwrite" rows="5" cols="50">
                 <%=cc.getCsContent()%>
                           </textarea>
-    </div>
-    <div class="file-upload">
-      <div>
-        <%=cc.getCsDate()%>
-      </div>
-      <%}%>
+</div>
+<div class="file-upload">
+  <div>
+    <%=cc.getCsDate()%>
+  </div>
+  <%}%>
       
           </div> --%>
 
