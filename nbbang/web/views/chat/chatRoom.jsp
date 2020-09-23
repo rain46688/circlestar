@@ -7,13 +7,23 @@
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script> 
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
 <style>
 
 /* === 채팅 구현 부분  === */
 
 *{
 font-family: 'Jua', sans-serif;
+font-weight:bold;
+}
+
+body{
+	/* background-color:#FFC107; */
+	background-image:url('<%=request.getContextPath()%>/images/rememberBread.png');
+	background-repeat:no-repeat;
+	background-size: 100% 100%;
 }
 
 /* 사이드바 사이즈  */
@@ -21,7 +31,8 @@ font-family: 'Jua', sans-serif;
 	height: 80%;
 	width: 80%;
 	margin: 30px auto;
-	border: 2px black solid;
+	border: 4px black solid;
+	padding:1px;
 	border-radius: 10px;
 	background-color:#B2C7D9;
 }
@@ -52,7 +63,7 @@ font-family: 'Jua', sans-serif;
 #msgText{
 	resize: none;
 	border: none;
-	padding: 10px 0px 10px 0px;
+	padding: 10px 10px 10px 10px;
 	width:80%;
 }
 
@@ -73,6 +84,7 @@ textarea:focus{
 	margin-bottom:10px;
 	margin-top:10px;
 	text-align:center;
+	font-size:20px;
 }
 
 /* 관리자 전용 접속부분 글자색 */
@@ -81,14 +93,15 @@ textarea:focus{
  	margin-bottom:10px;
 	margin-top:10px;
 	text-align:center;
+	font-size:20px;
 }
 
 /* 프로필 둥글게보이기 radius 70%하면됨  */
 .profile{
  	width:50px; 
 	height:50px;
+	border:1px solid #FFC107;
 	border-radius: 70%;
-	background-color:#272728;
 	 float: left;
 	 margin:10px;
 }
@@ -134,6 +147,10 @@ border:1px #B2C7D9 solid;
 	 float: left;
 }
 
+.date{
+	float:left;
+}
+
 /* 현재 방번호 상단에 보여주기 위해 */
 /* #roomno{
 text-align:center;
@@ -142,6 +159,7 @@ margin-top:10px;
 
 </style>
 
+<section>
 <div id="side">
 	<div id="chat">
 	<!-- tradeStage 방의 상태가 2단계인경우
@@ -156,6 +174,7 @@ margin-top:10px;
 			</c:if>
 	</div>
 </div>
+</section>
 
 <script>
 
@@ -168,17 +187,12 @@ $(function(){
 		dataType: "json",
 		url: "<%=request.getContextPath()%>/chat/getChatList",
 			success : function(data) {
-				console.log("success 부분");
+				console.log("success 부분 data : ["+data+"]");
 				let html ="";
+				
+				if(data != null && data != ''){
+					console.log('data null 인지 아닌지? : '+data);
 				$.each(data,function(i,msg){
-					
-					/* if(msg["msg"] == 'SYS1'){
-						html='true'+msg["msg"] ;	
-						
-					}else{
-						html='false'+msg["msg"] ;
-					} */
-			
 					if(msg["msg"] == "SYS1"){
 						 if(msg["sendNickName"] == "ADMIN"){
 								html+="<div class='tmp'><div class='admin'> ADMIN 관리자가 접속하였습니다." + "</div></div>";
@@ -192,12 +206,14 @@ $(function(){
 					}else if(msg["sendNickName"] == "${m.nickname}"){
 				 		 html+="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div></div>";
 					}else{
-						 html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
+						 html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div>";
 					}
-					//$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
-					console.log(i+" : "+html);
 				});
 				$("#ChatArea").html(html);
+				$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
+				}
+				
+				
 			}
 		})
 		
@@ -263,7 +279,7 @@ if("${tradeStage}"=="2"){
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else{
 			//상대방 메세지일 경우 분기처리
-			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
+			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date'>"+"11:23"+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
 		}
 		/* 스크롤 아래로 유지해주는 것  채팅이 입력되면 가장 아래로 스크롤을 고정시켜야된다.
@@ -278,10 +294,18 @@ if("${tradeStage}"=="2"){
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}")));
+		
+		
 		txt.val(' ');//칸 비워주기
-		txt.html(' ');
-		//txt.val(txt.replace(/\r\n/g, ''));
-		//엔터키 없애주기
+		txt.html(' ');//html 비워주기
+		//txt.html(txt.val().trim());
+		//txt.html(txt.html.trim());
+		//txt.val(txt.html.trim());
+		//txt.val(txt.val().trim());
+		//txt.val(txt.replace(/\r\n/g, ''));		//엔터키 없애주기
+
+		
+		
 			}
 		};
 		
@@ -289,6 +313,8 @@ if("${tradeStage}"=="2"){
 	$("#msgText").keydown(function(key) {
 		if (key.keyCode == 13) {
 			sendMessage();
+			//txt.val('');//칸 비워주기
+			//txt.html('');//html 비워주기
 		}
 	});
 	

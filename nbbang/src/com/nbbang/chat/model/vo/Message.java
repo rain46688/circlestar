@@ -62,8 +62,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [sendNickName=" + sendNickName + ", msg=" + msg + ", curMemsList=" + curMemsList + ", boardId="
-				+ boardId + ", chatProfile=" + chatProfile + "]";
+		return " === "+sendNickName + ", " + msg + ", " + curMemsList + ", "+ boardId + ", " + chatProfile+" === ";
 	}
 
 	
