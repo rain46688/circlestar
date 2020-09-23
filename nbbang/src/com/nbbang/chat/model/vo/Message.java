@@ -6,18 +6,21 @@ public class Message {
 	private String curMemsList;
 	private String boardId;
 	private String chatProfile;
+	private String chatTime;
 
 	public Message() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Message(String sendNickName, String msg, String curMemsList, String boardId, String chatProfile) {
+	public Message(String sendNickName, String msg, String curMemsList, String boardId, String chatProfile,
+			String chatTime) {
 		super();
 		this.sendNickName = sendNickName;
 		this.msg = msg;
 		this.curMemsList = curMemsList;
 		this.boardId = boardId;
 		this.chatProfile = chatProfile;
+		this.chatTime = chatTime;
 	}
 
 	public String getSendNickName() {
@@ -60,11 +63,18 @@ public class Message {
 		this.chatProfile = chatProfile;
 	}
 
-	@Override
-	public String toString() {
-		return " === "+sendNickName + ", " + msg + ", " + curMemsList + ", "+ boardId + ", " + chatProfile+" === ";
+	public String getChatTime() {
+		return chatTime;
 	}
 
-	
+	public void setChatTime(String chatTime) {
+		this.chatTime = chatTime;
+	}
+
+	@Override
+	public String toString() {
+		return " === " + sendNickName + ", " + msg + ", " + curMemsList + ", " + boardId + ", " + chatProfile + ", "
+				+ chatTime + " === ";
+	}
 
 }
