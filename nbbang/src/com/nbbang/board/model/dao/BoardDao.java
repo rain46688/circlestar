@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
 import com.nbbang.board.model.vo.Card;
+import com.nbbang.board.model.vo.Comment;
 import com.nbbang.member.model.vo.LikeList;
 
 public class BoardDao {
@@ -185,13 +186,64 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("boardLikeInsert"));
 			pstmt.setInt(1, list.getLikeUsid());
-			pstmt.setInt(1, list.getLikeBoardId().get(0));
+			pstmt.setInt(2, list.getLikeBoardId().get(0));
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}return result;
+	}
+	
+	public int commentInsert(Connection conn, Comment c) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("commentInsert"));
+			pstmt.setInt(1, c.getCboardId());
+			pstmt.setString(2, c.getContent());
+			pstmt.setBoolean(3, c.getSecret());
+			pstmt.setString(4, c.getCwriterNickname());
+			pstmt.setInt(5, c.getComLayer());
+			pstmt.setString(6, c.getComProfile());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<Comment> commentList(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("commentList");
+		List<Comment> list = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardId);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Comment>();
+			while(rs.next()) {
+				Comment c = new Comment();
+				c.setComLayer(rs.getInt("COM_LAYER"));
+				c.setCboardId(rs.getInt("CBOARD_ID"));
+				c.setContent(rs.getString("CONTENT"));
+				c.setCenrollDate(rs.getDate("CENROLL_DATE"));
+				c.setSecret(rs.getBoolean("SECRET"));
+				c.setCwriterNickname(rs.getString("CWRITER_NICKNAME"));
+				c.setComProfile(rs.getString("COM_PROFILE"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 	private String[] stringToArr(String str) {

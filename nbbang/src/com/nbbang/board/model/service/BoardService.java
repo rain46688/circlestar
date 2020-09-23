@@ -12,6 +12,7 @@ import com.nbbang.board.model.dao.BoardDao;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
 import com.nbbang.board.model.vo.Card;
+import com.nbbang.board.model.vo.Comment;
 import com.nbbang.member.model.vo.LikeList;
 
 public class BoardService {
@@ -69,5 +70,25 @@ public class BoardService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public int commentInsert(Comment c) {
+		Connection conn = getConnection();
+		int result = dao.commentInsert(conn, c);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public List<Comment> commentList(int boardId) {
+		Connection conn = getConnection();
+		List<Comment> commentList = dao.commentList(conn, boardId);
+		close(conn);
+		return commentList;
+		
 	}
 }

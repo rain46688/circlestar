@@ -219,55 +219,16 @@
     </div>
     <div id="commentSection">
       <div id="commentInsert">
-        <form action="">
           <select name="commentTo" id="commentTo">
             <option value="openComment" selected>전체댓글</option>
             <option value="secretComment">비밀댓글</option>
           </select>
-          <input type="text" size="48">
-          <button>댓글입력</button>
-        </form>
+          <input type="text" id="commentContent" size="48">
+          <input type="hidden" id="commentLevel" value="1">
+          <button id="commentInsertBtn">댓글입력</button>
       </div>
     <div id="Comments">
       <ul class="comment_list">
-        <li class="comment_item">
-          <hr>
-          <div class="comment_area">
-            <div class="comment_thumb">
-            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
-            </div>
-            <div class="comment_box">
-              <div class="comment_id">
-                아이디
-              </div>
-            <div class="comment_text">
-              내용
-            </div>
-            <div class="comment_info">
-              1993.01.11 19:33 답글쓰기 
-            </div>
-          </div>
-          </div>
-        </li>
-        <li class="comment_item">
-          <hr>
-          <div class="comment_area">
-            <div class="comment_thumb">
-            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
-            </div>
-            <div class="comment_box">
-              <div class="comment_id">
-                아이디
-              </div>
-            <div class="comment_text">
-              내용
-            </div>
-            <div class="comment_info">
-              1993.01.11 19:33 답글쓰기 
-            </div>
-          </div>
-          </div>
-        </li>
         <li class="comment_item">
           <hr>
           <div class="comment_area">
@@ -293,6 +254,10 @@
   </div>
 </section>
 <script>
+  $(document).ready(function(){
+    fn_commentList();
+  })
+
   $("#likeBtn").click(function(e){
     $.ajax({
       url:"<%=request.getContextPath()%>/board/boardLike",
@@ -308,5 +273,65 @@
       }
     })
   })
+  $("#commentInsertBtn").click(function(e){
+    if($("#commentContent").val()!=null) {
+    $.ajax({
+      url:"<%=request.getContextPath()%>/board/commentInsert",
+      type:"post",
+      dataType:"text",
+      data : {
+        "cBoardId" : "<%= c.getCardBoard().getBoardId() %>",
+        "content" : $("#commentContent").val(),
+        "secret" : $("#commentTo").val(),
+        "cWriterNickname" : "<%= loginnedMember.getNickname() %>",
+        "comLayer" : $("#commentLevel").val(),
+        "comProfile" : "<%= loginnedMember.getMemberPicture() %>"
+      },
+      success : function(data){
+        if(data!="success") {
+          alert("댓글 작성에 실패했습니다.");
+        }
+        fn_commentList(data);
+      }
+    })
+    }
+  })
+
+  function fn_commentList(){
+    $.ajax({
+      url:"<%=request.getContextPath()%>/board/commentList",
+      type:"post",
+      dataType:"json",
+      data:{
+        "cBoardId" : "<%= c.getCardBoard().getBoardId() %>"
+      },
+      success:function(data){
+        let html = "";
+        $.each(data, function(index, item){
+          html += "<li class='comment_item'>";
+          html += "<hr>";
+          html += "<div class='comment_area'>";
+          html += "<div class='comment_thumb'>";
+          html += "<img src='<%= request.getContextPath() %>/images/logo.png' alt='' width='30px' height='30px'>";
+          html += "</div>";
+          html += "<div class='comment_box'>";
+          html += "<div class='comment_id'>";
+          html += item.cwriterNickname;
+          html += "</div>";
+          html += "<div class='comment_text'>";
+          html += item.content + "</div>";            
+          html += "<div class='comment_info'>";
+          html += item.cenrollDate + " 답글쓰기";
+          html += "</div></div></div></li>"
+        });
+        $(".comment_list").html(html);
+      }
+    })
+  }
+
+  $("#startBtn").click(function(e){
+
+  })
+
 </script>
 <%@ include file="/views/common/footer.jsp" %>
