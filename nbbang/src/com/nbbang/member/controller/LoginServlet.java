@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
 
 /**
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		String memberPwd=request.getParameter("password");
 		Member m=new MemberService().loginMember(memberId,memberPwd);
-		
+		//------
 		String saveId=request.getParameter("saveId");
 		if(saveId!=null) {
 			Cookie c=new Cookie("saveId",memberIdStr);
@@ -66,8 +67,12 @@ public class LoginServlet extends HttpServlet {
 			response.addCookie(c);
 		}
 		if(m!=null) {
+			int usid=m.getUsid();
+			LikeList ll=new MemberService().methodForLikelist(usid);
+			
 			HttpSession session=request.getSession();
 			session.setAttribute("loginnedMember",m);
+			session.setAttribute("likeList", ll.getLikeBoardId());
 			if(m.isPwIsUuid()==true) {
 				request.setAttribute("msg", "임시 비밀번호를 사용 중입니다. 비밀번호를 변경해주세요.");
 				request.setAttribute("loc", "/");
