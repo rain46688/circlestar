@@ -166,6 +166,9 @@
                     <div class="capsuleLeft">프로필사진</div>
                     <div class="capsuleRight">
                         <div>
+                            <div>
+                                <img src="<%=memberPic+m.getMemberPicture() %>" alt="프로필사진">
+                            </div>
                             <button type="button" class="button" id="picBtn">수정</button>
                         </div>
                         <div id="updatePic"></div>

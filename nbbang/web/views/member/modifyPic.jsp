@@ -2,7 +2,7 @@
 <%@ page import="com.nbbang.member.model.vo.Member" %>
 <%
 	Member m=(Member)request.getAttribute("member");
-	String memberPic=(String)session.getAttribute("memberPic");
+	String memberPic=request.getContextPath()+"/upload/profilePic/";
 %>
 <style>
 	.btn{
@@ -47,7 +47,7 @@
 	<form id="modifyProfilePic" action="<%=request.getContextPath()%>/member/modifyPicCpl" enctype="multipart/form-data" method="post">
 		<div>
 			<p>
-				<img src="<%=memberPic %>">
+				<img src="<%=memberPic+m.getMemberPicture() %>">
 			</p>
 		</div>
 		<input type="file" name="userProfile" class="file">
