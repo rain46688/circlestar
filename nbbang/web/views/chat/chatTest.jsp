@@ -61,7 +61,6 @@ function fun_createroom() {
 					console.log("data : "+data);
 				if (data == 1) {
 					//방의 상태를 바꿔야되니 ajax로 갔따오자 방의 상태를 2로 변경함
-					nbbang(this.form);
 				} else {
 					alert('N빵 인원이 다 체워지지 않았습니다.');
 				} 

@@ -198,9 +198,9 @@ margin-top:10px;
 
 $(function(){
 	
-	let time = "${time}";
+/* 	let time = "${time}";
 	let arr = time.split('오');
-	time='오'+arr[1];
+	time='오'+arr[1]; */
 	
 	/* 여기서 댓글 처럼 채팅 리스트를 가져와서 쏴주기만하면됨  */
 	$.ajax({
@@ -225,8 +225,14 @@ $(function(){
 					}else if(msg["sendNickName"] == "ADMIN"){
 						 html+="<div class='tmp'><div class='admin'> 시스템 관리자 : "+msg["msg"] + "</div></div>";
 					}else if(msg["sendNickName"] == "${m.nickname}"){
+						let time = msg["chatTime"];
+						let arr = time.split('오');
+						time='오'+arr[1];
 						html+="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div><div class='date'>"+time+"</div></div>";
 					}else{
+						let time = msg["chatTime"];
+						let arr = time.split('오');
+						time='오'+arr[1];
 						html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
 					}
 				});

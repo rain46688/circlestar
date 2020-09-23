@@ -90,14 +90,17 @@ public class ChatSocket {
 							if(list.size() != 10) {
 								System.out.println(" === ChatSocket 리스트 안참 list.size() : "+list.size()+" === ");
 								System.out.println("msg : "+msg);
-								list.add(msg);
+								System.out.println("msg.getMsg() : "+msg.getMsg());
+								if(!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
+									System.out.println("********* "+msg.getMsg());
+									list.add(msg);
+								}
 								user.get(key).getBasicRemote().sendObject(msg);
 							}else {
 								//디비에 넣고 클리어
 								System.out.println(" === ChatSocket 리스트 꽉참 list.size() : "+list.size()+" === ");
 								int result = new ChatService().insertChatMsg(list);
 							}
-							
 						}
 					}
 				}
@@ -121,10 +124,9 @@ public class ChatSocket {
 		Member key = null;
 		
 		//현재 접속중인 유저가 없다면 리스트 클리어		
-		if(user.isEmpty()) {
-			System.out.println(" === ChatSocket 방에 아무도 없으면 클리어 === ");
-			list.clear();
-		}
+		int result = new ChatService().insertChatMsg(list);
+			System.out.println(" === ChatSocket 방 나가면 넣고 클리어 === ");
+	
 		Iterator<Member> userIterator = user.keySet().iterator();
 		try {
 			while (userIterator.hasNext()) {
