@@ -42,7 +42,6 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String uploadPath = request.getServletContext().getRealPath("/upload/") + UPLOAD_FOLDER;
 
 		File fileSaveDir = new File(uploadPath);// 경로 없으면 생성
@@ -53,16 +52,13 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 
 		MultipartRequest mr = new MultipartRequest(request, uploadPath, maxSize, "UTF-8",
 				new DefaultFileRenamePolicy());
-		System.out.println(mr.getParameter("type"));
-		System.out.println(mr.getParameter("contentwrite"));
-		System.out.println(mr.getParameter("title"));
-		System.out.println(mr.getParameter("writer"));
+
 		// 멀티플로 보낸 파일 받기
 		Enumeration<String> e = mr.getFileNames();// type파일로 온 data의 이름을 가져오는 메소드
 		List<CustomerFile> fileList = new ArrayList<CustomerFile>();
 		while (e.hasMoreElements()) {
 			CustomerFile ctF = new CustomerFile();
-			ctF.setCsFileId(Integer.parseInt(mr.getParameter("writer")));
+			
 			ctF.setCsFileName(mr.getFilesystemName(e.nextElement()));
 			fileList.add(ctF);
 		}
@@ -70,32 +66,27 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		System.out.println(fileList);
 
 			
-		if (fileNames.size() == 0) {// 파일 업로드가 됐는지 확인
-			request.setAttribute("msg", "파일 업로드 오류입니다. 관리자에게 문의하세요.");
-			request.setAttribute("loc", "/customer/customerQnAWritingEnd");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-			return;
-		}
 		CustomerCenter c = new CustomerCenter();
 		
-
-		c.setCsWriter(mr.getParameter("writer"));
-		c.setCsType(mr.getParameter("type"));
-		c.setCsTitle(mr.getParameter("title"));
-		c.setCsContent(mr.getParameter("contentwrite"));
-		c.setCsNickname(mr.getParameter("nickname"));
-		c.setCsAnswer(mr.getParameter("answer"));
+		
+		c.setCsWriterUsid(Integer.parseInt(mr.getParameter("csWriterUsid")));
+		System.out.println(mr.getParameter("csWriterUsid"));
+		c.setCsType(mr.getParameter("csType"));
+		c.setCsTitle(mr.getParameter("csTitle"));
+		c.setCsContent(mr.getParameter("csContent"));
+		c.setCsNickname(mr.getParameter("csNickname"));
+		
 		
 		
 		// csFileId는 NULL
 
 		int result = new CustomerService().insertQnA(c,fileList);
-		if (result > 0) {
+		if (result>0) {
 			// 업로드 성공
-			request.setAttribute("msg", "업로드 완료!");
+			request.setAttribute("msg", "문의가 완료되었습니다.");
 			request.setAttribute("loc", "/customer/customerQnA.jsp");
 		} else {
-			request.setAttribute("msg", "업로드에 실패하였습니다.");
+			request.setAttribute("msg", "문의에 실패하였습니다.");
 			request.setAttribute("loc", "/customer/customerQnAWriting.jsp");
 		}
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

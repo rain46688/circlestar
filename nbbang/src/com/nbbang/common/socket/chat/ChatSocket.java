@@ -133,7 +133,7 @@ public class ChatSocket {
 						key = exitterator.next();
 						if (!user.get(key).equals(session)) {
 							System.out.println(" === ChatSocket 진입 여부 확인용 1 === ");
-							user.get(key).getBasicRemote().sendObject(new Message(key.getNickname(), "SYS2", "", "",""));
+							user.get(key).getBasicRemote().sendObject(new Message(key.getNickname(), "SYS2", "", "","",""));
 						}
 					}
 					System.out.println(" === ChatSocket 소켓 연결 종료 name : " + name + " === ");

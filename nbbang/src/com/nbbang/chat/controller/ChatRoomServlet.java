@@ -1,6 +1,10 @@
 package com.nbbang.chat.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +49,22 @@ public class ChatRoomServlet extends HttpServlet {
 		String curMemsList = request.getParameter("curMemsList");
 		String memberPicture = request.getParameter("memberPicture");
 		curMemsList=new ChatService().selectCurMemsList(boardId);
+		
+		//현재 시간을 객체로 만들어서 넘겨줌
+//		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd a HH:mm");
+//		Date time_ = new Date();
+//		String time = format.format(time_);
+//		System.out.println("time : "+time);
+		
+//		try {
+//			Date date = format.parse(time);
+//			System.out.println(date);
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		
 		System.out.println("maxMems : "+maxMems+", writerUsid : "+writerUsid+"\n"
 				+"boardId : "+boardId+", curMemsList : "+curMemsList);
 		
@@ -67,6 +87,7 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("y", 660);
 		request.setAttribute("m", m);
 		request.setAttribute("memberPicture", memberPicture);
+//		request.setAttribute("time", time);
 		request.getRequestDispatcher("/views/chat/chatRoom.jsp").forward(request, response);
 	}
 

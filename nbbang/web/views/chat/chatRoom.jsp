@@ -17,6 +17,7 @@
 *{
 font-family: 'Jua', sans-serif;
 font-weight:bold;
+/* text-shadow: -1px 0 #FFC107, 0 0.5px #FFC107, 0.5px 0 #FFC107, 0 -1px #FFC107; */
 }
 
 body{
@@ -118,12 +119,14 @@ textarea:focus{
 	border-radius: 10px;
 	margin:15px;
 	padding:10px;
-	margin-left:180px;
+	/* margin-left:180px; */
+	margin-left:60%;
+	margin-bottom:5px;
 }
 
 /* 각각 채팅을 감싸는 div 배경색과 같은 테투리를 갖고있음 */
 .tmp{
-/* border:1px black solid; */
+border:1px black solid;
 border:1px #B2C7D9 solid;
 }
 
@@ -137,9 +140,12 @@ border:1px #B2C7D9 solid;
 	border-radius: 10px;
 	margin:15px;
 	padding:10px;
-	margin-right:120px;
-	margin-left:-50px;
+	/* margin-right:120px; */
+	margin-right:40%;
+/* 	margin-left:-50px; */
+	margin-left:25%;
 	margin-top:25px;
+	margin-bottom:5px;
 }
 
 /* 닉네임 div */
@@ -147,8 +153,20 @@ border:1px #B2C7D9 solid;
 	 float: left;
 }
 
+/* 본인이 보는 채팅 */
 .date{
-	float:left;
+	display:inline;
+	color:black;
+	margin-left:78%;
+		font-size:12px;
+}
+
+/* 남이 쓰는 채팅 */
+.date2{
+	display:inline;
+	color:black;
+	margin-left:30%;
+		font-size:12px;
 }
 
 /* 현재 방번호 상단에 보여주기 위해 */
@@ -238,7 +256,11 @@ if("${tradeStage}"=="2"){
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
-		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}","")));
+		
+		var _today = new Date();
+		let time = _today.format('yyyy-MM-dd a/p hh:mm')
+		console.log(time);
+		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}","",time)));
 	};
 	socket.onclose = function(e) {
 		console.log("onclose 실행");
@@ -275,11 +297,17 @@ if("${tradeStage}"=="2"){
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else if(msg["sendNickName"] == "${m.nickname}"){
 			//자기 메세지일 경우 분기처리
-	 		let html="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div></div>";
+				let time = msg["chatTime"];
+				let arr = time.split('오');
+				time='오'+arr[1];
+	 		let html="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div><div class='date'>"+time+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else{
 			//상대방 메세지일 경우 분기처리
-			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date'>"+"11:23"+"</div></div>";
+				let time = msg["chatTime"];
+				let arr = time.split('오');
+				time='오'+arr[1];
+			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
 		}
 		/* 스크롤 아래로 유지해주는 것  채팅이 입력되면 가장 아래로 스크롤을 고정시켜야된다.
@@ -293,7 +321,7 @@ if("${tradeStage}"=="2"){
 		let txt = $("#msgText");
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
-		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}")));
+		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}",time)));
 		
 		
 		txt.val(' ');//칸 비워주기
@@ -319,12 +347,13 @@ if("${tradeStage}"=="2"){
 	});
 	
 	//메세지 객체
-	function Message(sendNickName,msg,curMemsList,boardId,chatProfile){
+	function Message(sendNickName,msg,curMemsList,boardId,chatProfile,chatTime){
 		this.sendNickName=sendNickName;
 		this.msg=msg;
 		this.curMemsList=curMemsList;
 		this.boardId = boardId;
 		this.chatProfile = chatProfile;
+		this.chatTime = chatTime;
 	};
 	
 }
