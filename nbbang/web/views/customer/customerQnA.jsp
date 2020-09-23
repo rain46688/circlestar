@@ -56,6 +56,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 					<th>제목</th>
 					<th>작성자</th>
 					<th>문의날짜</th>
+					
 				</tr>
 				<% if(list.isEmpty()){ %>
 
@@ -70,22 +71,23 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 				<%}else{
                     for(CustomerCenter cc : list) { %>
 				<tr>
-					<td> <%=cc.getCsNo()%> </td>
+					<td> <%=cc.getCsId()%> </td>
 
 					<td><%=cc.getCsType()%></td>
 
 					<td>
-						<a
-							href="<%=request.getContextPath()%>/customer/customerReadFrm">
-							<%=cc.getCsTitle()%> </a>
-							<div class="container">
+						
+							<a href="<%=request.getContextPath()%>/customer/customerReadFrm">
+							<%=cc.getCsTitle()%> 
+							</a>
+							<!-- <div class="container"> -->
 
 					</td>
 
+					<td><%=cc.getCsNickname()%></td>
 
-<%-- 					<td><%=cc.getCsWriter()%></td>
-
-					<td><%=cc.getCsDate()%></td> --%>
+					<td><%=cc.getCsDate()%></td> 
+					
 				</tr>
 				<%
 					}
@@ -97,10 +99,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 		<div class="page_wrap">
 			<%=request.getAttribute("pageBar")%>
 		</div>
-		<!-- <div class="ad-content">
-		<a href="http://handscoffee.com/new_hands//board/new_board.php?bo_table=new_event&wr_id=173"><image src="<%=request.getContextPath()%>/images/ha1.jpg"></image>
-		</a>
-		</div> -->
+
 	</div>
 
 	<script>

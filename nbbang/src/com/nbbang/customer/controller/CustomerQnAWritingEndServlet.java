@@ -68,13 +68,14 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 			
 		CustomerCenter c = new CustomerCenter();
 		
-
-		c.setCsWriter(mr.getParameter("writer"));
-		c.setCsType(mr.getParameter("type"));
-		c.setCsTitle(mr.getParameter("title"));
-		c.setCsContent(mr.getParameter("contentwrite"));
-		c.setCsNickname(mr.getParameter("nickname"));
-		c.setCsAnswer(mr.getParameter("answer"));
+		
+		c.setCsWriterUsid(Integer.parseInt(mr.getParameter("csWriterUsid")));
+		System.out.println(mr.getParameter("csWriterUsid"));
+		c.setCsType(mr.getParameter("csType"));
+		c.setCsTitle(mr.getParameter("csTitle"));
+		c.setCsContent(mr.getParameter("csContent"));
+		c.setCsNickname(mr.getParameter("csNickname"));
+		
 		
 		
 		// csFileId는 NULL

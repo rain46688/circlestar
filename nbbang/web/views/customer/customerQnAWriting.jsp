@@ -50,7 +50,7 @@ pageEncoding="UTF-8"%>
 
       </div> -->
       <div class="type-wrap">
-          <select class="type-select" name="type" style="width:581px;">
+          <select class="type-select" name="csType" style="width:581px;">
                 <option value="" selected>문의유형을 선택하세요.</option>
                 <option value="회원정보">회원정보관련</option>
                 <option value="거래배송">거래배송관련</option>
@@ -61,20 +61,22 @@ pageEncoding="UTF-8"%>
       </div>
     
      <div class="fix-writer">
-       <input type="hidden" name="memberNo" value="<%=loginnedMember.getUsid()%>">
-        <input value="<%=loginnedMember.getMemberId()%>" class="writing-input" name="writer" id="" readonly size="75">
+
+       <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
+       
+        <input value="<%=loginnedMember.getNickname()%>" class="writing-input" name="csNickname" id="" readonly size="75">
         <!-- 9999는 Admin에 USID 이다.USID는 회원가입을 하잖아 회원가입을 하면 시퀀스 넘버에 의해 
             자동으로 증가한다. 일단은 9999로 해놓고 나중에 세션값을 받아와서 닉네임을 조회한 다음에 
                 넘겨서 DB에 넣어라. -->
-      </div>
+    </div>
       
       <div class="write-title">
-        <input type="text" class="writing-input" name="title" placeholder="제목을 입력하쇼." size="75">
+        <input type="text" class="writing-input" name="csTitle" placeholder="제목을 입력하쇼." size="75">
         
       </div>
       
       <div class="write-content">
-        <textarea name="contentwrite" rows="16" cols="80" placeholder="내용을 입력하쇼" ></textarea>
+        <textarea name="csContent" rows="16" cols="80" placeholder="내용을 입력하쇼" ></textarea>
       </div>
      
       <div class="file-upload">
@@ -94,10 +96,11 @@ pageEncoding="UTF-8"%>
     $(".btn-submit").click(e => {
       let form=new FormData();
       //일반파일 넣기
-      form.append("type",$("[name=type]").val());
-      form.append("writer",$("[name=memberNo]").val());
-      form.append("contentwrite",$("[name=contentwrite]").val());
-      form.append("title",$("[name=title]").val());
+      form.append("csNickname",$("[name=csNickname]").val());
+      form.append("csType",$("[name=csType]").val());
+      form.append("csWriterUsid",$("[name=csWriterUsid]").val());
+      form.append("csContent",$("[name=csContent]").val());
+      form.append("csTitle",$("[name=csTitle]").val());
       let filesdata=$("[name=csFile]")[0];
       console.log(filesdata)
       for(let i=0;i<filesdata.files.length;i++){

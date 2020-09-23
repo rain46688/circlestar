@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class CustomerCenter {
 
-	private int csNo;
-	private String csWriter;
+	private int csId;
+	private int csWriterUsid;
 	private String csType;
 	private String csTitle;
 	private String csContent;
@@ -19,11 +19,11 @@ public class CustomerCenter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CustomerCenter(int csNo, String csWriter, String csType, String csTitle, String csContent, Date csDate,
+	public CustomerCenter(int csId, int csWriterUsid, String csType, String csTitle, String csContent, Date csDate,
 			Boolean csIscheck, String csNickname, String csAnswer) {
 		super();
-		this.csNo = csNo;
-		this.csWriter = csWriter;
+		this.csId = csId;
+		this.csWriterUsid = csWriterUsid;
 		this.csType = csType;
 		this.csTitle = csTitle;
 		this.csContent = csContent;
@@ -33,20 +33,20 @@ public class CustomerCenter {
 		this.csAnswer = csAnswer;
 	}
 
-	public int getCsNo() {
-		return csNo;
+	public int getCsId() {
+		return csId;
 	}
 
-	public void setCsNo(int csNo) {
-		this.csNo = csNo;
+	public void setCsId(int csId) {
+		this.csId = csId;
 	}
 
-	public String getCsWriter() {
-		return csWriter;
+	public int getCsWriterUsid() {
+		return csWriterUsid;
 	}
 
-	public void setCsWriter(String csWriter) {
-		this.csWriter = csWriter;
+	public void setCsWriterUsid(int csWriterUsid) {
+		this.csWriterUsid = csWriterUsid;
 	}
 
 	public String getCsType() {
@@ -107,10 +107,17 @@ public class CustomerCenter {
 
 	@Override
 	public String toString() {
-		return "CustomerCenter [csNo=" + csNo + ", csWriter=" + csWriter + ", csType=" + csType + ", csTitle=" + csTitle
-				+ ", csContent=" + csContent + ", csDate=" + csDate + ", csIscheck=" + csIscheck + ", csNickname="
-				+ csNickname + ", csAnswer=" + csAnswer + "]";
+		return "CustomerCenter [csId=" + csId + ", csWriterUsid=" + csWriterUsid + ", csType=" + csType + ", csTitle="
+				+ csTitle + ", csContent=" + csContent + ", csDate=" + csDate + ", csIscheck=" + csIscheck
+				+ ", csNickname=" + csNickname + ", csAnswer=" + csAnswer + "]";
 	}
+
+	
+
+	
+	
+
+	
 
 
 
