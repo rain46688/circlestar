@@ -39,7 +39,7 @@
         padding-left: 24px;
     }
 
-    button {
+    button.writeBtn {
         width: 100px;
         background-color:sandybrown;
         border: none;
@@ -149,7 +149,7 @@
     </div>
     <!-- 작성버튼 -->
     <div id="btn-news">
-        <button type="submit" id="btn-news-check">글작성</button>
+        <button type="submit" class="writeBtn" id="btn-news-check">글작성</button>
     </div>
 
 

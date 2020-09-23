@@ -14,13 +14,12 @@
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
         justify-items: stretch;
-        width: 13%;
+        width: 14%;
     }
     div#sideBarTitleContainer{
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
-        min-width: 240px;
     }
     p#sideBarTitle{
         font-size: 2em;
@@ -28,7 +27,7 @@
         margin-top: 10%;
     }
     p#sideBarText{
-        font-size: 1.5em;
+        font-size: 1em;
         font-weight: bold;
         margin-bottom: 10%;
     }
@@ -36,7 +35,6 @@
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
-        min-width: 240px;
     }
     .postList{
         font-size: 1em;
@@ -50,7 +48,7 @@
         position: relative;
 	    background: #FFFFFF;
 	    text-align: center;
-        margin: 5% 32% 5% 1%;
+        margin: 5% 31% 5% 1%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
@@ -102,7 +100,7 @@
         <div id="myPageSideBar">
             <div id="sideBarTitleContainer">
                 <p id="sideBarTitle">마이 페이지</p>
-                <p class="sideBarText">N빵은 고객님의 돈과 시간을<br>N빵해드립니다.</p>
+                <p class="sideBarText">N빵은 고객님의<br>돈과 시간을<br>N빵해드립니다.</p>
             </div>
             <div id="sideBarLinkContainer">
                 <div>

@@ -87,7 +87,7 @@ public class BoardDao {
 				c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
 				c.getCardBoard().setMaxMems(rs.getInt("MAX_MEMS"));
 				c.getCardBoard().setLimitTime(rs.getDate("LIMIT_TIME"));
-				c.getCardBoard().setTradeStage(rs.getInt("LIKE_COUNT"));
+				c.getCardBoard().setTradeStage(rs.getInt("TRADE_STAGE"));
 				c.getCardBoard().setPopularBoard(rs.getBoolean("POPULAR_BOARD"));
 				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
 				c.getCardBoard().setOwnStatus(rs.getString("TRADE_KIND"));
