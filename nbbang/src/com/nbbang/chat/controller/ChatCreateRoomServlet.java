@@ -41,7 +41,7 @@ public class ChatCreateRoomServlet extends HttpServlet {
 		//boardId로 검색되는 현재 방의 인원을 알아와야됨
 		String curMemsList=new ChatService().selectCurMemsList(boardId);
 		int curNum = 0;
-		if(!curMemsList.equals(""))
+		if(!curMemsList.equals("") && curMemsList != null)
 			for(String user : curMemsList.split(",")) {curNum++;}
 		
 		System.out.println("maxMems : "+maxMems+", curNum : "+curNum);

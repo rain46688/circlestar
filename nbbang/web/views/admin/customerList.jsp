@@ -102,7 +102,7 @@
 			</div>
 <%			for (CustomerCenter c : list) { %>
 			<div class="divRow">
-				<div class="divCell"><%=c.getCsNo() %></div>
+				<div class="divCell"><%=c.getCsId() %></div>
 				<div class="divCell"><%=c.getCsNickname() %></div>
 				<div class="divCell"><%=c.getCsTitle() %></div>
 				<div class="divCell"><%=c.getCsDate() %></div>

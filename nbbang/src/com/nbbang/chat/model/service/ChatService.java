@@ -59,8 +59,10 @@ public class ChatService {
 		Connection conn = getConnection();
 		int result = cd.insertChatMsg(conn,list);
 		if(result > 0) {
+			System.out.println("커밋 !");
 			commit(conn);
 		}else {
+			System.out.println("커밋 안됨");
 			rollback(conn);
 		}
 		close(conn);

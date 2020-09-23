@@ -6,9 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+
+import org.apache.catalina.LifecycleListener;
 
 import com.nbbang.chat.model.vo.Message;
 
@@ -42,7 +47,8 @@ public class ChatDao {
 			while (rs.next()) {
 				list += rs.getString(1) + ",";
 			}
-			list = list.substring(0, list.length() - 1);
+			if (list.length() > 0)
+				list = list.substring(0, list.length() - 1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,28 +107,29 @@ public class ChatDao {
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		try {
-			// 회원을 방에 추가하는 경우 분기
-			if (flag.equals("1")) {
-				pstmt = conn.prepareStatement(prop.getProperty("decideBuyCheck"));
-				pstmt.setString(1, boardId);
-				pstmt.setString(2, usid);
-				rs = pstmt.executeQuery();
-				if (rs.next()) {
-					// 회원을 중복해서 추가하는 경우 분기
-					return 2;
+			if (usid != null) {
+				// 회원을 방에 추가하는 경우 분기
+				if (flag.equals("1")) {
+					pstmt = conn.prepareStatement(prop.getProperty("decideBuyCheck"));
+					pstmt.setString(1, boardId);
+					pstmt.setString(2, usid);
+					rs = pstmt.executeQuery();
+					if (rs.next()) {
+						// 회원을 중복해서 추가하는 경우 분기
+						return 2;
+					}
+					pstmt = conn.prepareStatement(prop.getProperty("decideBuyUserAdd"));
+					pstmt.setString(1, boardId);
+					pstmt.setString(2, usid);
+					pstmt.setString(3, nickname);
+				} else if (flag.equals("2")) {
+					// 회원을 삭제하는 경우 분기
+					pstmt = conn.prepareStatement(prop.getProperty("decideBuyUserDrop"));
+					pstmt.setString(1, boardId);
+					pstmt.setString(2, usid);
 				}
-				pstmt = conn.prepareStatement(prop.getProperty("decideBuyUserAdd"));
-				pstmt.setString(1, boardId);
-				pstmt.setString(2, usid);
-				pstmt.setString(3, nickname);
-			} else if (flag.equals("2")) {
-				// 회원을 삭제하는 경우 분기
-				pstmt = conn.prepareStatement(prop.getProperty("decideBuyUserDrop"));
-				pstmt.setString(1, boardId);
-				pstmt.setString(2, usid);
+				result = pstmt.executeUpdate();
 			}
-			result = pstmt.executeUpdate();
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -135,35 +142,36 @@ public class ChatDao {
 
 	public int insertChatMsg(Connection conn, List<Message> list) {
 		// TODO Auto-generated method stub
-		
-		
-		for(Message s : list) {
-			System.out.println(s);
-		}
-		
+
+		/*
+		 * for(Message s : list) { System.out.println(s); }
+		 */
+		System.out.println();
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			for(Message m : list) {
+			for (Message m : list) {
 				pstmt = conn.prepareStatement(prop.getProperty("insertChatMsg"));
 				pstmt.setString(1, m.getBoardId());
 				pstmt.setString(2, m.getSendNickName());
 				pstmt.setString(3, m.getMsg());
 				pstmt.setString(4, m.getChatProfile());
-				result=pstmt.executeUpdate();
+				pstmt.setString(5, m.getChatTime());
+				result = pstmt.executeUpdate();
+				System.out.println(m);
+				System.out.println("result : " + result);
 			}
+			System.out.println("여기 실행안됨??");
 			list.clear();
 			System.out.println(" === 리스트 쌓인거 전송하고 클리어 dao === ");
-			
-			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-			
-		return 0;
+
+		return result;
 	}
 
 	public List<Message> getChatList(Connection conn, String boardId) {
@@ -173,54 +181,26 @@ public class ChatDao {
 		List<Message> list = new ArrayList<Message>();
 		Message m = null;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("getChatList"));
+			pstmt = conn.prepareStatement(prop.getProperty("getChatList"));
 			pstmt.setString(1, boardId);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				m = new Message();
 				m.setBoardId(rs.getString("CHAT_BOARD_ID"));
 				m.setSendNickName(rs.getString("CHAT_WRITER_NICKNAME"));
 				m.setMsg(rs.getString("CHAT_CONTENT"));
 				m.setChatProfile(rs.getString("CHAT_PROFILE_IMAGE"));
+				m.setChatTime(rs.getString("CHAT_TIME"));
 				list.add(m);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return list;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
