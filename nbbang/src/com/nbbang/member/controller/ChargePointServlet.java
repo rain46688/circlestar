@@ -27,7 +27,8 @@ public class ChargePointServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int point=Integer.parseInt(request.getParameter("money"));
+		System.out.println("전달성공");
 	}
 
 	/**
