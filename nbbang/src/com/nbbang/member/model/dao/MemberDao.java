@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
@@ -396,7 +398,6 @@ private Properties prop=new Properties();
 		}
 		return ll;
 	}
-
 
 	
 }
