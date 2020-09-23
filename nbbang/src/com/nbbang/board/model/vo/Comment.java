@@ -3,80 +3,64 @@ package com.nbbang.board.model.vo;
 import java.util.Date;
 
 public class Comment {
-	private int comId;//댓글식별값
-	private int com_layer;//대댓글 레벨
-	private int cwriterUsid;//댓글작성자USID
-	private int cboard_id;//댓글 달린 게시물 아이디
-	private String comment;//댓글 내용
-	private Date cenroll_date;//댓글 작성 날짜
+	private int comLayer;//대댓글 레벨
+	private int cboardId;//댓글 달린 게시물 아이디
+	private String content;//댓글 내용
+	private Date cenrollDate;//댓글 작성 날짜
 	private Boolean secret;//비밀 댓글 여부
 	private String cwriterNickname;//작성자 닉네임
 	private String comProfile;//프로필 이미지 경로
+	private int comId;//댓글 식별자
+	private int comRef;//댓글 참조값
 	
 	public Comment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(int comId, int com_layer, int cwriterUsid, int cboard_id, String comment, Date cenroll_date,
-			Boolean secret, String cwriterNickname, String comProfile) {
+	public Comment(int comLayer, int cboardId, String content, Date cenrollDate, Boolean secret, String cwriterNickname,
+			String comProfile, int comId, int comRef) {
 		super();
-		this.comId = comId;
-		this.com_layer = com_layer;
-		this.cwriterUsid = cwriterUsid;
-		this.cboard_id = cboard_id;
-		this.comment = comment;
-		this.cenroll_date = cenroll_date;
+		this.comLayer = comLayer;
+		this.cboardId = cboardId;
+		this.content = content;
+		this.cenrollDate = cenrollDate;
 		this.secret = secret;
 		this.cwriterNickname = cwriterNickname;
 		this.comProfile = comProfile;
-	}
-
-	public int getComId() {
-		return comId;
-	}
-
-	public void setComId(int comId) {
 		this.comId = comId;
+		this.comRef = comRef;
 	}
 
-	public int getCom_layer() {
-		return com_layer;
+	public int getComLayer() {
+		return comLayer;
 	}
 
-	public void setCom_layer(int com_layer) {
-		this.com_layer = com_layer;
+	public void setComLayer(int comLayer) {
+		this.comLayer = comLayer;
 	}
 
-	public int getCwriterUsid() {
-		return cwriterUsid;
+	public int getCboardId() {
+		return cboardId;
 	}
 
-	public void setCwriterUsid(int cwriterUsid) {
-		this.cwriterUsid = cwriterUsid;
+	public void setCboardId(int cboardId) {
+		this.cboardId = cboardId;
 	}
 
-	public int getCboard_id() {
-		return cboard_id;
+	public String getContent() {
+		return content;
 	}
 
-	public void setCboard_id(int cboard_id) {
-		this.cboard_id = cboard_id;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public String getComment() {
-		return comment;
+	public Date getCenrollDate() {
+		return cenrollDate;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public Date getCenroll_date() {
-		return cenroll_date;
-	}
-
-	public void setCenroll_date(Date cenroll_date) {
-		this.cenroll_date = cenroll_date;
+	public void setCenrollDate(Date cenrollDate) {
+		this.cenrollDate = cenrollDate;
 	}
 
 	public Boolean getSecret() {
@@ -103,10 +87,26 @@ public class Comment {
 		this.comProfile = comProfile;
 	}
 
+	public int getComId() {
+		return comId;
+	}
+
+	public void setComId(int comId) {
+		this.comId = comId;
+	}
+
+	public int getComRef() {
+		return comRef;
+	}
+
+	public void setComRef(int comRef) {
+		this.comRef = comRef;
+	}
+
 	@Override
 	public String toString() {
-		return "Comment [comId=" + comId + ", com_layer=" + com_layer + ", cwriterUsid=" + cwriterUsid + ", cboard_id="
-				+ cboard_id + ", comment=" + comment + ", cenroll_date=" + cenroll_date + ", secret=" + secret
-				+ ", cwriterNickname=" + cwriterNickname + ", comProfile=" + comProfile + "]";
+		return "Comment [comLayer=" + comLayer + ", cboardId=" + cboardId + ", content=" + content + ", cenrollDate="
+				+ cenrollDate + ", secret=" + secret + ", cwriterNickname=" + cwriterNickname + ", comProfile="
+				+ comProfile + ", comId=" + comId + ", comRef=" + comRef + "]";
 	}
 }

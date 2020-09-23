@@ -62,7 +62,7 @@ public class BoardPageServlet extends HttpServlet {
 		Card c = new BoardService().boardPage(boardId, hasRead);
 		if(c==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
-			request.setAttribute("loc", "/views/board/bolist.jsp");
+			request.setAttribute("loc", "/boList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			request.setAttribute("curCard", c);

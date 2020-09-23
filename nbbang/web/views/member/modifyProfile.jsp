@@ -105,6 +105,27 @@
         border-bottom: black 1px solid;
         padding: 10px;
     }
+    div.profilePicDiv{
+        position: relative;
+        width: 30%;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #profilePicField{
+        position: relative;
+        margin: auto;
+        border-radius: 70%;
+        height: 10em;
+        width: 10em;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
 </style>
 </style>
 <section>
@@ -166,9 +187,9 @@
                     <div class="capsuleLeft">프로필사진</div>
                     <div class="capsuleRight">
                         <div>
-                            <div>
-                                <img src="<%=memberPic+m.getMemberPicture() %>" alt="프로필사진">
-                            </div>
+                            <div class="profilePicDiv" style="min-width: 180px;">
+                                <img id="profilePicField" src="<%=memberPic+m.getMemberPicture() %>" alt="프사">
+                             </div>
                             <button type="button" class="button" id="picBtn">수정</button>
                         </div>
                         <div id="updatePic"></div>
