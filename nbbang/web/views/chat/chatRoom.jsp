@@ -7,13 +7,20 @@
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script> 
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
 <style>
 
 /* === 채팅 구현 부분  === */
 
 *{
 font-family: 'Jua', sans-serif;
+font-weight:bold;
+}
+
+body{
+	background-color:#FFC107;
 }
 
 /* 사이드바 사이즈  */
@@ -21,7 +28,7 @@ font-family: 'Jua', sans-serif;
 	height: 80%;
 	width: 80%;
 	margin: 30px auto;
-	border: 2px black solid;
+	border: 3px black solid;
 	border-radius: 10px;
 	background-color:#B2C7D9;
 }
@@ -52,7 +59,7 @@ font-family: 'Jua', sans-serif;
 #msgText{
 	resize: none;
 	border: none;
-	padding: 10px 0px 10px 0px;
+	padding: 10px 10px 10px 10px;
 	width:80%;
 }
 
@@ -142,6 +149,7 @@ margin-top:10px;
 
 </style>
 
+<section>
 <div id="side">
 	<div id="chat">
 	<!-- tradeStage 방의 상태가 2단계인경우
@@ -156,6 +164,7 @@ margin-top:10px;
 			</c:if>
 	</div>
 </div>
+</section>
 
 <script>
 
@@ -168,17 +177,13 @@ $(function(){
 		dataType: "json",
 		url: "<%=request.getContextPath()%>/chat/getChatList",
 			success : function(data) {
-				console.log("success 부분");
+				console.log("success 부분 data : ["+data+"]");
 				let html ="";
+				
+				if(data != null && data != ''){
+					console.log('데이터 부분 널아님 data : '+data);
 				$.each(data,function(i,msg){
-					
-					/* if(msg["msg"] == 'SYS1'){
-						html='true'+msg["msg"] ;	
-						
-					}else{
-						html='false'+msg["msg"] ;
-					} */
-			
+	
 					if(msg["msg"] == "SYS1"){
 						 if(msg["sendNickName"] == "ADMIN"){
 								html+="<div class='tmp'><div class='admin'> ADMIN 관리자가 접속하였습니다." + "</div></div>";
@@ -194,10 +199,12 @@ $(function(){
 					}else{
 						 html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div></div></div>";
 					}
-					//$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
-					console.log(i+" : "+html);
+					$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
 				});
 				$("#ChatArea").html(html);
+				}
+				
+				
 			}
 		})
 		

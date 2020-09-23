@@ -88,18 +88,17 @@ public class ChatSocket {
 					if (!key.getCurRoomBid().equals("") && key.getCurRoomBid().equals(boardId)) {
 						if (user.get(key) != null && user.get(key).isOpen()) {
 							name = key.getNickname();
-							System.out.println(" === Null이 아니고 세션 열려있음, 메세지 : " + msg + " === ");
+							//System.out.println(" === Null이 아니고 세션 열려있음, 메세지 : " + msg + " === ");
 							
 							if(list.size() != 10) {
-								System.out.println("리스트 10 아님 list.size() : "+list.size());
+								System.out.println(" === 리스트 안참 list.size() : "+list.size()+" === ");
 								System.out.println("msg : "+msg);
 								list.add(msg);
 								user.get(key).getBasicRemote().sendObject(msg);
 							}else {
 								//디비에 넣고 클리어
-								System.out.println("리스트 10됨 list.size() : "+list.size());
-							int result = new ChatService().insertChatMsg(list);
-								System.out.println("리스트 클리어됨 list.size() : "+list.size());
+								System.out.println(" === 리스트 꽉참 list.size() : "+list.size()+" === ");
+								int result = new ChatService().insertChatMsg(list);
 							}
 							
 						}
@@ -123,6 +122,11 @@ public class ChatSocket {
 		String name = "";
 		List<Member> keyList = new ArrayList<Member>();
 		Member key = null;
+		
+		//현재 접속중인 유저가 없다면 리스트 클리어		
+		if(user.isEmpty()) {
+			list.clear();
+		}
 		Iterator<Member> userIterator = user.keySet().iterator();
 		try {
 			while (userIterator.hasNext()) {
