@@ -92,9 +92,17 @@ h1 {
 	float: center;
 }
 
-.nav-tabs{
-border:1px solid white;
-border-bottom:1px #DEE2E6 solid ; 
+.nav-tabs {
+	border: 1px solid white;
+	border-bottom: 1px #DEE2E6 solid;
+}
+
+.empty {
+	float: center;
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 15px;
+	margin-left: 10px;
 }
 </style>
 
@@ -132,6 +140,7 @@ border-bottom:1px #DEE2E6 solid ;
 				<div class="divCell">문의 날짜</div>
 			</div>
 			<%
+				if (!list.isEmpty()) {
 				for (CustomerCenter c : list) {
 			%>
 			<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
@@ -141,6 +150,13 @@ border-bottom:1px #DEE2E6 solid ;
 				<div class="divCell"><%=c.getCsTitle()%></div>
 				<div class="divCell"><%=c.getCsDate()%></div>
 			</div>
+
+			<%
+				}
+			} else {
+			%>
+
+			<div class="empty">등록된 문의 글이 없습니다.</div>
 
 			<%
 				}

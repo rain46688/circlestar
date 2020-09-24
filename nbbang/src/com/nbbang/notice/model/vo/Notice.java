@@ -4,36 +4,50 @@ import java.util.Date;
 
 public class Notice {
 
-	private int noticeNo;
+	private int noticeId;
+	private int noticeAdminUsid;
+	private String noticeWriteNickname;
 	private String noticeTitle;
-	private String noticeWriter;
 	private String noticeContent;
 	private Date noticeDate;
-	private String filePath;
-	private boolean status;
-	
+
 	public Notice() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notice(int noticeNo, String noticeTitle, String noticeWriter, String noticeContent, Date noticeDate,
-			String filePath, boolean status) {
+	public Notice(int noticeId, int noticeAdminUsid, String noticeWriteNickname, String noticeTitle,
+			String noticeContent, Date noticeDate) {
 		super();
-		this.noticeNo = noticeNo;
+		this.noticeId = noticeId;
+		this.noticeAdminUsid = noticeAdminUsid;
+		this.noticeWriteNickname = noticeWriteNickname;
 		this.noticeTitle = noticeTitle;
-		this.noticeWriter = noticeWriter;
 		this.noticeContent = noticeContent;
 		this.noticeDate = noticeDate;
-		this.filePath = filePath;
-		this.status = status;
 	}
 
-	public int getNoticeNo() {
-		return noticeNo;
+	public int getNoticeId() {
+		return noticeId;
 	}
 
-	public void setNoticeNo(int noticeNo) {
-		this.noticeNo = noticeNo;
+	public void setNoticeId(int noticeId) {
+		this.noticeId = noticeId;
+	}
+
+	public int getNoticeAdminUsid() {
+		return noticeAdminUsid;
+	}
+
+	public void setNoticeAdminUsid(int noticeAdminUsid) {
+		this.noticeAdminUsid = noticeAdminUsid;
+	}
+
+	public String getNoticeWriteNickname() {
+		return noticeWriteNickname;
+	}
+
+	public void setNoticeWriteNickname(String noticeWriteNickname) {
+		this.noticeWriteNickname = noticeWriteNickname;
 	}
 
 	public String getNoticeTitle() {
@@ -42,14 +56,6 @@ public class Notice {
 
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
-	}
-
-	public String getNoticeWriter() {
-		return noticeWriter;
-	}
-
-	public void setNoticeWriter(String noticeWriter) {
-		this.noticeWriter = noticeWriter;
 	}
 
 	public String getNoticeContent() {
@@ -68,27 +74,11 @@ public class Notice {
 		this.noticeDate = noticeDate;
 	}
 
-	public String getFilePath() {
-		return filePath;
-	}
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	@Override
 	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeWriter=" + noticeWriter
-				+ ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate + ", filePath=" + filePath
-				+ ", status=" + status + "]";
+		return "Notice [noticeId=" + noticeId + ", noticeAdminUsid=" + noticeAdminUsid + ", noticeWriteNickname="
+				+ noticeWriteNickname + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
+				+ ", noticeDate=" + noticeDate + "]";
 	}
-	
+
 }
