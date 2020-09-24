@@ -35,7 +35,7 @@ public class CommentListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int boardId = Integer.parseInt(request.getParameter("cBoardId"));
 		List<Comment> commentList = new BoardService().commentList(boardId);
-		
+	
 		response.setContentType("application/json;charset=utf-8");
 		new Gson().toJson(commentList, response.getWriter());
 		

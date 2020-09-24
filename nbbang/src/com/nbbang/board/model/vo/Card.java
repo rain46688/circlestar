@@ -3,6 +3,7 @@ package com.nbbang.board.model.vo;
 public class Card {
 	private Board cardBoard;
 	private BoardFile cardFile;
+	private String writerProfile;
 	
 	public Card() {
 		// TODO Auto-generated constructor stub
@@ -30,8 +31,16 @@ public class Card {
 		this.cardFile = cardFile;
 	}
 
+	public String getWriterProfile() {
+		return writerProfile;
+	}
+
+	public void setWriterProfile(String writerProfile) {
+		this.writerProfile = writerProfile;
+	}
+
 	@Override
 	public String toString() {
-		return "Card [cardBoard=" + cardBoard + ", cardFile=" + cardFile + "]";
+		return "Card [cardBoard=" + cardBoard + ", cardFile=" + cardFile + ", writerProfile=" + writerProfile + "]";
 	}
 }

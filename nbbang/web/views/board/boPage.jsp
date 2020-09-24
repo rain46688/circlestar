@@ -186,6 +186,12 @@
   .turnRed {
     background-color: red;
   }
+  #userThumb>img {
+  	border-radius: 70%;
+  }
+  #comment_thumb>img {
+  	border-radius: 70%;
+  }
 </style>
 <section>
   <div id="wrapper">
@@ -195,7 +201,7 @@
     </div>
     <div id="userInfo">
     	<hr>
-      <div id="userThumb"><img src="<%= request.getContextPath() %>/images/bread.png" alt="" width="40px" height="40px"></div>
+      <div id="userThumb"><img src="<%= memberPic + c.getWriterProfile() %>" alt="" width="40px" height="40px"></div>
         <div id="userIdAndAddress">
           <div id="userId"><%= c.getCardBoard().getWriterNickname() %></div>
           <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div>
@@ -233,36 +239,28 @@
       </div>
     <div id="Comments">
       <ul class="comment_list">
-        <li class="comment_item">
-          <hr>
-          <div class="comment_area">
-            <div class="comment_thumb">
-            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
-            </div>
-            <div class="comment_box">
-              <div class="comment_id">
-                아이디
-              </div>
-            <div class="comment_text">
-              내용
-            </div>
-            <div class="comment_info">
-              1993.01.11 19:33 답글쓰기 
-            </div>
-          </div>
-          </div>
-        </li>
+        <!-- 댓글이 들어갈 곳 -->
       </ul>
     </div>
     </div>
   </div>
 </section>
 <script>
+	$("#commentContent").keypress(function(e){
+		if(e.keyCode == 13) {
+			$("#commentInsertBtn").click();
+			$("#commentContent").val("");
+			return false;
+		}
+	});
+
     $(document).ready(function () {
         fn_commentList();
 
+        
+
         $("#likeFunc").click(function (e) {
-            if ($("#likeFunc").css("background-color") == "rgba(0, 0, 0, 0)") {
+            if ($("#likeFunc").css("background-color") == "rgb(239, 239, 239)") {
                 $.ajax({
                     url: "<%=request.getContextPath()%>/board/boardLike?key=insert",
                     type: "post",
@@ -285,7 +283,7 @@
                         'boardId': '<%= c.getCardBoard().getBoardId() %>'
                     },
                     success: function (data) {
-                        $("#likeFunc").css("background-color", "rgba(0, 0, 0, 0)");
+                        $("#likeFunc").css("background-color", "rgb(239, 239, 239)");
                     }
                 })
             }
@@ -331,8 +329,8 @@
                     html += "<hr>";
                     html += "<div class='comment_area'>";
                     html += "<div class='comment_thumb'>";
-                    html += "<img src='<%= request.getContextPath() %>/images/logo.png' alt='' width='30px'" +
-                            " height='30px'>";
+                    html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
+                            " height='30px' style='border-radius: 70%'>";
                     html += "</div>";
                     html += "<div class='comment_box'>";
                     html += "<div class='comment_id'>";
@@ -348,7 +346,7 @@
             }
         })
     }
-
+    
     $("#startBtn").click(function (e) {})
 </script>
 <%@ include file="/views/common/footer.jsp" %>

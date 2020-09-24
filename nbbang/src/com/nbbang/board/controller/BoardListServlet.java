@@ -52,8 +52,8 @@ public class BoardListServlet extends HttpServlet {
 				}
 			}
 		}
-		
-		int totalData = new BoardService().boardListCount();
+		System.out.println(blist.size());
+		int totalData = new BoardService().boardListCount(boardTitle);
 		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
 		int pageBarSize = 5;
 		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -62,7 +62,7 @@ public class BoardListServlet extends HttpServlet {
 		if(pageNo == 1) {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>이전</a></li>";
 		}else {
-			pageBar += "<li class='page-item'><a class='page-link' href='"+ request.getContextPath() + "/boList?cPage=" + (pageNo-1) + "'>이전</a></li>";
+			pageBar += "<li class='page-item'><a class='page-link' href='"+ request.getContextPath() + "/boList?cPage=" + (pageNo-1) + "&boardTitle=" + boardTitle + "'>이전</a></li>";
 		}
 		
 		while(pageNo <= pageEnd && pageNo <= totalPage) {
@@ -70,7 +70,7 @@ public class BoardListServlet extends HttpServlet {
 				pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>" + pageNo + "</a></li>";
 			}else {
 				pageBar+="<li class='page-item'><a class='page-link' href='" + request.getContextPath() + 
-				"/boList?cPage="+pageNo+"')>"+pageNo+"</a></li>";
+				"/boList?cPage="+pageNo+"&boardTitle=" + boardTitle +"')>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 		}
@@ -78,7 +78,7 @@ public class BoardListServlet extends HttpServlet {
 		if(pageNo > totalPage) {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>다음</a></li>";
 		}else {
-			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/boList?cPage=" + pageNo + "'>다음</a></li>";
+			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/boList?cPage=" + pageNo + "&boardTitle=" + boardTitle + "'>다음</a></li>";
 		}
 		request.setAttribute("category", boardTitle);
 		request.setAttribute("boardList", blist);

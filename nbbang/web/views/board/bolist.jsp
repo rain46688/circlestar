@@ -28,27 +28,38 @@
 .card-body {
 	padding: 0.5em;
 }
-
+.card-wrapper h1 {
+	font-family: 'Do Hyeon', sans-serif;
+}
 #writeBoard {
 	text-align: right;
 	padding-right: 1em;
+	font-family: 'Do Hyeon', sans-serif;
+	
 }
 #writeBoard>button {
 	height: 2em;
 	width: 5em;
+	font-size: 20px;
+}
+
+#writeBoard>button:hover {
+	border: 2px black solid;
 }
 #interest {
 	font-size:15px;
 	color:gray;
 }
-
+.card {
+	border: 2px black solid;
+}
 .card-title {
 	width: 10em;
 	height: 1em;
 }
 
 .card-title>p {
-	font-size: 25px;
+	font-size: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -66,11 +77,11 @@
 			for (Card c : bolist) {
 		%>
 		<div class="card"
-			onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=c.getCardBoard().getBoardId()%>'"
+			onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid() %>'"
 			style="width: 15rem; cursor: pointer; padding:0px">
 			<!-- file의 갯수 분기처리 -->
 			<%-- <% if(files.length==1) {%> --%>
-			<div class="">
+			<div class="image-wrapper">
 			<img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em">
 			<%-- <% }else { %> --%>
 			<%-- <img src="<%=request.getContextPath()%>/upload/images/<%= files[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em"> --%>
@@ -78,7 +89,7 @@
 			</div>
 			<div class="card-body">
 				<input type="hidden" value="<%= c.getCardBoard().getBoardId()%>">
-				<h5 class="card-title"><p><%= c.getCardBoard().getBoardTitle() %></p></h5>
+				<h4 class="card-title"><p><%= c.getCardBoard().getBoardTitle() %></p></h4>
 				<p><%= c.getCardBoard().getTradeArea() %></p>
 				<p id="interest"><%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회</p>
 				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= c.getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
