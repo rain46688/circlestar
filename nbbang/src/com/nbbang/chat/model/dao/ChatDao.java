@@ -88,6 +88,7 @@ public class ChatDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("creatRoom"));
+			//트레이드 스테이지 2로 변경
 			pstmt.setString(1, "2");
 			pstmt.setString(2, boardId);
 			result = pstmt.executeUpdate();
