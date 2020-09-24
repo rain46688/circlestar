@@ -2,10 +2,11 @@
 <%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-
 <%
 	List<CustomerCenter> list = (List) request.getAttribute("list");
 String a = (String) request.getParameter("a");
+String s = request.getParameter("s");
+String Sc = request.getParameter("Sc");
 %>
 <style>
 #writecontainer {
@@ -60,8 +61,17 @@ String a = (String) request.getParameter("a");
 	font-size: 20px;
 }
 
-#bar {
-	display: inline-block;
+#search {
+	display: block;
+	float: center;
+	overflow: hidden;
+}
+
+#search div {
+	float: right;
+}
+
+#pagebar {
 	float: center;
 }
 </style>
@@ -94,6 +104,7 @@ String a = (String) request.getParameter("a");
 
 			<div class="divRowTitle">
 				<div class="divCell">문의 ID</div>
+				<div class="divCell">타입</div>
 				<div class="divCell">작성자</div>
 				<div class="divCell">제목</div>
 				<div class="divCell">문의 날짜</div>
@@ -103,6 +114,7 @@ String a = (String) request.getParameter("a");
 			%>
 			<div class="divRow" style="cursor: pointer">
 				<div class="divCell"><%=c.getCsId()%></div>
+				<div class="divCell"><%=c.getCsType()%></div>
 				<div class="divCell"><%=c.getCsNickname()%></div>
 				<div class="divCell"><%=c.getCsTitle()%></div>
 				<div class="divCell"><%=c.getCsDate()%></div>
@@ -115,7 +127,23 @@ String a = (String) request.getParameter("a");
 			<br>
 		</div>
 	</div>
-	<nav aria-lable="Page navigation">
+
+
+	<form class="form-inline" action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
+		
+		<div>
+			<select class="form-control" id="sel1" name="s">
+				<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
+				<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
+				<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
+				<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
+			</select>
+			<input type="hidden" name="a" value=<%=a %>>
+			<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
+			<button class="btn btn-success" type="submit">검색</button>
+		</div>
+	</form>
+	<nav aria-lable="Page navigation" id="pagebar">
 		<ul class="pagination justify-content-center">
 			<%=request.getAttribute("pageBar")%>
 		</ul>

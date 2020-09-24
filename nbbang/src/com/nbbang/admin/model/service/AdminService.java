@@ -28,6 +28,34 @@ public class AdminService {
 		return cnt;
 	}
 
+	public List<CustomerCenter> customerList(int cPage, int numPerPage, String a, String select, String search) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		List<CustomerCenter> list = null;
+		if(select.equals("ALL")) {
+			 list = aa.customerList(conn, cPage, numPerPage,a,search);
+		}else {
+			 list = aa.customerList(conn, cPage, numPerPage,a,select,search);
+		}
+		close(conn);
+		return list;
+	}
+
+	public int customerListCount(String a, String select, String search) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int cnt = 0;
+		if(select.equals("ALL")) {
+			System.out.println("서비스 ALL분기");
+			cnt = aa.customerListCount(conn,a,search);
+		}else {
+			System.out.println("서비스 ALL 아님");
+			cnt = aa.customerListCount(conn,a,select,search);
+		}
+		close(conn);
+		return cnt;
+	}
+
 //	public List<Member> selectMemberSearch(String type, String keyword, int cPage, int numPerPage) {
 //		// TODO Auto-generated method stub
 //		Connection conn = getConnection();
