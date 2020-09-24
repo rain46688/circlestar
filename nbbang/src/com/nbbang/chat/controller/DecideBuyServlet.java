@@ -36,28 +36,18 @@ public class DecideBuyServlet extends HttpServlet {
 		String flag = request.getParameter("flag");
 		
 		System.out.println("usid : "+usid+", nickname : "+nickname+", boardId : "+boardId+", flag : "+flag);
-		
-		if(flag.equals("1")) {
+
 			//구매 결정
 			int result = new ChatService().decideBuyUser(usid,nickname,boardId,flag);
-			if(result ==1) {
+			if(result ==0) {
+				System.out.println("현재 방에 유저 추가 & 삭제 실패");
+			}else if(result == 1){
 				System.out.println("현재 방에 유저 추가");
-			}else if(result == 0){
-				System.out.println("현재 방에 유저 추가 실패!!!");
+			}else if(result == 2) {
+				System.out.println("현재 방에 이미 해당 유저가 있음");
 			}else {
-				System.out.println("현재 방에 이미 해당 유저가 있음!!!");
+				System.out.println("현재 방에 유저 삭제");
 			}
-		}else {
-			//구매 결정 취소
-			int result = new ChatService().decideBuyUser(usid,nickname,boardId,flag);
-			if(result > 0) {
-				System.out.println("현재 방에 유저 나감");
-			}else {
-				System.out.println("현재 방에 유저 나감 실패");
-			}
-		}
-		
-		
 	}
 
 	/**
