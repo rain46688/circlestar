@@ -19,9 +19,9 @@ public class BoardService {
 
 	BoardDao dao = new BoardDao();
 
-	public List<Card> boardList(int cPage, int numPerPage) {
+	public List<Card> boardList(int cPage, int numPerPage, String boardTitle) {
 		Connection conn = getConnection();
-		List<Card> boardList = dao.boardList(conn, cPage, numPerPage);
+		List<Card> boardList = dao.boardList(conn, cPage, numPerPage, boardTitle);
 		close(conn);
 		return boardList;
 	}
@@ -63,7 +63,19 @@ public class BoardService {
 	public int boardLikeInsert(LikeList list) {
 		Connection conn = getConnection();
 		int result = dao.boardLikeInsert(conn, list);
-		if(result > 1) {
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int boardLikeDelete(LikeList list) {
+		Connection conn = getConnection();
+		int result = dao.boardLikeDelete(conn, list);
+		if(result > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
