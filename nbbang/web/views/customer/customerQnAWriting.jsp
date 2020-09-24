@@ -10,15 +10,6 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/qnawriting.css" type="text/css">
 <jsp:include page="maincss.jsp"></jsp:include>
 
-
-
-
-
-
-
-
-
-
 <div class="writing-container">
   <div class="writing-wrap">
     
@@ -58,12 +49,21 @@ pageEncoding="UTF-8"%>
         <input type="file" name="csFile" multiple="true" >
       </div>
      
+  <div id="submitBtn-kdh">
+      <button type="button" class="btn-submit" onclick=" movingPage('<%=request.getContextPath()%>/customer/customerQnAWritingEnd')">문의등록</button>
+   </div>
     </form>
   </div>
 </div>
-            <div id="submitBtn-kdh">
-              <button type="button" class="btn-submit" onclick=" movingPage('<%=request.getContextPath()%>/customer/customerQnAWritingEnd')">문의등록</button>
-            </div>
+
+
+
+
+
+
+
+
+
           
 
 
