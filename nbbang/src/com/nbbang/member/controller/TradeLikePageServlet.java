@@ -26,7 +26,8 @@ public class TradeLikePageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("좋아요");
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		request.getRequestDispatcher("/views/member/like.jsp").forward(request, response);
 	}
 
 	/**

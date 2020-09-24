@@ -48,7 +48,7 @@
         position: relative;
 	    background: #FFFFFF;
 	    text-align: center;
-        margin: 5% 26% 5% 1%;
+        margin: 3% 26% 5% 1%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */

@@ -84,10 +84,10 @@
             </div>
             <div id="sideBarLinkContainer">
                 <div>
-                    <a class="nav-link postList active" href="<%=request.getContextPath()%>/member/iCreateList?usid=<%=loginnedMember.getUsid()%>">내가 만든 거래</a>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/iCreateList?usid=<%=loginnedMember.getUsid()%>">내가 만든 거래</a>
                 </div>
                 <div>
-                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/waitList?usid=<%=loginnedMember.getUsid()%>">신청한 거래</a>
+                    <a class="nav-link postList active" href="<%=request.getContextPath()%>/member/waitList?usid=<%=loginnedMember.getUsid()%>">신청한 거래</a>
                 </div>
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/onGoingList?usid=<%=loginnedMember.getUsid()%>">시작된 거래</a>
@@ -109,44 +109,7 @@
                 </div>
             </div>
         </div>
-        <div id="iCreateContainer">
-            <div class="item textField" id="containerTitle">
-                <div id="modifyProfile" style="margin-bottom: 20px; font-size: 24px; padding: 5px;" >내가 만든 거래</div>
-            </div>
-            <div id="cardContainer">
-                <div class="card">
-                    <div class="imgContainer">
-                        <img src="<%=request.getContextPath()%>/upload/profilePic/profileNone.png" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-    
-                <div class="card">
-                    <div class="imgContainer">
-                        <img src="<%=request.getContextPath()%>/upload/profilePic/bs.png" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
         
-                <div class="card">
-                    <img src="<%=request.getContextPath()%>/upload/profilePic/profileNone.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-        
-                <div class="card">
-                    <img src="<%=request.getContextPath()%>/upload/profilePic/profileNone.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 <%@ include file="/views/common/footer.jsp" %>

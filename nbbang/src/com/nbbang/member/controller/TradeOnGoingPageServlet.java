@@ -26,7 +26,8 @@ public class TradeOnGoingPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("진행중인");
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		request.getRequestDispatcher("/views/member/onGoing.jsp").forward(request, response);
 	}
 
 	/**
