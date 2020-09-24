@@ -27,11 +27,12 @@ div#infoContainer .item:nth-child(1) {
 }
 .infoContainer>.item{
    min-height: 200px;
-   border: 1px solid rgb(236, 175, 89);
+   border: 2px solid rgb(236, 175, 89);
    background-color: white;
 }
 div#headContainer{
    display: flex;
+   border-radius: 15px;
 }
 div.profilePicDiv{
    position: relative;
@@ -63,6 +64,7 @@ div.smallBox{
    position: relative;
    height: auto;
    padding: 5%;
+   border-radius: 15px;
 }
 p.title{
    font-size: 1.5em;
@@ -157,7 +159,7 @@ button#chargebtn{
       function fn_chargePoint(){
          const url="<%=request.getContextPath()%>/member/chargePoint";
 			const title="chargePoint";
-			const status="left=500px,top=100px,width=500px,height=500px";
+			const status="left=500px,top=100px,width=500px,height=660px";
 
 			open("",title,status);
 
