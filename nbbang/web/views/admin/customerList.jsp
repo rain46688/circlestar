@@ -45,6 +45,17 @@ String Sc = request.getParameter("Sc");
 	display: table-row;
 	font-size: 20px;
 	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
+}
+
+h1{
+	font-weight:bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
+}
+
+.active{
+	font-weight:bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
 }
 
 .divCell, .divTableHead {
@@ -102,7 +113,7 @@ String Sc = request.getParameter("Sc");
 	<div class="divList">
 		<div class="divListBody">
 
-			<div class="divRowTitle">
+			<div class="divRowTitle shadow p-3 mb-5 bg-white rounded">
 				<div class="divCell">문의 ID</div>
 				<div class="divCell">타입</div>
 				<div class="divCell">작성자</div>
@@ -112,7 +123,7 @@ String Sc = request.getParameter("Sc");
 			<%
 				for (CustomerCenter c : list) {
 			%>
-			<div class="divRow" style="cursor: pointer">
+			<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
 				<div class="divCell"><%=c.getCsId()%></div>
 				<div class="divCell"><%=c.getCsType()%></div>
 				<div class="divCell"><%=c.getCsNickname()%></div>
