@@ -167,4 +167,18 @@ private MemberDao dao=new MemberDao();
 		close(conn);
 	}
 
+	public List<Card> boardList(int cPage, int numPerPage, int usid) {
+		Connection conn=getConnection();
+		List<Card> blist=dao.boardList(conn, cPage, numPerPage, usid);
+		close(conn);
+		return blist;
+	}
+
+	public int boardListCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.boardListCount(conn, usid);
+		close(conn);
+		return totalData;
+	}
+
 }

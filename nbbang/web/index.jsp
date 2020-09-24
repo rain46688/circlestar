@@ -4,21 +4,64 @@
 <%@ include file="/views/common/header.jsp"%>
 <style>
 	#cards-wrapper {
+		width: 100%;
 		background-color: #ecaf59;
+		text-align: center;
 	}
 	#cards-nav {
-		border: 1px red solid;
+		width: 100%;
 		margin: 0 auto;
 		text-align: center;
 	}
 	#cards-nav>ul {
 		list-style: none;
-		border: 1px red solid;
 		margin: 0 auto;
-	}
-	#card-nav>ul>li {
 
-		float: left;
+	}
+	#cards-nav>ul>li {
+		display: inline-block;
+		padding: 0 auto;
+		margin-right: -3px;
+		margin-left: -3px;
+		margin-bottom: -2px;
+		border: 1.5px black solid;
+		border-bottom: 2px white solid;
+	}
+	#cards-nav div {
+		width: 10em;
+		height: 10em;
+		font-size: 26px;
+		font-family: 'Do Hyeon', sans-serif;
+		padding: 0 auto;
+	}
+	#popularBoards {
+		background-color: white;
+
+	}
+
+	#cards-nav .contentBlock {
+		padding-top: 3.5em;
+		width: 100%;
+		height: 30px;
+	}
+
+	#recentBoards {
+		background-color: bisque;
+	}
+
+	#specialBoards {
+		background-color: burlywood;
+	}
+	#contentWrapper {
+		width: 100%;
+		border-top: 1.5px black solid;
+		background-color: white;
+	}
+	#contentPosition {
+		width: 80em;
+		margin: 0 auto;
+
+		text-align: left;
 	}
 </style>
 
@@ -71,15 +114,140 @@
 		<div id="cards-nav">
 			<ul>
 				<li><div id="popularBoards">
-					인기 게시물
+					<div class="contentBlock">
+					<img src="images/popular.png" alt="" width="60px" height="60px">
+					<p>인기게시물</p>
+					</div>
 				</div></li>
 				<li><div id="recentBoards">
-					최신 게시물
+					<div class="contentBlock">
+						<img src="images/recent.png" alt="" width="60px" height="60px">
+						<p>최신게시물</p>
+						</div>
 				</div></li>
 				<li><div id="specialBoards">
-					특가
+					<div class="contentBlock">
+						<img src="images/special.png" alt="" width="60px" height="60px">
+						<p>특가</p>
+						</div>
 				</div></li>
 			</ul>
+		</div>
+		<div id="contentWrapper">
+			<div id="contentPosition">
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+				  <div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Card title</h5>
+					  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					</div>
+				  </div>
+			</div>
 		</div>
 	</div>
 	<script>

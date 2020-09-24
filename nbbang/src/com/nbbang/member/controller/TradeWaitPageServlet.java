@@ -26,7 +26,8 @@ public class TradeWaitPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("기다리는");
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		request.getRequestDispatcher("/views/member/wait.jsp").forward(request, response);
 	}
 
 	/**
