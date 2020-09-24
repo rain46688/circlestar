@@ -12,8 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-
+import com.nbbang.board.model.vo.Board;
+import com.nbbang.board.model.vo.BoardFile;
+import com.nbbang.board.model.vo.Card;
+import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
@@ -432,5 +434,6 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}
 	}
+
 
 }

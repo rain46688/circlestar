@@ -135,19 +135,19 @@
             </div>
             <div id="sideBarLinkContainer">
                 <div>
-                    <a class="nav-link postList" href="#">참여 중인 거래</a>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/iCreateList?usid=<%=loginnedMember.getUsid()%>">내가 만든 거래</a>
                 </div>
                 <div>
-                    <a class="nav-link postList" href="#">내가 만든 거래</a>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/waitList?usid=<%=loginnedMember.getUsid()%>">신청한 거래</a>
                 </div>
                 <div>
-                    <a class="nav-link postList" href="#">진행 중인 거래</a>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/onGoingList?usid=<%=loginnedMember.getUsid()%>">시작된 거래</a>
                 </div>
                 <div>
-                    <a class="nav-link postList" href="#">과거 거래 내역</a>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/pastList?usid=<%=loginnedMember.getUsid()%>">과거 거래 내역</a>
                 </div>
                 <div>
-                    <a class="nav-link postList" href="#">좋아요 한 게시글</a>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/likeList?usid=<%=loginnedMember.getUsid()%>">좋아요 한 게시글</a>
                 </div>
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/modifyProfile?usid=<%=loginnedMember.getUsid()%>">프로필 수정하기</a>
