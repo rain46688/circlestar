@@ -177,9 +177,9 @@ margin-top:10px;
 
 </style>
 
-<section>
-<div id="side">
-	<div id="chat">
+<section >
+<div id="side" >
+	<div id="chat" >
 	<!-- tradeStage 방의 상태가 2단계인경우
 	게시판 상세페이지에서 방이 생성될때 정보를 변경 후 Attribute 보내줘야됨 
 	-->
@@ -233,7 +233,7 @@ $(function(){
 						let time = msg["chatTime"];
 						let arr = time.split('오');
 						time='오'+arr[1];
-						html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
+						html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/profilePic/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
 					}
 				});
 				$("#ChatArea").html(html);
@@ -316,7 +316,8 @@ if("${tradeStage}"=="2"){
 				let time = msg["chatTime"];
 				let arr = time.split('오');
 				time='오'+arr[1];
-			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/images/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
+				console.log("msg['chatProfile']"+msg["chatProfile"]);
+			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/profilePic/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
 		}
 		/* 스크롤 아래로 유지해주는 것  채팅이 입력되면 가장 아래로 스크롤을 고정시켜야된다.

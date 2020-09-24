@@ -1,4 +1,3 @@
-<%@page import="com.nbbang.customer.model.vo.CustomerFile"%>
 <%@page import="java.util.List"%>
 <%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,7 +10,7 @@ pageEncoding="UTF-8"%>
 <jsp:include page="maincss.jsp"></jsp:include>
 <%
 
- CustomerCenter c=(CustomerCenter)request.getAttribute("cc");
+CustomerCenter c=(CustomerCenter)request.getAttribute("c");
 List<CustomerCenter> list = (List) request.getAttribute("list");
 %>
 <style>
@@ -62,67 +61,11 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
   div#submitBtn {
     margin-top: 35%;
   }
-
-  d
-
-  .imgList {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .imgC p {
-    text-align: center;
-  }
-
-  .modal {
-    display: none;
-    z-index: 500;
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .modal button {
-    position: absolute;
-    top: 3rem;
-    right: 3rem;
-    background: transparent;
-    border: 0;
-    color: #ffffff;
-    font-size: 3rem;
-  }
-
-  .modalBox {
-    position: relative;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    background-color: #ffffff;
-    width: 30%;
-    height: 30%;
-    text-align: center;
-  }
-
-  .modalBox img {
-    width: 100%;
-  }
-
-  .modalBox p {
-    color: #ffffff;
-    background-color: #000;
-    font-size: 2rem;
-    padding: .2rem;
-  }
 </style>
 <section>
 <div id="QA-container">
 
-  <form action="#" method="post" enctype="multipart/form-data">
+<form action="#" method="post" enctype="multipart/form-data">
     <div class="question-container">
 
       <div class="write-content">
@@ -140,13 +83,13 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
       <div class="file-upload">
         <%for(CustomerFile cf : c.getCf()){ %>
 
-          
+
           <div class="imgList">
             <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
               width="60" height="60">
             <p><%=cf.getCsFileName() %> </p>
           </div>
-        
+
           <!-- 팝업 될 곳 -->
           <div class="modal">
             <button>&times;</button>
@@ -157,7 +100,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
             </div>
           </div>
         <%} %>
-      
+
       </div>
     </form>
   
@@ -167,18 +110,30 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
   </div>
   
   
+>>>>>>> c511c306312863fcad18af969debebd0de7b4cc1
 
-</div>
 
-  <div class="comment-container">
-    <div class="comment-editor">
-     <%if(c.getCsContent()!=null){ %>
-      <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
+    <div class="answer-container">
+      <image src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
+        
+        <% if(list.isEmpty()) {%>
         <div class="answer-content">
-          <input type="hidden" name="csId" value="<%=c.getCsId()%>">
-          <textarea name="admin-answer" cols="60" rows="10"></textarea>
-  
+          <p>zzzzzzzzzzzzzzzzzz</p>
         </div>
+<<<<<<< HEAD
+        <div class="answer-date">
+          zzzzzzzzzzzzzzzzzzzzzz
+        </div>
+        <%}else{
+            for(CustomerCenter cc : list) {%>
+        <div class="answer-content">
+          <p><%=c.getCsAnswer()%></p>
+        </div>
+        <div class="answer-date">
+          <%=c.getCsDate()%>
+        </div>
+        <%
+=======
         <button type="submit" id="btn-insert" >등록</button>
       </form>
       <%}else{ 
@@ -228,11 +183,33 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
         return false;
       } else {
         $(".modal").hide();
+>>>>>>> c511c306312863fcad18af969debebd0de7b4cc1
       }
-    });
-  });
-</script>
+    }
+    %>
+    </div>
 
 
+
+<<<<<<< HEAD
+
+    <%--              <%for(CustomerCenter cc : list){%>
+    <div class="wrtie-content">
+      <textarea name="contentwrite" rows="5" cols="50">
+                <%=cc.getCsContent()%>
+                          </textarea>
+    </div>
+    <div class="file-upload">
+      <div>
+        <%=cc.getCsDate()%>
+      </div>
+      <%}%>
+      
+          </div> --%>
+
+  </form>
+</div>
+=======
 </section>
+>>>>>>> c511c306312863fcad18af969debebd0de7b4cc1
 <%@ include file="/views/common/footer.jsp"%>
