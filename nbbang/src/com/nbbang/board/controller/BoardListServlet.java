@@ -32,6 +32,8 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		String boardTitle = request.getParameter("boardTitle");
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -40,7 +42,16 @@ public class BoardListServlet extends HttpServlet {
 		}
 		int numPerPage = 40;
 		
-		List<Card> blist = new BoardService().boardList(cPage, numPerPage);
+		List<Card> blist = new BoardService().boardList(cPage, numPerPage, boardTitle);
+		for(Card c : blist) {
+			String temp = c.getCardBoard().getTradeArea();
+			if(temp!=null) {
+				if(temp.length()>8) {
+				String newTemp = temp.substring(0, temp.indexOf(" ", temp.indexOf(" ") + 1));
+				c.getCardBoard().setTradeArea(newTemp);
+				}
+			}
+		}
 		
 		int totalData = new BoardService().boardListCount();
 		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
@@ -69,6 +80,7 @@ public class BoardListServlet extends HttpServlet {
 		}else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/boList?cPage=" + pageNo + "'>다음</a></li>";
 		}
+		request.setAttribute("category", boardTitle);
 		request.setAttribute("boardList", blist);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/board/bolist.jsp").forward(request, response);

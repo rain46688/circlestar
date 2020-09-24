@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.nbbang.member.model.vo.Member, java.util.List" %>
@@ -7,7 +8,13 @@
 <%
 	Member loginnedMember=(Member)session.getAttribute("loginnedMember");
 	String memberPic=request.getContextPath()+"/upload/profilePic/";
-	List<Integer> likelist=(List<Integer>)session.getAttribute("likeList");
+	List<Integer> likelist = new ArrayList<Integer>();
+	if(session.getAttribute("likeList")!=null){
+		likelist=(List<Integer>)session.getAttribute("likeList");
+		for(Integer i : likelist) {
+		System.out.println(i);
+		}
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -60,23 +67,23 @@
 		<nav>
 			<ul class="nav justify-content-center">
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/boList">특가</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/boList?boardTitle=특가">특가</a>
 					<!-- 차후 게시판 분류대로 나눌 예정 -->
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/boList">식품</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/boList?boardTitle=식품">식품</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/boList">패션잡화</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/boList?boardTitle=패션잡화">패션잡화</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/boList">취미-문구</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/boList?boardTitle=취미-문구">취미-문구</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/boList">티켓</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/boList?boardTitle=티켓">티켓</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/boList">애완용품</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/boList?boardTitle=애완용품">애완용품</a>
 				</li>
 			</ul>
 		</nav>
