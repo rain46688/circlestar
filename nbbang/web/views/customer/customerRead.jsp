@@ -63,9 +63,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
     margin-top: 35%;
   }
 
-  d
-
-  .imgList {
+  d .imgList {
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -141,13 +139,13 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
       <div class="file-upload">
         <%for(CustomerFile cf : c.getCf()){ %>
 
-          
-          <div class="imgList">
+
+        <div class="imgList">
           <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
             width="60" height="60">
           <p><%=cf.getCsFileName() %> </p>
         </div>
-        
+
         <!-- 팝업 될 곳 -->
         <div class="modal">
           <button>&times;</button>
@@ -157,57 +155,57 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
             <p></p>
           </div>
         </div>
-       
+
         <%} %>
-      
+
       </div>
 
   </form>
-  
-  
+
+
   <div class="hr-line">
     <hr id="hr-line">
   </div>
-  
-  
+
+
 
 </div>
 
-  <div class="comment-container">
-    <div class="comment-editor">
-     <%if(c.getCsContent()!=null){ %>
+<div class="comment-container">
+  <div class="comment-editor">
+    <%if(c.getCsContent()!=null){ %>
+    <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
+      <div class="answer-content">
+        <input type="hidden" name="csId" value="<%=c.getCsId()%>">
+        <textarea name="admin-answer" cols="60" rows="10"></textarea>
+
+      </div>
+      <button type="submit" id="btn-insert">등록</button>
+    </form>
+    <%}else{ 
+		%>
       <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
-        <div class="answer-content">
-          <input type="hidden" name="csId" value="<%=c.getCsId()%>">
-          <textarea name="admin-answer" cols="60" rows="10"></textarea>
-  
-        </div>
-        <button type="submit" id="btn-insert" >등록</button>
-        </form>
-   <%}else{ 
+     <div class="answer-container">
+       <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
+ 
+ 
+       <div class="answer-content">
+ 
+         <p><%=c.getCsAnswer()%></p>
+       </div>
+       <div class="answer-date">
+ 
+         <%=c.getCsDate()%>
+       </div>
+ 
+     </div>
+     </form>
 				
-				%>
-      <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
-   <div class="answer-container"> 
-     <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> 
-    
-    
-  <div class="answer-content"> 
-    
-     <p><%=c.getCsAnswer()%></p> 
-  </div> 
-  <div class="answer-date"> 
-    
-    <%=c.getCsDate()%>
-  </div> 
-  
- </div> 
-      </form>
-      
+
   </div>
-  </div>
-    <%
-}%> 
+</div>
+<%
+}%>
 <script>
   $(function () {
     // 	이미지 클릭시 해당 이미지 모달
