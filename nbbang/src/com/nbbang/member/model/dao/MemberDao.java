@@ -398,5 +398,39 @@ private Properties prop=new Properties();
 		return ll;
 	}
 
-	
+	public int getCrtPoint(Connection conn, int usid) {
+		int crtPoint=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getCrtPoint"));
+			pstmt.setInt(1, usid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				crtPoint=rs.getInt("POINT");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return crtPoint;
+	}
+
+	public void chargePoint(Connection conn, int usid, int newPoint) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("chargePoint"));
+			pstmt.setInt(1, newPoint);
+			pstmt.setInt(2, usid);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+	}
+
 }
