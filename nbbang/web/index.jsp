@@ -2,7 +2,25 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="/views/common/header.jsp"%>
+<style>
+	#cards-wrapper {
+		background-color: #ecaf59;
+	}
+	#cards-nav {
+		border: 1px red solid;
+		margin: 0 auto;
+		text-align: center;
+	}
+	#cards-nav>ul {
+		list-style: none;
+		border: 1px red solid;
+		margin: 0 auto;
+	}
+	#card-nav>ul>li {
 
+		float: left;
+	}
+</style>
 <section>
 
 	<div id="carouselField" name="carouselField">
@@ -48,10 +66,21 @@
 		</div>
 	</div>
 
-
-<!-- card 건들면 속상함 ㅠ.ㅠ-->
-
-
+	<div id="cards-wrapper">
+		<div id="cards-nav">
+			<ul>
+				<li><div id="popularBoards">
+					인기 게시물
+				</div></li>
+				<li><div id="recentBoards">
+					최신 게시물
+				</div></li>
+				<li><div id="specialBoards">
+					특가
+				</div></li>
+			</ul>
+		</div>
+	</div>
 	<script>
 		$(function() {
 			$('.carouselInhee').carousel({
