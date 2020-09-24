@@ -121,7 +121,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 </style>
 
 <div id="QA-container">
-<form action="#" method="post" enctype="multipart/form-data">
+<form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post" enctype="multipart/form-data">
     <div class="question-container">
 
       <div class="write-content">

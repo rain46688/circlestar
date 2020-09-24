@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
       
 
       <div class="type-wrap">
-          <select class="type-select" name="csType" style="width:581px;">
+          <select class="type-select" name="csType" style="width:37em;">
                 <option value="" selected>문의유형을 선택하세요.</option>
                 <option value="회원정보">회원정보관련</option>
                 <option value="거래배송">거래배송관련</option>
@@ -32,12 +32,12 @@ pageEncoding="UTF-8"%>
 
        <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
        
-        <input value="<%=loginnedMember.getNickname()%>" class="writing-input" name="csNickname" id="" readonly size="75">
+        <input value="<%=loginnedMember.getNickname()%>" class="writing-input" name="csNickname" id="" readonly size="76em">
 
     </div>
       
       <div class="write-title">
-        <input type="text" class="writing-input" name="csTitle" placeholder="제목을 입력하쇼." size="75">
+        <input type="text" class="writing-input" name="csTitle" placeholder="제목을 입력하쇼." size="76em">
         
       </div>
       

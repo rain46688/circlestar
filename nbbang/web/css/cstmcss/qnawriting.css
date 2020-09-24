@@ -38,10 +38,11 @@ div.write-content{
 }
 div.file-upload{
     margin-top: 2%;
-    padding-bottom: 5px;
+    padding-bottom: 2%;
 }
 div#submitBtn-kdh{
-    margin-top: 4%;
+    margin-top: 2em;
+    margin-bottom: 1em;
     
     
     

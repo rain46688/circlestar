@@ -31,7 +31,7 @@
             href="<%=request.getContextPath() %>/customer/customerNews">소식보기</a></li>
 
         <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
-            href="<%=request.getContextPath() %>/customer/customerAsk">FAQ</a></li>
+            href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
 
       </ul>
 

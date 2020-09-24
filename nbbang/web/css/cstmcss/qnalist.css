@@ -11,7 +11,7 @@ table {
 }
 
 th {
-    background-color: #f1a90d;
+    background-color: orange;
     font-weight: bolder;
     text-align: center;
     font-size: 20px;
@@ -19,12 +19,20 @@ th {
 
 td {
     text-align: center;
-    padding-top: 0.7%;
+    padding-top: 3%;
     font-size: 14px;
+    color: black;
+}
+td a{
+    color:gray;
+    font-weight: bold;
+}
+td a:hover{
+    color: chocolate;
 }
 .qna-caution{
     width: 50%;
-    
+    margin-top: 10%;
     margin-left: 33%;
 }
 .qna-caution,
@@ -38,11 +46,12 @@ td {
 .qna-caution li.caution-first{
     font-weight: bold;
     font-size: 20px;
+    margin-top: 3em;
 }
 .qna-caution li.caution-c{
     font-size: 12px;
-    
-    padding-top: 5px;
+    margin-top:1em;
+   
 }
 .page_wrap{
     margin-top: 5%;
@@ -65,20 +74,33 @@ td {
     font-weight: bold;
 }  */
 
-div.ad-content *{
+/* div.ad-content *{
     width: 800px;
     height: 200px;
     margin-left:15%;
-}
+} */
 #btn-news {
     float: right;
-    margin-bottom: 5em;
+    margin-bottom: 10em;
     margin-right: 13em;
 }
+.btn_1{
+    width: 7em;
+    color: black;
+    border: 1.5px solid black;
+    background-color: rgb(226, 226, 226);
+    text-align: center;
 
+}
+a:hover {
+    text-decoration: none;
+}
 
 
 
 ul.side-bar-kdh p#img-title{
     padding-bottom: 10px;
+}
+.coustomer-news{
+    margin-top: 2em;
 }
