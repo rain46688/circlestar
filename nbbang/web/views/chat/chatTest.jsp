@@ -26,7 +26,11 @@
 
 <script>
 
+/* 변경될 부분 지워도됨 */
 let room = 2;
+
+
+
 var pop;
 window.onunload = function() { 
 	pop.close(); 
