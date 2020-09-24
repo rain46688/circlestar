@@ -51,10 +51,10 @@
 	color:gray;
 }
 .card {
-	border: 2px black solid;
+	border: 1px gray solid;
 }
 .card-title {
-	width: 10em;
+	width: 9.5em;
 	height: 1em;
 }
 
