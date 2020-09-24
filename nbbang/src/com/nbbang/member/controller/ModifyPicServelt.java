@@ -65,7 +65,7 @@ public class ModifyPicServelt extends HttpServlet {
 					||ext.equals("JPG")||ext.equals("PNG")||ext.equals("GIF")) {
 				String prev=m.getMemberPicture();
 				File prevFile=new File(savePath+"/"+prev);
-				if(prevFile.exists()) {
+				if(prevFile.exists() && !prev.equals("profileNone.png")) {
 					prevFile.delete();
 				}
 				fileName=file.getName();
