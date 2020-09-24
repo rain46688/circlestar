@@ -42,9 +42,7 @@ pageEncoding="UTF-8"%>
        <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
        
         <input value="<%=loginnedMember.getNickname()%>" class="writing-input" name="csNickname" id="" readonly size="75">
-        <!-- 9999는 Admin에 USID 이다.USID는 회원가입을 하잖아 회원가입을 하면 시퀀스 넘버에 의해 
-            자동으로 증가한다. 일단은 9999로 해놓고 나중에 세션값을 받아와서 닉네임을 조회한 다음에 
-                넘겨서 DB에 넣어라. -->
+
     </div>
       
       <div class="write-title">

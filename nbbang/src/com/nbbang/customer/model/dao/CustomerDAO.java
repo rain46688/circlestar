@@ -147,20 +147,24 @@ public class CustomerDAO {
 	}
 
 	public int insertAnswer(Connection conn, CustomerCenter c) {
-		// TODO Auto-generated method stub
+		System.out.println("c in dao before update: " + c);
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("insertAnswer"));
+
 			pstmt.setString(1, c.getCsAnswer());
+			pstmt.setInt(2,c.getCsId());
 
 			result = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-
 		}
+		
+		
 		return result;
 	}
 
@@ -189,11 +193,18 @@ public class CustomerDAO {
 				cc.setCsNickname(rs.getString("cs_nickname"));
 				cc.setCsAnswer(rs.getString("cs_answer"));
 								
-				
+				List<CustomerFile> files=new ArrayList();
 				CustomerFile cf = new CustomerFile();
 				cf.setCsFileId(rs.getInt(1));
-				cf.setCsFileName(rs.getString(2));
-				cc.cf = cf;
+				cf.setCsFileName(rs.getString(2));//첫번째파일
+				files.add(cf);
+				while(rs.next()) {//기타파일
+					CustomerFile cfEx = new CustomerFile();
+					cf.setCsFileId(rs.getInt(1));
+					cf.setCsFileName(rs.getString(2));
+					files.add(cfEx);
+				}
+				cc.setCf(files);
 				
 			}
 

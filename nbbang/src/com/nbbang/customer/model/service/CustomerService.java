@@ -65,7 +65,7 @@ public class CustomerService {
 	}
 
 	public int insertAnswer(CustomerCenter c) {
-		// TODO Auto-generated method stub
+		System.out.println("c in update: " + c);
 		Connection conn = getConnection();
 		int result = dao.insertAnswer(conn, c);
 		if (result > 0)

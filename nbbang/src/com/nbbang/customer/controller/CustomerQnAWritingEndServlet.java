@@ -106,14 +106,5 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-//	private String getFileName(Part part) {
-//		String contentDisp = part.getHeader("content-disposition");
-//		String[] tokens = contentDisp.split(";");
-//		for (String token : tokens) {
-//			if (token.trim().startsWith("filename")) {
-//				return token.substring(token.indexOf("=") + 2, token.length() - 1);
-//			}
-//		}
-//		return "";
-//	}
+
 }

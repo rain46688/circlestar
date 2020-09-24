@@ -1,7 +1,7 @@
 package com.nbbang.customer.model.vo;
 
 import java.sql.Date;
-import java.util.Arrays;
+import java.util.List;
 
 public class CustomerCenter {
 
@@ -15,13 +15,13 @@ public class CustomerCenter {
 	private String csNickname;
 	private String csAnswer;
 	
-	public CustomerFile cf;//객체값 사용 위해서 public으로 선언하는거에요 getter/setter로 똑같이 접근 가능
+	private List<CustomerFile> cf;//객체값 사용 위해서 public으로 선언하는거에요 getter/setter로 똑같이 접근 가능
 	
-	public CustomerFile getCf() {
+	public List<CustomerFile> getCf() {
 		return cf;
 	}
 
-	public void setCf(CustomerFile cf) {
+	public void setCf(List<CustomerFile> cf) {
 		this.cf = cf;
 	}
 

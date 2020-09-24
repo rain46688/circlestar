@@ -14,7 +14,7 @@ import com.nbbang.customer.model.vo.CustomerCenter;
 /**
  * Servlet implementation class CustomerAnswer
  */
-@WebServlet(description = "/customer/CustmerAnswer", urlPatterns = { "/CustomerAnswer" })
+@WebServlet("/customer/customerAnswerEnd")
 public class CustomerAnswer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,15 +33,31 @@ public class CustomerAnswer extends HttpServlet {
 		// TODO Auto-generated method stub
 		CustomerCenter c = new CustomerCenter();
 		c.setCsAnswer(request.getParameter("admin-answer"));
+		c.setCsId(Integer.parseInt(request.getParameter("csId")));
+		
+		
+		System.out.println(request.getParameter("admin-answer"));
 		
 		int result = new CustomerService().insertAnswer(c);
+		
+		String msg = "";
+		String loc ="/";
+		
 		if(result>0) {
-//			request.setAttribute("msg","문의답변 등록");
-			request.setAttribute("loc", "/customer/customerQnA.jsp");
-		} else {
-			request.setAttribute("msg", "문의답면 실패 ㅡㅡ");
-			request.setAttribute("loc", "/customer/customer");
+			
+			msg="댓글완";
+			loc = ""; 
+			
+		
+			
+		}else {
+			msg="실패"; 
+			loc=""; 
+					
 		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("lodc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
