@@ -26,6 +26,11 @@
 
 <script>
 
+/* 변경될 부분 지워도됨 */
+let room = 2;
+
+
+
 var pop;
 window.onunload = function() { 
 	pop.close(); 
@@ -50,18 +55,19 @@ function nbbang(f){
 }
 
 
+
 function fun_createroom() {
+	
 	$.ajax({
 		type: "GET",
 		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {"boardId":"2"},
+		data: {"boardId":room},
 		dataType: "json",
 		url: "<%=request.getContextPath()%>/chat/createRoom",
 			success : function(data) {
 					console.log("data : "+data);
 				if (data == 1) {
 					//방의 상태를 바꿔야되니 ajax로 갔따오자 방의 상태를 2로 변경함
-					nbbang(this.form);
 				} else {
 					alert('N빵 인원이 다 체워지지 않았습니다.');
 				} 
@@ -74,7 +80,7 @@ function fun_decidebuy(){
 	$.ajax({
 		type: "GET",
 		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"2","flag":"1"},
+		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":room,"flag":"1"},
 		url: "<%=request.getContextPath()%>/chat/decidebuy",
 			success : function(data) {
 				location.reload();
@@ -88,7 +94,7 @@ function fun_cancelbuy() {
 	$.ajax({
 		type: "GET",
 		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"2","flag":"2"},
+		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":room,"flag":"2"},
 		url: "<%=request.getContextPath()%>/chat/decidebuy",
 			success : function(data) {
 				location.reload();

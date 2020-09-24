@@ -44,7 +44,19 @@ public class ChatService {
 	public int decideBuyUser(String usid, String nickname, String boardId, String flag) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int result = cd.decideBuyUser(conn,usid,nickname,boardId,flag);
+		int result = 0;
+		if (usid != null) {
+			if (flag.equals("1")) {
+				if(cd.decideBuyUserCheck(conn,boardId,usid) == 1) {
+					result =  2;
+				}else {
+					result = cd.decideBuyUser(conn,boardId,usid,nickname);
+				}
+			} else if (flag.equals("2")) {
+				result = cd.decideBuyUser(conn,boardId,usid);
+				if(result == 1) result=3;
+			}
+		}
 		if(result > 0) {
 			commit(conn);
 		}else {
@@ -57,10 +69,22 @@ public class ChatService {
 	public int insertChatMsg(List<Message> list) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int result = cd.insertChatMsg(conn,list);
+		int result = 0;
+		for (Message msg : list) {
+			result = cd.insertChatMsg(conn,msg);
+			if(result == 0) {
+				rollback(conn);
+				return result;
+			}
+		}
+		System.out.println("여기 실행안됨??");
+		list.clear();
+		System.out.println(" === 리스트 쌓인거 전송하고 클리어 Service === ");
 		if(result > 0) {
+			System.out.println("커밋 !");
 			commit(conn);
 		}else {
+			System.out.println("커밋 안됨");
 			rollback(conn);
 		}
 		close(conn);
