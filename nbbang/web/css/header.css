@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* header 관련 css 추가할꺼 넣기*/
 
+#container {
+	width: 100%;
+}
+
 /* 헤더부분 폰트 설정 */
 header{
 	font-family: 'Do Hyeon', sans-serif;
@@ -37,10 +41,14 @@ header{
 div#topBtn>button{
 	background-color: #ecaf59;
 	margin-right: 0.25em;
-	color: white;
-	border: none;
+	color: black;
+	border: 2px black solid;
 }
 
+div#topBtn>button:hover{
+	color:white;
+}
+	
 /* 메뉴바 */
 .nav{
 	clear: both;
@@ -48,6 +56,8 @@ div#topBtn>button{
 	justify-content: center;
 	align-items: center;  
 	font-size: 30px;
+	border:2px black solid;
+	width:100%;
 }
 
 .nav-link{
@@ -56,18 +66,25 @@ div#topBtn>button{
 
 header>nav>ul{
 	background-color: #FFC107;
+	width:100%;
 }
 
 header>nav>ul>li{
-	margin-left: 1.25em;
-	margin-right: 1.25em;
-	text-align:center
+	padding-left: 1.25em;
+	padding-right: 1.25em;
+	text-align:center;
 }
 header>nav>ul>li>a {
 	width:5em;
+	-webkit-transition: .15s all;   
+    -webkit-transition-delay: 0.15s; 
+    transition: .15s all;   
+    transition-delay: 0.15s;
 }
 header>nav>ul>li>a:hover {
 	color:white;
+	-webkit-transition-delay: 0s;
+    transition-delay: 0s;
 }
 
 

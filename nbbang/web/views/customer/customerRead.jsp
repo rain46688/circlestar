@@ -1,3 +1,4 @@
+<%@page import="com.nbbang.customer.model.vo.CustomerFile"%>
 <%@page import="java.util.List"%>
 <%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,7 +11,7 @@ pageEncoding="UTF-8"%>
 <jsp:include page="maincss.jsp"></jsp:include>
 <%
 
-CustomerCenter c=(CustomerCenter)request.getAttribute("c");
+ CustomerCenter c=(CustomerCenter)request.getAttribute("cc");
 List<CustomerCenter> list = (List) request.getAttribute("list");
 %>
 <style>
@@ -61,88 +62,185 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
   div#submitBtn {
     margin-top: 35%;
   }
+
+  d
+
+  .imgList {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .imgC p {
+    text-align: center;
+  }
+
+  .modal {
+    display: none;
+    z-index: 500;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .modal button {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    background: transparent;
+    border: 0;
+    color: #ffffff;
+    font-size: 3rem;
+  }
+
+  .modalBox {
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    background-color: #ffffff;
+    width: 30%;
+    height: 30%;
+    text-align: center;
+  }
+
+  .modalBox img {
+    width: 100%;
+  }
+
+  .modalBox p {
+    color: #ffffff;
+    background-color: #000;
+    font-size: 2rem;
+    padding: .2rem;
+  }
 </style>
 
 <div id="QA-container">
 
-  <form action="#" method="post"
-    enctype="multipart/form-data">
+  <form action="#" method="post" enctype="multipart/form-data">
     <div class="question-container">
 
       <div class="write-content">
 
-        <image src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
+        <img src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
+        <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
+
+        <div class="content-write" name="csContent">
+
+          <p><%=c.getCsContent() %></p>
+        </div>
+      </div>
+      <div class="writing-date">
+        <p><%=c.getCsDate() %></p>
+      </div>
+      <div class="file-upload">
+        <%for(CustomerFile cf : c.getCf()){ %>
 
           
-          <div class="content-write" name="contentwrite">
-            <p>zzzzzzzfddddz</p>
-          </div>
+          <div class="imgList">
+          <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
+            width="60" height="60">
+          <p><%=cf.getCsFileName() %> </p>
         </div>
         
-        <div class="file-upload">
-          <p id="file">첨부파일
-              
-          </p>
-        </div>
-
-
-        <div class="comment-container">
-          <div class="comment-editor">
-            <form action="<%=request.getContextPath()%>/customer/CustmerAnswer" method="post">
-              <textarea name="admin-answer"  cols="60" rows="10"></textarea>
-              
-              <button type="submit" id="btn-insert">등록</button>
-            </form>
+        <!-- 팝업 될 곳 -->
+        <div class="modal">
+          <button>&times;</button>
+          <div class="modalBox">
+            <img src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
+              alt="<%=cf.getCsFileName() %>">
+            <p></p>
           </div>
         </div>
-    </div>
-
-    <div class="hr-line">
-      <hr id="hr-line">
-    </div>
-
-
-    <div class="answer-container">
-      <image src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
-        
-        <% if(list.isEmpty()) {%>
-        <div class="answer-content">
-          <p>zzzzzzzzzzzzzzzzzz</p>
-        </div>
-        <div class="answer-date">
-          zzzzzzzzzzzzzzzzzzzzzz
-        </div>
-        <%}else{
-            for(CustomerCenter cc : list) {%>
-        <div class="answer-content">
-          <p><%=c.getCsAnswer()%></p>
-        </div>
-        <div class="answer-date">
-          <%=c.getCsDate()%>
-        </div>
-        <%
-      }
-    }
-    %>
-    </div>
-
-
-
-
-    <%--              <%for(CustomerCenter cc : list){%>
-    <div class="wrtie-content">
-      <textarea name="contentwrite" rows="5" cols="50">
-                <%=cc.getCsContent()%>
-                          </textarea>
-    </div>
-    <div class="file-upload">
-      <div>
-        <%=cc.getCsDate()%>
-      </div>
-      <%}%>
+       
+        <%} %>
       
-          </div> --%>
+      </div>
 
   </form>
+  
+  
+  <div class="hr-line">
+    <hr id="hr-line">
+  </div>
+  
+  
+
 </div>
+
+  <div class="comment-container">
+    <div class="comment-editor">
+     <%if(c.getCsContent()!=null){ %>
+      <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
+        <div class="answer-content">
+          <input type="hidden" name="csId" value="<%=c.getCsId()%>">
+          <textarea name="admin-answer" cols="60" rows="10"></textarea>
+  
+        </div>
+        <button type="submit" id="btn-insert" >등록</button>
+        </form>
+   <%}else{ 
+				
+				%>
+      <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
+   <div class="answer-container"> 
+     <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> 
+    
+    
+  <div class="answer-content"> 
+    
+     <p><%=c.getCsAnswer()%></p> 
+  </div> 
+  <div class="answer-date"> 
+    
+    <%=c.getCsDate()%>
+  </div> 
+  
+ </div> 
+      </form>
+      
+  </div>
+  </div>
+    <%
+}%> 
+<script>
+  $(function () {
+    // 	이미지 클릭시 해당 이미지 모달
+    $(".imgC").click(function () {
+      $(".modal").show();
+      // 해당 이미지 가겨오기
+      var imgSrc = $(this).children("img").attr("src");
+      var imgAlt = $(this).children("img").attr("alt");
+      $(".modalBox img").attr("src", imgSrc);
+      $(".modalBox img").attr("alt", imgAlt);
+
+
+
+      // 해당 이미지에 alt값을 가져와 제목으로
+      $(".modalBox p").text(imgAlt);
+    });
+
+    //.modal안에 button을 클릭하면 .modal닫기
+    $(".modal button").click(function () {
+      $(".modal").hide();
+    });
+
+    //.modal밖에 클릭시 닫힘
+    $(".modal").click(function (e) {
+      if (e.target.className != "modal") {
+        return false;
+      } else {
+        $(".modal").hide();
+      }
+    });
+  });
+</script>
+
+
+
 <%@ include file="/views/common/footer.jsp"%>

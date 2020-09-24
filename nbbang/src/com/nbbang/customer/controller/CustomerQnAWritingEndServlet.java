@@ -72,9 +72,13 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		c.setCsWriterUsid(Integer.parseInt(mr.getParameter("csWriterUsid")));
 		System.out.println(mr.getParameter("csWriterUsid"));
 		c.setCsType(mr.getParameter("csType"));
+		System.out.println(mr.getParameter("csType"));
 		c.setCsTitle(mr.getParameter("csTitle"));
+		System.out.println(mr.getParameter("csTitle"));
 		c.setCsContent(mr.getParameter("csContent"));
+		System.out.println(mr.getParameter("csContent"));
 		c.setCsNickname(mr.getParameter("csNickname"));
+		System.out.println(mr.getParameter("csNickname"));
 		
 		
 		
@@ -102,14 +106,5 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-//	private String getFileName(Part part) {
-//		String contentDisp = part.getHeader("content-disposition");
-//		String[] tokens = contentDisp.split(";");
-//		for (String token : tokens) {
-//			if (token.trim().startsWith("filename")) {
-//				return token.substring(token.indexOf("=") + 2, token.length() - 1);
-//			}
-//		}
-//		return "";
-//	}
+
 }

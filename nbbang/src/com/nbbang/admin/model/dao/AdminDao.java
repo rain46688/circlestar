@@ -92,6 +92,107 @@ public class AdminDao {
 			e.printStackTrace();
 		}
 	}
+
+	public List<CustomerCenter> customerList(Connection conn, int cPage, int numPerPage, String a, String select, String search) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		List<CustomerCenter> list = new ArrayList<CustomerCenter>();
+		String sql = prop.getProperty("customerListSearch").replace("$s", select);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, a);
+			pstmt.setInt(3, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(4, cPage * numPerPage);
+			rs = pstmt.executeQuery();
+			print(list, rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int customerListCount(Connection conn, String a, String select, String search) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		String sql = prop.getProperty("customerListSearchCount").replace("$s", select);
+		System.out.println("sql"+sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, a);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
+	}
+
+	public List<CustomerCenter> customerList(Connection conn, int cPage, int numPerPage, String a, String search) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		List<CustomerCenter> list = new ArrayList<CustomerCenter>();
+		String sql = prop.getProperty("customerListAllSearch");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, "%"+search+"%");
+			pstmt.setString(3, "%"+search+"%");
+			pstmt.setString(4, a);
+			pstmt.setInt(5, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(6, cPage * numPerPage);
+			rs = pstmt.executeQuery();
+			print(list, rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int customerListCount(Connection conn, String a, String search) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		String sql = prop.getProperty("customerListAllSearchCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, "%"+search+"%");
+			pstmt.setString(3, "%"+search+"%");
+			pstmt.setString(4, a);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
+	}
 	
 	
 	

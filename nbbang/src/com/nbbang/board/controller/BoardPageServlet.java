@@ -33,6 +33,7 @@ public class BoardPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String boardId = request.getParameter("boardId");
+		int writerUsid = Integer.parseInt(request.getParameter("writerUsid"));
 		
 		Cookie[] cookies = request.getCookies();
 		String boardHistory = "";
@@ -59,12 +60,22 @@ public class BoardPageServlet extends HttpServlet {
 			c.setMaxAge(-1);
 			response.addCookie(c);
 		}
-		Card c = new BoardService().boardPage(boardId, hasRead);
+		Card c = new BoardService().boardPage(boardId, hasRead, writerUsid);
+		
+		
 		if(c==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
 			request.setAttribute("loc", "/boList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
+			System.out.println(c.getWriterProfile());
+			String temp = c.getCardBoard().getTradeArea();
+			if(temp!=null) {
+				if(temp.length()>8) {
+				String newTemp = temp.substring(0, temp.indexOf(" ", temp.indexOf(" ") + 1));
+				c.getCardBoard().setTradeArea(newTemp);
+				}
+			}
 			request.setAttribute("curCard", c);
 			request.getRequestDispatcher("/views/board/boPage.jsp").forward(request, response);
 		}

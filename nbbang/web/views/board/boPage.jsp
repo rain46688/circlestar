@@ -186,16 +186,59 @@
   .turnRed {
     background-color: red;
   }
+  #userThumb>img {
+  	border-radius: 70%;
+  }
+  #comment_thumb>img {
+  	border-radius: 70%;
+  }
 </style>
 <section>
   <div id="wrapper">
     <div id="imageWrapper">
-      <img src="<%= request.getContextPath() %>/upload/images/<%= c.getCardFile().getFileName()[0] %>" alt="" width="700em" height="400em">
-      <!-- carousel 적용할 예정 -->
+      <%-- <img src="<%= request.getContextPath() %>/upload/images/<%= c.getCardFile().getFileName()[0] %>" alt="" width="700em" height="400em">
+      <!-- carousel 적용할 예정 --> --%>
+      <div id="carouselField" name="carouselField" >
+        <div id="carouselNB" class="carousel slide " data-ride="carousel" data-interval="false">
+          <ol class="carousel-indicators">
+      <% for(int i = 0; i < c.getCardFile().getFileName().length; i++)  {%>
+            <% if(i==0) { %>
+            <li data-target="#carouselInhee" data-slide-to="<%= i %>" class="active"></li>
+            <% }else { %>
+              <li data-target="#carouselInhee" data-slide-to="<%= i %>"></li>
+            <% }} %>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <% for(int i = 0; i < c.getCardFile().getFileName().length; i++)  {%>
+              <% if(i==0) { %>
+            <div class="carousel-item active">
+              <img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[i] %>"
+                class="d-block w-100" alt="..." width="700em" height="400em">
+            </div>
+            <% }else { %>
+              <div class="carousel-item">
+                <img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[i] %>"
+                  class="d-block w-100" alt="..." width="700em" height="400em">
+              </div>
+            <% }} %>
+          </div>
+    
+          <a class="carousel-control-prev" href="#carouselNB" role="button"
+            data-slide="prev"> <span class="carousel-control-prev-icon"
+            aria-hidden="true"></span> <span class="sr-only">Previous</span>
+          </a> 
+          <a class="carousel-control-next" href="#carouselNB" role="button"
+            data-slide="next"> <span class="carousel-control-next-icon"
+            aria-hidden="true"></span> <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
     </div>
     <div id="userInfo">
     	<hr>
-      <div id="userThumb"><img src="<%= request.getContextPath() %>/images/bread.png" alt="" width="40px" height="40px"></div>
+      <div id="userThumb">
+        <img src="<%= memberPic + c.getWriterProfile() %>" alt="" width="40px" height="40px">
+      </div>
         <div id="userIdAndAddress">
           <div id="userId"><%= c.getCardBoard().getWriterNickname() %></div>
           <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div>
@@ -219,7 +262,7 @@
       </div>
       <br>
       <div id="contentText"><%= c.getCardBoard().getContent() %></div>
-      <div id="etcInfo"><a href="#">신고하기</a> <a href="#">제품 페이지</a></div>
+      <div id="etcInfo"><a href="#">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
     </div>
     <div id="commentSection">
       <div id="commentInsert">
@@ -233,36 +276,26 @@
       </div>
     <div id="Comments">
       <ul class="comment_list">
-        <li class="comment_item">
-          <hr>
-          <div class="comment_area">
-            <div class="comment_thumb">
-            <img src="<%= request.getContextPath() %>/images/logo.png" alt="" width="30px" height="30px">
-            </div>
-            <div class="comment_box">
-              <div class="comment_id">
-                아이디
-              </div>
-            <div class="comment_text">
-              내용
-            </div>
-            <div class="comment_info">
-              1993.01.11 19:33 답글쓰기 
-            </div>
-          </div>
-          </div>
-        </li>
+        <!-- 댓글이 들어갈 곳 -->
       </ul>
     </div>
     </div>
   </div>
 </section>
 <script>
+	$("#commentContent").keypress(function(e){
+		if(e.keyCode == 13) {
+			$("#commentInsertBtn").click();
+			$("#commentContent").val("");
+			return false;
+		}
+	});
+
     $(document).ready(function () {
         fn_commentList();
 
         $("#likeFunc").click(function (e) {
-            if ($("#likeFunc").css("background-color") == "rgba(0, 0, 0, 0)") {
+            if ($("#likeFunc").css("background-color") == "rgb(239, 239, 239)") {
                 $.ajax({
                     url: "<%=request.getContextPath()%>/board/boardLike?key=insert",
                     type: "post",
@@ -285,7 +318,7 @@
                         'boardId': '<%= c.getCardBoard().getBoardId() %>'
                     },
                     success: function (data) {
-                        $("#likeFunc").css("background-color", "rgba(0, 0, 0, 0)");
+                        $("#likeFunc").css("background-color", "rgb(239, 239, 239)");
                     }
                 })
             }
@@ -331,8 +364,8 @@
                     html += "<hr>";
                     html += "<div class='comment_area'>";
                     html += "<div class='comment_thumb'>";
-                    html += "<img src='<%= request.getContextPath() %>/images/logo.png' alt='' width='30px'" +
-                            " height='30px'>";
+                    html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
+                            " height='30px' style='border-radius: 70%'>";
                     html += "</div>";
                     html += "<div class='comment_box'>";
                     html += "<div class='comment_id'>";
@@ -348,7 +381,7 @@
             }
         })
     }
-
+    
     $("#startBtn").click(function (e) {})
 </script>
 <%@ include file="/views/common/footer.jsp" %>

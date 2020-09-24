@@ -43,12 +43,13 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardList");
+		System.out.println(boardTitle);
 		List<Card> list = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (cPage-1)*numPerPage+1);
-			pstmt.setInt(2, cPage*numPerPage);
-			pstmt.setString(3, boardTitle);
+			pstmt.setString(1, boardTitle);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
 			rs = pstmt.executeQuery();
 			list = new ArrayList<Card>();
 			while(rs.next()) {
@@ -96,8 +97,13 @@ public class BoardDao {
 				c.getCardBoard().setContent(rs.getString("CONTENT"));
 				c.getCardBoard().setEnrollDate(rs.getDate("ENROLL_DATE"));
 				c.getCardBoard().setHit(rs.getInt("HIT"));
+				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
 				c.getCardBoard().setProductCategory(rs.getString("PRODUCT_CATEGORY"));
-				c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				try {
+					c.getCardBoard().setTradeArea(new AESCrypto().decrypt(rs.getString("TRADE_AREA")));
+				} catch (Exception e) {
+					c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				}
 				c.getCardBoard().setMaxMems(rs.getInt("MAX_MEMS"));
 				c.getCardBoard().setLimitTime(rs.getDate("LIMIT_TIME"));
 				c.getCardBoard().setTradeStage(rs.getInt("TRADE_STAGE"));
@@ -117,13 +123,37 @@ public class BoardDao {
 		return c;
 	}
 	
-	public int boardListCount(Connection conn) {
+	public Card boardPageForProfile(Connection conn, Card c, int writerUsid) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("boardPageForProfile");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, writerUsid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				c.setWriterProfile(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return c;
+	}
+	
+	
+	
+	public int boardListCount(Connection conn, String boardTitle) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardListCount");
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardTitle);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
@@ -192,7 +222,7 @@ public class BoardDao {
 			close(pstmt);
 		}return result;
 	}
-	
+	//유저측 관심 수 업데이트
 	public int boardLikeInsert(Connection conn, LikeList list) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -208,6 +238,22 @@ public class BoardDao {
 		}return result;
 	}
 	
+	//해당 보드에 관심 수 업데이트
+	public int boardLikeUpdate(Connection conn, LikeList list) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardLikeUpdate"));
+			pstmt.setInt(1, list.getLikeBoardId().get(0));
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	//유저측 likelist에서 줄이기
 	public int boardLikeDelete(Connection conn, LikeList list) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -215,6 +261,21 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(prop.getProperty("boardLikeDelete"));
 			pstmt.setInt(1, list.getLikeUsid());
 			pstmt.setInt(2, list.getLikeBoardId().get(0));
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	//보드측 like 갯수 줄이기
+	public int boardLikeDeleteUpdate(Connection conn, LikeList list) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardLikeDeleteUpdate"));
+			pstmt.setInt(1, list.getLikeBoardId().get(0));
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -273,6 +334,7 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
 	
 	private String[] stringToArr(String str) {
 		if(str==null) {

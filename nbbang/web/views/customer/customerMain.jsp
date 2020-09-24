@@ -13,7 +13,7 @@ figure.snip1384 {
   position: relative;
   overflow: hidden;
   margin-left: 40%;
-  margin-top: 3%;
+  margin-top: 4%;
   width: 600px;
   height: 700px;
   color: #ffffff;

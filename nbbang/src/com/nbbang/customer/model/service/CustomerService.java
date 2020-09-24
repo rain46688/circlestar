@@ -65,7 +65,7 @@ public class CustomerService {
 	}
 
 	public int insertAnswer(CustomerCenter c) {
-		// TODO Auto-generated method stub
+		System.out.println("c in update: " + c);
 		Connection conn = getConnection();
 		int result = dao.insertAnswer(conn, c);
 		if (result > 0)
@@ -74,6 +74,15 @@ public class CustomerService {
 			rollback(conn);
 		close(conn);
 		return result;
+	}
+
+	public CustomerCenter viewDetailRead(int num) {
+		Connection conn = getConnection();
+		System.out.println("num in service: " + num);
+		CustomerCenter cc= dao.viewDetailRead(conn, num);
+		
+		close(conn);
+		return cc;
 	}
 
 }
