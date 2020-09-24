@@ -124,7 +124,10 @@ String a = (String) request.getParameter("a");
 
 <script>
 $(".divRow").click(e=>{
-    location.assign('<%=request.getContextPath()%>/admin/adminCustomerPage?cid='+$(e.target).parent().children('div').html());
+	/* 상세 페이지를 따로 만들 필요없이 도환이 고객센터 상세 페이지로 연결 세션이 어드민일경우에 "답변 작성 폼이있고 완료를 누를 경우 
+	답변(CS_ANSWER)이 등록되며 처리 상태(CS_ISCHECK = 1)로 넘어감 이미 처리 상태 일경우에 기존 답변을 가져와서 다시 수정후 넘길수있게 도 가능하면
+	좋겠음" 일단 CS_ID 파라미터 cid로 넘김 나중에 수정하길*/
+    location.assign('<%=request.getContextPath()%>/customer/customerReadFrm?cid='+$(e.target).parent().children('div').html());
 })
 
 </script>
