@@ -26,7 +26,8 @@ public class TradePastPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("과거");
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		request.getRequestDispatcher("/views/member/past.jsp").forward(request, response);
 	}
 
 	/**
