@@ -7,7 +7,9 @@ import static com.nbbang.common.temp.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
+import com.nbbang.board.model.vo.Card;
 import com.nbbang.member.model.dao.MemberDao;
 import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.LikeList;

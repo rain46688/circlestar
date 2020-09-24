@@ -117,7 +117,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
     padding: .2rem;
   }
 </style>
-
+<section>
 <div id="QA-container">
 
   <form action="#" method="post" enctype="multipart/form-data">
@@ -129,7 +129,6 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
         <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
 
         <div class="content-write" name="csContent">
-
           <p><%=c.getCsContent() %></p>
         </div>
       </div>
@@ -178,8 +177,8 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
       <div class="answer-content">
         <input type="hidden" name="csId" value="<%=c.getCsId()%>">
         <textarea name="admin-answer" cols="60" rows="10"></textarea>
-
       </div>
+
       <button type="submit" id="btn-insert">등록</button>
     </form>
     <%}else{ 
@@ -240,5 +239,5 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 </script>
 
 
-
+</section>
 <%@ include file="/views/common/footer.jsp"%>
