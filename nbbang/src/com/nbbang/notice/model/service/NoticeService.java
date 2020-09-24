@@ -13,28 +13,21 @@ public class NoticeService {
 
 	private NoticeDAO dao=new NoticeDAO();
 	
-	public List<Notice> selectNoticeList(int cPage, int numPerPage) {
+	public List<Notice> noticeList(int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
 		Connection conn=getConnection();
-		List<Notice> list=dao.selectNoticeList(conn,cPage,numPerPage);
+		List<Notice> list=dao.noticeList(conn,cPage,numPerPage);
 		close(conn);
 		return list;
 	}
 
-	public int selectNoticeCount() {
+	public int noticeListCount() {
 		// TODO Auto-generated method stub
 		Connection conn=getConnection();
-		int count=dao.selectNoticeCount(conn);
+		int count=dao.noticeListCount(conn);
 		close(conn);
 		return count;
 	}
 
-	public Notice picNotice(int no) {
-		// TODO Auto-generated method stub
-		Connection conn=getConnection();
-		Notice n=dao.picNotice(conn,no);
-		close(conn);
-		return n;
-	}
 
 }

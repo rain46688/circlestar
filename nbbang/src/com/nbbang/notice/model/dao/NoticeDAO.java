@@ -29,26 +29,24 @@ public class NoticeDAO {
 		}
 	}
 	
-	public List<Notice> selectNoticeList(Connection conn, int cPage, int numPerPage) {
+	public List<Notice> noticeList(Connection conn, int cPage, int numPerPage) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<Notice> list = new ArrayList();
+		List<Notice> list = new ArrayList<Notice>();
 		try {
-			pstmt = conn.prepareStatement(p.getProperty("selectNoticeList"));
-			System.out.println("123123123123123"+p.getProperty("selectNoticeList"));
+			pstmt = conn.prepareStatement(p.getProperty("noticeList"));
 			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
 			pstmt.setInt(2, cPage * numPerPage);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Notice n = new Notice();
-				n.setNoticeNo(rs.getInt("notice_no"));
-				n.setNoticeTitle(rs.getString("notice_title"));
-				n.setNoticeWriter(rs.getString("notice_writer"));
-				n.setNoticeContent(rs.getNString("notice_content"));
-				n.setNoticeDate(rs.getDate("notice_date"));
-				n.setFilePath(rs.getString("filepath"));
-				n.setStatus(rs.getString("status") == "Y" ? true : false);
+				n.setNoticeId(rs.getInt("NOTICE_ID"));
+				n.setNoticeAdminUsid(rs.getString("NOTICE_ADMIN_USID"));
+				n.setNoticeWriteNickname(rs.getString("NOTICE_WRITE_NICKNAME"));
+				n.setNoticeTitle(rs.getString("NOTICE_TITLE"));
+				n.setNoticeContent(rs.getNString("NOTICE_CONTENT"));
+				n.setNoticeDate(rs.getDate("NOTICE_DATE"));
 				list.add(n);
 			}
 
@@ -63,13 +61,13 @@ public class NoticeDAO {
 		
 	}
 
-	public int selectNoticeCount(Connection conn) {
+	public int noticeListCount(Connection conn) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
 		try {
-			pstmt = conn.prepareStatement(p.getProperty("selectNoticeCount"));
+			pstmt = conn.prepareStatement(p.getProperty("noticeListCount"));
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				result = rs.getInt(1);
@@ -83,50 +81,5 @@ public class NoticeDAO {
 		return result;
 	}
 
-	public Notice picNotice(Connection conn, int no) {
-		// TODO Auto-generated method stub
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Notice n=null;
-		try {
-			pstmt = conn.prepareStatement(p.getProperty("picNotice"));
-			pstmt.setInt(1, no);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				n=new Notice();
-				n.setNoticeNo(rs.getInt("notice_no"));
-				n.setNoticeTitle(rs.getString("notice_title"));
-				n.setNoticeWriter(rs.getString("notice_writer"));
-				n.setNoticeContent(rs.getString("notice_content"));
-				n.setFilePath(rs.getString("filepath"));
-				n.setNoticeDate(rs.getDate("notice_date"));
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(conn);
-			close(pstmt);
-		}
-		return n;
-	}
-
-	public int insertNotice(Connection conn, Notice n) {
-		// TODO Auto-generated method stub
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(p.getProperty("insertNotice"));
-			pstmt.setString(1, n.getNoticeTitle());
-			pstmt.setString(2, n.getNoticeWriter());
-			pstmt.setString(3, n.getNoticeContent());
-			pstmt.setString(4, n.getFilePath());
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
 
 }
