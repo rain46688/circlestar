@@ -56,11 +56,6 @@
     font-size: 1.7em;
   }
 
-
-  #startBtn>button {
-    width: 5em;
-  }
-
   #priceAndLikeBtn {
     text-align: left;
     padding-top: 0.5em;
@@ -176,12 +171,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  #likeBtn, #startBtn {
-    /* width: 5em; */
+  #startBtn {
     margin-left: 2.5px;
-    text-align: right;
-    float: right;
-    font-size: 20px;
+    float: left;
+    font-size: 18px;
   }
   .turnRed {
     background-color: red;
@@ -249,13 +242,13 @@
     <div class="content">
       <hr>
       <div id="title">
-        <div id="titleContent"><p><%= c.getCardBoard().getBoardTitle() %>가나다라마바사아만아답자당마자다나아자</p></div>
-      
-        <div id="startBtn" onclick="fun_decidebuy()"><button>n빵하기</button></div>
-           <div id="startBtn" onclick="fun_cancelbuy()"><button>취소</button></div>
-              <div id="startBtn" onclick="fun_createroom()"><button>인원 차서 방장이 방열기</button></div>
-        
-                			<form name="form">
+        <div id="titleContent"><p><%= c.getCardBoard().getBoardTitle() %></p></div>
+        <div id="startBtn">
+        <button onclick="fun_decidebuy();">n빵하기</button>
+        <button onclick="fun_cancelbuy();">취소</button>
+        <button onclick="fun_createroom();">인원 차서 방장이 방열기</button>
+        <button id="likeFunc" class="<% if(likelist!=null&&likelist.contains(c.getCardBoard().getBoardId())) {%>turnRed<%}%>">❤️</button>
+        <form name="form">
 				<!-- 디비에서 객체를 받아와서 다시 넣어야됨 일단은 리터럴로 넘김 -->
 					<!-- BOARD 컬럼의  BOARD_ID -->
 					<input type="hidden" name="boardId" value="${curCard.cardBoard.boardId}"> 
@@ -266,14 +259,15 @@
 					<!-- BOARD 컬럼의  WRITER_USID -->
 					<input type="hidden" name="writerUsid" value="${loginnedMember.usid}">
 					<!-- MEMBER 컬럼의  MEMBER_PICTURE -->
-					<input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
-					<button onclick="nbbang(this.form)" class="btn btn-success">채팅방 접속하기</button>	
-				</form>
-				
-        <div id="likeBtn"><button id="likeFunc" class="<% if(likelist!=null&&likelist.contains(c.getCardBoard().getBoardId())) {%>turnRed<%}%>">❤️</button></div>
+          			<input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
+          <!-- <%-- <% if(c.getCardBoard().getTradeStage()>1) {%> --%> -->
+					<button onclick="nbbang(this.form)" >채팅방 접속하기</button>	
+          <!-- <%-- <%}%> --%> -->
+        </form>
+     	</div>
       </div>
       
-      <div id="date"><%= c.getCardBoard().getEnrollDate() %> <%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회수 </div>
+      <div id="date"><%= c.getCardBoard().getEnrollDate() %>  관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %></div>
       <!-- 가격 -->
       <div id="priceAndLikeBtn">
           <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
@@ -473,7 +467,5 @@ function fun_cancelbuy() {
             }
         })
     }
-    
-    $("#startBtn").click(function (e) {})
 </script>
 <%@ include file="/views/common/footer.jsp" %>
