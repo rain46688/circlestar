@@ -4,9 +4,18 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
-<%
+<% 
+Member loginedMember = new Member(); //세션저장용
 
 List<CustomerCenter> list = (List) request.getAttribute("list");
+
+loginedMember = (Member)session.getAttribute("loginnedMember");
+System.out.println("loginedMem in jsp: "+ loginedMember);
+System.out.println("list in jsp: "+ list);
+
+ int loginedId = loginnedMember.getUsid(); //로그인한 멤버 아이디?usId가 먼지 모르겟음
+ System.out.println("loginedId in jsp: "+ loginedId); 
+ 
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/main.css" type="text/css">
 
@@ -55,7 +64,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 					<th>문의날짜</th>
 					
 				</tr>
-				<% if(list.isEmpty()){ %>
+				<%-- <% if(list.isEmpty()){ %> --%>
 					
 				<tr>
 					<td>1</td>
@@ -65,32 +74,31 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 					<td>2020.09.16</td>
 				</tr>
 				
-				<%}else{
+				<%
 					for(CustomerCenter cc : list) { %>
+ 
 						<tr>
 					<td> <%=cc.getCsId()%> </td>
-					
 					<td>
 					<a href="<%=request.getContextPath()%>/admin/adminCustomerList"></a>
 					<%=cc.getCsType()%></td>
-					
+				
 					<td>
 						
-						<a href="<%=request.getContextPath()%>/customer/customerReadFrm">
+						<a href="<%=request.getContextPath()%>/customer/customerReadFrm?num=<%=cc.getCsId() %>">
 							<%=cc.getCsTitle()%> 
 						</a>
-						<!-- <div class="container"> -->
 							
 						</td>
 						
 						<td><%=cc.getCsNickname()%></td>
-						
+			
 						<td><%=cc.getCsDate()%></td> 
 						
 					</tr>
 					<%
 				}
-			}
+					
 			%>
 			
 		</thead>

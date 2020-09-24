@@ -37,6 +37,7 @@ public class CustomerReadFrm extends HttpServlet {
 	
 		
 		//저기뒤에 매개변수로 넘기는 건 jsp에서 보내오는 값. 이름이 같아야함.
+		System.out.println("request.getParameter(\"num\"): " + request.getParameter("num"));
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		//이런거 보내고 나서 꼭 확인
