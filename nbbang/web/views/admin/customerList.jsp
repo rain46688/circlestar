@@ -123,14 +123,8 @@ String a = (String) request.getParameter("a");
 </div>
 
 <script>
-
 $(".divRow").click(e=>{
-	//console.log("타겟 : "+$(e.target).html())
-	let id = $(e.target).parent().children('div').html();	
-	console.log(id);
-	location.replace("'<%=request.getContextPath()%>/admin/adminCustomerPage?cid="+id+"'");
-	
-	
+    location.assign('<%=request.getContextPath()%>/admin/adminCustomerPage?cid='+$(e.target).parent().children('div').html());
 })
 
 </script>
