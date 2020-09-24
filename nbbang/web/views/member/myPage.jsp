@@ -107,6 +107,7 @@ button#chargebtn{
             <p class="memberInfoText">&nbsp;가입일:&nbsp;<%=m.getEnrollDate() %></p>
             <span class="memberInfoText">신고당한 횟수:&nbsp;<%=request.getAttribute("reportCount") %></span><br>
             <form action="" name="chargePoint">
+            	<input type="hidden" name="usid" value="<%=m.getUsid()%>">
             </form>
          </div>
       </div>

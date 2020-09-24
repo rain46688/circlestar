@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.nbbang.member.model.vo.Member" %>
  <%
-String name = (String) request.getAttribute("name");
-String email = (String) request.getAttribute("email");
-String phone = (String) request.getAttribute("phone");
-String address = (String) request.getAttribute("address");
-int totalPrice =  5000;
+	String email=(String)request.getAttribute("email");
+	String name=(String)request.getAttribute("name");
+	String phone=(String)request.getAttribute("phone");
+	String address=(String)request.getAttribute("address");
+	Member m=(Member)request.getAttribute("member");
 %>
 <!DOCTYPE html>
 <html>
@@ -88,87 +88,102 @@ body *{
   border-radius: 50%;
   background:white;
 }
+div#radioContainer{
+	margin: 10% 5% 0 5%;
+	padding: 3%;
+}
+#chargeBtn{
+        outline: none;
+        background: #735020;
+        width: 40%;
+        border: none;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 18px;
+		cursor: pointer;
+		text-align: center;
+		margin: 0 30%;
+    }
 </style>
 </head>
 <body>
-<div class="card-body bg-white mt-0 shadow">
-	<p style="font-size: 20px; text-align: center;">포인트 충전하기</p>
-	<div id="radioContainer">
-		<label class="container">One
-		<input type="radio" name="money" checked>
-		<span class="checkmark"></span>
-		</label>
+<div class="card-body bg-white mt-0">
+	<p style="font-size: 25px; text-align: center;">포인트 충전하기</p>
+		<div id="radioContainer">
+			<label class="container">5000
+			<input type="radio" name="money" value="5000" checked>
+			<span class="checkmark"></span>
+			</label>
+			
+			<label class="container">10000
+			<input type="radio" name="money" value="10000">
+			<span class="checkmark"></span>
+			</label>
+			
+			<label class="container">15000
+			<input type="radio" name="money" value="15000">
+			<span class="checkmark"></span>
+			</label>
 		
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
+			<label class="container">20000
+			<input type="radio" name="money" value="15000">
+			<span class="checkmark"></span>
+			</label>
 		
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
-	
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
-	
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
-	
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
-	
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
-	
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
-	
-	
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
-	
-	
-		<label class="container">Two
-		<input type="radio" name="money">
-		<span class="checkmark"></span>
-		</label>
+			<label class="container">25000
+			<input type="radio" name="money" value="15000">
+			<span class="checkmark"></span>
+			</label>
+		
+			<label class="container">30000
+			<input type="radio" name="money" value="15000">
+			<span class="checkmark"></span>
+			</label>
+		
+			<label class="container">35000
+			<input type="radio" name="money" value="15000">
+			<span class="checkmark"></span>
+			</label>
+		
+			<label class="container">40000
+			<input type="radio" name="money" value="15000">
+			<span class="checkmark"></span>
+			</label>
+		
+		
+			<label class="container">45000
+			<input type="radio" name="money" value="15000">
+			<span class="checkmark"></span>
+			</label>
+		
+		
+			<label class="container">50000
+			<input type="radio" name="money" value="15000">
+			<span class="checkmark"></span>
+			</label>
+		</div>
+		<input type="hidden" name="usid" value="<%=m.getUsid()%>">
+		<p  style="color: red;">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
+		<button type="button" id="chargeBtn" onclick="fn_chargePoint();">충 전 하 기</button>
 	</div>
-
-	<p  style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
-	<button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
-</div>
 <script>
-    $('#charge_kakao').click(function () {
-        // getter
+	function fn_chargePoint(){
         var IMP = window.IMP;
         IMP.init('imp53290509');
-        var money = $('input[name="cp_item"]:checked').val();
+        var money = $('input[name="money"]:checked').val();
+		var usid=$('input[name="usid"]').val();
         console.log(money);
 
         IMP.request_pay({
             pg : 'kakaopay',
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '주문명:결제테스트',
-            amount : 14000,
-            buyer_email : 'iamport@siot.do',
-            buyer_name : '구매자이름',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : '서울특별시 강남구 삼성동',
-            buyer_postcode : '123-456'
+            name : '포인트 충전',
+            amount : money,
+            buyer_email : '<%=email%>',
+            buyer_name : '<%=name%>',
+            buyer_tel : '<%=phone%>',
+            buyer_addr : '<%=address%>',
         }, function(rsp) {
             if ( rsp.success ) {
             	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -180,30 +195,31 @@ body *{
         	    		imp_uid : rsp.imp_uid
         	    		//기타 필요한 데이터가 있으면 추가 전달
             		}
-            	}).done(function(data) {
-            		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-            		if ( everythings_fine ) {
-            			var msg = '결제가 완료되었습니다.';
-            			msg += '\n고유ID : ' + rsp.imp_uid;
-            			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-            			msg += '\결제 금액 : ' + rsp.paid_amount;
-            			msg += '카드 승인번호 : ' + rsp.apply_num;
-            			
-            			alert(msg);
-            		} else {
-            			//[3] 아직 제대로 결제가 되지 않았습니다.
-            			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-            		}
             	});
+				$.ajax({
+                    type: "POST", 
+                    url: "<%=request.getContextPath() %>/member/chargePointCpl", //충전 금액값을 보낼 url 설정
+                    data: {
+                        "point" : money,
+						"usid" :usid
+                    },
+                });
+				var msg = '결제가 완료되었습니다.';
+				msg += '\n고유ID : ' + rsp.imp_uid;
+				msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+				msg += '\n결제 금액 : ' + rsp.paid_amount+'원';
+				alert(msg);
+				close();
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
                 
                 alert(msg);
+                close();
             }
         });
-    });
-	
+	};
+
 </script>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

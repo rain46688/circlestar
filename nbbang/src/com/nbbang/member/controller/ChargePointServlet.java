@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nbbang.member.model.service.MemberService;
+
 /**
  * Servlet implementation class ChargePointServlet
  */
-@WebServlet("/member/chargePointCpl")
+@WebServlet(urlPatterns = "/member/chargePointCpl")
 public class ChargePointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,8 +29,14 @@ public class ChargePointServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int point=Integer.parseInt(request.getParameter("money"));
-		System.out.println("전달성공");
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		int point=Integer.parseInt(request.getParameter("point"));
+		//현재 포인트 가져옴
+		int crtPoint=new MemberService().getCrtPoint(usid);
+		//합치기
+		int newPoint=point+crtPoint;
+		//새 포인트 넣어줌
+		new MemberService().chargePoint(usid,newPoint);
 	}
 
 	/**
