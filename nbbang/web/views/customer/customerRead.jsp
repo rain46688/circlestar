@@ -63,7 +63,9 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
     margin-top: 35%;
   }
 
-  d .imgList {
+  
+
+  .imgList {
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -117,10 +119,9 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
     padding: .2rem;
   }
 </style>
-<section>
-<div id="QA-container">
 
-  <form action="#" method="post" enctype="multipart/form-data">
+<div id="QA-container">
+<form action="#" method="post" enctype="multipart/form-data">
     <div class="question-container">
 
       <div class="write-content">
@@ -139,72 +140,69 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
         <%for(CustomerFile cf : c.getCf()){ %>
 
 
-        <div class="imgList">
-          <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-            width="60" height="60">
-          <p><%=cf.getCsFileName() %> </p>
-        </div>
-
-        <!-- 팝업 될 곳 -->
-        <div class="modal">
-          <button>&times;</button>
-          <div class="modalBox">
-            <img src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-              alt="<%=cf.getCsFileName() %>">
-            <p></p>
+          <div class="imgList">
+            <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
+              width="60" height="60">
+            <p><%=cf.getCsFileName() %> </p>
           </div>
-        </div>
 
+          <!-- 팝업 될 곳 -->
+          <div class="modal">
+            <button>&times;</button>
+            <div class="modalBox">
+              <img src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
+                alt="<%=cf.getCsFileName() %>">
+              <p></p>
+            </div>
+          </div>
         <%} %>
 
       </div>
-
-  </form>
-
-
+    </form>
+  
+  
   <div class="hr-line">
     <hr id="hr-line">
   </div>
-
-
+  
+  
 
 </div>
 
-<div class="comment-container">
-  <div class="comment-editor">
-    <%if(c.getCsContent()!=null){ %>
-    <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
-      <div class="answer-content">
-        <input type="hidden" name="csId" value="<%=c.getCsId()%>">
-        <textarea name="admin-answer" cols="60" rows="10"></textarea>
-      </div>
-
-      <button type="submit" id="btn-insert">등록</button>
-    </form>
-    <%}else{ 
-		%>
+  <div class="comment-container">
+    <div class="comment-editor">
+     <%if(c.getCsAnswer()!=null){ %>
       <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
-     <div class="answer-container">
-       <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
- 
- 
-       <div class="answer-content">
- 
-         <p><%=c.getCsAnswer()%></p>
-       </div>
-       <div class="answer-date">
- 
-         <%=c.getCsDate()%>
-       </div>
- 
-     </div>
-     </form>
-				
-
+        <div class="answer-content">
+          <input type="hidden" name="csId" value="<%=c.getCsId()%>">
+          <textarea name="admin-answer" cols="60" rows="10"></textarea>
+  
+        </div>
+        <button type="submit" id="btn-insert" >등록</button>
   </div>
-</div>
-<%
-}%>
+  </div>
+   <%}else{ %>
+				
+				
+      
+   <div class="answer-container"> 
+     <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> 
+    
+  	<div class="answer-content"> 
+	     <p><%=c.getCsAnswer()%></p> 
+	  </div> 
+  	<div class="answer-date"> 
+	    <%=c.getCsDate()%>
+	  </div> 
+	 </div> 
+	    <%
+		}%> 
+    
+      </form>
+    
+    
+  
+      
 <script>
   $(function () {
     // 	이미지 클릭시 해당 이미지 모달
@@ -239,5 +237,5 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 </script>
 
 
-</section>
+
 <%@ include file="/views/common/footer.jsp"%>

@@ -23,7 +23,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 	<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm" class="btn_1">문의하기</a>
 </div>
 <section class="qnaSection">
-	<!-- <div class="cs-alert">
+	<div class="cs-alert">
 		<div class="cs-alert__title">
 			<image src="<%=request.getContextPath()%>/images/war.png" style="width: 40px;"><a>불법거래 유도 관련 문의</a> <br>
 
@@ -31,7 +31,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 		<div class="cs-alert__content">
 			<a>더 빠른 안내를 위하여 불법거래 유도 관련 문의는  <br> <span>엔빵 불법거래 신고센터 (031-112)</span>로 문의를 해 주시기 바랍니다.</a>
 		</div>
-	</div> -->
+	</div>
 	<div class="qna-caution">
 		<ul>
 			<li class="caution-li caution-first ">1:1문의</li>
@@ -77,13 +77,13 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 
 					<td>
 						
-							<a href="<%=request.getContextPath()%>/customer/customerReadFrm?num=<%=cc.getCsId()%>">
+							<a href="<%=request.getContextPath()%>/customer/customerReadFrm">
 							<%=cc.getCsTitle()%> 
 							</a>
 							<!-- <div class="container"> -->
 
 					</td>
-					
+
 					<td><%=cc.getCsNickname()%></td>
 
 					<td><%=cc.getCsDate()%></td> 
