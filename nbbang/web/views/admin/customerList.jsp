@@ -8,6 +8,9 @@ String a = (String) request.getParameter("a");
 String s = request.getParameter("s");
 String Sc = request.getParameter("Sc");
 %>
+
+
+<!--  우리 메뉴바 색깔 #FFC107 -->
 <style>
 #writecontainer {
 	border-radius: 5px;
@@ -168,6 +171,21 @@ $(".divRow").click(e=>{
 	좋겠음" 일단 CS_ID 파라미터 cid로 넘김 나중에 수정하길*/
     location.assign('<%=request.getContextPath()%>/customer/customerReadFrm?cid='+$(e.target).parent().children('div').html());
 })
+
+
+   $('.divRow').hover(function(){
+        $(this).css('color','#FFC107');
+        $(this).removeClass( 'shadow p-3 mb-5 bg-white rounded' );
+    }, function() {
+        $(this).css('color','black');
+        $(this).addClass( 'shadow p-3 mb-5 bg-white rounded' );
+    });
+
+
+
+
+
+
 
 </script>
 
