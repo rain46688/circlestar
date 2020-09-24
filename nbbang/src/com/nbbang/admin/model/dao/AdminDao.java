@@ -27,7 +27,7 @@ public class AdminDao {
 		}
 	}
 
-	public List<CustomerCenter> customerList(Connection conn, int cPage, int numPerPage) {
+	public List<CustomerCenter> customerList(Connection conn, int cPage, int numPerPage, String a) {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -35,8 +35,9 @@ public class AdminDao {
 		String sql = prop.getProperty("customerList");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
-			pstmt.setInt(2, cPage * numPerPage);
+			pstmt.setString(1, a);
+			pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(3, cPage * numPerPage);
 			rs = pstmt.executeQuery();
 			print(list, rs);
 		} catch (SQLException e) {
@@ -49,7 +50,7 @@ public class AdminDao {
 		return list;
 	}
 	
-	public int customerListCount(Connection conn) {
+	public int customerListCount(Connection conn, String a) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -57,6 +58,7 @@ public class AdminDao {
 		String sql = prop.getProperty("customerListCount");
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, a);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				cnt = rs.getInt(1);
@@ -75,13 +77,12 @@ public class AdminDao {
 		try {
 			while (rs.next()) {
 				CustomerCenter c = new CustomerCenter();
-				c.setCsNo(rs.getInt("CS_ID"));
-				c.setCsWriter(rs.getString("CS_WRITER_USID"));
-				c.setCsType(rs.getString("CS_TPYE"));
+				c.setCsId(rs.getInt("CS_ID"));
+				c.setCsWriterUsid(rs.getInt("CS_WRITER_USID"));
+				c.setCsType(rs.getString("CS_TYPE"));
 				c.setCsTitle(rs.getString("CS_TITLE"));
 				c.setCsContent(rs.getString("CS_CONTENT"));
 				c.setCsDate(rs.getDate("CS_DATE"));
-				c.setCsFile(rs.getString("CS_FILE"));
 				c.setCsIscheck(rs.getBoolean("CS_ISCHECK"));
 				c.setCsNickname(rs.getString("CS_NICKNAME"));
 				list.add(c);
