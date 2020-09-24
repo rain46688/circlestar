@@ -58,13 +58,13 @@ pageEncoding="UTF-8"%>
         <input type="file" name="csFile" multiple="true" >
       </div>
      
-      <div id="submitBtn-kdh">
-        <button type="button" class="btn-submit" onclick=" movingPage('<%=request.getContextPath()%>/customer/customerQnAWritingEnd')">문의등록</button>
-      </div>
-    
     </form>
   </div>
 </div>
+            <div id="submitBtn-kdh">
+              <button type="button" class="btn-submit" onclick=" movingPage('<%=request.getContextPath()%>/customer/customerQnAWritingEnd')">문의등록</button>
+            </div>
+          
 
 
   <script>

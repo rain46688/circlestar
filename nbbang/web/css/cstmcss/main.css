@@ -3,7 +3,7 @@
 	div#kdh-sidebar-container{
 		width: 14em;
 	height: 35em;
-	margin-top: 3%;
+	margin-top: 6em;
 	margin-left: 17%;
 	float: left;
 	margin-bottom: 15%;
@@ -28,7 +28,8 @@
 ul.sidebarTitle{
 	background-color: rgb(252, 173, 26);
 	color: whitesmoke;
-	height: 12em;
+	height: 11em;
+	margin-top: 1em;
 	
 }
 ul.sidebarTitle li#kdh-side-Title{
@@ -43,7 +44,10 @@ ul.sidebarTitle li#kdh-side-text span{
 }
 ul .side-bar-kdh{
 	text-align: center;
-	border: 1px solid yellow;
+	
+}
+div#kdh-sidebar-left{
+	border: 1px solid darkgray;
 }
  div#kdh-sidebar-left ul li{
  	list-style:none;
@@ -52,11 +56,12 @@ ul .side-bar-kdh{
 
  .cstmt-list a,
  .list-hiper a{
-  color:rgb(207, 135, 40);
-  list-style: none;
-  font-size: 20px;
-  text-align: center;
   
+  list-style: none;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  margin-left: 2em;
   
  }
  .cstmt-list a:hover,

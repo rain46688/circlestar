@@ -45,18 +45,18 @@ public class CustomerAnswer extends HttpServlet {
 		
 		if(result>0) {
 			
-			msg="댓글완";
-			loc = ""; 
+			msg="완료";
+			loc = "/customer/customerReadFrm"; 
 			
 		
 			
 		}else {
 			msg="실패"; 
-			loc=""; 
+			loc="/customer/customerReadFrm"; 
 					
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("lodc", loc);
+		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 

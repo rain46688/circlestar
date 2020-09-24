@@ -63,7 +63,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
     margin-top: 35%;
   }
 
-  
+  d
 
   .imgList {
     width: 100%;
@@ -175,7 +175,7 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
 
   <div class="comment-container">
     <div class="comment-editor">
-     <%if(list.isEmpty()){ %>
+     <%if(c.getCsContent()!=null){ %>
       <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
         <div class="answer-content">
           <input type="hidden" name="csId" value="<%=c.getCsId()%>">
@@ -183,10 +183,11 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
   
         </div>
         <button type="submit" id="btn-insert" >등록</button>
+        </form>
    <%}else{ 
 				
-				for(CustomerCenter cc : list)%>
-      
+				%>
+      <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
    <div class="answer-container"> 
      <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> 
     
@@ -201,12 +202,12 @@ List<CustomerCenter> list = (List) request.getAttribute("list");
   </div> 
   
  </div> 
-    <%
-}%> 
       </form>
       
   </div>
   </div>
+    <%
+}%> 
 <script>
   $(function () {
     // 	이미지 클릭시 해당 이미지 모달
