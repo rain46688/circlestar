@@ -48,17 +48,20 @@ String Sc = request.getParameter("Sc");
 	display: table-row;
 	font-size: 20px;
 	font-weight: bold;
-	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
 }
 
-h1{
-	font-weight:bold;
-	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
+h1 {
+	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
 }
 
-.active{
-	font-weight:bold;
-	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
+.active {
+	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
 }
 
 .divCell, .divTableHead {
@@ -87,6 +90,11 @@ h1{
 
 #pagebar {
 	float: center;
+}
+
+.nav-tabs{
+border:1px solid white;
+border-bottom:1px #DEE2E6 solid ; 
 }
 </style>
 
@@ -144,7 +152,7 @@ h1{
 
 
 	<form class="form-inline" action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
-		
+
 		<div>
 			<select class="form-control" id="sel1" name="s">
 				<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
@@ -152,7 +160,7 @@ h1{
 				<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
 				<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
 			</select>
-			<input type="hidden" name="a" value=<%=a %>>
+			<input type="hidden" name="a" value=<%=a%>>
 			<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
 			<button class="btn btn-success" type="submit">검색</button>
 		</div>
