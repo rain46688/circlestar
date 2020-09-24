@@ -37,6 +37,7 @@
 </head>
 
 <body>
+	<div id="container">
 	<header>
 		<div id="topField">
 			<div id="logoContainer">

@@ -26,9 +26,10 @@ public class BoardService {
 		return boardList;
 	}
 
-	public Card boardPage(String boardId, boolean hasRead) {
+	public Card boardPage(String boardId, boolean hasRead, int writerUsid) {
 		Connection conn = getConnection();
 		Card c = dao.boardPage(conn, boardId);
+		c = dao.boardPageForProfile(conn, c, writerUsid);
 		if (c != null && !hasRead) {
 			int result = dao.updateReadCount(conn, Integer.parseInt(boardId));
 			if (result > 0)
@@ -40,9 +41,9 @@ public class BoardService {
 		return c;
 	}
 
-	public int boardListCount() {
+	public int boardListCount(String boardTitle) {
 		Connection conn = getConnection();
-		int result = dao.boardListCount(conn);
+		int result = dao.boardListCount(conn, boardTitle);
 		close(conn);
 		return result;
 	}
@@ -63,10 +64,13 @@ public class BoardService {
 	public int boardLikeInsert(LikeList list) {
 		Connection conn = getConnection();
 		int result = dao.boardLikeInsert(conn, list);
-		if(result > 0) {
+		result += dao.boardLikeUpdate(conn, list);
+		if(result > 1) {
 			commit(conn);
+			System.out.println("commit");
 		}else {
 			rollback(conn);
+			System.out.println("rollback");
 		}
 		close(conn);
 		return result;
@@ -75,10 +79,13 @@ public class BoardService {
 	public int boardLikeDelete(LikeList list) {
 		Connection conn = getConnection();
 		int result = dao.boardLikeDelete(conn, list);
-		if(result > 0) {
+		result += dao.boardLikeDeleteUpdate(conn, list);
+		if(result > 1) {
 			commit(conn);
+			System.out.println("commit");
 		}else {
 			rollback(conn);
+			System.out.println("rollback");
 		}
 		close(conn);
 		return result;

@@ -53,7 +53,7 @@ public class BoardLikeServlet extends HttpServlet {
 			result = new BoardService().boardLikeDelete(list);
 		}
 
-		if (result == 0) {
+		if (result < 2) {
 			PrintWriter pw = response.getWriter();
 			pw.append("failed to insert");
 			return;
