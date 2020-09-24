@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.nbbang.board.model.vo.Card"%>
 <%@page import="com.nbbang.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -182,6 +183,9 @@
     float: right;
     font-size: 20px;
   }
+  .turnRed {
+    background-color: red;
+  }
 </style>
 <section>
   <div id="wrapper">
@@ -204,7 +208,7 @@
       <div id="title">
         <div id="titleContent"><p><%= c.getCardBoard().getBoardTitle() %>가나다라마바사아만아답자당마자다나아자</p></div>
         <div id="startBtn"><button>n빵하기</button></div>
-        <div id="likeBtn"><button>❤️</button></div>
+        <div id="likeBtn"><button id="likeFunc" class="<% if(likelist!=null&&likelist.contains(c.getCardBoard().getBoardId())) {%>turnRed<%}%>">❤️</button></div>
       </div>
       
       <div id="date"><%= c.getCardBoard().getEnrollDate() %> <%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회수 </div>
@@ -254,84 +258,97 @@
   </div>
 </section>
 <script>
-  $(document).ready(function(){
-    fn_commentList();
-  })
+    $(document).ready(function () {
+        fn_commentList();
 
-  $("#likeBtn").click(function(e){
-    $.ajax({
-      url:"<%=request.getContextPath()%>/board/boardLike",
-      type:"post",
-      dataType:"text",
-      data : {
-        'userUsid':'<%= loginnedMember.getUsid() %>',
-        'boardId':'<%= c.getCardBoard().getBoardId() %>'
-      },
-      success : function(data){
-        $("#likeBtn>button").css("background-color","yellow");
-        console.log(data);
-      }
+        $("#likeFunc").click(function (e) {
+            if ($("#likeFunc").css("background-color") == "rgba(0, 0, 0, 0)") {
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/board/boardLike?key=insert",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        'userUsid': '<%= loginnedMember.getUsid() %>',
+                        'boardId': '<%= c.getCardBoard().getBoardId() %>'
+                    },
+                    success: function (data) {
+                        $("#likeFunc").css("background-color", "red");
+                    }
+                })
+            } else {
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/board/boardLike?key=delete",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        'userUsid': '<%= loginnedMember.getUsid() %>',
+                        'boardId': '<%= c.getCardBoard().getBoardId() %>'
+                    },
+                    success: function (data) {
+                        $("#likeFunc").css("background-color", "rgba(0, 0, 0, 0)");
+                    }
+                })
+            }
+        })
     })
-  })
-  $("#commentInsertBtn").click(function(e){
-    if($("#commentContent").val()!=null) {
-    $.ajax({
-      url:"<%=request.getContextPath()%>/board/commentInsert",
-      type:"post",
-      dataType:"text",
-      data : {
-        "cBoardId" : "<%= c.getCardBoard().getBoardId() %>",
-        "content" : $("#commentContent").val(),
-        "secret" : $("#commentTo").val(),
-        "cWriterNickname" : "<%= loginnedMember.getNickname() %>",
-        "comLayer" : $("#commentLevel").val(),
-        "comProfile" : "<%= loginnedMember.getMemberPicture() %>"
-      },
-      success : function(data){
-        if(data!="success") {
-          alert("댓글 작성에 실패했습니다.");
+
+    $("#commentInsertBtn").click(function (e) {
+        if ($("#commentContent").val() != null) {
+            $.ajax({
+                url: "<%=request.getContextPath()%>/board/commentInsert",
+                type: "post",
+                dataType: "text",
+                data: {
+                    "cBoardId": "<%= c.getCardBoard().getBoardId() %>",
+                    "content": $("#commentContent").val(),
+                    "secret": $("#commentTo").val(),
+                    "cWriterNickname": "<%= loginnedMember.getNickname() %>",
+                    "comLayer": $("#commentLevel").val(),
+                    "comProfile": "<%= loginnedMember.getMemberPicture() %>"
+                },
+                success: function (data) {
+                    if (data != "success") {
+                        alert("댓글 작성에 실패했습니다.");
+                    }
+                    fn_commentList(data);
+                }
+            })
         }
-        fn_commentList(data);
-      }
     })
+
+    function fn_commentList() {
+        $.ajax({
+            url: "<%=request.getContextPath()%>/board/commentList",
+            type: "post",
+            dataType: "json",
+            data: {
+                "cBoardId": "<%= c.getCardBoard().getBoardId() %>"
+            },
+            success: function (data) {
+                let html = "";
+                $.each(data, function (index, item) {
+                    html += "<li class='comment_item'>";
+                    html += "<hr>";
+                    html += "<div class='comment_area'>";
+                    html += "<div class='comment_thumb'>";
+                    html += "<img src='<%= request.getContextPath() %>/images/logo.png' alt='' width='30px'" +
+                            " height='30px'>";
+                    html += "</div>";
+                    html += "<div class='comment_box'>";
+                    html += "<div class='comment_id'>";
+                    html += item.cwriterNickname;
+                    html += "</div>";
+                    html += "<div class='comment_text'>";
+                    html += item.content + "</div>";
+                    html += "<div class='comment_info'>";
+                    html += item.cenrollDate + " 답글쓰기";
+                    html += "</div></div></div></li>"
+                });
+                $(".comment_list").html(html);
+            }
+        })
     }
-  })
 
-  function fn_commentList(){
-    $.ajax({
-      url:"<%=request.getContextPath()%>/board/commentList",
-      type:"post",
-      dataType:"json",
-      data:{
-        "cBoardId" : "<%= c.getCardBoard().getBoardId() %>"
-      },
-      success:function(data){
-        let html = "";
-        $.each(data, function(index, item){
-          html += "<li class='comment_item'>";
-          html += "<hr>";
-          html += "<div class='comment_area'>";
-          html += "<div class='comment_thumb'>";
-          html += "<img src='<%= request.getContextPath() %>/images/logo.png' alt='' width='30px' height='30px'>";
-          html += "</div>";
-          html += "<div class='comment_box'>";
-          html += "<div class='comment_id'>";
-          html += item.cwriterNickname;
-          html += "</div>";
-          html += "<div class='comment_text'>";
-          html += item.content + "</div>";            
-          html += "<div class='comment_info'>";
-          html += item.cenrollDate + " 답글쓰기";
-          html += "</div></div></div></li>"
-        });
-        $(".comment_list").html(html);
-      }
-    })
-  }
-
-  $("#startBtn").click(function(e){
-    
-  })
-
+    $("#startBtn").click(function (e) {})
 </script>
 <%@ include file="/views/common/footer.jsp" %>
