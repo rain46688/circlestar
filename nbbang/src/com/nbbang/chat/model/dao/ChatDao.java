@@ -88,6 +88,7 @@ public class ChatDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("creatRoom"));
+			//트레이드 스테이지 2로 변경
 			pstmt.setString(1, "2");
 			pstmt.setString(2, boardId);
 			result = pstmt.executeUpdate();
@@ -100,35 +101,19 @@ public class ChatDao {
 		return result;
 	}
 
-	@SuppressWarnings("resource")
-	public int decideBuyUser(Connection conn, String usid, String nickname, String boardId, String flag) {
+	public int decideBuyUserCheck(Connection conn, String boardId, String usid) {
 		// TODO Auto-generated method stub
 		int result = 0;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		try {
-			if (usid != null) {
-				// 회원을 방에 추가하는 경우 분기
-				if (flag.equals("1")) {
-					pstmt = conn.prepareStatement(prop.getProperty("decideBuyCheck"));
-					pstmt.setString(1, boardId);
-					pstmt.setString(2, usid);
-					rs = pstmt.executeQuery();
-					if (rs.next()) {
-						// 회원을 중복해서 추가하는 경우 분기
-						return 2;
-					}
-					pstmt = conn.prepareStatement(prop.getProperty("decideBuyUserAdd"));
-					pstmt.setString(1, boardId);
-					pstmt.setString(2, usid);
-					pstmt.setString(3, nickname);
-				} else if (flag.equals("2")) {
-					// 회원을 삭제하는 경우 분기
-					pstmt = conn.prepareStatement(prop.getProperty("decideBuyUserDrop"));
-					pstmt.setString(1, boardId);
-					pstmt.setString(2, usid);
-				}
-				result = pstmt.executeUpdate();
+			pstmt = conn.prepareStatement(prop.getProperty("decideBuyCheck"));
+			pstmt.setString(1, boardId);
+			pstmt.setString(2, usid);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				// 회원을 중복해서 추가하는 경우
+				result = 1;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -139,18 +124,49 @@ public class ChatDao {
 		}
 		return result;
 	}
-
-	public int insertChatMsg(Connection conn, List<Message> list) {
+	
+	public int decideBuyUser(Connection conn, String boardId, String usid, String nickname) {
 		// TODO Auto-generated method stub
+		int result = 0;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("decideBuyUserAdd"));
+			pstmt.setString(1, boardId);
+			pstmt.setString(2, usid);
+			pstmt.setString(3, nickname);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int decideBuyUser(Connection conn, String boardId, String usid) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("decideBuyUserDrop"));
+			pstmt.setString(1, boardId);
+			pstmt.setString(2, usid);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
-		/*
-		 * for(Message s : list) { System.out.println(s); }
-		 */
-		System.out.println();
+	public int insertChatMsg(Connection conn, Message m) {
+		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			for (Message m : list) {
 				pstmt = conn.prepareStatement(prop.getProperty("insertChatMsg"));
 				pstmt.setString(1, m.getBoardId());
 				pstmt.setString(2, m.getSendNickName());
@@ -158,12 +174,7 @@ public class ChatDao {
 				pstmt.setString(4, m.getChatProfile());
 				pstmt.setString(5, m.getChatTime());
 				result = pstmt.executeUpdate();
-				System.out.println(m);
-				System.out.println("result : " + result);
-			}
-			System.out.println("여기 실행안됨??");
-			list.clear();
-			System.out.println(" === 리스트 쌓인거 전송하고 클리어 dao === ");
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

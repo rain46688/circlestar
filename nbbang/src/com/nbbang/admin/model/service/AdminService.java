@@ -12,18 +12,18 @@ import com.nbbang.customer.model.vo.CustomerCenter;
 public class AdminService {
 	private AdminDao aa = new AdminDao();
 
-	public List<CustomerCenter> customerList(int cPage, int numPerPage) {
+	public List<CustomerCenter> customerList(int cPage, int numPerPage, String a) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		List<CustomerCenter> list = aa.customerList(conn, cPage, numPerPage);
+		List<CustomerCenter> list = aa.customerList(conn, cPage, numPerPage,a);
 		close(conn);
 		return list;
 	}
 
-	public int customerListCount() {
+	public int customerListCount(String a) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int cnt = aa.customerListCount(conn);
+		int cnt = aa.customerListCount(conn,a);
 		close(conn);
 		return cnt;
 	}

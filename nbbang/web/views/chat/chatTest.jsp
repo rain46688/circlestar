@@ -26,6 +26,11 @@
 
 <script>
 
+/* 변경될 부분 지워도됨 */
+let room = 2;
+
+
+
 var pop;
 window.onunload = function() { 
 	pop.close(); 
@@ -50,11 +55,13 @@ function nbbang(f){
 }
 
 
+
 function fun_createroom() {
+	
 	$.ajax({
 		type: "GET",
 		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {"boardId":"2"},
+		data: {"boardId":room},
 		dataType: "json",
 		url: "<%=request.getContextPath()%>/chat/createRoom",
 			success : function(data) {
@@ -73,7 +80,7 @@ function fun_decidebuy(){
 	$.ajax({
 		type: "GET",
 		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"2","flag":"1"},
+		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":room,"flag":"1"},
 		url: "<%=request.getContextPath()%>/chat/decidebuy",
 			success : function(data) {
 				location.reload();
@@ -87,7 +94,7 @@ function fun_cancelbuy() {
 	$.ajax({
 		type: "GET",
 		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"2","flag":"2"},
+		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":room,"flag":"2"},
 		url: "<%=request.getContextPath()%>/chat/decidebuy",
 			success : function(data) {
 				location.reload();

@@ -152,4 +152,17 @@ private MemberDao dao=new MemberDao();
 		return ll;
 	}
 
+	public int getCrtPoint(int usid) {
+		Connection conn=getConnection();
+		int crtPoint=dao.getCrtPoint(conn, usid);
+		close(conn);
+		return crtPoint;
+	}
+
+	public void chargePoint(int usid, int newPoint) {
+		Connection conn=getConnection();
+		dao.chargePoint(conn, usid, newPoint);
+		close(conn);
+	}
+
 }

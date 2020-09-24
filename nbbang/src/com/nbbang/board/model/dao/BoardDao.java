@@ -3,6 +3,8 @@ package com.nbbang.board.model.dao;
 import static com.nbbang.common.temp.JDBCTemplate.close;
 
 import java.io.FileReader;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,10 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
 import com.nbbang.board.model.vo.Card;
 import com.nbbang.board.model.vo.Comment;
+import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.vo.LikeList;
 
 public class BoardDao {
@@ -32,7 +39,7 @@ public class BoardDao {
 		}
 	}
 	
-	public List<Card> boardList(Connection conn, int cPage, int numPerPage){
+	public List<Card> boardList(Connection conn, int cPage, int numPerPage, String boardTitle){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardList");
@@ -41,6 +48,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
 			pstmt.setInt(2, cPage*numPerPage);
+			pstmt.setString(3, boardTitle);
 			rs = pstmt.executeQuery();
 			list = new ArrayList<Card>();
 			while(rs.next()) {
@@ -50,7 +58,12 @@ public class BoardDao {
 				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
 				c.getCardBoard().setHit(rs.getInt("HIT"));
 				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
-				c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				try {
+					c.getCardBoard().setTradeArea(AESCrypto.decrypt(rs.getString("TRADE_AREA")));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				} 
 				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
 				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
 				list.add(c);
@@ -185,6 +198,21 @@ public class BoardDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("boardLikeInsert"));
+			pstmt.setInt(1, list.getLikeUsid());
+			pstmt.setInt(2, list.getLikeBoardId().get(0));
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int boardLikeDelete(Connection conn, LikeList list) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardLikeDelete"));
 			pstmt.setInt(1, list.getLikeUsid());
 			pstmt.setInt(2, list.getLikeBoardId().get(0));
 			result = pstmt.executeUpdate();
