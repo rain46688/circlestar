@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <%
 
  CustomerCenter c=(CustomerCenter)request.getAttribute("cc");
-
+List<CustomerCenter> list = (List) request.getAttribute("list");
 %>
 <style>
   div#QA-container {
@@ -63,7 +63,7 @@ pageEncoding="UTF-8"%>
     margin-top: 35%;
   }
 
-  }
+  
 
   .imgList {
     width: 100%;
@@ -175,7 +175,7 @@ pageEncoding="UTF-8"%>
 
   <div class="comment-container">
     <div class="comment-editor">
-<%--     <%if(){ %> --%>
+     <%if(list.isEmpty()){ %>
       <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
         <div class="answer-content">
           <input type="hidden" name="csId" value="<%=c.getCsId()%>">
@@ -183,23 +183,26 @@ pageEncoding="UTF-8"%>
   
         </div>
         <button type="submit" id="btn-insert" >등록</button>
-<%--       <%}else{ %> --%>
+   <%}else{ 
+				
+				for(CustomerCenter cc : list)%>
       
-<!--   <div class="answer-container"> -->
-<%--     <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> --%>
+   <div class="answer-container"> 
+     <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> 
     
     
-<!--   <div class="answer-content"> -->
+  <div class="answer-content"> 
     
-<%--     <p><%=c.getCsAnswer()%></p> --%>
-<!--   </div> -->
-<!--   <div class="answer-date"> -->
+     <p><%=c.getCsAnswer()%></p> 
+  </div> 
+  <div class="answer-date"> 
     
-<%--     <%=c.getCsDate()%> --%>
-<!--   </div> -->
+    <%=c.getCsDate()%>
+  </div> 
   
-<!-- </div> -->
-<%--       <%} %> --%>
+ </div> 
+    <%
+}%> 
       </form>
       
   </div>
