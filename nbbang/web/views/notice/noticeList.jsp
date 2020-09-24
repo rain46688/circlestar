@@ -65,6 +65,7 @@ h1 {
 
 .btn {
 	float: right;
+	margin:0 10px 10px 0;
 }
 
 .noti {
@@ -76,7 +77,18 @@ h1 {
 }
 
 .noContent {
-	
+	margin-top:15px;
+	margin-left:10px;
+	font-size:20px;
+	font-weight:bold;
+}
+
+.empty{
+	float:center;
+	font-size:20px;
+	font-weight:bold;
+		margin-top:15px;
+	margin-left:10px;
 }
 </style>
 
@@ -103,6 +115,7 @@ h1 {
 					<div class="divCell">등록 날짜</div>
 				</div>
 				<%
+					if(!list.isEmpty()){
 					for (Notice n : list) {
 				%>
 				<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
@@ -118,7 +131,13 @@ h1 {
 
 				<%
 					}
+				}else {
 				%>
+
+					<div class="empty">등록된 공지 글이 없습니다.</div>
+
+				
+				<%} %>
 
 				<br>
 			</div>

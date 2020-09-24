@@ -89,6 +89,8 @@ h1 {
 		<h1>공지 사항 작성</h1>
 	</div>
 	<form method="post" action="<%=request.getContextPath()%>/notice/noticeWrite">
+		<input type="hidden" name="usid" value="${loginnedMember.usid}">
+		<input type="hidden" name="nickname" value="${loginnedMember.nickname}">
 		<div class="form-group">
 				<label for="formGroupExampleInput">공지 사항 제목 : </label>
 				<input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="공지사항 제목">
@@ -107,6 +109,13 @@ h1 {
 
 
 <script>
+	
+CKEDITOR.replace('content');
+CKEDITOR.editorConfig = function( config ) {
+config.uiColor = red;
+config.height = 600;
+config.toolbarCanCollapse = true;};
+	
 	
 </script>
 

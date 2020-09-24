@@ -1,7 +1,6 @@
 package com.nbbang.notice.model.dao;
 
 import static com.nbbang.common.temp.JDBCTemplate.close;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -42,7 +41,7 @@ public class NoticeDAO {
 			while (rs.next()) {
 				Notice n = new Notice();
 				n.setNoticeId(rs.getInt("NOTICE_ID"));
-				n.setNoticeAdminUsid(rs.getString("NOTICE_ADMIN_USID"));
+				n.setNoticeAdminUsid(rs.getInt("NOTICE_ADMIN_USID"));
 				n.setNoticeWriteNickname(rs.getString("NOTICE_WRITE_NICKNAME"));
 				n.setNoticeTitle(rs.getString("NOTICE_TITLE"));
 				n.setNoticeContent(rs.getNString("NOTICE_CONTENT"));
@@ -81,5 +80,45 @@ public class NoticeDAO {
 		return result;
 	}
 
+	public int insertNotice(Connection conn, Notice n) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(p.getProperty("insertNotice"));
+			pstmt.setInt(1, n.getNoticeAdminUsid());
+			pstmt.setString(2, n.getNoticeWriteNickname());
+			pstmt.setString(3, n.getNoticeTitle());
+			pstmt.setString(4, n.getNoticeContent());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

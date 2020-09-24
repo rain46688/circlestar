@@ -5,7 +5,7 @@ import java.util.Date;
 public class Notice {
 
 	private int noticeId;
-	private String noticeAdminUsid;
+	private int noticeAdminUsid;
 	private String noticeWriteNickname;
 	private String noticeTitle;
 	private String noticeContent;
@@ -15,7 +15,7 @@ public class Notice {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notice(int noticeId, String noticeAdminUsid, String noticeWriteNickname, String noticeTitle,
+	public Notice(int noticeId, int noticeAdminUsid, String noticeWriteNickname, String noticeTitle,
 			String noticeContent, Date noticeDate) {
 		super();
 		this.noticeId = noticeId;
@@ -34,11 +34,11 @@ public class Notice {
 		this.noticeId = noticeId;
 	}
 
-	public String getNoticeAdminUsid() {
+	public int getNoticeAdminUsid() {
 		return noticeAdminUsid;
 	}
 
-	public void setNoticeAdminUsid(String noticeAdminUsid) {
+	public void setNoticeAdminUsid(int noticeAdminUsid) {
 		this.noticeAdminUsid = noticeAdminUsid;
 	}
 

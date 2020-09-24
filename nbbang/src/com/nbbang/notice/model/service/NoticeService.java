@@ -29,5 +29,19 @@ public class NoticeService {
 		return count;
 	}
 
+	public int insertNotice(Notice n) {
+		// TODO Auto-generated method stub
+		Connection conn=getConnection();
+		int result = dao.insertNotice(conn,n);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	
+	
 
 }
