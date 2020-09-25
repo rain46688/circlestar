@@ -53,8 +53,8 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("result", m);
-		request.getRequestDispatcher("/views/member/checkIdDuplicate.jsp").forward(request, response);			
+		request.setAttribute("checkId", m);
+		request.getRequestDispatcher("/views/member/checkIdajax.jsp").forward(request, response);			
 	}
 
 	/**

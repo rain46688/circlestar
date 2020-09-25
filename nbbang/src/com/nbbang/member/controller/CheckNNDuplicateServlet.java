@@ -36,8 +36,8 @@ public class CheckNNDuplicateServlet extends HttpServlet {
 		System.out.println(nick);
 		Member m=null;
 		m=new MemberService().nickDuplicate(nick);
-		request.setAttribute("result", m);
-		request.getRequestDispatcher("/views/member/checkNNDuplicate.jsp").forward(request, response);
+		request.setAttribute("checkNN", m);
+		request.getRequestDispatcher("/views/member/checkNNajax.jsp").forward(request, response);
 	}
 
 	/**
