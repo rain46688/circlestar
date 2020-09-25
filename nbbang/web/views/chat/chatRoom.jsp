@@ -266,8 +266,8 @@ function fixedSize() {
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
 	var _today = new Date();
-	let day = _today.format('yyyy-MM-dd a/p hh:mm');
-		//console.log("time : "+time);
+	let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
+		console.log("day : "+day);
 		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}","",day)));
 	};
 	socket.onclose = function(e) {
@@ -331,7 +331,7 @@ function fixedSize() {
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
 		var _today = new Date();
-		let day = _today.format('yyyy-MM-dd a/p hh:mm');
+		let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}",day)));
 		
 		txt.val(' ');//칸 비워주기

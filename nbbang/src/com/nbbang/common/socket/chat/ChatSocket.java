@@ -1,8 +1,6 @@
 package com.nbbang.common.socket.chat;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,11 +15,9 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-
 import com.nbbang.chat.model.service.ChatService;
 import com.nbbang.chat.model.vo.Message;
 import com.nbbang.member.model.vo.Member;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @ServerEndpoint(value = "/socket", configurator = GetHttpSession.class, encoders = {
 		MessageEncoder.class }, decoders = { MessageDecoder.class })
@@ -91,7 +87,7 @@ public class ChatSocket {
 							name = key.getNickname();
 							// System.out.println(" === Null이 아니고 세션 열려있음, 메세지 : " + msg + " === ");
 
-							if (list.size() != 10) {
+							if (list.size() != 18) {
 								System.out.println(" === ChatSocket 리스트 안참 list.size() : " + list.size() + " === ");
 								System.out.println("msg : " + msg);
 								System.out.println("msg.getMsg() : " + msg.getMsg());
@@ -102,10 +98,15 @@ public class ChatSocket {
 								user.get(key).getBasicRemote().sendObject(msg);
 							} else {
 								// 디비에 넣고 클리어
+								if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
+									System.out.println("********* " + msg.getMsg());
+									list.add(msg);
+								}
+								user.get(key).getBasicRemote().sendObject(msg);
 								System.out.println(" === ChatSocket 리스트 꽉참 list.size() : " + list.size() + " === ");
-								//set = new HashSet<Message>(list);
-								//System.out.println(" === set size : "+set.size());
-								//list = new ArrayList<Message>(set);
+								set = new HashSet<Message>(list);
+								System.out.println(" === set size : "+set.size());
+								list = new ArrayList<Message>(set);
 								System.out.println(" === list size : "+list.size());
 								
 								int result = new ChatService().insertChatMsg(list);
@@ -130,6 +131,10 @@ public class ChatSocket {
 		Member key = null;
 
 		// 현재 접속중인 유저가 없다면 리스트 클리어
+		set = new HashSet<Message>(list);
+		System.out.println(" === close set size : "+set.size());
+		list = new ArrayList<Message>(set);
+		System.out.println(" === close list size : "+list.size());
 		int result = new ChatService().insertChatMsg(list);
 		System.out.println(" === ChatSocket 방 나가면 넣고 클리어 === ");
 
