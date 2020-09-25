@@ -16,18 +16,18 @@ public class CustomerService {
 
 	private CustomerDAO dao = new CustomerDAO();
 
-	public List<CustomerCenter> qnAList(int cPage, int numPerPage) {
+	public List<CustomerCenter> qnAList(int cPage, int numPerPage, int num) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		List<CustomerCenter> list = dao.qnAList(conn, cPage, numPerPage);
+		List<CustomerCenter> list = dao.qnAList(conn, cPage, numPerPage, num);
 		close(conn);
 		return list;
 	}
 
-	public int qnACount() {
+	public int qnACount(int num) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int count = dao.qnACount(conn);
+		int count = dao.qnACount(conn,num);
 		close(conn);
 		return count;
 	}

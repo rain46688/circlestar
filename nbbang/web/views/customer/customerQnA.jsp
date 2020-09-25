@@ -8,7 +8,7 @@
 Member loginedMember = new Member(); //세션저장용
 
 List<CustomerCenter> list = (List) request.getAttribute("list");
-
+CustomerCenter c=(CustomerCenter)request.getAttribute("cc");
 loginedMember = (Member)session.getAttribute("loginnedMember");
 System.out.println("loginedMem in jsp: "+ loginedMember);
 System.out.println("list in jsp: "+ list);
@@ -64,7 +64,7 @@ System.out.println("list in jsp: "+ list);
 					<th>문의날짜</th>
 					
 				</tr>
-
+				
 				
 				<%
 					for(CustomerCenter cc : list) { %>

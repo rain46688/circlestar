@@ -6,7 +6,7 @@
 
 <%
 Member loginnedMember=(Member)session.getAttribute("loginnedMember");
-
+CustomerCenter cc=(CustomerCenter)session.getAttribute("c");
 %>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/cstmcss/main.css" type="text/css">
@@ -43,7 +43,7 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
                     href="<%=request.getContextPath() %>/customerMain">소개글</a></li>
                 <li class="cstmt-list">
                   <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
-                    href="<%=request.getContextPath() %>/customer/customerQnA">문의하기</a></li>
+                    href="<%=request.getContextPath() %>/customer/customerQnA?num=<%=cc.getCsId() %>">문의하기</a></li>
                 <li class="cstmt-list"><a class="main-a" style="font-family:  'Gothic A1', sans-serif;"
                     href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
         
