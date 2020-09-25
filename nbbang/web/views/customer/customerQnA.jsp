@@ -104,9 +104,9 @@ System.out.println("list in jsp: "+ list);
 		</thead>
 	</table>
 	<div class="page_wrap">
-		<%=request.getAttribute("pageBar")%>
+		<a><%=request.getAttribute("pageBar")%></a>
 	</div>
-	
+
 	<div id="btn-news">
 		
 		<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm" class="btn_1">문의하기</a>

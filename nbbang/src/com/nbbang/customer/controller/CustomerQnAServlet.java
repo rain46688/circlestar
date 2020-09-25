@@ -38,12 +38,12 @@ public class CustomerQnAServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=5;
+		int numPerPage=10;
 		
 		
 		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage);
 		for(CustomerCenter c : list) {
-			System.out.println(c);
+			
 		}
 		int totalData=new CustomerService().qnACount();
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
@@ -53,9 +53,9 @@ public class CustomerQnAServlet extends HttpServlet {
 		
 		String pageBar="";
 		if(pageNo==1) {
-			pageBar="<span>[이전]</span>";
+			pageBar+="<span>&laquo;</span>";
 		}else {
-			pageBar="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo-1)+"'>&laquo;</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -68,9 +68,9 @@ public class CustomerQnAServlet extends HttpServlet {
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
+			pageBar+="<span>&raquo;</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"'>&raquo;</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);
