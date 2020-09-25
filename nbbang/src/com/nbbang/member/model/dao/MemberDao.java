@@ -623,6 +623,120 @@ private Properties prop=new Properties();
 		return totalData;
 	}
 
+	public List<Card> pastList(Connection conn, int cPage, int numPerPage, int usid) {
+		List<Card> list=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("pastList"));
+			pstmt.setInt(1, usid);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			list=new ArrayList<Card>();
+			while(rs.next()){
+				Card c = new Card(new Board(), new BoardFile());
+				c.getCardBoard().setBoardId(rs.getInt("BOARD_ID"));
+				c.getCardBoard().setBoardTitle(rs.getString("BOARD_TITLE"));
+				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
+				c.getCardBoard().setHit(rs.getInt("HIT"));
+				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
+				try {
+					c.getCardBoard().setTradeArea(AESCrypto.decrypt(rs.getString("TRADE_AREA")));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				} 
+				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
+				list.add(c);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int pastCount(Connection conn, int usid) {
+		int totalData=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("pastCount"));
+			pstmt.setInt(1, usid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				totalData=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return totalData;
+	}
+
+	public List<Card> likeList(Connection conn, int cPage, int numPerPage, int usid) {
+		List<Card> list=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("likeList"));
+			pstmt.setInt(1, usid);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			list=new ArrayList<Card>();
+			while(rs.next()){
+				Card c = new Card(new Board(), new BoardFile());
+				c.getCardBoard().setBoardId(rs.getInt("BOARD_ID"));
+				c.getCardBoard().setBoardTitle(rs.getString("BOARD_TITLE"));
+				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
+				c.getCardBoard().setHit(rs.getInt("HIT"));
+				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
+				try {
+					c.getCardBoard().setTradeArea(AESCrypto.decrypt(rs.getString("TRADE_AREA")));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				} 
+				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
+				list.add(c);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int likeCount(Connection conn, int usid) {
+		int totalData=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("likeCount"));
+			pstmt.setInt(1, usid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				totalData=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return totalData;
+	}
+
 
 
 }

@@ -138,7 +138,7 @@
         <div id="iCreateContainer">
             <div class="item textField" id="containerTitle">
                 <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >신청한 거래</div>
-                <div style="font-size: 16px; padding-left: 10px; text-align: left;" >다른 참가자를 기다리는 중인 거래 목록입니다.</div>
+                <div style="font-size: 16px; padding-left: 10px; text-align: left;" >아직 시작되지 않은 거래 목록입니다.</div>
                 <div style="margin-bottom: 20px; font-size: 16px; padding-left: 10px; text-align: left;" >이미지를 누르면 상세 페이지로 이동합니다.</div>
             </div>
             <div id="cardContainer">

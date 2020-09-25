@@ -50,8 +50,8 @@
     div#iCreateContainer{
         position: relative;
         background: #FFFFFF;
-        text-align: left;
-        margin: 3% 10% 5% 2%;
+        text-align: center;
+        margin: 3% 12% 5% 0%;
         /* 세로정렬꽉차게 가운데:center */
         /*align-items: stretch;*/
         /* 가로정렬꽉차게 가운데:center */
@@ -61,13 +61,18 @@
     }
     div.card{
         padding: 0;
-        margin: 0 3% 3% 0;
-        width:25%;
+        margin: 0 1% 3% 1%;
+        width:30%;
     }
     div.card-body{
-        padding: 0 2%;
+        padding:4%;
     }
-
+    
+    div.card-body *{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
     .card-img-top {
         width: 100%;
         height: 10vw;
@@ -75,6 +80,25 @@
     }
     a.active{
         font-weight: bold;
+    }
+    .imgContainer{
+        cursor: pointer;
+    }
+    nav.listPageBar{
+        text-align: center;
+        margin: 0;
+    }
+    ul.pagination{
+        text-align: center;
+    }
+    #productTitle{
+        text-align: left;
+        font-size: 16px;
+
+    }
+    #productPrice{
+        text-align: right;
+        font-size: 16px;
     }
 </style>
 <section>
@@ -114,7 +138,7 @@
         <div id="iCreateContainer">
             <div class="item textField" id="containerTitle">
                 <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >시작된 거래</div>
-                <div style="font-size: 16px; padding-left: 10px; text-align: left;" >현재 진행중인 거래입니다.</div>
+                <div style="font-size: 16px; padding-left: 10px; text-align: left;" >현재 진행중인 거래 목록입니다.</div>
                 <div style="margin-bottom: 20px; font-size: 16px; padding-left: 10px; text-align: left;" >이미지를 누르면 상세 페이지로 이동합니다.</div>
             </div>
             <div id="cardContainer">
