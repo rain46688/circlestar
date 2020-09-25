@@ -31,12 +31,15 @@ header{
 #searchSection>input {
 	margin-top: 0.5em;
 	width: 16em;
-	height: 2.5em;
+	height: 2.75em;
 	border-radius: 0%;
 	border: 2px black solid;
 	font-size: 16px;
 	font-family: Arial, Helvetica, sans-serif;
 	float: left;
+	border-bottom-left-radius: 4px;
+	border-top-left-radius: 4px;
+	padding-left: 5px;
 }
 
 #searchSection>input:focus {
@@ -54,8 +57,11 @@ header{
 	border-left: none;
 	float: left;
 	background-color: #ecaf59;
-	width: 40px;
-	height: 40px;
+	width: 44px;
+	height: 44px;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	cursor: pointer;
 }
 
 /* 로고 크기 및 위치 */
