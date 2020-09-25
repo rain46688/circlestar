@@ -56,7 +56,8 @@ div#topBtn>button:hover{
 	justify-content: center;
 	align-items: center;  
 	font-size: 30px;
-	border:2px black solid;
+	border-top:2px black solid;
+	border-bottom:2px black solid;
 	width:100%;
 }
 
@@ -70,12 +71,12 @@ header>nav>ul{
 }
 
 header>nav>ul>li{
-	padding-left: 1.25em;
-	padding-right: 1.25em;
+	font-size: 26px;
+	width: 7em;
 	text-align:center;
 }
 header>nav>ul>li>a {
-	width:5em;
+
 	-webkit-transition: .15s all;   
     -webkit-transition-delay: 0.15s; 
     transition: .15s all;   
@@ -135,6 +136,7 @@ header>nav>ul>li>a:hover {
 	font-size: 14px;
 	cursor: pointer;
 }
+
 #loginField img{
 	width: 40%;
 	height: auto;
