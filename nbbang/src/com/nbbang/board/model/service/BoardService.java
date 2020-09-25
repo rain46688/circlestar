@@ -26,9 +26,9 @@ public class BoardService {
 		return boardList;
 	}
 	
-	public List<Card> boardListSearch(int cPage, int numPerPage, String keyword) {
+	public List<Card> boardListSearch(int cPage, int numPerPage, String keyword, String category) {
 		Connection conn = getConnection();
-		List<Card> boardList = dao.boardListSearch(conn, cPage, numPerPage, keyword );
+		List<Card> boardList = dao.boardListSearch(conn, cPage, numPerPage, keyword, category);
 		close(conn);
 		return boardList;
 	}
@@ -51,6 +51,13 @@ public class BoardService {
 	public int boardListCount(String boardTitle) {
 		Connection conn = getConnection();
 		int result = dao.boardListCount(conn, boardTitle);
+		close(conn);
+		return result;
+	}
+	
+	public int boardListCountSearch(String category, String keyword) {
+		Connection conn = getConnection();
+		int result = dao.boardListCountSearch(conn, category, keyword);
 		close(conn);
 		return result;
 	}
