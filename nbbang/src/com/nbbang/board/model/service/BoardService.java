@@ -25,6 +25,13 @@ public class BoardService {
 		close(conn);
 		return boardList;
 	}
+	
+	public List<Card> boardListSearch(int cPage, int numPerPage, String keyword) {
+		Connection conn = getConnection();
+		List<Card> boardList = dao.boardListSearch(conn, cPage, numPerPage, keyword );
+		close(conn);
+		return boardList;
+	}
 
 	public Card boardPage(String boardId, boolean hasRead, int writerUsid) {
 		Connection conn = getConnection();
