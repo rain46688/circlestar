@@ -375,7 +375,6 @@ public class BoardDao {
 				c.getCardBoard().setProductUrl(rs.getString("PRODUCT_URL"));
 				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
 				list.add(c);
-				System.out.println(c);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

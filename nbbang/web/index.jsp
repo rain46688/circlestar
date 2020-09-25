@@ -36,7 +36,7 @@
 		padding: 0 auto;
 	}
 	#popularBoards {
-		background-color: white;
+		background-color: rgb(228, 176, 103);
 	}
 
 	#cards-nav .contentBlock {
@@ -44,7 +44,7 @@
 		width: 100%;
 		height: 30px;
 	}
-
+	
 	#recentBoards {
 		background-color: bisque;
 	}
@@ -66,35 +66,47 @@
 		padding-top: 3em;
 		text-align: left;
 	}
-
+	.card-body {
+		padding:0;
+		padding-top: 1em;
+	}
 	.card {
-	border: 1px white solid;
+		border: 1px white solid;
+		margin-left: 2em;
+		margin-right: 2em;
 	}
 
 	.card-title {
-	width: 9.5em;
-	height: 1em;
+		width: 9em;
+		height: 1em;
+		margin-bottom: 0.25em;
 	}
 
 	.card-title>p {
-	font-size: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+		font-size: 20px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.interest {
+
+	}
+	.card-price {
+		text-align: right;
 	}
 
 </style>
 
 <section>
-
+	
 	<div id="carouselField" name="carouselField">
 		<div id="carouselNB" class="carousel slide carouselInhee" data-ride="carousel">
 			<ol class="carousel-indicators">
-				<li data-target="#carouselInhee" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselInhee" data-slide-to="1"></li>
-				<li data-target="#carouselInhee" data-slide-to="2"></li>
-				<li data-target="#carouselInhee" data-slide-to="3"></li>
-				<li data-target="#carouselInhee" data-slide-to="4"></li>
+				<li data-target="#carouselNB" data-slide-to="0" class="active"></li>
+				<li data-target="#carouselNB" data-slide-to="1"></li>
+				<li data-target="#carouselNB" data-slide-to="2"></li>
+				<li data-target="#carouselNB" data-slide-to="3"></li>
+				<li data-target="#carouselNB" data-slide-to="4"></li>
 			</ol>
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
@@ -155,20 +167,7 @@
 		</div>
 		<div id="contentWrapper">
 			<div id="contentPosition">
-				<div class='card' 
-					onclick="location.href='<%=request.getContextPath()%>/board/boardPage'"
-					style="width: 15rem; cursor: pointer; padding: 0px;">
-					<div class="image-wrapper">
-					<img src="..." class="card-img-top" alt="...">
-					</div>
-					<div class="card-body">
-						<input type="hidden" value="boardid">
-						<h4 class="card-title"><p>타이틀</p></h4>
-						<p>주소</p>
-						<p id="interest">0 관심 0 조회</p>
-						<!-- <h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value=""></fmt:formatNumber>원</h4> -->
-					</div>
-				  </div>
+				
 			</div>
 		</div>
 	</div>
@@ -186,9 +185,10 @@
             },
             success: function (data) {
                 let html = "";
+				console.log(data);
 				$.each(data, function(index, item){
 					html += "<div class='card' ";
-					html += "onclick=\"location.href='<%=request.getContextPath()%>/board/boardPage?boardId=&writerUsid= %>'\"";
+					html += "onclick=\"location.href='<%=request.getContextPath()%>/board/boardPage?boardId="+item.cardBoard.boardId+"&writerUsid="+ item.cardBoard.writerUsid +"\" ";
 					html += "style=\"width: 15rem; cursor: pointer; padding: 0px;\">";
 					html += "<div class=\"image-wrapper\">";
 					html += "<img src=\"<%= request.getContextPath() %>/upload/images/" + item.cardFile.fileName[0] +"\" class=\"card-img-top\" alt=\"...\" width=\"120em\" height=\"200em\">";
@@ -197,7 +197,7 @@
 					html += "<input type=\"hidden\" value=\"boardid\">";
 					html += "<h4 class=\"card-title\"><p>" + item.cardBoard.boardTitle + "</p></h4>";
 					html += "<p>" + item.cardBoard.tradeArea + "<p>";
-					html += "<p id='interest'> 관심" + item.cardBoard.likeCount + "조회" + item.cardBoard.hit +"</p>";
+					html += "<p class='interest'> 관심 " + item.cardBoard.likeCount + " 조회 " + item.cardBoard.hit +"</p>";
 					html += "<h4 class='card-price'>" + item.cardBoard.productPrice + "원<h4>";
 					html += "</div></div>";
 				})
@@ -205,6 +205,21 @@
 				if(key!="popular") {
 				var location = document.querySelector("#popularBoards").offsetTop;
 				window.scrollTo({top:location, behavior:'smooth'});
+				}
+				if(key=="popular") {
+					$("#popularBoards").css("background-color","white");
+					$("#recentBoards").css("background-color","bisque");
+					$("#specialBoards").css("background-color","burlywood");
+				}
+				if(key=="recent") {
+					$("#popularBoards").css("background-color","bisque");
+					$("#recentBoards").css("background-color","white");
+					$("#specialBoards").css("background-color","burlywood");
+				}
+				if(key=="special") {
+					$("#popularBoards").css("background-color","burlywood");
+					$("#recentBoards").css("background-color","bisque");
+					$("#specialBoards").css("background-color","white");
 				}
             }
         })

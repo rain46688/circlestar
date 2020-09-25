@@ -34,7 +34,7 @@ public class BoardPageServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String boardId = request.getParameter("boardId");
 		int writerUsid = Integer.parseInt(request.getParameter("writerUsid"));
-		
+		System.out.println(boardId + writerUsid);
 		Cookie[] cookies = request.getCookies();
 		String boardHistory = "";
 		boolean hasRead = false;
