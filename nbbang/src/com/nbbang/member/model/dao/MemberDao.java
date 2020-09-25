@@ -737,6 +737,22 @@ private Properties prop=new Properties();
 		return totalData;
 	}
 
+	public int byebye(Connection conn, int usid, String password) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("byebye"));
+			pstmt.setInt(1, usid);
+			pstmt.setString(2, password);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 }
