@@ -56,7 +56,11 @@ body{
 #inputDiv{
 	height:20%;
 	width:100%;
-	background-color:white;
+	/* background-color:white; */
+	 background-color:#FFE9B9; 
+/* 	background-color:#FEFCEC; */
+	border:1px solid #E8AB62;
+	border-radius:10px;
 	border-radius-bottom-left: 10px;
 	border-radius-bottom-right: 10px;
 }
@@ -66,7 +70,14 @@ body{
 	resize: none;
 	border: none;
 	padding: 10px 10px 10px 10px;
-	width:80%;
+	/*  */
+	margin-top:5px;
+	margin-left:7px;
+	/*  */
+	width:79%;
+	
+		border-radius:5px;
+	height:86px;
 }
 
 /* 위 텍스트 영역 눌르면 옆에 테두리 생기는거 지우는 용도 */
@@ -194,7 +205,8 @@ margin-top:10px;
 					<c:if test="${empty loginnedMember}">
 					<div id="ChatArea"><div class='tmp'><div class='admin'>로그인후 다시 접속해주세요!</div></div></div>
 					<div id="inputDiv">
-						<textarea id="msgText" rows="3" cols="33"></textarea>
+					<!-- 	<textarea id="msgText" rows="3" cols="33"></textarea> -->
+						<textarea id="msgText" rows="1" cols="1"></textarea>
 						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
 					</div>
 					</c:if>
@@ -259,7 +271,7 @@ $(function(){
 
 $(this).resize(fixedSize);
 function fixedSize() {
-		this.resizeTo("${x}","${y}")
+		this.resizeTo(600,800);
 }
 
 /* 웹소켓 부분 */

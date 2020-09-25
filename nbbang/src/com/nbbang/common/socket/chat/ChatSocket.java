@@ -87,7 +87,7 @@ public class ChatSocket {
 				String curMemsList = msg.getCurMemsList();
 				String day = msg.getChatTime();
 
-				 System.out.println("boardId : "+boardId+", curMemsList : " + curMemsList);
+				 System.out.println("보낸사람 : "+msg.getSendNickName()+", boardId : "+boardId+", curMemsList : " + curMemsList);
 
 				Iterator<Member> userIterator = user.keySet().iterator();
 				while (userIterator.hasNext()) {
