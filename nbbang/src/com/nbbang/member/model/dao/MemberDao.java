@@ -472,6 +472,21 @@ private Properties prop=new Properties();
 		return list;
 	}
 	
+	public List<Card> waitlist(Connection conn, int cPage, int numPerPage, int usid) {
+		List<Card> list=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("waitList"));
+			pstmt.setInt(1, usid);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			list=new ArrayList<Card>();
+		}
+		return list;
+	}
+
 	private String[] stringToArr(String str) {
 		if(str==null) {
 			return new String[1];
@@ -505,6 +520,7 @@ private Properties prop=new Properties();
 		}
 		return totalData;
 	}
+
 
 
 }
