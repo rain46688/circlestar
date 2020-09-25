@@ -19,19 +19,21 @@ System.out.println("list: " + list);
 %>
 <style>
   div#QA-container {
-    margin-top: 1.4%;
+    margin-top: 3.4%;
     margin-left: 35%;
     margin-bottom: 4%;
     width: 50%;
     height: 100%;
-    box-shadow: 5px 5px 5px 5px #ecd051;
+    
   }
 
   div.question-container {
     height: 300px;
 
   }
-
+  div.writing-date{
+    margin-left: 40em;
+  }
   div.answer-container {
     height: 300px;
 
@@ -56,7 +58,7 @@ System.out.println("list: " + list);
   }
 
   div.hr-line {
-    box-shadow: 1px 1px 1px 1px #ecd051;
+    box-shadow: 1px 1px 1px 1px #f5f4f3;
     color: white;
 
     width: 100%;
@@ -122,9 +124,9 @@ System.out.println("list: " + list);
     padding: .2rem;
   }
 </style>
-
+<section>
 <div id="QA-container">
-<form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post" enctype="multipart/form-data">
+  <form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post" enctype="multipart/form-data">
     <div class="question-container">
 
       <div class="write-content">
@@ -136,45 +138,45 @@ System.out.println("list: " + list);
           <p><%=c.getCsContent() %></p>
         </div>
       </div>
-      <div class="writing-date">
-        <p><%=c.getCsDate() %></p>
-      </div>
       <div class="file-upload">
         <%for(CustomerFile cf : c.getCf()){ %>
-
-
+          
+      
           <div class="imgList">
             <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-              width="60" height="60">
+            width="60" height="60">
             <p><%=cf.getCsFileName() %> </p>
           </div>
-
+          
           <!-- 팝업 될 곳 -->
           <div class="modal">
             <button>&times;</button>
             <div class="modalBox">
               <img src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-                alt="<%=cf.getCsFileName() %>">
+              alt="<%=cf.getCsFileName() %>">
               <p></p>
             </div>
           </div>
-        <%} %>
-
-      </div>
+          <%} %>
+          
+        </div>
+            <div class="writing-date">
+              <p><%=c.getCsDate() %></p>
+            </div>
     </form>
   
   
   <div class="hr-line">
     <hr id="hr-line">
   </div>
-  
+
+
   
 
-</div>
 
   <div class="comment-container">
     <div class="comment-editor">
-     <%if(c.getCsAnswer()!=null){ %>
+     <%if(c.getCsAnswer()==null){ %>
       <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
         <div class="answer-content">
           <input type="hidden" name="csId" value="<%=c.getCsId()%>">
@@ -184,30 +186,9 @@ System.out.println("list: " + list);
         <button type="submit" id="btn-insert" >등록</button>
   </div>
   </div>
-   <%}else{ 
-   if((loginnedMember.getUsid() == 9999) && c.getCsAnswer() == null){
+	    <%
+	    }%> 
 
-	   //관리자로 로그인하고 content에 해당하는 get 값이 null이 아닌경우 답변을 작성 할 수 있는 분기문
-   
-   %>
-	   <div class="answer-container">
-	    
-	   
-	 <%  
-	   
-   }else {
-	 //관리자로 로그인 한 경우가 아니고 값이 있는 경우 해당 답변을 보여주는 구문을 작성 
-	 //여기에 if문 하나 더 써서
-	 //해당답변이 존재 안하면 등록된 답변이 없습니다 라고 나오게 하던가 해야함
-	 //일반 회원이 답변을 작성하지 않게 해야함 input태그는 여기에 들어가면 안됨
-	 //여기가 쥰내 이해가 안감 민수야 
-	 
-   %>
-    <%  
-	   
-   }
-	 
-   %>
 			
 
       
@@ -221,11 +202,10 @@ System.out.println("list: " + list);
 	    <%=c.getCsDate()%>
 	  </div> 
 	 </div> 
-	    <%
-	    }%> 
     
       </form>
-    
+</div> 
+    </section>
     
   
       
