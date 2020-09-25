@@ -195,4 +195,18 @@ private MemberDao dao=new MemberDao();
 		return totalData;
 	}
 
+	public List<Card> onGoingList(int cPage, int numPerPage, int usid) {
+		Connection conn=getConnection();
+		List<Card> blist=dao.onGoingList(conn, cPage, numPerPage, usid);
+		close(conn);
+		return blist;
+	}
+
+	public int onGoingCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.onGoingCount(conn,usid);
+		close(conn);
+		return totalData;
+	}
+
 }

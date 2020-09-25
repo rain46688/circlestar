@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.nbbang.board.model.vo.Card"%>
 <%@ include file="/views/common/header.jsp" %>
 <%
-	Member m=(Member)request.getAttribute("member");
+    Member m=(Member)request.getAttribute("member");
+    List<Card> bolist=(List<Card>)request.getAttribute("boardList");
 %>
 <style>
     div#myPageSideBar{
@@ -109,7 +111,35 @@
                 </div>
             </div>
         </div>
-        
+        <div id="iCreateContainer">
+            <div class="item textField" id="containerTitle">
+                <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >시작된 거래</div>
+                <div style="font-size: 16px; padding-left: 10px; text-align: left;" >현재 진행중인 거래입니다.</div>
+                <div style="margin-bottom: 20px; font-size: 16px; padding-left: 10px; text-align: left;" >이미지를 누르면 상세 페이지로 이동합니다.</div>
+            </div>
+            <div id="cardContainer">
+            	<%for(Card c:bolist){ %>
+                <div class="card">
+                    <div class="imgContainer" onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=loginnedMember.getUsid()%>'">
+                        <img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[0] %>" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                      <div id="productTitle">
+                        <%= c.getCardBoard().getBoardTitle() %>
+                      </div>
+                      <div id="productPrice">
+                        <%= c.getCardBoard().getProductPrice() %>
+                      </div>
+                    </div>
+                </div>
+                <%} %>
+                <nav aria-lable="Page navigation" class="listPageBar">
+					<ul class="pagination justify-content-center">
+						<%=request.getAttribute("pageBar")%>
+					</ul>
+				</nav>
+            </div>
+        </div>
     </div>
 </section>
 <%@ include file="/views/common/footer.jsp" %>
