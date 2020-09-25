@@ -7,13 +7,14 @@
 
 <style>
 #writecontainer {
-	border: 1px #ECAF59 solid;
+/* 	border: 1px #ECAF59 solid; */
 	border-radius: 5px;
 	margin-top: 5%;
 	margin-bottom: 2%;
 	height: auto;
-	width: 70%;
-	float: center;
+/* 	width: 62%; */
+	 width: 70%; 
+	float: right;
 }
 
 .divList {
@@ -90,21 +91,36 @@ h1 {
 		margin-top:15px;
 	margin-left:10px;
 }
+
+#side{
+float:left;
+
+}
+
+#container{
+margin-left:auto;
+margin-right:auto;
+}
+
 </style>
 
 
 
 
-<div id="container">
+<div class="container">
 
+<div id="side">
 	<!-- 사이드바 넣어야되나???? 누가 넣어줘라 -->
-
+	<jsp:include page="/views/customer/maincss.jsp"></jsp:include>
+</div>
 
 	<div class="container" id="writecontainer">
 		<div class="form-group">
 			<h1>공지 사항</h1>
 		</div>
+		<% if(loginnedMember.getNickname().equals("ADMIN")) {%>
 		<button onclick="location.href='<%=request.getContextPath() %>/notice/noticeWrite'" class="btn btn-success">공지 등록</button>
+		<%} %>
 		<div class="divList">
 			<div class="divListBody">
 
