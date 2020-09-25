@@ -42,6 +42,12 @@
 				<img src="<%=request.getContextPath() %>/images/logoTitle.png" id="logoTitle" alt="logoTitle">
 				</a>
 			</div>
+			<div id="searchSection">
+				<input type="text" name="" id="">
+				<div id="searchImage">
+					<img src="<%=request.getContextPath()%>/images/search.png" alt="" width="30px" height="30px">
+				</div>
+			</div>
 			<div id="topBtn">
 				<%if(loginnedMember==null) {%>
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
