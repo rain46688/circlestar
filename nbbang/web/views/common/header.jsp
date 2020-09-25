@@ -42,6 +42,12 @@
 				<img src="<%=request.getContextPath() %>/images/logoTitle.png" id="logoTitle" alt="logoTitle">
 				</a>
 			</div>
+			<div id="searchSection">
+				<input type="text" name="searchKeyword" id="searchKeyword" onkeypress="enterkey();">
+				<div id="searchImage" onclick="fn_search();">
+					<img src="<%=request.getContextPath()%>/images/search.png" alt="" width="30px" height="30px">
+				</div>
+			</div>
 			<div id="topBtn">
 				<%if(loginnedMember==null) {%>
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
@@ -86,3 +92,20 @@
 			</ul>
 		</nav>
 	</header>
+	<script>
+		function enterkey(){
+			if(window.event.keyCode == 13) {
+				fn_search();
+			}
+			return false;
+		}
+
+		function fn_search(){
+			let keyword = document.getElementById('searchKeyword').value;
+			if(keyword==""){
+				alert("검색어를 입력해주세요.")
+			}else {
+				location.assign("<%=request.getContextPath()%>/boListSearch?keyword="+keyword);
+			}
+		}
+	</script>

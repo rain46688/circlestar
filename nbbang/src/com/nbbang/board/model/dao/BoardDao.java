@@ -43,11 +43,49 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("boardList");
-		System.out.println(boardTitle);
 		List<Card> list = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardTitle);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Card>();
+			while(rs.next()) {
+				Card c = new Card(new Board(), new BoardFile());
+				c.getCardBoard().setBoardId(rs.getInt("BOARD_ID"));
+				c.getCardBoard().setBoardTitle(rs.getString("BOARD_TITLE"));
+				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
+				c.getCardBoard().setHit(rs.getInt("HIT"));
+				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
+				try {
+					c.getCardBoard().setTradeArea(AESCrypto.decrypt(rs.getString("TRADE_AREA")));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				} 
+				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public List<Card> boardListSearch(Connection conn, int cPage, int numPerPage, String keyword){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("boardListSearch");
+		List<Card> list = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			rs = pstmt.executeQuery();
