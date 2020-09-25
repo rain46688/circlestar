@@ -26,7 +26,7 @@
 		margin-left: -3px;
 		margin-bottom: -2px;
 		border: 1.5px black solid;
-		border-bottom: 2px white solid;
+		border-bottom: none;
 	}
 	#cards-nav div {
 		width: 8em;
@@ -61,8 +61,8 @@
 		width: 80em;
 		margin: 0 auto;
 		text-align: center;
-		padding-left: 5em;
-		padding-right: 5em;
+		padding-left: 7em;
+		padding-right: 7em;
 		padding-top: 3em;
 		text-align: left;
 	}
@@ -228,7 +228,6 @@
             }
         })
     }
-
     $(function () {
         $('.carouselInhee').carousel(
             {interval: 5000, pause: "hover", wrap: true, keyboard: true}

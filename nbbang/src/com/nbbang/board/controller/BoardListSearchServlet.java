@@ -13,16 +13,16 @@ import com.nbbang.board.model.service.BoardService;
 import com.nbbang.board.model.vo.Card;
 
 /**
- * Servlet implementation class BoardListServlet
+ * Servlet implementation class BoardListSearchServlet
  */
-@WebServlet("/boList")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/boListSearch")
+public class BoardListSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public BoardListSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +32,9 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String keyword = request.getParameter("keyword");
+		String boardTitle = "검색결과:" + keyword;
 		
-		String boardTitle = request.getParameter("boardTitle");
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -42,7 +43,7 @@ public class BoardListServlet extends HttpServlet {
 		}
 		int numPerPage = 40;
 		
-		List<Card> blist = new BoardService().boardList(cPage, numPerPage, boardTitle);
+		List<Card> blist = new BoardService().boardListSearch(cPage, numPerPage, keyword);
 		for(Card c : blist) {
 			String temp = c.getCardBoard().getTradeArea();
 			if(temp!=null) {
@@ -92,4 +93,5 @@ public class BoardListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }
