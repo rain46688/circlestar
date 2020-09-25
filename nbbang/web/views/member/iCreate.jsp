@@ -138,6 +138,7 @@
         <div id="iCreateContainer">
             <div class="item textField" id="containerTitle">
                 <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >내가 만든 거래</div>
+                <div style="font-size: 16px; padding-left: 10px; text-align: left;" >내가 만든 거래 목록입니다.</div>
                 <div style="margin-bottom: 20px; font-size: 16px; padding-left: 10px; text-align: left;" >이미지를 누르면 상세 페이지로 이동합니다.</div>
             </div>
             <div id="cardContainer">
