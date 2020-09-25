@@ -260,7 +260,8 @@ function fixedSize() {
 
 
 	//소켓 생성
-	var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket");
+	var socket=new WebSocket("ws://rclass.iptime.org:9999<%=request.getContextPath()%>/socket");
+	<%-- var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket"); --%>
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
