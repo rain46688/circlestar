@@ -60,6 +60,7 @@ public class ChatRoomServlet extends HttpServlet {
 		System.out.println("maxMems : "+maxMems+", writerUsid : "+writerUsid+"\n"
 				+"boardId : "+boardId+", curMemsList : "+curMemsList);
 		
+		
 //		//구매확정한 유저수 curNum
 		int curNum = 0;
 		if(m != null && boardId != null) 
