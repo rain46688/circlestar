@@ -183,13 +183,11 @@ margin-top:10px;
 	<!-- tradeStage 방의 상태가 2단계인경우
 	게시판 상세페이지에서 방이 생성될때 정보를 변경 후 Attribute 보내줘야됨 
 	-->
-			<c:if test="${tradeStage == 2}">
 					<div id="ChatArea"></div>
 					<div id="inputDiv">
 						<textarea id="msgText" rows="3" cols="33"></textarea>
 						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
 					</div>
-			</c:if>
 	</div>
 </div>
 </section>
@@ -259,7 +257,7 @@ function fixedSize() {
 /* 웹소켓 부분 */
 
 // 게시글 상태가 2단계일때 실행
-if("${tradeStage}"=="2"){
+
 
 	//소켓 생성
 	var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket");
@@ -402,6 +400,6 @@ if("${tradeStage}"=="2"){
 	Number.prototype.zf = function (len) {
 		return this.toString().zf(len); 
 		};
-}
+
 
 </script>
