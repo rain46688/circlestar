@@ -15,7 +15,8 @@ String Sc = request.getParameter("Sc");
 #writecontainer {
 	border-radius: 5px;
 	/* border: 1px rgba(128, 128, 128, 0.5) solid; */
-	border: 1px #ECAF59 solid;
+/* 	border: 1px #ECAF59 solid; */
+	border: 2px black solid;
 	padding: 20px;
 }
 
@@ -97,12 +98,13 @@ h1 {
 	border-bottom: 1px #DEE2E6 solid;
 }
 
-.empty {
-	float: center;
-	font-size: 20px;
-	font-weight: bold;
-	margin-top: 15px;
-	margin-left: 10px;
+.empty{
+	margin-top:20px;
+	font-weight:bold;
+		margin-top:15px;
+	margin-left:150%;
+		width:100%;
+			font-size:20px;
 }
 </style>
 

@@ -1,6 +1,7 @@
 package com.nbbang.notice.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +41,15 @@ public class NoticeListServlet extends HttpServlet {
 		int numPerPage = 7;
 
 		list = new NoticeService().noticeList(cPage, numPerPage);
+
+		//포멧해서 스트링 vo에 옮겨서 jsp에서 출력함
+		SimpleDateFormat fm = new SimpleDateFormat("yy년 MM월 dd일 HH시 mm분");
+		for(Notice n : list) {
+			String s = fm.format(n.getNoticeDate());
+			System.out.println(s);
+			n.setTimestamp(s);
+		}
+		
 		
 		int totalData = new NoticeService().noticeListCount();
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
