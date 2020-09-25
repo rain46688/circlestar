@@ -173,10 +173,12 @@ System.out.println("list: " + list);
 
   
 
-
+<%
+	if (c.getCsAnswer()==null && loginnedMember.getNickname().equals("ADMIN")){
+%>
   <div class="comment-container">
     <div class="comment-editor">
-     <%if(c.getCsAnswer()==null){ %>
+     <%-- <%if(c.getCsAnswer()==null){ %> --%>
       <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
         <div class="answer-content">
           <input type="hidden" name="csId" value="<%=c.getCsId()%>">
@@ -184,14 +186,14 @@ System.out.println("list: " + list);
   
         </div>
         <button type="submit" id="btn-insert" >등록</button>
+        <button type="button" onclick="fn_update()">수정</button>
   </div>
   </div>
-	    <%
-	    }%> 
+	    <%}%>
 
 			
 
-      
+      <%if(c.getCsAnswer()!=null || !loginnedMember.getNickname().equals("ADMIN")){ %> 
    <div class="answer-container"> 
      <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> 
     
@@ -202,6 +204,8 @@ System.out.println("list: " + list);
 	    <%=c.getCsDate()%>
 	  </div> 
 	 </div> 
+	   <% }
+	   %> 
     
       </form>
 </div> 

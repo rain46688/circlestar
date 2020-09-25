@@ -46,7 +46,7 @@ public class CustomerAnswer extends HttpServlet {
 		if(result>0) {
 			
 			msg="완료";
-			loc = "/customer/customerReadFrm"; 
+			loc = "/customer/customerReadFrm?num="+c.getCsId();
 			
 		
 			

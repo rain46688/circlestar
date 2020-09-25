@@ -64,15 +64,7 @@ System.out.println("list in jsp: "+ list);
 					<th>문의날짜</th>
 					
 				</tr>
-				<%-- <% if(list.isEmpty()){ %> --%>
-					
-				<tr>
-					<td>1</td>
-					<td>공지</td>
-					<td><a href="">공지사항입니다.</a></td>
-					<td>운영자</td>
-					<td>2020.09.16</td>
-				</tr>
+
 				
 				<%
 					for(CustomerCenter cc : list) { %>
@@ -80,7 +72,7 @@ System.out.println("list in jsp: "+ list);
 						<tr>
 					<td> <%=cc.getCsId()%> </td>
 					<td>
-					<a href="<%=request.getContextPath()%>/admin/adminCustomerList"></a>
+					
 					<%=cc.getCsType()%></td>
 				
 					<td>
