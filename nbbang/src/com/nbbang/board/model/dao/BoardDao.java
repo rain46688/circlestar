@@ -78,16 +78,24 @@ public class BoardDao {
 		return list;
 	}
 	
-	public List<Card> boardListSearch(Connection conn, int cPage, int numPerPage, String keyword){
+	public List<Card> boardListSearch(Connection conn, int cPage, int numPerPage, String keyword, String category){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("boardListSearch");
+		String sql = new String();
+		if(category.equals("overall"))sql = prop.getProperty("boardListSearch");
+		else sql = prop.getProperty("boardListSearchByCategory");
 		List<Card> list = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyword+"%");
-			pstmt.setInt(2, (cPage-1)*numPerPage+1);
-			pstmt.setInt(3, cPage*numPerPage);
+			if(category.equals("overall")) {
+				pstmt.setInt(2, (cPage-1)*numPerPage+1);
+				pstmt.setInt(3, cPage*numPerPage);
+			}else {
+				pstmt.setString(2, category);
+				pstmt.setInt(3, (cPage-1)*numPerPage+1);
+				pstmt.setInt(4, cPage*numPerPage);
+			}
 			rs = pstmt.executeQuery();
 			list = new ArrayList<Card>();
 			while(rs.next()) {
@@ -182,8 +190,6 @@ public class BoardDao {
 		return c;
 	}
 	
-	
-	
 	public int boardListCount(Connection conn, String boardTitle) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -192,6 +198,28 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardTitle);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} 
+		return result;
+	}
+	
+	public int boardListCountSearch(Connection conn, String category, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("boardListCountSearch");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setString(2, category);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
