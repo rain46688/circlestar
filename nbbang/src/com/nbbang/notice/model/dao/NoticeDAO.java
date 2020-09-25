@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -32,6 +34,7 @@ public class NoticeDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		Calendar c = new GregorianCalendar();
 		List<Notice> list = new ArrayList<Notice>();
 		try {
 			pstmt = conn.prepareStatement(p.getProperty("noticeList"));
@@ -45,7 +48,8 @@ public class NoticeDAO {
 				n.setNoticeWriteNickname(rs.getString("NOTICE_WRITE_NICKNAME"));
 				n.setNoticeTitle(rs.getString("NOTICE_TITLE"));
 				n.setNoticeContent(rs.getNString("NOTICE_CONTENT"));
-				n.setNoticeDate(rs.getDate("NOTICE_DATE"));
+				// 캘린더 변경 이래야 시간이 나옴				
+				n.setNoticeDate(rs.getTimestamp("NOTICE_DATE", c));
 				list.add(n);
 			}
 

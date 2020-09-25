@@ -110,4 +110,11 @@ public class BoardService {
 		return commentList;
 		
 	}
+	
+	public List<Card> mainViewList(String key){
+		Connection conn = getConnection();
+		List<Card> list = dao.mainViewList(conn, key);
+		close(conn);
+		return list;
+	}
 }

@@ -64,7 +64,7 @@ h1 {
 	margin: 15px 0 10px 0;
 }
 
-.btn {
+#n_btn {
 	float: right;
 	margin:0 10px 10px 0;
 }
@@ -78,18 +78,21 @@ h1 {
 }
 
 .noContent {
-	margin-top:15px;
-	margin-left:10px;
+	margin-top:20px;
+	margin-bottom:15px;
+	margin-left:100%;
 	font-size:20px;
 	font-weight:bold;
+	width:100%;
 }
 
 .empty{
-	float:center;
-	font-size:20px;
+	margin-top:20px;
 	font-weight:bold;
 		margin-top:15px;
-	margin-left:10px;
+	margin-left:150%;
+		width:100%;
+			font-size:20px;
 }
 
 #side{
@@ -119,7 +122,7 @@ margin-right:auto;
 			<h1>공지 사항</h1>
 		</div>
 		<% if(loginnedMember.getNickname().equals("ADMIN")) {%>
-		<button onclick="location.href='<%=request.getContextPath() %>/notice/noticeWrite'" class="btn btn-success">공지 등록</button>
+		<button onclick="location.href='<%=request.getContextPath() %>/notice/noticeWrite'" id="n_btn" class="btn btn-success">공지 등록</button>
 		<%} %>
 		<div class="divList">
 			<div class="divListBody">
@@ -138,7 +141,7 @@ margin-right:auto;
 					<div class="divCell"><%=n.getNoticeId()%></div>
 					<div class="divCell"><%=n.getNoticeWriteNickname()%></div>
 					<div class="divCell"><%=n.getNoticeTitle()%></div>
-					<div class="divCell"><%=n.getNoticeDate()%></div>
+					<div class="divCell"><%=n.getTimestamp()%></div>
 				</div>
 				<div class="noti">
 					<div class="noContent"><%=n.getNoticeContent()%></div>

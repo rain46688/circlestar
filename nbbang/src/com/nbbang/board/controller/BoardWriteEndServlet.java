@@ -91,7 +91,7 @@ public class BoardWriteEndServlet extends HttpServlet {
 		if(result > 1) {
 			//업로드 성공
 			request.setAttribute("msg", "업로드 완료!");
-			request.setAttribute("loc", "/boList");
+			request.setAttribute("loc", "/boList?boardTitle="+b.getProductCategory());
 		}else {
 			request.setAttribute("msg", "업로드에 실패하였습니다.");
 			request.setAttribute("loc", "/board/boWrite");
