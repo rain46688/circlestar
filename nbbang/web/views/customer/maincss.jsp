@@ -37,23 +37,35 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
             href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
           </ul>
           <%}else{%>
-      <ul class="side-bar-kdh">
-        <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
-        <li class="cstmt-list">
-          <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
-            href="<%=request.getContextPath() %>/customer/customerQnA">문의하기</a></li>
+            <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
+              <ul class="side-bar-kdh">
+                <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+                    href="<%=request.getContextPath() %>/customerMain">소개글</a></li>
+                <li class="cstmt-list">
+                  <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+                    href="<%=request.getContextPath() %>/customer/customerQnA">문의하기</a></li>
+                <li class="cstmt-list"><a class="main-a" style="font-family:  'Gothic A1', sans-serif;"
+                    href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
+        
+                <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+                    href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
+                  </ul>
         <%} else { %>
+            <ul>
+          <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+            href="<%=request.getContextPath() %>/customerMain">소개글</a></li>
         <li class="cstmt-list">
           <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
             href="<%=request.getContextPath() %>/admin/adminCustomerList?a=0">문의보기</a></li>
-        <%} %>
-        <li class="cstmt-list"><a class="main-a" style="font-family:  'Gothic A1', sans-serif;"
-            href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
+            <li class="cstmt-list"><a class="main-a" style="font-family:  'Gothic A1', sans-serif;"
+              href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
+              
+              <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+                href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
+              </ul>
+              <%} %>
+          
 
-        <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
-            href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
-
-      </ul>
       <%}%>
               
               <ul class="side-bar-kdh">
