@@ -88,9 +88,14 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
-	.interest {
 
+	#carouselField {
+		width: 80%;
+		padding-left: 5em;
+		padding-right: 5em;
 	}
+	
+
 	.card-price {
 		text-align: right;
 	}
@@ -167,7 +172,7 @@
 		</div>
 		<div id="contentWrapper">
 			<div id="contentPosition">
-				
+
 			</div>
 		</div>
 	</div>
@@ -185,10 +190,9 @@
             },
             success: function (data) {
                 let html = "";
-				console.log(data);
 				$.each(data, function(index, item){
 					html += "<div class='card' ";
-					html += "onclick=\"location.href='<%=request.getContextPath()%>/board/boardPage?boardId="+item.cardBoard.boardId+"&writerUsid="+ item.cardBoard.writerUsid +"\" ";
+					html += "onclick=\"location.href='<%=request.getContextPath()%>/board/boardPage?boardId="+item.cardBoard.boardId+"&writerUsid="+ item.cardBoard.writerUsid +"'\" ";
 					html += "style=\"width: 15rem; cursor: pointer; padding: 0px;\">";
 					html += "<div class=\"image-wrapper\">";
 					html += "<img src=\"<%= request.getContextPath() %>/upload/images/" + item.cardFile.fileName[0] +"\" class=\"card-img-top\" alt=\"...\" width=\"120em\" height=\"200em\">";
