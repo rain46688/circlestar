@@ -305,8 +305,8 @@ window.onunload = function() {
 
 /*  채팅창 관련 로직  */
 function nbbang(f){
-	var x = 450;
-	var y = 660;
+	var x = 600;
+	var y = 800;
 	var cx = (window.screen.width / 2) - (x / 2);
 	var cy= (window.screen.height / 2) - (y / 2);
 	console.log("window.screen.width : "+window.screen.width+", cx : "+cx);

@@ -22,20 +22,21 @@ font-weight:bold;
 
 body{
 	/* background-color:#FFC107; */
-	background-image:url('<%=request.getContextPath()%>/images/rememberBread.png');
+	background-image:url('<%=request.getContextPath()%>/images/chatRoom.png');
 	background-repeat:no-repeat;
 	background-size: 100% 100%;
 }
 
 /* 사이드바 사이즈  */
 #side {
-	height: 80%;
-	width: 80%;
-	margin: 30px auto;
-	border: 4px black solid;
+	height: 62%;
+	width: 62%;
+	margin: 28% auto;
+/* 	border: 4px black solid; */
 	padding:1px;
 	border-radius: 10px;
-	background-color:#B2C7D9;
+	/* background-color:#B2C7D9; */
+	background-color:#FEFCEC;
 }
 
 /* 텍스트 출력되는 하얀부분 위 박스 */
@@ -126,8 +127,10 @@ textarea:focus{
 
 /* 각각 채팅을 감싸는 div 배경색과 같은 테투리를 갖고있음 */
 .tmp{
-border:1px black solid;
+/* border:1px black solid;
 border:1px #B2C7D9 solid;
+ */
+ border:1px #FEFCEC solid;
 }
 
 /* 다른 사람껀 프로필이랑 이름 보여주고 왼쪽 */
@@ -146,6 +149,7 @@ border:1px #B2C7D9 solid;
 	margin-left:25%;
 	margin-top:25px;
 	margin-bottom:5px;
+	border:1px #FFC107 solid;
 }
 
 /* 닉네임 div */
