@@ -23,36 +23,61 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
     </ul>
     <div id="kdh-sidebar-left">
 
+      <%if (loginnedMember==null) {%>
       <ul class="side-bar-kdh">
         <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
             href="<%=request.getContextPath() %>/customerMain">소개글</a></li>
-      </ul>
-
-      <ul class="side-bar-kdh">
-<% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
-        <li class="cstmt-list"> 
-        <a class="main-a" style="font-family: 'Gothic A1', sans-serif;" href="<%=request.getContextPath() %>/customer/customerQnA">문의하기</a></li>
-<%} else { %>
-        <li class="cstmt-list"> 
-    	<a class="main-a" style="font-family: 'Gothic A1', sans-serif;" href="<%=request.getContextPath() %>/admin/adminCustomerList?a=0">문의보기</a></li>
-<%} %>
+        <li class="cstmt-list">
+          <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+            href="<%=request.getContextPath() %>/customer/customerQnA">문의하기</a></li>
         <li class="cstmt-list"><a class="main-a" style="font-family:  'Gothic A1', sans-serif;"
             href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
 
         <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
             href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
+          </ul>
+          <%}else{%>
+            <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
+              <ul class="side-bar-kdh">
+                <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+                    href="<%=request.getContextPath() %>/customerMain">소개글</a></li>
+                <li class="cstmt-list">
+                  <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+                    href="<%=request.getContextPath() %>/customer/customerQnA">문의하기</a></li>
+                <li class="cstmt-list"><a class="main-a" style="font-family:  'Gothic A1', sans-serif;"
+                    href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
+        
+                <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+                    href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
+                  </ul>
+        <%} else { %>
+            <ul>
+          <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+            href="<%=request.getContextPath() %>/customerMain">소개글</a></li>
+        <li class="cstmt-list">
+          <a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+            href="<%=request.getContextPath() %>/admin/adminCustomerList?a=0">문의보기</a></li>
+            <li class="cstmt-list"><a class="main-a" style="font-family:  'Gothic A1', sans-serif;"
+              href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
+              
+              <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
+                href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
+              </ul>
+              <%} %>
+          
 
-      </ul>
-
-      <ul class="side-bar-kdh">
-        <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">홈</a>
-        </li>
-        <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">구경하기</a>
-        </li>
-        <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">해외직구</a>
-        </li>
-        <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">마이페이지</a></li>
-      </ul>
-    </div>
+      <%}%>
+              
+              <ul class="side-bar-kdh">
+                <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">홈</a>
+                </li>
+                <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">구경하기</a>
+                </li>
+                <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">해외직구</a>
+                </li>
+                <li class="list-hiper"><a href="" class="hiper-tag" style="font-family: 'Gothic A1', sans-serif;">마이페이지</a></li>
+              </ul>
+            </div>
   </div>
   </div>
+  

@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-table {
-    width: 50em;
+table.table {
+    width: 54em;
     height: 20em;
     margin-left: 35%;
+    margin-top: 1em;
 
     
 }
@@ -26,7 +27,7 @@ td a{
     font-weight: bold;
 }
 td a:hover{
-    color: chocolate;
+    color: rgb(168, 101, 53);
 }
 .qna-caution{
     width: 50%;
@@ -44,7 +45,7 @@ td a:hover{
 .qna-caution li.caution-first{
     font-weight: bold;
     font-size: 20px;
-    margin-top: 3em;
+    margin-top: 0em;
 }
 .qna-caution li.caution-c{
     font-size: 12px;
@@ -85,10 +86,10 @@ td a:hover{
 } */
 #btn-news {
     float: right;
-    margin-bottom: 10em;
-    margin-right: 13em;
+    margin-right: 10em;
+    margin-bottom: 3em;
 }
-.btn_1{
+.btn{
     width: 7em;
     color: black;
     border: 1.5px solid black;
