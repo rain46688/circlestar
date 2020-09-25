@@ -44,9 +44,11 @@ public class ChatSocket {
 				// Map이 isEmpty인경우 바로 넣어줌
 				if (user.isEmpty()) {
 					user.put(m, session);
+					printMember();
 					System.out.println(" === ChatSocket user.isEmpty() 분기문 진입 name : " + m.getNickname() + " === ");
 				} else {
 					// 중복적으로 접근한 경우 차단시켜서 Map에 넣지않도록 필터링
+					// 이러면 한 게시판에서 여러번 접속이 안되는듯?
 					System.out.println(" === ChatSocket !user.isEmpty() 분기문 진입 == ");
 					Iterator<Member> useriterator = user.keySet().iterator();
 					while (useriterator.hasNext()) {
@@ -54,6 +56,7 @@ public class ChatSocket {
 						if (!key.equals(m)) {
 							System.out.println(" === ChatSocket 멤버 user에 추가 name :" + m.getNickname() + " === ");
 							user.put(m, session);
+							printMember();
 						}
 					}
 				}
@@ -91,17 +94,15 @@ public class ChatSocket {
 								System.out.println(" === ChatSocket 리스트 안참 list.size() : " + list.size() + " === ");
 								System.out.println("msg : " + msg);
 								System.out.println("msg.getMsg() : " + msg.getMsg());
-								if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
-									System.out.println("********* " + msg.getMsg());
+								//if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
 									list.add(msg);
-								}
+							//	}
 								user.get(key).getBasicRemote().sendObject(msg);
 							} else {
 								// 디비에 넣고 클리어
-								if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
-									System.out.println("********* " + msg.getMsg());
+								//if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
 									list.add(msg);
-								}
+							//	}
 								user.get(key).getBasicRemote().sendObject(msg);
 								System.out.println(" === ChatSocket 리스트 꽉참 list.size() : " + list.size() + " === ");
 								set = new HashSet<Message>(list);
@@ -168,5 +169,18 @@ public class ChatSocket {
 			System.out.println(" === onClose 예외, name : " + name + " === ");
 		}
 	}
+	
+	public void printMember() {
+		System.out.println(" ---------------------- ");
+		Iterator<Member> it = user.keySet().iterator();
+		while (it.hasNext()) {
+			Member key = it.next();
+			System.out.println(key.getNickname());
+			
+		}
+		System.out.println(" ---------------------- ");
+	}
+		
+	
 
 }

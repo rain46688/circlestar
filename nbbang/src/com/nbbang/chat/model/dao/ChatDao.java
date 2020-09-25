@@ -214,4 +214,26 @@ public class ChatDao {
 		return list;
 	}
 
+	public int getCurMems(Connection conn, String boardId) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		int curmem = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("getCurMems"));
+			pstmt.setString(1, boardId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				curmem++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return curmem;
+	}
+
 }

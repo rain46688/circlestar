@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.nbbang.chat.model.service.ChatService;
 
 /**
@@ -15,45 +16,43 @@ import com.nbbang.chat.model.service.ChatService;
 @WebServlet("/chat/decidebuy")
 public class DecideBuyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DecideBuyServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DecideBuyServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println(" === DecideBuyServlet 실행됨 === ");
 		String usid = request.getParameter("usid");
 		String nickname = request.getParameter("nickname");
 		String boardId = request.getParameter("boardId");
 		String flag = request.getParameter("flag");
-		
-		System.out.println("usid : "+usid+", nickname : "+nickname+", boardId : "+boardId+", flag : "+flag);
 
-			//구매 결정
-			int result = new ChatService().decideBuyUser(usid,nickname,boardId,flag);
-			if(result ==0) {
-				System.out.println("현재 방에 유저 추가 & 삭제 실패");
-			}else if(result == 1){
-				System.out.println("현재 방에 유저 추가");
-			}else if(result == 2) {
-				System.out.println("현재 방에 이미 해당 유저가 있음");
-			}else {
-				System.out.println("현재 방에 유저 삭제");
-			}
+		System.out.println("usid : " + usid + ", nickname : " + nickname + ", boardId : " + boardId + ", flag : " + flag);
+
+		// 구매 결정
+		int result = new ChatService().decideBuyUser(usid, nickname, boardId, flag);
+
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(result, response.getWriter());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

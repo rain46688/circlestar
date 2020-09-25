@@ -226,11 +226,13 @@ $(function(){
 						let time = msg["chatTime"];
 						let arr = time.split('오');
 						time='오'+arr[1];
+						time = time.substring(0,time.lastIndexOf(':'));
 						html+="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div><div class='date'>"+time+"</div></div>";
 					}else{
 						let time = msg["chatTime"];
 						let arr = time.split('오');
 						time='오'+arr[1];
+						time = time.substring(0,time.lastIndexOf(':'));
 						html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/profilePic/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
 					}
 				});
@@ -308,6 +310,7 @@ function fixedSize() {
 				let time = msg["chatTime"];
 				let arr = time.split('오');
 				time='오'+arr[1];
+				time = time.substring(0,time.lastIndexOf(':'));
 	 		let html="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div><div class='date'>"+time+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else{
@@ -315,6 +318,7 @@ function fixedSize() {
 				let time = msg["chatTime"];
 				let arr = time.split('오');
 				time='오'+arr[1];
+				time = time.substring(0,time.lastIndexOf(':'));
 				console.log("msg['chatProfile']"+msg["chatProfile"]);
 			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/profilePic/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
@@ -333,9 +337,7 @@ function fixedSize() {
 		var _today = new Date();
 		let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}",day)));
-		if($(this).val().includes("\n")){
-			txt.val(txt.replace("\n", ''));	
-		}
+
 		txt.val(' ');//칸 비워주기
 		txt.html(' ');//html 비워주기
 		//txt.html(txt.val().trim());
@@ -351,7 +353,10 @@ function fixedSize() {
 	$("#msgText").keyup(function(key) {
 		if (key.keyCode == 13) {
 			console.log("zz : "+$(this).val().includes("\n"));
-			sendMessage();
+			if($(this).val().includes("\n")){
+				sendMessage();
+				txt.val(txt.replace("\n", ''));	
+			}
 
 			//txt.val('');//칸 비워주기
 			//txt.html('');//html 비워주기
