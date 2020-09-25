@@ -1,10 +1,8 @@
 @charset "UTF-8";
-*{
-    text-decoration:none
-}
+
 table {
-    width: 800px;
-    height: 300px;
+    width: 50em;
+    height: 20em;
     margin-left: 35%;
 
     
@@ -55,8 +53,14 @@ td a:hover{
 }
 .page_wrap{
     margin-top: 5%;
-    margin-left: 56.0%;
+    margin-left: 52.0%;
     margin-bottom: 5%;
+    width: 5em;
+}
+.page_wrap a{
+    padding-left:0.5em;
+ 
+    
 }
 /* .cs-alert{
     width: 1200px;
@@ -92,7 +96,7 @@ td a:hover{
     text-align: center;
 
 }
-a:hover {
+td a:hover {
     text-decoration: none;
 }
 
