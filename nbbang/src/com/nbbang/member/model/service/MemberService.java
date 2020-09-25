@@ -181,4 +181,18 @@ private MemberDao dao=new MemberDao();
 		return totalData;
 	}
 
+	public List<Card> waitList(int cPage, int numPerPage, int usid) {
+		Connection conn=getConnection();
+		List<Card> blist=dao.waitlist(conn, cPage, numPerPage,usid);
+		close(conn);
+		return blist;
+	}
+
+	public int waitCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.waitCount(conn,usid);
+		close(conn);
+		return totalData;
+	}
+
 }
