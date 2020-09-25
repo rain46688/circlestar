@@ -38,12 +38,12 @@ public class CustomerQnAServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=10;
+		int numPerPage=7;
 		
 		
 		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage);
 		for(CustomerCenter c : list) {
-			
+//			System.out.println(c);
 		}
 		int totalData=new CustomerService().qnACount();
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));

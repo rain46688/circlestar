@@ -41,13 +41,13 @@ System.out.println("list in jsp: "+ list);
 	<div class="qna-caution">
 		<ul class="ul-caution">
 			<li class="caution-li caution-first ">1:1문의</li>
-			<li class="caution-li caution-c">●전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있으니, 문의 시 입력하지 않도록 주의해 주시기
-				바랍니다.</li>
-				<li class="caution-li caution-c">●개인정보를 기입하지 마세요.</li>
+			<li class="caution-li caution-c">- 전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있습니다.</li>
+				<li class="caution-li caution-c">- 문의 시 입력하지 않도록 주의해 주시기
+					바랍니다.</li>
 			</ul>
 		</div>
 	<div class="coustomer-news">
-		<table class="tbl-news">
+		<table class="table table-striped">
 			<colgroup>
 				<col width="15%">
 				<col width="15%">
@@ -103,15 +103,15 @@ System.out.println("list in jsp: "+ list);
 			
 		</thead>
 	</table>
+			<div id="btn-news">
+				
+				<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm" class="btn btn-default">문의하기</a>
+			
+			</div>
 	<div class="page_wrap">
 		<a><%=request.getAttribute("pageBar")%></a>
 	</div>
 
-	<div id="btn-news">
-		
-		<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm" class="btn_1">문의하기</a>
-	
-	</div>
 
 
 	<script>
