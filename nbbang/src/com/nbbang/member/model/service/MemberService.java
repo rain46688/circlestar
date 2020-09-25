@@ -195,4 +195,46 @@ private MemberDao dao=new MemberDao();
 		return totalData;
 	}
 
+	public List<Card> onGoingList(int cPage, int numPerPage, int usid) {
+		Connection conn=getConnection();
+		List<Card> blist=dao.onGoingList(conn, cPage, numPerPage, usid);
+		close(conn);
+		return blist;
+	}
+
+	public int onGoingCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.onGoingCount(conn,usid);
+		close(conn);
+		return totalData;
+	}
+
+	public List<Card> pastList(int cPage, int numPerPage, int usid) {
+		Connection conn=getConnection();
+		List<Card> blist=dao.pastList(conn, cPage, numPerPage, usid);
+		close(conn);
+		return blist;
+	}
+
+	public int pastCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.pastCount(conn,usid);
+		close(conn);
+		return totalData;
+	}
+
+	public List<Card> likeList(int cPage, int numPerPage, int usid) {
+		Connection conn=getConnection();
+		List<Card> blist=dao.likeList(conn, cPage, numPerPage, usid);
+		close(conn);
+		return blist;
+	}
+
+	public int likeCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.likeCount(conn,usid);
+		close(conn);
+		return totalData;
+	}
+
 }
