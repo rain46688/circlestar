@@ -82,7 +82,7 @@
 			<!-- file의 갯수 분기처리 -->
 			<%-- <% if(files.length==1) {%> --%>
 			<div class="image-wrapper">
-			<img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em">
+			<img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="200em">
 			<%-- <% }else { %> --%>
 			<%-- <img src="<%=request.getContextPath()%>/upload/images/<%= files[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em"> --%>
 		<%-- 	<%} %> --%>
@@ -94,6 +94,8 @@
 				<p id="interest"><%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회</p>
 				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= c.getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
 			</div>
+			<br>
+			<hr>
 		</div>
 		<%
 			}
@@ -109,7 +111,7 @@
 </section>
 <script>
 	function fn_boWrite(){
-		location.assign("<%= request.getContextPath() %>/board/boWrite");
+		location.assign("<%= request.getContextPath() %>/board/boWrite?category=<%= request.getAttribute("category") %>");
 	}
 	/* $('.js-imgSizeSame').each(function(index) { // 1번 
 		

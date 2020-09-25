@@ -335,6 +335,58 @@ public class BoardDao {
 		return list;
 	}
 	
+	public List<Card> mainViewList(Connection conn, String key) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = new String();
+		switch(key) {
+			case "popular" : sql = prop.getProperty("popularView");break;
+			case "recent" : sql = prop.getProperty("recentView");break;
+			case "special" : sql = prop.getProperty("specialView");break;
+		};
+		List<Card> list = null;
+		try {
+			if(sql.contains("$re"))sql = sql.replace("$re", "'특가'");
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Card>();
+			while(rs.next()) {
+				Card c = new Card(new Board(), new BoardFile());
+				c.getCardBoard().setBoardId(rs.getInt("BOARD_ID"));
+				c.getCardBoard().setBoardTitle(rs.getString("BOARD_TITLE"));
+				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
+				c.getCardBoard().setWriterNickname(rs.getString("WRITER_NICKNAME"));
+				c.getCardBoard().setContent(rs.getString("CONTENT"));
+				c.getCardBoard().setEnrollDate(rs.getDate("ENROLL_DATE"));
+				c.getCardBoard().setHit(rs.getInt("HIT"));
+				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
+				c.getCardBoard().setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+				try {
+					c.getCardBoard().setTradeArea(new AESCrypto().decrypt(rs.getString("TRADE_AREA")));
+				} catch (Exception e) {
+					c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
+				}
+				c.getCardBoard().setMaxMems(rs.getInt("MAX_MEMS"));
+				c.getCardBoard().setLimitTime(rs.getDate("LIMIT_TIME"));
+				c.getCardBoard().setTradeStage(rs.getInt("TRADE_STAGE"));
+				c.getCardBoard().setPopularBoard(rs.getBoolean("POPULAR_BOARD"));
+				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				c.getCardBoard().setOwnStatus(rs.getString("TRADE_KIND"));
+				c.getCardBoard().setProductUrl(rs.getString("PRODUCT_URL"));
+				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
+				list.add(c);
+				System.out.println(c);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	
 	private String[] stringToArr(String str) {
 		if(str==null) {

@@ -11,9 +11,6 @@
 	List<Integer> likelist = new ArrayList<Integer>();
 	if(session.getAttribute("likeList")!=null){
 		likelist=(List<Integer>)session.getAttribute("likeList");
-		for(Integer i : likelist) {
-		System.out.println(i);
-		}
 	}
 %>
 <!DOCTYPE html>

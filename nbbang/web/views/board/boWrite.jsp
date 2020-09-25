@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<%
+	String category = request.getParameter("category");
+%>
 <style>
 #wrapper {
     margin: 0 auto;
@@ -79,12 +82,12 @@
 			<form id="frm" action="<%= request.getContextPath() %>/board/boardWriteEnd" method="POST"
 				enctype="multipart/form-data">
 				<select class="custom-select custom-select-sm" name="category" id="category">
-					<option value="" selected>게시판을 선택하세요</option>
-					<option value="식품">식품</option>
-					<option value="패션잡화">패션잡화</option>
-					<option value="취미-문구">취미-문구</option>
-					<option value="티켓">티켓</option>
-					<option value="애완용품">애완용품</option>
+					<option value="" <%if(category==null){%>selected<%} %>>게시판을 선택하세요</option>
+					<option value="식품"<%if(category.equals("식품")){%>selected<%} %>>식품</option>
+					<option value="패션잡화"<%if(category.equals("패션잡화")){%>selected<%} %>>패션잡화</option>
+					<option value="취미-문구"<%if(category.equals("취미-문구")){%>selected<%} %>>취미-문구</option>
+					<option value="티켓"<%if(category.equals("티켓")){%>selected<%} %>>티켓</option>
+					<option value="애완용품"<%if(category.equals("애완용품")){%>selected<%} %>>애완용품</option>
 				</select>
 				<input type="hidden" name="writerNickname" value="<%= loginnedMember.getNickname() %>" >
 				<input type="hidden" name="writerUsid" value="<%= loginnedMember.getUsid() %>" >
