@@ -53,7 +53,8 @@ public class TradeWaitPageServlet extends HttpServlet {
 			}
 		}
 		
-		int totalData=new MemberService().boardListCount(usid);
+		int totalData=new MemberService().waitCount(usid);
+		
 		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
 		int pageBarSize = 5;
 		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -62,7 +63,7 @@ public class TradeWaitPageServlet extends HttpServlet {
 		if(pageNo == 1) {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>이전</a></li>";
 		}else {
-			pageBar += "<li class='page-item'><a class='page-link' href='"+ request.getContextPath() + "/member/iCreateList?usid="+usid+"&cPage=" + (pageNo-1) + "'>이전</a></li>";
+			pageBar += "<li class='page-item'><a class='page-link' href='"+ request.getContextPath() + "/member/waitList?usid="+usid+"&cPage=" + (pageNo-1) + "'>이전</a></li>";
 		}
 		
 		while(pageNo <= pageEnd && pageNo <= totalPage) {
@@ -70,7 +71,7 @@ public class TradeWaitPageServlet extends HttpServlet {
 				pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>" + pageNo + "</a></li>";
 			}else {
 				pageBar+="<li class='page-item'><a class='page-link' href='" + request.getContextPath() + 
-				"/member/iCreateList?usid="+usid+"&cPage=" + pageNo +"')>"+pageNo+"</a></li>";
+				"/member/waitList?usid="+usid+"&cPage=" + pageNo +"')>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 		}
@@ -78,7 +79,7 @@ public class TradeWaitPageServlet extends HttpServlet {
 		if(pageNo > totalPage) {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>다음</a></li>";
 		}else {
-			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/member/iCreateList?usid="+usid+"&cPage=" + pageNo + "'>다음</a></li>";
+			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/member/waitList?usid="+usid+"&cPage=" + pageNo + "'>다음</a></li>";
 		}
 		
 		request.setAttribute("usid", usid);

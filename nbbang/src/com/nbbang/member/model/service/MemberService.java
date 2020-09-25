@@ -188,4 +188,11 @@ private MemberDao dao=new MemberDao();
 		return blist;
 	}
 
+	public int waitCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.waitCount(conn,usid);
+		close(conn);
+		return totalData;
+	}
+
 }
