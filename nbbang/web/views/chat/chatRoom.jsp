@@ -333,7 +333,9 @@ function fixedSize() {
 		var _today = new Date();
 		let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}",day)));
-		
+		if($(this).val().includes("\n")){
+			txt.val(txt.replace("\n", ''));	
+		}
 		txt.val(' ');//칸 비워주기
 		txt.html(' ');//html 비워주기
 		//txt.html(txt.val().trim());
@@ -349,10 +351,8 @@ function fixedSize() {
 	$("#msgText").keyup(function(key) {
 		if (key.keyCode == 13) {
 			console.log("zz : "+$(this).val().includes("\n"));
-			if($(this).val().includes("\n")){
-				sendMessage();
-				txt.val(txt.replace("\n", ''));	
-			}
+			sendMessage();
+
 			//txt.val('');//칸 비워주기
 			//txt.html('');//html 비워주기
 		}

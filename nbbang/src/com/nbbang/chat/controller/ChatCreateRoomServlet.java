@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.nbbang.chat.model.service.ChatService;
@@ -34,6 +35,7 @@ public class ChatCreateRoomServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println(" === ChatCreateRoomServlet 실행 === ");
 		String boardId = request.getParameter("boardId");
+		HttpSession session = request.getSession();
 		System.out.println("boardId : "+boardId);
 		//boardId로 현재 방의 맥스 인원을 알아오고
 		int maxMems = new ChatService().getMaxMems(boardId);

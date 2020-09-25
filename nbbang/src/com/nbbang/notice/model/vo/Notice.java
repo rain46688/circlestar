@@ -10,13 +10,14 @@ public class Notice {
 	private String noticeTitle;
 	private String noticeContent;
 	private Date noticeDate;
+	private String timestamp;
 
 	public Notice() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Notice(int noticeId, int noticeAdminUsid, String noticeWriteNickname, String noticeTitle,
-			String noticeContent, Date noticeDate) {
+			String noticeContent, Date noticeDate, String timestamp) {
 		super();
 		this.noticeId = noticeId;
 		this.noticeAdminUsid = noticeAdminUsid;
@@ -24,6 +25,7 @@ public class Notice {
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.noticeDate = noticeDate;
+		this.timestamp = timestamp;
 	}
 
 	public int getNoticeId() {
@@ -74,11 +76,19 @@ public class Notice {
 		this.noticeDate = noticeDate;
 	}
 
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
 	@Override
 	public String toString() {
 		return "Notice [noticeId=" + noticeId + ", noticeAdminUsid=" + noticeAdminUsid + ", noticeWriteNickname="
 				+ noticeWriteNickname + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
-				+ ", noticeDate=" + noticeDate + "]";
+				+ ", noticeDate=" + noticeDate + ", timestamp=" + timestamp + "]";
 	}
 
 }
