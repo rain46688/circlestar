@@ -44,6 +44,7 @@ public class ChatSocket {
 				// Map이 isEmpty인경우 바로 넣어줌
 				if (user.isEmpty()) {
 					user.put(m, session);
+					System.out.println("onopen부분1 print");
 					printMember();
 					System.out.println(" === ChatSocket user.isEmpty() 분기문 진입 name : " + m.getNickname() + " === ");
 				} else {
@@ -56,7 +57,9 @@ public class ChatSocket {
 						if (!key.equals(m)) {
 							System.out.println(" === ChatSocket 멤버 user에 추가 name :" + m.getNickname() + " === ");
 							user.put(m, session);
+							System.out.println("onopen부분2 print");
 							printMember();
+							
 						}
 					}
 				}
@@ -94,15 +97,15 @@ public class ChatSocket {
 								System.out.println(" === ChatSocket 리스트 안참 list.size() : " + list.size() + " === ");
 								System.out.println("msg : " + msg);
 								System.out.println("msg.getMsg() : " + msg.getMsg());
-								//if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
+								if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
 									list.add(msg);
-							//	}
+								}
 								user.get(key).getBasicRemote().sendObject(msg);
 							} else {
 								// 디비에 넣고 클리어
-								//if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
+								if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
 									list.add(msg);
-							//	}
+								}
 								user.get(key).getBasicRemote().sendObject(msg);
 								System.out.println(" === ChatSocket 리스트 꽉참 list.size() : " + list.size() + " === ");
 								set = new HashSet<Message>(list);
@@ -165,6 +168,8 @@ public class ChatSocket {
 				System.out.println(" === ChatSocket 진입 여부 확인용 2 === ");
 				user.remove(listkey);
 			}
+			System.out.println("onclose부분 print");
+			printMember();
 		} catch (Exception e) {
 			System.out.println(" === onClose 예외, name : " + name + " === ");
 		}

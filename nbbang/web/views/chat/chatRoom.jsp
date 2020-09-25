@@ -184,14 +184,20 @@ margin-top:10px;
 <section >
 <div id="side" >
 	<div id="chat" >
-	<!-- tradeStage 방의 상태가 2단계인경우
-	게시판 상세페이지에서 방이 생성될때 정보를 변경 후 Attribute 보내줘야됨 
-	-->
+				<c:if test="${!empty loginnedMember}">
 					<div id="ChatArea"></div>
 					<div id="inputDiv">
 						<textarea id="msgText" rows="3" cols="33"></textarea>
 						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
 					</div>
+					</c:if>
+					<c:if test="${empty loginnedMember}">
+					<div id="ChatArea"><div class='tmp'><div class='admin'>로그인후 다시 접속해주세요!</div></div></div>
+					<div id="inputDiv">
+						<textarea id="msgText" rows="3" cols="33"></textarea>
+						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
+					</div>
+					</c:if>
 	</div>
 </div>
 </section>
@@ -199,11 +205,7 @@ margin-top:10px;
 <script>
 
 $(function(){
-	
-/* 	let time = "${time}";
-	let arr = time.split('오');
-	time='오'+arr[1]; */
-	
+
 	/* 여기서 댓글 처럼 채팅 리스트를 가져와서 쏴주기만하면됨  */
 	$.ajax({
 		type: "POST",
@@ -262,12 +264,20 @@ function fixedSize() {
 
 /* 웹소켓 부분 */
 
-// 게시글 상태가 2단계일때 실행
-
-
-	//소켓 생성
+	//===== 소켓 생성 배포 서버 사용시에 변경 해야됨 =====
+	/* 
+	
+	cd .\Downloads\
+	
+	pscp -P 21578 .\20AM_nbbang.war team1@rclass.iptime.org:/home/apache-tomcat-8.5.45/webapps/
+	
+	team11
+	
+	*/	
+		
 	<%-- var socket=new WebSocket("ws://rclass.iptime.org:9999<%=request.getContextPath()%>/socket"); --%>
 	var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket");
+	
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
@@ -344,26 +354,18 @@ function fixedSize() {
 
 		txt.val(' ');//칸 비워주기
 		txt.html(' ');//html 비워주기
-		//txt.html(txt.val().trim());
-		//txt.html(txt.html.trim());
-		//txt.val(txt.html.trim());
-		//txt.val(txt.val().trim());
-		//txt.val(txt.replace(/\r\n/g, ''));		//엔터키 없애주기
-		
 			}
 		};
 		
 	//엔터키 입력시 메세지 발송
 	$("#msgText").keyup(function(key) {
 		if (key.keyCode == 13) {
-			console.log("zz : "+$(this).val().includes("\n"));
+			console.log("엔터 남아있는지 여부 : "+$(this).val().includes("\n"));
 			if($(this).val().includes("\n")){
 				sendMessage();
-				txt.val(txt.replace("\n", ''));	
+				txt.val(txt.replace("\n", ''));
+				console.log("엔터 남아있는지 여부 replace 후 : "+$(this).val().includes("\n"));	
 			}
-
-			//txt.val('');//칸 비워주기
-			//txt.html('');//html 비워주기
 		}
 	});
 	
