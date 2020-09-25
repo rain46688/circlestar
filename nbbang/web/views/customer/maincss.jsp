@@ -24,10 +24,11 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
     <div id="kdh-sidebar-left">
 
       <ul class="side-bar-kdh">
+        <%if (loginnedMember==null) {%>
         <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
             href="<%=request.getContextPath() %>/customerMain">소개글</a></li>
       </ul>
-
+      <%}else{%>
       <ul class="side-bar-kdh">
 <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
         <li class="cstmt-list"> 
@@ -42,6 +43,7 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
         <li class="cstmt-list"><a class="main-a" style="font-family: 'Gothic A1', sans-serif;"
             href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
 
+            <%}%>
       </ul>
 
       <ul class="side-bar-kdh">
