@@ -260,8 +260,8 @@ function fixedSize() {
 
 
 	//소켓 생성
-	var socket=new WebSocket("ws://rclass.iptime.org:9999<%=request.getContextPath()%>/socket");
-	<%-- var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket"); --%>
+	<%-- var socket=new WebSocket("ws://rclass.iptime.org:9999<%=request.getContextPath()%>/socket"); --%>
+	var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket");
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
@@ -346,9 +346,13 @@ function fixedSize() {
 		};
 		
 	//엔터키 입력시 메세지 발송
-	$("#msgText").keydown(function(key) {
+	$("#msgText").keyup(function(key) {
 		if (key.keyCode == 13) {
-			sendMessage();
+			console.log("zz : "+$(this).val().includes("\n"));
+			if($(this).val().includes("\n")){
+				sendMessage();
+				txt.val(txt.replace("\n", ''));	
+			}
 			//txt.val('');//칸 비워주기
 			//txt.html('');//html 비워주기
 		}

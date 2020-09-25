@@ -2,6 +2,7 @@ package com.nbbang.chat.model.service;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Set;
 
 import com.nbbang.chat.model.dao.ChatDao;
 import com.nbbang.chat.model.vo.Message;
