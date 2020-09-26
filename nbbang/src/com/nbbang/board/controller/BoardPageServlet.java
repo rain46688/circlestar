@@ -64,7 +64,6 @@ public class BoardPageServlet extends HttpServlet {
 		Card c = new BoardService().boardPage(boardId, hasRead, writerUsid);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
 		ArrayList<Integer> tradeUserList = new BoardService().tradeUserList(Integer.parseInt(boardId));
 		if(c==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");

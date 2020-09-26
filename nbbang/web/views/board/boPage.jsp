@@ -303,13 +303,19 @@
         <!-- </form> -->
       </div>
       
-      <div id="date"><%= newDate %> &nbsp&nbsp 관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %> <p></p></div>
+      <div id="date"><%= newDate %> &nbsp&nbsp 관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %> 
+      <p>
+      	<% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
+          	현재 참여중인 N빵입니다.
+            <% }else { %>
+            <% } %>
+      </p></div>
       <!-- 가격 -->
       <div id="priceAndLikeBtn">
           <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
       </div>
       <div id="contentText"><%= c.getCardBoard().getContent() %></div>
-      <div id="etcInfo"><a href="#">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
+      <div id="etcInfo"><a href="<%= request.getContextPath() %>/member/report?userId=<%= loginnedMember.getUsid() %>&boardId=<%= c.getCardBoard().getBoardId() %>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
       <hr>
       <div id="funcBtns">
         <ul>
@@ -336,9 +342,15 @@
             <img src="<%= request.getContextPath() %>/images/fullheart.png" width="40px" height="40px">
             <%} %>
             <p>찜하기</p></div></li>
+          	<% if(c.getCardBoard().getWriterUsid()!=loginnedMember.getUsid()) {%>
           <li><div id="startFuncBtn" onclick="fun_decidebuy();">
+            <% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
+            <img src="<%= request.getContextPath() %>/images/cancel.png" width="40px" height="40px">
+            <% }else { %>
             <img src="<%= request.getContextPath() %>/images/onebyn.png" width="40px" height="40px">
+            <% } %>
             <p>N빵신청</p></div></li>
+            <% } %>
             <% if(tradeUserList.contains(loginnedMember.getUsid())&&c.getCardBoard().getTradeStage()>1) {%>
           <li><div id="enterFuncBtn" onclick="fn_enterBtn();">
             <img src="<%= request.getContextPath() %>/images/enter.png" width="40px" height="40px">

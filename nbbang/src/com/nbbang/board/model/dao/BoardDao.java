@@ -274,6 +274,22 @@ public class BoardDao {
 		return result;
 	}
 	
+	public int boardInsertTradeList(Connection conn, int tradeUsid, String tradeUserNickname) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardInsertTradeList"));
+			pstmt.setInt(1, tradeUsid);
+			pstmt.setString(2, tradeUserNickname);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int updateReadCount(Connection conn, int boardId) {
 		PreparedStatement pstmt = null;
 		int result = 0;

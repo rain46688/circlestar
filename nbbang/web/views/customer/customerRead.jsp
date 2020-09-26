@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
   rel="stylesheet">
 
-<jsp:include page="maincss.jsp"></jsp:include>
+
 <%
 
  CustomerCenter c=(CustomerCenter)request.getAttribute("cc");
@@ -125,6 +125,7 @@ System.out.println("list: " + list);
   }
 </style>
 <section>
+  <jsp:include page="maincss.jsp"></jsp:include>
 <div id="QA-container">
   <form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post" enctype="multipart/form-data">
     <div class="question-container">
@@ -182,18 +183,18 @@ System.out.println("list: " + list);
       <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
         <div class="answer-content">
           <input type="hidden" name="csId" value="<%=c.getCsId()%>">
-          <textarea name="admin-answer" cols="60" rows="10"></textarea>
+          <textarea name="admin-answer" cols="100" rows="10"></textarea>
   
         </div>
         <button type="submit" id="btn-insert" >등록</button>
-       
+        <!-- <button type="button" onclick="fn_update()">수정</button> -->
   </div>
   </div>
 	    <%}%>
 
 			
 
-      <%if(c.getCsAnswer()!=null || !loginnedMember.getNickname().equals("ADMIN")){ %> 
+      <%if(c.getCsAnswer()!=null  || !loginnedMember.getNickname().equals("ADMIN")){ %> 
    <div class="answer-container"> 
      <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> 
     

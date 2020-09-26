@@ -84,12 +84,12 @@ td a:hover{
     height: 200px;
     margin-left:15%;
 } */
-#btn-news {
+#btn-news1 {
     float: right;
     margin-right: 13em;
     margin-bottom: 3em;
 }
-.btn{
+.btn-default{
     width: 7em;
     color: black;
     border: 1.5px solid black;
