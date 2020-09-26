@@ -35,6 +35,15 @@ public class MainViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String key = request.getParameter("function");
 		List<Card> list = new BoardService().mainViewList(key);
+		for(Card c : list) {
+			String temp = c.getCardBoard().getTradeArea();
+			if(temp!=null) {
+				if(temp.length()>8) {
+				String newTemp = temp.substring(0, temp.indexOf(" ", temp.indexOf(" ") + 1));
+				c.getCardBoard().setTradeArea(newTemp);
+				}
+			}
+		}
 		
 		response.setContentType("application/json;charset=utf-8");
 		new Gson().toJson(list, response.getWriter());

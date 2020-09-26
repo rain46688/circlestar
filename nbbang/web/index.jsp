@@ -12,7 +12,7 @@
 	#cards-nav {
 		width: 100%;
 		margin: 0 auto;
-		text-align: center;
+		text-align: center;;
 	}
 	#cards-nav>ul {
 		list-style: none;
@@ -25,8 +25,11 @@
 		margin-right: -3px;
 		margin-left: -3px;
 		margin-bottom: -2px;
-		border: 1.5px black solid;
+		border-left: 2px black solid;
 		border-bottom: none;
+	}
+	#cards-nav>ul>li:last-of-type {
+		border-right: 2px black solid;
 	}
 	#cards-nav div {
 		width: 8em;
@@ -37,6 +40,7 @@
 	}
 	#popularBoards {
 		background-color: rgb(228, 176, 103);
+		border-left: 1px black solid;
 	}
 
 	#cards-nav .contentBlock {
@@ -51,10 +55,11 @@
 
 	#specialBoards {
 		background-color: burlywood;
+		border-right: 1px black solid;
 	}
 	#contentWrapper {
 		width: 100%;
-		border-top: 1.5px black solid;
+		border-top: 2px black solid;
 		background-color: white;
 	}
 	#contentPosition {
@@ -93,6 +98,7 @@
 		width: 80%;
 		padding-left: 5em;
 		padding-right: 5em;
+		border-bottom: 2px black solid;
 	}
 	
 

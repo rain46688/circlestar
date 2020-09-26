@@ -91,7 +91,14 @@
 		<div id="writeBoard">
 			<input id="searchInHere" onkeypress="searchEnter();" type="text" placeholder="게시판 내에서 검색">
 			<button id="searchInHereBtn" onclick="fn_search('<%= request.getAttribute("category") %>');">검색</button>
+			<% if(request.getAttribute("category").equals("특가")) {%>
+			<% 	if(loginnedMember!=null&&loginnedMember.getNickname().equals("ADMIN")){ %>
 			<button id="writeBtn" onclick="fn_boWrite();">글쓰기</button>
+			<%  }else { 
+				}}
+			else { %>
+			<button id="writeBtn" onclick="fn_boWrite();">글쓰기</button>
+			<%} %>
 		</div>
 		<%
 			for (Card c : bolist) {

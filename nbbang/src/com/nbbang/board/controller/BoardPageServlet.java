@@ -1,6 +1,7 @@
 package com.nbbang.board.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +35,6 @@ public class BoardPageServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String boardId = request.getParameter("boardId");
 		int writerUsid = Integer.parseInt(request.getParameter("writerUsid"));
-		System.out.println(boardId + writerUsid);
 		Cookie[] cookies = request.getCookies();
 		String boardHistory = "";
 		boolean hasRead = false;
@@ -62,13 +62,14 @@ public class BoardPageServlet extends HttpServlet {
 		}
 		Card c = new BoardService().boardPage(boardId, hasRead, writerUsid);
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		
 		if(c==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
 			request.setAttribute("loc", "/boList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
-			System.out.println(c.getWriterProfile());
 			String temp = c.getCardBoard().getTradeArea();
 			if(temp!=null) {
 				if(temp.length()>8) {
