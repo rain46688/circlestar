@@ -126,7 +126,7 @@
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/pastList?usid=<%=loginnedMember.getUsid()%>">과거 거래 내역</a>
                 </div>
-                <div>
+                <div style="margin-bottom: 1.3em;">
                     <a class="nav-link postList active" href="<%=request.getContextPath()%>/member/likeList?usid=<%=loginnedMember.getUsid()%>">좋아요 한 게시글</a>
                 </div>
                 <div>
@@ -135,8 +135,11 @@
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/updatePw?usid=<%=loginnedMember.getUsid()%>">비밀번호 수정하기</a>
                 </div>
-                <div>
+                <div style="margin-bottom: 1.3em;">
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>">개인정보 확인하기</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>">내 신고 내역</a>
                 </div>
             </div>
         </div>

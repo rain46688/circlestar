@@ -9,7 +9,7 @@
 .infoContainer {
    display: grid;
    grid-template-columns: repeat(2, 1fr);
-   grid-template-rows: repeat(7, 1fr);
+   grid-template-rows: repeat(8, 1fr);
    column-gap: 2%;
    row-gap: 5%;
    margin: 5% 30%;
@@ -162,6 +162,12 @@ p>button{
          <p class="text">개인정보를 확인 및 수정할 수 있습니다.</p>
          <p class="bottomBtn"><button type="button" class="realBtn"
          	onclick="location.href='<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
+      </div>
+      <div class="item smallBox" id="report">
+         <p class="title">내 신고 내역</p>
+         <p class="text">나의 신고 내용과 관리자의 답변을 확인할 수 있습니다.</p>
+         <p class="bottomBtn"><button type="button" class="realBtn"
+         	onclick="location.href='<%=request.getContextPath()%>/member/report?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
       </div>
       <div></div>
    </div>
