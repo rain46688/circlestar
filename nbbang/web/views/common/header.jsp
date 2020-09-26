@@ -44,7 +44,7 @@
 			</div>
 			<div id="searchSection">
 				<input type="text" name="searchKeyword" id="searchKeyword" onkeypress="enterkey();">
-				<div id="searchImage" onclick="fn_search();">
+				<div id="searchImage" onclick="fn_search('overall');">
 					<img src="<%=request.getContextPath()%>/images/search.png" alt="" width="30px" height="30px">
 				</div>
 			</div>
@@ -95,17 +95,21 @@
 	<script>
 		function enterkey(){
 			if(window.event.keyCode == 13) {
-				fn_search();
+				fn_search('overall');
 			}
 			return false;
 		}
 
-		function fn_search(){
+		function fn_search(category){
 			let keyword = document.getElementById('searchKeyword').value;
+			if(category=='overall') {
 			if(keyword==""){
 				alert("검색어를 입력해주세요.")
 			}else {
-				location.assign("<%=request.getContextPath()%>/boListSearch?keyword="+keyword);
+				location.assign("<%=request.getContextPath()%>/boListSearch?keyword="+keyword +"&category="+category);
+			}}else {
+				keyword = document.getElementById('searchInHere').value;
+				location.assign("<%=request.getContextPath()%>/boListSearch?keyword="+keyword +"&category="+category);
 			}
 		}
 	</script>

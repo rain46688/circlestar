@@ -3,19 +3,16 @@ package com.nbbang.board.model.dao;
 import static com.nbbang.common.temp.JDBCTemplate.close;
 
 import java.io.FileReader;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
@@ -78,16 +75,24 @@ public class BoardDao {
 		return list;
 	}
 	
-	public List<Card> boardListSearch(Connection conn, int cPage, int numPerPage, String keyword){
+	public List<Card> boardListSearch(Connection conn, int cPage, int numPerPage, String keyword, String category){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("boardListSearch");
+		String sql = new String();
+		if(category.equals("overall"))sql = prop.getProperty("boardListSearch");
+		else sql = prop.getProperty("boardListSearchByCategory");
 		List<Card> list = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyword+"%");
-			pstmt.setInt(2, (cPage-1)*numPerPage+1);
-			pstmt.setInt(3, cPage*numPerPage);
+			if(category.equals("overall")) {
+				pstmt.setInt(2, (cPage-1)*numPerPage+1);
+				pstmt.setInt(3, cPage*numPerPage);
+			}else {
+				pstmt.setString(2, category);
+				pstmt.setInt(3, (cPage-1)*numPerPage+1);
+				pstmt.setInt(4, cPage*numPerPage);
+			}
 			rs = pstmt.executeQuery();
 			list = new ArrayList<Card>();
 			while(rs.next()) {
@@ -133,7 +138,9 @@ public class BoardDao {
 				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
 				c.getCardBoard().setWriterNickname(rs.getString("WRITER_NICKNAME"));
 				c.getCardBoard().setContent(rs.getString("CONTENT"));
-				c.getCardBoard().setEnrollDate(rs.getDate("ENROLL_DATE"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date enrollDate = sdf.parse(rs.getTimestamp(("ENROLL_DATE")).toString().substring(0, 19));
+				c.getCardBoard().setEnrollDate(enrollDate);
 				c.getCardBoard().setHit(rs.getInt("HIT"));
 				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
 				c.getCardBoard().setProductCategory(rs.getString("PRODUCT_CATEGORY"));
@@ -151,7 +158,7 @@ public class BoardDao {
 				c.getCardBoard().setProductUrl(rs.getString("PRODUCT_URL"));
 				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -182,8 +189,6 @@ public class BoardDao {
 		return c;
 	}
 	
-	
-	
 	public int boardListCount(Connection conn, String boardTitle) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -192,6 +197,28 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardTitle);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} 
+		return result;
+	}
+	
+	public int boardListCountSearch(Connection conn, String category, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("boardListCountSearch");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setString(2, category);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);

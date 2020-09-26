@@ -89,7 +89,7 @@
         position: relative;
     }
     div.capsuleLeft{
-        width: 20%;
+        width: 25%;
         min-height: 70px;
         float: left;
         /* border-right: black 1px solid; */
@@ -97,7 +97,7 @@
         padding: 10px;
     }
     div.capsuleRight{
-        width: 70%;
+        width: 75%;
         min-height: 70px;
         float: right;
         border-bottom: black 1px solid;
@@ -194,6 +194,27 @@
                     </div>
                 </div>
             </div>
+
+            <div class="item textField">
+                <div class="fieldCapsule">
+                    <div class="capsuleLeft">회원 탈퇴하기</div>
+                    <div class="capsuleRight">
+                        <div id="fakeDiv">
+                            <div>
+                                탈퇴하시겠습니까?
+                            </div>
+                            <button type="button" class="button" id="byeBtn" style="width: 15%;">탈퇴하기</button>
+                        </div>
+                        <div id="reallyDiv" style="display: none;">
+                            <div>
+                                정말로 탈퇴하실건가요...?
+                            </div>
+                            <button type="button" class="button" id="reallyBtn" style="width: 25%;">정말로 탈퇴하기</button>
+                            <div id="reallyByeField"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -221,7 +242,23 @@
             })
             $("#picBtn").css({"display":"none"});
             $("#updatePic").css({"display":"block"});
-	    });
+        });
+        $(function(){
+            $("#byeBtn").click(function(){
+                $("#fakeDiv").fadeOut(2000);
+                $("#reallyDiv").fadeIn(2000);
+            });
+        });
+        $("#reallyBtn").click(e=>{
+            $.ajax({
+                url:"<%=request.getContextPath()%>/member/bye?usid="+<%=loginnedMember.getUsid()%>,
+                type:"get",
+                dataType:"html",
+                success: data =>{
+                    $("div#reallyByeField").html(data);
+                }
+            })
+        });
     </script>
 </section>
 <%@ include file="/views/common/footer.jsp" %>

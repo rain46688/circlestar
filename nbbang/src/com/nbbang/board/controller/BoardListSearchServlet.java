@@ -33,7 +33,14 @@ public class BoardListSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String keyword = request.getParameter("keyword");
+		String category = request.getParameter("category");
 		String boardTitle = "검색결과:" + keyword;
+		
+		if(category.equals("overall")) {
+			boardTitle = "검색결과:" + keyword;
+		}else {
+			boardTitle = category + " 내에서 검색결과:" + keyword; 
+		}
 		
 		int cPage;
 		try {
@@ -43,7 +50,7 @@ public class BoardListSearchServlet extends HttpServlet {
 		}
 		int numPerPage = 40;
 		
-		List<Card> blist = new BoardService().boardListSearch(cPage, numPerPage, keyword);
+		List<Card> blist = new BoardService().boardListSearch(cPage, numPerPage, keyword, category);
 		for(Card c : blist) {
 			String temp = c.getCardBoard().getTradeArea();
 			if(temp!=null) {
@@ -53,7 +60,7 @@ public class BoardListSearchServlet extends HttpServlet {
 				}
 			}
 		}
-		int totalData = new BoardService().boardListCount(boardTitle);
+		int totalData = new BoardService().boardListCountSearch(category, keyword);
 		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
 		int pageBarSize = 5;
 		int pageNo = ((cPage-1)/pageBarSize)*pageBarSize+1;

@@ -57,20 +57,18 @@
 		<div id="loginField">
 			<h2 style="margin-bottom: 50px;">회원가입</h2>
 			<form id="memberEnrollFrm" name="memberEnrollFrm" action="<%=request.getContextPath() %>/memberEnrollEnd" method="post">
-				<input type="email" id="id" name="userId" class="input" placeholder="이메일" required style="width : 59%;">
-				<input type="button" value="중복검사" class="button" id="idbtn" onclick="fn_id_duplicate();">
-				<input type="hidden" name="checked_id" value="">
+				<input type="email" id="id" name="userId" class="input" placeholder="이메일" required>
 				<div class="constrain" id="idConstrain"></div>
+				<div class="constrain" id="idDuplicateAjax"></div>
 
 				<input type="password" placeholder="비밀번호" class="input" id="pw" name="password" minlength="4" maxlength="16" required>
 				<div class="constrain" id="pwConstrain"></div>
 				<input type="password" placeholder="비밀번호 확인" class="input" id="pw2">
 				<div class="constrain" id="pw2Constrain"></div>
 				
-				<input type="text" placeholder="닉네임" class="input" id="nickname" name="nick" maxlength="10" required style="width : 59%;">
-				<input type="button" value="중복검사" class="button" id="nnbtn" onclick="fn_nickname_duplicate();">
-				<input type="hidden" name="checked_nn" value="">
+				<input type="text" placeholder="닉네임" class="input" id="nickname" name="nick" maxlength="10" required>
 				<div class="constrain" id="nnConstrain"></div>
+				<div class="constrain" id="nickDuplicateAjax"></div>
 
 
 				<input type="text" placeholder="이름" class="input checkLength" id="name" name="name" minlength="2" maxlength="5" required>
@@ -114,10 +112,9 @@
 				</div>
 				<div class="constrain" id="bdConstrain"></div>
 
-				<input type="tel" placeholder="휴대폰" class="input checkLength" id="phone" name="phone" maxlength="11" required style="width : 59%;">
-				<input type="button" value="중복검사" class="button" id="pnbtn" onclick="fn_phone_duplicate();">
-				<input type="hidden" name="checked_pn" value="">
+				<input type="tel" placeholder="휴대폰" class="input checkLength" id="phone" name="phone" maxlength="11">
 				<div class="constrain" id="pnConstrain"></div>
+				<div class="constrain" id="phoneDuplicateAjax"></div>
 				
 				<div style="text-align: left; margin: 0 15px 10px 56px;">주소</div>
 				<input type="text" class="input" id="sample4_postcode" placeholder="우편번호" style="width : 59%;" readonly>
@@ -132,9 +129,6 @@
 				
 				<button class="bottombtns" type="button" style="width:40%; margin-top: 30px;" onclick="fn_enroll();">가입</button>
 				<button class="bottombtns" type="reset" style="width:40%; margin-top: 30px;">취소</button>
-			</form>
-			<form action="" name="checkIdDuplicate">
-				<input type="hidden" name="userId">
 			</form>
 			<form action="" name="checkNNDuplicate">
 				<input type="hidden" name="nick">
@@ -205,6 +199,7 @@
 	</script>
 	<script>
 		// id제약조건
+		var idPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 		$(function(){
 			$("#id").blur(e=>{
 				const id=$("#id").val().trim();
@@ -215,37 +210,29 @@
 			})
 			$("#id").keyup(function(e){
 				const id=$("#id").val().trim();
-				var idPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 				$("input[name=checked_id]").val('');
 				if(id.length!=0&&!idPattern.test(id)){
 					$("#idConstrain").html("이메일 형식을 지켜주세요.");
 					$("#idConstrain").css({"display":"block"});
-				}else{
+				}
+				else{
 					$("#idConstrain").css({"display":"none"});
 				}
 			});
 		});
-		
-		function fn_id_duplicate(){
-			let id=$("#id").val().trim();
-			var idPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-			if(id.length==0 || !idPattern.test(id)){
-				alert("이메일을 입력해주세요.");
-			}else{
-				const url="<%=request.getContextPath()%>/checkIdDuplicate";
-				const title="chekcIdDuplicate";
-				const status="left=500px,top=100px,width=500px,height=200px";
-	
-				open("",title,status);
-		
-				checkIdDuplicate.target=title;
-				checkIdDuplicate.action=url;
-				checkIdDuplicate.method="post";
-	
-				checkIdDuplicate.userId.value=id;
-				checkIdDuplicate.submit();
-			}
-		};
+		const id=$("#id").val().trim();
+		$("#id").keyup(e=>{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/checkIdDuplicate",
+				data:{"userId":$(e.target).val()},
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$("#idDuplicateAjax").html(data);
+					$("#idDuplicateAjax").css({"display":"block"});
+				}
+			});
+		});
 
 		// pw제약조건
 		var pwPattern = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,16}$/;
@@ -319,25 +306,19 @@
 			});
 		});
 
-		function fn_nickname_duplicate(){
-			let nn=$("#nickname").val().trim();
-			if(nn.length==0){
-				alert("닉네임을 입력해주세요.");
-			}else{
-				const url="<%=request.getContextPath()%>/checkNNDuplicate";
-				const title="checkNNDuplicate";
-				const status="left=500px,top=100px,width=500px,height=200px";
-
-				open("",title,status);
-
-				checkNNDuplicate.target=title;
-				checkNNDuplicate.action=url;
-				checkNNDuplicate.method="post";
-
-				checkNNDuplicate.nick.value=nn;
-				checkNNDuplicate.submit();
-			}
-		};
+		const nn=$("#nickname").val().trim();
+		$("#nickname").keyup(e=>{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/checkNNDuplicate",
+				data:{"nick":$(e.target).val()},
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$("#nickDuplicateAjax").html(data);
+					$("#nickDuplicateAjax").css({"display":"block"});
+				}
+			});
+		});
 
 		//이름 제약조건
 		var namePattern= /[a-zA-Z가-힣]{2,5}$/;
@@ -479,26 +460,20 @@
 				}
 			});
 		});
-
-		function fn_phone_duplicate(){
-			let pn=$("#phone").val().trim();
-			if(pn.length==0 || !pnPattern.test(pn)){
-				alert("휴대폰 번호를 입력해주세요.");
-			}else{
-				const url="<%=request.getContextPath()%>/checkPNDuplicate";
-				const title="checkPNDuplicate";
-				const status="left=500px,top=100px,width=500px,height=200px";
-
-				open("",title,status);
-
-				checkPNDuplicate.target=title;
-				checkPNDuplicate.action=url;
-				checkPNDuplicate.method="post";
-
-				checkPNDuplicate.phone.value=pn;
-				checkPNDuplicate.submit();
-			}
-		};
+		const phone=$("#phone").val().trim();
+		$("#phone").keyup(e=>{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/checkPNDuplicate",
+				data:{"phone":$(e.target).val()},
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$("#phoneDuplicateAjax").html(data);
+					$("#phoneDuplicateAjax").css({"display":"block"});
+				}
+			});
+		});
+		
 
 		//주소 제약조건
 		$(function(){
@@ -585,13 +560,13 @@
 				$("#adConstrain").css({"display":"block"});
 			}
 			//중복확인을 했나요
-			if($("input[name='checked_id']").val()==''){
+			if($("#checkIdhidden").val()=='existed'){
 				alert('아이디 중복 확인을 해주세요.');
 			}
-			if($("input[name='checked_nn']").val()==''){
+			if($("#checkNNhidden").val()=='existed'){
 				alert('닉네임 중복 확인을 해주세요.');
 			}
-			if($("input[name='checked_pn']").val()==''){
+			if($("#checkPNhidden").val()=='existed'){
 				alert('휴대폰 번호 중복 확인을 해주세요.');
 			}
 			//주소 확인을 했나요
@@ -601,8 +576,7 @@
 			//제약조건을 만족했나요
 			if(id!=="" && (pw!==""&&pwPattern.test(pw)) && (pw2!==""&&pw===pw2) && (nn!==""&&nnPattern.test(nn)) && (name!==""&&namePattern.test(name)) && (gender.length=1||gender.length>1)
 				&& (yy!=="" && yyPattern.test(yy)) && mm!=="" && mm!=="월" && (dd!==""&&ddPattern.test(dd)) && (phone!==""&&pnPattern.test(phone)) && address!==""
-				&& $("input[name='checked_id']").val()!='' && $("input[name='checked_nn']").val()!=''
-				&& $("input[name='checked_ad']").val()!='' && $("input[name='checked_pn']").val()!=''){
+				&& $("#checkIdhidden").val()!='existed' && $("#checkNNhidden").val()!='existed' && $("#checkPNhidden").val()!='existed' && $("input[name='checked_ad']").val()!=''){
 				$("#memberEnrollFrm").submit();
 			}else{
 				alert("필수 입력 항목을 확인해주세요.");

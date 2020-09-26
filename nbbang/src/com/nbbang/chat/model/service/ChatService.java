@@ -12,11 +12,11 @@ import static com.nbbang.common.temp.JDBCTemplate.*;
 public class ChatService {
 
 	private ChatDao cd = new ChatDao();
-	
+
 	public String selectCurMemsList(String boardId) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		String list = cd.selectCurMemsList(conn,boardId);
+		String list = cd.selectCurMemsList(conn, boardId);
 		close(conn);
 		return list;
 	}
@@ -24,7 +24,7 @@ public class ChatService {
 	public int getMaxMems(String boardId) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int maxMems = cd.getMaxMems(conn,boardId);
+		int maxMems = cd.getMaxMems(conn, boardId);
 		close(conn);
 		return maxMems;
 	}
@@ -32,10 +32,10 @@ public class ChatService {
 	public int creatRoom(String boardId) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		int result = cd.creatRoom(conn,boardId);
-		if(result > 0) {
+		int result = cd.creatRoom(conn, boardId);
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
 		close(conn);
@@ -47,20 +47,31 @@ public class ChatService {
 		Connection conn = getConnection();
 		int result = 0;
 		if (usid != null) {
-			if (flag.equals("1")) {
-				if(cd.decideBuyUserCheck(conn,boardId,usid) == 1) {
-					result =  2;
-				}else {
-					result = cd.decideBuyUser(conn,boardId,usid,nickname);
+
+			int maxmem = getMaxMems(boardId);
+			// System.out.println("maxmem : "+maxmem);
+			int curmem = getCurMems(boardId);
+			// System.out.println("curmem : "+curmem);
+			if (curmem < maxmem) {
+				if (flag.equals("1")) {
+					if (cd.decideBuyUserCheck(conn, boardId, usid) == 1) {
+						result = 2;
+					} else {
+						result = cd.decideBuyUser(conn, boardId, usid, nickname);
+					}
+				} else if (flag.equals("2")) {
+					result = cd.decideBuyUser(conn, boardId, usid);
+					if (result == 1)
+						result = 3;
 				}
-			} else if (flag.equals("2")) {
-				result = cd.decideBuyUser(conn,boardId,usid);
-				if(result == 1) result=3;
+			} else {
+				result = 4;
 			}
+
 		}
-		if(result > 0) {
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
 		close(conn);
@@ -72,8 +83,8 @@ public class ChatService {
 		Connection conn = getConnection();
 		int result = 0;
 		for (Message msg : list) {
-			result = cd.insertChatMsg(conn,msg);
-			if(result == 0) {
+			result = cd.insertChatMsg(conn, msg);
+			if (result == 0) {
 				rollback(conn);
 				return result;
 			}
@@ -81,10 +92,10 @@ public class ChatService {
 		System.out.println("여기 실행안됨??");
 		list.clear();
 		System.out.println(" === 리스트 쌓인거 전송하고 클리어 Service === ");
-		if(result > 0) {
+		if (result > 0) {
 			System.out.println("커밋 !");
 			commit(conn);
-		}else {
+		} else {
 			System.out.println("커밋 안됨");
 			rollback(conn);
 		}
@@ -95,12 +106,17 @@ public class ChatService {
 	public List<Message> getChatList(String boardId) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
-		List<Message> list = cd.getChatList(conn,boardId);
+		List<Message> list = cd.getChatList(conn, boardId);
 		close(conn);
 		return list;
 	}
 
-	
-	
-	
+	public int getCurMems(String boardId) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int curmem = cd.getCurMems(conn, boardId);
+		close(conn);
+		return curmem;
+	}
+
 }

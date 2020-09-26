@@ -43,7 +43,7 @@ public class NoticeListServlet extends HttpServlet {
 		list = new NoticeService().noticeList(cPage, numPerPage);
 
 		//포멧해서 스트링 vo에 옮겨서 jsp에서 출력함
-		SimpleDateFormat fm = new SimpleDateFormat("yy년 MM월 dd일 HH시 mm분");
+		SimpleDateFormat fm = new SimpleDateFormat("yy년 MM월 dd일 HH:mm");
 		for(Notice n : list) {
 			String s = fm.format(n.getNoticeDate());
 			System.out.println(s);
