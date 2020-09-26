@@ -95,7 +95,7 @@
 	<script>
 		function enterkey(){
 			if(window.event.keyCode == 13) {
-				fn_search();
+				fn_search('overall');
 			}
 			return false;
 		}

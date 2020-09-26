@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.nbbang.board.model.vo.Card"%>
 <%@page import="com.nbbang.board.model.vo.Board"%>
@@ -5,6 +7,9 @@
 <%@ include file="/views/common/header.jsp" %>
 <% 
 	Card c = (Card)request.getAttribute("curCard");
+	Date enrollDate = c.getCardBoard().getEnrollDate();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm");
+	String newDate = sdf.format(enrollDate);
 %>
 <style>
   #wrapper {
@@ -185,6 +190,32 @@
   #comment_thumb>img {
   	border-radius: 70%;
   }
+  #funcBtns {
+    padding-top: 0.5em;
+    padding-bottom: 0px;
+    padding-left: 0em;
+    font-size: 12px;
+  }
+  #funcBtns>ul {
+    padding-left: 0.25em;
+    list-style: none;
+    text-align: left;
+  }
+  #funcBtns>ul>li {
+    display: inline-block;
+    text-align: center;
+    margin-left:0.5em;
+    margin-right: 0.5em;
+    padding-bottom: 0px;
+    height: 4.5em;
+  }
+  #funcBtns>ul div {
+    cursor: pointer;
+  }
+  #funcBtns>ul div:hover {
+    transform:scale(1.1);
+    font-weight: bold;
+  }
 </style>
 <section>
   <div id="wrapper">
@@ -259,7 +290,7 @@
 					<!-- BOARD 컬럼의  WRITER_USID -->
 					<input type="hidden" name="writerUsid" value="${loginnedMember.usid}">
 					<!-- MEMBER 컬럼의  MEMBER_PICTURE -->
-          			<input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
+          <input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
           <!-- <%-- <% if(c.getCardBoard().getTradeStage()>1) {%> --%> -->
 					<button onclick="nbbang(this.form)" >채팅방 접속하기</button>	
           <!-- <%-- <%}%> --%> -->
@@ -267,15 +298,33 @@
      	</div>
       </div>
       
-      <div id="date"><%= c.getCardBoard().getEnrollDate() %>  관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %></div>
+      <div id="date"><%= newDate %> &nbsp&nbsp 관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %></div>
       <!-- 가격 -->
       <div id="priceAndLikeBtn">
           <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
-          <!-- <a href=""><img src="<%= request.getContextPath() %>/images/heart.png" alt="LikeBtn" width="30px" height="30px"></a> -->
       </div>
-      <br>
       <div id="contentText"><%= c.getCardBoard().getContent() %></div>
       <div id="etcInfo"><a href="#">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
+      <br>
+      <hr>
+      <div id="funcBtns">
+        <ul>
+          <li><div id="likeFuncBtn">
+            <img src="<%= request.getContextPath() %>/images/heart.png" width="40px" height="40px">
+            <p>찜하기</p></div></li>
+          <li><div id="startFuncBtn">
+            <img src="<%= request.getContextPath() %>/images/onebyn.png" width="40px" height="40px">
+            <p>N빵신청</p></div></li>
+          <li><div id="enterFuncBtn">
+            <img src="<%= request.getContextPath() %>/images/enter.png" width="40px" height="40px">
+            <p>채팅방접속</p></div></li>
+          <li><div id="openFuncBtn">
+            <img src="<%= request.getContextPath() %>/images/open.png" width="40px" height="40px">
+            <p>방열기</p></div></li>
+        </ul>
+      </div>
+      
+      <hr>
     </div>
     <div id="commentSection">
       <div id="commentInsert">

@@ -3,19 +3,16 @@ package com.nbbang.board.model.dao;
 import static com.nbbang.common.temp.JDBCTemplate.close;
 
 import java.io.FileReader;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
@@ -141,7 +138,9 @@ public class BoardDao {
 				c.getCardBoard().setWriterUsid(rs.getInt("WRITER_USID"));
 				c.getCardBoard().setWriterNickname(rs.getString("WRITER_NICKNAME"));
 				c.getCardBoard().setContent(rs.getString("CONTENT"));
-				c.getCardBoard().setEnrollDate(rs.getDate("ENROLL_DATE"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date enrollDate = sdf.parse(rs.getTimestamp(("ENROLL_DATE")).toString().substring(0, 19));
+				c.getCardBoard().setEnrollDate(enrollDate);
 				c.getCardBoard().setHit(rs.getInt("HIT"));
 				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
 				c.getCardBoard().setProductCategory(rs.getString("PRODUCT_CATEGORY"));
@@ -159,7 +158,7 @@ public class BoardDao {
 				c.getCardBoard().setProductUrl(rs.getString("PRODUCT_URL"));
 				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
