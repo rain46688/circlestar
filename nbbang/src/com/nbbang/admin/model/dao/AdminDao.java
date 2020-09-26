@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.nbbang.admin.model.AdminMem;
 import com.nbbang.customer.model.vo.CustomerCenter;
+import com.nbbang.member.model.vo.Member;
 
 public class AdminDao {
 
@@ -210,6 +211,9 @@ public class AdminDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				am = new AdminMem();
+				Member m = am.getMem();
+				m.setUsid(rs.getInt("USID"));
+				m.setMemberName(rs.getString("MEMBER_NAME"));
 				
 				
 				
