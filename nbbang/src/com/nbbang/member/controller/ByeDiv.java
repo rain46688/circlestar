@@ -1,8 +1,6 @@
 package com.nbbang.member.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
 
 /**
- * Servlet implementation class CheckNNDuplicateServlet
+ * Servlet implementation class ByeServlet
  */
-@WebServlet("/checkNNDuplicate")
-public class CheckNNDuplicateServlet extends HttpServlet {
+@WebServlet("/member/bye")
+public class ByeDiv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckNNDuplicateServlet() {
+    public ByeDiv() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +29,10 @@ public class CheckNNDuplicateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String nick=request.getParameter("nick");
-		System.out.println(nick);
-		Member m=null;
-		m=new MemberService().nickDuplicate(nick);
-		request.setAttribute("checkNN", m);
-		request.getRequestDispatcher("/views/member/checkNNajax.jsp").forward(request, response);
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		Member m=new MemberService().myPage(usid);
+		request.setAttribute("member", m);
+		request.getRequestDispatcher("/views/member/bye.jsp").forward(request, response);
 	}
 
 	/**

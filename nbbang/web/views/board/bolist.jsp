@@ -35,9 +35,9 @@
 	text-align: right;
 	padding-right: 1em;
 	font-family: 'Do Hyeon', sans-serif;
-	
+	height: 3em;
 }
-#writeBoard>button {
+#writeBoard>#writeBtn {
 	height: 2em;
 	width: 5em;
 	font-size: 20px;
@@ -64,6 +64,24 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+#searchInHere {
+	font-family: Arial, Helvetica, sans-serif;
+	border: 2px gray solid;
+	padding-left: 4px;
+	height: 2.55em;
+}
+
+#searchInHere:focus{
+	outline: none;
+	margin-bottom: -1px;
+}
+
+#searchInHereBtn {
+	height: 2em;
+	width: 3em;
+	font-size: 20px;
+}
 </style>
 <section>
 	<div class="card-wrapper">
@@ -71,7 +89,9 @@
 		<h1><%= request.getAttribute("category") %></h1>
 		</div>
 		<div id="writeBoard">
-			<button onclick="fn_boWrite();">글쓰기</button>
+			<input id="searchInHere" onkeypress="searchEnter();" type="text" placeholder="게시판 내에서 검색">
+			<button id="searchInHereBtn" onclick="fn_search('<%= request.getAttribute("category") %>');">검색</button>
+			<button id="writeBtn" onclick="fn_boWrite();">글쓰기</button>
 		</div>
 		<%
 			for (Card c : bolist) {
@@ -110,6 +130,12 @@
 	<br>
 </section>
 <script>
+	function searchEnter() {
+		if(window.event.keyCode==13) {
+			$("#searchInHereBtn").click();
+		}
+		return false;
+	}
 	function fn_boWrite(){
 		location.assign("<%= request.getContextPath() %>/board/boWrite?category=<%= request.getAttribute("category") %>");
 	}

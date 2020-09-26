@@ -237,4 +237,13 @@ private MemberDao dao=new MemberDao();
 		return totalData;
 	}
 
+	public int byebye(int usid, String password) {
+		Connection conn=getConnection();
+		int result=dao.byebye(conn, usid, password);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 }

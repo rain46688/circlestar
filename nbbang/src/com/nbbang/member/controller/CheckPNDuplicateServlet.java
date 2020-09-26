@@ -48,8 +48,8 @@ public class CheckPNDuplicateServlet extends HttpServlet {
 		}
 		Member m=null;
 		m=new MemberService().phoneDuplicate(phone);
-		request.setAttribute("result", m);
-		request.getRequestDispatcher("/views/member/checkPNDuplicate.jsp").forward(request, response);
+		request.setAttribute("checkPN", m);
+		request.getRequestDispatcher("/views/member/checkPNajax.jsp").forward(request, response);
 	}
 
 	/**
