@@ -63,9 +63,14 @@ public class ChatRoomServlet extends HttpServlet {
 		
 //		//구매확정한 유저수 curNum
 		int curNum = 0;
+		
+		
 		if(m != null && boardId != null) 
 			m.setCurRoomBid(boardId);
 		//현재 방의 boardId를 넣어줌!! 이부분 중요!
+		
+		//채팅 쓸때 넘기는걸로 해봄!!
+		
 		if(!curMemsList.equals(""))
 			for(String user : curMemsList.split(",")) {curNum++;}
 		
