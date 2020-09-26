@@ -117,11 +117,14 @@ figure.snip1384.hover i {
   -webkit-transform: translate(0px, 0px);
   transform: translate(0px, 0px);
   opacity: 1;
-} */
+} 
+a.kdh{
+  font-weight: bold;
+}
 
 </style>
 <section>
-<jsp:include page="maincss.jsp"></jsp:include>
+  <jsp:include page="maincss.jsp"></jsp:include>
 
 
 

@@ -28,16 +28,9 @@ System.out.println("list in jsp: "+ list);
 	
 	
 	<section class="qnaSection">
+
 		<jsp:include page="maincss.jsp"></jsp:include>
-	<!-- <div class="cs-alert">
-		<div class="cs-alert__title">
-			<image src="<%=request.getContextPath()%>/images/war.png" style="width: 40px;"><a>불법거래 유도 관련 문의</a> <br>
-				
-			</div>
-			<div class="cs-alert__content">
-				<a>더 빠른 안내를 위하여 불법거래 유도 관련 문의는  <br> <span>엔빵 불법거래 신고센터 (031-112)</span>로 문의를 해 주시기 바랍니다.</a>
-		</div>
-	</div> -->
+
 	<div class="qna-caution">
 		<ul class="ul-caution">
 			<li class="caution-li caution-first ">1:1문의</li>
@@ -97,7 +90,7 @@ System.out.println("list in jsp: "+ list);
 	</table>
 			<div id="btn-news1">
 				
-				<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm"
+				<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm?nick=<%=loginnedMember.getNickname() %>"
 					 class="btn-default">문의하기</a>
 			
 			</div>

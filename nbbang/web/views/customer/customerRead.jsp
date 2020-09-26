@@ -18,6 +18,7 @@ System.out.println("C: "+ c);
 System.out.println("list: " + list);
 %>
 <style>
+  
   div#QA-container {
     margin-top: 3.4%;
     margin-left: 35%;
@@ -28,7 +29,7 @@ System.out.println("list: " + list);
   }
 
   div.question-container {
-    height: 300px;
+    height: 40em;
 
   }
 
@@ -123,10 +124,14 @@ System.out.println("list: " + list);
     color: #ffffff;
     background-color: #000;
     font-size: 2rem;
-    padding: .2rem;
+    padding: 2rem;
+  }
+
+ .comment-container .comment-editor #btn-insert{
+    margin-bottom: 5em;
   }
 </style>
-<section>
+<section class="answer-container-kdh">
   <jsp:include page="maincss.jsp"></jsp:include>
   <div id="QA-container">
     <form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post"
@@ -189,9 +194,9 @@ System.out.println("list: " + list);
             <input type="hidden" name="csId" value="<%=c.getCsId()%>">
             <textarea name="admin-answer" cols="100" rows="10"></textarea>
 
+            <button type="submit" id="btn-insert">등록</button>
           </div>
-          <button type="submit" id="btn-insert">등록</button>
-          <!-- <button type="button" onclick="fn_update()">수정</button> -->
+          
         </form>
       </div>
     </div>

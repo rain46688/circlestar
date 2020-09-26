@@ -97,7 +97,7 @@ pageEncoding="UTF-8"%>
         }
       
       })
-      location.href ="<%=request.getContextPath()%>/customer/customerQnA"; 
+      location.href ="<%=request.getContextPath()%>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>"; 
     }
 
 

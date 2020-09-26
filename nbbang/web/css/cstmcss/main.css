@@ -1,5 +1,5 @@
 @charset "UTF-8";
- 
+
 	div#kdh-sidebar-container{
 		width: 14em;
 	height: 35em;
@@ -42,10 +42,7 @@ ul.sidebarTitle li#kdh-side-text span{
 	font-size: 20px;
 	padding-top: 20em;
 }
-ul .side-bar-kdh{
-	text-align: center;
-	
-}
+
 div#kdh-sidebar-left{
 	border: 1px solid darkgray;
 }
@@ -58,10 +55,10 @@ div#kdh-sidebar-left{
  .list-hiper a{
   
   list-style: none;
-  font-size: 16px;
+  font-size: 20px;
   color: black;
   text-decoration: none;
-  margin-left: 2em;
+  margin-left: 1em;
   
  }
  .cstmt-list a:hover,
