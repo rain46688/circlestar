@@ -357,12 +357,16 @@ function fixedSize() {
 	//메세지를 발송하는 부분
 	function sendMessage() {
 		console.log("sendMessage 실행");	
+
+		console.log("여기 실행됨?? 2");
 		let txt = $("#msgText");
 		if(txt.val().trim()!=""){
 		var user = "${m.nickname}";
 		var _today = new Date();
 		let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
+		console.log("${loginnedMember}");
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}",day)));
+		console.log("여기 실행됨?? 3");
 		txt.val(' ');//칸 비워주기
 		txt.html(' ');//html 비워주기
 			}
@@ -389,13 +393,14 @@ function fixedSize() {
 	});
 	
 	//메세지 객체
-	function Message(sendNickName,msg,curMemsList,boardId,chatProfile,chatTime){
+	function Message(sendNickName,msg,curMemsList,boardId,chatProfile,chatTime,mem){
 		this.sendNickName=sendNickName;
 		this.msg=msg;
 		this.curMemsList=curMemsList;
 		this.boardId = boardId;
 		this.chatProfile = chatProfile;
 		this.chatTime = chatTime;
+		this.mem = mem;
 	};
 	
 	

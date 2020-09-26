@@ -86,14 +86,31 @@ public class ChatSocket {
 				String boardId = msg.getBoardId();
 				String curMemsList = msg.getCurMemsList();
 				String day = msg.getChatTime();
+				//Member mem = msg.getMem();
+				//System.out.println("mem : "+mem);
+				
+				//mem.setCurRoomBid(boardId);
 
 				 System.out.println("보낸사람 : "+msg.getSendNickName()+", boardId : "+boardId+", curMemsList : " + curMemsList);
 
+				 
 				Iterator<Member> userIterator = user.keySet().iterator();
 				while (userIterator.hasNext()) {
 					Member key = userIterator.next();
 					// Member객체의 현재 접속한 방을 기준으로 나눠서 같은 방에 있는 유저한테만 메세지를 보냄
+					
+//					if(key.getNickname().equals(msg.getSendNickName())) {
+//						key.setCurRoomBid(boardId);
+//					}
+					
 					System.out.println(" [ key.getCurRoomBid() : "+key.getCurRoomBid()+" ]");
+					
+					if(key.getCurRoomBid().equals(boardId)) {
+						System.out.println("트루"+key.getCurRoomBid()+" "+boardId);
+					}else {
+						System.out.println("풜스"+key.getCurRoomBid()+" "+boardId);
+					}
+					
 					if (!key.getCurRoomBid().equals("") && key.getCurRoomBid().equals(boardId)) {
 						System.out.println(" === 방기준으로 나누기 분기 부분 === ");
 						if (user.get(key) != null && user.get(key).isOpen()) {
