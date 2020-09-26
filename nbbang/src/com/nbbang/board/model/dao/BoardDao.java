@@ -451,6 +451,33 @@ public class BoardDao {
 		return list;
 	}
 	
+	public ArrayList<Integer> tradeUserList(Connection conn, int boardId){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("tradeUserList");
+		ArrayList<Integer> list = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardId);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Integer>();
+			if(rs.next()) {
+				String[] tempStr;
+				tempStr = stringToArr(rs.getString("TRADE_USER_LIST"));
+				for(String s : tempStr) {
+				list.add(Integer.parseInt(s));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	
 	private String[] stringToArr(String str) {
 		if(str==null) {

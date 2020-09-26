@@ -2,6 +2,7 @@ package com.nbbang.board.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,7 +65,7 @@ public class BoardPageServlet extends HttpServlet {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		
+		ArrayList<Integer> tradeUserList = new BoardService().tradeUserList(Integer.parseInt(boardId));
 		if(c==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
 			request.setAttribute("loc", "/boList");
@@ -77,6 +78,7 @@ public class BoardPageServlet extends HttpServlet {
 				c.getCardBoard().setTradeArea(newTemp);
 				}
 			}
+			if(tradeUserList!=null)request.setAttribute("tradeUserList", tradeUserList);
 			request.setAttribute("curCard", c);
 			request.getRequestDispatcher("/views/board/boPage.jsp").forward(request, response);
 		}

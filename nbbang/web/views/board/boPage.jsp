@@ -1,6 +1,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="com.nbbang.board.model.vo.Card"%>
 <%@page import="com.nbbang.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -10,6 +10,10 @@
 	Date enrollDate = c.getCardBoard().getEnrollDate();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm");
 	String newDate = sdf.format(enrollDate);
+	List<Integer> tradeUserList = new ArrayList<Integer>();
+	if(request.getAttribute("tradeUserList")!=null){
+		tradeUserList = (List<Integer>)request.getAttribute("tradeUserList");
+	}
 %>
 <style>
   #wrapper {
@@ -162,6 +166,10 @@
     overflow: auto;
   }
   
+  #date p {
+    color: darkgreen;
+    font-weight: bold;
+  }
   #etcInfo a {
   	color:black;
   }
@@ -274,53 +282,73 @@
       <hr>
       <div id="title">
         <div id="titleContent"><p><%= c.getCardBoard().getBoardTitle() %></p></div>
-        <div id="startBtn">
-        <button onclick="fun_decidebuy();">n빵하기</button>
+        <!-- <button onclick="fun_decidebuy();">n빵하기</button>
         <button onclick="fun_cancelbuy();">취소</button>
         <button onclick="fun_createroom();">인원 차서 방장이 방열기</button>
-        <button id="likeFunc" class="<% if(likelist!=null&&likelist.contains(c.getCardBoard().getBoardId())) {%>turnRed<%}%>">❤️</button>
         <form name="form">
 				<!-- 디비에서 객체를 받아와서 다시 넣어야됨 일단은 리터럴로 넘김 -->
 					<!-- BOARD 컬럼의  BOARD_ID -->
-					<input type="hidden" name="boardId" value="${curCard.cardBoard.boardId}"> 
+					<!-- <input type="hidden" name="boardId" value="${curCard.cardBoard.boardId}">  -->
 					<!-- BOARD 컬럼의  MAX_MEMS -->
-					<input type="hidden" name="maxMems" value="${curCard.cardBoard.maxMems}"> 
+					<!-- <input type="hidden" name="maxMems" value="${curCard.cardBoard.maxMems}">  -->
 					<!-- BOARD 컬럼의  TRADE_STAGE -->
-					<input type="hidden" name="tradeStage" value="${curCard.cardBoard.tradeStage}"> 
+					<!-- <input type="hidden" name="tradeStage" value="${curCard.cardBoard.tradeStage}">  -->
 					<!-- BOARD 컬럼의  WRITER_USID -->
-					<input type="hidden" name="writerUsid" value="${loginnedMember.usid}">
+					<!-- <input type="hidden" name="writerUsid" value="${loginnedMember.usid}"> -->
 					<!-- MEMBER 컬럼의  MEMBER_PICTURE -->
-          <input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
+          <!-- <input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}"> -->
           <!-- <%-- <% if(c.getCardBoard().getTradeStage()>1) {%> --%> -->
-					<button onclick="nbbang(this.form)" >채팅방 접속하기</button>	
+					<!-- <button onclick="nbbang(this.form)" >채팅방 접속하기</button>	 -->
           <!-- <%-- <%}%> --%> -->
-        </form>
-     	</div>
+        <!-- </form> -->
       </div>
       
-      <div id="date"><%= newDate %> &nbsp&nbsp 관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %></div>
+      <div id="date"><%= newDate %> &nbsp&nbsp 관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %> <p></p></div>
       <!-- 가격 -->
       <div id="priceAndLikeBtn">
           <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
       </div>
       <div id="contentText"><%= c.getCardBoard().getContent() %></div>
       <div id="etcInfo"><a href="#">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
-      <br>
       <hr>
       <div id="funcBtns">
         <ul>
-          <li><div id="likeFuncBtn">
+          <form style="display: none;" name="form">
+            <!-- 디비에서 객체를 받아와서 다시 넣어야됨 일단은 리터럴로 넘김 -->
+              <!-- BOARD 컬럼의  BOARD_ID -->
+              <input type="hidden" name="boardId" value="${curCard.cardBoard.boardId}"> 
+              <!-- BOARD 컬럼의  MAX_MEMS -->
+              <input type="hidden" name="maxMems" value="${curCard.cardBoard.maxMems}"> 
+              <!-- BOARD 컬럼의  TRADE_STAGE -->
+              <input type="hidden" name="tradeStage" value="${curCard.cardBoard.tradeStage}"> 
+              <!-- BOARD 컬럼의  WRITER_USID -->
+              <input type="hidden" name="writerUsid" value="${loginnedMember.usid}">
+              <!-- MEMBER 컬럼의  MEMBER_PICTURE -->
+              <input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
+              <!-- <%-- <% if(c.getCardBoard().getTradeStage()>1) {%> --%> -->
+              <button id="hiddenEnterBtn" onclick="nbbang(this.form)" >채팅방 접속하기</button>	
+              <!-- <%-- <%}%> --%> -->
+            </form>
+          <li><div id="likeFunc" >
+          <% if(!likelist.contains(c.getCardBoard().getBoardId())) {%>
             <img src="<%= request.getContextPath() %>/images/heart.png" width="40px" height="40px">
+            <%}if(likelist.contains(c.getCardBoard().getBoardId())) { %>
+            <img src="<%= request.getContextPath() %>/images/fullheart.png" width="40px" height="40px">
+            <%} %>
             <p>찜하기</p></div></li>
-          <li><div id="startFuncBtn">
+          <li><div id="startFuncBtn" onclick="fun_decidebuy();">
             <img src="<%= request.getContextPath() %>/images/onebyn.png" width="40px" height="40px">
             <p>N빵신청</p></div></li>
-          <li><div id="enterFuncBtn">
+            <% if(tradeUserList.contains(loginnedMember.getUsid())&&c.getCardBoard().getTradeStage()>1) {%>
+          <li><div id="enterFuncBtn" onclick="fn_enterBtn();">
             <img src="<%= request.getContextPath() %>/images/enter.png" width="40px" height="40px">
             <p>채팅방접속</p></div></li>
-          <li><div id="openFuncBtn">
+            <%} %>
+          <% if(c.getCardBoard().getWriterUsid()==loginnedMember.getUsid()){ %>
+          <li><div id="openFuncBtn" onclick="fun_createroom();">
             <img src="<%= request.getContextPath() %>/images/open.png" width="40px" height="40px">
             <p>방열기</p></div></li>
+            <%} %>
         </ul>
       </div>
       
@@ -346,6 +374,9 @@
 </section>
 <script>
 
+function fn_enterBtn(){
+  $("#hiddenEnterBtn").click();
+}
 
 var pop;
 window.onunload = function() { 
@@ -382,6 +413,7 @@ function fun_createroom() {
 					console.log("data : "+data);
 				if (data == 1) {
 					//방의 상태를 바꿔야되니 ajax로 갔따오자 방의 상태를 2로 변경함
+          alert('채팅방이 생성되었습니다.');
 				} else {
 					alert('N빵 인원이 다 체워지지 않았습니다.');
 				} 
@@ -391,22 +423,35 @@ function fun_createroom() {
 
 function fun_decidebuy(){
 	/* 컨트롤 f주의 여기 틀어짐 컨텍스트 부분 */
+  if($("#startFuncBtn>img").attr("src")=="<%= request.getContextPath() %>/images/onebyn.png") {
 	$.ajax({
 		type: "GET",
 		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
 		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"${curCard.cardBoard.boardId}","flag":"1"},
 		url: "<%=request.getContextPath()%>/chat/decidebuy",
 			success : function(data) {
-				location.reload();
-			}
+        $("#startFuncBtn>img").attr("src","<%= request.getContextPath() %>/images/cancel.png");
+        $("#startFuncBtn>p").text("N빵취소");
+        $("#date p").text("현재 참여중인 N빵입니다.");
+      }
 		}) 	
-
-	}
+	}else {
+    $.ajax({
+		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
+		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"${curCard.cardBoard.boardId}","flag":"2"},
+		url: "<%=request.getContextPath()%>/chat/decidebuy",
+			success : function(data) {
+        $("#startFuncBtn>img").attr("src","<%= request.getContextPath() %>/images/onebyn.png");
+        $("#startFuncBtn>p").text("N빵신청");
+        $("#date p").text("");
+			}
+		})
+  }
+}
 
 //취소할때
 function fun_cancelbuy() {
 	$.ajax({
-		type: "GET",
 		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
 		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"${curCard.cardBoard.boardId}","flag":"2"},
 		url: "<%=request.getContextPath()%>/chat/decidebuy",
@@ -428,9 +473,9 @@ function fun_cancelbuy() {
 
     $(document).ready(function () {
         fn_commentList();
-
+        $("#hideButton").hide();
         $("#likeFunc").click(function (e) {
-            if ($("#likeFunc").css("background-color") == "rgb(239, 239, 239)") {
+            if ($("#likeFunc>img").attr("src") == "<%= request.getContextPath() %>/images/heart.png") {
                 $.ajax({
                     url: "<%=request.getContextPath()%>/board/boardLike?key=insert",
                     type: "post",
@@ -440,7 +485,7 @@ function fun_cancelbuy() {
                         'boardId': '<%= c.getCardBoard().getBoardId() %>'
                     },
                     success: function (data) {
-                        $("#likeFunc").css("background-color", "red");
+                        $("#likeFunc>img").attr("src", "<%= request.getContextPath() %>/images/fullheart.png");
                     }
                 })
             } else {
@@ -453,7 +498,7 @@ function fun_cancelbuy() {
                         'boardId': '<%= c.getCardBoard().getBoardId() %>'
                     },
                     success: function (data) {
-                        $("#likeFunc").css("background-color", "rgb(239, 239, 239)");
+                        $("#likeFunc>img").attr("src", "<%= request.getContextPath() %>/images/heart.png");
                     }
                 })
             }
