@@ -53,7 +53,7 @@ public class CustomerReadFrm extends HttpServlet {
 		String view ="";
 		if(cc == null) {
 			request.setAttribute("msg", "조회 실패");
-			request.setAttribute("loc", "customerQnA.jsp"); 
+			request.setAttribute("loc", "/customer/customerQnA"); 
 			
 		view ="/views/common/msg.jsp";
 			
