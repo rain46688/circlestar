@@ -29,13 +29,21 @@
         text-align: center;
         margin: 0 0 15px;
     }
+	div#nickDuplicateAjax{
+		margin-top: -10px;
+		margin-bottom: 10px;
+		margin-left: 5px;
+		font-size: 12px;
+		color: red;
+		display: none;
+		text-align: left;
+	}
 </style>
 <div>
 	<form id="memberEnrollFrm" action="<%=request.getContextPath()%>/member/modifyNickCpl" method="post">
 		<input type="text" placeholder="변경할 닉네임을 입력해주세요." class="input" id="nickname" name="nick" maxlength="10" required style="width : 59%;">
-		<button type="button" class="nnbtn" id="nnbtn" onclick="fn_nickname_duplicate();">중복검사</button>
-		<input type="hidden" name="checked_nn" value="">
 		<div class="constrain" id="nnConstrain"></div><br>
+		<div class="constrain" id="nickDuplicateAjax"></div>
 		<button type="button" class="nnbtn" onclick="fn_updateNick();">수정완료</button>
 		<button type="button" class="nnbtn" onclick="fn_resetTheForm();">수정취소</button>
 		<input type="hidden" name="usid" value="<%=m.getUsid()%>">
@@ -68,32 +76,26 @@
 		});
 	});
 
-	function fn_nickname_duplicate(){
-		let nn=$("#nickname").val().trim();
-		if(nn.length==0){
-			alert("닉네임을 입력해주세요.");
-		}else{
-			const url="<%=request.getContextPath()%>/checkNNDuplicate";
-			const title="checkNNDuplicate";
-			const status="left=500px,top=100px,width=500px,height=200px";
-
-			open("",title,status);
-
-			checkNNDuplicate.target=title;
-			checkNNDuplicate.action=url;
-			checkNNDuplicate.method="post";
-
-			checkNNDuplicate.nick.value=nn;
-			checkNNDuplicate.submit();
-		}
-	};
+	const nn=$("#nickname").val().trim();
+		$("#nickname").keyup(e=>{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/checkNNDuplicate",
+				data:{"nick":$(e.target).val()},
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$("#nickDuplicateAjax").html(data);
+					$("#nickDuplicateAjax").css({"display":"block"});
+				}
+			});
+		});
 
 
 	function fn_updateNick(){
 		let nn=$("#nickname").val().trim();
 		if(nn.length==0 || !nnPattern.test(nn)){
 			alert("닉네임을 입력해주세요.");
-		}else if($("input[name='checked_nn']").val()==''){
+		}else if($("#checkNNhidden").val()=='existed'){
 			alert('닉네임 중복 확인을 해주세요.');
 		}else{
 			$("#memberEnrollFrm").submit();
