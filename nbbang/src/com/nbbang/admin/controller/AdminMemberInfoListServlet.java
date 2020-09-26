@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.nbbang.admin.model.AdminMem;
 import com.nbbang.admin.model.service.AdminService;
+import com.nbbang.admin.model.vo.AdminMem;
 
 /**
  * Servlet implementation class AdminMemberInfoServlet
