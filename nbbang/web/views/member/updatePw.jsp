@@ -54,52 +54,71 @@
         position: relative;
 	    background: #FFFFFF;
 	    text-align: center;
-        margin: 3% 31% 5% 1%;
+        margin: 3% 26% 5% 1%;
         /* 세로정렬꽉차게 가운데:center */
         align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
         justify-items: stretch;
-        width: 30%;
+        width: 35%;
         float: right;
     }
     div .item *{
         width:100%;
-        text-align: center;
+        text-align: left;
+        font-size: 16px;
     }
-    form#updatePwForm button{
+    button.button{
         outline: none;
         background: #735020;
-        width: 38%;
+        width: 45%;
+        min-width: 40px;
         border: none;
-        margin: 0 1% 20%;
-        padding: 15px;
+        padding: 5px;
         color: #FFFFFF;
         font-size: 14px;
         cursor: pointer;
+        text-align: center;
+        margin: 5px 2%;
     }
-    div#updatePwContainer .textField{
-        padding: 1%;
-    }
-    div#updatePwContainer .input{
+    .input {
         outline: none;
         border: black solid 1px;
         background-color: white;
         width: 80%;
-        margin: 0 0 15px;
-        padding: 15px;
+        height: 36px;
+        margin: 10px 0 15px;
+        padding: 5px;
         box-sizing: border-box;
         font-size: 14px;
-        text-align: left;
     }
     div.constrain{
-        margin-top: -15px;
-        margin-bottom: 15px;
-        margin-left: 70px;
+        margin-top: -10px;
+        margin-bottom: 0px;
+        margin-left: 5px;
         font-size: 12px;
         color: red;
         display: none;
         text-align: left;
 	}
+    div.fieldCapsule{
+        display: flex;
+        position: relative;
+    }
+    div.capsuleLeft{
+        width: 35%;
+        min-height: 70px;
+        float: left;
+        /* border-right: black 1px solid; */
+        border-bottom: black 1px solid;
+        padding: 10px;
+    }
+    div.capsuleRight{
+        width: 65%;
+        min-height: 70px;
+        float: right;
+        border-bottom: black 1px solid;
+        padding: 10px;
+    }
     a.active{
         font-weight: bold;
     }
@@ -146,28 +165,55 @@
                 <div class="item textField" id="containerTitle">
                     <div id="modifyProfile" style="margin-bottom: 20px; font-size: 24px; padding: 5px;" >비밀번호 수정하기</div>
                 </div>
+                <div class="item textField">
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="border-top: black 1px solid;">현재 비밀번호</div>
+                        <div class="capsuleRight" style="border-top: black 1px solid;">
+                            <div class="item textField">
+                                <input type="password" class="input" id="crtPw" name="crtPw" placeholder="현재 비밀번호">
+                            </div>
+                            <div class="constrain" id="crtPwConstrain"></div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="item textField">
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft">새로운 비밀번호</div>
+                        <div class="capsuleRight">
+                            <div class="item textField">
+                                <input type="password" class="input" id="newPw" name="newPw" placeholder="새로운 비밀번호">
+                            </div>
+                            <div class="constrain" id="newPwConstrain"></div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="item textField">
-                    <input type="password" class="input" id="crtPw" name="crtPw" placeholder="현재 비밀번호">
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft">새로운 비밀번호 확인</div>
+                        <div class="capsuleRight">
+                            <div class="item textField">
+                                <input type="password" class="input" id="newPw2" name="newPw2" placeholder="새로운 비밀번호 확인">
+                            </div>
+                            <div class="constrain" id="newPwConstrain2"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="constrain" id="crtPwConstrain"></div>
 
                 <div class="item textField">
-                    <input type="password" class="input" id="newPw" name="newPw" placeholder="새로운 비밀번호">
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft"></div>
+                        <div class="capsuleRight">
+                            <div id="btnsField" class="item button">
+                                <button type="button" class="button" onclick="fn_updatePw();">변경하기</button>
+                                <button type="button" class="button" onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=m.getUsid()%>'">취소</button>
+                            </div>
+                            <input type="hidden" name="usid" value="<%=m.getUsid()%>">
+                            <input type="hidden" name="realPw" value="<%=m.getMemberPwd()%>">
+                        </div>
+                    </div>
                 </div>
-                <div class="constrain" id="newPwConstrain"></div>
-
-                <div class="item textField">
-                    <input type="password" class="input" id="newPw2" name="newPw2" placeholder="새로운 비밀번호 확인">
-                </div>
-                <div class="constrain" id="newPwConstrain2"></div>
-
-                <div id="btnsField" class="item button">
-                    <button type="button" onclick="fn_updatePw();">변경하기</button>
-                    <button type="button" onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=m.getUsid()%>'">취소</button>
-                </div>
-                <input type="hidden" name="usid" value="<%=m.getUsid()%>">
-                <input type="hidden" name="realPw" value="<%=m.getMemberPwd()%>">
             </form>
         </div>
     </div>
