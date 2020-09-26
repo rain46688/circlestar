@@ -16,35 +16,40 @@
         justify-items: stretch;
         width: 14%;
         float: left;
+        font-family: 'Do Hyeon', sans-serif;
     }
     div#sideBarTitleContainer{
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
+        border: 1px black solid;
     }
     p#sideBarTitle{
-        font-size: 2em;
-        font-weight: bold;
+        font-size: 2.5em;
         margin-top: 10%;
     }
     p#sideBarText{
-        font-size: 1em;
-        font-weight: bold;
+        font-size: 1.3em;
         margin-bottom: 10%;
     }
     div#sideBarLinkContainer{
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
+        border: 1px black solid;
+        border-top: none;
     }
     .postList{
-        font-size: 1em;
+        font-size: 1.3em;
         text-align: left;
     }
     .postList:hover{
         color: rgb(243, 183, 24);
     }
 
+    div#modifyProfile{
+        font-family: 'Do Hyeon', sans-serif;
+    }
     div#memberInfoContainer{
         position: relative;
 	    background: #FFFFFF;
@@ -103,13 +108,16 @@
         border-bottom: black 1px solid;
         padding: 10px;
     }
+    a.active{
+        font-weight: bold;
+    }
 </style>
 <section>
     <div id="myPageWrapper">
         <div id="myPageSideBar">
             <div id="sideBarTitleContainer">
                 <p id="sideBarTitle">마이 페이지</p>
-                <p class="sideBarText">N빵은 고객님의<br>돈과 시간을<br>N빵해드립니다.</p>
+                <p id="sideBarText">N빵은 고객님의<br>돈과 시간을<br>N빵해드립니다.</p>
             </div>
             <div id="sideBarLinkContainer">
                 <div>
@@ -134,13 +142,13 @@
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/updatePw?usid=<%=loginnedMember.getUsid()%>">비밀번호 수정하기</a>
                 </div>
                 <div>
-                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>">개인정보 확인하기</a>
+                    <a class="nav-link postList active" href="<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>">개인정보 확인하기</a>
                 </div>
             </div>
         </div>
         <div id="memberInfoContainer">
             <div class="item textField" id="containerTitle">
-                <div id="updatePwTitle" style="margin-bottom: 20px; font-size: 24px; padding: 5px;" >나의 정보</div>
+                <div id="modifyProfile" style="margin-bottom: 20px; font-size: 24px; padding: 5px;" >나의 정보</div>
             </div>
 
             <div class="item textField">

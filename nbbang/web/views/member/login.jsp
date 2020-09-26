@@ -27,6 +27,8 @@
 <!-- jQuery -->
 <script src="js/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" type="text/css">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 </head>
 <body>

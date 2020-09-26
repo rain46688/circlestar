@@ -29,13 +29,21 @@
         text-align: center;
         margin: 0 0 15px;
     }
+	div#phoneDuplicateAjax{
+		margin-top: -10px;
+		margin-bottom: 10px;
+		margin-left: 5px;
+		font-size: 12px;
+		color: red;
+		display: none;
+		text-align: left;
+	}
 </style>
 <div>
 	<form id="memberEnrollFrm" action="<%=request.getContextPath()%>/member/updatePhoneCpl" method="post">
-		<input type="tel" placeholder="변경할 휴대폰 번호를 입력해주세요." class="input checkLength" id="phone" name="phone" maxlength="11" required style="width : 59%;">
-		<button type="button" class="pnbtn" onclick="fn_phone_duplicate();">중복검사</button>
-		<input type="hidden" name="checked_pn" value="">
+		<input type="tel" placeholder="변경할 휴대폰 번호를 입력해주세요." class="input checkLength" id="phone" name="phone" maxlength="11" required style="width: 59%;">
 		<div class="constrain" id="pnConstrain"></div><br>
+		<div class="constrain" id="phoneDuplicateAjax"></div>
 		<button type="button" class="pnbtn" onclick="fn_updatePhone();">수정완료</button>
 		<button type="button" class="pnbtn" onclick="fn_resetTheForm();">수정취소</button>
 		<input type="hidden" name="usid" value="<%=m.getUsid()%>">
@@ -67,6 +75,19 @@
 				}
 			});
 		});
+		const phone=$("#phone").val().trim();
+		$("#phone").keyup(e=>{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/checkPNDuplicate",
+				data:{"phone":$(e.target).val()},
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$("#phoneDuplicateAjax").html(data);
+					$("#phoneDuplicateAjax").css({"display":"block"});
+				}
+			});
+		});
 
 		function fn_phone_duplicate(){
 			let pn=$("#phone").val().trim();
@@ -92,7 +113,7 @@
 			let pn=$("#phone").val().trim();
 			if(pn.length==0 || !pnPattern.test(pn)){
 				alert("휴대폰 번호를 입력해주세요.");
-			}else if($("input[name='checked_pn']").val()==''){
+			}else if($("#checkPNhidden").val()=='existed'){
 				alert('휴대폰 번호 중복 확인을 해주세요.');
 			}else{
 				$("#memberEnrollFrm").submit();
