@@ -6,6 +6,7 @@ import static com.nbbang.common.temp.JDBCTemplate.getConnection;
 import static com.nbbang.common.temp.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.nbbang.board.model.dao.BoardDao;
@@ -81,10 +82,8 @@ public class BoardService {
 		result += dao.boardLikeUpdate(conn, list);
 		if(result > 1) {
 			commit(conn);
-			System.out.println("commit");
 		}else {
 			rollback(conn);
-			System.out.println("rollback");
 		}
 		close(conn);
 		return result;
@@ -130,5 +129,12 @@ public class BoardService {
 		List<Card> list = dao.mainViewList(conn, key);
 		close(conn);
 		return list;
+	}
+	
+	public ArrayList<Integer> tradeUserList(int boardId) {
+		Connection conn = getConnection();
+		ArrayList<Integer> tradeUserList = dao.tradeUserList(conn, boardId);
+		close(conn);
+		return tradeUserList;
 	}
 }
