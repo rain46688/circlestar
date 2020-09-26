@@ -3,7 +3,7 @@
 <%@ include file="/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/cstmcss/main.css" type="text/css">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap" rel="stylesheet">
-<jsp:include page="maincss.jsp"></jsp:include>
+
 <style>
 
  @import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
@@ -13,9 +13,9 @@ figure.snip1384 {
   position: relative;
   overflow: hidden;
   margin-left: 40%;
-  margin-top: 4%;
-  width: 600px;
-  height: 700px;
+  margin-top: 3%;
+  width: 35em;
+  height: 40em;
   color: #ffffff;
   text-align: left;
   font-size: 16px;
@@ -28,8 +28,8 @@ figure.snip1384 * {
   transition: all 0.35s ease;
 }
 figure.snip1384 img {
-  width: 600px;
-  height: 700px;
+  width: 33em;
+  height: 35em;
   backface-visibility: hidden;
   vertical-align: top;
 }
@@ -120,8 +120,8 @@ figure.snip1384.hover i {
 } */
 
 </style>
-
-
+<section>
+<jsp:include page="maincss.jsp"></jsp:include>
 
 
 
@@ -135,7 +135,7 @@ figure.snip1384.hover i {
     <a href="#"></a>
   </figure>
 </div> 
-
+</section>
 <!-- <button type="button" class="btn-qna" style="font-size: 20px;"
   onclick="location.href='<%=request.getContextPath()%>/customer/customerQnA'">고객센터 바로가기</button> -->
 
