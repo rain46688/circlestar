@@ -19,10 +19,11 @@ String Sc = request.getParameter("Sc"); */
 	/* 	border: 1px #ECAF59 solid; */
 	border: 2px black solid;
 	padding: 20px;
+	width:auto;
 }
 
 #cList {
-	width: 100%;
+	width: auto;
 	height: 500px;
 }
 
@@ -111,7 +112,7 @@ h1 {
 
 <div class="container" id="writecontainer">
 	<div class="form-group">
-		<h1>문의 내역</h1>
+		<h1>회원 관리</h1>
 	</div>
 
 
@@ -131,6 +132,7 @@ h1 {
 				<div class="divCell">생성한 방 갯수</div>
 				<div class="divCell">회원등급</div>
 				<div class="divCell">신고당한횟수</div>
+					<div class="divCell">이메일</div>
 			</div>
 			<%
 				if (!list.isEmpty()) {
@@ -144,7 +146,7 @@ h1 {
 				<div class="divCell"><%=a.getMem().getBirthday()%></div>
 				<div class="divCell"><%=a.getMem().getEnrollDate()%></div>
 				<div class="divCell"><%=a.getMem().getPoint()%></div>
-				<div class="divCell"><%=a.getMem().getLeaveMem()%></div>
+				<div class="divCell"><%=(a.getMem().getLeaveMem())?'Y':'N'%></div>
 				<div class="divCell"><%=a.getMem().getNbbangScore()%></div>
 				<div class="divCell"><%=a.getCreateBoardCount()%></div>
 				<div class="divCell"><%=a.getGradeLevel()%></div>

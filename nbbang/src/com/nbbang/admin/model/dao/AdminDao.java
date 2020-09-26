@@ -212,6 +212,7 @@ public class AdminDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				am = new AdminMem();
+				am.setMem(new Member());
 				Member m = am.getMem();
 				m.setUsid(rs.getInt("USID"));
 				m.setMemberName(rs.getString("MEMBER_NAME"));
@@ -226,10 +227,6 @@ public class AdminDao {
 				am.setGradeLevel(rs.getInt("GRADE_LEVEL"));
 				am.setReportCount(rs.getInt("REPORT_COUNT"));
 				list.add(am);
-			}
-			
-			for(AdminMem a : list) {
-				System.out.println(a);
 			}
 			
 		} catch (SQLException e) {
