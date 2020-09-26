@@ -73,6 +73,19 @@
     ul.pagination{
         text-align: center;
     }
+    div#tableContainer{
+        margin-top: 5%;
+    }
+    div#tableTitleContainer{
+    }
+    div.tableTitle{
+        float: left;
+        width: 20%;
+        text-align: center;
+    }
+    div#tableTextContainer{
+        clear:both;
+    }
 </style>
 <section>
     <div id="myPageWrapper">
@@ -116,7 +129,27 @@
                 <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >내 신고 내역</div>
                 <div style="font-size: 16px; padding-left: 10px; text-align: left;" >나의 신고 내용과 관리자의 답변을 확인할 수 있습니다.</div>
             </div>
-            <div>
+            <div id="tableContainer">
+                <div id="tableTitleContainer">
+                    <div class="tableTitle">
+                        순번
+                    </div>
+                    <div class="tableTitle">
+                        신고유형
+                    </div>
+                    <div class="tableTitle">
+                        글제목
+                    </div>
+                    <div class="tableTitle">
+                        피신고회원
+                    </div>
+                    <div class="tableTitle">
+                        관리자 답변 여부
+                    </div>
+                </div>
+                <div id="tableTextContainer">
+
+                </div>
                 <nav aria-lable="Page navigation" class="listPageBar">
                     <ul class="pagination justify-content-center">
                         <%=request.getAttribute("pageBar")%>
