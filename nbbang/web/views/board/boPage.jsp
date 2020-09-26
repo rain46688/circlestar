@@ -315,7 +315,7 @@
           <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
       </div>
       <div id="contentText"><%= c.getCardBoard().getContent() %></div>
-      <div id="etcInfo"><a href="#">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
+      <div id="etcInfo"><a href="<%= request.getContextPath() %>/member/report?userId=<%= loginnedMember.getUsid() %>&boardId=<%= c.getCardBoard().getBoardId() %>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
       <hr>
       <div id="funcBtns">
         <ul>
@@ -347,7 +347,7 @@
             <% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
             <img src="<%= request.getContextPath() %>/images/cancel.png" width="40px" height="40px">
             <% }else { %>
-            <img src="<%= request.getContextPath() %>/images/nbyone.png" width="40px" height="40px">
+            <img src="<%= request.getContextPath() %>/images/onebyn.png" width="40px" height="40px">
             <% } %>
             <p>N빵신청</p></div></li>
             <% } %>

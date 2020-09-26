@@ -96,11 +96,10 @@
 
 	#carouselField {
 		width: 80%;
-		padding-left: 5em;
-		padding-right: 5em;
+		padding-left: 12em;
+		padding-right: 12em;
 		border-bottom: 2px black solid;
 	}
-	
 
 	.card-price {
 		text-align: right;
@@ -122,23 +121,23 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
 					<img src="<%=request.getContextPath()%>/images/main1.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-90" alt="..." height="600em">
 				</div>
 				<div class="carousel-item">
 					<img src="<%=request.getContextPath()%>/images/main2.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-90" alt="..." height="600em">
 				</div>
 				<div class="carousel-item">
 					<img src="<%=request.getContextPath()%>/images/main3.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-90" alt="..." height="600em">
 				</div>
 				<div class="carousel-item">
 					<img src="<%=request.getContextPath()%>/images/main4.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-90" alt="..." height="600em">
 				</div>
 				<div class="carousel-item">
 					<img src="<%=request.getContextPath()%>/images/main5.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-90" alt="..." height="600em">
 				</div>
 			</div>
 
