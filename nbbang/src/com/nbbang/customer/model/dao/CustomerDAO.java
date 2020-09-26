@@ -30,7 +30,7 @@ public class CustomerDAO {
 		}
 	}
 
-	public List<CustomerCenter> qnAList(Connection conn, int cPage, int numPerPage) {
+	public List<CustomerCenter> qnAList(Connection conn, int cPage, int numPerPage, String nick) {
 		// TODO Auto-generated method stub
 
 		PreparedStatement pstmt = null;
@@ -39,8 +39,9 @@ public class CustomerDAO {
 
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("qnAList"));
-			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
-			pstmt.setInt(2, cPage * numPerPage);
+			pstmt.setString(1, nick);
+			pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(3, cPage * numPerPage);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				CustomerCenter cc = new CustomerCenter();
@@ -66,7 +67,7 @@ public class CustomerDAO {
 
 	}
 
-	public int qnACount(Connection conn) {
+	public int qnACount(Connection conn, String nick) {
 		// TODO Auto-generated method stub
 
 		PreparedStatement pstmt = null;
@@ -74,6 +75,7 @@ public class CustomerDAO {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("qnaCount"));
+			pstmt.setString(1, nick);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				result = rs.getInt(1);

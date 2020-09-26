@@ -34,9 +34,9 @@ public class CustomerQnAServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String nick=request.getParameter("nick");
 		
-		
-		int num = Integer.parseInt(request.getParameter("num"));
+//		int num = Integer.parseInt(request.getParameter("num"));
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -47,11 +47,11 @@ public class CustomerQnAServlet extends HttpServlet {
 		int numPerPage=7;
 		
 		
-		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage,num);
+		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage,nick);
 		for(CustomerCenter c : list) {
-//			System.out.println(c);
+			System.out.println("c : "+ c);
 		}
-		int totalData=new CustomerService().qnACount(num);
+		int totalData=new CustomerService().qnACount(nick);
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
