@@ -494,6 +494,39 @@ public class BoardDao {
 		return list;
 	}
 	
+	public int boardPayMinusPoint(Connection conn, int userUsid, int productPrice) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			String sql = prop.getProperty("boardPayMinusPoint");
+			sql = sql.replace("$re", ""+productPrice);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userUsid);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardPayTradeList(Connection conn, int userUsid, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardPayTradeList"));
+			pstmt.setInt(1, boardId);
+			pstmt.setInt(2, userUsid);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	private String[] stringToArr(String str) {
 		if(str==null) {

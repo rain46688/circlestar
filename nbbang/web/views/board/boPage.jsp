@@ -394,6 +394,12 @@
 </section>
 <script>
 
+function fn_pay(){
+  if(confirm('결제를 진행하시겠습니까?')) {
+    location.href="<%=request.getContextPath()%>/board/boardPay?buyerUsid=<%=loginnedMember.getUsid()%>&boardId=<%=c.getCardBoard().getBoardId()%>&productPrice=<%=c.getCardBoard().getProductPrice()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
+  }
+}
+
 function fn_enterBtn(){
   $("#hiddenEnterBtn").click();
 }

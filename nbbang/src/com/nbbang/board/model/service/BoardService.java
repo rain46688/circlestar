@@ -79,20 +79,6 @@ public class BoardService {
 		return result;
 	}
 	
-//	public int boardInsertTradeList(int tradeUsid, String tradeUserNickname) {
-//		Connection conn = getConnection();
-//		int result = dao.boardInsertTradeList(conn, tradeUsid, tradeUserNickname);
-//		if(result > 0) {
-//			commit(conn);
-//			System.out.println("commit");
-//		}else {
-//			rollback(conn);
-//			System.out.println("rollback");
-//		}
-//		close(conn);
-//		return result;
-//	}
-	
 	public int boardLikeInsert(LikeList list) {
 		Connection conn = getConnection();
 		int result = dao.boardLikeInsert(conn, list);
@@ -153,5 +139,18 @@ public class BoardService {
 		ArrayList<Integer> tradeUserList = dao.tradeUserList(conn, boardId);
 		close(conn);
 		return tradeUserList;
+	}
+	
+	public int boardPay(int userUsid, int boardId, int productPrice) {
+		Connection conn = getConnection();
+		int result = dao.boardPayMinusPoint(conn, userUsid, productPrice);
+		result += dao.boardPayTradeList(conn, userUsid, boardId);
+		if(result > 1) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }
