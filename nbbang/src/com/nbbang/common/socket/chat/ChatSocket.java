@@ -41,22 +41,31 @@ public class ChatSocket {
 					" === ChatSocket 멤버 닉네임 : " + m.getNickname() + ", HttpSession : " + httpSession + " === ");
 			// Map에 담음
 			try {
-				// Map이 isEmpty인경우 바로 넣어줌
-				if (user.isEmpty()) {
 					user.put(m, session);
-					System.out.println(" === ChatSocket user.isEmpty() 분기문 진입 name : " + m.getNickname() + " === ");
-				} else {
-					// 중복적으로 접근한 경우 차단시켜서 Map에 넣지않도록 필터링
-					System.out.println(" === ChatSocket !user.isEmpty() 분기문 진입 == ");
-					Iterator<Member> useriterator = user.keySet().iterator();
-					while (useriterator.hasNext()) {
-						Member key = useriterator.next();
-						if (!key.equals(m)) {
-							System.out.println(" === ChatSocket 멤버 user에 추가 name :" + m.getNickname() + " === ");
-							user.put(m, session);
-						}
-					}
-				}
+				// Map이 isEmpty인경우 바로 넣어줌
+//				if (user.isEmpty()) {
+//					user.put(m, session);
+//					System.out.println("onopen부분1 print");
+//					printMember();
+//					System.out.println(" === ChatSocket user.isEmpty() 분기문 진입 name : " + m.getNickname() + " === ");
+//				} else {
+//					// 중복적으로 접근한 경우 차단시켜서 Map에 넣지않도록 필터링
+//					// 이러면 한 게시판에서 여러번 접속이 안되는듯?
+//					System.out.println(" === ChatSocket !user.isEmpty() 분기문 진입 == ");
+//					Iterator<Member> useriterator = user.keySet().iterator();
+//					while (useriterator.hasNext()) {
+//						Member key = useriterator.next();
+//						if (!key.equals(m)) {
+//							System.out.println(" === ChatSocket 멤버 user에 추가 name :" + m.getNickname() + " === ");
+//							user.put(m, session);
+//							System.out.println("onopen부분2 print");
+//							printMember();
+//							
+//						}
+//					}
+//				}
+				
+				
 			} catch (Exception e) {
 				System.out.println(" === onOpen 예외 === ");
 			}
@@ -68,6 +77,8 @@ public class ChatSocket {
 	@OnMessage
 	public void onMessage(Message msg, Session session) {
 		System.out.println(" === onMessage 메소드 실행 === ");
+		System.out.println("onMessage 부분 print");
+		printMember();
 		// Message객체 가져옴
 		if (msg != null) {
 			String name = "";
@@ -76,30 +87,29 @@ public class ChatSocket {
 				String curMemsList = msg.getCurMemsList();
 				String day = msg.getChatTime();
 
-				// System.out.println("boardId : "+boardId+", curMemsList : " + curMemsList);
+				 System.out.println("보낸사람 : "+msg.getSendNickName()+", boardId : "+boardId+", curMemsList : " + curMemsList);
 
 				Iterator<Member> userIterator = user.keySet().iterator();
 				while (userIterator.hasNext()) {
 					Member key = userIterator.next();
 					// Member객체의 현재 접속한 방을 기준으로 나눠서 같은 방에 있는 유저한테만 메세지를 보냄
+					System.out.println(" [ key.getCurRoomBid() : "+key.getCurRoomBid()+" ]");
 					if (!key.getCurRoomBid().equals("") && key.getCurRoomBid().equals(boardId)) {
+						System.out.println(" === 방기준으로 나누기 분기 부분 === ");
 						if (user.get(key) != null && user.get(key).isOpen()) {
 							name = key.getNickname();
 							// System.out.println(" === Null이 아니고 세션 열려있음, 메세지 : " + msg + " === ");
-
 							if (list.size() != 18) {
 								System.out.println(" === ChatSocket 리스트 안참 list.size() : " + list.size() + " === ");
 								System.out.println("msg : " + msg);
 								System.out.println("msg.getMsg() : " + msg.getMsg());
 								if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
-									System.out.println("********* " + msg.getMsg());
 									list.add(msg);
 								}
 								user.get(key).getBasicRemote().sendObject(msg);
 							} else {
 								// 디비에 넣고 클리어
 								if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
-									System.out.println("********* " + msg.getMsg());
 									list.add(msg);
 								}
 								user.get(key).getBasicRemote().sendObject(msg);
@@ -112,6 +122,8 @@ public class ChatSocket {
 								int result = new ChatService().insertChatMsg(list);
 							}
 						}
+						
+						
 					}
 				}
 
@@ -150,10 +162,9 @@ public class ChatSocket {
 					Iterator<Member> exitterator = user.keySet().iterator();
 					while (exitterator.hasNext()) {
 						key = exitterator.next();
-						if (!user.get(key).equals(session)) {
+						if (!user.get(key).equals(session) && !key.getNickname().equals(name)) {
 							System.out.println(" === ChatSocket 진입 여부 확인용 1 === ");
-							user.get(key).getBasicRemote()
-									.sendObject(new Message(key.getNickname(), "SYS2", "", "", "", ""));
+							user.get(key).getBasicRemote().sendObject(new Message(key.getNickname(), "SYS2", "", "", "", ""));
 						}
 					}
 					System.out.println(" === ChatSocket 소켓 연결 종료 name : " + name + " === ");
@@ -164,9 +175,24 @@ public class ChatSocket {
 				System.out.println(" === ChatSocket 진입 여부 확인용 2 === ");
 				user.remove(listkey);
 			}
+			System.out.println("onclose부분 print");
+			printMember();
 		} catch (Exception e) {
 			System.out.println(" === onClose 예외, name : " + name + " === ");
 		}
 	}
+	
+	public void printMember() {
+		System.out.println(" ---------------------- ");
+		Iterator<Member> it = user.keySet().iterator();
+		while (it.hasNext()) {
+			Member key = it.next();
+			System.out.println(key.getNickname());
+			
+		}
+		System.out.println(" ---------------------- ");
+	}
+		
+	
 
 }

@@ -76,8 +76,8 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("boardId", boardId);
 		request.setAttribute("curNum", curNum);
 		request.setAttribute("curMemsList", curMemsList);
-		request.setAttribute("x", 450);
-		request.setAttribute("y", 660);
+		request.setAttribute("x", 600);
+		request.setAttribute("y", 800);
 		request.setAttribute("m", m);
 		request.setAttribute("memberPicture", memberPicture);
 		request.setAttribute("time", time);

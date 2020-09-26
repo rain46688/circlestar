@@ -354,8 +354,8 @@ window.onunload = function() {
 
 /*  채팅창 관련 로직  */
 function nbbang(f){
-	var x = 450;
-	var y = 660;
+	var x = 600;
+	var y = 800;
 	var cx = (window.screen.width / 2) - (x / 2);
 	var cy= (window.screen.height / 2) - (y / 2);
 	console.log("window.screen.width : "+window.screen.width+", cx : "+cx);
@@ -382,7 +382,6 @@ function fun_createroom() {
 					console.log("data : "+data);
 				if (data == 1) {
 					//방의 상태를 바꿔야되니 ajax로 갔따오자 방의 상태를 2로 변경함
-          alert('채팅방이 생성되었습니다.');
 				} else {
 					alert('N빵 인원이 다 체워지지 않았습니다.');
 				} 

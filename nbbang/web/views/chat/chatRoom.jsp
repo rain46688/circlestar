@@ -22,20 +22,21 @@ font-weight:bold;
 
 body{
 	/* background-color:#FFC107; */
-	background-image:url('<%=request.getContextPath()%>/images/rememberBread.png');
+	background-image:url('<%=request.getContextPath()%>/images/chatRoom.png');
 	background-repeat:no-repeat;
 	background-size: 100% 100%;
 }
 
 /* 사이드바 사이즈  */
 #side {
-	height: 80%;
-	width: 80%;
-	margin: 30px auto;
-	border: 4px black solid;
+	height: 62%;
+	width: 62%;
+	margin: 28% auto;
+/* 	border: 4px black solid; */
 	padding:1px;
 	border-radius: 10px;
-	background-color:#B2C7D9;
+	/* background-color:#B2C7D9; */
+	background-color:#FEFCEC;
 }
 
 /* 텍스트 출력되는 하얀부분 위 박스 */
@@ -55,7 +56,11 @@ body{
 #inputDiv{
 	height:20%;
 	width:100%;
-	background-color:white;
+	/* background-color:white; */
+	 background-color:#FFE9B9; 
+/* 	background-color:#FEFCEC; */
+	border:1px solid #E8AB62;
+	border-radius:10px;
 	border-radius-bottom-left: 10px;
 	border-radius-bottom-right: 10px;
 }
@@ -65,7 +70,14 @@ body{
 	resize: none;
 	border: none;
 	padding: 10px 10px 10px 10px;
-	width:80%;
+	/*  */
+	margin-top:5px;
+	margin-left:7px;
+	/*  */
+	width:79%;
+	
+		border-radius:5px;
+	height:86px;
 }
 
 /* 위 텍스트 영역 눌르면 옆에 테두리 생기는거 지우는 용도 */
@@ -126,8 +138,10 @@ textarea:focus{
 
 /* 각각 채팅을 감싸는 div 배경색과 같은 테투리를 갖고있음 */
 .tmp{
-border:1px black solid;
+/* border:1px black solid;
 border:1px #B2C7D9 solid;
+ */
+ border:1px #FEFCEC solid;
 }
 
 /* 다른 사람껀 프로필이랑 이름 보여주고 왼쪽 */
@@ -146,6 +160,7 @@ border:1px #B2C7D9 solid;
 	margin-left:25%;
 	margin-top:25px;
 	margin-bottom:5px;
+	border:1px #FFC107 solid;
 }
 
 /* 닉네임 div */
@@ -180,14 +195,21 @@ margin-top:10px;
 <section >
 <div id="side" >
 	<div id="chat" >
-	<!-- tradeStage 방의 상태가 2단계인경우
-	게시판 상세페이지에서 방이 생성될때 정보를 변경 후 Attribute 보내줘야됨 
-	-->
+				<c:if test="${!empty loginnedMember}">
 					<div id="ChatArea"></div>
 					<div id="inputDiv">
 						<textarea id="msgText" rows="3" cols="33"></textarea>
 						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
 					</div>
+					</c:if>
+					<c:if test="${empty loginnedMember}">
+					<div id="ChatArea"><div class='tmp'><div class='admin'>로그인후 다시 접속해주세요!</div></div></div>
+					<div id="inputDiv">
+					<!-- 	<textarea id="msgText" rows="3" cols="33"></textarea> -->
+						<textarea id="msgText" rows="1" cols="1"></textarea>
+						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
+					</div>
+					</c:if>
 	</div>
 </div>
 </section>
@@ -195,11 +217,7 @@ margin-top:10px;
 <script>
 
 $(function(){
-	
-/* 	let time = "${time}";
-	let arr = time.split('오');
-	time='오'+arr[1]; */
-	
+
 	/* 여기서 댓글 처럼 채팅 리스트를 가져와서 쏴주기만하면됨  */
 	$.ajax({
 		type: "POST",
@@ -226,11 +244,13 @@ $(function(){
 						let time = msg["chatTime"];
 						let arr = time.split('오');
 						time='오'+arr[1];
+						time = time.substring(0,time.lastIndexOf(':'));
 						html+="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div><div class='date'>"+time+"</div></div>";
 					}else{
 						let time = msg["chatTime"];
 						let arr = time.split('오');
 						time='오'+arr[1];
+						time = time.substring(0,time.lastIndexOf(':'));
 						html+="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/profilePic/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
 					}
 				});
@@ -251,17 +271,25 @@ $(function(){
 
 $(this).resize(fixedSize);
 function fixedSize() {
-		this.resizeTo("${x}","${y}")
+		this.resizeTo(600,800);
 }
 
 /* 웹소켓 부분 */
 
-// 게시글 상태가 2단계일때 실행
-
-
-	//소켓 생성
+	//===== 소켓 생성 배포 서버 사용시에 변경 해야됨 =====
+	/* 
+	
+	cd .\Downloads\
+	
+	pscp -P 21578 .\20AM_nbbang.war team1@rclass.iptime.org:/home/apache-tomcat-8.5.45/webapps/
+	
+	team11
+	
+	*/	
+		
 	<%-- var socket=new WebSocket("ws://rclass.iptime.org:9999<%=request.getContextPath()%>/socket"); --%>
 	var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket");
+	
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
@@ -308,6 +336,7 @@ function fixedSize() {
 				let time = msg["chatTime"];
 				let arr = time.split('오');
 				time='오'+arr[1];
+				time = time.substring(0,time.lastIndexOf(':'));
 	 		let html="<div class='tmp'><div class='mymsg'>"+msg["msg"]+"</div><div class='date'>"+time+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html); 
 		}else{
@@ -315,6 +344,7 @@ function fixedSize() {
 				let time = msg["chatTime"];
 				let arr = time.split('오');
 				time='오'+arr[1];
+				time = time.substring(0,time.lastIndexOf(':'));
 				console.log("msg['chatProfile']"+msg["chatProfile"]);
 			let html="<div class='tmp'><img class='profile' src='<%=request.getContextPath()%>/upload/profilePic/"+msg["chatProfile"]+"'><div class='nick'>"+msg["sendNickName"]+"</div><div class='othermsg'>"+msg["msg"]+"</div><div class='date2'>"+time+"</div></div>";
 			$("#ChatArea").html($("#ChatArea").html()+html);
@@ -333,28 +363,28 @@ function fixedSize() {
 		var _today = new Date();
 		let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}",day)));
-		if($(this).val().includes("\n")){
-			txt.val(txt.replace("\n", ''));	
-		}
 		txt.val(' ');//칸 비워주기
 		txt.html(' ');//html 비워주기
-		//txt.html(txt.val().trim());
-		//txt.html(txt.html.trim());
-		//txt.val(txt.html.trim());
-		//txt.val(txt.val().trim());
-		//txt.val(txt.replace(/\r\n/g, ''));		//엔터키 없애주기
-		
 			}
 		};
 		
 	//엔터키 입력시 메세지 발송
 	$("#msgText").keyup(function(key) {
 		if (key.keyCode == 13) {
-			console.log("zz : "+$(this).val().includes("\n"));
-			sendMessage();
-
-			//txt.val('');//칸 비워주기
-			//txt.html('');//html 비워주기
+			console.log("엔터 남아있는지 여부 : "+$(this).val().includes("\n"));
+			if($(this).val().includes("\n")){
+				console.log($(this).val());
+				console.log(typeof($(this)));
+				let s = $(this).val().replace("\n", '');
+				$(this).val(s);
+				$(this).selectRange(0,0);
+				console.log("["+s+"]");
+				console.log("엔터 남아있는지 여부 : "+$(this).val().includes("\n"));
+				sendMessage();
+			}else{
+				sendMessage();
+				console.log(" 엔터 없음 : ["+s+"]");
+			}
 		}
 	});
 	
@@ -367,6 +397,25 @@ function fixedSize() {
 		this.chatProfile = chatProfile;
 		this.chatTime = chatTime;
 	};
+	
+	
+	$.fn.selectRange = function(start, end) {
+		return this.each(function() {
+			if(this.setSelectionRange) {
+				this.focus();
+				this.setSelectionRange(start, end);
+			}
+			else if(this.createTextRange) {
+				var range = this.createTextRange();
+				range.collapse(true);
+				range.moveEnd('character', end);
+				range.moveStart('character', start);
+				range.select();
+			}
+		});
+	};
+
+
 	
 	//날짜 포멧용 함수
 	Date.prototype.format = function (f) {
