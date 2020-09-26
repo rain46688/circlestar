@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.customer.model.service.CustomerService;
 import com.nbbang.customer.model.vo.CustomerCenter;
+import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Member;
 
 /**
  * Servlet implementation class CustomerQnAServlet
@@ -32,20 +34,24 @@ public class CustomerQnAServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String nick=request.getParameter("nick");
+		
+//		int num = Integer.parseInt(request.getParameter("num"));
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
+		
 		int numPerPage=7;
 		
 		
-		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage);
+		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage,nick);
 		for(CustomerCenter c : list) {
-//			System.out.println(c);
+			System.out.println("c : "+ c);
 		}
-		int totalData=new CustomerService().qnACount();
+		int totalData=new CustomerService().qnACount(nick);
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;

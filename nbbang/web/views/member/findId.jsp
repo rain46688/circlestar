@@ -12,6 +12,8 @@
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" type="text/css">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
 	/* 아이디 비번 찾기 */

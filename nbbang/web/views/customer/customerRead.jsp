@@ -186,7 +186,7 @@ System.out.println("list: " + list);
   
         </div>
         <button type="submit" id="btn-insert" >등록</button>
-        <button type="button" onclick="fn_update()">수정</button>
+       
   </div>
   </div>
 	    <%}%>
