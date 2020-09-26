@@ -18,6 +18,8 @@
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/logo.png">
 <title>포인트 충전하기</title>
 <style>
 /* Customize the label (the container) */
