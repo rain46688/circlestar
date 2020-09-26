@@ -156,6 +156,7 @@ public class ChatSocket {
 	public void onClose(Session session) {
 		System.out.println(" === onClose 메소드 실행 === ");
 		String name = "";
+		String boardId="";
 		List<Member> keyList = new ArrayList<Member>();
 		Member key = null;
 
@@ -175,14 +176,17 @@ public class ChatSocket {
 				// 세션이 끊어진 유저를 user Map에서 삭제하는 과정
 				if (user.get(key).equals(session)) {
 					name = key.getNickname();
+					boardId=key.getCurRoomBid();
 					// 세션이 끊어진 유저 이외에 다른 유저에게 메세지를 전송시켜주도록 필터링하는 과정
 					Iterator<Member> exitterator = user.keySet().iterator();
 					while (exitterator.hasNext()) {
 						key = exitterator.next();
-						if (!user.get(key).equals(session) && !key.getNickname().equals(name)) {
+						//if (!user.get(key).equals(session) && !key.getNickname().equals(name)) {
+						if(!user.get(key).equals(session) && key.getCurRoomBid().equals(boardId)) {
 							System.out.println(" === ChatSocket 진입 여부 확인용 1 === ");
 							user.get(key).getBasicRemote().sendObject(new Message(key.getNickname(), "SYS2", "", "", "", ""));
 						}
+						//}
 					}
 					System.out.println(" === ChatSocket 소켓 연결 종료 name : " + name + " === ");
 					keyList.add(key);
