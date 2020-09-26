@@ -215,10 +215,23 @@ public class AdminDao {
 				Member m = am.getMem();
 				m.setUsid(rs.getInt("USID"));
 				m.setMemberName(rs.getString("MEMBER_NAME"));
-				m.
-				
-				
+				m.setNickname(rs.getString("NICKNAME"));
+				m.setGender(rs.getString("GENDER"));
+				m.setBirthday(rs.getDate("BIRTHDAY"));
+				m.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				m.setPoint(rs.getInt("POINT"));
+				m.setLeaveMem(rs.getBoolean("LEAVE_MEM"));
+				m.setNbbangScore(rs.getInt("NBBANG_SCORE"));
+				am.setCreateBoardCount(rs.getInt("CREATE_BOARD_COUNT"));
+				am.setGradeLevel(rs.getInt("GRADE_LEVEL"));
+				am.setReportCount(rs.getInt("REPORT_COUNT"));
+				list.add(am);
 			}
+			
+			for(AdminMem a : list) {
+				System.out.println(a);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -227,6 +240,28 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int memberInfoListCount(Connection conn) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		String sql = prop.getProperty("memberInfoListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
 	}
 	
 	

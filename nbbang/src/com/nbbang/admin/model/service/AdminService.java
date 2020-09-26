@@ -65,5 +65,13 @@ public class AdminService {
 		return list;
 	}
 
+	public int memberInfoListCount() {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int cnt = aa.memberInfoListCount(conn);
+		close(conn);
+		return cnt;
+	}
+
 
 }

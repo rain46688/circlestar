@@ -7,20 +7,20 @@ import com.nbbang.member.model.vo.Member;
 public class AdminMem {
 
 	private Member mem;
-	private Grade grade;
-	private TradeList tradeList;
-	private Report report;
+	private int gradeLevel;
+	private int createBoardCount;
+	private int reportCount;
 
 	public AdminMem() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AdminMem(Member mem, Grade grade, TradeList tradeList, Report report) {
+	public AdminMem(Member mem, int gradeLevel, int createBoardCount, int reportCount) {
 		super();
 		this.mem = mem;
-		this.grade = grade;
-		this.tradeList = tradeList;
-		this.report = report;
+		this.gradeLevel = gradeLevel;
+		this.createBoardCount = createBoardCount;
+		this.reportCount = reportCount;
 	}
 
 	public Member getMem() {
@@ -31,33 +31,34 @@ public class AdminMem {
 		this.mem = mem;
 	}
 
-	public Grade getGrade() {
-		return grade;
+	public int getGradeLevel() {
+		return gradeLevel;
 	}
 
-	public void setGrade(Grade grade) {
-		this.grade = grade;
+	public void setGradeLevel(int gradeLevel) {
+		this.gradeLevel = gradeLevel;
 	}
 
-	public TradeList getTradeList() {
-		return tradeList;
+	public int getCreateBoardCount() {
+		return createBoardCount;
 	}
 
-	public void setTradeList(TradeList tradeList) {
-		this.tradeList = tradeList;
+	public void setCreateBoardCount(int createBoardCount) {
+		this.createBoardCount = createBoardCount;
 	}
 
-	public Report getReport() {
-		return report;
+	public int getReportCount() {
+		return reportCount;
 	}
 
-	public void setReport(Report report) {
-		this.report = report;
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminMem [mem=" + mem + ", grade=" + grade + ", tradeList=" + tradeList + ", report=" + report + "]";
+		return "AdminMem [mem=" + mem + ", gradeLevel=" + gradeLevel + ", createBoardCount=" + createBoardCount
+				+ ", reportCount=" + reportCount + "]";
 	}
 
 }

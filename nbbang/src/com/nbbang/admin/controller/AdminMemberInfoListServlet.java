@@ -75,7 +75,7 @@ public class AdminMemberInfoListServlet extends HttpServlet {
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/admin/memberInfoList.jsp.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/memberInfoList.jsp").forward(request, response);
 	}
 
 	/**
