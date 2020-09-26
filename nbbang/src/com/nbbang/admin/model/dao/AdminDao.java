@@ -217,6 +217,7 @@ public class AdminDao {
 				m.setUsid(rs.getInt("USID"));
 				m.setMemberName(rs.getString("MEMBER_NAME"));
 				m.setNickname(rs.getString("NICKNAME"));
+				m.setMemberId(rs.getString("MEMBER_ID"));
 				m.setGender(rs.getString("GENDER"));
 				m.setBirthday(rs.getDate("BIRTHDAY"));
 				m.setEnrollDate(rs.getDate("ENROLL_DATE"));

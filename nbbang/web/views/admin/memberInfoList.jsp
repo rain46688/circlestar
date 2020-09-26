@@ -5,9 +5,9 @@
 <%
 	List<AdminMem> list = (List) request.getAttribute("list");
 
-/* String a = (String) request.getParameter("a");
+String a = (String) request.getParameter("a");
 String s = request.getParameter("s");
-String Sc = request.getParameter("Sc"); */
+String Sc = request.getParameter("Sc");
 %>
 
 
@@ -19,7 +19,8 @@ String Sc = request.getParameter("Sc"); */
 	/* 	border: 1px #ECAF59 solid; */
 	border: 2px black solid;
 	padding: 20px;
-	width:auto;
+	width: 90%;
+	margin: 20px auto;
 }
 
 #cList {
@@ -87,8 +88,21 @@ h1 {
 	overflow: hidden;
 }
 
-#search div {
-	float: right;
+#searchDiv {
+	border: 1px solid black;
+	width: 30%;
+	margin:2em auto;
+	overflow:hidden;
+}
+
+
+#searchDiv2 *{
+	float:left;
+}
+
+
+#check {
+	margin-left: 5em;
 }
 
 #pagebar {
@@ -110,19 +124,40 @@ h1 {
 }
 </style>
 
-<div class="container" id="writecontainer">
+<div id="writecontainer">
 	<div class="form-group">
 		<h1>회원 관리</h1>
 	</div>
+<form action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
+		<div id="searchDiv">
+			<div id="searchDiv2">
+			<select class="form-control" id="sel1" name="s">
+				<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
+				<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
+				<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
+				<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
+			</select>
+			<input type="hidden" name="a" value=<%=a%>>
+			<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
+			</div>
+			<button class="btn btn-success" type="submit">검색</button>
+		</div>
+	</form>
+	
+	
+	
+	
+	<br>
 
-
+	<hr>
+	<br> <br>
 	<div class="divList">
 		<div class="divListBody">
-
 			<div class="divRowTitle shadow p-3 mb-5 bg-white rounded">
 				<div class="divCell">UID</div>
 				<div class="divCell">회원 이름</div>
 				<div class="divCell">닉네임</div>
+				<div class="divCell">이메일</div>
 				<div class="divCell">성별</div>
 				<div class="divCell">생년월일</div>
 				<div class="divCell">가입날짜</div>
@@ -132,25 +167,25 @@ h1 {
 				<div class="divCell">생성한 방 갯수</div>
 				<div class="divCell">회원등급</div>
 				<div class="divCell">신고당한횟수</div>
-					<div class="divCell">이메일</div>
 			</div>
 			<%
 				if (!list.isEmpty()) {
-				for (AdminMem a : list) {
+				for (AdminMem am : list) {
 			%>
 			<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
-				<div class="divCell"><%=a.getMem().getUsid()%></div>
-				<div class="divCell"><%=a.getMem().getMemberName()%></div>
-				<div class="divCell"><%=a.getMem().getNickname()%></div>
-				<div class="divCell"><%=a.getMem().getGender()%></div>
-				<div class="divCell"><%=a.getMem().getBirthday()%></div>
-				<div class="divCell"><%=a.getMem().getEnrollDate()%></div>
-				<div class="divCell"><%=a.getMem().getPoint()%></div>
-				<div class="divCell"><%=(a.getMem().getLeaveMem())?'Y':'N'%></div>
-				<div class="divCell"><%=a.getMem().getNbbangScore()%></div>
-				<div class="divCell"><%=a.getCreateBoardCount()%></div>
-				<div class="divCell"><%=a.getGradeLevel()%></div>
-				<div class="divCell"><%=a.getReportCount()%></div>
+				<div class="divCell"><%=am.getMem().getUsid()%></div>
+				<div class="divCell"><%=am.getMem().getMemberName()%></div>
+				<div class="divCell"><%=am.getMem().getNickname()%></div>
+				<div class="divCell"><%=am.getMem().getMemberId()%></div>
+				<div class="divCell"><%=am.getMem().getGender()%></div>
+				<div class="divCell"><%=am.getMem().getBirthday()%></div>
+				<div class="divCell"><%=am.getMem().getEnrollDate()%></div>
+				<div class="divCell"><%=am.getMem().getPoint()%></div>
+				<div class="divCell"><%=(am.getMem().getLeaveMem()) ? 'Y' : 'N'%></div>
+				<div class="divCell"><%=am.getMem().getNbbangScore()%></div>
+				<div class="divCell"><%=am.getCreateBoardCount()%></div>
+				<div class="divCell"><%=am.getGradeLevel()%></div>
+				<div class="divCell"><%=am.getReportCount()%></div>
 			</div>
 
 			<%
@@ -169,8 +204,7 @@ h1 {
 	</div>
 
 
-	<form class="form-inline" action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
-	</form>
+	<form class="form-inline" action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search"></form>
 	<nav aria-lable="Page navigation" id="pagebar">
 		<ul class="pagination justify-content-center">
 			<%=request.getAttribute("pageBar")%>
@@ -179,18 +213,13 @@ h1 {
 </div>
 
 <script>
-
-   $('.divRow').hover(function(){
-        $(this).css('color','#FFC107');
-        $(this).removeClass( 'shadow p-3 mb-5 bg-white rounded' );
-    }, function() {
-        $(this).css('color','black');
-        $(this).addClass( 'shadow p-3 mb-5 bg-white rounded' );
-    });
-
-
-
-
+	$('.divRow').hover(function() {
+		$(this).css('color', '#FFC107');
+		$(this).removeClass('shadow p-3 mb-5 bg-white rounded');
+	}, function() {
+		$(this).css('color', 'black');
+		$(this).addClass('shadow p-3 mb-5 bg-white rounded');
+	});
 </script>
 
 <%@ include file="/views/common/footer.jsp"%>

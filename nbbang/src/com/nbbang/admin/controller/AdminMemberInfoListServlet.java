@@ -1,8 +1,13 @@
 package com.nbbang.admin.controller;
 
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.admin.model.service.AdminService;
 import com.nbbang.admin.model.vo.AdminMem;
+import com.nbbang.common.temp.AESCrypto;
 
 /**
  * Servlet implementation class AdminMemberInfoServlet
@@ -18,31 +24,47 @@ import com.nbbang.admin.model.vo.AdminMem;
 @WebServlet("/admin/memberInfoList")
 public class AdminMemberInfoListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminMemberInfoListServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AdminMemberInfoListServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int cPage;
-		List<AdminMem> list =null;
+		List<AdminMem> list = null;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
 		int numPerPage = 30;
-		
+
 		list = new AdminService().memberInfoList(cPage, numPerPage);
 		
+
+		for (AdminMem a : list) {
+			String memberId;
+			try {
+				//System.out.println("?? : "+a.getMem().getMemberId());
+				memberId = AESCrypto.decrypt(a.getMem().getMemberId());
+				//System.out.println("gg : "+memberId);
+			} catch (Exception e) {
+				memberId = a.getMem().getMemberId();
+			}
+			a.getMem().setMemberId(memberId);
+		}
+	
+
 		int totalData = new AdminService().memberInfoListCount();
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
@@ -62,7 +84,7 @@ public class AdminMemberInfoListServlet extends HttpServlet {
 						+ pageNo + "</a></li>";
 			} else {
 				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-						+ "/admin/memberInfoList?cPage=" + pageNo +"')>" + pageNo + "</a></li>";
+						+ "/admin/memberInfoList?cPage=" + pageNo + "')>" + pageNo + "</a></li>";
 			}
 			pageNo++;
 		}
@@ -71,7 +93,7 @@ public class AdminMemberInfoListServlet extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>다음</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/memberInfoList?cPage=" + pageNo +"'>다음</a></li>";
+					+ "/admin/memberInfoList?cPage=" + pageNo + "'>다음</a></li>";
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
@@ -79,9 +101,11 @@ public class AdminMemberInfoListServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
