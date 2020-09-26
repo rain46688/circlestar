@@ -93,8 +93,9 @@ public class ChatSocket {
 				while (userIterator.hasNext()) {
 					Member key = userIterator.next();
 					// Member객체의 현재 접속한 방을 기준으로 나눠서 같은 방에 있는 유저한테만 메세지를 보냄
+					System.out.println(" [ key.getCurRoomBid() : "+key.getCurRoomBid()+" ]");
 					if (!key.getCurRoomBid().equals("") && key.getCurRoomBid().equals(boardId)) {
-						
+						System.out.println(" === 방기준으로 나누기 분기 부분 === ");
 						if (user.get(key) != null && user.get(key).isOpen()) {
 							name = key.getNickname();
 							// System.out.println(" === Null이 아니고 세션 열려있음, 메세지 : " + msg + " === ");

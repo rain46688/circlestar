@@ -363,7 +363,6 @@ function fixedSize() {
 		var _today = new Date();
 		let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}",day)));
-
 		txt.val(' ');//칸 비워주기
 		txt.html(' ');//html 비워주기
 			}
@@ -374,9 +373,17 @@ function fixedSize() {
 		if (key.keyCode == 13) {
 			console.log("엔터 남아있는지 여부 : "+$(this).val().includes("\n"));
 			if($(this).val().includes("\n")){
+				console.log($(this).val());
+				console.log(typeof($(this)));
+				let s = $(this).val().replace("\n", '');
+				$(this).val(s);
+				$(this).selectRange(0,0);
+				console.log("["+s+"]");
+				console.log("엔터 남아있는지 여부 : "+$(this).val().includes("\n"));
 				sendMessage();
-				txt.val(txt.replace("\n", ''));
-				console.log("엔터 남아있는지 여부 replace 후 : "+$(this).val().includes("\n"));	
+			}else{
+				sendMessage();
+				console.log(" 엔터 없음 : ["+s+"]");
 			}
 		}
 	});
@@ -390,6 +397,25 @@ function fixedSize() {
 		this.chatProfile = chatProfile;
 		this.chatTime = chatTime;
 	};
+	
+	
+	$.fn.selectRange = function(start, end) {
+		return this.each(function() {
+			if(this.setSelectionRange) {
+				this.focus();
+				this.setSelectionRange(start, end);
+			}
+			else if(this.createTextRange) {
+				var range = this.createTextRange();
+				range.collapse(true);
+				range.moveEnd('character', end);
+				range.moveStart('character', start);
+				range.select();
+			}
+		});
+	};
+
+
 	
 	//날짜 포멧용 함수
 	Date.prototype.format = function (f) {
