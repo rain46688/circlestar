@@ -99,7 +99,6 @@
 				<input class="form-control" type="text" name="price" id="price" placeholder="가격">
 				<select class="custom-select custom-select-md" name="maxMems" id="maxMems">
 					<option value="" selected>n빵 인원</option>
-					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
