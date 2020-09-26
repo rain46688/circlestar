@@ -105,19 +105,107 @@ margin-left:auto;
 margin-right:auto;
 }
 
+
+
+
+
+/* 인희꺼 사이드바 */
+
+ div#myPageSideBar{
+        position: relative;
+        background: white;
+        text-align: center;
+        margin: 3% 3% 3% 20%;
+        /* 세로정렬꽉차게 가운데:center */
+        align-items: stretch;
+        /* 가로정렬꽉차게 가운데:center */
+        justify-items: stretch;
+        width: 14%;
+        float: left;
+    }
+    div#sideBarTitleContainer{
+        background-color: rgb(243, 183, 24);
+        padding: 6%;
+        color: white;
+    }
+    p#sideBarTitle{
+        font-size: 2em;
+        font-weight: bold;
+        margin-top: 10%;
+    }
+    p#sideBarText{
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: 10%;
+    }
+    div#sideBarLinkContainer{
+        border: darkgrey 1px solid;
+        border-top: none;
+        padding: 10%;
+    }
+
+
+/* 인희꺼 가져옴 ㅋㅋ */
+
+   div#writecontainer{
+        position: relative;
+	    background: #FFFFFF;
+	    text-align: center;
+        margin: 3% 21% 5% 2%;
+        /* 세로정렬꽉차게 가운데:center */
+        align-items: stretch;
+        /* 가로정렬꽉차게 가운데:center */
+        justify-items: stretch;
+        width: 40%;
+        float: left;
+    }
+
+
 </style>
 
 
 
 
-<div class="container">
+<div>
 
-<div id="side">
-	<!-- 사이드바 넣어야되나???? 누가 넣어줘라 -->
-	<jsp:include page="/views/customer/maincss.jsp"></jsp:include>
-</div>
+<div id="myPageSideBar">
+            <div id="sideBarTitleContainer">
+                <p id="sideBarTitle">고객센터</p>
+                <p class="sideBarText">N빵은 고객님의<br><span>고민을</span><br>N빵해드립니다.</p>
+            </div>
+            <div id="sideBarLinkContainer">
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/customerMain">소개글</a>
+                </div>
+                  <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/customer/customerQnA">문의하기</a>
+                </div>
+                  <%} else { %>
+                           <a class="nav-link postList" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=0">문의보기</a>
+                     <%} %>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/notice/noticeList">소식보기</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/customer/customerFaq">FAQ</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>#">홈</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>#">구경하기</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>#">해외직구</a>
+                </div>
+                <div>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>">마이페이지</a>
+                </div>
+            </div>
+        </div>
 
-	<div class="container" id="writecontainer">
+	<div id="writecontainer">
 		<div class="form-group">
 			<h1>공지 사항</h1>
 		</div>
