@@ -8,7 +8,7 @@
 Member loginedMember = new Member(); //세션저장용
 
 List<CustomerCenter> list = (List) request.getAttribute("list");
-/* CustomerCenter c=(CustomerCenter)request.getAttribute("cc"); */
+CustomerCenter c=(CustomerCenter)request.getAttribute("cc");
 loginedMember = (Member)session.getAttribute("loginnedMember");
 System.out.println("loginedMem in jsp: "+ loginedMember);
 System.out.println("list in jsp: "+ list);
@@ -23,12 +23,12 @@ System.out.println("list in jsp: "+ list);
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
 	rel="stylesheet">
 
-<jsp:include page="maincss.jsp"></jsp:include>
-
-
-
-
-<section class="qnaSection">
+	
+	
+	
+	
+	<section class="qnaSection">
+		<jsp:include page="maincss.jsp"></jsp:include>
 	<!-- <div class="cs-alert">
 		<div class="cs-alert__title">
 			<image src="<%=request.getContextPath()%>/images/war.png" style="width: 40px;"><a>불법거래 유도 관련 문의</a> <br>
@@ -95,14 +95,15 @@ System.out.println("list in jsp: "+ list);
 			
 		</thead>
 	</table>
-			<div id="btn-news">
+			<div id="btn-news1">
 				
-				<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm" class="btn btn-default">문의하기</a>
+				<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm"
+					 class="btn-default">문의하기</a>
 			
 			</div>
-	<div class="page_wrap">
+	<!-- <div id="pagebar">
 		<a><%=request.getAttribute("pageBar")%></a>
-	</div>
+	</div> -->
 
 
 

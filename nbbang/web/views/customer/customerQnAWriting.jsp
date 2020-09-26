@@ -8,9 +8,9 @@ pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
   rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/qnawriting.css" type="text/css">
-<jsp:include page="maincss.jsp"></jsp:include>
-
+<section>
 <div class="writing-container">
+  <jsp:include page="maincss.jsp"></jsp:include>
   <div class="writing-wrap">
     
     <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
@@ -55,7 +55,7 @@ pageEncoding="UTF-8"%>
     </form>
   </div>
 </div>
-
+</section>
 
 
 
