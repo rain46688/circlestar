@@ -346,15 +346,23 @@
           <li><div id="startFuncBtn" onclick="fun_decidebuy();">
             <% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
             <img src="<%= request.getContextPath() %>/images/cancel.png" width="40px" height="40px">
+            <p>N빵취소</p></div></li>
             <% }else { %>
             <img src="<%= request.getContextPath() %>/images/onebyn.png" width="40px" height="40px">
-            <% } %>
             <p>N빵신청</p></div></li>
+            <% } %>
             <% } %>
             <% if(tradeUserList.contains(loginnedMember.getUsid())&&c.getCardBoard().getTradeStage()>1) {%>
           <li><div id="enterFuncBtn" onclick="fn_enterBtn();">
             <img src="<%= request.getContextPath() %>/images/enter.png" width="40px" height="40px">
             <p>채팅방접속</p></div></li>
+            <%} %>
+            <%if(c.getCardBoard().getWriterUsid()!=loginnedMember.getUsid()){ %>
+            <%if(c.getCardBoard().getTradeStage()==2&&tradeUserList.contains(loginnedMember.getUsid())) {%>
+          <li><div id="openFuncBtn" onclick="fn_pay();">
+            <img src="<%= request.getContextPath() %>/images/dollar.png" width="40px" height="40px">
+            <p>결제하기</p></div></li>
+            <%} %>
             <%} %>
           <% if(c.getCardBoard().getWriterUsid()==loginnedMember.getUsid()){ %>
           <li><div id="openFuncBtn" onclick="fun_createroom();">
