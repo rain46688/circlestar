@@ -67,14 +67,31 @@ public class BoardService {
 		Connection conn = getConnection();
 		int result = dao.boardInsert(conn, b);
 		result += dao.boardInsert(conn, bf);
-		if(result > 1) {
+		result += dao.boardInsertTradeList(conn, b.getWriterUsid(), b.getWriterNickname());
+		if(result > 2) {
 			commit(conn);
+			System.out.println("commit");
 		}else {
 			rollback(conn);
+			System.out.println("rollback");
 		}
 		close(conn);
 		return result;
 	}
+	
+//	public int boardInsertTradeList(int tradeUsid, String tradeUserNickname) {
+//		Connection conn = getConnection();
+//		int result = dao.boardInsertTradeList(conn, tradeUsid, tradeUserNickname);
+//		if(result > 0) {
+//			commit(conn);
+//			System.out.println("commit");
+//		}else {
+//			rollback(conn);
+//			System.out.println("rollback");
+//		}
+//		close(conn);
+//		return result;
+//	}
 	
 	public int boardLikeInsert(LikeList list) {
 		Connection conn = getConnection();
