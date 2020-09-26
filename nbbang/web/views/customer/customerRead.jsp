@@ -24,16 +24,18 @@ System.out.println("list: " + list);
     margin-bottom: 4%;
     width: 50%;
     height: 100%;
-    
+
   }
 
   div.question-container {
     height: 300px;
 
   }
-  div.writing-date{
+
+  div.writing-date {
     margin-left: 40em;
   }
+
   div.answer-container {
     height: 300px;
 
@@ -68,7 +70,7 @@ System.out.println("list: " + list);
     margin-top: 35%;
   }
 
-  
+
 
   .imgList {
     width: 100%;
@@ -126,91 +128,94 @@ System.out.println("list: " + list);
 </style>
 <section>
   <jsp:include page="maincss.jsp"></jsp:include>
-<div id="QA-container">
-  <form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post" enctype="multipart/form-data">
-    <div class="question-container">
+  <div id="QA-container">
+    <form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post"
+      enctype="multipart/form-data">
+      <!-- 클라이언트 창 -->
+      <div class="question-container">
 
-      <div class="write-content">
+        <div class="write-content">
 
-        <img src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
-        <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
+          <img src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
+          <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
 
-        <div class="content-write" name="csContent">
-          <p><%=c.getCsContent() %></p>
+          <div class="content-write" name="csContent">
+            <p><%=c.getCsContent() %></p>
+          </div>
         </div>
-      </div>
-      <div class="file-upload">
-        <%for(CustomerFile cf : c.getCf()){ %>
-          
-      
+        <div class="file-upload">
+          <%for(CustomerFile cf : c.getCf()){ %>
+
+
           <div class="imgList">
             <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-            width="60" height="60">
+              width="60" height="60">
             <p><%=cf.getCsFileName() %> </p>
           </div>
-          
+
           <!-- 팝업 될 곳 -->
           <div class="modal">
             <button>&times;</button>
             <div class="modalBox">
               <img src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-              alt="<%=cf.getCsFileName() %>">
+                alt="<%=cf.getCsFileName() %>">
               <p></p>
             </div>
           </div>
           <%} %>
-          
+
         </div>
-            <div class="writing-date">
-              <p><%=c.getCsDate() %></p>
-            </div>
+        <div class="writing-date">
+          <p><%=c.getCsDate() %></p>
+        </div>
     </form>
-  
-  
-  <div class="hr-line">
-    <hr id="hr-line">
-  </div>
 
 
-  
+    <div class="hr-line">
+      <hr id="hr-line">
+    </div>
 
-<%
+
+
+
+    <%
 	if (c.getCsAnswer()==null && loginnedMember.getNickname().equals("ADMIN")){
 %>
-  <div class="comment-container">
-    <div class="comment-editor">
-     <%-- <%if(c.getCsAnswer()==null){ %> --%>
-      <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
-        <div class="answer-content">
-          <input type="hidden" name="csId" value="<%=c.getCsId()%>">
-          <textarea name="admin-answer" cols="100" rows="10"></textarea>
-  
-        </div>
-        <button type="submit" id="btn-insert" >등록</button>
-        <!-- <button type="button" onclick="fn_update()">수정</button> -->
-  </div>
-  </div>
-	    <%}%>
+    <div class="comment-container">
+      <div class="comment-editor">
+        <%-- <%if(c.getCsAnswer()==null){ %> --%>
+        <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
+          <div class="answer-content">
+            <input type="hidden" name="csId" value="<%=c.getCsId()%>">
+            <textarea name="admin-answer" cols="100" rows="10"></textarea>
+
+          </div>
+          <button type="submit" id="btn-insert">등록</button>
+          <!-- <button type="button" onclick="fn_update()">수정</button> -->
+        </form>
+      </div>
+    </div>
+    <%}%>
 
 			
 
-      <%if(c.getCsAnswer()!=null  || !loginnedMember.getNickname().equals("ADMIN")){ %> 
-   <div class="answer-container"> 
-     <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;"> 
+      <%if(c.getCsAnswer()!=null){ %>
+    <div class="answer-container">
+      <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
+
+      <div class="answer-content">
+        <p><%=c.getCsAnswer()%></p>
+      </div>
+      <div class="answer-date">
+        <%=c.getCsDate()%>
+      </div>
+    </div>
+
+  </div>
+  <%}%>
     
-  	<div class="answer-content"> 
-	     <p><%=c.getCsAnswer()%></p> 
-	  </div> 
-  	<div class="answer-date"> 
-	    <%=c.getCsDate()%>
-	  </div> 
-	 </div> 
-	   <% }
-	   %> 
-    
-      </form>
-</div> 
-    </section>
+  
+</section>
     
   
       

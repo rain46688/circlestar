@@ -95,7 +95,11 @@ td a:hover{
     border: 1.5px solid black;
     background-color: rgb(226, 226, 226);
     text-align: center;
+    text-decoration: none;
 
+}
+div#btn-news1 a{
+    text-decoration: none;
 }
 td a:hover {
     text-decoration: none;
