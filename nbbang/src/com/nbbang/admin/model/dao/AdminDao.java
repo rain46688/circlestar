@@ -1,6 +1,7 @@
 package com.nbbang.admin.model.dao;
 
 import static com.nbbang.common.temp.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.nbbang.admin.model.AdminMem;
+import com.nbbang.admin.model.vo.AdminMem;
 import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.member.model.vo.Member;
 
@@ -214,7 +215,7 @@ public class AdminDao {
 				Member m = am.getMem();
 				m.setUsid(rs.getInt("USID"));
 				m.setMemberName(rs.getString("MEMBER_NAME"));
-				
+				m.
 				
 				
 			}

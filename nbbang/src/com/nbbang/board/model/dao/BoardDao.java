@@ -274,6 +274,22 @@ public class BoardDao {
 		return result;
 	}
 	
+	public int boardInsertTradeList(Connection conn, int tradeUsid, String tradeUserNickname) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardInsertTradeList"));
+			pstmt.setInt(1, tradeUsid);
+			pstmt.setString(2, tradeUserNickname);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int updateReadCount(Connection conn, int boardId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -476,6 +492,39 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public int boardPayMinusPoint(Connection conn, int userUsid, int productPrice) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			String sql = prop.getProperty("boardPayMinusPoint");
+			sql = sql.replace("$re", ""+productPrice);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userUsid);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardPayTradeList(Connection conn, int userUsid, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardPayTradeList"));
+			pstmt.setInt(1, boardId);
+			pstmt.setInt(2, userUsid);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

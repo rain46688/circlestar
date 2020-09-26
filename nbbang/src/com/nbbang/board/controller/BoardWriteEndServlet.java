@@ -86,9 +86,9 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setOwnStatus(request.getParameter("ownStatus"));
 		bg.setFileName(fileNames.toArray(new String[fileNames.size()]));
 		
-		
 		int result = new BoardService().boardInsert(b,bg);
-		if(result > 1) {
+		
+		if(result > 2) {
 			//업로드 성공
 			request.setAttribute("msg", "업로드 완료!");
 			request.setAttribute("loc", "/boList?boardTitle="+b.getProductCategory());

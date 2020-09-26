@@ -95,12 +95,10 @@
 	}
 
 	#carouselField {
-		width: 80%;
-		padding-left: 5em;
-		padding-right: 5em;
 		border-bottom: 2px black solid;
+		padding-left: 12em;
+		padding-right: 12em;
 	}
-	
 
 	.card-price {
 		text-align: right;
@@ -122,23 +120,23 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
 					<img src="<%=request.getContextPath()%>/images/main1.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-100" alt="..." height="500em">
 				</div>
 				<div class="carousel-item">
 					<img src="<%=request.getContextPath()%>/images/main2.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-100" alt="..." height="500em">
 				</div>
 				<div class="carousel-item">
 					<img src="<%=request.getContextPath()%>/images/main3.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-100" alt="..." height="500em">
 				</div>
 				<div class="carousel-item">
 					<img src="<%=request.getContextPath()%>/images/main4.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-100" alt="..." height="500em">
 				</div>
 				<div class="carousel-item">
 					<img src="<%=request.getContextPath()%>/images/main5.jpg"
-						class="d-block w-100" alt="...">
+						class="d-block w-100" alt="..." height="500em">
 				</div>
 			</div>
 
@@ -238,11 +236,28 @@
         $('.carouselInhee').carousel(
             {interval: 5000, pause: "hover", wrap: true, keyboard: true}
         );
+		setInterval(test, 50);
+		function test(){
+			if($('.active img').attr('src')=='<%=request.getContextPath()%>/images/main1.jpg'){
+			$('#carouselField').css('background-color','rgb(163,0,23)');}
+			if($('.active img').attr('src')=='<%=request.getContextPath()%>/images/main2.jpg')
+			$('#carouselField').css('background-color','rgb(27,35,56)');
+			if($('.active img').attr('src')=='<%=request.getContextPath()%>/images/main3.jpg')
+			$('#carouselField').css('background-color','rgb(190,103,93)');
+			if($('.active img').attr('src')=='<%=request.getContextPath()%>/images/main4.jpg')
+			$('#carouselField').css('background-color','rgb(171,215,254)');
+			if($('.active img').attr('src')=='<%=request.getContextPath()%>/images/main5.jpg')
+			$('#carouselField').css('background-color','rgb(57,16,108)');
+		}
     });
 </script>
 </section>
 <%@ include file="/views/common/footer.jsp"%>
-
+<!-- 163 0 23
+27	35	56	
+190	103	93	
+171	215	254	
+57	16	108	 -->
 <!--
 
 Member

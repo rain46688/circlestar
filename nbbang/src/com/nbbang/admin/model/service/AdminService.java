@@ -6,8 +6,8 @@ import static com.nbbang.common.temp.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.nbbang.admin.model.AdminMem;
 import com.nbbang.admin.model.dao.AdminDao;
+import com.nbbang.admin.model.vo.AdminMem;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
 public class AdminService {
