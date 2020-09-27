@@ -926,4 +926,162 @@ public class AdminDao {
 		return cnt;
 	}
 
+	public List<Report> reportSearchList(Connection conn, int cPage, int numPerPage, String a, String search,String select) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		List<Report> list = new ArrayList<Report>();
+		Report r = null;
+		if(select.equals("n")) {
+			select = "REPORT_TARGET_NICKNAME";
+		}else if(select.equals("w")) {
+			select ="REPORT_USER_NICKNAME";
+		}if(select.equals("t")) {
+			select ="REPORT_TITLE";
+		}if(select.equals("c")) {
+			select ="REPORT_TYPE";
+		}
+		
+		String sql = prop.getProperty("reportSearchList").replace("$s", select);
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, a);
+			pstmt.setInt(3, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(4, cPage * numPerPage);
+			rs = pstmt.executeQuery();
+	
+			while(rs.next()) {
+				r = new Report();
+				r.setReportId(rs.getInt("REPORT_ID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportIswarning(rs.getInt("REPORT_ISWARNING"));
+				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				list.add(r);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int reportSearchListCount(Connection conn, String a, String search, String select) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+
+		if(select.equals("n")) {
+			select = "REPORT_TARGET_NICKNAME";
+		}else if(select.equals("w")) {
+			select ="REPORT_USER_NICKNAME";
+		}if(select.equals("t")) {
+			select ="REPORT_TITLE";
+		}if(select.equals("c")) {
+			select ="REPORT_TYPE";
+		}
+		
+		
+		String sql = prop.getProperty("reportSearchListCount").replace("$s", select);
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, a);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
+	}
+
+	public List<Report> reportAllSearchList(Connection conn, int cPage, int numPerPage, String a, String search) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		List<Report> list = new ArrayList<Report>();
+		String sql = prop.getProperty("reportAllSearchList");
+		Report r = null;
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(3, "%" + search + "%");
+			pstmt.setString(4, "%" + search + "%");
+			pstmt.setString(5, a);
+			pstmt.setInt(6, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(7, cPage * numPerPage);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				r = new Report();
+				r.setReportId(rs.getInt("REPORT_ID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportIswarning(rs.getInt("REPORT_ISWARNING"));
+				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				list.add(r);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int reportAllSearchListCount(Connection conn, String a, String search) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		String sql = prop.getProperty("reportAllSearchListCount");
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(3, "%" + search + "%");
+			pstmt.setString(4, "%" + search + "%");
+			pstmt.setString(5, a);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
+	}
+
 }
