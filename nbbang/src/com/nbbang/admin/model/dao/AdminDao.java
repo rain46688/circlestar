@@ -265,8 +265,7 @@ public class AdminDao {
 		return cnt;
 	}
 
-	public List<AdminMem> memberInfoSearchList(Connection conn, int cPage, int numPerPage, String ra, String select,
-			String search) {
+	public List<AdminMem> memberInfoSearchList(Connection conn, int cPage, int numPerPage, String ra, String select, String search) {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -308,8 +307,7 @@ public class AdminDao {
 		return list;
 	}
 
-	public List<AdminMem> memberInfoSearchList(Connection conn, int cPage, int numPerPage, String ra, String select,
-			String search, String c) {
+	public List<AdminMem> memberInfoSearchList(Connection conn, int cPage, int numPerPage, String ra, String select, String search, String c) {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
@@ -324,12 +322,13 @@ public class AdminDao {
 			select="MEMBER_ID";
 		}
 		
+		
 		String sql = prop.getProperty("memberInfoSearchList").replace("$s", select);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			pstmt.setString(2, ra);
-			if (c == null) {
+			if(c == null  || c.equals("null")) {
 				pstmt.setInt(3, 0);
 			} else {
 				pstmt.setInt(3, 1);
@@ -380,13 +379,12 @@ public class AdminDao {
 		}else {
 			select="MEMBER_ID";
 		}
-		
 		String sql = prop.getProperty("memberInfoSearchListCount").replace("$s", select);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			pstmt.setString(2, ra);
-			if (c == null) {
+			if(c == null  || c.equals("null")) {
 				pstmt.setInt(3, 0);
 			} else {
 				pstmt.setInt(3, 1);
@@ -402,6 +400,7 @@ public class AdminDao {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println(cnt);
 		return cnt;
 	}
 
@@ -419,7 +418,7 @@ public class AdminDao {
 			pstmt.setString(2, "%" + search + "%");
 			pstmt.setString(3, "%" + search + "%");
 			pstmt.setString(4, ra);
-			if (c == null) {
+			if(c == null || c.equals("null")) {
 				pstmt.setInt(5, 0);
 			} else {
 				pstmt.setInt(5, 1);
@@ -469,7 +468,7 @@ public class AdminDao {
 			pstmt.setString(2, "%" + search + "%");
 			pstmt.setString(3, "%" + search + "%");
 			pstmt.setString(4, ra);
-			if (c == null) {
+			if(c == null  || c.equals("null")) {
 				pstmt.setInt(5, 0);
 			} else {
 				pstmt.setInt(5, 1);
@@ -582,7 +581,7 @@ public class AdminDao {
 			select2="LIKE_COUNT";
 		}
 		
-		if(ra == null) {
+		if(ra == null ||  ra.equals("null")) {
 			ra = "ASC";
 		}
 		
@@ -591,11 +590,11 @@ public class AdminDao {
 		sql = sql.replace("$s2", select2);
 		sql = sql.replace("$s", select);
 		sql = sql.replace("$r", ra);
-	//	System.out.println(sql);
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
-			if(p == null) {
+			if(p== null ||  p.equals("null")) {
 				pstmt.setInt(2, 0);
 			}else {
 				pstmt.setInt(2, 1);
@@ -664,7 +663,7 @@ public class AdminDao {
 			select2="LIKE_COUNT";
 		}
 		
-		if(ra == null) {
+		if(ra == null ||  ra.equals("null")) {
 			ra = "ASC";
 		}
 
@@ -675,7 +674,7 @@ public class AdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
-			if(p == null) {
+			if(p == null || p.equals("null")) {
 				pstmt.setInt(2, 0);
 			}else {
 				pstmt.setInt(2, 1);

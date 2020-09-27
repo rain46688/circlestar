@@ -74,8 +74,7 @@ public class AdminService {
 		return cnt;
 	}
 
-	public List<AdminMem> memberInfoSearchList(int cPage, int numPerPage, String ra, String select, String search,
-			String c) {
+	public List<AdminMem> memberInfoSearchList(int cPage, int numPerPage, String ra, String select, String search, String c) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
 		List<AdminMem> list = null;
@@ -83,6 +82,7 @@ public class AdminService {
 		if (!select.equals("ALL")) {
 			list = aa.memberInfoSearchList(conn, cPage, numPerPage, ra, select, search, c);
 		} else {
+			System.out.println("ALL 들어옴");
 			list = aa.memberInfoAllSearchList(conn, cPage, numPerPage, ra, select, search, c);
 		}
 		close(conn);
@@ -96,9 +96,11 @@ public class AdminService {
 		if (!select.equals("ALL")) {
 			cnt = aa.memberInfoSearchListCount(conn, ra, select, search, c);
 		} else {
+			System.out.println("ALL 들어옴");
 			cnt = aa.memberInfoAllSearchListCount(conn, ra, select, search, c);
 		}
 		close(conn);
+		System.out.println(cnt);
 		return cnt;
 	}
 

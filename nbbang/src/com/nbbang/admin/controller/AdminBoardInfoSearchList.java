@@ -53,12 +53,12 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerPage = 30;
+		int numPerPage = 10;
 
 		list = new AdminService().boardInfoSearchList(cPage, numPerPage, ra, select, Search, select2,select3,p);
 
 		int totalData = new AdminService().boardInfoSearchListCount(ra, select, Search, select2,select3,p);
-
+		System.out.println("totalData : "+totalData);
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
@@ -68,8 +68,8 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>이전</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/adminCustomerSearch?cPage=" + (pageNo - 1) + "&ra=" + ra + "&s=" + select + "&Sc="
-					+ Search + "&p=" + p + "&select2=" + select2 + "&select3=" + select3 + " '>이전</a></li>";
+					+ "/admin/boardInfoSearchList?cPage=" + (pageNo - 1) + "&ra=" + ra + "&s=" + select + "&Sc="
+					+ Search + "&p=" + p + "&s2=" + select2 + "&s3=" + select3 + " '>이전</a></li>";
 		}
 
 		while (pageNo <= pageEnd && pageNo <= totalPage) {
@@ -78,8 +78,8 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 						+ pageNo + "</a></li>";
 			} else {
 				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-						+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
-						+"&p=" + p + "&select2=" + select2 + "&select3=" + select3 + "')>" + pageNo + "</a></li>";
+						+ "/admin/boardInfoSearchList?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
+						+"&p=" + p + "&s2=" + select2 + "&s3=" + select3 + "')>" + pageNo + "</a></li>";
 			}
 			pageNo++;
 		}
@@ -88,8 +88,8 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>다음</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
-					+ "&p=" + p + "&select2=" + select2 + "&select3=" + select3 + "'>다음</a></li>";
+					+ "/admin/boardInfoSearchList?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
+					+ "&p=" + p + "&s2=" + select2 + "&s3=" + select3 + "'>다음</a></li>";
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);

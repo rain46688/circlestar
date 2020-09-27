@@ -111,7 +111,7 @@ margin-right:auto;
 
 /* 인희꺼 사이드바 */
 
- div#myPageSideBar{
+div#myPageSideBar{
         position: relative;
         background: white;
         text-align: center;
@@ -122,26 +122,36 @@ margin-right:auto;
         justify-items: stretch;
         width: 14%;
         float: left;
+        font-family: 'Do Hyeon', sans-serif;
     }
     div#sideBarTitleContainer{
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
+        border: 1px black solid;
     }
     p#sideBarTitle{
-        font-size: 2em;
-        font-weight: bold;
+        font-size: 2.5em;
         margin-top: 10%;
     }
     p#sideBarText{
-        font-size: 1em;
-        font-weight: bold;
+        font-size: 1.3em;
         margin-bottom: 10%;
     }
     div#sideBarLinkContainer{
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
+        border: 1px black solid;
+        border-top: none;
+    }
+    
+        .postList{
+        font-size: 1.3em;
+        text-align: left;
+    }
+    .postList:hover{
+        color: rgb(243, 183, 24);
     }
 
 

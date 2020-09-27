@@ -41,7 +41,14 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 		String ra = request.getParameter("ra");
 		String c = request.getParameter("c");// 선택안하면 null이 넘어옴
 
-		//System.out.println(select + " " + Search + " " + ra + " " + c);
+		
+		if(c == null) {
+			System.out.println("c는 널이다");
+		}else {
+			System.out.println("c는 널이 아니다");
+		}
+		
+		System.out.println(select + " [" + Search + "] " + ra + " " + c);
 
 		int cPage;
 		List<AdminMem> list = null;
@@ -50,11 +57,15 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
+		
+		System.out.println("cPage : "+cPage);
+		
 		int numPerPage = 30;
 
 		list = new AdminService().memberInfoSearchList(cPage, numPerPage, ra, select, Search, c);
 
 		int totalData = new AdminService().memberInfoSearchListCount(ra, select, Search, c);
+		System.out.println("totalData : "+totalData);
 
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
@@ -65,7 +76,7 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>이전</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/adminCustomerSearch?cPage=" + (pageNo - 1) + "&ra=" + ra + "&s=" + select + "&Sc="
+					+ "/admin/memberInfoSearchList?cPage=" + (pageNo - 1) + "&ra=" + ra + "&s=" + select + "&Sc="
 					+ Search + "&c=" + c + " '>이전</a></li>";
 		}
 
@@ -75,7 +86,7 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 						+ pageNo + "</a></li>";
 			} else {
 				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-						+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
+						+ "/admin/memberInfoSearchList?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
 						+ "&c=" + c + "')>" + pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -85,7 +96,7 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>다음</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
+					+ "/admin/memberInfoSearchList?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
 					+ "&c=" + c + "'>다음</a></li>";
 		}
 		request.setAttribute("list", list);
