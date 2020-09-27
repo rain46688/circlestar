@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.nbbang.admin.model.dao.AdminDao;
+import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
@@ -100,5 +101,22 @@ public class AdminService {
 		close(conn);
 		return cnt;
 	}
+
+	public List<AdminBoard> boardInfoList(int cPage, int numPerPage) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		List<AdminBoard> list = aa.boardInfoList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public int boardInfoListCount() {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int cnt = aa.boardInfoListCount(conn);
+		close(conn);
+		return cnt;
+	}
+	
 
 }

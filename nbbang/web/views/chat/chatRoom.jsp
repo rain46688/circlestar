@@ -7,6 +7,7 @@
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script> 
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<title>dsfdsfsd</title>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>

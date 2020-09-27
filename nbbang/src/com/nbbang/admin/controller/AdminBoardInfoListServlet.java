@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.admin.model.service.AdminService;
+import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
-import com.nbbang.customer.model.vo.CustomerCenter;
+import com.nbbang.common.temp.AESCrypto;
 
 /**
- * Servlet implementation class AdminMemberInfoSearchList
+ * Servlet implementation class AdminMemberInfoServlet
  */
-@WebServlet("/admin/memberInfoSearchList")
-public class AdminMemberInfoSearchList extends HttpServlet {
+@WebServlet("/admin/boardInfoList")
+public class AdminBoardInfoListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdminMemberInfoSearchList() {
+	public AdminBoardInfoListServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,16 +36,8 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(" === AdminMemberInfoSearchList 실행됨 === ");
-		String select = request.getParameter("s");
-		String Search = request.getParameter("Sc");// 아무것도 안적으면 빈값
-		String ra = request.getParameter("ra");
-		String c = request.getParameter("c");// 선택안하면 null이 넘어옴
-
-		//System.out.println(select + " " + Search + " " + ra + " " + c);
-
 		int cPage;
-		List<AdminMem> list = null;
+		List<AdminBoard> list = null;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch (NumberFormatException e) {
@@ -52,10 +45,10 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 		}
 		int numPerPage = 30;
 
-		list = new AdminService().memberInfoSearchList(cPage, numPerPage, ra, select, Search, c);
+		list = new AdminService().boardInfoList(cPage, numPerPage);
+	
 
-		int totalData = new AdminService().memberInfoSearchListCount(ra, select, Search, c);
-
+		int totalData = new AdminService().boardInfoListCount();
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
@@ -65,8 +58,7 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>이전</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/adminCustomerSearch?cPage=" + (pageNo - 1) + "&ra=" + ra + "&s=" + select + "&Sc="
-					+ Search + "&c=" + c + " '>이전</a></li>";
+					+ "/admin/boardInfoList?cPage=" + (pageNo - 1) + " '>이전</a></li>";
 		}
 
 		while (pageNo <= pageEnd && pageNo <= totalPage) {
@@ -75,8 +67,7 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 						+ pageNo + "</a></li>";
 			} else {
 				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-						+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
-						+ "&c=" + c + "')>" + pageNo + "</a></li>";
+						+ "/admin/boardInfoList?cPage=" + pageNo + "')>" + pageNo + "</a></li>";
 			}
 			pageNo++;
 		}
@@ -85,13 +76,11 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>다음</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
-					+ "&c=" + c + "'>다음</a></li>";
+					+ "/admin/boardInfoList?cPage=" + pageNo + "'>다음</a></li>";
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/admin/memberInfoList.jsp").forward(request, response);
-
+		request.getRequestDispatcher("/views/admin/boardInfoList.jsp").forward(request, response);
 	}
 
 	/**
