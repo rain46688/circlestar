@@ -127,7 +127,7 @@
             </div>
         </div>
         <div id="iCreateContainer">
-            <form action="<%=request.getContextPath() %>/member/reportSend" name="reportForm">
+            <form action="<%=request.getContextPath() %>/member/reportSend" name="reportForm" method="post">
                 <div>
                     <div>
                         글번호<input type="text" name="rboardId" value="<%=boardData.getBoardId()%>" readonly>
@@ -144,6 +144,9 @@
                         </select>
                     </div>
                     <div>
+                        제목<input type="text" name="reportTitle">
+                    </div>
+                    <div>
                         신고할 게시글 제목<input type="text" name="rtitle" value="<%=boardData.getBoardTitle()%>" readonly>
                     </div>
                     <div>
@@ -151,12 +154,12 @@
                     </div>
                     <div>
                         <div>
-                            <textarea name="rcontent" id="" cols="30" rows="10">신고 내용을 상세하게 적어주세요
-                            </textarea>
+                            <textarea name="rcontent" id="" cols="30" rows="10">신고 내용을 상세하게 적어주세요</textarea>
                             <input type="file" name="rfile">
                         </div>
                         <div>
-                            <button>신고하기</button>
+                            <button type="button" onclick="fn_reportSend();">신고하기</button>
+                            <button type="reset" onclick="history.back();">취소</button>
                         </div>
                     </div>
                     <input type="hidden" name="rusid" value="<%=user.getUsid()%>">
@@ -173,5 +176,8 @@
             </form>
         </div>
     </div>
+    <script>
+
+    </script>
 </section>
 <%@ include file="/views/common/footer.jsp" %>
