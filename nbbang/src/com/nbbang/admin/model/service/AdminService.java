@@ -94,9 +94,9 @@ public class AdminService {
 		Connection conn = getConnection();
 		int cnt = 0;
 		if (!select.equals("ALL")) {
-			aa.memberInfoSearchListCount(conn, ra, select, search, c);
+			cnt = aa.memberInfoSearchListCount(conn, ra, select, search, c);
 		} else {
-			aa.memberInfoAllSearchListCount(conn, ra, select, search, c);
+			cnt = aa.memberInfoAllSearchListCount(conn, ra, select, search, c);
 		}
 		close(conn);
 		return cnt;
@@ -122,14 +122,27 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
 		List<AdminBoard> list = null;
-
 		if (!select.equals("ALL")) {
 			list = aa.boardInfoSearchList(conn, cPage, numPerPage, ra, select, search, select2, select3, p);
 		} else {
-			list = aa.boardInfoAllSearchList(conn, cPage, numPerPage, ra, select, search, select2, select3, p);
+			//list = aa.boardInfoAllSearchList(conn, cPage, numPerPage, ra, select, search, select2, select3, p);
 		}
 		close(conn);
 		return list;
+	}
+
+	public int boardInfoSearchListCount(String ra, String select, String search, String select2, String select3,
+			String p) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int cnt = 0;
+		if (!select.equals("ALL")) {
+			cnt = aa.boardInfoSearchListCount(conn,ra, select, search, select2, select3, p);
+		} else {
+			//cnt = aa.boardInfoAllSearchListCount(conn,ra, select, search, select2, select3, p);
+		}
+		close(conn);
+		return cnt;
 	}
 	
 	

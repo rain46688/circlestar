@@ -162,16 +162,17 @@ h1 {
 			<div class="row shadow p-3 mb-3 bg-white rounded">
 				<div class="cell">
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="AS" <%=ra != null && ra.equals("AS") ? "checked" : ""%>>오름 차순
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="ASC" <%=ra != null && ra.equals("AS") ? "checked" : ""%>>오름 차순
 						</label>
 					</div>
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="DE" <%=ra != null && ra.equals("DE") ? "checked" : ""%>>내림 차순
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="DESC" <%=ra != null && ra.equals("DE") ? "checked" : ""%>>내림 차순
 						</label>
 					</div>
 				</div>
 				<div class="cell">
 					<select class="form-control" id="sel1" name="s2">
+						<option value="D" <%=s2 != null && s2.equals("D") ? "selected" : ""%>>날짜</option>
 						<option value="b" <%=s2 != null && s2.equals("b") ? "selected" : ""%>>글 ID</option>
 						<option value="h" <%=s2 != null && s2.equals("h") ? "selected" : ""%>>조회수</option>
 						<option value="T" <%=s2 != null && s2.equals("T") ? "selected" : ""%>>거래단계</option>

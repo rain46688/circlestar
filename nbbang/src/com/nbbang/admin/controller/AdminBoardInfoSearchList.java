@@ -38,10 +38,10 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println(" === AdminBoardInfoSearchList 실행됨 === ");
 		String select = request.getParameter("s"); // 아무것도 안넣으면  ALL , 전체,제목,닉네임,거래지역
-		String select2 = request.getParameter("s2"); // 아무것도 안넣으면 b , 글ID,조회수,거래단계,제품가격,좋아요
+		String select2 = request.getParameter("s2"); // 아무것도 안넣으면 D , 날짜,글ID,조회수,거래단계,제품가격,좋아요
 		String select3 = request.getParameter("s3"); // 아무것도 안넣으면 특가,  특가,식품,패션잡화,취미문구,티켓,애완용품
 		String Search = request.getParameter("Sc");// 아무것도 안적으면 빈값 "", 검색값
-		String ra = request.getParameter("ra");// 선택안하면 null이 넘어옴, 오름차순AS, 내림차순DE
+		String ra = request.getParameter("ra");// 선택안하면 null이 넘어옴, 오름차순ASC, 내림차순DESC
 		String p = request.getParameter("p");// 선택안하면 null이 넘어옴, 인기게시물 여부
 
 		System.out.println(select + " " +select2 + " " +select3 + " [" + Search + "] " + ra + " " + p);
@@ -69,7 +69,7 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
 					+ "/admin/adminCustomerSearch?cPage=" + (pageNo - 1) + "&ra=" + ra + "&s=" + select + "&Sc="
-					+ Search + "&c=" + c + " '>이전</a></li>";
+					+ Search + "&p=" + p + "&select2=" + select2 + "&select3=" + select3 + " '>이전</a></li>";
 		}
 
 		while (pageNo <= pageEnd && pageNo <= totalPage) {
@@ -79,7 +79,7 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 			} else {
 				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
 						+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
-						+ "&c=" + c + "')>" + pageNo + "</a></li>";
+						+"&p=" + p + "&select2=" + select2 + "&select3=" + select3 + "')>" + pageNo + "</a></li>";
 			}
 			pageNo++;
 		}
@@ -89,11 +89,11 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
 					+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&ra=" + ra + "&s=" + select + "&Sc=" + Search
-					+ "&c=" + c + "'>다음</a></li>";
+					+ "&p=" + p + "&select2=" + select2 + "&select3=" + select3 + "'>다음</a></li>";
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/admin/memberInfoList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/boardInfoList.jsp").forward(request, response);
 
 	}
 
