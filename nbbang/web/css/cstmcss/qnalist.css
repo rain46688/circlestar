@@ -1,11 +1,12 @@
 @charset "UTF-8";
-
+.qnaSection{margin-top:1em;}
 table.table {
-    width: 54em;
+    width: 51.5em;
+    position: relative;
     height: 20em;
-    margin-left: 35%;
+    margin-left: 33em;
     margin-top: 1em;
-
+    
     
 }
 
@@ -18,7 +19,7 @@ th {
 
 td {
     text-align: center;
-    padding-top: 3%;
+    padding-top: 3em;
     font-size: 14px;
     color: black;
 }
@@ -30,13 +31,15 @@ td a:hover{
     color: rgb(168, 101, 53);
 }
 .qna-caution{
-    width: 50%;
-    margin-top: 10%;
-    margin-left: 33%;
+    
+    margin-top: 0;
+    margin-left: 33em;
+    position: relative;
 }
 .qna-caution,
 .ul-caution{
     margin-top: 6em;
+    position: relative;
 }
 .qna-caution .caution-li{
     list-style: none;
@@ -63,39 +66,24 @@ td a:hover{
  
     
 }
-/* .cs-alert{
-    width: 1200px;
-    margin-left: 35%;
-    margin-top: 4%;
-}
-.cs-alert .cs-alert__title a{
-    font-size: 18px;
-    font-weight: bold;
-}
-.cs-alert .cs-alert__content a {
-    font-size: 15px;
-}   
-.cs-alert .cs-alert__content a span{
-    font-weight: bold;
-}  */
 
-/* div.ad-content *{
-    width: 800px;
-    height: 200px;
-    margin-left:15%;
-} */
 #btn-news1 {
     float: right;
-    margin-right: 13em;
-    margin-bottom: 3em;
+    margin-right: 14.5em;
+    margin-bottom: 3.5em;
+    position: relative;
 }
 .btn-default{
-    width: 7em;
+    width: 7.5em;
     color: black;
     border: 1.5px solid black;
     background-color: rgb(226, 226, 226);
     text-align: center;
+    text-decoration: none;
 
+}
+div#btn-news1 a{
+    text-decoration: none;
 }
 td a:hover {
     text-decoration: none;

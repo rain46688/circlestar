@@ -27,6 +27,18 @@ public class BoardFile {
 	public String[] getFileName() {
 		return fileName;
 	}
+	
+	public String getFileName(String toString) {
+		String result = new String();
+		for(int i = 0; i < fileName.length; i++) {
+			if(i==0) {
+				result += fileName[i];
+			}else {
+				result += ","+fileName[i];
+			}
+		}
+		return result;
+	}
 
 	public void setFileName(String[] fileName) {
 		this.fileName = fileName;

@@ -8,9 +8,9 @@ pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
   rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/qnawriting.css" type="text/css">
+<!-- <jsp:include page="maincss.jsp"></jsp:include> -->
 <section>
 <div class="writing-container">
-  <jsp:include page="maincss.jsp"></jsp:include>
   <div class="writing-wrap">
     
     <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
@@ -23,8 +23,8 @@ pageEncoding="UTF-8"%>
                 <option value="회원정보">회원정보관련</option>
                 <option value="거래배송">거래배송관련</option>
                 <option value="불법거래">불법거래</option>
-                <option value="성희롱">성희롱</option>
-                <option value="신고">신고</option>
+                <option value="상품관련">상품관련</option>
+                <option value="쿠폰/포인트">쿠폰/포인트</option>
            </select> 
       </div>
     
@@ -32,17 +32,17 @@ pageEncoding="UTF-8"%>
 
        <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
        
-        <input value="<%=loginnedMember.getNickname()%>" class="writing-input  form-control mt-4 mb-2" name="csNickname" id="" readonly size="76em">
+        <input value="<%=loginnedMember.getNickname()%>" class="writing-input  form-control mt-4 mb-2" name="csNickname" id="" readonly style="width:37em;" >
 
     </div>
       
-      <div class="form-group">
-        <input type="text" class="writing-input form-control mt-4 mb-2" name="csTitle" placeholder="제목을 입력하쇼." size="76em">
+      <div class="write-title">
+        <input type="text" class="writing-input form-control mt-4 mb-2" name="csTitle" placeholder="제목을 입력하쇼." style="width:37em;">
         
       </div>
       
       <div class="write-content">
-        <textarea name="csContent" class="form-group  form-control mt-4 mb-2" rows="16" cols="80" placeholder="내용을 입력하쇼" ></textarea>
+        <textarea name="csContent" class="form-group  form-control mt-4 mb-2" style="width:37em; height: 25em;" placeholder="내용을 입력하쇼" ></textarea>
       </div>
      
       <div class="file-upload">
@@ -97,7 +97,7 @@ pageEncoding="UTF-8"%>
         }
       
       })
-      location.href ="<%=request.getContextPath()%>/customer/customerQnA"; 
+      location.href ="<%=request.getContextPath()%>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>"; 
     }
 
 

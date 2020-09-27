@@ -14,11 +14,14 @@
 	if(request.getAttribute("tradeUserList")!=null){
 		tradeUserList = (List<Integer>)request.getAttribute("tradeUserList");
 	}
+	String reply = new String();
+	if(request.getAttribute("reply")!=null) {
+		reply = (String)request.getAttribute("reply");
+	}
 %>
 <style>
   #wrapper {
     margin: 0 auto;
-    margin-top: 3em;
     padding-top: 1em;
     width: 45em;
     text-align: center;
@@ -224,8 +227,29 @@
     transform:scale(1.1);
     font-weight: bold;
   }
+  #btnForWriter {
+   	margin: 0 auto;
+  	margin-top:3em;
+  	margin-bottom:5px;
+  	text-align:right;
+  	width:60%;
+  	font-family:'Do Hyeon', sans-serif;
+  }
+  #btnForWriter>button {
+	height: 2em;
+	width: 5em;
+	font-size: 20px;
+	}
+
+	#btnForWriter>button:hover {
+	border: 2px black solid;
+	}
 </style>
 <section>
+	<div id="btnForWriter"> 
+  		<button onclick="fn_modifyBoard();">수정하기</button>
+  		<button onclick="fn_deleteBoard();">삭제하기</button>
+  	</div>
   <div id="wrapper">
     <div id="imageWrapper">
       <%-- <img src="<%= request.getContextPath() %>/upload/images/<%= c.getCardFile().getFileName()[0] %>" alt="" width="700em" height="400em">
@@ -346,15 +370,23 @@
           <li><div id="startFuncBtn" onclick="fun_decidebuy();">
             <% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
             <img src="<%= request.getContextPath() %>/images/cancel.png" width="40px" height="40px">
+            <p>N빵취소</p></div></li>
             <% }else { %>
             <img src="<%= request.getContextPath() %>/images/onebyn.png" width="40px" height="40px">
-            <% } %>
             <p>N빵신청</p></div></li>
+            <% } %>
             <% } %>
             <% if(tradeUserList.contains(loginnedMember.getUsid())&&c.getCardBoard().getTradeStage()>1) {%>
           <li><div id="enterFuncBtn" onclick="fn_enterBtn();">
             <img src="<%= request.getContextPath() %>/images/enter.png" width="40px" height="40px">
             <p>채팅방접속</p></div></li>
+            <%} %>
+            <%if(c.getCardBoard().getWriterUsid()!=loginnedMember.getUsid()){ %>
+            <%if(c.getCardBoard().getTradeStage()==2&&tradeUserList.contains(loginnedMember.getUsid())) {%>
+          <li><div id="openFuncBtn" onclick="fn_pay();">
+            <img src="<%= request.getContextPath() %>/images/dollar.png" width="40px" height="40px">
+            <p>결제하기</p></div></li>
+            <%} %>
             <%} %>
           <% if(c.getCardBoard().getWriterUsid()==loginnedMember.getUsid()){ %>
           <li><div id="openFuncBtn" onclick="fun_createroom();">
@@ -386,6 +418,20 @@
 </section>
 <script>
 
+function fn_modifyBoard(){
+  location.href = "<%=request.getContextPath()%>/board/boardModify?boardId=<%=c.getCardBoard().getBoardId()%>";
+}
+
+function fn_deleteBoard(){
+  location.href = "<%=request.getContextPath()%>/board/boardDelete?boardId=<%=c.getCardBoard().getBoardId()%>";
+}
+
+function fn_pay(){
+  if(confirm('결제를 진행하시겠습니까?')) {
+    location.href="<%=request.getContextPath()%>/board/boardPay?buyerUsid=<%=loginnedMember.getUsid()%>&boardId=<%=c.getCardBoard().getBoardId()%>&productPrice=<%=c.getCardBoard().getProductPrice()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
+  }
+}
+
 function fn_enterBtn(){
   $("#hiddenEnterBtn").click();
 }
@@ -394,6 +440,12 @@ var pop;
 window.onunload = function() { 
 	pop.close(); 
 }
+<% if(reply.equals("success")) { %>
+function autoReple() {
+  $("#commentContent").val('결제했습니다.');
+  $("#commentInsertBtn").click();
+}
+<% } %>
 
 /*  채팅창 관련 로직  */
 function nbbang(f){
@@ -485,6 +537,10 @@ function fun_cancelbuy() {
 
     $(document).ready(function () {
         fn_commentList();
+        <% if(reply.equals("success")) { %>
+        autoReple();
+        <% } %>
+        console.log("last");
         $("#hideButton").hide();
         $("#likeFunc").click(function (e) {
             if ($("#likeFunc>img").attr("src") == "<%= request.getContextPath() %>/images/heart.png") {

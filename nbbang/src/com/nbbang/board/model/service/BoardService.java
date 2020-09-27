@@ -70,28 +70,37 @@ public class BoardService {
 		result += dao.boardInsertTradeList(conn, b.getWriterUsid(), b.getWriterNickname());
 		if(result > 2) {
 			commit(conn);
-			System.out.println("commit");
 		}else {
 			rollback(conn);
-			System.out.println("rollback");
 		}
 		close(conn);
 		return result;
 	}
 	
-//	public int boardInsertTradeList(int tradeUsid, String tradeUserNickname) {
-//		Connection conn = getConnection();
-//		int result = dao.boardInsertTradeList(conn, tradeUsid, tradeUserNickname);
-//		if(result > 0) {
-//			commit(conn);
-//			System.out.println("commit");
-//		}else {
-//			rollback(conn);
-//			System.out.println("rollback");
-//		}
-//		close(conn);
-//		return result;
-//	}
+	public int boardModify(Board b, BoardFile bf, boolean hasFile) {
+		Connection conn = getConnection();
+		int result = dao.boardModifyBoard(conn, b);
+		if(hasFile) {
+		//파일 있으면
+		result += dao.boardModifyFileDelete(conn, bf);
+		result += dao.boardModifyFileInsert(conn, bf);
+			//파일 삭제 후 업데이트
+			if(result > 2) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}else {
+			//없으면 Board만 실행
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}
+		close(conn);
+		return result;
+	}
 	
 	public int boardLikeInsert(LikeList list) {
 		Connection conn = getConnection();
@@ -153,5 +162,25 @@ public class BoardService {
 		ArrayList<Integer> tradeUserList = dao.tradeUserList(conn, boardId);
 		close(conn);
 		return tradeUserList;
+	}
+	
+	public int boardPay(int userUsid, int boardId, int productPrice) {
+		Connection conn = getConnection();
+		int result = dao.boardPayMinusPoint(conn, userUsid, productPrice);
+		result += dao.boardPayTradeList(conn, userUsid, boardId);
+		if(result > 1) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public Card boardModifyCard(String boardId) {
+		Connection conn = getConnection();
+		Card c = dao.boardPage(conn, boardId);
+		close(conn);
+		return c;
 	}
 }

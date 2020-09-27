@@ -1,11 +1,11 @@
 @charset "UTF-8";
 *{ text-decoration:none}
 div.writing-container{
-    margin-left: 30%;
+    margin-left: 23%;
     margin-top: 3%;
     margin-bottom: 4%;
     
-    width: 70%;
+    width: 65em;
     
 }
 div.writing-wrap{
@@ -13,28 +13,28 @@ div.writing-wrap{
     margin-top: 1%;
     border: 1px solid #eeeeee;
     width: 65%;
-    box-shadow: 2px 2px 2px 2px #eef1d7ee;
+    
     text-align: center;
     border-radius: 5%;
 }
 div.type-wrap{
     margin-top: 2%;
-    
+    margin-left: 2.5em;
     
     
 }
 div.fix-writer{
     margin-top: 2%;
-    
+    margin-left: 2.5em;
     
 }
 div.write-title{
     margin-top: 2%;
-    
+    margin-left: 2.5em;
 }
 div.write-content{
     margin-top: 2%;
-    
+    margin-left: 2.5em;
 }
 div.file-upload{
     margin-top: 2%;
