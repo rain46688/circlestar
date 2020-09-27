@@ -426,14 +426,30 @@ public class BoardDao {
 	public int commentInsert(Connection conn, Comment c) {
 		PreparedStatement pstmt = null;
 		int result = 0;
+		int key = c.getComLayer();
+		String sql = new String();
+		if(key==1) {
+			sql = prop.getProperty("commentInsert");
+		}else {
+			sql = prop.getProperty("commentInsert2");
+		}
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("commentInsert"));
-			pstmt.setInt(1, c.getCboardId());
-			pstmt.setString(2, c.getContent());
-			pstmt.setBoolean(3, c.getSecret());
-			pstmt.setString(4, c.getCwriterNickname());
-			pstmt.setInt(5, c.getComLayer());
-			pstmt.setString(6, c.getComProfile());
+			pstmt = conn.prepareStatement(sql);
+			if(key==1) {
+				pstmt.setInt(1, c.getCboardId());
+				pstmt.setString(2, c.getContent());
+				pstmt.setBoolean(3, c.getSecret());
+				pstmt.setString(4, c.getCwriterNickname());
+				pstmt.setInt(5, c.getComLayer());
+				pstmt.setString(6, c.getComProfile());
+			}else {
+				pstmt.setInt(1, c.getCboardId());
+				pstmt.setString(2, c.getContent());
+				pstmt.setString(3, c.getCwriterNickname());
+				pstmt.setInt(4, c.getComLayer());
+				pstmt.setString(5, c.getComProfile());
+				pstmt.setInt(6, c.getComRef());
+			}
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -462,6 +478,7 @@ public class BoardDao {
 				c.setSecret(rs.getBoolean("SECRET"));
 				c.setCwriterNickname(rs.getString("CWRITER_NICKNAME"));
 				c.setComProfile(rs.getString("COM_PROFILE"));
+				c.setComId(rs.getInt("COM_ID"));
 				list.add(c);
 			}
 		} catch (SQLException e) {
@@ -600,65 +617,66 @@ public class BoardDao {
 		return result;
 	}
 	
-	public int boardDeleteLikelist(Connection conn, int boardId) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		try {
-			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteLikelist"));
-			pstmt.setInt(1, boardId);
-			result = pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
-	public int boardDeleteBoardfile(Connection conn, int boardId) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		try {
-			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteBoardfile"));
-			pstmt.setInt(1, boardId);
-			result = pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
-	public int boardDeleteComment(Connection conn, int boardId) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		try {
-			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteComment"));
-			pstmt.setInt(1, boardId);
-			result = pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
-	public int boardDeleteTradelist(Connection conn, int boardId) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		try {
-			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteTradelist"));
-			pstmt.setInt(1, boardId);
-			result = pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
+	//delete 추가 옵션
+//	public int boardDeleteLikelist(Connection conn, int boardId) {
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		try {
+//			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteLikelist"));
+//			pstmt.setInt(1, boardId);
+//			result = pstmt.executeUpdate();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(pstmt);
+//		}
+//		return result;
+//	}
+//	
+//	public int boardDeleteBoardfile(Connection conn, int boardId) {
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		try {
+//			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteBoardfile"));
+//			pstmt.setInt(1, boardId);
+//			result = pstmt.executeUpdate();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(pstmt);
+//		}
+//		return result;
+//	}
+//	
+//	public int boardDeleteComment(Connection conn, int boardId) {
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		try {
+//			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteComment"));
+//			pstmt.setInt(1, boardId);
+//			result = pstmt.executeUpdate();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(pstmt);
+//		}
+//		return result;
+//	}
+//	
+//	public int boardDeleteTradelist(Connection conn, int boardId) {
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		try {
+//			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteTradelist"));
+//			pstmt.setInt(1, boardId);
+//			result = pstmt.executeUpdate();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(pstmt);
+//		}
+//		return result;
+//	}
 	
 	private String[] stringToArr(String str) {
 		if(str==null) {
