@@ -88,7 +88,7 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		if (result>0) {
 			// 업로드 성공
 			request.setAttribute("msg", "문의가 완료되었습니다.");
-			request.setAttribute("loc", "/customer/customerQnA");
+			request.setAttribute("loc", "/customer/customerQnA?num="+c.getCsNickname());
 		} else {
 			request.setAttribute("msg", "문의에 실패하였습니다.");
 			request.setAttribute("loc", "/customer/customerQnAWriting.jsp");

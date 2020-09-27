@@ -27,9 +27,9 @@ System.out.println("list in jsp: "+ list);
 	
 	
 	
+	<jsp:include page="maincss.jsp"></jsp:include>
 	<section class="qnaSection">
 
-		<jsp:include page="maincss.jsp"></jsp:include>
 
 	<div class="qna-caution">
 		<ul class="ul-caution">
