@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
+import com.nbbang.admin.model.vo.Report;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.member.model.vo.Member;
@@ -130,7 +131,6 @@ public class AdminDao {
 		ResultSet rs = null;
 		int cnt = 0;
 		String sql = prop.getProperty("customerListSearchCount").replace("$s", select);
-		System.out.println("sql" + sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
@@ -315,21 +315,21 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		List<AdminMem> list = new ArrayList<AdminMem>();
 		AdminMem am = null;
-		
-		if(select.equals("n")) {
-			select="MEMBER_NAME";
-		}else if(select.equals("N")) {
-			select="NICKNAME";
-		}else {
-			select="MEMBER_ID";
+
+		if (select.equals("n")) {
+			select = "MEMBER_NAME";
+		} else if (select.equals("N")) {
+			select = "NICKNAME";
+		} else {
+			select = "MEMBER_ID";
 		}
-		
+
 		String sql = prop.getProperty("memberInfoSearchList").replace("$s", select);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			pstmt.setString(2, ra);
-			if (c == null) {
+			if (c == null || c.equals("null")) {
 				pstmt.setInt(3, 0);
 			} else {
 				pstmt.setInt(3, 1);
@@ -372,21 +372,20 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int cnt = 0;
-		
-		if(select.equals("n")) {
-			select="MEMBER_NAME";
-		}else if(select.equals("N")) {
-			select="NICKNAME";
-		}else {
-			select="MEMBER_ID";
+
+		if (select.equals("n")) {
+			select = "MEMBER_NAME";
+		} else if (select.equals("N")) {
+			select = "NICKNAME";
+		} else {
+			select = "MEMBER_ID";
 		}
-		
 		String sql = prop.getProperty("memberInfoSearchListCount").replace("$s", select);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			pstmt.setString(2, ra);
-			if (c == null) {
+			if (c == null || c.equals("null")) {
 				pstmt.setInt(3, 0);
 			} else {
 				pstmt.setInt(3, 1);
@@ -419,7 +418,7 @@ public class AdminDao {
 			pstmt.setString(2, "%" + search + "%");
 			pstmt.setString(3, "%" + search + "%");
 			pstmt.setString(4, ra);
-			if (c == null) {
+			if (c == null || c.equals("null")) {
 				pstmt.setInt(5, 0);
 			} else {
 				pstmt.setInt(5, 1);
@@ -469,7 +468,7 @@ public class AdminDao {
 			pstmt.setString(2, "%" + search + "%");
 			pstmt.setString(3, "%" + search + "%");
 			pstmt.setString(4, ra);
-			if (c == null) {
+			if (c == null || c.equals("null")) {
 				pstmt.setInt(5, 0);
 			} else {
 				pstmt.setInt(5, 1);
@@ -553,51 +552,50 @@ public class AdminDao {
 		return cnt;
 	}
 
-	public List<AdminBoard> boardInfoSearchList(Connection conn, int cPage, int numPerPage, String ra, String select, String search, String select2, String select3, String p) {
+	public List<AdminBoard> boardInfoSearchList(Connection conn, int cPage, int numPerPage, String ra, String select,
+			String search, String select2, String select3, String p) {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		List<AdminBoard> list = new ArrayList<AdminBoard>();
 		AdminBoard bo = null;
-		
-		if(select.equals("t")) {
+
+		if (select.equals("t")) {
 			select = "BOARD_TITLE";
-		}else if(select.equals("N")) {
-			select ="WRITER_NICKNAME";
-		}else {
-			select="TRADE_AREA";
+		} else if (select.equals("N")) {
+			select = "WRITER_NICKNAME";
+		} else {
+			select = "TRADE_AREA";
 		}
-		
-		if(select2.equals("b")) {
+
+		if (select2.equals("b")) {
 			select2 = "BOARD_ID";
-		}else if(select2.equals("h")) {
-			select2 ="HIT";
-		}else if(select2.equals("T")) {
-			select2 ="TRADE_STAGE";
-		}else if(select2.equals("p")) {
-			select2 ="PRODUCT_PRICE";
-		}else if(select2.equals("D")) {
-			select2 ="ENROLL_DATE";
-		}else {
-			select2="LIKE_COUNT";
+		} else if (select2.equals("h")) {
+			select2 = "HIT";
+		} else if (select2.equals("T")) {
+			select2 = "TRADE_STAGE";
+		} else if (select2.equals("p")) {
+			select2 = "PRODUCT_PRICE";
+		} else if (select2.equals("D")) {
+			select2 = "ENROLL_DATE";
+		} else {
+			select2 = "LIKE_COUNT";
 		}
-		
-		if(ra == null) {
+
+		if (ra == null || ra.equals("null")) {
 			ra = "ASC";
 		}
-		
-		
+
 		String sql = prop.getProperty("boardInfoSearchList");
 		sql = sql.replace("$s2", select2);
 		sql = sql.replace("$s", select);
 		sql = sql.replace("$r", ra);
-	//	System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%");
-			if(p == null) {
+			pstmt.setString(1, "%" + search + "%");
+			if (p == null || p.equals("null")) {
 				pstmt.setInt(2, 0);
-			}else {
+			} else {
 				pstmt.setInt(2, 1);
 			}
 			pstmt.setString(3, select3);
@@ -635,36 +633,36 @@ public class AdminDao {
 		return list;
 	}
 
-	
-	public int boardInfoSearchListCount(Connection conn, String ra, String select, String search, String select2, String select3, String p) {
+	public int boardInfoSearchListCount(Connection conn, String ra, String select, String search, String select2,
+			String select3, String p) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int cnt = 0;
-		
-		if(select.equals("t")) {
+
+		if (select.equals("t")) {
 			select = "BOARD_TITLE";
-		}else if(select.equals("N")) {
-			select ="WRITER_NICKNAME";
-		}else {
-			select="TRADE_AREA";
+		} else if (select.equals("N")) {
+			select = "WRITER_NICKNAME";
+		} else {
+			select = "TRADE_AREA";
 		}
-		
-		if(select2.equals("b")) {
+
+		if (select2.equals("b")) {
 			select2 = "BOARD_ID";
-		}else if(select2.equals("h")) {
-			select2 ="HIT";
-		}else if(select2.equals("T")) {
-			select2 ="TRADE_STAGE";
-		}else if(select2.equals("p")) {
-			select2 ="PRODUCT_PRICE";
-		}else if(select2.equals("D")) {
-			select2 ="ENROLL_DATE";
-		}else {
-			select2="LIKE_COUNT";
+		} else if (select2.equals("h")) {
+			select2 = "HIT";
+		} else if (select2.equals("T")) {
+			select2 = "TRADE_STAGE";
+		} else if (select2.equals("p")) {
+			select2 = "PRODUCT_PRICE";
+		} else if (select2.equals("D")) {
+			select2 = "ENROLL_DATE";
+		} else {
+			select2 = "LIKE_COUNT";
 		}
-		
-		if(ra == null) {
+
+		if (ra == null || ra.equals("null")) {
 			ra = "ASC";
 		}
 
@@ -674,10 +672,10 @@ public class AdminDao {
 		sql = sql.replace("$r", ra);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%");
-			if(p == null) {
+			pstmt.setString(1, "%" + search + "%");
+			if (p == null || p.equals("null")) {
 				pstmt.setInt(2, 0);
-			}else {
+			} else {
 				pstmt.setInt(2, 1);
 			}
 			pstmt.setString(3, select3);
@@ -694,22 +692,238 @@ public class AdminDao {
 		}
 		return cnt;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public List<AdminBoard> boardInfoAllSearchList(Connection conn, int cPage, int numPerPage, String ra, String select,
+			String search, String select2, String select3, String p) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		List<AdminBoard> list = new ArrayList<AdminBoard>();
+		AdminBoard bo = null;
+
+		if (select.equals("t")) {
+			select = "BOARD_TITLE";
+		} else if (select.equals("N")) {
+			select = "WRITER_NICKNAME";
+		} else {
+			select = "TRADE_AREA";
+		}
+
+		if (select2.equals("b")) {
+			select2 = "BOARD_ID";
+		} else if (select2.equals("h")) {
+			select2 = "HIT";
+		} else if (select2.equals("T")) {
+			select2 = "TRADE_STAGE";
+		} else if (select2.equals("p")) {
+			select2 = "PRODUCT_PRICE";
+		} else if (select2.equals("D")) {
+			select2 = "ENROLL_DATE";
+		} else {
+			select2 = "LIKE_COUNT";
+		}
+
+		if (ra == null || ra.equals("null")) {
+			ra = "ASC";
+		}
+
+		String sql = prop.getProperty("boardInfoAllSearchList");
+		sql = sql.replace("$s2", select2);
+		sql = sql.replace("$r", ra);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(3, "%" + search + "%");
+			if (p == null || p.equals("null")) {
+				pstmt.setInt(4, 0);
+			} else {
+				pstmt.setInt(4, 1);
+			}
+			pstmt.setString(5, select3);
+			pstmt.setInt(6, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(7, cPage * numPerPage);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				bo = new AdminBoard();
+				bo.setBo(new Board());
+				Board b = bo.getBo();
+				b.setBoardId(rs.getInt("BOARD_ID"));
+				b.setWriterUsid(rs.getInt("WRITER_USID"));
+				b.setBoardTitle(rs.getString("BOARD_TITLE"));
+				b.setWriterNickname(rs.getString("WRITER_NICKNAME"));
+				b.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				b.setHit(rs.getInt("HIT"));
+				b.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+				b.setTradeArea(rs.getString("TRADE_AREA"));
+				b.setTradeStage(rs.getInt("TRADE_STAGE"));
+				b.setPopularBoard(rs.getBoolean("POPULAR_BOARD"));
+				b.setTradeKind(rs.getString("TRADE_KIND"));
+				b.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				bo.setNbbangMemCount(rs.getString("NBBANG"));
+				bo.setLikeCount(rs.getInt("LIKE_COUNT"));
+				list.add(bo);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int boardInfoAllSearchListCount(Connection conn, String ra, String select, String search, String select2,
+			String select3, String p) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+
+		if (select.equals("t")) {
+			select = "BOARD_TITLE";
+		} else if (select.equals("N")) {
+			select = "WRITER_NICKNAME";
+		} else {
+			select = "TRADE_AREA";
+		}
+
+		if (select2.equals("b")) {
+			select2 = "BOARD_ID";
+		} else if (select2.equals("h")) {
+			select2 = "HIT";
+		} else if (select2.equals("T")) {
+			select2 = "TRADE_STAGE";
+		} else if (select2.equals("p")) {
+			select2 = "PRODUCT_PRICE";
+		} else if (select2.equals("D")) {
+			select2 = "ENROLL_DATE";
+		} else {
+			select2 = "LIKE_COUNT";
+		}
+
+		if (ra == null || ra.equals("null")) {
+			ra = "ASC";
+		}
+
+		String sql = prop.getProperty("boardInfoAllSearchListCount");
+		sql = sql.replace("$s2", select2);
+		sql = sql.replace("$r", ra);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(3, "%" + search + "%");
+
+			if (p == null || p.equals("null")) {
+				pstmt.setInt(4, 0);
+			} else {
+				pstmt.setInt(4, 1);
+			}
+			pstmt.setString(5, select3);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
+	}
+
+	public int byebye(Connection conn, int usid) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("byebye"));
+			pstmt.setInt(1, usid);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int iamSoSorry(Connection conn, int usid) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("iamSoSorry"));
+			pstmt.setInt(1, usid);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<Report> reportList(Connection conn, int cPage, int numPerPage, String a) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		List<Report> list = new ArrayList<Report>();
+		Report r = null;
+		String sql = prop.getProperty("reportList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, a);
+			pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(3, cPage * numPerPage);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				r = new Report();
+				r.setReportId(rs.getInt("REPORT_ID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportIswarning(rs.getInt("REPORT_ISWARNING"));
+				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int reportListCount(Connection conn, String a) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		String sql = prop.getProperty("reportListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, a);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
+	}
+
 }

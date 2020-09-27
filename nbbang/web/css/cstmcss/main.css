@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
 	div#kdh-sidebar-container{
-		width: 14em;
+		width: 13.5em;
 		height: 34em;
 	margin-top: 2em;
 	margin-left: 15em;
 	float: left;
-	border: 2px solid darkgray;
+	border: 2.4px solid gray;
 	
 	margin-bottom: 3em;
 	} 
@@ -21,31 +21,32 @@ ul.side-bar-kdh{
 	
 }
 
-ul.sidebarTitle{
+div.sidebarTitle{
 	background-color: rgb(243, 183, 24);
 	text-align: justify;
 	width: 99.9%;
 	height: 14em;
 	color: whitesmoke;
-	
-	
+	list-style: none;
+	border: 2px solid gray;
 	
 	
 }
-ul.sidebarTitle li#kdh-side-Title{
+div.sidebarTitle li#kdh-side-Title{
 	font-size: 30px;
 	font-weight: bold;
 	padding-top: 1em;
-	padding-left: 10%;
+	padding-left: 2em;
+	text-decoration: none;
 	
 }
-ul.sidebarTitle li#kdh-side-text{
+div.sidebarTitle li#kdh-side-text{
 	font-weight: bold;
 	font-size: 20px;
-	padding-left: 6%;
-	
+	padding-left: 2.5em;
+	text-decoration: none;
 }
-ul.sidebarTitle li#kdh-side-text span{
+div.sidebarTitle li#kdh-side-text span{
 	padding-left: 14%;
 }
 

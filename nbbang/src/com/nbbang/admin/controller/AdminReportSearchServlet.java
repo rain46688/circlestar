@@ -10,56 +10,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.admin.model.service.AdminService;
-import com.nbbang.admin.model.vo.AdminBoard;
-import com.nbbang.admin.model.vo.AdminMem;
-import com.nbbang.common.temp.AESCrypto;
+import com.nbbang.customer.model.vo.CustomerCenter;
 
 /**
- * Servlet implementation class AdminMemberInfoServlet
+ * Servlet implementation class AdminCustomerPageServlet
  */
-@WebServlet("/admin/boardInfoList")
-public class AdminBoardInfoListServlet extends HttpServlet {
+@WebServlet("/admin/adminReportListSearch")
+public class AdminReportSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AdminReportSearchServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public AdminBoardInfoListServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int cPage;
-		List<AdminBoard> list = null;
+		System.out.println(" === AdminCustomerSearchServlet 실행됨 === ");
+
+		String select =  request.getParameter("s");
+		String Search =  request.getParameter("Sc");
+		String a = request.getParameter("a");
+		int  cPage;
+		List<CustomerCenter> list =null;
+		System.out.println("select : "+select);
+		System.out.println("Search : "+Search);
+		System.out.println("a : "+a);
+		
+		if(a != null && a.equals("")) {
+			a = "0";
+		}
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerPage = 30;
-
-		list = new AdminService().boardInfoList(cPage, numPerPage);
-	
+		int numPerPage = 10;
+		list = new AdminService().customerList(cPage, numPerPage,a,select,Search);
 		
-		for (AdminBoard a : list) {
-			String tradearea;
-			try {
-				tradearea = AESCrypto.decrypt(a.getBo().getTradeArea());
-			} catch (Exception e) {
-				tradearea = a.getBo().getTradeArea();
-			}
-			a.getBo().setTradeArea(tradearea);
-		}
-
-		int totalData = new AdminService().boardInfoListCount();
+		int totalData = new AdminService().customerListCount(a,select,Search);
 		System.out.println("totalData : "+totalData);
+		//adminCustomerSearch로 바꾸기
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
@@ -69,7 +66,7 @@ public class AdminBoardInfoListServlet extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>이전</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/boardInfoList?cPage=" + (pageNo - 1) + " '>이전</a></li>";
+					+ "/admin/adminCustomerSearch?cPage=" + (pageNo - 1) + "&a="+a+"&s="+select+"&Sc="+Search+" '>이전</a></li>";
 		}
 
 		while (pageNo <= pageEnd && pageNo <= totalPage) {
@@ -78,7 +75,7 @@ public class AdminBoardInfoListServlet extends HttpServlet {
 						+ pageNo + "</a></li>";
 			} else {
 				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-						+ "/admin/boardInfoList?cPage=" + pageNo + "')>" + pageNo + "</a></li>";
+						+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&a="+a+"&s="+select+"&Sc="+Search+"')>" + pageNo + "</a></li>";
 			}
 			pageNo++;
 		}
@@ -87,19 +84,17 @@ public class AdminBoardInfoListServlet extends HttpServlet {
 			pageBar += "<li class='page-item disabled'><a class='page-link' href='#' tabindex='-1' aria-disabled='true'>다음</a></li>";
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
-					+ "/admin/boardInfoList?cPage=" + pageNo + "'>다음</a></li>";
+					+ "/admin/adminCustomerSearch?cPage=" + pageNo + "&a="+a+"&s="+select+"&Sc="+Search+"'>다음</a></li>";
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/admin/boardInfoList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/customerList.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

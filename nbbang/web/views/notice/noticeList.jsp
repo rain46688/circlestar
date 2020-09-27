@@ -30,17 +30,17 @@
 
 .divRowTitle {
 	display: table-row;
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: bold;
 	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
 		#BFBFBF;
 	width: 100%;
 }
 
-h1 {
+h2 {
 	font-weight: bold;
-	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
-		#BFBFBF;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
+	margin: 15px 0 10px 0;
 }
 
 .active {
@@ -54,15 +54,13 @@ h1 {
 	display: table-cell;
 	padding: 25px 10px;
 	width: 16.67%;
+	font-size:15px;
 }
 
 .divListBody {
 	display: table-row-group;
 }
 
-h1 {
-	margin: 15px 0 10px 0;
-}
 
 #n_btn {
 	float: right;
@@ -81,7 +79,7 @@ h1 {
 	margin-top:20px;
 	margin-bottom:15px;
 	margin-left:100%;
-	font-size:20px;
+	font-size:15px;
 	font-weight:bold;
 	width:100%;
 }
@@ -92,7 +90,7 @@ h1 {
 		margin-top:15px;
 	margin-left:150%;
 		width:100%;
-			font-size:20px;
+			font-size:15px;
 }
 
 #side{
@@ -111,7 +109,7 @@ margin-right:auto;
 
 /* 인희꺼 사이드바 */
 
- div#myPageSideBar{
+div#myPageSideBar{
         position: relative;
         background: white;
         text-align: center;
@@ -122,26 +120,36 @@ margin-right:auto;
         justify-items: stretch;
         width: 14%;
         float: left;
+        font-family: 'Do Hyeon', sans-serif;
     }
     div#sideBarTitleContainer{
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
+        border: 1px black solid;
     }
     p#sideBarTitle{
-        font-size: 2em;
-        font-weight: bold;
+        font-size: 2.5em;
         margin-top: 10%;
     }
     p#sideBarText{
-        font-size: 1em;
-        font-weight: bold;
+        font-size: 1.3em;
         margin-bottom: 10%;
     }
     div#sideBarLinkContainer{
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
+        border: 1px black solid;
+        border-top: none;
+    }
+    
+        .postList{
+        font-size: 1.3em;
+        text-align: left;
+    }
+    .postList:hover{
+        color: rgb(243, 183, 24);
     }
 
 
@@ -188,7 +196,7 @@ margin-right:auto;
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/notice/noticeList">소식보기</a>
                 </div>
                 <div>
-                    <a class="nav-link postList" href="<%=request.getContextPath()%>/customer/customerFaq">FAQ</a>
+                    <a class="nav-link postList" href="<%=request.getContextPath()%>/customerFaq">FAQ</a>
                 </div>
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>#">홈</a>
@@ -207,7 +215,7 @@ margin-right:auto;
 
 	<div id="writecontainer">
 		<div class="form-group">
-			<h1>공지 사항</h1>
+			<h2>공지 사항</h2>
 		</div>
 		<% if(loginnedMember.getNickname().equals("ADMIN")) {%>
 		<button onclick="location.href='<%=request.getContextPath() %>/notice/noticeWrite'" id="n_btn" class="btn btn-success">공지 등록</button>

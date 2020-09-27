@@ -169,7 +169,7 @@ h1 {
 				</div>
 				<div class="cell">
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="c" value="leave" <%=c != null && c.equals("leave") ? "checked" : ""%>>탈퇴여부
+						<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="c" value="leave" <%=c != null && c.equals("leave") ? "checked" : ""%>>탈퇴여부 <br><small>(아래 회원 박스를 눌러 탈퇴/복구 가능)</small>
 						</label>
 					</div>
 				</div>
@@ -250,6 +250,47 @@ h1 {
 </div>
 
 <script>
+
+$(".divRow").click(e=>{
+	let flag = 0;
+	//console.log($(e.target).parent().children('div:eq(8)').html());
+	if($(e.target).parent().children('div:eq(8)').html() =='N'){
+		//console.log("if "+$(e.target).parent().children('div:eq(8)').html());
+		var result = confirm($(e.target).parent().children('div').html()+"번  회원을 탈퇴시키겠습니까?");
+		flag=1;
+	}else{
+		//console.log("else "+$(e.target).parent().children('div:eq(8)').html());
+		var result = confirm($(e.target).parent().children('div').html()+"번  회원을 복구시키겠습니까?");
+		flag=2;
+	}
+	if(result){
+			$.ajax({
+				type: "GET",
+				data: {"memId":$(e.target).parent().children('div').html(),"flag":flag},
+				dataType: "json",
+				url: "<%=request.getContextPath()%>/admin/adminMemBye",
+					success : function(data) {
+							console.log("data : "+data);
+						if (data == 1) {
+		         			 alert('회원을 정상적으로 탈퇴시켰습니다.');
+						} else if(data == 0) {
+							alert('회원 탈퇴에 실패하였습니다.');
+						} else if(data == 3) {
+							alert('회원을 정상적으로 복구시켰습니다.');	
+						}else{
+							alert('회원 복구에 실패하였습니다.');
+						}
+						location.reload();
+					}
+				})
+	}else{
+
+	} 
+	
+})
+
+
+
 	$('.divRow').hover(function() {
 		$(this).css('color', '#FFC107');
 		$(this).removeClass('shadow p-3 mb-5 bg-white rounded');

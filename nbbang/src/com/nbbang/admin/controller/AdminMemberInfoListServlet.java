@@ -47,6 +47,7 @@ public class AdminMemberInfoListServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
+		System.out.println("cPage : "+cPage);
 		int numPerPage = 30;
 
 		list = new AdminService().memberInfoList(cPage, numPerPage);
@@ -66,6 +67,7 @@ public class AdminMemberInfoListServlet extends HttpServlet {
 	
 
 		int totalData = new AdminService().memberInfoListCount();
+		System.out.println("totalData : "+totalData);
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
