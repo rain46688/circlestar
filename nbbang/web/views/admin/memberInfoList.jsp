@@ -1,12 +1,14 @@
+<%@page import="com.nbbang.admin.model.vo.AdminMem"%>
 <%@page import="java.util.List"%>
-<%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<CustomerCenter> list = (List) request.getAttribute("list");
-String a = (String) request.getParameter("a");
+	List<AdminMem> list = (List) request.getAttribute("list");
+
+String ra = (String) request.getParameter("ra");
 String s = request.getParameter("s");
 String Sc = request.getParameter("Sc");
+String c = request.getParameter("c");
 %>
 
 
@@ -15,13 +17,15 @@ String Sc = request.getParameter("Sc");
 #writecontainer {
 	border-radius: 5px;
 	/* border: 1px rgba(128, 128, 128, 0.5) solid; */
-/* 	border: 1px #ECAF59 solid; */
+	/* 	border: 1px #ECAF59 solid; */
 	border: 2px black solid;
 	padding: 20px;
+	width: 90%;
+	margin: 20px auto;
 }
 
 #cList {
-	width: 100%;
+	width: auto;
 	height: 500px;
 }
 
@@ -79,14 +83,8 @@ h1 {
 	font-size: 20px;
 }
 
-#search {
-	display: block;
-	float: center;
-	overflow: hidden;
-}
-
-#search div {
-	float: right;
+#check {
+	margin-left: 5em;
 }
 
 #pagebar {
@@ -98,59 +96,137 @@ h1 {
 	border-bottom: 1px #DEE2E6 solid;
 }
 
-.empty{
-	margin-top:20px;
-	font-weight:bold;
-		margin-top:15px;
-	margin-left:150%;
-		width:100%;
-			font-size:20px;
+.empty {
+	margin-top: 20px;
+	font-weight: bold;
+	margin-top: 15px;
+	margin-left: 280%;
+	width: 100%;
+	font-size: 20px;
+}
+
+#searchDiv {
+	width: 40%;
+	margin: 1em auto;
+	padding: 3em;
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
+}
+
+.row {
+	display: table;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.cell {
+	display: table-cell;
+	width: 16.67%;
+}
+
+.wideCell {
+	display: table-cell;
+}
+
+.cols {
+	float: center;
+}
+
+.cols button {
+	margin: 0 0 0 45%;
 }
 </style>
 
-<div class="container" id="writecontainer">
-	<div class="form-group">
-		<h1>문의 내역</h1>
-	</div>
+<div id="writecontainer">
 
-	<div id="cMenu">
-		<ul class="nav nav-tabs">
-			<li class="nav-item">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</li>
-			<li class="nav-item">
-				<a class="nav-link <%=a != null && a.equals("0") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=0">
-					<small>미처리</small>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link <%=a != null && a.equals("1") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=1">
-					<small>처리</small>
-				</a>
-			</li>
-		</ul>
-	</div>
+	<form action="<%=request.getContextPath()%>/admin/memberInfoSearchList" id="search">
+		<div id="searchDiv" class="shadow p-3 mb-5 bg-white rounded">
+			<div class="form-group">
+				<h1>회원 관리</h1>
+			</div>
+			<div class="row shadow p-3 mb-3 bg-white rounded">
+				<div class="cell">
+					<select class="form-control" id="sel1" name="s">
+						<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
+						<option value="n" <%=s != null && s.equals("n") ? "selected" : ""%>>회원이름</option>
+						<option value="N" <%=s != null && s.equals("N") ? "selected" : ""%>>닉네임</option>
+						<option value="e" <%=s != null && s.equals("e") ? "selected" : ""%>>이메일</option>
+					</select>
+				</div>
+				<div class="cell">
+					<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
+				</div>
+			</div>
+			<div class="row shadow p-3 mb-3 bg-white rounded">
+				<div class="cell">
+					<div class="form-check-inline">
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="M" <%=ra != null && ra.equals("M") ? "checked" : ""%>>남
+						</label>
+					</div>
+					<div class="form-check-inline">
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="F" <%=ra != null && ra.equals("F") ? "checked" : ""%>>여
+						</label>
+					</div>
+				</div>
+				<div class="cell">
+					<div class="form-check-inline">
+						<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="c" value="leave" <%=c != null && c.equals("leave") ? "checked" : ""%>>탈퇴여부
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cols">
+					<button class="btn btn-success" type="submit">검색</button>
+				</div>
+			</div>
+		</div>
+	</form>
 
-	<br>
 
+
+
+
+	<hr>
+	<br> <br>
 	<div class="divList">
 		<div class="divListBody">
-
 			<div class="divRowTitle shadow p-3 mb-5 bg-white rounded">
-				<div class="divCell">문의 ID</div>
-				<div class="divCell">타입</div>
-				<div class="divCell">작성자</div>
-				<div class="divCell">제목</div>
-				<div class="divCell">문의 날짜</div>
+				<div class="divCell">UID</div>
+				<div class="divCell">회원 이름</div>
+				<div class="divCell">닉네임</div>
+				<div class="divCell">이메일</div>
+				<div class="divCell">성별</div>
+				<div class="divCell">생년월일</div>
+				<div class="divCell">가입날짜</div>
+				<div class="divCell">포인트</div>
+				<div class="divCell">탈퇴여부</div>
+				<div class="divCell">n빵 점수</div>
+				<div class="divCell">총 게시글수</div>
+				<div class="divCell">회원등급</div>
+				<div class="divCell">신고당한횟수</div>
 			</div>
 			<%
 				if (!list.isEmpty()) {
-				for (CustomerCenter c : list) {
+				for (AdminMem am : list) {
 			%>
 			<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
-				<div class="divCell"><%=c.getCsId()%></div>
-				<div class="divCell"><%=c.getCsType()%></div>
-				<div class="divCell"><%=c.getCsNickname()%></div>
-				<div class="divCell"><%=c.getCsTitle()%></div>
-				<div class="divCell"><%=c.getCsDate()%></div>
+				<div class="divCell"><%=am.getMem().getUsid()%></div>
+				<div class="divCell"><%=am.getMem().getMemberName()%></div>
+				<div class="divCell"><%=am.getMem().getNickname()%></div>
+				<div class="divCell"><%=am.getMem().getMemberId()%></div>
+				<div class="divCell"><%=am.getMem().getGender()%></div>
+				<div class="divCell"><%=am.getMem().getBirthday()%></div>
+				<div class="divCell"><%=am.getMem().getEnrollDate()%></div>
+				<div class="divCell"><%=am.getMem().getPoint()%></div>
+				<div class="divCell"><%=(am.getMem().getLeaveMem()) ? 'Y' : 'N'%></div>
+				<div class="divCell"><%=am.getMem().getNbbangScore()%></div>
+				<div class="divCell"><%=am.getCreateBoardCount()%></div>
+				<div class="divCell"><%=am.getGradeLevel()%></div>
+				<div class="divCell"><%=am.getReportCount()%></div>
 			</div>
 
 			<%
@@ -158,7 +234,7 @@ h1 {
 			} else {
 			%>
 
-			<div class="empty">등록된 문의 글이 없습니다.</div>
+			<div class="empty">조회된 회원이 없습니다.</div>
 
 			<%
 				}
@@ -169,20 +245,7 @@ h1 {
 	</div>
 
 
-	<form class="form-inline" action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
-
-		<div>
-			<select class="form-control" id="sel1" name="s">
-				<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
-				<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
-				<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
-				<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
-			</select>
-			<input type="hidden" name="a" value=<%=a%>>
-			<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
-			<button class="btn btn-success" type="submit">검색</button>
-		</div>
-	</form>
+	<form class="form-inline" action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search"></form>
 	<nav aria-lable="Page navigation" id="pagebar">
 		<ul class="pagination justify-content-center">
 			<%=request.getAttribute("pageBar")%>
@@ -191,28 +254,13 @@ h1 {
 </div>
 
 <script>
-$(".divRow").click(e=>{
-	/* 상세 페이지를 따로 만들 필요없이 도환이 고객센터 상세 페이지로 연결 세션이 어드민일경우에 "답변 작성 폼이있고 완료를 누를 경우 
-	답변(CS_ANSWER)이 등록되며 처리 상태(CS_ISCHECK = 1)로 넘어감 이미 처리 상태 일경우에 기존 답변을 가져와서 다시 수정후 넘길수있게 도 가능하면
-	좋겠음" 일단 CS_ID 파라미터 cid로 넘김 나중에 수정하길*/
-    location.assign('<%=request.getContextPath()%>/customer/customerReadFrm?num='+$(e.target).parent().children('div').html());
-})
-
-
-   $('.divRow').hover(function(){
-        $(this).css('color','#FFC107');
-        $(this).removeClass( 'shadow p-3 mb-5 bg-white rounded' );
-    }, function() {
-        $(this).css('color','black');
-        $(this).addClass( 'shadow p-3 mb-5 bg-white rounded' );
-    });
-
-
-
-
-
-
-
+	$('.divRow').hover(function() {
+		$(this).css('color', '#FFC107');
+		$(this).removeClass('shadow p-3 mb-5 bg-white rounded');
+	}, function() {
+		$(this).css('color', 'black');
+		$(this).addClass('shadow p-3 mb-5 bg-white rounded');
+	});
 </script>
 
 <%@ include file="/views/common/footer.jsp"%>
