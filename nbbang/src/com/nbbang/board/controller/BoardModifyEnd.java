@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,11 @@ import com.nbbang.common.temp.uploadRename;
  * Servlet implementation class BoardModifyEnd
  */
 @WebServlet("/board/boardModifyEnd")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
+* 100)
 public class BoardModifyEnd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	private static final String UPLOAD_FOLDER = "images";
        
     /**
@@ -40,24 +44,21 @@ public class BoardModifyEnd extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String uploadPath = request.getServletContext().getRealPath("/upload/") + UPLOAD_FOLDER;
-		String boardId = request.getParameter("boardId");
 		List<String> fileNames = new ArrayList<String>();
 		String originalFiles = request.getParameter("originalFiles");
-		System.out.println(originalFiles);
 		boolean hasFile = false;
 		
 		//파일이 있는지 확인.
 		for(Part part : request.getParts()) {
-			if(part.getName().equals("file")){
+			if(part.getName().equals("file")&&part.getSize()>0){
 				hasFile = true;
-				break;
 			}
 		}
 		
 		//있으면 전에 있던 파일 지움.
 		if(hasFile) {
 			//파일 이름을 배열로 바꿔줌
-			String[] filesToDelete;
+			String[] filesToDelete = {};
 			if(originalFiles.contains(",")) {
 				//길이가 1개 이상인지 확인
 				filesToDelete = originalFiles.split(",");
@@ -69,7 +70,7 @@ public class BoardModifyEnd extends HttpServlet {
 				File file = new File(uploadPath + UPLOAD_FOLDER + s);
 				if(file.exists()) {
 					//삭제
-					file.delete();
+					if(file.delete())System.out.println("삭제완료");;
 				}
 			}
 			//파일 업로드
@@ -88,10 +89,11 @@ public class BoardModifyEnd extends HttpServlet {
 			}
 		}
 		
+		
 		//게시글 정보 DB에 업로드
 		BoardFile bf = new BoardFile();
 		Board b = new Board();
-		System.out.println(boardId);
+		String boardId = request.getParameter("boardId");
 		b.setBoardId(Integer.parseInt(boardId));
 		b.setProductCategory(request.getParameter("category"));
 		b.setWriterNickname(request.getParameter("writer"));
@@ -111,14 +113,24 @@ public class BoardModifyEnd extends HttpServlet {
 		}
 		
 		int result = new BoardService().boardModify(b, bf, hasFile);
-		
-		if(result > 2) {
-			request.setAttribute("msg", "수정 성공!");
-			request.setAttribute("loc", "/boList?boardTitle="+b.getProductCategory());
-		}
-		else {
-			request.setAttribute("msg", "업로드에 실패하였습니다.");
-			request.setAttribute("loc", "/");
+		if(!hasFile) {
+			if(result > 0) {
+				request.setAttribute("msg", "수정 성공!");
+				request.setAttribute("loc", "/boList?boardTitle="+b.getProductCategory());
+			}
+			else {
+				request.setAttribute("msg", "업로드에 실패하였습니다.");
+				request.setAttribute("loc", "/");
+			}
+		}else {
+			if(result > 2) {
+				request.setAttribute("msg", "수정 성공!");
+				request.setAttribute("loc", "/boList?boardTitle="+b.getProductCategory());
+			}
+			else {
+				request.setAttribute("msg", "업로드에 실패하였습니다.");
+				request.setAttribute("loc", "/");
+			}
 		}
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
