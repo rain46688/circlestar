@@ -61,14 +61,14 @@ public class CustomerQnAServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<span>&laquo;</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo-1)+"'>&laquo;</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo-1)+"&nick="+nick+"'>&laquo;</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"&nick="+nick+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -76,7 +76,7 @@ public class CustomerQnAServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar+="<span>&raquo;</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"'>&raquo;</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"&nick="+nick+"'>&raquo;</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);
