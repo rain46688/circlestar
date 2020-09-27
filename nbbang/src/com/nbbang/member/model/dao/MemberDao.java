@@ -19,6 +19,7 @@ import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
+import com.nbbang.member.model.vo.Report;
 
 public class MemberDao {
 private Properties prop=new Properties();
@@ -793,6 +794,29 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}
 		return b;
+	}
+
+	public int sendReport(Connection conn, Report r) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("sendReport"));
+			pstmt.setInt(1, r.getReportUserUsid());
+			pstmt.setInt(2,r.getReportBoardId());
+			pstmt.setInt(3, r.getReportTargetUsid());
+			pstmt.setString(4, r.getReportType());
+			pstmt.setString(5, r.getReportTitle());
+			pstmt.setString(6, r.getReportContent());
+			pstmt.setString(7, r.getReportFile());
+			pstmt.setString(8, r.getReportTargetNickname());
+			pstmt.setString(9, r.getReportUserNickname());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 

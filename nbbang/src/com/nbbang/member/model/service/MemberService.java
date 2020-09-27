@@ -254,4 +254,12 @@ private MemberDao dao=new MemberDao();
 		return b;
 	}
 
+	public int sendReport(Report r) {
+		Connection conn=getConnection();
+		int result=dao.sendReport(conn,r);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
 }
