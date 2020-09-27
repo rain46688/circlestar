@@ -5,9 +5,10 @@
 <%
 	List<AdminMem> list = (List) request.getAttribute("list");
 
-String a = (String) request.getParameter("a");
+String ra = (String) request.getParameter("ra");
 String s = request.getParameter("s");
 String Sc = request.getParameter("Sc");
+String c = request.getParameter("c");
 %>
 
 
@@ -99,7 +100,7 @@ h1 {
 	margin-top: 20px;
 	font-weight: bold;
 	margin-top: 15px;
-	margin-left: 150%;
+	margin-left: 280%;
 	width: 100%;
 	font-size: 20px;
 }
@@ -110,7 +111,8 @@ h1 {
 	padding: 3em;
 	font-size: 20px;
 	font-weight: bold;
-	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
 }
 
 .row {
@@ -140,46 +142,40 @@ h1 {
 
 <div id="writecontainer">
 
-	<form action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
-
+	<form action="<%=request.getContextPath()%>/admin/memberInfoSearchList" id="search">
 		<div id="searchDiv" class="shadow p-3 mb-5 bg-white rounded">
-	<div class="form-group">
-		<h1>회원 관리</h1>
-	</div>
+			<div class="form-group">
+				<h1>회원 관리</h1>
+			</div>
 			<div class="row shadow p-3 mb-3 bg-white rounded">
 				<div class="cell">
 					<select class="form-control" id="sel1" name="s">
 						<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
-						<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
-						<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
-						<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
+						<option value="n" <%=s != null && s.equals("n") ? "selected" : ""%>>회원이름</option>
+						<option value="N" <%=s != null && s.equals("N") ? "selected" : ""%>>닉네임</option>
+						<option value="e" <%=s != null && s.equals("e") ? "selected" : ""%>>이메일</option>
 					</select>
-
 				</div>
 				<div class="cell">
 					<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
 				</div>
 			</div>
-
 			<div class="row shadow p-3 mb-3 bg-white rounded">
 				<div class="cell">
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="radio" class="form-check-input" name="optradio">남
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="M" <%=ra != null && ra.equals("M") ? "checked" : ""%>>남
 						</label>
 					</div>
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="radio" class="form-check-input" name="optradio">여
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="F" <%=ra != null && ra.equals("F") ? "checked" : ""%>>여
 						</label>
 					</div>
-
 				</div>
 				<div class="cell">
-
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="checkbox" class="form-check-input" value="">탈퇴여부
+						<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="c" value="leave" <%=c != null && c.equals("leave") ? "checked" : ""%>>탈퇴여부
 						</label>
 					</div>
-
 				</div>
 			</div>
 			<div class="row">
@@ -188,8 +184,6 @@ h1 {
 				</div>
 			</div>
 		</div>
-
-
 	</form>
 
 
@@ -211,7 +205,7 @@ h1 {
 				<div class="divCell">포인트</div>
 				<div class="divCell">탈퇴여부</div>
 				<div class="divCell">n빵 점수</div>
-				<div class="divCell">생성한 방 갯수</div>
+				<div class="divCell">총 게시글수</div>
 				<div class="divCell">회원등급</div>
 				<div class="divCell">신고당한횟수</div>
 			</div>
