@@ -82,25 +82,6 @@ h1 {
 	font-size: 20px;
 }
 
-#search {
-	display: block;
-	float: center;
-	overflow: hidden;
-}
-
-#searchDiv {
-	border: 1px solid black;
-	width: 30%;
-	margin:2em auto;
-	overflow:hidden;
-}
-
-
-#searchDiv2 *{
-	float:left;
-}
-
-
 #check {
 	margin-left: 5em;
 }
@@ -122,31 +103,65 @@ h1 {
 	width: 100%;
 	font-size: 20px;
 }
+
+#searchDiv {
+	border: 1px solid black;
+	width: 30%;
+	margin: 2em auto;
+	padding: 5em;
+}
+
+#search {
+	margin: 0 auto;
+	border: 1px black solid;
+	width: 100%;
+	height: 10%;
+
+}
+
+#search div{
+}
+
+#sel *{
+	margin: 0 auto;
+	border: 1px black solid;
+	width: 100%;
+	height: 10%;
+}
+
+
+
+
+
 </style>
 
 <div id="writecontainer">
 	<div class="form-group">
 		<h1>회원 관리</h1>
 	</div>
-<form action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
+	<form action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
 		<div id="searchDiv">
-			<div id="searchDiv2">
-			<select class="form-control" id="sel1" name="s">
-				<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
-				<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
-				<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
-				<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
-			</select>
-			<input type="hidden" name="a" value=<%=a%>>
-			<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
+
+			<div id="sel">
+				<select class="form-control" id="sel1" name="s">
+					<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
+					<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
+					<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
+					<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
+				</select>
+				<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
 			</div>
-			<button class="btn btn-success" type="submit">검색</button>
+			<div id="search">
+			<div>
+				<button class="btn btn-success" type="submit">검색</button>
+				</div>
+			</div>
 		</div>
 	</form>
-	
-	
-	
-	
+
+
+
+
 	<br>
 
 	<hr>
