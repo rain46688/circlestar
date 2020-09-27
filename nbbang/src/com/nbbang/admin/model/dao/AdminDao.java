@@ -505,6 +505,7 @@ public class AdminDao {
 				bo.setBo(new Board());
 				Board b = bo.getBo();
 				b.setBoardId(rs.getInt("BOARD_ID"));
+				b.setWriterUsid(rs.getInt("WRITER_USID"));
 				b.setBoardTitle(rs.getString("BOARD_TITLE"));
 				b.setWriterNickname(rs.getString("WRITER_NICKNAME"));
 				b.setEnrollDate(rs.getDate("ENROLL_DATE"));

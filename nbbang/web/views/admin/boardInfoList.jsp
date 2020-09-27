@@ -1,14 +1,16 @@
-<%@page import="com.nbbang.admin.model.vo.AdminMem"%>
+<%@page import="com.nbbang.admin.model.vo.AdminBoard"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<AdminMem> list = (List) request.getAttribute("list");
+	List<AdminBoard> list = (List) request.getAttribute("list");
 
 String ra = (String) request.getParameter("ra");
+String s2 = (String) request.getParameter("s2");
+String s3 = (String) request.getParameter("s3");
 String s = request.getParameter("s");
 String Sc = request.getParameter("Sc");
-String c = request.getParameter("c");
+String p = request.getParameter("p");
 %>
 
 
@@ -73,14 +75,11 @@ h1 {
 	border-bottom: 1px #DEE2E6 solid;
 	display: table-cell;
 	padding: 25px 10px;
+	text-overflow: ellipsis;
 }
 
 .divListBody {
 	display: table-row-group;
-}
-
-.nav-link {
-	font-size: 20px;
 }
 
 #check {
@@ -142,7 +141,7 @@ h1 {
 
 <div id="writecontainer">
 
-	<form action="<%=request.getContextPath()%>/admin/memberInfoSearchList" id="search">
+	<form action="<%=request.getContextPath()%>/admin/boardInfoSearchList" id="search">
 		<div id="searchDiv" class="shadow p-3 mb-5 bg-white rounded">
 			<div class="form-group">
 				<h1>게시판 관리</h1>
@@ -151,9 +150,9 @@ h1 {
 				<div class="cell">
 					<select class="form-control" id="sel1" name="s">
 						<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
-						<option value="n" <%=s != null && s.equals("n") ? "selected" : ""%>>회원이름</option>
+						<option value="t" <%=s != null && s.equals("t") ? "selected" : ""%>>제목</option>
 						<option value="N" <%=s != null && s.equals("N") ? "selected" : ""%>>닉네임</option>
-						<option value="e" <%=s != null && s.equals("e") ? "selected" : ""%>>이메일</option>
+						<option value="l" <%=s != null && s.equals("l") ? "selected" : ""%>>거래지역</option>
 					</select>
 				</div>
 				<div class="cell">
@@ -163,19 +162,40 @@ h1 {
 			<div class="row shadow p-3 mb-3 bg-white rounded">
 				<div class="cell">
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="M" <%=ra != null && ra.equals("M") ? "checked" : ""%>>남
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="AS" <%=ra != null && ra.equals("AS") ? "checked" : ""%>>오름 차순
 						</label>
 					</div>
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="F" <%=ra != null && ra.equals("F") ? "checked" : ""%>>여
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="DE" <%=ra != null && ra.equals("DE") ? "checked" : ""%>>내림 차순
 						</label>
 					</div>
 				</div>
 				<div class="cell">
+					<select class="form-control" id="sel1" name="s2">
+						<option value="b" <%=s2 != null && s2.equals("b") ? "selected" : ""%>>글 ID</option>
+						<option value="h" <%=s2 != null && s2.equals("h") ? "selected" : ""%>>조회수</option>
+						<option value="T" <%=s2 != null && s2.equals("T") ? "selected" : ""%>>거래단계</option>
+						<option value="p" <%=s2 != null && s2.equals("p") ? "selected" : ""%>>제품가격</option>
+						<option value="g" <%=s2 != null && s2.equals("g") ? "selected" : ""%>>좋아요</option>
+					</select>
+				</div>
+			</div>
+			<div class="row shadow p-3 mb-3 bg-white rounded">
+				<div class="cell">
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="c" value="leave" <%=c != null && c.equals("leave") ? "checked" : ""%>>탈퇴여부
+						<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="pop" value="pop" <%=p != null && p.equals("pop") ? "checked" : ""%>>인기 게시물 여부
 						</label>
 					</div>
+				</div>
+				<div class="cell">
+					<select class="form-control" id="sel1" name="s3">
+						<option value="특가" <%=s3 != null && s3.equals("특가") ? "selected" : ""%>>특가</option>
+						<option value="식품" <%=s3 != null && s3.equals("식품") ? "selected" : ""%>>식품</option>
+						<option value="패션잡화" <%=s3 != null && s3.equals("패션잡화") ? "selected" : ""%>>패션잡화</option>
+						<option value="취미문구" <%=s3 != null && s3.equals("취미문구") ? "selected" : ""%>>취미문구</option>
+						<option value="티켓" <%=s3 != null && s3.equals("티켓") ? "selected" : ""%>>티켓</option>
+						<option value="애완용품" <%=s3 != null && s3.equals("애완용품") ? "selected" : ""%>>애완용품</option>
+					</select>
 				</div>
 			</div>
 			<div class="row">
@@ -186,16 +206,13 @@ h1 {
 		</div>
 	</form>
 
-
-
-
-
 	<hr>
 	<br> <br>
 	<div class="divList">
 		<div class="divListBody">
 			<div class="divRowTitle shadow p-3 mb-5 bg-white rounded">
 				<div class="divCell">글 ID</div>
+				<div class="divCell">작성자 USID</div>
 				<div class="divCell">글 제목</div>
 				<div class="divCell">작성자 닉네임</div>
 				<div class="divCell">등록날짜</div>
@@ -211,22 +228,23 @@ h1 {
 			</div>
 			<%
 				if (!list.isEmpty()) {
-				for (AdminMem am : list) {
+				for (AdminBoard ab : list) {
 			%>
 			<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
-				<div class="divCell"><%=am.getMem().getUsid()%></div>
-				<div class="divCell"><%=am.getMem().getMemberName()%></div>
-				<div class="divCell"><%=am.getMem().getNickname()%></div>
-				<div class="divCell"><%=am.getMem().getMemberId()%></div>
-				<div class="divCell"><%=am.getMem().getGender()%></div>
-				<div class="divCell"><%=am.getMem().getBirthday()%></div>
-				<div class="divCell"><%=am.getMem().getEnrollDate()%></div>
-				<div class="divCell"><%=am.getMem().getPoint()%></div>
-				<div class="divCell"><%=(am.getMem().getLeaveMem()) ? 'Y' : 'N'%></div>
-				<div class="divCell"><%=am.getMem().getNbbangScore()%></div>
-				<div class="divCell"><%=am.getCreateBoardCount()%></div>
-				<div class="divCell"><%=am.getGradeLevel()%></div>
-				<div class="divCell"><%=am.getReportCount()%></div>
+				<div class="divCell"><%=ab.getBo().getBoardId()%></div>
+				<div class="divCell"><%=ab.getBo().getWriterUsid()%></div>
+				<div class="divCell"><%=ab.getBo().getBoardTitle()%></div>
+				<div class="divCell"><%=ab.getBo().getWriterNickname()%></div>
+				<div class="divCell"><%=ab.getBo().getEnrollDate()%></div>
+				<div class="divCell"><%=ab.getBo().getHit()%></div>
+				<div class="divCell"><%=ab.getBo().getProductCategory()%></div>
+				<div class="divCell"><%=ab.getBo().getTradeArea()%></div>
+				<div class="divCell"><%=ab.getBo().getTradeStage()%></div>
+				<div class="divCell"><%=(ab.getBo().isPopularBoard()) ? 'Y' : 'N'%></div>
+				<div class="divCell"><%=ab.getBo().getTradeKind()%></div>
+				<div class="divCell"><%=ab.getBo().getProductPrice()%></div>
+				<div class="divCell"><%=ab.getNbbangMemCount()%></div>
+				<div class="divCell"><%=ab.getLikeCount()%></div>
 			</div>
 
 			<%
@@ -254,6 +272,12 @@ h1 {
 </div>
 
 <script>
+
+$(".divRow").click(e=>{
+    location.assign('<%=request.getContextPath()%>/board/boardPage?boardId='+$(e.target).parent().children('div').html()+'&writerUsid='+$(e.target).parent().children('div:eq(1)').html());
+})
+
+
 	$('.divRow').hover(function() {
 		$(this).css('color', '#FFC107');
 		$(this).removeClass('shadow p-3 mb-5 bg-white rounded');
