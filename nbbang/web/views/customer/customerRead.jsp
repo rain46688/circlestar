@@ -18,29 +18,28 @@ System.out.println("C: "+ c);
 System.out.println("list: " + list);
 %>
 <style>
-  
-  div#QA-container {
-    margin-top: 3.4%;
-    margin-left: 35%;
-    margin-bottom: 4%;
-    width: 50%;
-    height: 100%;
-
-  }
-
-  div.question-container {
+  section.answer-container-kdh{
+    margin-top:3em;
+    margin-bottom: 3em;
+    width: 45em; 
     height: 40em;
-
+    margin-left: 33em;
+    
+    position: relative;
   }
+
+
+
+
 
   div.writing-date {
-    margin-left: 40em;
+    
+    float: right;
+    
+    margin-top: 8em;
   }
 
-  div.answer-container {
-    height: 300px;
 
-  }
 
   div.content-write p,
   div.answer-content p {
@@ -48,29 +47,38 @@ System.out.println("list: " + list);
   }
 
   div.file-upload {
-    margin-left: 5%;
+    
     margin-top: 26%;
 
-    width: 200px;
+    width: 10em;
   }
-
+  div.answer-container{
+    margin-top: 3em;
+    margin-bottom: 50em;
+    width: 45em; 
+    
+   
+  }
   div.answer-date {
     float: right;
-    margin-top: 25%;
-    margin-right: 4%;
+    margin-top: 8em;
+    
   }
 
   div.hr-line {
     box-shadow: 1px 1px 1px 1px #f5f4f3;
     color: white;
+    margin-bottom: 3em;
 
-    width: 100%;
+    
   }
 
   div#submitBtn {
     margin-top: 35%;
   }
-
+  div.comment-container{
+    margin-left: 0em;
+  }
 
 
   .imgList {
@@ -111,30 +119,26 @@ System.out.println("list: " + list);
     left: 50%;
     transform: translate(-50%, -20%);
     background-color: #ffffff;
-    width: 30%;
-    height: 30%;
+    width: 30em;
+    height: 20em;
     text-align: center;
   }
 
   .modalBox img {
-    width: 100%;
+    width: 20em;
+    height: 20em;
   }
 
-  .modalBox p {
-    color: #ffffff;
-    background-color: #000;
-    font-size: 2rem;
-    padding: 2rem;
-  }
+
 
  .comment-container .comment-editor #btn-insert{
     margin-bottom: 5em;
   }
 </style>
+<jsp:include page="maincss.jsp"></jsp:include>
 <section class="answer-container-kdh">
-  <jsp:include page="maincss.jsp"></jsp:include>
   <div id="QA-container">
-    <form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post"
+  <form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post"
       enctype="multipart/form-data">
       <!-- 클라이언트 창 -->
       <div class="question-container">
@@ -147,15 +151,18 @@ System.out.println("list: " + list);
           <div class="content-write" name="csContent">
             <p><%=c.getCsContent() %></p>
           </div>
-        </div>
-        <div class="file-upload">
+          <div class="writing-date">
+            <p><%=c.getCsDate() %></p>
+          </div>
           <%for(CustomerFile cf : c.getCf()){ %>
-
-
-          <div class="imgList">
-            <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-              width="60" height="60">
-            <p><%=cf.getCsFileName() %> </p>
+            <div class="file-upload">
+              
+              
+              <div class="imgList">
+                <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
+                width="60" height="60">
+                <p><%=cf.getCsFileName() %> </p>
+              </div>
           </div>
 
           <!-- 팝업 될 곳 -->
@@ -168,59 +175,76 @@ System.out.println("list: " + list);
             </div>
           </div>
           <%} %>
-
-        </div>
-        <div class="writing-date">
-          <p><%=c.getCsDate() %></p>
-        </div>
-    </form>
-
-
-    <div class="hr-line">
-      <hr id="hr-line">
-    </div>
-
-
-
-
-    <%
-	if (c.getCsAnswer()==null && loginnedMember.getNickname().equals("ADMIN")){
-%>
-    <div class="comment-container">
-      <div class="comment-editor">
-        <%-- <%if(c.getCsAnswer()==null){ %> --%>
-        <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
-          <div class="answer-content">
-            <input type="hidden" name="csId" value="<%=c.getCsId()%>">
-            <textarea name="admin-answer" cols="100" rows="10"></textarea>
-
-            <button type="submit" id="btn-insert">등록</button>
-          </div>
           
-        </form>
+        </div>
       </div>
+    </form>
+        <div class="hr-line">
+          <hr id="hr-line">
+        </div>
+        <%
+        if (c.getCsAnswer()==null && loginnedMember.getNickname().equals("ADMIN")){
+        %>
+          <div class="comment-container">
+            <div class="comment-editor">
+              <%-- <%if(c.getCsAnswer()==null){ %> --%>
+              <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
+                <div class="answer-content">
+                  <input type="hidden" name="csId" value="<%=c.getCsId()%>">
+                  <textarea name="admin-answer" cols="100" rows="10"></textarea>
+        
+                  <button type="submit" id="btn-insert">등록</button>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+          <%}%> 
+        <%if(c.getCsAnswer()!=null){ %>
+      <div class="answer-container">
+        <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
+        
+        <div class="answer-content">
+          <p><%=c.getCsAnswer()%></p>
+          <div class="answer-date">
+            <%=c.getCsDate()%>
+          </div>
+        </div>
+        <%}%>
+      </div>
+       </div> 
+  </div>
+  <!-- <%
+if (c.getCsAnswer()==null && loginnedMember.getNickname().equals("ADMIN")){
+%>
+  <div class="comment-container">
+    <div class="comment-editor">
+      <%-- <%if(c.getCsAnswer()==null){ %> --%>
+      <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
+        <div class="answer-content">
+          <input type="hidden" name="csId" value="<%=c.getCsId()%>">
+          <textarea name="admin-answer" cols="100" rows="10"></textarea>
+
+          <button type="submit" id="btn-insert">등록</button>
+        </div>
+        
+      </form>
     </div>
-    <%}%>
+  </div>
+  <%}%> -->
+  </section>
+
+
+    
+
+
+
 
 			
 
-      <%if(c.getCsAnswer()!=null){ %>
-    <div class="answer-container">
-      <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
-
-      <div class="answer-content">
-        <p><%=c.getCsAnswer()%></p>
-      </div>
-      <div class="answer-date">
-        <%=c.getCsDate()%>
-      </div>
-    </div>
-
-  </div>
-  <%}%>
     
   
-</section>
+
     
   
       
