@@ -117,12 +117,12 @@ h1 {
 		<ul class="nav nav-tabs">
 			<li class="nav-item">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</li>
 			<li class="nav-item">
-				<a class="nav-link nc <%=a != null && a.equals("0") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=0">
+				<a class="nav-link nc <%=a != null && a.equals("0") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminReportList?a=0">
 					<small>미처리</small>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link nc <%=a != null && a.equals("1") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=1">
+				<a class="nav-link nc <%=a != null && a.equals("1") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminReportList?a=1">
 					<small>처리</small>
 				</a>
 			</li>
@@ -146,14 +146,17 @@ h1 {
 			</div>
 			<%
 				if (!list.isEmpty()) {
-				for (CustomerCenter c : list) {
+				for (Report r : list) {
 			%>
 			<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
-				<div class="divCell"><%=c.getCsId()%></div>
-				<div class="divCell"><%=c.getCsType()%></div>
-				<div class="divCell"><%=c.getCsNickname()%></div>
-				<div class="divCell"><%=c.getCsTitle()%></div>
-				<div class="divCell"><%=c.getCsDate()%></div>
+				<div class="divCell"><%=r.getReportId()%></div>
+				<div class="divCell"><%=r.getReportType()%></div>
+				<div class="divCell"><%=r.getReportUserNickname()%></div>
+				<div class="divCell"><%=r.getReportTargetNickname()%></div>
+				<div class="divCell"><%=r.getReportTitle()%></div>
+				<div class="divCell"><%=r.getReportDate()%></div>
+				<div class="divCell"><%=r.getReportIswarning()%></div>
+				<div class="divCell"><%=r.getReportTargetUsid()%></div>
 			</div>
 
 			<%
@@ -172,7 +175,7 @@ h1 {
 	</div>
 
 
-	<form class="form-inline" action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
+	<form class="form-inline" action="<%=request.getContextPath()%>/admin/adminReportListSearch" id="search">
 
 		<div>
 			<select class="form-control" id="sel1" name="s">

@@ -51,10 +51,8 @@ public class AdminService {
 		Connection conn = getConnection();
 		int cnt = 0;
 		if (select.equals("ALL")) {
-			System.out.println("서비스 ALL분기");
 			cnt = aa.customerListCount(conn, a, search);
 		} else {
-			System.out.println("서비스 ALL 아님");
 			cnt = aa.customerListCount(conn, a, select, search);
 		}
 		close(conn);
@@ -193,6 +191,32 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
 		int cnt = aa.reportListCount(conn, a);
+		close(conn);
+		return cnt;
+	}
+
+	public List<Report> reportSearchList(int cPage, int numPerPage, String a, String select, String search) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		List<Report> list = null;
+		if (select.equals("ALL")) {
+			list = aa.reportAllSearchList(conn, cPage, numPerPage, a, search);
+		} else {
+			list = aa.reportSearchList(conn, cPage, numPerPage, a, search,select);
+		}
+		close(conn);
+		return list;
+	}
+
+	public int reportSearchListCount(String a, String select, String search) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int cnt = 0;
+		if (select.equals("ALL")) {
+			cnt = aa.reportAllSearchListCount(conn, a, search);
+		} else {
+			cnt = aa.reportSearchListCount(conn, a, search,select);
+		}
 		close(conn);
 		return cnt;
 	}
