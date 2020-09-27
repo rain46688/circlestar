@@ -17,6 +17,11 @@
 /* 
 .pagination>li>.page-link {
 } */
+.card-img-top {
+        width: 100%;
+        height: 10vw;
+        object-fit: cover;
+    }
 
 .pagination>li>a {
 	color:black;

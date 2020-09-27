@@ -49,6 +49,7 @@ public class ChatRoomServlet extends HttpServlet {
 		String curMemsList = request.getParameter("curMemsList");
 		String memberPicture = request.getParameter("memberPicture");
 		curMemsList=new ChatService().selectCurMemsList(boardId);
+		String boardTitle = request.getParameter("boardTitle");
 		
 		//현재 시간을 객체로 만들어서 넘겨줌
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd a HH:mm");
@@ -86,6 +87,7 @@ public class ChatRoomServlet extends HttpServlet {
 		request.setAttribute("m", m);
 		request.setAttribute("memberPicture", memberPicture);
 		request.setAttribute("time", time);
+		request.setAttribute("boardTitle", boardTitle);
 		request.getRequestDispatcher("/views/chat/chatRoom.jsp").forward(request, response);
 	}
 

@@ -194,51 +194,52 @@ public class BoardService {
 		return result;
 	}
 	
-	public int boardDeleteBoardfile(int boardId) {
-		Connection conn = getConnection();
-		int result = dao.boardDeleteBoardfile(conn, boardId);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
-	
-	public int boardDeleteLikelist(int boardId) {
-		Connection conn = getConnection();
-		int result = dao.boardDeleteLikelist(conn, boardId);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
-	
-	public int boardDeleteComment(int boardId) {
-		Connection conn = getConnection();
-		int result = dao.boardDeleteComment(conn, boardId);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
-	
-	public int boardDeleteTradelist(int boardId) {
-		Connection conn = getConnection();
-		int result = dao.boardDeleteTradelist(conn, boardId);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
+	// 삭제 추가 옵션들.
+//	public int boardDeleteBoardfile(int boardId) {
+//		Connection conn = getConnection();
+//		int result = dao.boardDeleteBoardfile(conn, boardId);
+//		if(result > 0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
+//		close(conn);
+//		return result;
+//	}
+//	
+//	public int boardDeleteLikelist(int boardId) {
+//		Connection conn = getConnection();
+//		int result = dao.boardDeleteLikelist(conn, boardId);
+//		if(result > 0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
+//		close(conn);
+//		return result;
+//	}
+//	
+//	public int boardDeleteComment(int boardId) {
+//		Connection conn = getConnection();
+//		int result = dao.boardDeleteComment(conn, boardId);
+//		if(result > 0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
+//		close(conn);
+//		return result;
+//	}
+//	
+//	public int boardDeleteTradelist(int boardId) {
+//		Connection conn = getConnection();
+//		int result = dao.boardDeleteTradelist(conn, boardId);
+//		if(result > 0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
+//		close(conn);
+//		return result;
+//	}
 }
