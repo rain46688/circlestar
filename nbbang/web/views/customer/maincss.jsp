@@ -33,7 +33,7 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
             href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
 
         <li class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/customer/customerFaq">FAQ</a></li>
+            href="<%=request.getContextPath() %>/customerFaq">FAQ</a></li>
             <li class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
             </li>
 
