@@ -22,6 +22,9 @@
 <style>
   #wrapper {
     margin: 0 auto;
+    <% if(!(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1)){ %>
+    margin-top: 5em;
+    <% } %>
     padding-top: 1em;
     width: 45em;
     text-align: center;
@@ -232,8 +235,8 @@
   	margin-top:3em;
   	margin-bottom:5px;
   	text-align:right;
-  	width:60%;
-  	font-family:'Do Hyeon', sans-serif;
+  	width:45em;
+    font-family:'Do Hyeon', sans-serif;
   }
   #btnForWriter>button {
 	height: 2em;
@@ -246,14 +249,14 @@
 	}
 </style>
 <section>
+	<% if(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1){ %>
 	<div id="btnForWriter"> 
   		<button onclick="fn_modifyBoard();">수정하기</button>
   		<button onclick="fn_deleteBoard();">삭제하기</button>
   	</div>
+  	<%} %>
   <div id="wrapper">
     <div id="imageWrapper">
-      <%-- <img src="<%= request.getContextPath() %>/upload/images/<%= c.getCardFile().getFileName()[0] %>" alt="" width="700em" height="400em">
-      <!-- carousel 적용할 예정 --> --%>
       <div id="carouselField" name="carouselField" >
         <div id="carouselNB" class="carousel slide " data-ride="carousel" data-interval="false">
           <ol class="carousel-indicators">
@@ -423,7 +426,9 @@ function fn_modifyBoard(){
 }
 
 function fn_deleteBoard(){
-  location.href = "<%=request.getContextPath()%>/board/boardDelete?boardId=<%=c.getCardBoard().getBoardId()%>";
+  if(confirm('게시물을 삭제하시겠습니까?')){
+  location.href = "<%=request.getContextPath()%>/board/boardDelete?boardId=<%=c.getCardBoard().getBoardId()%>&category=<%=c.getCardBoard().getProductCategory()%>";
+  }
 }
 
 function fn_pay(){
