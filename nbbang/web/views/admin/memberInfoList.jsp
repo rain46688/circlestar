@@ -105,64 +105,96 @@ h1 {
 }
 
 #searchDiv {
-	border: 1px solid black;
-	width: 30%;
-	margin: 2em auto;
-	padding: 5em;
+	width: 40%;
+	margin: 1em auto;
+	padding: 3em;
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px #BFBFBF;
 }
 
-#search {
-	margin: 0 auto;
-	border: 1px black solid;
+.row {
+	display: table;
 	width: 100%;
-	height: 10%;
-
-}
-
-#search div{
-}
-
-#sel *{
+	height: 100%;
 	margin: 0 auto;
-	border: 1px black solid;
-	width: 100%;
-	height: 10%;
 }
 
+.cell {
+	display: table-cell;
+	width: 16.67%;
+}
 
+.wideCell {
+	display: table-cell;
+}
 
+.cols {
+	float: center;
+}
 
-
+.cols button {
+	margin: 0 0 0 45%;
+}
 </style>
 
 <div id="writecontainer">
+
+	<form action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
+
+		<div id="searchDiv" class="shadow p-3 mb-5 bg-white rounded">
 	<div class="form-group">
 		<h1>회원 관리</h1>
 	</div>
-	<form action="<%=request.getContextPath()%>/admin/adminCustomerSearch" id="search">
-		<div id="searchDiv">
+			<div class="row shadow p-3 mb-3 bg-white rounded">
+				<div class="cell">
+					<select class="form-control" id="sel1" name="s">
+						<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
+						<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
+						<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
+						<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
+					</select>
 
-			<div id="sel">
-				<select class="form-control" id="sel1" name="s">
-					<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
-					<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
-					<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
-					<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
-				</select>
-				<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
+				</div>
+				<div class="cell">
+					<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
+				</div>
 			</div>
-			<div id="search">
-			<div>
-				<button class="btn btn-success" type="submit">검색</button>
+
+			<div class="row shadow p-3 mb-3 bg-white rounded">
+				<div class="cell">
+					<div class="form-check-inline">
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="optradio">남
+						</label>
+					</div>
+					<div class="form-check-inline">
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="optradio">여
+						</label>
+					</div>
+
+				</div>
+				<div class="cell">
+
+					<div class="form-check-inline">
+						<label class="form-check-label"> <input type="checkbox" class="form-check-input" value="">탈퇴여부
+						</label>
+					</div>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="cols">
+					<button class="btn btn-success" type="submit">검색</button>
 				</div>
 			</div>
 		</div>
+
+
 	</form>
 
 
 
 
-	<br>
 
 	<hr>
 	<br> <br>
