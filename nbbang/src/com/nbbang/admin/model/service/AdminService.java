@@ -127,7 +127,7 @@ public class AdminService {
 		if (!select.equals("ALL")) {
 			list = aa.boardInfoSearchList(conn, cPage, numPerPage, ra, select, search, select2, select3, p);
 		} else {
-			//list = aa.boardInfoAllSearchList(conn, cPage, numPerPage, ra, select, search, select2, select3, p);
+			list = aa.boardInfoAllSearchList(conn, cPage, numPerPage, ra, select, search, select2, select3, p);
 		}
 		close(conn);
 		return list;
@@ -141,7 +141,7 @@ public class AdminService {
 		if (!select.equals("ALL")) {
 			cnt = aa.boardInfoSearchListCount(conn,ra, select, search, select2, select3, p);
 		} else {
-			//cnt = aa.boardInfoAllSearchListCount(conn,ra, select, search, select2, select3, p);
+			cnt = aa.boardInfoAllSearchListCount(conn,ra, select, search, select2, select3, p);
 		}
 		close(conn);
 		return cnt;

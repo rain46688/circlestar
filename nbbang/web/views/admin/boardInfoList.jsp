@@ -10,7 +10,7 @@ String s2 = (String) request.getParameter("s2");
 String s3 = (String) request.getParameter("s3");
 String s = request.getParameter("s");
 String Sc = request.getParameter("Sc");
-String p = request.getParameter("p");
+String p = request.getParameter("pop");
 %>
 
 
@@ -162,11 +162,11 @@ h1 {
 			<div class="row shadow p-3 mb-3 bg-white rounded">
 				<div class="cell">
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="ASC" <%=ra != null && ra.equals("AS") ? "checked" : ""%>>오름 차순
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="ASC" <%=ra != null && ra.equals("ASC") ? "checked" : ""%>>오름 차순
 						</label>
 					</div>
 					<div class="form-check-inline">
-						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="DESC" <%=ra != null && ra.equals("DE") ? "checked" : ""%>>내림 차순
+						<label class="form-check-label"> <input type="radio" class="form-check-input" name="ra" value="DESC" <%=ra != null && ra.equals("DESC") ? "checked" : ""%>>내림 차순
 						</label>
 					</div>
 				</div>

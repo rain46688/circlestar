@@ -693,6 +693,16 @@ public class AdminDao {
 		}
 		return cnt;
 	}
+
+	public List<AdminBoard> boardInfoAllSearchList(Connection conn, int cPage, int numPerPage, String ra, String select, String search, String select2, String select3, String p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int boardInfoAllSearchListCount(Connection conn, String ra, String select, String search, String select2, String select3, String p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	
