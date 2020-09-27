@@ -272,7 +272,7 @@ $(function(){
 
 $(this).resize(fixedSize);
 function fixedSize() {
-		this.resizeTo(600,800);
+		this.resizeTo(620,850);
 }
 
 /* 웹소켓 부분 */
