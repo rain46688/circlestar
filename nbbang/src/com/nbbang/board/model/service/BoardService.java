@@ -70,10 +70,33 @@ public class BoardService {
 		result += dao.boardInsertTradeList(conn, b.getWriterUsid(), b.getWriterNickname());
 		if(result > 2) {
 			commit(conn);
-			System.out.println("commit");
 		}else {
 			rollback(conn);
-			System.out.println("rollback");
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int boardModify(Board b, BoardFile bf, boolean hasFile) {
+		Connection conn = getConnection();
+		int result = dao.boardModifyBoard(conn, b);
+		if(hasFile) {
+		//파일 있으면
+		result += dao.boardModifyFileDelete(conn, bf);
+		result += dao.boardModifyFileInsert(conn, bf);
+			//파일 삭제 후 업데이트
+			if(result > 2) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}else {
+			//없으면 Board만 실행
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
 		}
 		close(conn);
 		return result;
@@ -152,5 +175,12 @@ public class BoardService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public Card boardModifyCard(String boardId) {
+		Connection conn = getConnection();
+		Card c = dao.boardPage(conn, boardId);
+		close(conn);
+		return c;
 	}
 }
