@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
+import com.nbbang.admin.model.vo.Report;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.member.model.vo.Member;
@@ -865,6 +866,64 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public List<Report> reportList(Connection conn, int cPage, int numPerPage, String a) {
+		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		List<Report> list = new ArrayList<Report>();
+		Report r = null;
+		String sql = prop.getProperty("reportList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, a);
+			pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(3, cPage * numPerPage);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				r = new Report();
+				r.setReportId(rs.getInt("REPORT_ID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportIswarning(rs.getInt("REPORT_ISWARNING"));
+				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int reportListCount(Connection conn, String a) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		String sql = prop.getProperty("reportListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, a);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
 	}
 
 }

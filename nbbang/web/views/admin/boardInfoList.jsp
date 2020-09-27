@@ -99,7 +99,7 @@ h1 {
 	margin-top: 20px;
 	font-weight: bold;
 	margin-top: 15px;
-	margin-left: 280%;
+	margin-left: 300%;
 	width: 100%;
 	font-size: 20px;
 }

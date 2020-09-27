@@ -1,9 +1,9 @@
+<%@page import="com.nbbang.admin.model.vo.Report"%>
 <%@page import="java.util.List"%>
-<%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<CustomerCenter> list = (List) request.getAttribute("list");
+	List<Report> list = (List) request.getAttribute("list");
 String a = (String) request.getParameter("a");
 String s = request.getParameter("s");
 String Sc = request.getParameter("Sc");
@@ -15,7 +15,7 @@ String Sc = request.getParameter("Sc");
 #writecontainer {
 	border-radius: 5px;
 	/* border: 1px rgba(128, 128, 128, 0.5) solid; */
-/* 	border: 1px #ECAF59 solid; */
+	/* 	border: 1px #ECAF59 solid; */
 	border: 2px black solid;
 	padding: 20px;
 }
@@ -98,19 +98,19 @@ h1 {
 	border-bottom: 1px #DEE2E6 solid;
 }
 
-.empty{
-	margin-top:20px;
-	font-weight:bold;
-		margin-top:15px;
-	margin-left:70%;
-		width:100%;
-			font-size:20px;
+.empty {
+	margin-top: 20px;
+	font-weight: bold;
+	margin-top: 15px;
+	margin-left: 150%;
+	width: 100%;
+	font-size: 20px;
 }
 </style>
 
 <div class="container" id="writecontainer">
 	<div class="form-group">
-		<h1>문의 내역</h1>
+		<h1>신고 내역</h1>
 	</div>
 
 	<div id="cMenu">
@@ -135,11 +135,14 @@ h1 {
 		<div class="divListBody">
 
 			<div class="divRowTitle shadow p-3 mb-5 bg-white rounded">
-				<div class="divCell">문의 ID</div>
-				<div class="divCell">타입</div>
+				<div class="divCell">신고 ID</div>
+				<div class="divCell">유형</div>
 				<div class="divCell">작성자</div>
+				<div class="divCell">제재 회원</div>
 				<div class="divCell">제목</div>
-				<div class="divCell">문의 날짜</div>
+				<div class="divCell">신고 날짜</div>
+				<div class="divCell">제재 여부</div>
+				<div class="divCell">제재 회원 ID</div>
 			</div>
 			<%
 				if (!list.isEmpty()) {
@@ -158,7 +161,7 @@ h1 {
 			} else {
 			%>
 
-			<div class="empty">등록된 문의 글이 없습니다.</div>
+			<div class="empty">등록된 신고 글이 없습니다.</div>
 
 			<%
 				}
@@ -174,9 +177,10 @@ h1 {
 		<div>
 			<select class="form-control" id="sel1" name="s">
 				<option value="ALL" <%=s != null && s.equals("ALL") ? "selected" : ""%>>전체</option>
-				<option value="CS_TYPE" <%=s != null && s.equals("CS_TYPE") ? "selected" : ""%>>타입</option>
-				<option value="CS_NICKNAME" <%=s != null && s.equals("CS_NICKNAME") ? "selected" : ""%>>작성자</option>
-				<option value="CS_TITLE" <%=s != null && s.equals("CS_TITLE") ? "selected" : ""%>>제목</option>
+				<option value="n" <%=s != null && s.equals("n") ? "selected" : ""%>>제재 회원</option>
+				<option value="w" <%=s != null && s.equals("w") ? "selected" : ""%>>작성자</option>
+				<option value="t" <%=s != null && s.equals("t") ? "selected" : ""%>>제목</option>
+				<option value="c" <%=s != null && s.equals("c") ? "selected" : ""%>>유형</option>
 			</select>
 			<input type="hidden" name="a" value=<%=a%>>
 			<input class="form-control mr-sm-2" type="text" name="Sc" placeholder="검색할 내용을 입력" value="<%=Sc != null && !Sc.equals("") ? Sc : ""%>">
@@ -192,10 +196,7 @@ h1 {
 
 <script>
 $(".divRow").click(e=>{
-	/* 상세 페이지를 따로 만들 필요없이 도환이 고객센터 상세 페이지로 연결 세션이 어드민일경우에 "답변 작성 폼이있고 완료를 누를 경우 
-	답변(CS_ANSWER)이 등록되며 처리 상태(CS_ISCHECK = 1)로 넘어감 이미 처리 상태 일경우에 기존 답변을 가져와서 다시 수정후 넘길수있게 도 가능하면
-	좋겠음" 일단 CS_ID 파라미터 cid로 넘김 나중에 수정하길*/
-    location.assign('<%=request.getContextPath()%>/customer/customerReadFrm?num='+$(e.target).parent().children('div').html());
+    <%-- location.assign('<%=request.getContextPath()%>/customer/customerReadFrm?num='+$(e.target).parent().children('div').html()); --%>
 })
 
 

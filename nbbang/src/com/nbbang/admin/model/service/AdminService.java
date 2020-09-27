@@ -11,6 +11,7 @@ import java.util.List;
 import com.nbbang.admin.model.dao.AdminDao;
 import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
+import com.nbbang.admin.model.vo.Report;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
 public class AdminService {
@@ -178,6 +179,22 @@ public class AdminService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public List<Report> reportList(int cPage, int numPerPage, String a) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		List<Report> list = aa.reportList(conn, cPage, numPerPage, a);
+		close(conn);
+		return list;
+	}
+
+	public int reportListCount(String a) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int cnt = aa.reportListCount(conn, a);
+		close(conn);
+		return cnt;
 	}
 
 }
