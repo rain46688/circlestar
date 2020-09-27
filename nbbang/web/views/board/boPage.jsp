@@ -108,6 +108,14 @@
     overflow: auto;
   }
 
+  #commentInsert2 {
+    width: fluid;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: left;
+    overflow: auto;
+  }
+
   #Comments {
     width: 100%;
   }
@@ -117,6 +125,14 @@
     list-style: none;
     margin: 0 auto;
     overflow: auto;
+  }
+
+  .comment_area2{
+    width: 100%;
+    overflow: auto;
+    padding-left: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 
   .comment_area {
@@ -246,7 +262,16 @@
 
 	#btnForWriter>button:hover {
 	border: 2px black solid;
-	}
+  }
+  
+  .addToReple {
+    text-decoration: none;
+    color: gray;
+  }
+
+  .confirm {
+    font-family: 'Do Hyeon', sans-serif;
+  }
 </style>
 <section>
 	<% if(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1){ %>
@@ -359,6 +384,8 @@
               <!-- MEMBER 컬럼의  MEMBER_PICTURE -->
               <input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
               <!-- <%-- <% if(c.getCardBoard().getTradeStage()>1) {%> --%> -->
+                <input type="hidden" name="boardTitle" value="${curCard.cardBoard.boardTitle}">
+
               <button id="hiddenEnterBtn" onclick="nbbang(this.form)" >채팅방 접속하기</button>	
               <!-- <%-- <%}%> --%> -->
             </form>
@@ -407,9 +434,9 @@
             <option value="openComment" selected>전체댓글</option>
             <option value="secretComment">비밀댓글</option>
           </select>
-          <input type="text" id="commentContent" size="48">
-          <input type="hidden" id="commentLevel" value="1">
-          <button id="commentInsertBtn">댓글입력</button>
+          <input type="text" name="commentContent" class="commentContent" id="commentContent" size="48">
+          <input type="hidden" name="commentLevel" id="commentLevel" value="1">
+          <button class="commentInsertBtn">댓글입력</button>
       </div>
     <div id="Comments">
       <ul class="comment_list">
@@ -420,6 +447,17 @@
   </div>
 </section>
 <script>
+
+function fn_replyToReply(comId){
+  let html = "";
+  html += "<div id=\"commentInsert2\">";
+  html += "<input type=\"text\" name='commentContent' class='commentContent' id=\"commentContent\" size=\"46\">";
+  html += "<input type=\"hidden\" name='commentLevel' id=\"commentLevel\" value=\"2\">";
+  html += "<input type=\"hidden\" name='com_ref' id=\"com_ref\" value="+comId+">";
+  html += "<button class=\"commentInsertBtn\">댓글입력</button>";
+  html += "</div>";
+  $(event.target).parent().parent().append(html);
+}
 
 function fn_modifyBoard(){
   location.href = "<%=request.getContextPath()%>/board/boardModify?boardId=<%=c.getCardBoard().getBoardId()%>";
@@ -447,8 +485,10 @@ window.onunload = function() {
 }
 <% if(reply.equals("success")) { %>
 function autoReple() {
-  $("#commentContent").val('결제했습니다.');
+  $("#commentContent").val("<p class='confirm'>결제했습니다.</p>");
   $("#commentInsertBtn").click();
+  $("#commentContent").val("");
+  return false;
 }
 <% } %>
 
@@ -458,8 +498,7 @@ function nbbang(f){
 	var y = 800;
 	var cx = (window.screen.width / 2) - (x / 2);
 	var cy= (window.screen.height / 2) - (y / 2);
-	console.log("window.screen.width : "+window.screen.width+", cx : "+cx);
-	console.log("window.screen.height : "+window.screen.height+", cy : "+cy);
+
 	var url    ="<%=request.getContextPath()%>/chat/chatRoom";
 	  var title  = "chat";
 	  var status = "toolbar=no,directories=no,scrollbars=no,resizable=no,status=no,menubar=no,width="+x+", height="+y+", top="+cy+",left="+cx;
@@ -479,7 +518,6 @@ function fun_createroom() {
 		dataType: "json",
 		url: "<%=request.getContextPath()%>/chat/createRoom",
 			success : function(data) {
-					console.log("data : "+data);
 				if (data == 1) {
 					//방의 상태를 바꿔야되니 ajax로 갔따오자 방의 상태를 2로 변경함
           alert('채팅방이 생성되었습니다.');
@@ -529,23 +567,69 @@ function fun_cancelbuy() {
 			}
 		})
 }
-
-
-
-	$("#commentContent").keypress(function(e){
-		if(e.keyCode == 13) {
-			$("#commentInsertBtn").click();
-			$("#commentContent").val("");
+  //같은 이름을 가진 모든 클래스에 Func적용
+  $(document).on('keypress', '.commentContent', function(e){
+    if(e.keyCode == 13) {
+      $(e.target).parent().children('.commentInsertBtn').click();
+			$(e.target).val("");
 			return false;
 		}
-	});
+  });
+
+  $(document).on('click','.commentInsertBtn',function (e){
+      
+        if ($(e.target).parent().children('.commentContent').val() != null) {
+          if($(e.target).parent().children('input[name=commentLevel]').val()==1) {
+            $.ajax({
+                url: "<%=request.getContextPath()%>/board/commentInsert",
+                type: "post",
+                dataType: "text",
+                data: {
+                    "cBoardId": "<%= c.getCardBoard().getBoardId() %>",
+                    "content": $(e.target).parent().children('input[name=commentContent]').val(),
+                    "secret": $(e.target).parent().children('select[name=commentTo]').val(),
+                    "cWriterNickname": "<%= loginnedMember.getNickname() %>",
+                    "comLayer": $(e.target).parent().children('input[name=commentLevel]').val(),
+                    "comProfile": "<%= loginnedMember.getMemberPicture() %>"
+                },
+                success: function (data) {
+                    if (data != "success") {
+                        alert("댓글 작성에 실패했습니다.");
+                    }
+                    $(e.target).parent().children('input[name=commentContent]').val("");
+                    fn_commentList(data);
+                }
+            })
+          }else {
+            $.ajax({
+                url: "<%=request.getContextPath()%>/board/commentInsert",
+                type: "post",
+                dataType: "text",
+                data: {
+                    "cBoardId": "<%= c.getCardBoard().getBoardId() %>",
+                    "content": $(e.target).parent().children('input[name=commentContent]').val(),
+                    "cWriterNickname": "<%= loginnedMember.getNickname() %>",
+                    "comLayer": $(e.target).parent().children('input[name=commentLevel]').val(),
+                    "comProfile": "<%= loginnedMember.getMemberPicture() %>",
+                    "com_ref" : $(e.target).parent().children('input[name=com_ref]').val()
+                },
+                success: function (data) {
+                    if (data != "success") {
+                        alert("댓글 작성에 실패했습니다.");
+                    }
+                    $(e.target).parent().children('input[name=commentContent]').val("");
+                    fn_commentList(data);
+                }
+            })
+          }
+        }
+      })
 
     $(document).ready(function () {
         fn_commentList();
         <% if(reply.equals("success")) { %>
         autoReple();
         <% } %>
-        console.log("last");
         $("#hideButton").hide();
         $("#likeFunc").click(function (e) {
             if ($("#likeFunc>img").attr("src") == "<%= request.getContextPath() %>/images/heart.png") {
@@ -578,29 +662,7 @@ function fun_cancelbuy() {
         })
     })
 
-    $("#commentInsertBtn").click(function (e) {
-        if ($("#commentContent").val() != null) {
-            $.ajax({
-                url: "<%=request.getContextPath()%>/board/commentInsert",
-                type: "post",
-                dataType: "text",
-                data: {
-                    "cBoardId": "<%= c.getCardBoard().getBoardId() %>",
-                    "content": $("#commentContent").val(),
-                    "secret": $("#commentTo").val(),
-                    "cWriterNickname": "<%= loginnedMember.getNickname() %>",
-                    "comLayer": $("#commentLevel").val(),
-                    "comProfile": "<%= loginnedMember.getMemberPicture() %>"
-                },
-                success: function (data) {
-                    if (data != "success") {
-                        alert("댓글 작성에 실패했습니다.");
-                    }
-                    fn_commentList(data);
-                }
-            })
-        }
-    })
+    
 
     function fn_commentList() {
         $.ajax({
@@ -613,22 +675,79 @@ function fun_cancelbuy() {
             success: function (data) {
                 let html = "";
                 $.each(data, function (index, item) {
-                    html += "<li class='comment_item'>";
-                    html += "<hr>";
-                    html += "<div class='comment_area'>";
-                    html += "<div class='comment_thumb'>";
-                    html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
-                            " height='30px' style='border-radius: 70%'>";
-                    html += "</div>";
-                    html += "<div class='comment_box'>";
-                    html += "<div class='comment_id'>";
-                    html += item.cwriterNickname;
-                    html += "</div>";
-                    html += "<div class='comment_text'>";
-                    html += item.content + "</div>";
-                    html += "<div class='comment_info'>";
-                    html += item.cenrollDate + " 답글쓰기";
-                    html += "</div></div></div></li>"
+                  if(item.comLayer==1){
+                    if(item.cwriterNickname=="<%=loginnedMember.getNickname()%>") {
+                      html += "<li class='comment_item'>";
+                      html += "<hr>";
+                      html += "<div class='comment_area'>";
+                      html += "<div class='comment_thumb'>";
+                      html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
+                              " height='30px' style='border-radius: 70%'>";
+                      html += "</div>";
+                      html += "<div class='comment_box'>";
+                      html += "<div class='comment_id'>";
+                      html += item.cwriterNickname;
+                      html += "</div>";
+                      html += "<div class='comment_text'>";
+                      html += item.content + "</div>";
+                      html += "<div class='comment_info'>";
+                      html += item.cenrollDate + " <a class='addToReple' style='cursor:pointer' onclick='fn_replyToReply("+item.comId+");'>답글쓰기</a> <a class='addToReple' href='#' onclick='fn_repleModify();'>수정</a> <a class='addToReple' href='#' onclick='fn_repleModify();'>삭제</a>";
+                      html += "</div></div></div></li>"
+                    }else {
+                      html += "<li class='comment_item'>";
+                      html += "<hr>";
+                      html += "<div class='comment_area'>";
+                      html += "<div class='comment_thumb'>";
+                      html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
+                              " height='30px' style='border-radius: 70%'>";
+                      html += "</div>";
+                      html += "<div class='comment_box'>";
+                      html += "<div class='comment_id'>";
+                      html += item.cwriterNickname;
+                      html += "</div>";
+                      html += "<div class='comment_text'>";
+                      html += item.content + "</div>";
+                      html += "<div class='comment_info'>";
+                      html += item.cenrollDate + " <a class='addToReple' style='cursor:pointer' onclick='fn_replyToReply("+item.comId+");'>답글쓰기</a>";
+                      html += "</div></div></div></li>"
+                    }
+                  }else {
+                    if(item.cwriterNickname=="<%=loginnedMember.getNickname()%>") {
+                      html += "<li class='comment_item'>";
+                      // html += "<hr>";
+                      html += "<div class='comment_area2'>";
+                      html += "<div class='comment_thumb'>";
+                      html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
+                              " height='30px' style='border-radius: 70%'>";
+                      html += "</div>";
+                      html += "<div class='comment_box'>";
+                      html += "<div class='comment_id'>";
+                      html += item.cwriterNickname;
+                      html += "</div>";
+                      html += "<div class='comment_text'>";
+                      html += item.content + "</div>";
+                      html += "<div class='comment_info'>";
+                      html += item.cenrollDate + "  <a class='addToReple' style='cursor:pointer' onclick='fn_repleModify();'>수정</a> <a class='addToReple' href='#' onclick='fn_repleModify();'>삭제</a>";
+                      html += "</div></div></div></li>"
+                    }else {
+                      html += "<li class='comment_item'>";
+                      html += "<hr>";
+                      html += "<div class='comment_area2'>";
+                      html += "<div class='comment_thumb'>";
+                      html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
+                              " height='30px' style='border-radius: 70%'>";
+                      html += "</div>";
+                      html += "<div class='comment_box'>";
+                      html += "<div class='comment_id'>";
+                      html += item.cwriterNickname;
+                      html += "</div>";
+                      html += "<div class='comment_text'>";
+                      html += item.content + "</div>";
+                      html += "<div class='comment_info'>";
+                      html += item.cenrollDate
+                      html += "</div></div></div></li>"
+                    }
+                  }
                 });
                 $(".comment_list").html(html);
             }

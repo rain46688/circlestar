@@ -34,13 +34,21 @@ public class CommentInsertServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		Comment c = new Comment();
-		
-		c.setCboardId(Integer.parseInt(request.getParameter("cBoardId")));
-		c.setContent(request.getParameter("content"));
-		c.setSecret(request.getParameter("secret").equals("secretComment")?true:false);
-		c.setCwriterNickname(request.getParameter("cWriterNickname"));
-		c.setComLayer(Integer.parseInt(request.getParameter("comLayer")));
-		c.setComProfile(request.getParameter("comProfile"));
+		if(request.getParameter("comLayer").equals("1")) {
+			c.setCboardId(Integer.parseInt(request.getParameter("cBoardId")));
+			c.setContent(request.getParameter("content"));
+			c.setSecret(request.getParameter("secret").equals("secretComment")?true:false);
+			c.setCwriterNickname(request.getParameter("cWriterNickname"));
+			c.setComLayer(Integer.parseInt(request.getParameter("comLayer")));
+			c.setComProfile(request.getParameter("comProfile"));
+		}else {
+			c.setCboardId(Integer.parseInt(request.getParameter("cBoardId")));
+			c.setContent(request.getParameter("content"));
+			c.setCwriterNickname(request.getParameter("cWriterNickname"));
+			c.setComLayer(Integer.parseInt(request.getParameter("comLayer")));
+			c.setComProfile(request.getParameter("comProfile"));
+			c.setComRef(Integer.parseInt(request.getParameter("com_ref")));
+		}
 		
 		int result = new BoardService().commentInsert(c);
 		
