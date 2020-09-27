@@ -79,10 +79,6 @@ h1 {
 	display: table-row-group;
 }
 
-.nav-link {
-	font-size: 20px;
-}
-
 #check {
 	margin-left: 5em;
 }

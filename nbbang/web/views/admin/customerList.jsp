@@ -75,7 +75,7 @@ h1 {
 	display: table-row-group;
 }
 
-.nav-link {
+.nc {
 	font-size: 20px;
 }
 
@@ -117,12 +117,12 @@ h1 {
 		<ul class="nav nav-tabs">
 			<li class="nav-item">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</li>
 			<li class="nav-item">
-				<a class="nav-link <%=a != null && a.equals("0") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=0">
+				<a class="nav-link nc <%=a != null && a.equals("0") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=0">
 					<small>미처리</small>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link <%=a != null && a.equals("1") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=1">
+				<a class="nav-link nc <%=a != null && a.equals("1") ? "active" : ""%>" href="<%=request.getContextPath()%>/admin/adminCustomerList?a=1">
 					<small>처리</small>
 				</a>
 			</li>
