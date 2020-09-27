@@ -942,7 +942,7 @@ private Properties prop=new Properties();
 			pstmt.setInt(1, reportId);
 			pstmt.setInt(2, usid);
 			rs=pstmt.executeQuery();
-			while(rs.next()) {
+			if(rs.next()) {
 				r.setReportId(rs.getInt("REPORT_ID"));
 				r.setReportUserUsid(rs.getInt("REPORT_USER_USID"));
 				r.setReportBoardId(rs.getInt("REPORT_BOARD_ID"));
@@ -975,7 +975,7 @@ private Properties prop=new Properties();
 			pstmt=conn.prepareStatement(prop.getProperty("reportDetailAll"));
 			pstmt.setInt(1, reportId);
 			rs=pstmt.executeQuery();
-			while(rs.next()) {
+			if(rs.next()) {
 				r.setReportId(rs.getInt("REPORT_ID"));
 				r.setReportUserUsid(rs.getInt("REPORT_USER_USID"));
 				r.setReportBoardId(rs.getInt("REPORT_BOARD_ID"));

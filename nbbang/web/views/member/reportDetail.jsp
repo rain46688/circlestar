@@ -1,11 +1,10 @@
-<%@page import="com.nbbang.board.model.vo.Board"%>
+<%@page import="com.nbbang.board.model.vo.Board, com.nbbang.member.model.vo.Report"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 <%
-	Board boardData=(Board)request.getAttribute("boardData");
-	Member user=(Member)request.getAttribute("user");
-	Member target=(Member)request.getAttribute("target");
+    Report rd=(Report)request.getAttribute("reportDetail");
+    Board boardData=(Board)request.getAttribute("boardData");
 %>
 <style>
     div#myPageSideBar{
@@ -80,7 +79,7 @@
     ul.pagination{
         text-align: center;
     }
-    input.reportInfo{
+    div.reportInfo{
         border: none;
         width: 100%;
     }
@@ -156,43 +155,43 @@
                 </div>
             </div>
         </div>
-        <div id="iCreateContainer">
-            <div class="item textField" id="containerTitle">
-                <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0;margin-bottom: 20px; text-align: left;" >신고하기</div>
-            </div>
-            <div class="item textField" style="margin-left: 1%;">
-                <form action="<%=request.getContextPath() %>/member/reportSend" id="reportForm" name="reportForm" method="post" enctype="multipart/form-data"> 
+        <%if(loginnedMember.getUsid()!=9999){%>
+            <div id="iCreateContainer">
+                <div class="item textField" id="containerTitle">
+                    <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0;margin-bottom: 20px; text-align: left;" >신고내역</div>
+                </div>
+                <div class="item textField" style="margin-left: 1%;">
                     <div class="fieldCapsule">
                         <div style="font-size: 18px;">
-                            신고할 게시글 정보
+                            신고한 게시글 정보
                         </div>
                     </div>
                     <div class="fieldCapsule">
                         <div class="capsuleLeft">
-                            <input type="text" class="reportInfo" value="글번호" readonly>
+                            글번호
                         </div>
                         <div class="capsuleRight">
-                            <input type="text" class="reportInfo" name="rboardId" value="<%=boardData.getBoardId()%>" readonly>
+                            <%=boardData.getBoardId()%>
                         </div>
                     </div>
                     <div class="fieldCapsule">
                         <div class="capsuleLeft">
-                            <input type="text" class="reportInfo" value="신고할 게시물 제목" readonly>
+                            신고한 게시물 제목
                         </div>
                         <div class="capsuleRight">
-                            <input type="text" class="reportInfo" id="rtitle" name="rtitle" value="<%=boardData.getBoardTitle()%>" readonly>
+                            <%=boardData.getBoardTitle()%>
                         </div>
                     </div>
                     <div class="fieldCapsule">
                         <div class="capsuleLeft">
-                            <input type="text" class="reportInfo" value="신고할 회원" readonly>
+                            신고한 회원
                         </div>
                         <div class="capsuleRight">
-                            <input type="text" class="reportInfo" value="<%=boardData.getWriterNickname()%>" readonly>
+                            <%=boardData.getWriterNickname()%>
                         </div>
                     </div>
-            </div> 
-            <div class="item textField" style="margin-left: 1%;">
+                </div> 
+                <div class="item textField" style="margin-left: 1%;">
                     <div style="height: 20px;"> </div>
                     <div class="fieldCapsule">
                         <div style="font-size: 18px;">
@@ -201,56 +200,140 @@
                     </div>
                     <div class="fieldCapsule">
                         <div class="capsuleLeft" style="width: 20%;">
-                            <input type="text" class="reportInfo" value="신고유형" readonly>
+                            신고유형
                         </div>
                         <div class="capsuleRight" style="width: 80%;">
-                            <select name="rtype" id="rtype">
-                                <option>선택</option>
-                                <option value="홍보성">홍보성</option>
-                                <option value="권리침해">권리침해</option>
-                                <option value="선정성">선정성</option>
-                                <option value="인신공격">인신공격</option>
-                                <option value="기타">기타</option>
-                            </select>
+                            <%=rd.getReportType()%>
                         </div>
                     </div>
                     <div class="fieldCapsule">
                         <div class="capsuleLeft" style="width: 20%;">
-                            <input type="text" class="reportInfo" value="제목" readonly>
+                            제목
                         </div>
                         <div class="capsuleRight" style="width: 80%;">
-                            <input type="text" id="reportTitle" name="reportTitle" placeholder="제목을 입력해주세요">
+                            <%=rd.getReportTitle() %>
                         </div>
                     </div>
                     <div class="fieldCapsule">
                         <div class="capsuleLeft" style="width: 20%;">
-                            <input type="text" class="reportInfo" value="내용" readonly>
+                            내용
                         </div>
                         <div class="capsuleRight" style="width: 80%;">
-                            <textarea id="rcontent" name="rcontent" cols="30" rows="4" maxlength="100" placeholder="신고 내용을 적어주세요."></textarea>
+                            <%=rd.getReportContent() %>
                         </div>
                     </div>
                     <div class="fieldCapsule">
                         <div class="capsuleLeft" style="width: 20%;">
-                            <input type="text" class="reportInfo" value="파일첨부" readonly>
+                            첨부한 파일
                         </div>
                         <div class="capsuleRight" style="width: 80%;">
-                            <input type="file" name="rfile">
+                            <%=rd.getReportFile() %>
                         </div>
                     </div>
-                   
-                    <div style="text-align: center; margin-top: 1%;">
-                        <button type="button" class="button" onclick="fn_reportSend();">신고하기</button>
-                        <button type="button" class="button" onclick="history.back();">취소</button>
-                    </div>
-                    <input type="hidden" name="rusid" value="<%=user.getUsid()%>">
-                    <input type="hidden" name="rnickname" value="<%=user.getNickname()%>">
-                    <input type="hidden" name="rtargetUsid" value="<%=target.getUsid()%>">
-                    <input type="hidden" name="rtargetNickname" value="<%=target.getNickname()%>">
                 </div>
-                </form>
+                <div class="item textField" style="margin-left: 1%;">
+                    <div style="height: 20px;"> </div>
+                    <div class="fieldCapsule">
+                        <div style="font-size: 18px;">
+                            관리자 답변
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            신고유형
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
+                            <%if(rd.getReportAnswer()==null){%>
+                            	아직 관리자로부터 받은 답변이 없습니다.
+                            <%}else {
+                            	rd.getReportAnswer();	
+                            } %>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2%;">
+                    <button type="button" class="button" 
+                    onclick="location.href='<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>'">목록으로</button>
+                </div>
             </div>
-        </div>
+        <%}else{%>
+            <div id="iCreateContainer">
+                <div class="item textField" id="containerTitle">
+                    <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0;margin-bottom: 20px; text-align: left;" >신고내역</div>
+                </div>
+                <div class="item textField" style="margin-left: 1%;">
+                    <div class="fieldCapsule">
+                        <div style="font-size: 18px;">
+                            신고한 게시글 정보
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft">
+                            글번호
+                        </div>
+                        <div class="capsuleRight">
+                            <%=boardData.getBoardId()%>
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft">
+                            신고한 게시물 제목
+                        </div>
+                        <div class="capsuleRight">
+                            <%=boardData.getBoardTitle()%>
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft">
+                            신고한 회원
+                        </div>
+                        <div class="capsuleRight">
+                            <%=boardData.getWriterNickname()%>
+                        </div>
+                    </div>
+                </div> 
+                <div class="item textField" style="margin-left: 1%;">
+                    <div style="height: 20px;"> </div>
+                    <div class="fieldCapsule">
+                        <div style="font-size: 18px;">
+                            상세내용
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            신고유형
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
+                            <%=rd.getReportType()%>
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            제목
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
+                            <%=rd.getReportTitle() %>
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            내용
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
+                            <%=rd.getReportContent() %>
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            첨부한 파일
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
+                            <%=rd.getReportFile() %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%}%>
     </div>
     <script>
         function fn_reportSend(){

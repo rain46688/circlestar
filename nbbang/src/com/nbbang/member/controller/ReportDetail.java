@@ -1,7 +1,6 @@
 package com.nbbang.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.nbbang.board.model.vo.Board;
 import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
 import com.nbbang.member.model.vo.Report;
@@ -40,15 +40,18 @@ public class ReportDetail extends HttpServlet {
 			if(loginnedMember.getUsid()!=9999) {//관리자가 아니면
 				int reportId=Integer.parseInt(request.getParameter("reportId"));
 				Report r=new MemberService().reportDetail(usid, reportId);
+				int boardId=r.getReportBoardId();
+				Board b=new MemberService().boardData(boardId);
 				request.setAttribute("reportDetail", r);
-				request.getRequestDispatcher("/views/member/reportDetil.jsp").forward(request, response);
+				request.setAttribute("boardData", b);
+				request.getRequestDispatcher("/views/member/reportDetail.jsp").forward(request, response);
 			}
 		}else {
 			if(loginnedMember.getUsid()==9999) {//관리자면
 				int reportId=Integer.parseInt(request.getParameter("reportId"));
 				Report r=new MemberService().reportDetail(reportId);
 				request.setAttribute("reportDetail",r);
-				request.getRequestDispatcher("/views/member/reportDetil.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/member/reportDetail.jsp").forward(request, response);
 			}else {
 				request.setAttribute("msg", "접근불가능한 페이지입니다.");
 				request.setAttribute("loc", "/");
