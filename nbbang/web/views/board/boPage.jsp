@@ -566,7 +566,66 @@ function fun_cancelbuy() {
 				location.reload();
 			}
 		})
-}
+  }
+
+  $(document).on('click', '.repleDelete', function(e){
+    let comId = $(e.target).parent().parent().children('.comId').val();
+    if(confirm('댓글을 삭제하시겠습니까?')) {
+      $.ajax({
+                url: "<%=request.getContextPath()%>/board/commentDelete",
+                type: "post",
+                dataType: "text",
+                data: {
+                    "comId":$(e.target).parent().parent().children('.comId').val()
+                },
+                success: function (data) {
+                    if (data != "success") {
+                        alert("댓글 삭제에 실패했습니다.");
+                    }
+                    fn_commentList(data);
+                }
+            })
+    }
+  })
+
+  $(document).on('click', '.repleModify',function(e){
+    let value = $(e.target).parent().parent().children('.comment_text').text();
+    let comId = $(e.target).parent().parent().children('.comId').val();
+    let html = "";
+    html += "<div id=\"commentInsert2\">";
+    html += "<input type=\"text\" name='commentContent' class='commentModify' id=\"commentContent\" value='"+value+"' size=\"46\">";
+    html += "<input type=\"hidden\" name='comId' class=\"comId\" value=\""+comId+"\">";
+    html += "<button class=\"commentModifyBtn\">댓글입력</button>";
+    html += "</div>";
+    $(e.target).parent().parent().children('.comment_text').html(html);
+  })
+
+  $(document).on('keypress', '.commentModify', function(e){
+    if(e.keyCode == 13) {
+      $(e.target).parent().children('.commentModifyBtn').click();
+			$(e.target).val("");
+			return false;
+		}
+  });
+
+  $(document).on('click','.commentModifyBtn',function(e){
+    $.ajax({
+                url: "<%=request.getContextPath()%>/board/commentModify",
+                type: "post",
+                dataType: "text",
+                data: {
+                    "comId":$(e.target).parent().children('.comId').val(),
+                    "content":$(e.target).parent().children('.commentModify').val()
+                },
+                success: function (data) {
+                    if (data != "success") {
+                        alert("댓글 작성에 실패했습니다.");
+                    }
+                    fn_commentList(data);
+                }
+            })
+  })
+
   //같은 이름을 가진 모든 클래스에 Func적용
   $(document).on('keypress', '.commentContent', function(e){
     if(e.keyCode == 13) {
@@ -577,7 +636,6 @@ function fun_cancelbuy() {
   });
 
   $(document).on('click','.commentInsertBtn',function (e){
-      
         if ($(e.target).parent().children('.commentContent').val() != null) {
           if($(e.target).parent().children('input[name=commentLevel]').val()==1) {
             $.ajax({
@@ -675,6 +733,7 @@ function fun_cancelbuy() {
             success: function (data) {
                 let html = "";
                 $.each(data, function (index, item) {
+                  console.log(item.secret);
                   if(item.comLayer==1){
                     if(item.cwriterNickname=="<%=loginnedMember.getNickname()%>") {
                       html += "<li class='comment_item'>";
@@ -688,12 +747,14 @@ function fun_cancelbuy() {
                       html += "<div class='comment_id'>";
                       html += item.cwriterNickname;
                       html += "</div>";
+                      html += "<input type='hidden' class='comId' value='" + item.comId + "'>";
                       html += "<div class='comment_text'>";
                       html += item.content + "</div>";
                       html += "<div class='comment_info'>";
-                      html += item.cenrollDate + " <a class='addToReple' style='cursor:pointer' onclick='fn_replyToReply("+item.comId+");'>답글쓰기</a> <a class='addToReple' href='#' onclick='fn_repleModify();'>수정</a> <a class='addToReple' href='#' onclick='fn_repleModify();'>삭제</a>";
+                      html += item.cenrollDate + " <a class='addToReple' style='cursor:pointer' onclick='fn_replyToReply("+item.comId+");'>답글쓰기</a> <a class='addToReple repleModify' style='cursor:pointer'>수정</a> <a class='addToReple repleDelete' style='cursor:pointer' >삭제</a>";
                       html += "</div></div></div></li>"
                     }else {
+                      if(!item.secret){
                       html += "<li class='comment_item'>";
                       html += "<hr>";
                       html += "<div class='comment_area'>";
@@ -705,11 +766,31 @@ function fun_cancelbuy() {
                       html += "<div class='comment_id'>";
                       html += item.cwriterNickname;
                       html += "</div>";
+                      html += "<input type='hidden' class='comId' value='" + item.comId + "'>";
                       html += "<div class='comment_text'>";
                       html += item.content + "</div>";
                       html += "<div class='comment_info'>";
                       html += item.cenrollDate + " <a class='addToReple' style='cursor:pointer' onclick='fn_replyToReply("+item.comId+");'>답글쓰기</a>";
                       html += "</div></div></div></li>"
+                      }else {
+                        html += "<li class='comment_item'>";
+                      html += "<hr>";
+                      html += "<div class='comment_area'>";
+                      html += "<div class='comment_thumb'>";
+                      html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
+                              " height='30px' style='border-radius: 70%'>";
+                      html += "</div>";
+                      html += "<div class='comment_box'>";
+                      html += "<div class='comment_id'>";
+                      html += item.cwriterNickname;
+                      html += "</div>";
+                      html += "<input type='hidden' class='comId' value='" + item.comId + "'>";
+                      html += "<div class='comment_text'>";
+                      html += "비밀댓글입니다." + "</div>";
+                      html += "<div class='comment_info'>";
+                      html += item.cenrollDate + " <a class='addToReple' style='cursor:pointer' onclick='fn_replyToReply("+item.comId+");'>답글쓰기</a>";
+                      html += "</div></div></div></li>"
+                      }
                     }
                   }else {
                     if(item.cwriterNickname=="<%=loginnedMember.getNickname()%>") {
@@ -724,10 +805,11 @@ function fun_cancelbuy() {
                       html += "<div class='comment_id'>";
                       html += item.cwriterNickname;
                       html += "</div>";
+                      html += "<input type='hidden' class='comId' value='" + item.comId + "'>";
                       html += "<div class='comment_text'>";
                       html += item.content + "</div>";
                       html += "<div class='comment_info'>";
-                      html += item.cenrollDate + "  <a class='addToReple' style='cursor:pointer' onclick='fn_repleModify();'>수정</a> <a class='addToReple' href='#' onclick='fn_repleModify();'>삭제</a>";
+                      html += item.cenrollDate + "  <a class='addToReple repleModify' style='cursor:pointer'>수정</a> <a class='addToReple repleDelete' style='cursor:pointer' >삭제</a>";
                       html += "</div></div></div></li>"
                     }else {
                       html += "<li class='comment_item'>";
@@ -741,11 +823,12 @@ function fun_cancelbuy() {
                       html += "<div class='comment_id'>";
                       html += item.cwriterNickname;
                       html += "</div>";
+                      html += "<input type='hidden' class='comId' value='" + item.comId + "'>";
                       html += "<div class='comment_text'>";
                       html += item.content + "</div>";
                       html += "<div class='comment_info'>";
-                      html += item.cenrollDate
-                      html += "</div></div></div></li>"
+                      html += item.cenrollDate;
+                      html += "</div></div></div></li>";
                     }
                   }
                 });
