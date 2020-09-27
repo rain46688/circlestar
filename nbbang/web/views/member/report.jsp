@@ -127,7 +127,7 @@
             </div>
         </div>
         <div id="iCreateContainer">
-            <form action="<%=request.getContextPath() %>/member/reportSend" name="reportForm" method="post">
+            <form action="<%=request.getContextPath() %>/member/reportSend" id="reportForm" name="reportForm" method="post">
                 <div>
                     <div>
                         글번호<input type="text" name="rboardId" value="<%=boardData.getBoardId()%>" readonly>
@@ -177,7 +177,9 @@
         </div>
     </div>
     <script>
-
+        function fn_reportSend(){
+            $("#reportForm").submit();
+        }
     </script>
 </section>
 <%@ include file="/views/common/footer.jsp" %>
