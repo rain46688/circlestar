@@ -57,13 +57,18 @@
         position: relative;
         background: #FFFFFF;
         text-align: center;
-        margin: 3% 12% 5% 0%;
+        margin: 3% 23% 5% 0%;
         /* 세로정렬꽉차게 가운데:center */
-        /*align-items: stretch;*/
+        align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
-        /*justify-items: stretch;*/
-        width: 51%;
-        float: left;
+        justify-items: stretch;
+        width: 40%;
+        float: right;
+    }
+    div .item *{
+        width:100%;
+        text-align: left;
+        font-size: 16px;
     }
     a.active{
         font-weight: bold;
@@ -75,11 +80,43 @@
     ul.pagination{
         text-align: center;
     }
-    
-    div#fieldCapsule{
+    input.reportInfo{
+        border: none;
+        width: 100%;
+    }
+    div.fieldCapsule{
         display: flex;
         position: relative;
-        padding: 3%;
+    }
+    div.capsuleLeft{
+        width: 30%;
+        float: left;
+        border-bottom: black 1px solid;
+        padding: 1%;
+    }
+    div.capsuleRight{
+        width: 70%;
+        float: left;
+        border-bottom: black 1px solid;
+        padding: 1%;
+    }
+    input#rtitle{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    button.button{
+        outline: none;
+        background: #735020;
+        width: 10%;
+        min-width: 40px;
+        border: none;
+        padding: 5px;
+        color: #FFFFFF;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        margin: 5px 0;
     }
 </style>
 <section>
@@ -123,58 +160,109 @@
             <div class="item textField" id="containerTitle">
                 <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0;margin-bottom: 20px; text-align: left;" >신고하기</div>
             </div>
-            <form action="<%=request.getContextPath() %>/member/reportSend" id="reportForm" name="reportForm" method="post">
-                <div id="fieldCapsule">
-                    <div>
-                        신고유형
-                        <select name="rtype">
-                            <option>선택</option>
-                            <option value="홍보성">홍보성</option>
-                            <option value="권리침해">권리침해</option>
-                            <option value="선정성">선정성</option>
-                            <option value="인신공격">인신공격</option>
-                            <option value="기타">기타</option>
-                        </select>
+            <div class="item textField" style="margin-left: 1%;">
+                <form action="<%=request.getContextPath() %>/member/reportSend" id="reportForm" name="reportForm" method="post" enctype="multipart/form-data"> 
+                    <div class="fieldCapsule">
+                        <div style="font-size: 18px;">
+                            신고할 게시글 정보
+                        </div>
                     </div>
-                    <div>
-                        신고할 게시물 번호<input type="text" name="rboardId" value="<%=boardData.getBoardId()%>" readonly>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft">
+                            <input type="text" class="reportInfo" value="글번호" readonly>
+                        </div>
+                        <div class="capsuleRight">
+                            <input type="text" class="reportInfo" name="rboardId" value="<%=boardData.getBoardId()%>" readonly>
+                        </div>
                     </div>
-                    <div>
-                        제목<input type="text" name="reportTitle">
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft">
+                            <input type="text" class="reportInfo" value="신고할 게시물 제목" readonly>
+                        </div>
+                        <div class="capsuleRight">
+                            <input type="text" class="reportInfo" id="rtitle" name="rtitle" value="<%=boardData.getBoardTitle()%>" readonly>
+                        </div>
                     </div>
-                    <div>
-                        신고할 게시물 제목<input type="text" name="rtitle" value="<%=boardData.getBoardTitle()%>" readonly>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft">
+                            <input type="text" class="reportInfo" value="신고할 회원" readonly>
+                        </div>
+                        <div class="capsuleRight">
+                            <input type="text" class="reportInfo" value="<%=boardData.getWriterNickname()%>" readonly>
+                        </div>
                     </div>
-                    <div>
-                        신고할 회원<input type="text" value="<%=boardData.getWriterNickname()%>" readonly>
+            </div> 
+            <div class="item textField" style="margin-left: 1%;">
+                    <div style="height: 20px;"> </div>
+                    <div class="fieldCapsule">
+                        <div style="font-size: 18px;">
+                            상세내용
+                        </div>
                     </div>
-                    <div>
-                        <div>
-                            <textarea name="rcontent" id="" cols="30" rows="10">신고 내용을 상세하게 적어주세요</textarea>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            <input type="text" class="reportInfo" value="신고유형" readonly>
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
+                            <select name="rtype" id="rtype">
+                                <option>선택</option>
+                                <option value="홍보성">홍보성</option>
+                                <option value="권리침해">권리침해</option>
+                                <option value="선정성">선정성</option>
+                                <option value="인신공격">인신공격</option>
+                                <option value="기타">기타</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            <input type="text" class="reportInfo" value="제목" readonly>
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
+                            <input type="text" id="reportTitle" name="reportTitle" placeholder="제목을 입력해주세요">
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            <input type="text" class="reportInfo" value="내용" readonly>
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
+                            <textarea id="rcontent" name="rcontent" cols="30" rows="10" placeholder="신고 내용을 상세하게 적어주세요."></textarea>
+                        </div>
+                    </div>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 20%;">
+                            <input type="text" class="reportInfo" value="파일첨부" readonly>
+                        </div>
+                        <div class="capsuleRight" style="width: 80%;">
                             <input type="file" name="rfile">
                         </div>
-                        <div>
-                            <button type="button" onclick="fn_reportSend();">신고하기</button>
-                            <button type="reset" onclick="history.back();">취소</button>
-                        </div>
+                    </div>
+                   
+                    <div style="text-align: center; margin-top: 1%;">
+                        <button type="button" class="button" onclick="fn_reportSend();">신고하기</button>
+                        <button type="button" class="button" onclick="history.back();">취소</button>
                     </div>
                     <input type="hidden" name="rusid" value="<%=user.getUsid()%>">
                     <input type="hidden" name="rnickname" value="<%=user.getNickname()%>">
                     <input type="hidden" name="rtargetUsid" value="<%=target.getUsid()%>">
                     <input type="hidden" name="rtargetNickname" value="<%=target.getNickname()%>">
                 </div>
-                    <nav aria-lable="Page navigation" class="listPageBar">
-                        <ul class="pagination justify-content-center">
-                            <%=request.getAttribute("pageBar")%>
-                        </ul>
-                    </nav>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
     <script>
         function fn_reportSend(){
+            if($("#rtype").val()=='선택' || $("#rtype").val()==null){
+                alert("신고유형을 선택해주세요.");
+            }else if($("#reportTitle").val().trim()===''){
+                alert("제목을 입력해주세요.");
+            }else if($("#rcontent").val().trim()===''){
+                alert("내용을 입력해주세요.");
+            }else{
             $("#reportForm").submit();
+            }
         }
     </script>
 </section>

@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
 import com.nbbang.member.model.vo.Report;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class ReportSendServlet
@@ -32,17 +36,28 @@ public class ReportSendServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			request.setAttribute("msg", "업로드 오류(form:enctype)");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
+		
+		String path=getServletContext().getRealPath("/")+"upload/report";
+		int maxSize=1024*1024*10;
+		String encode="UTF-8";
+		MultipartRequest mr=new MultipartRequest(request, path, maxSize, encode, new DefaultFileRenamePolicy());
+		
 		Report r=new Report();
-		int rusid=Integer.parseInt(request.getParameter("rusid"));
-		int rboardId=Integer.parseInt(request.getParameter("rboardId"));
-		int rtargetUsid=Integer.parseInt(request.getParameter("rtargetUsid"));
-		String rtype=request.getParameter("rtype");
-		String reportTitle=request.getParameter("reportTitle");
-		String rcontent=request.getParameter("rcontent");
-		String rfile=request.getParameter("rfile");
-		String rtargetNickname=request.getParameter("rtargetUsid");
-		String rnickname=request.getParameter("rnickname");
+		int rusid=Integer.parseInt(mr.getParameter("rusid"));
+		int rboardId=Integer.parseInt(mr.getParameter("rboardId"));
+		int rtargetUsid=Integer.parseInt(mr.getParameter("rtargetUsid"));
+		String rtype=mr.getParameter("rtype");
+		String reportTitle=mr.getParameter("reportTitle");
+		String rcontent=mr.getParameter("rcontent");
+		String rfile=mr.getFilesystemName("rfile");
+		String rtargetNickname=mr.getParameter("rtargetUsid");
+		String rnickname=mr.getParameter("rnickname");
 		
 		r.setReportUserUsid(rusid);
 		r.setReportBoardId(rboardId);
