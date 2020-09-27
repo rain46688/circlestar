@@ -819,6 +819,120 @@ private Properties prop=new Properties();
 		return result;
 	}
 
+	public List<Report> getReportList(Connection conn, int cPage, int numPerPage, int usid) {
+		List<Report> rlist=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getReportList"));
+			pstmt.setInt(1, usid);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			rlist=new ArrayList<Report>();
+			while(rs.next()) {
+				Report r=new Report();
+				r.setReportId(rs.getInt("REPORT_ID"));
+				r.setReportUserUsid(rs.getInt("REPORT_USER_USID"));
+				r.setReportBoardId(rs.getInt("REPORT_BOARD_ID"));
+				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportContent(rs.getString("REPORT_CONTENT"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportFile(rs.getString("REPORT_FILE"));
+				r.setReportIscheck(rs.getBoolean("REPORT_ISCHECK"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportAnswer(rs.getString("REPORT_ANSWER"));
+				r.setReportIswarning(rs.getBoolean("REPORT_ISWARNING"));
+				rlist.add(r);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return rlist;
+	}
+
+	public int reportListCount(Connection conn, int usid) {
+		int totalData=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("reportListCount"));
+			pstmt.setInt(1, usid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				totalData=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return totalData;
+	}
+
+	public List<Report> getReportListAll(Connection conn, int cPage, int numPerPage) {
+		List<Report> rlist=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getReportListAll"));
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			rlist=new ArrayList<Report>();
+			while(rs.next()) {
+				Report r=new Report();
+				r.setReportId(rs.getInt("REPORT_ID"));
+				r.setReportUserUsid(rs.getInt("REPORT_USER_USID"));
+				r.setReportBoardId(rs.getInt("REPORT_BOARD_ID"));
+				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportContent(rs.getString("REPORT_CONTENT"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportFile(rs.getString("REPORT_FILE"));
+				r.setReportIscheck(rs.getBoolean("REPORT_ISCHECK"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportAnswer(rs.getString("REPORT_ANSWER"));
+				r.setReportIswarning(rs.getBoolean("REPORT_ISWARNING"));
+				rlist.add(r);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return rlist;
+	}
+
+	public int reportListAllCount(Connection conn) {
+		int totalData=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("reportListAllCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				totalData=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return totalData;
+	}
+
 
 
 }

@@ -24,7 +24,7 @@
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
-        border: 1px black solid;
+        border: 2px black solid;
     }
     p#sideBarTitle{
         font-size: 2.5em;
@@ -38,7 +38,7 @@
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
-        border: 1px black solid;
+        border: 2px black solid;
         border-top: none;
     }
     .postList{

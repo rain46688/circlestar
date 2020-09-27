@@ -1,9 +1,11 @@
+<%@page import="com.nbbang.member.model.vo.Report"%>
 <%@page import="com.nbbang.board.model.vo.Card"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 <%
-	Member m=(Member)request.getAttribute("member");
+    Member m=(Member)request.getAttribute("member");
+    List<Report> rlist=(List<Report>)request.getAttribute("memberReportList");
 %>
 <style>
     div#myPageSideBar{
@@ -23,7 +25,7 @@
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
-        border: 1px black solid;
+        border: 2px black solid;
     }
     p#sideBarTitle{
         font-size: 2.5em;
@@ -37,7 +39,7 @@
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
-        border: 1px black solid;
+        border: 2px black solid;
         border-top: none;
     }
     .postList{
@@ -80,7 +82,7 @@
     }
     div.tableTitle{
         float: left;
-        width: 20%;
+        width: 15%;
         text-align: center;
     }
     div#tableTextContainer{
@@ -121,7 +123,7 @@
                 </div>
                 <%if(loginnedMember.getUsid()==9999){%>
                     <div>
-                        <a class="nav-link postList" href="<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>">신고 접수 내역</a>
+                        <a class="nav-link postList active" href="<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>">신고 접수 내역</a>
                     </div>
                 <%}else{%>
                 <div>
@@ -139,7 +141,7 @@
                 <div id="tableContainer">
                     <div id="tableTitleContainer">
                         <div class="tableTitle">
-                            순번
+                            글번호
                         </div>
                         <div class="tableTitle">
                             신고유형
@@ -150,7 +152,7 @@
                         <div class="tableTitle">
                             피신고회원
                         </div>
-                        <div>
+                        <div class="tableTitle">
                             신고일
                         </div>
                         <div class="tableTitle">
@@ -158,7 +160,29 @@
                         </div>
                     </div>
                     <div id="tableTextContainer">
-                        
+                        <%for(Report r:rlist){ %>
+                            <div>
+								<%=r.getReportId() %>
+                            </div>
+                            <div>
+								<%=r.getReportType() %>
+                            </div>
+                            <div>
+								<%=r.getReportTitle() %>
+                            </div>
+                            <div>
+								<%=r.getReportDate() %>
+                            </div>
+                            <%if(r.getReportAnswer()==null){ %> 
+	                            <div>
+	                            	N
+	                            </div>
+                            <%}else{%>
+	                            <div>
+	                            	Y
+	                            </div>
+                            <%} %>
+                        <%}%>
                     </div>
                     <nav aria-lable="Page navigation" class="listPageBar">
                         <ul class="pagination justify-content-center">
@@ -176,18 +200,15 @@
                 <div id="tableContainer">
                     <div id="tableTitleContainer">
                         <div class="tableTitle">
-                            순번
+                            글번호
                         </div>
                         <div class="tableTitle">
                             신고유형
                         </div>
                         <div class="tableTitle">
-                            글제목
+                            제목
                         </div>
                         <div class="tableTitle">
-                            피신고회원
-                        </div>
-                        <div>
                             신고일
                         </div>
                         <div class="tableTitle">
@@ -195,7 +216,29 @@
                         </div>
                     </div>
                     <div id="tableTextContainer">
-                        
+                        <%for(Report r:rlist){ %>
+                            <div>
+								<%=r.getReportId() %>
+                            </div>
+                            <div>
+								<%=r.getReportType() %>
+                            </div>
+                            <div>
+								<%=r.getReportTitle() %>
+                            </div>
+                            <div>
+								<%=r.getReportDate() %>
+                            </div>
+                            <%if(r.getReportAnswer()==null){ %> 
+	                            <div>
+	                            	N
+	                            </div>
+                            <%}else{%>
+	                            <div>
+	                            	Y
+	                            </div>
+                            <%} %>
+                        <%}%>
                     </div>
                     <nav aria-lable="Page navigation" class="listPageBar">
                         <ul class="pagination justify-content-center">

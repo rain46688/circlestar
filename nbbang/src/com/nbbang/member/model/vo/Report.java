@@ -17,6 +17,7 @@ public class Report {
 	private String reportTargetNickname; //신고를 당한 유저의 닉네임
 	private String reportUserNickname; //신고를 한 유저의 닉네임
 	private String reportAnswer; //신고 답변 내용
+	private boolean reportIswarning;
 	
 	public Report() {
 		// TODO Auto-generated constructor stub
@@ -24,7 +25,7 @@ public class Report {
 
 	public Report(int reportId, int reportUserUsid, int reportBoardId, int reportTargetUsid, String reportType,
 			String reportTitle, String reportContent, Date reportDate, String reportFile, boolean reportIscheck,
-			String reportTargetNickname, String reportUserNickname, String reportAnswer) {
+			String reportTargetNickname, String reportUserNickname, String reportAnswer, boolean reportIswarning) {
 		super();
 		this.reportId = reportId;
 		this.reportUserUsid = reportUserUsid;
@@ -39,6 +40,7 @@ public class Report {
 		this.reportTargetNickname = reportTargetNickname;
 		this.reportUserNickname = reportUserNickname;
 		this.reportAnswer = reportAnswer;
+		this.reportIswarning = reportIswarning;
 	}
 
 	public int getReportId() {
@@ -145,6 +147,14 @@ public class Report {
 		this.reportAnswer = reportAnswer;
 	}
 
+	public boolean isReportIswarning() {
+		return reportIswarning;
+	}
+
+	public void setReportIswarning(boolean reportIswarning) {
+		this.reportIswarning = reportIswarning;
+	}
+
 	@Override
 	public String toString() {
 		return "Report [reportId=" + reportId + ", reportUserUsid=" + reportUserUsid + ", reportBoardId="
@@ -152,7 +162,7 @@ public class Report {
 				+ ", reportTitle=" + reportTitle + ", reportContent=" + reportContent + ", reportDate=" + reportDate
 				+ ", reportFile=" + reportFile + ", reportIscheck=" + reportIscheck + ", reportTargetNickname="
 				+ reportTargetNickname + ", reportUserNickname=" + reportUserNickname + ", reportAnswer=" + reportAnswer
-				+ "]";
+				+ ", reportIswarning=" + reportIswarning + "]";
 	}
 
 	

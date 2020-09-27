@@ -25,7 +25,7 @@
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
-        border: 1px black solid;
+        border: 2px black solid;
     }
     p#sideBarTitle{
         font-size: 2.5em;
@@ -39,7 +39,7 @@
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
-        border: 1px black solid;
+        border: 2px black solid;
         border-top: none;
     }
     .postList{
@@ -75,18 +75,11 @@
     ul.pagination{
         text-align: center;
     }
-    div#tableContainer{
-        margin-top: 5%;
-    }
-    div#tableTitleContainer{
-    }
-    div.tableTitle{
-        float: left;
-        width: 20%;
-        text-align: center;
-    }
-    div#tableTextContainer{
-        clear:both;
+    
+    div#fieldCapsule{
+        display: flex;
+        position: relative;
+        padding: 3%;
     }
 </style>
 <section>
@@ -127,11 +120,11 @@
             </div>
         </div>
         <div id="iCreateContainer">
+            <div class="item textField" id="containerTitle">
+                <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0;margin-bottom: 20px; text-align: left;" >신고하기</div>
+            </div>
             <form action="<%=request.getContextPath() %>/member/reportSend" id="reportForm" name="reportForm" method="post">
-                <div>
-                    <div>
-                        글번호<input type="text" name="rboardId" value="<%=boardData.getBoardId()%>" readonly>
-                    </div>
+                <div id="fieldCapsule">
                     <div>
                         신고유형
                         <select name="rtype">
@@ -144,10 +137,13 @@
                         </select>
                     </div>
                     <div>
+                        신고할 게시물 번호<input type="text" name="rboardId" value="<%=boardData.getBoardId()%>" readonly>
+                    </div>
+                    <div>
                         제목<input type="text" name="reportTitle">
                     </div>
                     <div>
-                        신고할 게시글 제목<input type="text" name="rtitle" value="<%=boardData.getBoardTitle()%>" readonly>
+                        신고할 게시물 제목<input type="text" name="rtitle" value="<%=boardData.getBoardTitle()%>" readonly>
                     </div>
                     <div>
                         신고할 회원<input type="text" value="<%=boardData.getWriterNickname()%>" readonly>

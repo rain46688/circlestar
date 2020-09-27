@@ -262,4 +262,32 @@ private MemberDao dao=new MemberDao();
 		return result;
 	}
 
+	public List<Report> getReportList(int cPage, int numPerPage, int usid) {
+		Connection conn=getConnection();
+		List<Report> rlist=dao.getReportList(conn, cPage, numPerPage, usid);
+		close(conn);
+		return rlist;
+	}
+
+	public int reportListCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.reportListCount(conn,usid);
+		close(conn);
+		return totalData;
+	}
+
+	public List<Report> getReportListAll(int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<Report> rlist=dao.getReportListAll(conn, cPage, numPerPage);
+		close(conn);
+		return rlist;
+	}
+
+	public int reportListAllCount() {
+		Connection conn=getConnection();
+		int totalData=dao.reportListAllCount(conn);
+		close(conn);
+		return totalData;
+	}
+
 }
