@@ -66,6 +66,7 @@ public class BoardPageServlet extends HttpServlet {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		ArrayList<Integer> tradeUserList = new BoardService().tradeUserList(Integer.parseInt(boardId));
+		int likeCount = new BoardService().requestCount(Integer.parseInt(boardId));
 		if(c==null) {
 			request.setAttribute("msg", "문서를 불러오는데 실패했습니다");
 			request.setAttribute("loc", "/boList");
@@ -79,6 +80,7 @@ public class BoardPageServlet extends HttpServlet {
 				}
 			}
 			if(tradeUserList!=null)request.setAttribute("tradeUserList", tradeUserList);
+			request.setAttribute("requestCount", likeCount);
 			request.setAttribute("reply", reply);
 			request.setAttribute("curCard", c);
 			request.getRequestDispatcher("/views/board/boPage.jsp").forward(request, response);

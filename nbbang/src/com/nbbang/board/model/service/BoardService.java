@@ -218,6 +218,13 @@ public class BoardService {
 		return result;
 	}
 	
+	public int requestCount(int boardId) {
+		Connection conn = getConnection();
+		int result = dao.requestCount(conn, boardId);
+		close(conn);
+		return result;
+	}
+	
 	// 삭제 추가 옵션들.
 //	public int boardDeleteBoardfile(int boardId) {
 //		Connection conn = getConnection();

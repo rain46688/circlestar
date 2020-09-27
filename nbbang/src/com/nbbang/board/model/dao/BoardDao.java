@@ -474,14 +474,16 @@ public class BoardDao {
 				c.setComLayer(rs.getInt("COM_LAYER"));
 				c.setCboardId(rs.getInt("CBOARD_ID"));
 				c.setContent(rs.getString("CONTENT"));
-				c.setCenrollDate(rs.getDate("CENROLL_DATE"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date enrollDate = sdf.parse(rs.getTimestamp(("CENROLL_DATE")).toString().substring(0, 19));
+				c.setCenrollDate(enrollDate);
 				c.setSecret(rs.getBoolean("SECRET"));
 				c.setCwriterNickname(rs.getString("CWRITER_NICKNAME"));
 				c.setComProfile(rs.getString("COM_PROFILE"));
 				c.setComId(rs.getInt("COM_ID"));
 				list.add(c);
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -645,6 +647,27 @@ public class BoardDao {
 		}finally {
 			close(pstmt);
 		}
+		return result;
+	}
+	
+	public int requestCount(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("requestCount");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		} 
 		return result;
 	}
 	

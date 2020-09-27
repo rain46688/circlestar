@@ -151,47 +151,6 @@
 	function fn_boWrite(){
 		location.assign("<%= request.getContextPath() %>/board/boWrite?category=<%= request.getAttribute("category") %>");
 	}
-	/* $('.js-imgSizeSame').each(function(index) { // 1번 
-		
-		$(this).children('img').one("load", function() { // 2번 
-			}).each(function() { 
-				imageSizeSame($(this).parent(), 0.7); // 3번 
-			}); 
-		$(this).parents('.card').find('.desc-noimg').addClass('desc').removeClass('desc-noimg'); // 4번 
-			
-	});
-	
-	function imageSizeSame(wrapImgClass, ratio=0) { // 1번 
-		var divHeight; 
-		var div = wrapImgClass; 
-		var img = div.children('img'); 
-		var divWidth = div.width(); 
-		if(!ratio || ratio == 0) { // 2번 
-			divHeight = div.height(); // 3번 
-			} else { divHeight = divWidth * ratio; // 4번 
-			div.height(divHeight + 'px'); // 5번 
-			} var divAspect = divHeight / divWidth; // 6번 
-			var imgAspect = img.height() / img.width(); // 7번 
-			if (imgAspect <= divAspect) { // 8번 // 이미지가 div보다 납작한 경우 세로를 div에 맞추고 가로는 중앙으로 맞춤 
-				var imgWidthActual = div.outerHeight(true) / imgAspect; 
-				var imgWidthToBe = div.outerHeight(true) / divAspect; 
-				var marginLeft = -Math.round((imgWidthActual - imgWidthToBe) / 2); 
-				img.css({ 
-					width: 'auto', 
-					'margin-left': marginLeft + 'px', 
-				height: '100%' 
-			}); 
-		} else { // 9번 
-			// div가 이미지보다 납작한 경우 가로를 img에 맞추고 세로는 중앙으로 맞춤 
-			var imgHeightActual = div.outerWidth(true) * imgAspect; 
-			var imgHeightToBe = div.outerWidth(true) * divAspect; 
-			var marginTop = Math.round((imgHeightActual - imgHeightToBe) / 2); 
-			img.css({ width: '100%', 'margin-left': 0, 
-				'margin-top': - marginTop + 'px', 
-				height: 'auto' }); 
-			} 
-		} */
-
 
 </script>
 <%@ include file="/views/common/footer.jsp"%>
