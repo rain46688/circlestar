@@ -617,6 +617,37 @@ public class BoardDao {
 		return result;
 	}
 	
+	public int commentModify(Connection conn, String content, int comId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("commentModify"));
+			pstmt.setString(1, content);
+			pstmt.setInt(2, comId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int commentDelete(Connection conn, int comId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("commentDelete"));
+			pstmt.setInt(1, comId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	//delete 추가 옵션
 //	public int boardDeleteLikelist(Connection conn, int boardId) {
 //		PreparedStatement pstmt = null;

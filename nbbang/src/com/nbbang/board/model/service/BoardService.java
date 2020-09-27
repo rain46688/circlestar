@@ -194,6 +194,30 @@ public class BoardService {
 		return result;
 	}
 	
+	public int commentModify(String content, int comId) {
+		Connection conn = getConnection();
+		int result = dao.commentModify(conn, content, comId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int commentDelete(int comId) {
+		Connection conn = getConnection();
+		int result = dao.commentDelete(conn, comId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	// 삭제 추가 옵션들.
 //	public int boardDeleteBoardfile(int boardId) {
 //		Connection conn = getConnection();
