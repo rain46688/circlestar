@@ -121,10 +121,8 @@ public class BoardService {
 		result += dao.boardLikeDeleteUpdate(conn, list);
 		if(result > 1) {
 			commit(conn);
-			System.out.println("commit");
 		}else {
 			rollback(conn);
-			System.out.println("rollback");
 		}
 		close(conn);
 		return result;
@@ -182,5 +180,65 @@ public class BoardService {
 		Card c = dao.boardPage(conn, boardId);
 		close(conn);
 		return c;
+	}
+	
+	public int boardDelete(int boardId) {
+		Connection conn = getConnection();
+		int result = dao.boardDelete(conn, boardId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int boardDeleteBoardfile(int boardId) {
+		Connection conn = getConnection();
+		int result = dao.boardDeleteBoardfile(conn, boardId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int boardDeleteLikelist(int boardId) {
+		Connection conn = getConnection();
+		int result = dao.boardDeleteLikelist(conn, boardId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int boardDeleteComment(int boardId) {
+		Connection conn = getConnection();
+		int result = dao.boardDeleteComment(conn, boardId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int boardDeleteTradelist(int boardId) {
+		Connection conn = getConnection();
+		int result = dao.boardDeleteTradelist(conn, boardId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }

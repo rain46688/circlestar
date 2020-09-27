@@ -81,9 +81,9 @@
 		<div id="title"><h4>글 수정</h4></div>
 		<hr color="black">
 		<div id="editor">
-			<form id="frm" action="<%= request.getContextPath() %>/board/boardModifyEnd" method="POST"
+			<form id="frm" action="<%= request.getContextPath() %>/board/boardModifyEnd?category=<%= category %>" method="POST"
 				enctype="multipart/form-data">
-				<select class="custom-select custom-select-sm" name="category" id="category" disabled>
+				<select class="custom-select custom-select-sm" name="category" id="category">
 					<option value="" <%if(category==null){%>selected<%} %>>게시판을 선택하세요</option>
 					<option value="식품"<%if(category.equals("식품")){%>selected<%} %>>식품</option>
 					<option value="패션잡화"<%if(category.equals("패션잡화")){%>selected<%} %>>패션잡화</option>
@@ -159,6 +159,7 @@
 	config.uiColor = red;
 	config.height = 600;
 	config.toolbarCanCollapse = true;};
+	
 	
 	var sel_file;
 	$(function(){

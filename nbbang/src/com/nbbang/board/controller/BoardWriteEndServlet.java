@@ -85,7 +85,6 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setWriterUsid(Integer.parseInt(request.getParameter("writerUsid")));
 		b.setOwnStatus(request.getParameter("ownStatus"));
 		bf.setFileName(fileNames.toArray(new String[fileNames.size()]));
-		
 		int result = new BoardService().boardInsert(b,bf);
 		
 		if(result > 2) {
