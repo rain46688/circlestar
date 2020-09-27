@@ -43,7 +43,7 @@ public class AdminBoardInfoListServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerPage = 10;
+		int numPerPage = 30;
 
 		list = new AdminService().boardInfoList(cPage, numPerPage);
 	

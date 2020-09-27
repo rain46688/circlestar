@@ -42,7 +42,7 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 		String select3 = request.getParameter("s3"); // 아무것도 안넣으면 특가,  특가,식품,패션잡화,취미문구,티켓,애완용품
 		String Search = request.getParameter("Sc");// 아무것도 안적으면 빈값 "", 검색값
 		String ra = request.getParameter("ra");// 선택안하면 null이 넘어옴, 오름차순ASC, 내림차순DESC
-		String p = request.getParameter("p");// 선택안하면 null이 넘어옴, 인기게시물 여부
+		String p = request.getParameter("pop");// 선택안하면 null이 넘어옴, 인기게시물 여부
 
 		System.out.println(select + " " +select2 + " " +select3 + " [" + Search + "] " + ra + " " + p);
 
@@ -53,7 +53,7 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerPage = 10;
+		int numPerPage = 30;
 
 		list = new AdminService().boardInfoSearchList(cPage, numPerPage, ra, select, Search, select2,select3,p);
 

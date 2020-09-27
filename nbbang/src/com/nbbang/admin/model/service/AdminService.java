@@ -1,7 +1,9 @@
 package com.nbbang.admin.model.service;
 
 import static com.nbbang.common.temp.JDBCTemplate.close;
+import static com.nbbang.common.temp.JDBCTemplate.commit;
 import static com.nbbang.common.temp.JDBCTemplate.getConnection;
+import static com.nbbang.common.temp.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -74,7 +76,8 @@ public class AdminService {
 		return cnt;
 	}
 
-	public List<AdminMem> memberInfoSearchList(int cPage, int numPerPage, String ra, String select, String search, String c) {
+	public List<AdminMem> memberInfoSearchList(int cPage, int numPerPage, String ra, String select, String search,
+			String c) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
 		List<AdminMem> list = null;
@@ -120,7 +123,8 @@ public class AdminService {
 		return cnt;
 	}
 
-	public List<AdminBoard> boardInfoSearchList(int cPage, int numPerPage, String ra, String select, String search, String select2, String select3, String p) {
+	public List<AdminBoard> boardInfoSearchList(int cPage, int numPerPage, String ra, String select, String search,
+			String select2, String select3, String p) {
 		// TODO Auto-generated method stub
 		Connection conn = getConnection();
 		List<AdminBoard> list = null;
@@ -139,53 +143,41 @@ public class AdminService {
 		Connection conn = getConnection();
 		int cnt = 0;
 		if (!select.equals("ALL")) {
-			cnt = aa.boardInfoSearchListCount(conn,ra, select, search, select2, select3, p);
+			cnt = aa.boardInfoSearchListCount(conn, ra, select, search, select2, select3, p);
 		} else {
-			cnt = aa.boardInfoAllSearchListCount(conn,ra, select, search, select2, select3, p);
+			cnt = aa.boardInfoAllSearchListCount(conn, ra, select, search, select2, select3, p);
 		}
 		close(conn);
 		return cnt;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public int byebye(int usid) {
+		Connection conn = getConnection();
+		int result = aa.byebye(conn, usid);
+		if (result > 0) {
+			commit(conn);
+			result = 1;
+		} else {
+			rollback(conn);
+			result = 0;
+		}
+		close(conn);
+		return result;
+	}
+
+	public int iamSoSorry(int usid) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		int result = aa.iamSoSorry(conn, usid);
+		if (result > 0) {
+			commit(conn);
+			result = 3;
+		} else {
+			rollback(conn);
+			result = 4;
+		}
+		close(conn);
+		return result;
+	}
 
 }
