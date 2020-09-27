@@ -36,6 +36,7 @@ public class BoardPageServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String boardId = request.getParameter("boardId");
 		int writerUsid = Integer.parseInt(request.getParameter("writerUsid"));
+		String reply = request.getParameter("reply");
 		Cookie[] cookies = request.getCookies();
 		String boardHistory = "";
 		boolean hasRead = false;
@@ -78,6 +79,7 @@ public class BoardPageServlet extends HttpServlet {
 				}
 			}
 			if(tradeUserList!=null)request.setAttribute("tradeUserList", tradeUserList);
+			request.setAttribute("reply", reply);
 			request.setAttribute("curCard", c);
 			request.getRequestDispatcher("/views/board/boPage.jsp").forward(request, response);
 		}

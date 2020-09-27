@@ -55,7 +55,7 @@ public class BoardPayServlet extends HttpServlet {
 			return;
 		}else {
 			request.setAttribute("msg", "결제 완료되었습니다.");
-			request.setAttribute("loc", "/board/boardPage?boardId="+boardId+"&writerUsid="+writerUsid);
+			request.setAttribute("loc", "/board/boardPage?boardId="+boardId+"&writerUsid="+writerUsid+"&reply=success");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}

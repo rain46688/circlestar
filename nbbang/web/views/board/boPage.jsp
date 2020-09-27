@@ -14,6 +14,10 @@
 	if(request.getAttribute("tradeUserList")!=null){
 		tradeUserList = (List<Integer>)request.getAttribute("tradeUserList");
 	}
+	String reply = new String();
+	if(request.getAttribute("reply")!=null) {
+		reply = (String)request.getAttribute("reply");
+	}
 %>
 <style>
   #wrapper {
@@ -276,7 +280,7 @@
           <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div>
         </div>
       <!-- 프로필 사진 + id -->
-      <h5 id="level">신뢰 level</h5>
+      <h5 id="level">신뢰 level<%= request.getAttribute("reply") %></h5>
     </div>
     <div class="content">
       <hr>
@@ -408,6 +412,12 @@ var pop;
 window.onunload = function() { 
 	pop.close(); 
 }
+<% if(reply.equals("success")) { %>
+function autoReple() {
+  $("#commentContent").val('결제했습니다.');
+  $("#commentInsertBtn").click();
+}
+<% } %>
 
 /*  채팅창 관련 로직  */
 function nbbang(f){
@@ -499,6 +509,10 @@ function fun_cancelbuy() {
 
     $(document).ready(function () {
         fn_commentList();
+        <% if(reply.equals("success")) { %>
+        autoReple();
+        <% } %>
+        console.log("last");
         $("#hideButton").hide();
         $("#likeFunc").click(function (e) {
             if ($("#likeFunc>img").attr("src") == "<%= request.getContextPath() %>/images/heart.png") {
