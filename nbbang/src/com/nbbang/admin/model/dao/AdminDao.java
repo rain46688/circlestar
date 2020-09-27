@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
+import com.nbbang.board.model.vo.Board;
 import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.member.model.vo.Member;
 
@@ -492,31 +493,31 @@ public class AdminDao {
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		List<AdminBoard> list = new ArrayList<AdminBoard>();
-		AdminMem am = null;
-		String sql = prop.getProperty("memberInfoList");
+		AdminBoard bo = null;
+		String sql = prop.getProperty("boardInfoList");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
 			pstmt.setInt(2, cPage * numPerPage);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				am = new AdminMem();
-				am.setMem(new Member());
-				Member m = am.getMem();
-				m.setUsid(rs.getInt("USID"));
-				m.setMemberName(rs.getString("MEMBER_NAME"));
-				m.setNickname(rs.getString("NICKNAME"));
-				m.setMemberId(rs.getString("MEMBER_ID"));
-				m.setGender(rs.getString("GENDER"));
-				m.setBirthday(rs.getDate("BIRTHDAY"));
-				m.setEnrollDate(rs.getDate("ENROLL_DATE"));
-				m.setPoint(rs.getInt("POINT"));
-				m.setLeaveMem(rs.getBoolean("LEAVE_MEM"));
-				m.setNbbangScore(rs.getInt("NBBANG_SCORE"));
-				am.setCreateBoardCount(rs.getInt("CREATE_BOARD_COUNT"));
-				am.setGradeLevel(rs.getInt("GRADE_LEVEL"));
-				am.setReportCount(rs.getInt("REPORT_COUNT"));
-				list.add(am);
+				bo = new AdminBoard();
+				bo.setBo(new Board());
+				Board b = bo.getBo();
+				b.setBoardId(rs.getInt("BOARD_ID"));
+				b.setBoardTitle(rs.getString("BOARD_TITLE"));
+				b.setWriterNickname(rs.getString("WRITER_NICKNAME"));
+				b.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				b.setHit(rs.getInt("HIT"));
+				b.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+				b.setTradeArea(rs.getString("TRADE_AREA"));
+				b.setTradeStage(rs.getInt("TRADE_STAGE"));
+				b.setPopularBoard(rs.getBoolean("POPULAR_BOARD"));
+				b.setTradeKind(rs.getString("TRADE_KIND"));
+				b.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				bo.setNbbangMemCount(rs.getString("NBBANG"));
+				bo.setLikeCount(rs.getInt("LIKE_COUNT"));
+				list.add(bo);
 			}
 
 		} catch (SQLException e) {
@@ -527,6 +528,28 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int boardInfoListCount(Connection conn) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		String sql = prop.getProperty("boardInfoListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cnt;
 	}
 
 }
