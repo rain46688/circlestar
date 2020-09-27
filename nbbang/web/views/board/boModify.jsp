@@ -1,8 +1,10 @@
+<%@page import="com.nbbang.board.model.vo.Card"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	String category = request.getParameter("category");
+	Card c = (Card)request.getAttribute("curCard");
+	String category = c.getCardBoard().getProductCategory();
 %>
 <style>
 #wrapper {
@@ -76,10 +78,10 @@
 
 <section>
 	<div id="wrapper">
-		<div id="title"><h4>글쓰기</h4></div>
+		<div id="title"><h4>글 수정</h4></div>
 		<hr color="black">
 		<div id="editor">
-			<form id="frm" action="<%= request.getContextPath() %>/board/boardWriteEnd" method="POST"
+			<form id="frm" action="<%= request.getContextPath() %>/board/boardModifyEnd?category=<%= category %>" method="POST"
 				enctype="multipart/form-data">
 				<select class="custom-select custom-select-sm" name="category" id="category">
 					<option value="" <%if(category==null){%>selected<%} %>>게시판을 선택하세요</option>
@@ -92,41 +94,43 @@
 				<input type="hidden" name="writerNickname" value="<%= loginnedMember.getNickname() %>" >
 				<input type="hidden" name="writerUsid" value="<%= loginnedMember.getUsid() %>" >
 				<input type="hidden" name="tradeArea" value="<%= loginnedMember.getAddress() %>" >
+				<input type="hidden" name="originalFiles" value="<%= c.getCardFile().getFileName("toString") %>">
+				<input type="hidden" name="boardId" value="<%= c.getCardBoard().getBoardId() %>" >
 				<div class="input-group marginTop">
-				<input class="form-control" type="text" name="title" id="titleInput" placeholder="제목을 입력하세요">
+				<input class="form-control" type="text" name="title" id="titleInput" value="<%=c.getCardBoard().getBoardTitle()%>">
 				</div>
 				<div class="input-group marginTop">	
-				<input class="form-control" type="text" name="price" id="price" placeholder="가격">
+				<input class="form-control" type="text" name="price" id="price" value="<%=c.getCardBoard().getProductPrice()%>">
 				<select class="custom-select custom-select-md" name="maxMems" id="maxMems">
-					<option value="" selected>n빵 인원</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
+					<option value="">n빵 인원</option>
+					<option value="2"<% if(c.getCardBoard().getMaxMems()==2){%> selected <% }%>>2</option>
+					<option value="3"<% if(c.getCardBoard().getMaxMems()==3){%> selected <% }%>>3</option>
+					<option value="4"<% if(c.getCardBoard().getMaxMems()==4){%> selected <% }%>>4</option>
+					<option value="5"<% if(c.getCardBoard().getMaxMems()==5){%> selected <% }%>>5</option>
+					<option value="6"<% if(c.getCardBoard().getMaxMems()==6){%> selected <% }%>>6</option>
+					<option value="7"<% if(c.getCardBoard().getMaxMems()==7){%> selected <% }%>>7</option>
+					<option value="8"<% if(c.getCardBoard().getMaxMems()==8){%> selected <% }%>>8</option>
+					<option value="9"<% if(c.getCardBoard().getMaxMems()==9){%> selected <% }%>>9</option>
+					<option value="10"<% if(c.getCardBoard().getMaxMems()==10){%> selected <% }%>>10</option>
+					<option value="11"<% if(c.getCardBoard().getMaxMems()==11){%> selected <% }%>>11</option>
+					<option value="12"<% if(c.getCardBoard().getMaxMems()==12){%> selected <% }%>>12</option>
+					<option value="13"<% if(c.getCardBoard().getMaxMems()==13){%> selected <% }%>>13</option>
+					<option value="14"<% if(c.getCardBoard().getMaxMems()==14){%> selected <% }%>>14</option>
+					<option value="15"<% if(c.getCardBoard().getMaxMems()==15){%> selected <% }%>>15</option>
 				</select>
 				<select class="custom-select custom-select-md" name="tradeMethod" id="tradeMethod">
 					<option value="">거래방식</option>
-					<option value="직거래">직거래</option>
-					<option value="택배배송">택배배송</option>
+					<option value="직거래"<% if(c.getCardBoard().getTradeKind().equals("직거래")){%> selected <% }%>>직거래</option>
+					<option value="택배배송"<% if(c.getCardBoard().getTradeKind().equals("택배배송")){%> selected <%} %>>택배배송</option>
 				</select>
 				<select class="custom-select custom-select-md" name="ownStatus" id="ownStatus">
-					<option value="구매예정">구매예정</option>
-					<option value="제품소유중">개인보유</option>
+					<option value="구매예정"<% if(c.getCardBoard().getOwnStatus().equals("구매예정")) {%>selected<%} %>>구매예정</option>
+					<option value="제품소유중"<% if(c.getCardBoard().getOwnStatus().equals("제품소유중")) {%>selected<%} %>>개인보유</option>
 				</select>
 				</div>
 				<div id="textEditor" class="marginTop">
 					<textarea name="content" id="content" rows="20" cols="80" placeholder="내용을 입력해주세요.">
-
+						<%= c.getCardBoard().getContent() %>
 					</textarea>
 				</div>
 				<div id="imageUpload" class="marginTop">
@@ -134,13 +138,16 @@
 					<input style="display: none;" type="file" name="file" id="file" multiple="true">
 					<div id="image-prev">
 						<!-- 이미지 미리보기 -->
+						<% for(String s : c.getCardFile().getFileName()){ %>
+						<img src="<%=request.getContextPath()+"/upload/images/" + s%>">
+						<%} %>
 					</div>
 				</div>
 				<div id="urlInsert" class="input-group marginTop">
 					<input type="text" class="form-control" name="url" id="url" placeholder="제품 URL">
 				</div>
 				<div id="submitBtn">
-					<button class="marginTop btn btn-outline-secondary" type="button" onclick="fn_submit();">글 등록</button>
+					<button class="marginTop btn btn-outline-secondary" type="button" onclick="fn_submit();">수정하기</button>
 				</div>
 			</form>
 		</div>
@@ -152,9 +159,9 @@
 	config.uiColor = red;
 	config.height = 600;
 	config.toolbarCanCollapse = true;};
-
+	
+	
 	var sel_file;
-
 	$(function(){
 		$("#file").on("change", handleImgFileSelect);
 	});
@@ -224,13 +231,13 @@
 			return;
 		}
 
-		files = document.querySelector("#file").files;
+		/* files = document.querySelector("#file").files;
 		filesArr = Array.prototype.slice.call(files)
 		if(filesArr < 1) {
 			alert("파일은 1개 이상 첨부해주세요.");
 			document.querySelector("#imageUpload").style.border = "1px red solid";
 			return;
-		}	
+		} */	
 
 		document.getElementById("frm").submit();
 		

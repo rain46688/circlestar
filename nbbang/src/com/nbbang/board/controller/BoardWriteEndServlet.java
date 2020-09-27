@@ -54,7 +54,7 @@ public class BoardWriteEndServlet extends HttpServlet {
 			fileSaveDir.mkdirs();
 		
 		List<String> fileNames = new ArrayList<String>();
-		int index = 0;
+//		int index = 0;
 		for (Part part : request.getParts()) {
 			if (part.getName().equals("file")) {
 				String renamed = new uploadRename().randomString(getFileName(part));
@@ -70,7 +70,7 @@ public class BoardWriteEndServlet extends HttpServlet {
 			return;
 		}
 		
-		BoardFile bg = new BoardFile();
+		BoardFile bf = new BoardFile();
 		Board b = new Board();
 		b.setProductCategory(request.getParameter("category"));
 		b.setWriterNickname(request.getParameter("writer"));
@@ -84,9 +84,8 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setWriterNickname(request.getParameter("writerNickname"));
 		b.setWriterUsid(Integer.parseInt(request.getParameter("writerUsid")));
 		b.setOwnStatus(request.getParameter("ownStatus"));
-		bg.setFileName(fileNames.toArray(new String[fileNames.size()]));
-		
-		int result = new BoardService().boardInsert(b,bg);
+		bf.setFileName(fileNames.toArray(new String[fileNames.size()]));
+		int result = new BoardService().boardInsert(b,bf);
 		
 		if(result > 2) {
 			//업로드 성공

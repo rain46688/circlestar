@@ -140,6 +140,7 @@ public class BoardDao {
 				c.getCardBoard().setContent(rs.getString("CONTENT"));
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date enrollDate = sdf.parse(rs.getTimestamp(("ENROLL_DATE")).toString().substring(0, 19));
+				c.getCardBoard().setTradeKind(rs.getString("TRADE_KIND"));
 				c.getCardBoard().setEnrollDate(enrollDate);
 				c.getCardBoard().setHit(rs.getInt("HIT"));
 				c.getCardBoard().setLikeCount(rs.getInt("LIKE_COUNT"));
@@ -282,6 +283,63 @@ public class BoardDao {
 			pstmt.setInt(1, tradeUsid);
 			pstmt.setString(2, tradeUserNickname);
 			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardModifyBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardModifyBoard"));
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setInt(2, b.getProductPrice());
+			pstmt.setInt(3, b.getMaxMems());
+			pstmt.setString(4, b.getTradeKind());
+			pstmt.setString(5, b.getOwnStatus());
+			pstmt.setString(6, b.getContent());
+			pstmt.setString(7, b.getProductUrl());
+			pstmt.setInt(8, b.getBoardId());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int boardModifyFileDelete(Connection conn, BoardFile bf) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String deleteSql = prop.getProperty("boardModifyDeleteFile");
+		try {
+			//수정전
+			pstmt = conn.prepareStatement(deleteSql);
+			pstmt.setInt(1, bf.getBfFileId());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardModifyFileInsert(Connection conn, BoardFile bf) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String insertSql = prop.getProperty("boardModifyInsertFile");
+		try {
+			pstmt = conn.prepareStatement(insertSql);
+			for(String s : bf.getFileName()) {
+				pstmt.setInt(1, bf.getBfFileId());
+				pstmt.setString(2, s);
+				result += pstmt.executeUpdate();
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -527,6 +585,80 @@ public class BoardDao {
 		return result;
 	}
 	
+	public int boardDelete(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDelete"));
+			pstmt.setInt(1, boardId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardDeleteLikelist(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteLikelist"));
+			pstmt.setInt(1, boardId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardDeleteBoardfile(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteBoardfile"));
+			pstmt.setInt(1, boardId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardDeleteComment(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteComment"));
+			pstmt.setInt(1, boardId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardDeleteTradelist(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDeleteTradelist"));
+			pstmt.setInt(1, boardId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	private String[] stringToArr(String str) {
 		if(str==null) {

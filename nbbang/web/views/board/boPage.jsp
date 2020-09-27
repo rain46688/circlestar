@@ -22,7 +22,9 @@
 <style>
   #wrapper {
     margin: 0 auto;
-    margin-top: 3em;
+    <% if(!(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1)){ %>
+    margin-top: 5em;
+    <% } %>
     padding-top: 1em;
     width: 45em;
     text-align: center;
@@ -228,12 +230,33 @@
     transform:scale(1.1);
     font-weight: bold;
   }
+  #btnForWriter {
+   	margin: 0 auto;
+  	margin-top:3em;
+  	margin-bottom:5px;
+  	text-align:right;
+  	width:45em;
+    font-family:'Do Hyeon', sans-serif;
+  }
+  #btnForWriter>button {
+	height: 2em;
+	width: 5em;
+	font-size: 20px;
+	}
+
+	#btnForWriter>button:hover {
+	border: 2px black solid;
+	}
 </style>
 <section>
+	<% if(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1){ %>
+	<div id="btnForWriter"> 
+  		<button onclick="fn_modifyBoard();">수정하기</button>
+  		<button onclick="fn_deleteBoard();">삭제하기</button>
+  	</div>
+  	<%} %>
   <div id="wrapper">
     <div id="imageWrapper">
-      <%-- <img src="<%= request.getContextPath() %>/upload/images/<%= c.getCardFile().getFileName()[0] %>" alt="" width="700em" height="400em">
-      <!-- carousel 적용할 예정 --> --%>
       <div id="carouselField" name="carouselField" >
         <div id="carouselNB" class="carousel slide " data-ride="carousel" data-interval="false">
           <ol class="carousel-indicators">
@@ -280,7 +303,7 @@
           <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div>
         </div>
       <!-- 프로필 사진 + id -->
-      <h5 id="level">신뢰 level<%= request.getAttribute("reply") %></h5>
+      <h5 id="level">신뢰 level</h5>
     </div>
     <div class="content">
       <hr>
@@ -397,6 +420,16 @@
   </div>
 </section>
 <script>
+
+function fn_modifyBoard(){
+  location.href = "<%=request.getContextPath()%>/board/boardModify?boardId=<%=c.getCardBoard().getBoardId()%>";
+}
+
+function fn_deleteBoard(){
+  if(confirm('게시물을 삭제하시겠습니까?')){
+  location.href = "<%=request.getContextPath()%>/board/boardDelete?boardId=<%=c.getCardBoard().getBoardId()%>&category=<%=c.getCardBoard().getProductCategory()%>";
+  }
+}
 
 function fn_pay(){
   if(confirm('결제를 진행하시겠습니까?')) {
