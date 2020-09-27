@@ -753,6 +753,48 @@ private Properties prop=new Properties();
 		return result;
 	}
 
+	public Board boardData(Connection conn, int boardId) {
+		Board b=new Board();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("boardData"));
+			pstmt.setInt(1, boardId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				b.setBoardId(rs.getInt("BOARD_ID"));
+				b.setWriterUsid(rs.getInt("WRITER_USID"));
+				b.setBoardTitle(rs.getString("BOARD_TITLE"));
+				b.setWriterNickname(rs.getString("WRITER_NICKNAME"));
+				b.setContent(rs.getString("CONTENT"));
+				b.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				b.setHit(rs.getInt("HIT"));
+				b.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+				b.setTradeArea(rs.getString("TRADE_AREA"));
+				b.setMaxMems(rs.getInt("MAX_MEMS"));
+				b.setLimitTime(rs.getDate("LIMIT_TIME"));
+				b.setTradeStage(rs.getInt("TRADE_STAGE"));
+				b.setLikeCount(rs.getInt("LIKE_COUNT"));
+				int popluarInt=Integer.parseInt(rs.getString("POPULAR_BOARD"));
+				if(popluarInt==0) {
+					b.setPopularBoard(false);					
+				}else {
+					b.setPopularBoard(true);
+				}
+				b.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				b.setOwnStatus(rs.getString("OWN_STATUS"));
+				b.setTradeKind(rs.getString("TRADE_KIND"));
+				b.setProductCategory(rs.getString("PRODUCT_URL"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return b;
+	}
+
 
 
 }

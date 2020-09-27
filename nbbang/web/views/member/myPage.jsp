@@ -163,12 +163,21 @@ p>button{
          <p class="bottomBtn"><button type="button" class="realBtn"
          	onclick="location.href='<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
       </div>
-      <div class="item smallBox" id="report">
-         <p class="title">내 신고 내역</p>
-         <p class="text">나의 신고 내용과 관리자의 답변을 확인할 수 있습니다.</p>
-         <p class="bottomBtn"><button type="button" class="realBtn"
-         	onclick="location.href='<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
-      </div>
+      <%if(loginnedMember.getUsid()==9999){%>
+         <div class="item smallBox" id="report">
+            <p class="title">신고 접수 내역</p>
+            <p class="text">접수된 신고 내역을 확인할 수 있습니다.</p>
+            <p class="bottomBtn"><button type="button" class="realBtn"
+               onclick="location.href='<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
+         </div>
+      <%}else{%>
+         <div class="item smallBox" id="report">
+            <p class="title">내 신고 내역</p>
+            <p class="text">나의 신고 내용과 관리자의 답변을 확인할 수 있습니다.</p>
+            <p class="bottomBtn"><button type="button" class="realBtn"
+               onclick="location.href='<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
+         </div>
+      <%}%>
       <div></div>
    </div>
    <script>

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
@@ -40,34 +41,42 @@ public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int usid=Integer.parseInt(request.getParameter("usid"));
-		Member m=new MemberService().myPage(usid);
-		String memberId;
-		String phone;
-		String address;
-		try {
-			phone=AESCrypto.decrypt(m.getPhone());
-			address=AESCrypto.decrypt(m.getAddress());
-			memberId=AESCrypto.decrypt(m.getMemberId());
-		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
-				| BadPaddingException e) {
-			// TODO Auto-generated catch block
-			phone=m.getPhone();
-			address=m.getAddress();
-			memberId=m.getMemberId();
+		HttpSession session=request.getSession();
+		Member loginnedMember=(Member)session.getAttribute("loginnedMember");
+		if(loginnedMember.getUsid()==usid) {
+			Member m=new MemberService().myPage(usid);
+			String memberId;
+			String phone;
+			String address;
+			try {
+				phone=AESCrypto.decrypt(m.getPhone());
+				address=AESCrypto.decrypt(m.getAddress());
+				memberId=AESCrypto.decrypt(m.getMemberId());
+			} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+					| BadPaddingException e) {
+				// TODO Auto-generated catch block
+				phone=m.getPhone();
+				address=m.getAddress();
+				memberId=m.getMemberId();
+			}
+			m.setPhone(phone);
+			m.setAddress(address);
+			m.setMemberId(memberId);
+			
+			Grade g=new MemberService().methodForGrade(usid);
+			int grade=g.getGradeLevel();
+			int maxRoomCount=g.getMaxRoomCount();
+			int reportCount=new MemberService().myPageReport(usid);
+			request.setAttribute("member", m);
+			request.setAttribute("grade", grade);
+			request.setAttribute("maxRoomCount", maxRoomCount);
+			request.setAttribute("reportCount", reportCount);
+			request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "접근불가능한 페이지입니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		m.setPhone(phone);
-		m.setAddress(address);
-		m.setMemberId(memberId);
-		
-		Grade g=new MemberService().methodForGrade(usid);
-		int grade=g.getGradeLevel();
-		int maxRoomCount=g.getMaxRoomCount();
-		int reportCount=new MemberService().myPageReport(usid);
-		request.setAttribute("member", m);
-		request.setAttribute("grade", grade);
-		request.setAttribute("maxRoomCount", maxRoomCount);
-		request.setAttribute("reportCount", reportCount);
-		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
 	}
 
 	/**

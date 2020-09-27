@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.member.model.service.MemberService;
@@ -37,27 +38,35 @@ public class MemberInfoPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int usid=Integer.parseInt(request.getParameter("usid"));
-		Member m=new MemberService().myPage(usid);
-		String memberIdStr;
-		String phoneStr;
-		String addressStr;
-		try {
-			memberIdStr=AESCrypto.decrypt(m.getMemberId());
-			String phoneDec=AESCrypto.decrypt(m.getPhone());
-			addressStr=AESCrypto.decrypt(m.getAddress());
-			phoneStr=phoneDec.substring(0,3)+"-"+phoneDec.substring(3,7)+"-"+phoneDec.substring(7);
-		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
-				| BadPaddingException e) {
-			memberIdStr=m.getMemberId();
-			phoneStr=m.getPhone();
-			addressStr=m.getAddress();
+		HttpSession session=request.getSession();
+		Member loginnedMember=(Member)session.getAttribute("loginnedMember");
+		if(loginnedMember.getUsid()==usid) {
+			Member m=new MemberService().myPage(usid);
+			String memberIdStr;
+			String phoneStr;
+			String addressStr;
+			try {
+				memberIdStr=AESCrypto.decrypt(m.getMemberId());
+				String phoneDec=AESCrypto.decrypt(m.getPhone());
+				addressStr=AESCrypto.decrypt(m.getAddress());
+				phoneStr=phoneDec.substring(0,3)+"-"+phoneDec.substring(3,7)+"-"+phoneDec.substring(7);
+			} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+					| BadPaddingException e) {
+				memberIdStr=m.getMemberId();
+				phoneStr=m.getPhone();
+				addressStr=m.getAddress();
+			}
+			m.setMemberId(memberIdStr);
+			m.setPhone(phoneStr);
+			m.setAddress(addressStr);
+			
+			request.setAttribute("member", m);
+			request.getRequestDispatcher("/views/member/memberInfo.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "접근불가능한 페이지입니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		m.setMemberId(memberIdStr);
-		m.setPhone(phoneStr);
-		m.setAddress(addressStr);
-		
-		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/member/memberInfo.jsp").forward(request, response);
 	}
 
 	/**

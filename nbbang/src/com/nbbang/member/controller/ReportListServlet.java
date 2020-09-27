@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.nbbang.member.model.vo.Member;
 
 /**
  * Servlet implementation class ReportListServlet
@@ -27,7 +30,16 @@ public class ReportListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/member/reportList.jsp").forward(request, response);
+		int usid=Integer.parseInt(request.getParameter("usid"));
+		HttpSession session=request.getSession();
+		Member loginnedMember=(Member)session.getAttribute("loginnedMember");
+		if(loginnedMember.getUsid()==usid) {
+			request.getRequestDispatcher("/views/member/reportList.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "접근불가능한 페이지입니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

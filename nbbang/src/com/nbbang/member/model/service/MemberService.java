@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.Card;
 import com.nbbang.member.model.dao.MemberDao;
 import com.nbbang.member.model.vo.Grade;
@@ -244,6 +245,13 @@ private MemberDao dao=new MemberDao();
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+
+	public Board boardData(int boardId) {
+		Connection conn=getConnection();
+		Board b=dao.boardData(conn, boardId);
+		close(conn);
+		return b;
 	}
 
 }

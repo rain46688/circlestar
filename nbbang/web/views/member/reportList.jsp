@@ -119,44 +119,92 @@
                 <div style="margin-bottom: 1.3em;">
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>">개인정보 확인하기</a>
                 </div>
+                <%if(loginnedMember.getUsid()==9999){%>
+                    <div>
+                        <a class="nav-link postList" href="<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>">신고 접수 내역</a>
+                    </div>
+                <%}else{%>
                 <div>
                     <a class="nav-link postList active" href="<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>">내 신고 내역</a>
                 </div>
+                <%}%>
             </div>
         </div>
-        <div id="iCreateContainer">
-            <div class="item textField" id="containerTitle">
-                <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >내 신고 내역</div>
-                <div style="font-size: 16px; padding-left: 10px; text-align: left;" >나의 신고 내용과 관리자의 답변을 확인할 수 있습니다.</div>
-            </div>
-            <div id="tableContainer">
-                <div id="tableTitleContainer">
-                    <div class="tableTitle">
-                        순번
-                    </div>
-                    <div class="tableTitle">
-                        신고유형
-                    </div>
-                    <div class="tableTitle">
-                        글제목
-                    </div>
-                    <div class="tableTitle">
-                        피신고회원
-                    </div>
-                    <div class="tableTitle">
-                        관리자 답변 여부
-                    </div>
+        <%if(loginnedMember.getUsid()==9999){%>
+            <div id="iCreateContainer">
+                <div class="item textField" id="containerTitle">
+                    <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >신고 접수 내역</div>
+                    <div style="font-size: 16px; padding-left: 10px; text-align: left;" >접수된 신고 목록입니다.</div>
                 </div>
-                <div id="tableTextContainer">
-
+                <div id="tableContainer">
+                    <div id="tableTitleContainer">
+                        <div class="tableTitle">
+                            순번
+                        </div>
+                        <div class="tableTitle">
+                            신고유형
+                        </div>
+                        <div class="tableTitle">
+                            글제목
+                        </div>
+                        <div class="tableTitle">
+                            피신고회원
+                        </div>
+                        <div>
+                            신고일
+                        </div>
+                        <div class="tableTitle">
+                            관리자 답변 여부
+                        </div>
+                    </div>
+                    <div id="tableTextContainer">
+                        
+                    </div>
+                    <nav aria-lable="Page navigation" class="listPageBar">
+                        <ul class="pagination justify-content-center">
+                            <%=request.getAttribute("pageBar")%>
+                        </ul>
+                    </nav>
                 </div>
-                <nav aria-lable="Page navigation" class="listPageBar">
-                    <ul class="pagination justify-content-center">
-                        <%=request.getAttribute("pageBar")%>
-                    </ul>
-                </nav>
             </div>
-        </div>
+        <%}else{%> 
+            <div id="iCreateContainer">
+                <div class="item textField" id="containerTitle">
+                    <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >내 신고 내역</div>
+                    <div style="font-size: 16px; padding-left: 10px; text-align: left;" >나의 신고 내용과 관리자의 답변을 확인할 수 있습니다.</div>
+                </div>
+                <div id="tableContainer">
+                    <div id="tableTitleContainer">
+                        <div class="tableTitle">
+                            순번
+                        </div>
+                        <div class="tableTitle">
+                            신고유형
+                        </div>
+                        <div class="tableTitle">
+                            글제목
+                        </div>
+                        <div class="tableTitle">
+                            피신고회원
+                        </div>
+                        <div>
+                            신고일
+                        </div>
+                        <div class="tableTitle">
+                            관리자 답변 여부
+                        </div>
+                    </div>
+                    <div id="tableTextContainer">
+                        
+                    </div>
+                    <nav aria-lable="Page navigation" class="listPageBar">
+                        <ul class="pagination justify-content-center">
+                            <%=request.getAttribute("pageBar")%>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        <%}%>
     </div>
 </section>
 <%@ include file="/views/common/footer.jsp" %>

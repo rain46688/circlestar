@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.nbbang.member.model.service.MemberService;
 import com.nbbang.member.model.vo.Member;
@@ -31,9 +32,17 @@ public class ModifyProfilePageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int usid=Integer.parseInt(request.getParameter("usid"));
-		Member m=new MemberService().myPage(usid);
-		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/member/modifyProfile.jsp").forward(request, response);
+		HttpSession session=request.getSession();
+		Member loginnedMember=(Member)session.getAttribute("loginnedMember");
+		if(loginnedMember.getUsid()==usid) {
+			Member m=new MemberService().myPage(usid);
+			request.setAttribute("member", m);
+			request.getRequestDispatcher("/views/member/modifyProfile.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "접근불가능한 페이지입니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**
