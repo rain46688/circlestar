@@ -2,54 +2,56 @@
 
 	div#kdh-sidebar-container{
 		width: 14em;
-	height: 35em;
-	
+		height: 34em;
+	margin-top: 2em;
 	margin-left: 15em;
 	float: left;
-	margin-bottom: 4em;
-	list-style: none;
+	border: 2px solid darkgray;
 	
+	margin-bottom: 3em;
 	} 
 
 	ul{
 		list-style:none;
 		}
 	 
+ul.side-bar-kdh{
+	text-align: center;
+	width: 79%;
+	
+}
 
-  /* #kdh-sidebar-left {
-	width: 14em;
-	height: 35em;
-	margin-top: 20%;
-	margin-left: 0%;
-	float: left;
-	margin-bottom: 15%;
-	
-	
-  } */
 ul.sidebarTitle{
 	background-color: rgb(243, 183, 24);
+	text-align: justify;
+	width: 99.9%;
+	height: 14em;
 	color: whitesmoke;
-	height: 11em;
-	margin-top: 1em;
+	
+	
+	
 	
 }
 ul.sidebarTitle li#kdh-side-Title{
-	font-size: 27px;
+	font-size: 30px;
 	font-weight: bold;
 	padding-top: 1em;
+	padding-left: 10%;
+	
 }
-ul.sidebarTitle li#kdh-side-text span{
+ul.sidebarTitle li#kdh-side-text{
 	font-weight: bold;
 	font-size: 20px;
-	padding-top: 20em;
+	padding-left: 6%;
+	
+}
+ul.sidebarTitle li#kdh-side-text span{
+	padding-left: 14%;
 }
 
-div#kdh-sidebar-left{
-	border: 1px solid darkgray;
-}
  div#kdh-sidebar-left ul li{
  	list-style:none;
-    padding: 3%;
+    padding-top:1em ;
  }
 
  .cstmt-list a,
@@ -59,7 +61,7 @@ div#kdh-sidebar-left{
   font-size: 20px;
   color: black;
   text-decoration: none;
-  margin-left: 1em;
+  
   
  }
  .cstmt-list a:hover,
