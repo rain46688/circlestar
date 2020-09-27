@@ -933,6 +933,73 @@ private Properties prop=new Properties();
 		return totalData;
 	}
 
+	public Report reportDetail(Connection conn, int usid, int reportId) {
+		Report r=new Report();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("reportDetail"));
+			pstmt.setInt(1, reportId);
+			pstmt.setInt(2, usid);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				r.setReportId(rs.getInt("REPORT_ID"));
+				r.setReportUserUsid(rs.getInt("REPORT_USER_USID"));
+				r.setReportBoardId(rs.getInt("REPORT_BOARD_ID"));
+				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportContent(rs.getString("REPORT_CONTENT"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportFile(rs.getString("REPORT_FILE"));
+				r.setReportIscheck(rs.getBoolean("REPORT_ISCHECK"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportAnswer(rs.getString("REPORT_ANSWER"));
+				r.setReportIswarning(rs.getBoolean("REPORT_ISWARNING"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return r;
+	}
+
+	public Report reportDetail(Connection conn, int reportId) {
+		Report r=new Report();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("reportDetailAll"));
+			pstmt.setInt(1, reportId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				r.setReportId(rs.getInt("REPORT_ID"));
+				r.setReportUserUsid(rs.getInt("REPORT_USER_USID"));
+				r.setReportBoardId(rs.getInt("REPORT_BOARD_ID"));
+				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportContent(rs.getString("REPORT_CONTENT"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportFile(rs.getString("REPORT_FILE"));
+				r.setReportIscheck(rs.getBoolean("REPORT_ISCHECK"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportAnswer(rs.getString("REPORT_ANSWER"));
+				r.setReportIswarning(rs.getBoolean("REPORT_ISWARNING"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return r;
+	}
+
 
 
 }

@@ -40,15 +40,20 @@ public class ReportDetail extends HttpServlet {
 			if(loginnedMember.getUsid()!=9999) {//관리자가 아니면
 				int reportId=Integer.parseInt(request.getParameter("reportId"));
 				Report r=new MemberService().reportDetail(usid, reportId);
-				
-				request.getRequestDispatcher("/views/member/reportDetil.jsp").forward(request, response);
-			}else {//관리자면
+				request.setAttribute("reportDetail", r);
 				request.getRequestDispatcher("/views/member/reportDetil.jsp").forward(request, response);
 			}
 		}else {
-			request.setAttribute("msg", "접근불가능한 페이지입니다.");
-			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			if(loginnedMember.getUsid()==9999) {//관리자면
+				int reportId=Integer.parseInt(request.getParameter("reportId"));
+				Report r=new MemberService().reportDetail(reportId);
+				request.setAttribute("reportDetail",r);
+				request.getRequestDispatcher("/views/member/reportDetil.jsp").forward(request, response);
+			}else {
+				request.setAttribute("msg", "접근불가능한 페이지입니다.");
+				request.setAttribute("loc", "/");
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);				
+			}
 		}
 	}
 
