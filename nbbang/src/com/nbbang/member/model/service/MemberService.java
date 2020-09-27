@@ -290,4 +290,18 @@ private MemberDao dao=new MemberDao();
 		return totalData;
 	}
 
+	public Report reportDetail(int usid, int reportId) {
+		Connection conn=getConnection();
+		Report r=dao.reportDetail(conn, usid, reportId);
+		close(conn);
+		return r;
+	}
+
+	public Report reportDetail(int reportId) {
+		Connection conn=getConnection();
+		Report r=dao.reportDetail(conn, reportId);
+		close(conn);
+		return r;
+	}
+
 }

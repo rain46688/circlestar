@@ -57,36 +57,53 @@
         position: relative;
         background: #FFFFFF;
         text-align: center;
-        margin: 3% 12% 5% 0%;
+        margin: 3% 8% 5% 0%;
         /* 세로정렬꽉차게 가운데:center */
-        /*align-items: stretch;*/
+        align-items: stretch;
         /* 가로정렬꽉차게 가운데:center */
-        /*justify-items: stretch;*/
-        width: 51%;
-        float: left;
+        justify-items: stretch;
+        width: 55%;
+        float: right;
+    }
+    div .item *{
+        width:100%;
+        text-align: center;
+        font-size: 16px;
     }
     a.active{
         font-weight: bold;
     }
     nav.listPageBar{
         text-align: center;
-        margin: 0;
+        margin-top: 3%;
     }
     ul.pagination{
         text-align: center;
     }
-    div#tableContainer{
-        margin-top: 5%;
+    div.fieldCapsule{
+        display: flex;
+        position: relative;
     }
-    div#tableTitleContainer{
-    }
-    div.tableTitle{
+    div.capsuleLeft{
         float: left;
-        width: 15%;
-        text-align: center;
+        border-bottom: black 1px solid;
+        padding: 1%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
-    div#tableTextContainer{
-        clear:both;
+    button.button{
+        outline: none;
+        background: #735020;
+        width: 10%;
+        min-width: 40px;
+        border: none;
+        padding: 5px;
+        color: #FFFFFF;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        margin: 5px 0;
     }
 </style>
 <section>
@@ -138,114 +155,115 @@
                     <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >신고 접수 내역</div>
                     <div style="font-size: 16px; padding-left: 10px; text-align: left;" >접수된 신고 목록입니다.</div>
                 </div>
-                <div id="tableContainer">
-                    <div id="tableTitleContainer">
-                        <div class="tableTitle">
-                            글번호
-                        </div>
-                        <div class="tableTitle">
-                            신고유형
-                        </div>
-                        <div class="tableTitle">
-                            글제목
-                        </div>
-                        <div class="tableTitle">
-                            피신고회원
-                        </div>
-                        <div class="tableTitle">
-                            신고일
-                        </div>
-                        <div class="tableTitle">
-                            관리자 답변 여부
-                        </div>
-                    </div>
-                    <div id="tableTextContainer">
-                        <%for(Report r:rlist){ %>
-                            <div>
-								<%=r.getReportId() %>
+                <div class="item textField" style="margin-left: 1%; margin-top: 3%;">
+                        <div class="fieldCapsule">
+                            <div class="capsuleLeft" style="width: 10%; border-top: black 1px solid;" >
+                                글번호
                             </div>
-                            <div>
-								<%=r.getReportType() %>
+                            <div class="capsuleLeft" style="width: 13%; border-top: black 1px solid;">
+                                신고유형
                             </div>
-                            <div>
-								<%=r.getReportTitle() %>
+                            <div class="capsuleLeft" style="width: 47%; border-top: black 1px solid;">
+                                글제목
                             </div>
-                            <div>
-								<%=r.getReportDate() %>
+                            <div class="capsuleLeft" style="width: 13%; border-top: black 1px solid;">
+                                신고일
                             </div>
-                            <%if(r.getReportAnswer()==null){ %> 
-	                            <div>
-	                            	N
-	                            </div>
-                            <%}else{%>
-	                            <div>
-	                            	Y
-	                            </div>
-                            <%} %>
-                        <%}%>
-                    </div>
-                    <nav aria-lable="Page navigation" class="listPageBar">
-                        <ul class="pagination justify-content-center">
-                            <%=request.getAttribute("pageBar")%>
-                        </ul>
-                    </nav>
+                            <div class="capsuleLeft" style="width: 15%; border-top: black 1px solid;">
+                                관리자 답변 여부
+                            </div>
+                        </div>
                 </div>
+                <div class="item textField" style="margin-left: 1%;">
+                    <%for(Report r:rlist){ %>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 10%;">
+                            <%=r.getReportId() %>
+                        </div>
+                        <div class="capsuleLeft" style="width: 13%;">
+                            <%=r.getReportType() %>
+                        </div>
+                        <div class="capsuleLeft" style="width: 47%;">
+                            <%=r.getReportTitle() %>
+                        </div>
+                        <div class="capsuleLeft" style="width: 13%;">
+                            <%=r.getReportDate() %>
+                        </div>
+                        <%if(r.getReportAnswer()==null){ %> 
+                            <div class="capsuleLeft" style="width: 15%;">
+                                N
+                            </div>
+                        <%}else{%>
+                            <div class="capsuleLeft" style="width: 15%;">
+                                Y
+                            </div>
+                        <%} %>
+                    </div>
+                    <%}%>
+                </div> 
+                <nav aria-lable="Page navigation" class="listPageBar">
+                    <ul class="pagination justify-content-center">
+                        <%=request.getAttribute("pageBar")%>
+                    </ul>
+                </nav>
             </div>
         <%}else{%> 
             <div id="iCreateContainer">
                 <div class="item textField" id="containerTitle">
                     <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >내 신고 내역</div>
-                    <div style="font-size: 16px; padding-left: 10px; text-align: left;" >나의 신고 내용과 관리자의 답변을 확인할 수 있습니다.</div>
+                    <div style="font-size: 16px; padding-left: 10px; text-align: left;" >나의 신고 내역과 관리자의 답변을 확인할 수 있습니다.</div>
                 </div>
-                <div id="tableContainer">
-                    <div id="tableTitleContainer">
-                        <div class="tableTitle">
+                <div class="item textField" style="margin-left: 1%; margin-top: 3%;">
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 10%; border-top: black 1px solid;">
                             글번호
                         </div>
-                        <div class="tableTitle">
+                        <div class="capsuleLeft" style="width: 13%; border-top: black 1px solid;">
                             신고유형
                         </div>
-                        <div class="tableTitle">
-                            제목
+                        <div class="capsuleLeft" style="width: 47%; border-top: black 1px solid;">
+                            글제목
                         </div>
-                        <div class="tableTitle">
+                        <div class="capsuleLeft" style="width: 13%; border-top: black 1px solid;">
                             신고일
                         </div>
-                        <div class="tableTitle">
+                        <div class="capsuleLeft" style="width: 15%; border-top: black 1px solid;">
                             관리자 답변 여부
                         </div>
                     </div>
-                    <div id="tableTextContainer">
-                        <%for(Report r:rlist){ %>
-                            <div>
-								<%=r.getReportId() %>
-                            </div>
-                            <div>
-								<%=r.getReportType() %>
-                            </div>
-                            <div>
-								<%=r.getReportTitle() %>
-                            </div>
-                            <div>
-								<%=r.getReportDate() %>
-                            </div>
-                            <%if(r.getReportAnswer()==null){ %> 
-	                            <div>
-	                            	N
-	                            </div>
-                            <%}else{%>
-	                            <div>
-	                            	Y
-	                            </div>
-                            <%} %>
-                        <%}%>
-                    </div>
-                    <nav aria-lable="Page navigation" class="listPageBar">
-                        <ul class="pagination justify-content-center">
-                            <%=request.getAttribute("pageBar")%>
-                        </ul>
-                    </nav>
                 </div>
+                <div class="item textField" style="margin-left: 1%;">
+                    <%for(Report r:rlist){ %>
+                    <div class="fieldCapsule">
+                        <div class="capsuleLeft" style="width: 10%;">
+                            <%=r.getReportId() %>
+                        </div>
+                        <div class="capsuleLeft" style="width: 13%;">
+                            <%=r.getReportType() %>
+                        </div>
+                        <div class="capsuleLeft" style="width: 47%; cursor: pointer;" onclick="location.href='<%=request.getContextPath()%>/member/reportDetail?usid=<%=r.getReportUserUsid()%>&reportId=<%=r.getReportId()%>'">
+                            <%=r.getReportTitle() %>
+                        </div>
+                        <div class="capsuleLeft" style="width: 13%;">
+                            <%=r.getReportDate() %>
+                        </div>
+                        <%if(r.getReportAnswer()==null){ %> 
+                            <div class="capsuleLeft" style="width: 15%;">
+                                N
+                            </div>
+                        <%}else{%>
+                            <div class="capsuleLeft" style="width: 15%;">
+                                Y
+                            </div>
+                        <%} %>
+                    </div>
+                    <%}%>
+                </div> 
+                <nav aria-lable="Page navigation" class="listPageBar">
+                    <ul class="pagination justify-content-center">
+                        <%=request.getAttribute("pageBar")%>
+                    </ul>
+                </nav>
             </div>
         <%}%>
     </div>
