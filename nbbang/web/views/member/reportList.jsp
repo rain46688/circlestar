@@ -211,7 +211,7 @@
             <div id="iCreateContainer">
                 <div class="item textField" id="containerTitle">
                     <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0; text-align: left;" >내 신고 내역</div>
-                    <div style="font-size: 16px; padding-left: 10px; text-align: left;" >나의 신고 내용과 관리자의 답변을 확인할 수 있습니다.</div>
+                    <div style="font-size: 16px; padding-left: 10px; text-align: left;" >나의 신고 내역과 관리자의 답변을 확인할 수 있습니다.</div>
                 </div>
                 <div class="item textField" style="margin-left: 1%; margin-top: 3%;">
                     <div class="fieldCapsule">
@@ -241,7 +241,7 @@
                         <div class="capsuleLeft" style="width: 13%;">
                             <%=r.getReportType() %>
                         </div>
-                        <div class="capsuleLeft" style="width: 47%;">
+                        <div class="capsuleLeft" style="width: 47%; cursor: pointer;" onclick="location.href='<%=request.getContextPath()%>/member/reportDetail?usid=<%=r.getReportUserUsid()%>&reportId=<%=r.getReportId()%>'">
                             <%=r.getReportTitle() %>
                         </div>
                         <div class="capsuleLeft" style="width: 13%;">

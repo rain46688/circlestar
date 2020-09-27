@@ -290,4 +290,8 @@ private MemberDao dao=new MemberDao();
 		return totalData;
 	}
 
+	public Report reportDetail(int usid, int reportId) {
+		Connection
+	}
+
 }
