@@ -613,7 +613,7 @@
 				alert('아이디 중복 확인을 해주세요.');
 			}
 			if($("#certiKey").val().trim()!=$("#certiNum").val().trim()){
-				alert('이메일 인증을 확인해주세요.')
+				alert('이메일 인증을 확인해주세요.');
 			}
 			if($("#checkNNhidden").val()=='existed'){
 				alert('닉네임 중복 확인을 해주세요.');
