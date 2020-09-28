@@ -39,7 +39,7 @@ public class BoardSpecialListServlet extends HttpServlet {
 		System.out.println("BoardSpecialListServlet");
 		String boardTitle = "특가";
 		int cPage;
-		SimpleDateFormat f = new SimpleDateFormat("MM/dd/yyyy HH:mm a");
+		SimpleDateFormat f = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
 		
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -56,17 +56,26 @@ public class BoardSpecialListServlet extends HttpServlet {
 					c.getCardBoard().setTradeArea(newTemp);
 				}
 			}
+			System.out.println(c.getCardBoard().getLimitTime());
 			String dd = f.format(c.getCardBoard().getLimitTime());
-			
-			if(dd.contains("오전")) {
-					System.out.println("t");
-			}else {
-				System.out.println("f");
-			}
-			
 			System.out.println(dd);
-			
+			if(dd.contains("오전")) {
+					//System.out.println("t");
+					dd=	dd.replace("오전", "AM");
+			}else {
+				//System.out.println("f");
+				dd=dd.replace("오후", "PM");
+			}
+			c.getCardBoard().setTime(dd);
+			System.out.println(dd);
 		}
+		
+		
+//		for(int i=0; i<blist.size();i++) {
+//			blist.get(i).getCardBoard().getBoardTitle();
+//			
+//		}
+//		
 		
 		
 		int totalData = new BoardService().boardListCount(boardTitle);

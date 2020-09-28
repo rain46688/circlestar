@@ -106,25 +106,34 @@
 			<%} %>
 		</div>
 		<%
-			for (Card c : bolist) {
+		for(int i=0; i<bolist.size(); i++) {
 		%>
-		<div class="card" onclick="location.href='<%=request.getContextPath()%>/board/boardSpecialPage?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid() %>'" style="width: 24rem; cursor: pointer; padding:0px">
+		<div class="card" onclick="location.href='<%=request.getContextPath()%>/board/boardSpecialPage?boardId=<%=bolist.get(i).getCardBoard().getBoardId()%>&writerUsid=<%=bolist.get(i).getCardBoard().getWriterUsid() %>'" style="width: 24rem; cursor: pointer; padding:0px">
 			<!-- file의 갯수 분기처리 -->
 			<%-- <% if(files.length==1) {%> --%>
 			<div class="image-wrapper">
-			<img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="200em">
+			<img src="<%=request.getContextPath()%>/upload/images/<%= bolist.get(i).getCardFile().getFileName()[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="200em">
 			<%-- <% }else { %> --%>
 			<%-- <img src="<%=request.getContextPath()%>/upload/images/<%= files[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em"> --%>
 		<%-- 	<%} %> --%>
 			</div>
 			<div class="card-body">
-				<input type="hidden" value="<%= c.getCardBoard().getBoardId()%>">
-				<h4 class="card-title"><p><%= c.getCardBoard().getBoardTitle() %></p></h4>
-				<p><%= c.getCardBoard().getTradeArea() %></p>
-				<div id="HourCountdown"></div> 남았습니다.<br>
+				<input type="hidden" value="<%= bolist.get(i).getCardBoard().getBoardId()%>">
+				<h4 class="card-title"><p><%= bolist.get(i).getCardBoard().getBoardTitle() %></p></h4>
+				<p><%= bolist.get(i).getCardBoard().getTradeArea() %></p>
 				
-				<p id="interest"><%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회</p>
-				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= c.getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
+				
+				<div id="HourCountdown<%=i%>"></div> 남았습니다.<br>
+				
+						<script>
+						
+						$(function(){
+							CountDownTimer('<%=bolist.get(i).getCardBoard().getTime()%>', 'HourCountdown<%=i%>');	
+						});
+						
+						</script>
+				<p id="interest"><%= bolist.get(i).getCardBoard().getLikeCount() %> 관심 <%= bolist.get(i).getCardBoard().getHit() %> 조회</p>
+				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= bolist.get(i).getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
 			</div>
 			<br>
 			<hr>
@@ -163,7 +172,7 @@
 		location.assign("<%= request.getContextPath() %>/board/boSpecialWrite");
 	}
 	
-	CountDownTimer('9/28/2020 8:00 PM', 'HourCountdown');	
+	
 	
 	
 	function CountDownTimer(dt, id) {
