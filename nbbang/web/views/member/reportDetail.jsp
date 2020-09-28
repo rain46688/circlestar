@@ -351,10 +351,10 @@
                             관리자 답변
                         </div>
                     </div>
-                    <form action="">
+                    <form id="reportAnswerForm" action="<%=request.getContextPath()%>/member/reportAnswer" method="post">
                         <div class="fieldCapsule">
                             <div class="capsuleLeft" style="width: 100%; text-align: center;">
-                                <textarea id="rcontent" name="ranswer" cols="30" rows="6" maxlength="500" placeholder="답변을 적어주세요."></textarea>
+                                <textarea id="ranswer" name="ranswer" cols="30" rows="6" maxlength="500" placeholder="답변을 적어주세요."></textarea>
                                 <button type="button" class="button" style="margin-left: -5px;" onclick="fn_reportAnswer();">답변전송</button>
                                 <input type="hidden" name="rboardId" value="<%=rd.getReportBoardId()%>">
                             </div>
@@ -369,8 +369,12 @@
         <%}%>
     </div>
     <script>
-        function reportAnswer(){
-            
+        function fn_reportAnswer(){
+            if($("#ranswer").val().trim()===''){
+                alert("답변을 입력해주세요.");
+            }else{
+                $("#reportAnswerForm").submit();
+            }
         }
     </script>
 </section>
