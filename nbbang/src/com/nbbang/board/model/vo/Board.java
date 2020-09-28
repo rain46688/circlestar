@@ -23,15 +23,30 @@ public class Board {
 	private String ownStatus;
 	private String tradeKind;
 	private String productUrl;
+	private String time;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
+	public String getTime() {
+		return time;
+	}
+
+
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+
+
 	public Board(int boardId, int writerUsid, String boardTitle, String writerNickname, String content, Date enrollDate,
 			int hit, String productCategory, String tradeArea, int maxMems, Date limitTime, int tradeStage,
 			int likeCount, boolean popularBoard, int productPrice, String ownStatus, String tradeKind,
-			String productUrl) {
+			String productUrl, String time) {
 		super();
 		this.boardId = boardId;
 		this.writerUsid = writerUsid;
@@ -51,7 +66,10 @@ public class Board {
 		this.ownStatus = ownStatus;
 		this.tradeKind = tradeKind;
 		this.productUrl = productUrl;
+		this.time = time;
 	}
+
+
 
 	public int getBoardId() {
 		return boardId;
@@ -204,6 +222,6 @@ public class Board {
 				+ ", hit=" + hit + ", productCategory=" + productCategory + ", tradeArea=" + tradeArea + ", maxMems="
 				+ maxMems + ", limitTime=" + limitTime + ", tradeStage=" + tradeStage + ", likeCount=" + likeCount
 				+ ", popularBoard=" + popularBoard + ", productPrice=" + productPrice + ", ownStatus=" + ownStatus
-				+ ", tradeKind=" + tradeKind + ", productUrl=" + productUrl + "]";
+				+ ", tradeKind=" + tradeKind + ", productUrl=" + productUrl + ", time=" + time + "]";
 	}
 }
