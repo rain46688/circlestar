@@ -15,8 +15,8 @@
 		tradeUserList = (List<Integer>)request.getAttribute("tradeUserList");
 	}
 	String reply = new String();
-	if(request.getAttribute("reply")!=null) {
-		reply = (String)request.getAttribute("reply");
+	if(request.getAttribute("reply")!=null){
+  	reply = (String)request.getAttribute("reply");
 	}
 	Integer requestCount = (Integer)request.getAttribute("requestCount");
 	int maxMems = c.getCardBoard().getMaxMems();
@@ -489,7 +489,7 @@
           </select>
           <input type="text" name="commentContent" class="commentContent" id="commentContent" size="48">
           <input type="hidden" name="commentLevel" id="commentLevel" value="1">
-          <button class="commentInsertBtn">댓글입력</button>
+          <button class="commentInsertBtn" id="commentInsertBtn">댓글입력</button>
       </div>
     <div id="Comments">
       <ul class="comment_list">
@@ -500,7 +500,13 @@
   </div>
 </section>
 <script>
-
+<% if(reply.equals("success")) { %>
+  function autoReple() {
+    $("#commentContent").val("<p class='confirm'>결제했습니다.</p>");
+    $("#commentInsertBtn").click();
+    $("#commentContent").val("");
+  }
+  <% } %>
 function fn_replyToReply(comId){
   let html = "";
   html += "<div id=\"commentInsert2\">";
@@ -535,15 +541,8 @@ function fn_enterBtn(){
 var pop;
 window.onunload = function() { 
 	pop.close(); 
+  
 }
-<% if(reply.equals("success")) { %>
-function autoReple() {
-  $("#commentContent").val("<p class='confirm'>결제했습니다.</p>");
-  $("#commentInsertBtn").click();
-  $("#commentContent").val("");
-  return false;
-}
-<% } %>
 
 /*  채팅창 관련 로직  */
 function nbbang(f){
