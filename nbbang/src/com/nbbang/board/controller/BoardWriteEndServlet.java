@@ -54,7 +54,6 @@ public class BoardWriteEndServlet extends HttpServlet {
 			fileSaveDir.mkdirs();
 		
 		List<String> fileNames = new ArrayList<String>();
-//		int index = 0;
 		for (Part part : request.getParts()) {
 			if (part.getName().equals("file")) {
 				String renamed = new uploadRename().randomString(getFileName(part));
