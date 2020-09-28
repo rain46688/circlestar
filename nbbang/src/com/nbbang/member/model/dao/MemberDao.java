@@ -1000,6 +1000,22 @@ private Properties prop=new Properties();
 		return r;
 	}
 
+	public int reportAnswer(Connection conn, String reportAnswer, int rboardId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("reportAnswer"));
+			pstmt.setString(1, reportAnswer);
+			pstmt.setInt(2, rboardId);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 }
