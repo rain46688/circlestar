@@ -48,7 +48,7 @@ public class BoardSpecialWriteEndServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// 이미지 저장 경로
-
+		System.out.println("BoardSpecialWriteEndServlet");
 		String uploadPath = request.getServletContext().getRealPath("/upload/") + UPLOAD_FOLDER;
 
 		File fileSaveDir = new File(uploadPath);// 경로 없으면 생성
@@ -72,11 +72,11 @@ public class BoardSpecialWriteEndServlet extends HttpServlet {
 			return;
 		}
 //
-//		System.out.println(request.getParameter("title") + " " + request.getParameter("name") + " "
-//				+ Integer.parseInt(request.getParameter("price")) + " "
-//				+ Integer.parseInt(request.getParameter("maxMems")) + " " + request.getParameter("time") + " "
-//				+ request.getParameter("content") + " " + fileNames.toArray(new String[fileNames.size()]) + " "
-//				+ request.getParameter("url"));
+		System.out.println(request.getParameter("title") + " " + request.getParameter("name") + " "
+				+ Integer.parseInt(request.getParameter("price")) + " "
+				+ Integer.parseInt(request.getParameter("maxMems")) + " " + request.getParameter("time") + " "
+				+ request.getParameter("content") + " " + fileNames.toArray(new String[fileNames.size()]) + " "
+				+ request.getParameter("url"));
 
 		Date date = new Date();
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -119,7 +119,7 @@ public class BoardSpecialWriteEndServlet extends HttpServlet {
 		bf.setFileName(fileNames.toArray(new String[fileNames.size()]));
 		int result = new BoardSpecialService().boardInsert(b, bf);
 
-		if (result > 2) {
+		if (result > 1) {
 			// 업로드 성공
 			request.setAttribute("msg", "업로드 완료!");
 			request.setAttribute("loc", "/boSpecialList?boardTitle=" + b.getProductCategory());

@@ -24,7 +24,8 @@ public class BoardSpecialService {
 		Connection conn = getConnection();
 		int result = dao.boardInsert(conn, b);
 		result += dao.boardInsert(conn, bf);
-		if (result > 2) {
+		System.out.println(result);
+		if (result > 1) {
 			commit(conn);
 		} else {
 			rollback(conn);
