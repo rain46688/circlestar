@@ -7,24 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.nbbang.board.model.vo.Board;
 import com.nbbang.member.model.service.MemberService;
-import com.nbbang.member.model.vo.Member;
 import com.nbbang.member.model.vo.Report;
 
 /**
- * Servlet implementation class ReportDetail
+ * Servlet implementation class ReportWarning
  */
-@WebServlet("/member/reportDetail")
-public class ReportDetail extends HttpServlet {
+@WebServlet("/warning")
+public class ReportWarning extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportDetail() {
+    public ReportWarning() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +30,19 @@ public class ReportDetail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int usid=Integer.parseInt(request.getParameter("usid"));
-		HttpSession session=request.getSession();
-		Member loginnedMember=(Member)session.getAttribute("loginnedMember");
-		if(loginnedMember.getUsid()==usid) {
-			int reportId=Integer.parseInt(request.getParameter("reportId"));
-			Report r=new MemberService().reportDetail(usid, reportId);
-			int boardId=r.getReportBoardId();
-			Board b=new MemberService().boardData(boardId);
-			request.setAttribute("reportDetail", r);
-			request.setAttribute("boardData", b);
-			request.getRequestDispatcher("/views/member/reportDetail.jsp").forward(request, response);
+		int reportId=Integer.parseInt(request.getParameter("reboardId"));
+		Report r=new MemberService().reportDetail(reportId);
+		int tusid=r.getReportTargetUsid();
+		int result=new MemberService().reportWarning(tusid);
+		System.out.println(reportId);
+		if(result>0) {
+			request.setAttribute("msg", "해당 회원에게 경고를 주었습니다.");
+			request.setAttribute("loc", "/admin/reportDetail?reportId="+reportId);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "접근불가능한 페이지입니다.");
-			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);				
+			request.setAttribute("msg", "경고주기에 실패했습니다.");
+			request.setAttribute("loc", "/admin/reportDetail?reportId="+reportId);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}
 

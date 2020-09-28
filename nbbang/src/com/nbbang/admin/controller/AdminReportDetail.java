@@ -1,7 +1,6 @@
-package com.nbbang.member.controller;
+package com.nbbang.admin.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +14,16 @@ import com.nbbang.member.model.vo.Member;
 import com.nbbang.member.model.vo.Report;
 
 /**
- * Servlet implementation class ReportDetail
+ * Servlet implementation class AdminReportDetail
  */
-@WebServlet("/member/reportDetail")
-public class ReportDetail extends HttpServlet {
+@WebServlet("/admin/reportDetail")
+public class AdminReportDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportDetail() {
+    public AdminReportDetail() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +32,16 @@ public class ReportDetail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int usid=Integer.parseInt(request.getParameter("usid"));
 		HttpSession session=request.getSession();
 		Member loginnedMember=(Member)session.getAttribute("loginnedMember");
-		if(loginnedMember.getUsid()==usid) {
+		if(loginnedMember.getUsid()==9999) {
 			int reportId=Integer.parseInt(request.getParameter("reportId"));
-			Report r=new MemberService().reportDetail(usid, reportId);
+			Report r=new MemberService().reportDetail(reportId);
 			int boardId=r.getReportBoardId();
 			Board b=new MemberService().boardData(boardId);
-			request.setAttribute("reportDetail", r);
+			request.setAttribute("reportDetail",r);
 			request.setAttribute("boardData", b);
-			request.getRequestDispatcher("/views/member/reportDetail.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/admin/adminReportDetail.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "접근불가능한 페이지입니다.");
 			request.setAttribute("loc", "/");

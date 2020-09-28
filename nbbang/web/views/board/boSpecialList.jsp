@@ -100,8 +100,8 @@ font-weight:bold;
 		<h1><%= request.getAttribute("category") %></h1>
 		</div>
 		<div id="writeBoard">
-			<input id="searchInHere" onkeypress="searchEnter();" type="text" placeholder="게시판 내에서 검색">
-			<button id="searchInHereBtn" onclick="fn_search('<%= request.getAttribute("category") %>');">검색</button>
+			<%-- <input id="searchInHere" onkeypress="searchEnter();" type="text" placeholder="게시판 내에서 검색">
+			<button id="searchInHereBtn" onclick="fn_search('<%= request.getAttribute("category") %>');">검색</button> --%>
 			<% if(request.getAttribute("category").equals("특가")) {%>
 			<% 	if(loginnedMember!=null&&loginnedMember.getNickname().equals("ADMIN")){ %>
 			<button id="writeBtn" onclick="fn_boWrite();">글쓰기</button>
@@ -126,7 +126,7 @@ font-weight:bold;
 			<div class="card-body">
 				<input type="hidden" value="<%= bolist.get(i).getCardBoard().getBoardId()%>">
 				<h4 class="card-title"><p><%= bolist.get(i).getCardBoard().getBoardTitle() %></p></h4>
-				<p><%= bolist.get(i).getCardBoard().getTradeArea() %></p>
+			<%-- 	<p><%= bolist.get(i).getCardBoard().getTradeArea() %></p> --%>
 				<div class="time">특가 마감까지 <p id="count<%=i%>"></p></div>
 						<script>
 						$(function(){
@@ -144,15 +144,7 @@ font-weight:bold;
 			}
 		%>
 	</div>
-	
-<%-- 	<% for(int i=0; i < 10; i++) { %>
-		<p id="<%=i%>">p</p>
-			<script>
-			
-			console.log("hh"+'<%=i%>');
-		
-		</script>
-	<% } %> --%>
+
 	
 	<br>
 		<nav aria-lable="Page navigation">
@@ -172,9 +164,6 @@ font-weight:bold;
 	function fn_boWrite(){
 		location.assign("<%= request.getContextPath() %>/board/boSpecialWrite");
 	}
-	
-	
-	
 	
 	function Timer(dt, id) {
 	    var end = new Date(dt);

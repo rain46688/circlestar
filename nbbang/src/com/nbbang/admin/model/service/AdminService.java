@@ -11,7 +11,7 @@ import java.util.List;
 import com.nbbang.admin.model.dao.AdminDao;
 import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
-import com.nbbang.admin.model.vo.Report;
+import com.nbbang.member.model.vo.Report;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
 public class AdminService {

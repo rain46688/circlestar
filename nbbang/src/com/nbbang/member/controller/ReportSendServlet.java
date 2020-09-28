@@ -56,7 +56,7 @@ public class ReportSendServlet extends HttpServlet {
 		String reportTitle=mr.getParameter("reportTitle");
 		String rcontent=mr.getParameter("rcontent");
 		String rfile=mr.getFilesystemName("rfile");
-		String rtargetNickname=mr.getParameter("rtargetUsid");
+		String rtargetNickname=mr.getParameter("rtargetNickname");
 		String rnickname=mr.getParameter("rnickname");
 		
 		r.setReportUserUsid(rusid);

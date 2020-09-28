@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.admin.model.service.AdminService;
-import com.nbbang.admin.model.vo.Report;
+import com.nbbang.member.model.vo.Report;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
 /**
@@ -35,6 +35,7 @@ public class AdminReportListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		int cPage;
 		List<Report> list =null;
 		try {

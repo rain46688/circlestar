@@ -54,18 +54,20 @@
 					onclick="location.href='<%=request.getContextPath()%>/loginPage'">로그인</button>
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/enrollMember'">회원가입</button>
+					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
+	   					onclick="location.href='<%=request.getContextPath()%>/member/myPage'">마이페이지</button>
 				<%}else{ %>
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/member/memLogout.lo'">로그아웃</button>
-				<%} %>
-
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 					onclick="location.href='<%=request.getContextPath()%>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>'">고객센터</button>
+				<%} %>
 
+				
 				<%if(loginnedMember!=null) {%>
 					<%if(loginnedMember.getUsid()==9999) {%>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
-	   					onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>'">관리자페이지</button>
+	   					onclick="location.href='<%=request.getContextPath()%>/admin/adminPage?usid=<%=loginnedMember.getUsid()%>'">관리자페이지</button>
 					<%}else{ %>
 	   				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 	   					onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>'">마이페이지</button>

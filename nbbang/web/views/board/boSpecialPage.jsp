@@ -300,20 +300,28 @@
         height: 35vw;
         object-fit: cover;
     }
+    
+.time > *{
+font-size:2em;
+font-weight:bold;
+}
 
 </style>
 <section>
-	<% if(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1){ %>
+<%-- 	<% if(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1){ %>
 	<div id="btnForWriter"> 
   		<button onclick="fn_modifyBoard();">수정하기</button>
   		<button onclick="fn_deleteBoard();">삭제하기</button>
   	</div>
-  	<%} %>
+  	<%} %> --%>
+  	
   	<% if(loginnedMember.getUsid()==9999) {%>
   	<div id="btnForWriter"> 
+  	  		<button onclick="fn_modifyBoard();">수정하기</button>
   		<button onclick="fn_deleteBoard();">삭제하기</button>
   	</div>
   	<%} %>
+  	
   <div id="wrapper">
     <div id="imageWrapper">
       <div id="carouselField" name="carouselField" >
@@ -354,54 +362,38 @@
     </div>
     <div id="userInfo">
     	<hr>
-      <div id="userThumb">
+  <%--     <div id="userThumb">
         <img src="<%= memberPic + c.getWriterProfile() %>" alt="" width="40px" height="40px">
-      </div>
+      </div> --%>
         <div id="userIdAndAddress">
-          <div id="userId"><%= c.getCardBoard().getWriterNickname() %></div>
-          <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div>
+           <div id="userId">기업명 : <%= c.getCardBoard().getWriterNickname() %></div>
+     <%--      <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div> --%>
+     	<div class="time"><p id="count"></p></div>
         </div>
       <!-- 프로필 사진 + id -->
-      <h5 id="level">신뢰 level</h5>
+ 
     </div>
     <div class="content">
       <hr>
       <div id="title">
         <div id="titleContent"><p><%= c.getCardBoard().getBoardTitle() %></p></div>
-        <!-- <button onclick="fun_decidebuy();">n빵하기</button>
-        <button onclick="fun_cancelbuy();">취소</button>
-        <button onclick="fun_createroom();">인원 차서 방장이 방열기</button>
-        <form name="form">
-				<!-- 디비에서 객체를 받아와서 다시 넣어야됨 일단은 리터럴로 넘김 -->
-					<!-- BOARD 컬럼의  BOARD_ID -->
-					<!-- <input type="hidden" name="boardId" value="${curCard.cardBoard.boardId}">  -->
-					<!-- BOARD 컬럼의  MAX_MEMS -->
-					<!-- <input type="hidden" name="maxMems" value="${curCard.cardBoard.maxMems}">  -->
-					<!-- BOARD 컬럼의  TRADE_STAGE -->
-					<!-- <input type="hidden" name="tradeStage" value="${curCard.cardBoard.tradeStage}">  -->
-					<!-- BOARD 컬럼의  WRITER_USID -->
-					<!-- <input type="hidden" name="writerUsid" value="${loginnedMember.usid}"> -->
-					<!-- MEMBER 컬럼의  MEMBER_PICTURE -->
-          <!-- <input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}"> -->
-          <!-- <%-- <% if(c.getCardBoard().getTradeStage()>1) {%> --%> -->
-					<!-- <button onclick="nbbang(this.form)" >채팅방 접속하기</button>	 -->
-          <!-- <%-- <%}%> --%> -->
-        <!-- </form> -->
+
       </div>
       
       <div id="date"><%= newDate %> &nbsp&nbsp 관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %> 
-      <p>
+<%--       <p>
       	<% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
           	현재 참여중인 N빵입니다.
             <% }else { %>
             <% } %>
-      </p></div>
+      </p> --%>
+      </div>
       <!-- 가격 -->
       <div id="priceAndLikeBtn">
           <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
       </div>
       <div id="contentText"><%= c.getCardBoard().getContent() %></div>
-      <div class="chart chart1" data-percent="<%=percent%>"><span class="title">N빵 완성까지 <%= target %>명!</span></div>
+      <div class="chart chart1" data-percent="<%=percent%>"><span class="title">마감 까지 <%= target %>명!</span></div>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
       <script src="<%=request.getContextPath()%>/js/easy-pie/dist/easypiechart.js"></script>
@@ -420,7 +412,18 @@
     });
 
       </script>
-      <div id="etcInfo"><a href="<%= request.getContextPath() %>/member/report?userId=<%= loginnedMember.getUsid() %>&boardId=<%= c.getCardBoard().getBoardId() %>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
+            <div id="funcBtns">
+        <ul>
+        <li>
+      <div id="openFuncBtn" onclick="fn_pay();">
+            <img src="<%= request.getContextPath() %>/images/dollar.png" width="40px" height="40px">
+            <p>특가 결제하기</p></div>
+            </li>
+            </ul>
+            </div>
+            
+            
+   <%--    <div id="etcInfo"><a href="<%= request.getContextPath() %>/member/report?userId=<%= loginnedMember.getUsid() %>&boardId=<%= c.getCardBoard().getBoardId() %>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
       <hr>
       <div id="funcBtns">
         <ul>
@@ -436,11 +439,11 @@
               <input type="hidden" name="writerUsid" value="${loginnedMember.usid}">
               <!-- MEMBER 컬럼의  MEMBER_PICTURE -->
               <input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
-              <!-- <%-- <% if(c.getCardBoard().getTradeStage()>1) {%> --%> -->
+              <!-- <% if(c.getCardBoard().getTradeStage()>1) {%> -->
                 <input type="hidden" name="boardTitle" value="${curCard.cardBoard.boardTitle}">
 
               <button id="hiddenEnterBtn" onclick="nbbang(this.form)" >채팅방 접속하기</button>	
-              <!-- <%-- <%}%> --%> -->
+              <!-- <%}%> -->
             </form>
           <li><div id="likeFunc" >
           <% if(!likelist.contains(c.getCardBoard().getBoardId())) {%>
@@ -477,7 +480,7 @@
             <p>방열기</p></div></li>
             <%} %>
         </ul>
-      </div>
+      </div> --%>
       
       <hr>
     </div>
@@ -500,6 +503,40 @@
   </div>
 </section>
 <script>
+
+Timer('<%=c.getCardBoard().getTime() %>', 'count');	
+
+function Timer(dt, id) {
+    var end = new Date(dt);
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById(id).innerHTML = '특딜이 마감되었습니다!';
+            console.log("마감");
+            $("#openFuncBtn").html("");
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+
+        document.getElementById(id).innerHTML = days + '일 ';
+        document.getElementById(id).innerHTML += hours + '시간 ';
+        document.getElementById(id).innerHTML += minutes + '분 ';
+        document.getElementById(id).innerHTML += seconds + '초';
+    }
+    timer = setInterval(showRemaining, 1000);
+}
+
 <% if(reply.equals("success")) { %>
   function autoReple() {
     $("#commentContent").val("<p class='confirm'>결제했습니다.</p>");
@@ -519,7 +556,7 @@ function fn_replyToReply(comId){
 }
 
 function fn_modifyBoard(){
-  location.href = "<%=request.getContextPath()%>/board/boardModify?boardId=<%=c.getCardBoard().getBoardId()%>";
+  location.href = "<%=request.getContextPath()%>/board/boardSpecialModify?boardId=<%=c.getCardBoard().getBoardId()%>";
 }
 
 function fn_deleteBoard(){
@@ -530,7 +567,7 @@ function fn_deleteBoard(){
 
 function fn_pay(){
   if(confirm('결제를 진행하시겠습니까?')) {
-    location.href="<%=request.getContextPath()%>/board/boardPay?buyerUsid=<%=loginnedMember.getUsid()%>&boardId=<%=c.getCardBoard().getBoardId()%>&productPrice=<%=c.getCardBoard().getProductPrice()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
+    location.href="<%=request.getContextPath()%>/board/boardSpecialPay?buyerUsid=<%=loginnedMember.getUsid()%>&boardId=<%=c.getCardBoard().getBoardId()%>&productPrice=<%=c.getCardBoard().getProductPrice()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>&ln=<%=loginnedMember.getNickname()%>";
   }
 }
 

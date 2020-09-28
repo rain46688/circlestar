@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.admin.model.service.AdminService;
-import com.nbbang.admin.model.vo.Report;
+import com.nbbang.member.model.vo.Report;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
 /**

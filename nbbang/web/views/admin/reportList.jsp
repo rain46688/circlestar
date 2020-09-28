@@ -1,9 +1,9 @@
-<%@page import="com.nbbang.admin.model.vo.Report"%>
+<%@page import="com.nbbang.member.model.vo.Report"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<Report> list = (List) request.getAttribute("list");
+List<Report> list = (List) request.getAttribute("list");
 String a = (String) request.getParameter("a");
 String s = request.getParameter("s");
 String Sc = request.getParameter("Sc");
@@ -18,6 +18,7 @@ String Sc = request.getParameter("Sc");
 	/* 	border: 1px #ECAF59 solid; */
 	border: 2px black solid;
 	padding: 20px;
+	
 }
 
 #cList {
@@ -106,6 +107,41 @@ h1 {
 	width: 100%;
 	font-size: 20px;
 }
+
+.noti {
+	/*width:733%;  */
+	width: 133%;
+	margin: 0px;
+	height: 200px;
+	display: inline-block;
+	display: flex;
+	position: relative;
+}
+
+.noContent {
+	margin-top:20px;
+	margin-bottom:15px;
+	margin-left:100%;
+	font-size:15px;
+	font-weight:bold;
+	width:100%;
+}
+div.fieldCapsule{
+	display: flex;
+	position: relative;
+}
+div.capsuleLeft{
+	width: 30%;
+	float: left;
+	border-bottom: black 1px solid;
+	padding: 1%;
+}
+div.capsuleRight{
+	width: 70%;
+	float: left;
+	border-bottom: black 1px solid;
+	padding: 1%;
+}
 </style>
 
 <div class="container" id="writecontainer">
@@ -138,38 +174,30 @@ h1 {
 				<div class="divCell">신고 ID</div>
 				<div class="divCell">유형</div>
 				<div class="divCell">작성자</div>
-				<div class="divCell">제재 회원</div>
+				<div class="divCell">피신고 회원</div>
 				<div class="divCell">제목</div>
 				<div class="divCell">신고 날짜</div>
 				<div class="divCell">제재 여부</div>
-				<div class="divCell">제재 회원 ID</div>
+				<div class="divCell">피신고 회원 ID</div>
 			</div>
 			<%
 				if (!list.isEmpty()) {
 				for (Report r : list) {
 			%>
-			<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
-				<div class="divCell"><%=r.getReportId()%></div>
-				<div class="divCell"><%=r.getReportType()%></div>
-				<div class="divCell"><%=r.getReportUserNickname()%></div>
-				<div class="divCell"><%=r.getReportTargetNickname()%></div>
-				<div class="divCell"><%=r.getReportTitle()%></div>
-				<div class="divCell"><%=r.getReportDate()%></div>
-				<div class="divCell"><%=r.getReportIswarning()%></div>
-				<div class="divCell"><%=r.getReportTargetUsid()%></div>
-			</div>
-
-			<%
-				}
-			} else {
-			%>
-
+				<div class="divRow shadow p-3 mb-5 bg-white rounded">
+					<div class="divCell"><%=r.getReportId()%></div>
+					<div class="divCell"><%=r.getReportType()%></div>
+					<div class="divCell"><%=r.getReportUserNickname()%></div>
+					<div class="divCell"><%=r.getReportTargetNickname()%></div>
+					<div class="divCell" style="cursor: pointer;" onclick="location.href='<%=request.getContextPath()%>/admin/reportDetail?reportId=<%=r.getReportId()%>'"><%=r.getReportTitle()%></div>
+					<div class="divCell"><%=r.getReportDate()%></div>
+					<div class="divCell"><%=r.isReportIswarning()%></div>
+					<div class="divCell"><%=r.getReportTargetUsid()%></div>
+				</div>
+			<%}%>
+		<%}else{%>
 			<div class="empty">등록된 신고 글이 없습니다.</div>
-
-			<%
-				}
-			%>
-
+		<%}%>
 			<br>
 		</div>
 	</div>
@@ -198,11 +226,6 @@ h1 {
 </div>
 
 <script>
-$(".divRow").click(e=>{
-    <%-- location.assign('<%=request.getContextPath()%>/customer/customerReadFrm?num='+$(e.target).parent().children('div').html()); --%>
-})
-
-
    $('.divRow').hover(function(){
         $(this).css('color','#FFC107');
         $(this).removeClass( 'shadow p-3 mb-5 bg-white rounded' );
@@ -210,13 +233,6 @@ $(".divRow").click(e=>{
         $(this).css('color','black');
         $(this).addClass( 'shadow p-3 mb-5 bg-white rounded' );
     });
-
-
-
-
-
-
-
 </script>
 
 <%@ include file="/views/common/footer.jsp"%>
