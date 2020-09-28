@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class CustomerLoginFilter
  */
-@WebFilter(urlPatterns= {"/customer/*","/board/*","/member/*"})
+@WebFilter(urlPatterns= {"/customer/*","/board/*","/member/*","/admin/*"})
 public class LoginFilter implements Filter {
 
     /**
@@ -37,7 +37,7 @@ public class LoginFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		HttpSession session=((HttpServletRequest)request).getSession(false);
+		HttpSession session=((HttpServletRequest)request).getSession();
         if(session.getAttribute("loginnedMember") == null) {
             request.getRequestDispatcher("/loginPage").forward(request, response);
             return;

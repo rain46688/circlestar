@@ -62,6 +62,7 @@ public class BoardDao {
 					c.getCardBoard().setTradeArea(rs.getString("TRADE_AREA"));
 				} 
 				c.getCardBoard().setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				c.getCardBoard().setTradeStage(rs.getInt("TRADE_STAGE"));
 				c.getCardFile().setFileName(stringToArr(rs.getString("FILE_NAME")));
 				list.add(c);
 			}

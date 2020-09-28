@@ -71,12 +71,12 @@ public class BoardSpecialWriteEndServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-
-		System.out.println(request.getParameter("title") + " " + request.getParameter("name") + " "
-				+ Integer.parseInt(request.getParameter("price")) + " "
-				+ Integer.parseInt(request.getParameter("maxMems")) + " " + request.getParameter("time") + " "
-				+ request.getParameter("content") + " " + fileNames.toArray(new String[fileNames.size()]) + " "
-				+ request.getParameter("url"));
+//
+//		System.out.println(request.getParameter("title") + " " + request.getParameter("name") + " "
+//				+ Integer.parseInt(request.getParameter("price")) + " "
+//				+ Integer.parseInt(request.getParameter("maxMems")) + " " + request.getParameter("time") + " "
+//				+ request.getParameter("content") + " " + fileNames.toArray(new String[fileNames.size()]) + " "
+//				+ request.getParameter("url"));
 
 		Date date = new Date();
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

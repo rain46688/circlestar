@@ -56,9 +56,9 @@ public class BoardSpecialListServlet extends HttpServlet {
 					c.getCardBoard().setTradeArea(newTemp);
 				}
 			}
-			System.out.println(c.getCardBoard().getLimitTime());
 			String dd = f.format(c.getCardBoard().getLimitTime());
-			System.out.println(dd);
+			System.out.println("list : "+c.getCardBoard().getLimitTime());
+			System.out.println("list : "+dd);
 			if(dd.contains("오전")) {
 					//System.out.println("t");
 					dd=	dd.replace("오전", "AM");
@@ -67,7 +67,7 @@ public class BoardSpecialListServlet extends HttpServlet {
 				dd=dd.replace("오후", "PM");
 			}
 			c.getCardBoard().setTime(dd);
-			System.out.println(dd);
+			//System.out.println(dd);
 		}
 		
 		
