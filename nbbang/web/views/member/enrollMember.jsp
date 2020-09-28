@@ -11,16 +11,18 @@
    #loginField > form > button:nth-child(10){
       width : 30%;
    }
-   #loginField > form:nth-child(2) > input.button{
+   #loginField > form:nth-child(2) input.button{
     outline: none;
     background: #735020;
     width: 20%;
     border: none;
     margin: 0 0 15px;
-    padding: 15px;
+    padding: 15px 0;
     color: #FFFFFF;
     font-size: 14px;
     cursor: pointer;
+	text-align: center;
+
    }
    div.dividedForm{
 	display: flex;
@@ -57,9 +59,15 @@
 		<div id="loginField">
 			<h2 style="margin-bottom: 50px;">회원가입</h2>
 			<form id="memberEnrollFrm" name="memberEnrollFrm" action="<%=request.getContextPath() %>/memberEnrollEnd" method="post">
-				<input type="email" id="id" name="userId" class="input" placeholder="이메일" required>
+				<input type="email" id="id" name="userId" class="input" placeholder="이메일" required style="width: 59%;">
+				<input type="button" class="button" id="certibtn" value="인증번호 전송" style="text-align: center;"><br>
 				<div class="constrain" id="idConstrain"></div>
 				<div class="constrain" id="idDuplicateAjax"></div>
+				<div style="display:none;" id="certiDiv">
+					<input type="text" class="input" id="certiNum" name="certiNum" placeholder="인증번호를 입력해주세요." required>
+					<div style="display:none;" id="certiResult"></div>
+					<div class="constrain" id="certiDuplicate"></div>
+				</div>
 
 				<input type="password" placeholder="비밀번호" class="input" id="pw" name="password" minlength="4" maxlength="16" required>
 				<div class="constrain" id="pwConstrain"></div>
@@ -232,6 +240,43 @@
 					$("#idDuplicateAjax").css({"display":"block"});
 				}
 			});
+		});
+
+		$("#certibtn").click(e=>{
+			const id=$("#id").val().trim();
+			if(id==="" || !idPattern.test(id)){
+				alert("이메일 주소를 입력해주세요.")
+			}else if($("#checkIdhidden").val()=='existed'){
+				alert("중복된 아이디는 사용할 수 없습니다.")
+			}else{
+				$.ajax({
+					url: "<%=request.getContextPath()%>/certiEmail",
+					data: {"email":$("#id").val()},
+					type: "post",
+					dataType: "html",
+				success:function(data){
+					$("#certiDiv").css({"display":"block"});
+					$("#certiResult").html(data);
+					alert("인증번호를 발송했습니다. 메일함을 확인해주세요.");
+				}
+				});
+			};
+		});
+
+		$("#certiNum").keyup(e=>{
+			if($("#certiKey").val().trim()==$("#certiNum").val().trim()){
+				$("#certiDuplicate").html("인증번호가 일치합니다.");
+				$("#certiDuplicate").css({"display":"block"});
+				$("#certiDuplicate").css({"color":"green"});
+			}else{
+				$("#certiDuplicate").html("인증번호가 일치하지 않습니다.");
+				$("#certiDuplicate").css({"display":"block"});
+				$("#certiDuplicate").css({"color":"red"});
+			}
+		})
+
+		$("#id").keyup(e=>{
+			$("#certiNum").val('');
 		});
 
 		// pw제약조건
@@ -567,6 +612,9 @@
 			if($("#checkIdhidden").val()=='existed'){
 				alert('아이디 중복 확인을 해주세요.');
 			}
+			if($("#certiKey").val().trim()!=$("#certiNum").val().trim()){
+				alert('이메일 인증을 확인해주세요.');
+			}
 			if($("#checkNNhidden").val()=='existed'){
 				alert('닉네임 중복 확인을 해주세요.');
 			}
@@ -580,7 +628,8 @@
 			//제약조건을 만족했나요
 			if(id!=="" && (pw!==""&&pwPattern.test(pw)) && (pw2!==""&&pw===pw2) && (nn!==""&&nnPattern.test(nn)) && (name!==""&&namePattern.test(name)) && (gender.length=1||gender.length>1)
 				&& (yy!=="" && yyPattern.test(yy)) && mm!=="" && mm!=="월" && (dd!==""&&ddPattern.test(dd)) && (phone!==""&&pnPattern.test(phone)) && address!==""
-				&& $("#checkIdhidden").val()!='existed' && $("#checkNNhidden").val()!='existed' && $("#checkPNhidden").val()!='existed' && $("input[name='checked_ad']").val()!=''){
+				&& $("#checkIdhidden").val()!='existed' && $("#checkNNhidden").val()!='existed' && $("#checkPNhidden").val()!='existed' && $("input[name='checked_ad']").val()!=''
+				&& $("#certiKey").val().trim()==$("#certiNum").val().trim()){
 				$("#memberEnrollFrm").submit();
 			}else{
 				alert("필수 입력 항목을 확인해주세요.");
