@@ -45,6 +45,19 @@ public class BoardSpecialPayServlet extends HttpServlet {
 		
 		Member m = new MemberService().myPage(userUsid);
 		
+		//특딜 시간 지났으면
+		
+		//이미 특가에 추가되어있으면
+		
+		int r = new BoardSpecialService().isInclude(userUsid,boardId);
+		if(r == 1) {
+			request.setAttribute("msg", "이미 해당 특가딜에 참가하셨습니다.");
+			request.setAttribute("loc", "/boSpecialList");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
+	
+		
 		int maxmem = new ChatService().getMaxMems(""+boardId);
 		int curmem = new ChatService().getCurMems(""+boardId);
 		//특가 인원 충분한지 
@@ -52,7 +65,7 @@ public class BoardSpecialPayServlet extends HttpServlet {
 		
 		if(productPrice>m.getPoint()) {
 			request.setAttribute("msg", "포인트가 충분하지 않습니다.");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/boSpecialList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
@@ -61,26 +74,31 @@ public class BoardSpecialPayServlet extends HttpServlet {
 		
 		if(result < 2) {
 			request.setAttribute("msg", "결제에 실패했습니다. 관리자에게 문의하세요.");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/boSpecialList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}else {
-			request.setAttribute("msg", "결제 완료되었습니다.");
 			
-			//트레이드 리스트에 추가
-			if((curmem + 1) < maxmem) {
-				//아직 인원 충분함
-				int re = new BoardSpecialService().addMem(boardId,userUsid,loginNickname);
-			}else if((curmem + 1) == maxmem){
-				//마지막 인원 찬거임
-				
+			
+			int re = new BoardSpecialService().addMem(boardId,userUsid,loginNickname);			
+			
+			if(re == 1) {
+				request.setAttribute("msg", "결제 완료되었습니다.");
+				request.setAttribute("loc", "/board/boardSpecialPage?boardId="+boardId+"&writerUsid="+writerUsid+"&reply=success");
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+				return;
+			}else if(re == 0) {
+				request.setAttribute("msg", "특가 인원추가에 실패하였습니다...");
+				request.setAttribute("loc", "/boSpecialList");
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+				return;
 			}
 			
 		}
 		}else {
 			//특가 인원 꽉참
 			request.setAttribute("msg", "특가 인원이 마감되었습니다..");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/boSpecialList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}

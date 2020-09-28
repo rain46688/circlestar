@@ -262,4 +262,119 @@ public class BoardSpecialDao {
 	}
 	
 	
+	public int boardInsertTradeList2(Connection conn, int tradeUsid, String tradeUserNickname,int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardInsertTradeList2"));
+			pstmt.setInt(1, boardId);
+			pstmt.setInt(2, tradeUsid);
+			pstmt.setString(3, tradeUserNickname);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int isInclude(Connection conn, int userUsid, int boardId) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("isInclude"));
+			pstmt.setInt(1, boardId);
+			pstmt.setInt(2, userUsid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = 1;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public int boardModifyBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardModifyBoard"));
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setInt(2, b.getProductPrice());
+			pstmt.setInt(3, b.getMaxMems());
+			pstmt.setString(4, b.getTradeKind());
+			pstmt.setString(5, b.getOwnStatus());
+			pstmt.setString(6, b.getContent());
+			pstmt.setString(7, b.getProductUrl());
+			pstmt.setTimestamp(8, new java.sql.Timestamp(b.getLimitTime().getTime()));
+			pstmt.setInt(9, b.getBoardId());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int boardModifyFileDelete(Connection conn, BoardFile bf) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String deleteSql = prop.getProperty("boardModifyDeleteFile");
+		try {
+			//수정전
+			pstmt = conn.prepareStatement(deleteSql);
+			pstmt.setInt(1, bf.getBfFileId());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int boardModifyFileInsert(Connection conn, BoardFile bf) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String insertSql = prop.getProperty("boardModifyInsertFile");
+		try {
+			pstmt = conn.prepareStatement(insertSql);
+			for(String s : bf.getFileName()) {
+				pstmt.setInt(1, bf.getBfFileId());
+				pstmt.setString(2, s);
+				result += pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

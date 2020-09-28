@@ -520,6 +520,8 @@ function Timer(dt, id) {
         if (distance < 0) {
             clearInterval(timer);
             document.getElementById(id).innerHTML = '특딜이 마감되었습니다!';
+            console.log("마감");
+            $("#openFuncBtn").html("");
             return;
         }
         var days = Math.floor(distance / _day);
@@ -554,7 +556,7 @@ function fn_replyToReply(comId){
 }
 
 function fn_modifyBoard(){
-  location.href = "<%=request.getContextPath()%>/board/boardModify?boardId=<%=c.getCardBoard().getBoardId()%>";
+  location.href = "<%=request.getContextPath()%>/board/boardSpecialModify?boardId=<%=c.getCardBoard().getBoardId()%>";
 }
 
 function fn_deleteBoard(){
