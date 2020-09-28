@@ -5,7 +5,7 @@
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script> 
+<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <title>${boardTitle}</title>
 <head>
@@ -14,17 +14,17 @@
 <style>
 
 /* === 채팅 구현 부분  === */
-
-*{
-font-family: 'Jua', sans-serif;
-font-weight:bold;
-/* text-shadow: -1px 0 #FFC107, 0 0.5px #FFC107, 0.5px 0 #FFC107, 0 -1px #FFC107; */
+* {
+	font-family: 'Jua', sans-serif;
+	font-weight: bold;
+	/* text-shadow: -1px 0 #FFC107, 0 0.5px #FFC107, 0.5px 0 #FFC107, 0 -1px #FFC107; */
 }
 
-body{
+body {
 	/* background-color:#FFC107; */
-	background-image:url('<%=request.getContextPath()%>/images/chatRoom.png');
-	background-repeat:no-repeat;
+	background-image:
+		url('<%=request.getContextPath()%>/images/chatRoom.png');
+	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
 
@@ -33,156 +33,157 @@ body{
 	height: 62%;
 	width: 62%;
 	margin: 28% auto;
-/* 	border: 4px black solid; */
-	padding:1px;
+	/* 	border: 4px black solid; */
+	padding: 1px;
 	border-radius: 10px;
 	/* background-color:#B2C7D9; */
-	background-color:#FEFCEC;
+	background-color: #FEFCEC;
 }
 
 /* 텍스트 출력되는 하얀부분 위 박스 */
-#ChatArea{
-/* 아래 스크롤바 감추기 */
-	overflow-x:hidden;
-	height:80%;
-	width:100%;
-/* 스크롤 바 투명하게 만들기 */	
+#ChatArea {
+	/* 아래 스크롤바 감추기 */
+	overflow-x: hidden;
+	height: 80%;
+	width: 100%;
+	/* 스크롤 바 투명하게 만들기 */
 	-ms-overflow-style: none;
 }
 
 /* 스크롤 바 투명하게 만들기 */
-::-webkit-scrollbar { display: none; }
+::-webkit-scrollbar {
+	display: none;
+}
 
 /* 밑에 입력하는 하얀부분 */
-#inputDiv{
-	height:20%;
-	width:100%;
+#inputDiv {
+	height: 20%;
+	width: 100%;
 	/* background-color:white; */
-	 background-color:#FFE9B9; 
-/* 	background-color:#FEFCEC; */
-	border:1px solid #E8AB62;
-	border-radius:10px;
+	background-color: #FFE9B9;
+	/* 	background-color:#FEFCEC; */
+	border: 1px solid #E8AB62;
+	border-radius: 10px;
 	border-radius-bottom-left: 10px;
 	border-radius-bottom-right: 10px;
 }
 
 /* 하얀부분 안에들어가는 입력하는 곳 텍스트 */
-#msgText{
+#msgText {
 	resize: none;
 	border: none;
 	padding: 10px 10px 10px 10px;
 	/*  */
-	margin-top:5px;
-	margin-left:7px;
+	margin-top: 5px;
+	margin-left: 7px;
 	/*  */
-	width:79%;
-	
-		border-radius:5px;
-	height:86px;
+	width: 79%;
+	border-radius: 5px;
+	height: 86px;
 }
 
 /* 위 텍스트 영역 눌르면 옆에 테두리 생기는거 지우는 용도 */
-textarea:focus{
-	outline:none;
+textarea:focus {
+	outline: none;
 }
 
 /* 전송 버튼 걍 부트스트랩*/
-#chatBtn{
-	margin-bottom:80px;
-	margin-right:1px;
+#chatBtn {
+	margin-bottom: 80px;
+	margin-right: 1px;
 }
 
 /* 접속부분 글자색 */
-.conn{
-	color:#272728;
-	margin-bottom:10px;
-	margin-top:10px;
-	text-align:center;
-	font-size:20px;
+.conn {
+	color: #272728;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-align: center;
+	font-size: 20px;
 }
 
 /* 관리자 전용 접속부분 글자색 */
-.admin{
-	color:red;
- 	margin-bottom:10px;
-	margin-top:10px;
-	text-align:center;
-	font-size:20px;
+.admin {
+	color: red;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-align: center;
+	font-size: 20px;
 }
 
 /* 프로필 둥글게보이기 radius 70%하면됨  */
-.profile{
- 	width:50px; 
-	height:50px;
-	border:1px solid #FFC107;
+.profile {
+	width: 50px;
+	height: 50px;
+	border: 1px solid #FFC107;
 	border-radius: 70%;
-	 float: left;
-	 margin:10px;
+	float: left;
+	margin: 10px;
 }
 
 /* 세션과 채팅쓴 사람이 같은경우 노란색에 오른쪽 정렬 */
-.mymsg{
+.mymsg {
 	/* width:170px;  */
 	/* margin-left:180px; */
 	/* float: right; */
-	width:auto; 
-	overflow:hidden;
-	height:auto;
-	background-color:#FFEB33;
+	width: auto;
+	overflow: hidden;
+	height: auto;
+	background-color: #FFEB33;
 	border-radius: 10px;
-	margin:15px;
-	padding:10px;
+	margin: 15px;
+	padding: 10px;
 	/* margin-left:180px; */
-	margin-left:60%;
-	margin-bottom:5px;
+	margin-left: 60%;
+	margin-bottom: 5px;
 }
 
 /* 각각 채팅을 감싸는 div 배경색과 같은 테투리를 갖고있음 */
-.tmp{
-/* border:1px black solid;
+.tmp {
+	/* border:1px black solid;
 border:1px #B2C7D9 solid;
  */
- border:1px #FEFCEC solid;
+	border: 1px #FEFCEC solid;
 }
 
 /* 다른 사람껀 프로필이랑 이름 보여주고 왼쪽 */
-.othermsg{
+.othermsg {
 	/*float: left; */
-	width:auto; 
-	overflow:hidden;
-	height:auto;
-	background-color:white;
+	width: auto;
+	overflow: hidden;
+	height: auto;
+	background-color: white;
 	border-radius: 10px;
-	margin:15px;
-	padding:10px;
+	margin: 15px;
+	padding: 10px;
 	/* margin-right:120px; */
-	margin-right:40%;
-/* 	margin-left:-50px; */
-	margin-left:25%;
-	margin-top:25px;
-	margin-bottom:5px;
-	border:1px #FFC107 solid;
+	margin-right: 40%;
+	/* 	margin-left:-50px; */
+	margin-left: 25%;
+	margin-top: 25px;
+	margin-bottom: 5px;
+	border: 1px #FFC107 solid;
 }
 
 /* 닉네임 div */
-.nick{
-	 float: left;
+.nick {
+	float: left;
 }
 
 /* 본인이 보는 채팅 */
-.date{
-	display:inline;
-	color:black;
-	margin-left:78%;
-		font-size:12px;
+.date {
+	display: inline;
+	color: black;
+	margin-left: 78%;
+	font-size: 12px;
 }
 
 /* 남이 쓰는 채팅 */
-.date2{
-	display:inline;
-	color:black;
-	margin-left:30%;
-		font-size:12px;
+.date2 {
+	display: inline;
+	color: black;
+	margin-left: 30%;
+	font-size: 12px;
 }
 
 /* 현재 방번호 상단에 보여주기 위해 */
@@ -190,29 +191,32 @@ border:1px #B2C7D9 solid;
 text-align:center;
 margin-top:10px;
 } */
-
 </style>
 
-<section >
-<div id="side" >
-	<div id="chat" >
-				<c:if test="${!empty loginnedMember}">
-					<div id="ChatArea"></div>
-					<div id="inputDiv">
-						<textarea id="msgText" rows="3" cols="33"></textarea>
-						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
+<section>
+	<div id="side">
+		<div id="chat">
+			<c:if test="${!empty loginnedMember}">
+				<div id="ChatArea"></div>
+				<div id="inputDiv">
+					<textarea id="msgText" rows="3" cols="33"></textarea>
+					<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
+				</div>
+			</c:if>
+			<c:if test="${empty loginnedMember}">
+				<div id="ChatArea">
+					<div class='tmp'>
+						<div class='admin'>로그인후 다시 접속해주세요!</div>
 					</div>
-					</c:if>
-					<c:if test="${empty loginnedMember}">
-					<div id="ChatArea"><div class='tmp'><div class='admin'>로그인후 다시 접속해주세요!</div></div></div>
-					<div id="inputDiv">
+				</div>
+				<div id="inputDiv">
 					<!-- 	<textarea id="msgText" rows="3" cols="33"></textarea> -->
-						<textarea id="msgText" rows="1" cols="1"></textarea>
-						<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
-					</div>
-					</c:if>
+					<textarea id="msgText" rows="1" cols="1"></textarea>
+					<button type="button" onclick="sendMessage()" class="btn btn-success" id="chatBtn">전송</button>
+				</div>
+			</c:if>
+		</div>
 	</div>
-</div>
 </section>
 
 <script>
@@ -289,7 +293,7 @@ function fixedSize() {
 	*/	
 		
  var socket=new WebSocket("ws://rclass.iptime.org:9999<%=request.getContextPath()%>/socket");
-<%-- var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket");  --%>
+ <%-- var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket"); --%>  
 	
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {

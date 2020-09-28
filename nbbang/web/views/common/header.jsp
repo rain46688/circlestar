@@ -78,7 +78,7 @@
 		<nav>
 			<ul class="nav justify-content-center">
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/boList?boardTitle=특가">특가</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/boSpecialList">특가</a>
 					<!-- 차후 게시판 분류대로 나눌 예정 -->
 				</li>
 				<li class="nav-item">
