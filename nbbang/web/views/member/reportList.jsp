@@ -183,7 +183,7 @@
                         <div class="capsuleLeft" style="width: 13%;">
                             <%=r.getReportType() %>
                         </div>
-                        <div class="capsuleLeft" style="width: 47%;">
+                        <div class="capsuleLeft" style="width: 47%; cursor: pointer;" onclick="location.href='<%=request.getContextPath()%>/member/reportDetail?usid=<%=r.getReportUserUsid()%>&reportId=<%=r.getReportId()%>'">
                             <%=r.getReportTitle() %>
                         </div>
                         <div class="capsuleLeft" style="width: 13%;">
