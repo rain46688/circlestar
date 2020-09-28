@@ -279,6 +279,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
+			System.out.println(prop.getProperty("boardInsertTradeList"));
 			pstmt = conn.prepareStatement(prop.getProperty("boardInsertTradeList"));
 			pstmt.setInt(1, tradeUsid);
 			pstmt.setString(2, tradeUserNickname);
@@ -675,6 +676,22 @@ public class BoardDao {
 		return result;
 	}
 	
+	public int boardDelivery(Connection conn, int boardId, int buyerUsid) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDelivery"));
+			pstmt.setInt(1, boardId);
+			pstmt.setInt(2, buyerUsid);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int boardDelete(Connection conn, int boardId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -747,6 +764,21 @@ public class BoardDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("boardShipping"));
+			pstmt.setInt(1, boardId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int boardEnd(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardEnd"));
 			pstmt.setInt(1, boardId);
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {

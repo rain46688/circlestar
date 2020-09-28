@@ -87,6 +87,7 @@ public class BoardListSearchServlet extends HttpServlet {
 		}else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/boList?cPage=" + pageNo + "&boardTitle=" + boardTitle + "'>다음</a></li>";
 		}
+		request.setAttribute("oriCategory", category);
 		request.setAttribute("category", boardTitle);
 		request.setAttribute("boardList", blist);
 		request.setAttribute("pageBar", pageBar);
