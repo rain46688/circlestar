@@ -33,9 +33,9 @@ System.out.println("list in jsp: "+ list);
 
 	<div class="qna-caution">
 		<ul class="ul-caution">
-			<li class="caution-li caution-first ">1:1문의</li>
-			<li class="caution-li caution-c">- 전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있습니다.</li>
-				<li class="caution-li caution-c">- 문의 시 입력하지 않도록 주의해 주시기
+			<li class="caution-li caution-first " style="font-family: 'Do Hyeon', sans-serif;">1:1문의</li>
+			<li class="caution-li caution-c" style="font-family: 'Do Hyeon', sans-serif;">- 전화번호, 주소, 이메일, 계좌번호 등의 개인정보는 타인에 의해 도용될 위험이 있습니다.</li>
+				<li class="caution-li caution-c" style="font-family: 'Do Hyeon', sans-serif;">- 문의 시 입력하지 않도록 주의해 주시기
 					바랍니다.</li>
 			</ul>
 		</div>
@@ -50,11 +50,11 @@ System.out.println("list in jsp: "+ list);
 			</colgroup>
 			<thead>
 				<tr>
-					<th>글번호</th>
-					<th>문의유형</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>문의날짜</th>
+					<th style="font-family: 'Do Hyeon', sans-serif;">글번호</th>
+					<th style="font-family: 'Do Hyeon', sans-serif;">문의유형</th>
+					<th style="font-family: 'Do Hyeon', sans-serif;">제목</th>
+					<th style="font-family: 'Do Hyeon', sans-serif;">작성자</th>
+					<th style="font-family: 'Do Hyeon', sans-serif;">문의날짜</th>
 					
 				</tr>
 				
@@ -91,7 +91,7 @@ System.out.println("list in jsp: "+ list);
 			<div id="btn-news1">
 				
 				<a type="button" href="<%=request.getContextPath() %>/customer/customerQnAFrm?nick=<%=loginnedMember.getNickname() %>"
-					 class="btn-default">문의하기</a>
+					 class="btn-default" style="font-family: 'Do Hyeon', sans-serif;">문의하기</a>
 			
 			</div>
 	<!-- <div id="pagebar">

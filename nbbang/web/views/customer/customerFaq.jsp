@@ -8,11 +8,13 @@
 <style>
     div.contaniner2-kdh {
         padding: 5em;
+        margin-left: 1em;
+        
     }
 
     .content1,
     .content2 {
-        margin-left: 3em;
+        margin-left: 2em;
     }
 
     .main-content-kdh a {
@@ -20,7 +22,8 @@
     }
 
     #wrapper-1 {
-        margin-top: 5%;
+        margin-top: 2em;
+        margin-bottom: 3em;
         margin-left: 0%;
         display: flex;
         justify-content: center;
@@ -197,8 +200,8 @@
 
 
 
+<jsp:include page="maincss.jsp"></jsp:include>
 <section id="wrapper-1">
-    <jsp:include page="maincss.jsp"></jsp:include>
     <div class="container-kim">
         <ul class="accordion">
             <li class="item">

@@ -150,9 +150,15 @@
                 <div style="margin-bottom: 1.3em;">
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/memberInfo?usid=<%=loginnedMember.getUsid()%>">개인정보 확인하기</a>
                 </div>
+                <%if(loginnedMember.getUsid()==9999){%>
+                    <div>
+                        <a class="nav-link postList active" href="<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>">신고 접수 내역</a>
+                    </div>
+                <%}else{%>
                 <div>
                     <a class="nav-link postList active" href="<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>">내 신고 내역</a>
                 </div>
+                <%}%>
             </div>
         </div>
         <%if(loginnedMember.getUsid()!=9999){%>
@@ -239,16 +245,15 @@
                         </div>
                     </div>
                     <div class="fieldCapsule">
-                        <div class="capsuleLeft" style="width: 20%;">
-                            신고유형
+                        <%if(rd.getReportAnswer()==null){%>
+                        <div class="capsuleLeft" style="width: 100%;">
+                            아직 관리자로부터 받은 답변이 없습니다.
                         </div>
-                        <div class="capsuleRight" style="width: 80%;">
-                            <%if(rd.getReportAnswer()==null){%>
-                            	아직 관리자로부터 받은 답변이 없습니다.
-                            <%}else {
-                            	rd.getReportAnswer();	
-                            } %>
+                        <%}else {%>
+                        <div class="capsuleLeft" style="width: 100%;">
+                            <%=rd.getReportAnswer()%>	
                         </div>
+                        <%}%>
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 2%;">
@@ -259,7 +264,7 @@
         <%}else{%>
             <div id="iCreateContainer">
                 <div class="item textField" id="containerTitle">
-                    <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0;margin-bottom: 20px; text-align: left;" >신고내역</div>
+                    <div id="modifyProfile" style="font-size: 24px; padding: 5px; padding-bottom: 0;margin-bottom: 20px; text-align: left;" >신고 접수 내역</div>
                 </div>
                 <div class="item textField" style="margin-left: 1%;">
                     <div class="fieldCapsule">
@@ -327,24 +332,47 @@
                         <div class="capsuleLeft" style="width: 20%;">
                             첨부한 파일
                         </div>
-                        <div class="capsuleRight" style="width: 80%;">
-                            <%=rd.getReportFile() %>
+                        <%if(rd.getReportFile()==null){%>
+                            <div class="capsuleRight" style="width: 80%;">
+                                첨부된 파일이 없습니다.
+                            </div>
+                        <%}else{%>
+                            <div class="capsuleRight" style="width: 80%;">
+                                <%=rd.getReportFile() %>
+                            </div>
+                        <%}%>
+                    </div>
+                </div>
+                <div class="item textField" style="margin-left: 1%;">
+                    <div style="height: 20px;"> </div>
+                    <div class="fieldCapsule">
+                        <div style="font-size: 18px;">
+                            관리자 답변
                         </div>
                     </div>
+                    <form id="reportAnswerForm" action="<%=request.getContextPath()%>/member/reportAnswer" method="post">
+                        <div class="fieldCapsule">
+                            <div class="capsuleLeft" style="width: 100%; text-align: center;">
+                                <textarea id="ranswer" name="ranswer" cols="30" rows="6" maxlength="500" placeholder="답변을 적어주세요."></textarea>
+                                <button type="button" class="button" style="margin-left: -5px;" onclick="fn_reportAnswer();">답변전송</button>
+                                <input type="hidden" name="rboardId" value="<%=rd.getReportId()%>">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div style="text-align: center; margin-top: 2%;">
+                    <button type="button" class="button" 
+                    onclick="location.href='<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>'">목록으로</button>
                 </div>
             </div>
         <%}%>
     </div>
     <script>
-        function fn_reportSend(){
-            if($("#rtype").val()=='선택' || $("#rtype").val()==null){
-                alert("신고유형을 선택해주세요.");
-            }else if($("#reportTitle").val().trim()===''){
-                alert("제목을 입력해주세요.");
-            }else if($("#rcontent").val().trim()===''){
-                alert("내용을 입력해주세요.");
+        function fn_reportAnswer(){
+            if($("#ranswer").val().trim()===''){
+                alert("답변을 입력해주세요.");
             }else{
-            $("#reportForm").submit();
+                $("#reportAnswerForm").submit();
             }
         }
     </script>

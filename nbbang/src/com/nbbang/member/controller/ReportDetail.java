@@ -50,7 +50,10 @@ public class ReportDetail extends HttpServlet {
 			if(loginnedMember.getUsid()==9999) {//관리자면
 				int reportId=Integer.parseInt(request.getParameter("reportId"));
 				Report r=new MemberService().reportDetail(reportId);
+				int boardId=r.getReportBoardId();
+				Board b=new MemberService().boardData(boardId);
 				request.setAttribute("reportDetail",r);
+				request.setAttribute("boardData", b);
 				request.getRequestDispatcher("/views/member/reportDetail.jsp").forward(request, response);
 			}else {
 				request.setAttribute("msg", "접근불가능한 페이지입니다.");

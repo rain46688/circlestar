@@ -15,7 +15,8 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
 
 
 <div id="kdh-container">
-  <div id="kdh-sidebar-container">
+  <!-- <div id="kdh-sidebar-container"> -->
+    
     <div id="kdh-sidebar-left">
       <div class="sidebarTitle side-bar-kdh">
   
@@ -24,61 +25,60 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
       </div>
 
       <%if (loginnedMember==null) {%>
-      <ul class="side-bar-kdh">
+      <!-- <ul class="side-bar-kdh"> -->
 
-        <li class="cstmt-list">
+        <div class="cstmt-list">
           <a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/customer/customerQnA">문의하기</a></li>
-        <li class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
+            href="<%=request.getContextPath() %>/customer/customerQnA">문의하기</a></div>
+        <div class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
+            href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></div>
 
-        <li class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/customerFaq">FAQ</a></li>
-            <li class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
-            </li>
+        <div class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
+            href="<%=request.getContextPath() %>/customerFaq">FAQ</a></div>
+            <div class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
+            </div>
 
-            <li class="list-hiper"><a href="<%=request.getContextPath()%>/member/myPage" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">마이페이지</a></li>
-      </ul>
+            <div class="list-hiper"><a href="<%=request.getContextPath()%>/member/myPage" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">마이페이지</a></div>
+      <!-- </ul> -->
       <%}else{%>
       <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
-      <ul class="side-bar-kdh">
+      <!-- <ul class="side-bar-kdh"> -->
 
-        <li class="cstmt-list">
+        <div class="cstmt-list">
           <a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
             href="<%=request.getContextPath() %>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>">문의하기</a>
-        </li>
-        <li class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
-        <li class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/customerFaq">FAQ</a></li>
-            <li class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
-            </li>
+        </div>
+        <div class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
+            href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></div>
+        <div class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
+            href="<%=request.getContextPath() %>/customerFaq">FAQ</a></div>
+            <div class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
+            </div>
 
-            <li class="list-hiper"><a href="<%=request.getContextPath()%>/member/myPage" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">마이페이지</a></li>
-      </ul>
+            <div class="list-hiper"><a href="<%=request.getContextPath()%>/member/myPage" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">마이페이지</a></div>
+      <!-- </ul> -->
       <%} else { %>
-      <ul class="side-bar-kdh">
+      <!-- <ul class="side-bar-kdh"> -->
 
-        <li class="cstmt-list">
+        <div class="cstmt-list">
           <a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/admin/adminCustomerList?a=0">문의보기</a></li>
-        <li class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></li>
+            href="<%=request.getContextPath() %>/admin/adminCustomerList?a=0">문의보기</a></div>
+        <div class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
+            href="<%=request.getContextPath() %>/notice/noticeList">소식보기</a></div>
 
-        <li class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
-            href="<%=request.getContextPath() %>/customerFaq">FAQ</a></li>
-            <li class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
-            </li>
+        <div class="cstmt-list"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;"
+            href="<%=request.getContextPath() %>/customerFaq">FAQ</a></div>
+            <div class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
+            </div>
 
-            <li class="list-hiper"><a href="<%=request.getContextPath()%>/member/myPage" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">마이페이지</a></li>
-      </ul>
+            <div class="list-hiper"><a href="<%=request.getContextPath()%>/member/myPage" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">마이페이지</a></div>
+      <!-- </ul> -->
       <%} %>
 
 
       <%}%>
               
 
-            </div>
+    </div>
+   <!-- </div> -->
   </div>
-  </div>
-  
