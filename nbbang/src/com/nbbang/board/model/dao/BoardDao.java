@@ -571,6 +571,60 @@ public class BoardDao {
 		return list;
 	}
 	
+	public ArrayList<Integer> paidUsers(Connection conn, int boardId){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("paidUsers");
+		ArrayList<Integer> list = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardId);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Integer>();
+			if(rs.next()) {
+				String[] tempStr;
+				tempStr = stringToArr(rs.getString("TRADE_USER_LIST"));
+				for(String s : tempStr) {
+				list.add(Integer.parseInt(s));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Integer> deliveryUsers(Connection conn, int boardId){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("deliveryUsers");
+		ArrayList<Integer> list = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardId);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Integer>();
+			if(rs.next()) {
+				String[] tempStr;
+				tempStr = stringToArr(rs.getString("TRADE_USER_LIST"));
+				for(String s : tempStr) {
+				list.add(Integer.parseInt(s));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	public int boardPayMinusPoint(Connection conn, int userUsid, int productPrice) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -685,6 +739,21 @@ public class BoardDao {
 			close(rs);
 			close(pstmt);
 		} 
+		return result;
+	}
+	
+	public int boardShipping(Connection conn, int boardId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("commentDelete"));
+			pstmt.setInt(1, boardId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 	

@@ -3,6 +3,7 @@ package com.nbbang.board.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,6 +65,10 @@ public class BoardPageServlet extends HttpServlet {
 		}
 		Card c = new BoardService().boardPage(boardId, hasRead, writerUsid);
 		
+		List<Integer> paidUsers= new ArrayList<Integer>();
+		List<Integer> deliveryUsers = new ArrayList<Integer>();
+		
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		ArrayList<Integer> tradeUserList = new BoardService().tradeUserList(Integer.parseInt(boardId));
 		int likeCount = new BoardService().requestCount(Integer.parseInt(boardId));
@@ -72,6 +77,12 @@ public class BoardPageServlet extends HttpServlet {
 			request.setAttribute("loc", "/boList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
+			if(c.getCardBoard().getTradeStage()==2) {
+				paidUsers = new BoardService().paidUsers(Integer.parseInt(boardId));
+			}
+			if(c.getCardBoard().getTradeStage()==3) {
+				deliveryUsers = new BoardService().deliveryUsers(Integer.parseInt(boardId));
+			}
 			String temp = c.getCardBoard().getTradeArea();
 			if(temp!=null) {
 				if(temp.length()>8) {
@@ -80,6 +91,8 @@ public class BoardPageServlet extends HttpServlet {
 				}
 			}
 			if(tradeUserList!=null)request.setAttribute("tradeUserList", tradeUserList);
+			request.setAttribute("paidUsers", paidUsers);
+			request.setAttribute("deliveryUsers", deliveryUsers);
 			request.setAttribute("requestCount", likeCount);
 			request.setAttribute("reply", reply);
 			request.setAttribute("curCard", c);

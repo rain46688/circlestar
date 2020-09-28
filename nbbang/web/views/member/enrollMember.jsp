@@ -269,10 +269,15 @@
 				$("#certiDuplicate").css({"display":"block"});
 				$("#certiDuplicate").css({"color":"green"});
 			}else{
-				$("#certiDuplicate").css({"display":"none"});
+				$("#certiDuplicate").html("인증번호가 일치하지 않습니다.");
+				$("#certiDuplicate").css({"display":"block"});
 				$("#certiDuplicate").css({"color":"red"});
 			}
 		})
+
+		$("#id").keyup(e=>{
+			$("#certiNum").val('');
+		});
 
 		// pw제약조건
 		var pwPattern = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,16}$/;
@@ -607,6 +612,9 @@
 			if($("#checkIdhidden").val()=='existed'){
 				alert('아이디 중복 확인을 해주세요.');
 			}
+			if($("#certiKey").val().trim()!=$("#certiNum").val().trim()){
+				alert('이메일 인증을 확인해주세요.')
+			}
 			if($("#checkNNhidden").val()=='existed'){
 				alert('닉네임 중복 확인을 해주세요.');
 			}
@@ -620,7 +628,8 @@
 			//제약조건을 만족했나요
 			if(id!=="" && (pw!==""&&pwPattern.test(pw)) && (pw2!==""&&pw===pw2) && (nn!==""&&nnPattern.test(nn)) && (name!==""&&namePattern.test(name)) && (gender.length=1||gender.length>1)
 				&& (yy!=="" && yyPattern.test(yy)) && mm!=="" && mm!=="월" && (dd!==""&&ddPattern.test(dd)) && (phone!==""&&pnPattern.test(phone)) && address!==""
-				&& $("#checkIdhidden").val()!='existed' && $("#checkNNhidden").val()!='existed' && $("#checkPNhidden").val()!='existed' && $("input[name='checked_ad']").val()!=''){
+				&& $("#checkIdhidden").val()!='existed' && $("#checkNNhidden").val()!='existed' && $("#checkPNhidden").val()!='existed' && $("input[name='checked_ad']").val()!=''
+				&& $("#certiKey").val().trim()==$("#certiNum").val().trim()){
 				$("#memberEnrollFrm").submit();
 			}else{
 				alert("필수 입력 항목을 확인해주세요.");
