@@ -156,8 +156,8 @@ public class ChatSocket {
 						if (!user.get(key).equals(session) && key.getCurRoomBid().equals(boardId)) {
 							//루프 돌면서 현재 세션이랑 같지 않으면서 같은 방에 있는 인원에게만 메세지 전달
 							System.out.println(" === ChatSocket 진입 여부 확인용 1 === ");
-							user.get(key).getBasicRemote()
-									.sendObject(new Message(key.getNickname(), "SYS2", "", "", "", ""));
+							System.out.println("나간사람??? : "+name);
+							user.get(key).getBasicRemote().sendObject(new Message(name, "SYS2", "", "", "", ""));
 						}
 					}
 					System.out.println(" === ChatSocket 소켓 연결 종료 name : " + name + " === ");
