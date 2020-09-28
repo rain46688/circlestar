@@ -11,8 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
+import com.google.gson.Gson;
 import com.nbbang.customer.model.service.CustomerService;
 import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.customer.model.vo.CustomerFile;
@@ -85,15 +85,12 @@ public class CustomerQnAWritingEndServlet extends HttpServlet {
 		// csFileId는 NULL
 
 		int result = new CustomerService().insertQnA(c,fileList);
-		if (result>0) {
-			// 업로드 성공
-			request.setAttribute("msg", "문의가 완료되었습니다.");
-			request.setAttribute("loc", "/customer/customerQnA?num="+c.getCsNickname());
-		} else {
-			request.setAttribute("msg", "문의에 실패하였습니다.");
-			request.setAttribute("loc", "/customer/customerQnAWriting.jsp");
-		}
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
+		
+		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(result,response.getWriter());
+		
 	}
 
 	/**

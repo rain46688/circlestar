@@ -92,12 +92,17 @@ pageEncoding="UTF-8"%>
        
         contentType:false,
         success:data=>{
-          console.log(data);
-          alert("등록성공!");
+        	//Ajax는 여기서 응답처리 해줘야함. 서블릿에서 하는게 아님.
+        }
+			if(data>0){
+				alert("등록성공!");
+			      location.href ="<%=request.getContextPath()%>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>"; 		
+			}else{
+				alert("등록실패!");
+			}
         }
       
-      })
-      location.href ="<%=request.getContextPath()%>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>"; 
+      });
     }
 
 
