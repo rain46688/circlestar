@@ -108,9 +108,7 @@
 		<%
 			for (Card c : bolist) {
 		%>
-		<div class="card"
-			onclick="location.href='<%=request.getContextPath()%>/board/boardSpecialPage?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid() %>'"
-			style="width: 24rem; cursor: pointer; padding:0px">
+		<div class="card" onclick="location.href='<%=request.getContextPath()%>/board/boardSpecialPage?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid() %>'" style="width: 24rem; cursor: pointer; padding:0px">
 			<!-- file의 갯수 분기처리 -->
 			<%-- <% if(files.length==1) {%> --%>
 			<div class="image-wrapper">
@@ -123,17 +121,29 @@
 				<input type="hidden" value="<%= c.getCardBoard().getBoardId()%>">
 				<h4 class="card-title"><p><%= c.getCardBoard().getBoardTitle() %></p></h4>
 				<p><%= c.getCardBoard().getTradeArea() %></p>
-				<p><%= c.getCardBoard().getLimitTime() %></p>
+				<div id="HourCountdown"></div> 남았습니다.<br>
+				
 				<p id="interest"><%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회</p>
 				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= c.getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
 			</div>
 			<br>
 			<hr>
 		</div>
+		
 		<%
 			}
 		%>
 	</div>
+	
+<%-- 	<% for(int i=0; i < 10; i++) { %>
+		<p id="<%=i%>">p</p>
+			<script>
+			
+			console.log("hh"+'<%=i%>');
+		
+		</script>
+	<% } %> --%>
+	
 	<br>
 		<nav aria-lable="Page navigation">
 			<ul class="pagination justify-content-center">
@@ -151,6 +161,42 @@
 	}
 	function fn_boWrite(){
 		location.assign("<%= request.getContextPath() %>/board/boSpecialWrite");
+	}
+	
+	CountDownTimer('9/28/2020 8:00 PM', 'HourCountdown');	
+	
+	
+	function CountDownTimer(dt, id) {
+
+	    var end = new Date(dt);
+
+	    var _second = 1000;
+	    var _minute = _second * 60;
+	    var _hour = _minute * 60;
+	    var _day = _hour * 24;
+	    var timer;
+
+	    function showRemaining() {
+	        var now = new Date();
+	        var distance = end - now;
+
+	        // 시간 종료 시 뜨는 문구
+	        if (distance < 0) {
+	            clearInterval(timer);
+	            document.getElementById(id).innerHTML = '카운트다운이 끝났습니다. 곧 오픈합니다!';
+	            return;
+	        }
+	        var days = Math.floor(distance / _day);
+	        var hours = Math.floor((distance % _day) / _hour);
+	        var minutes = Math.floor((distance % _hour) / _minute);
+	        var seconds = Math.floor((distance % _minute) / _second);
+
+	        document.getElementById(id).innerHTML = days + '일 ';
+	        document.getElementById(id).innerHTML += hours + '시간 ';
+	        document.getElementById(id).innerHTML += minutes + '분 ';
+	        document.getElementById(id).innerHTML += seconds + '초';
+	    }
+	    timer = setInterval(showRemaining, 1000);
 	}
 
 </script>

@@ -35,7 +35,7 @@ public class BoardSpecialListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		System.out.println("BoardSpecialListServlet");
 		String boardTitle = "특가";
 		int cPage;
 		try {
@@ -44,9 +44,10 @@ public class BoardSpecialListServlet extends HttpServlet {
 			cPage = 1;
 		}
 		int numPerPage = 6;
-
+		System.out.println("zzz");
 		List<Card> blist = new BoardSpecialService().boardList(cPage, numPerPage, boardTitle);
 		for (Card c : blist) {
+			System.out.println("zzz");
 			String temp = c.getCardBoard().getTradeArea();
 			if (temp != null) {
 				if (temp.length() > 8) {
@@ -54,6 +55,9 @@ public class BoardSpecialListServlet extends HttpServlet {
 					c.getCardBoard().setTradeArea(newTemp);
 				}
 			}
+			
+			System.out.println(c.getCardBoard().getLimitTime());
+			
 		}
 		int totalData = new BoardService().boardListCount(boardTitle);
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
