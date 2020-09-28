@@ -588,6 +588,23 @@ public class BoardDao {
 		return result;
 	}
 	
+	public int boardPayPlusPoint(Connection conn, int writerUsid, int productPrice) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			String sql = prop.getProperty("boardPayPlusPoint");
+			sql = sql.replace("$re", ""+productPrice);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, writerUsid);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int boardPayTradeList(Connection conn, int userUsid, int boardId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
