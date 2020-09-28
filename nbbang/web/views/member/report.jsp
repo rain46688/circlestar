@@ -227,7 +227,7 @@
                             <input type="text" class="reportInfo" value="내용" readonly>
                         </div>
                         <div class="capsuleRight" style="width: 80%;">
-                            <textarea id="rcontent" name="rcontent" cols="30" rows="4" maxlength="100" placeholder="신고 내용을 적어주세요."></textarea>
+                            <textarea id="rcontent" name="rcontent" cols="30" rows="6" maxlength="500" placeholder="신고 내용을 적어주세요."></textarea>
                         </div>
                     </div>
                     <div class="fieldCapsule">

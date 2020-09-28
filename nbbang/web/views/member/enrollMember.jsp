@@ -446,6 +446,10 @@
 					$("#pnConstrain").html("필수 입력 항목입니다.");
 					$("#pnConstrain").css({"display":"block"});
 					$("#pnConstrain").css({"color":"red"});
+				}else if(!pnPattern.test(phone)){
+					$("#pnConstrain").html("10-11자의 휴대폰 번호를 입력해주세요.");
+					$("#pnConstrain").css({"display":"block"});
+					$("#pnConstrain").css({"color":"red"});
 				}else{
 					$("#pnConstrain").css({"display":"none"});
 				}
