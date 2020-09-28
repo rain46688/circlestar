@@ -226,6 +226,32 @@ public class BoardService {
 		return result;
 	}
 	
+	public List<Integer> paidUsers(int boardId) {
+		Connection conn = getConnection();
+		List<Integer> paidUsers = dao.paidUsers(conn, boardId);
+		close(conn);
+		return paidUsers;
+	}
+	
+	public List<Integer> deliveryUsers(int boardId) {
+		Connection conn = getConnection();
+		List<Integer> deliveryList = dao.deliveryUsers(conn, boardId);
+		close(conn);
+		return deliveryList;
+	}
+	
+	public int boardShipping(int boardId) {
+		Connection conn = getConnection();
+		int result = dao.boardShipping(conn, boardId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	// 삭제 추가 옵션들.
 //	public int boardDeleteBoardfile(int boardId) {
 //		Connection conn = getConnection();
