@@ -892,7 +892,7 @@ function fun_cancelbuy() {
                         html += "</div></div></li>";
                       }else {
                         html += "<li class='comment_item'>";
-                        html += "<hr>";
+                        // html += "<hr>";
                         html += "<div class='comment_area2'>";
                         html += "<div class='comment_thumb'>";
                         html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
@@ -1000,7 +1000,7 @@ function fun_cancelbuy() {
                         html += "</div></div></li>";
                       }else {
                         html += "<li class='comment_item'>";
-                        html += "<hr>";
+                        // html += "<hr>";
                         html += "<div class='comment_area2'>";
                         html += "<div class='comment_thumb'>";
                         html += "<img src='<%= memberPic %>/"+ item.comProfile +"' alt='' width='30px'" +
