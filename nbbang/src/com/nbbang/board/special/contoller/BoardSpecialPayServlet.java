@@ -39,8 +39,8 @@ public class BoardSpecialPayServlet extends HttpServlet {
 		int productPrice = Integer.parseInt(request.getParameter("productPrice"));
 		int writerUsid = Integer.parseInt(request.getParameter("writerUsid"));
 		String loginNickname = request.getParameter("ln");
-		
-//		System.out.println(userUsid+" "+loginNickname);
+		System.out.println(" =========== ");
+	System.out.println(userUsid+" "+loginNickname+" "+boardId);
 		
 		
 		Member m = new MemberService().myPage(userUsid);

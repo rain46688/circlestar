@@ -371,7 +371,7 @@ font-weight:bold;
      	<div class="time"><p id="count"></p></div>
         </div>
       <!-- 프로필 사진 + id -->
-      <h5 id="level">기업 신뢰 level</h5>
+ 
     </div>
     <div class="content">
       <hr>

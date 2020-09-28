@@ -24,7 +24,6 @@ public class BoardSpecialService {
 		Connection conn = getConnection();
 		int result = dao.boardInsert(conn, b);
 		result += dao.boardInsert(conn, bf);
-		result += dao.boardInsertTradeList(conn, b.getWriterUsid(), b.getWriterNickname());
 		if (result > 2) {
 			commit(conn);
 		} else {

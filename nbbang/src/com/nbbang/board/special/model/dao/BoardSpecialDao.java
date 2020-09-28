@@ -226,11 +226,6 @@ public class BoardSpecialDao {
 	
 	
 	
-	
-	
-	
-	
-	
 	private String[] stringToArr(String str) {
 		if(str==null) {
 			return new String[1];
