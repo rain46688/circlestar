@@ -88,7 +88,7 @@ p>button{
 	         <p class="title">신고 보기</p>
 	         <p class="text">접수된 신고 내역을 보여줍니다.</p>
 	         <p class="bottomBtn"><button type="button" class="realBtn"
-	            onclick="location.href='<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>'">이동하기</button></p>
+	            onclick="location.href='<%=request.getContextPath()%>/admin/adminReportList?a=0'">이동하기</button></p>
 	      </div>
 	      <div class="item smallBox" id="pastList">
 	         <p class="title">문의 보기</p>

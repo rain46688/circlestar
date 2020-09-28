@@ -14,7 +14,7 @@ import java.util.Properties;
 
 import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
-import com.nbbang.admin.model.vo.Report;
+import com.nbbang.member.model.vo.Report;
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.member.model.vo.Member;
@@ -884,13 +884,19 @@ public class AdminDao {
 			while(rs.next()) {
 				r = new Report();
 				r.setReportId(rs.getInt("REPORT_ID"));
-				r.setReportType(rs.getString("REPORT_TYPE"));
-				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
-				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
-				r.setReportTitle(rs.getString("REPORT_TITLE"));
-				r.setReportDate(rs.getDate("REPORT_DATE"));
-				r.setReportIswarning(rs.getInt("REPORT_ISWARNING"));
+				r.setReportUserUsid(rs.getInt("REPORT_USER_USID"));
+				r.setReportBoardId(rs.getInt("REPORT_BOARD_ID"));
 				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
+				r.setReportType(rs.getString("REPORT_TYPE"));
+				r.setReportTitle(rs.getString("REPORT_TITLE"));
+				r.setReportContent(rs.getString("REPORT_CONTENT"));
+				r.setReportDate(rs.getDate("REPORT_DATE"));
+				r.setReportFile(rs.getString("REPORT_FILE"));
+				r.setReportIscheck(rs.getBoolean("REPORT_ISCHECK"));
+				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
+				r.setReportUserNickname(rs.getString("REPORT_USER_NICKNAME"));
+				r.setReportAnswer(rs.getString("REPORT_ANSWER"));
+				r.setReportIswarning(rs.getBoolean("REPORT_ISWARNING"));
 				list.add(r);
 			}
 		} catch (SQLException e) {
@@ -960,7 +966,7 @@ public class AdminDao {
 				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
 				r.setReportTitle(rs.getString("REPORT_TITLE"));
 				r.setReportDate(rs.getDate("REPORT_DATE"));
-				r.setReportIswarning(rs.getInt("REPORT_ISWARNING"));
+				r.setReportIswarning(rs.getBoolean("REPORT_ISWARNING"));
 				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
 				list.add(r);
 			}
@@ -1040,7 +1046,7 @@ public class AdminDao {
 				r.setReportTargetNickname(rs.getString("REPORT_TARGET_NICKNAME"));
 				r.setReportTitle(rs.getString("REPORT_TITLE"));
 				r.setReportDate(rs.getDate("REPORT_DATE"));
-				r.setReportIswarning(rs.getInt("REPORT_ISWARNING"));
+				r.setReportIswarning(rs.getBoolean("REPORT_ISWARNING"));
 				r.setReportTargetUsid(rs.getInt("REPORT_TARGET_USID"));
 				list.add(r);
 			}

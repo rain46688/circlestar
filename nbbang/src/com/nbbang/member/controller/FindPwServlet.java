@@ -62,7 +62,7 @@ public class FindPwServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/member/msgFindMember.jsp").forward(request, response);
 		}else {
 			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-		    uuid = uuid.substring(0, 8); //uuid를 앞에서부터 6자리 잘라줌.
+		    uuid = uuid.substring(0, 8);
 		    System.out.println(uuid);
 		    m.setMemberPwd(uuid);
 		    int pwIsUuid=1;
