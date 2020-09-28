@@ -1016,6 +1016,21 @@ private Properties prop=new Properties();
 		return result;
 	}
 
+	public int reportWarning(Connection conn, int tusid) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("reportWarning"));
+			pstmt.setInt(1, tusid);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 }

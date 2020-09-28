@@ -259,6 +259,7 @@ private MemberDao dao=new MemberDao();
 		int result=dao.sendReport(conn,r);
 		if(result>0) commit(conn);
 		else rollback(conn);
+		close(conn);
 		return result;
 	}
 
@@ -309,6 +310,16 @@ private MemberDao dao=new MemberDao();
 		int result=dao.reportAnswer(conn, reportAnswer, rboardId);
 		if(result>0) commit(conn);
 		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int reportWarning(int tusid) {
+		Connection conn=getConnection();
+		int result=dao.reportWarning(conn, tusid);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
 		return result;
 	}
 
