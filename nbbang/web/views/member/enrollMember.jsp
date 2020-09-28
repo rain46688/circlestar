@@ -269,10 +269,15 @@
 				$("#certiDuplicate").css({"display":"block"});
 				$("#certiDuplicate").css({"color":"green"});
 			}else{
-				$("#certiDuplicate").css({"display":"none"});
+				$("#certiDuplicate").html("인증번호가 일치하지 않습니다.");
+				$("#certiDuplicate").css({"display":"block"});
 				$("#certiDuplicate").css({"color":"red"});
 			}
 		})
+
+		$("#id").keyup(e=>{
+			$("#certiNum").val('');
+		});
 
 		// pw제약조건
 		var pwPattern = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,16}$/;
