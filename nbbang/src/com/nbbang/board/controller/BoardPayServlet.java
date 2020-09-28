@@ -46,7 +46,7 @@ public class BoardPayServlet extends HttpServlet {
 			return;
 		}
 		
-		int result = new BoardService().boardPay(userUsid, boardId, productPrice);
+		int result = new BoardService().boardPay(userUsid, boardId, productPrice, writerUsid);
 		
 		if(result < 2) {
 			request.setAttribute("msg", "결제에 실패했습니다. 관리자에게 문의하세요.");

@@ -162,10 +162,11 @@ public class BoardService {
 		return tradeUserList;
 	}
 	
-	public int boardPay(int userUsid, int boardId, int productPrice) {
+	public int boardPay(int userUsid, int boardId, int productPrice, int writerUsid) {
 		Connection conn = getConnection();
 		int result = dao.boardPayMinusPoint(conn, userUsid, productPrice);
 		result += dao.boardPayTradeList(conn, userUsid, boardId);
+		result += dao.boardPayPlusPoint(conn,writerUsid, productPrice);
 		if(result > 1) {
 			commit(conn);
 		}else {
