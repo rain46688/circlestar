@@ -126,7 +126,7 @@ div#myPageSideBar{
         background-color: rgb(243, 183, 24);
         padding: 6%;
         color: white;
-        border: 1px black solid;
+        border: 2px black solid;
     }
     p#sideBarTitle{
         font-size: 2.5em;
@@ -140,17 +140,17 @@ div#myPageSideBar{
         border: darkgrey 1px solid;
         border-top: none;
         padding: 10%;
-        border: 1px black solid;
+        border: 2px black solid;
         border-top: none;
     }
-    
-        .postList{
+    .postList{
         font-size: 1.3em;
         text-align: left;
     }
     .postList:hover{
         color: rgb(243, 183, 24);
     }
+
 
 
 /* 인희꺼 가져옴 ㅋㅋ */
@@ -182,9 +182,6 @@ div#myPageSideBar{
                 <p class="sideBarText">N빵은 고객님의<br><span>고민을</span><br>N빵해드립니다.</p>
             </div>
             <div id="sideBarLinkContainer">
-                <div>
-                    <a class="nav-link postList" href="<%=request.getContextPath()%>/customerMain">소개글</a>
-                </div>
                   <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/customer/customerQnA">문의하기</a>
@@ -201,13 +198,6 @@ div#myPageSideBar{
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>#">홈</a>
                 </div>
-                <div>
-                    <a class="nav-link postList" href="<%=request.getContextPath()%>#">구경하기</a>
-                </div>
-                <div>
-                    <a class="nav-link postList" href="<%=request.getContextPath()%>#">해외직구</a>
-                </div>
-                <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>">마이페이지</a>
                 </div>
             </div>

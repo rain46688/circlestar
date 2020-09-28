@@ -252,6 +252,30 @@ public class BoardService {
 		return result;
 	}
 	
+	public int boardDelivery(int boardId, int buyerUsid) {
+		Connection conn = getConnection();
+		int result = dao.boardDelivery(conn, boardId, buyerUsid);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int boardEnd(int boardId) {
+		Connection conn = getConnection();
+		int result = dao.boardEnd(conn, boardId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	// 삭제 추가 옵션들.
 //	public int boardDeleteBoardfile(int boardId) {
 //		Connection conn = getConnection();
