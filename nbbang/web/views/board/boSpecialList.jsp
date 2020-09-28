@@ -186,8 +186,7 @@ font-weight:bold;
 	        var minutes = Math.floor((distance % _hour) / _minute);
 	        var seconds = Math.floor((distance % _minute) / _second);
 
-	        document.getElementById(id).innerHTML = days + '일 ';
-	        document.getElementById(id).innerHTML += hours + '시간 ';
+	        document.getElementById(id).innerHTML = hours + '시간 ';
 	        document.getElementById(id).innerHTML += minutes + '분 ';
 	        document.getElementById(id).innerHTML += seconds + '초';
 	    }
