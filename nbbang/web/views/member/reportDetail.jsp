@@ -350,6 +350,7 @@
                             관리자 답변
                         </div>
                     </div>
+                    <%if(rd.getReportAnswer()==null){%>
                     <form id="reportAnswerForm" action="<%=request.getContextPath()%>/member/reportAnswer" method="post">
                         <div class="fieldCapsule">
                             <div class="capsuleLeft" style="width: 100%; text-align: center;">
@@ -359,6 +360,11 @@
                             </div>
                         </div>
                     </form>
+                    <%}else {%>
+                        <div class="capsuleLeft" style="width: 100%;">
+                            <%=rd.getReportAnswer()%>	
+                        </div>
+                    <%}%>
                 </div>
                 <div style="text-align: center; margin-top: 2%;">
                     <button type="button" class="button" 
