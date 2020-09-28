@@ -13,7 +13,7 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
   rel="stylesheet">
 
-<section>
+
 <div id="kdh-container">
   <!-- <div id="kdh-sidebar-container"> -->
     
@@ -82,4 +82,3 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
             </div>
    <!-- </div> -->
   </div>
-</section>
