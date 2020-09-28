@@ -295,6 +295,12 @@
   	font-size:16px;
   }
 
+  .card-img-top {
+        width: 100%;
+        height: 40vw;
+        object-fit: cover;
+    }
+
 </style>
 <section>
 	<% if(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1){ %>
@@ -320,12 +326,12 @@
               <% if(i==0) { %>
             <div class="carousel-item active">
               <img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[i] %>"
-                class="d-block w-100" alt="..." width="700em" height="400em">
+                class="d-block w-100 card-img-top" alt="..." width="800em" height="500em">
             </div>
             <% }else { %>
               <div class="carousel-item">
                 <img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[i] %>"
-                  class="d-block w-100" alt="..." width="700em" height="400em">
+                  class="d-block w-100 card-img-top" alt="..." width="800em" height="500em">
               </div>
             <% }} %>
           </div>
