@@ -94,8 +94,15 @@
 		<h1><%= request.getAttribute("category") %></h1>
 		</div>
 		<div id="writeBoard">
+			<% if(request.getAttribute("oriCategory")!=null) {%>
+			<% if(request.getAttribute("oriCategory").equals("overall")){}else{ %>
+			<input id="searchInHere" onkeypress="searchEnter();" type="text" placeholder="게시판 내에서 검색">
+			<button id="searchInHereBtn" onclick="fn_search('<%= request.getAttribute("oriCategory") %>');">검색</button>
+			<%	} %>
+			<% }else { %>
 			<input id="searchInHere" onkeypress="searchEnter();" type="text" placeholder="게시판 내에서 검색">
 			<button id="searchInHereBtn" onclick="fn_search('<%= request.getAttribute("category") %>');">검색</button>
+			<% } %>
 			<% if(request.getAttribute("category").equals("특가")) {%>
 			<% 	if(loginnedMember!=null&&loginnedMember.getNickname().equals("ADMIN")){ %>
 			<button id="writeBtn" onclick="fn_boWrite();">글쓰기</button>
@@ -117,7 +124,7 @@
 			<img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="200em">
 			<%-- <% }else { %> --%>
 			<%-- <img src="<%=request.getContextPath()%>/upload/images/<%= files[0] %>" class="card-img-top" alt="제품이미지" width="120em" height="160em"> --%>
-		<%-- 	<%} %> --%>
+			<%-- <%} %> --%>
 			</div>
 			<div class="card-body">
 				<input type="hidden" value="<%= c.getCardBoard().getBoardId()%>">
