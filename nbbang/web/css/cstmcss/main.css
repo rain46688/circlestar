@@ -62,19 +62,23 @@ div#kdh-side-bar-left{
   text-decoration: none;
   
   
- }
+ }*/
  .cstmt-list a:hover,
  .list-hiper a:hover{
 	 color: #f1bb74;
- } */
+ } 
  div#kdh-container{
 	 margin-bottom: 3em;
-	 margin-left: 20em;
+	 margin-left: 15em;
+	 width: 13.5em;
+	 height: 34em;
+	 float: left;
  }
  div#kdh-sidebar-left{
 	 border: 1px solid black;
-	 width: 14em;
+	 width: 13em;
 	 height: 30em;
+	 margin-top: 2em;
 	 
  }
 div.sidebarTitle{
@@ -102,3 +106,4 @@ div.cstmt-list a, .list-hiper a{
 	text-decoration: none;
 	color: black;
 }
+
