@@ -297,7 +297,7 @@
 
   .card-img-top {
         width: 100%;
-        height: 40vw;
+        height: 35vw;
         object-fit: cover;
     }
 
@@ -326,12 +326,12 @@
               <% if(i==0) { %>
             <div class="carousel-item active">
               <img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[i] %>"
-                class="d-block w-100 card-img-top" alt="..." width="800em" height="500em">
+                class="d-block w-90 card-img-top" alt="..." width="600em" height="500em">
             </div>
             <% }else { %>
               <div class="carousel-item">
                 <img src="<%=request.getContextPath()%>/upload/images/<%= c.getCardFile().getFileName()[i] %>"
-                  class="d-block w-100 card-img-top" alt="..." width="800em" height="500em">
+                  class="d-block w-90 card-img-top" alt="..." width="600em" height="500em">
               </div>
             <% }} %>
           </div>
@@ -585,9 +585,19 @@ function fun_decidebuy(){
 		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"${curCard.cardBoard.boardId}","flag":"1"},
 		url: "<%=request.getContextPath()%>/chat/decidebuy",
 			success : function(data) {
+        if(data == 0){
+         alert("현재 n빵 참여가 실패하였습니다.");
+        }else if(data == 1){
+         alert("현재 n빵에 참여하셨습니다.");
         $("#startFuncBtn>img").attr("src","<%= request.getContextPath() %>/images/cancel.png");
         $("#startFuncBtn>p").text("N빵취소");
         $("#date p").text("현재 참여중인 N빵입니다.");
+        }else if(data == 2){
+         alert("현재 n빵에 이미 참여하셨습니다.");
+        }else{
+         //data 4 넘어옴
+         alert("현재 n빵 최대인원을 초과하였습니다.");
+        }
       }
 		}) 	
 	}else {
@@ -596,9 +606,15 @@ function fun_decidebuy(){
 		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"${curCard.cardBoard.boardId}","flag":"2"},
 		url: "<%=request.getContextPath()%>/chat/decidebuy",
 			success : function(data) {
-        $("#startFuncBtn>img").attr("src","<%= request.getContextPath() %>/images/onebyn.png");
+        if(data == 0){
+         alert("현재 n빵 취소에 실패하였습니다.");
+        }else{
+         //data 3 넘어옴
+         alert("현재 n빵 참여가 취소되었습니다.");
+         $("#startFuncBtn>img").attr("src","<%= request.getContextPath() %>/images/onebyn.png");
         $("#startFuncBtn>p").text("N빵신청");
         $("#date p").text("");
+        }
 			}
 		})
   }
