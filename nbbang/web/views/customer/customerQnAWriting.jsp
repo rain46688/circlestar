@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
   rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/qnawriting.css" type="text/css">
-<!-- <jsp:include page="maincss.jsp"></jsp:include> -->
+<%-- <jsp:include page="maincss.jsp"></jsp:include>  --%>
 <section>
 <div class="writing-container">
   <div class="writing-wrap">
@@ -50,7 +50,8 @@ pageEncoding="UTF-8"%>
       </div>
      
   <div id="submitBtn-kdh">
-      <button type="button" class="btn-submit" onclick=" movingPage('<%=request.getContextPath()%>/customer/customerQnAWritingEnd')">문의등록</button>
+      <button type="button" class="btn-submit" onclick=" movingPage('<%=request.getContextPath()%>/customer/customerQnAWritingEnd')" style="font-family: 'Do Hyeon', sans-serif;"
+        >문의등록</button>
    </div>
     </form>
   </div>
