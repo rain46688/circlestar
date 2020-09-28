@@ -232,10 +232,27 @@
                         <div class="capsuleLeft" style="width: 20%;">
                             첨부한 파일
                         </div>
-                        <div class="capsuleRight" style="width: 80%;">
-                            <%=rd.getReportFile() %>
-                        </div>
+                        <%if(rd.getReportFile()!=null){%>
+                            <div class="capsuleRight" style="width: 80%; cursor: pointer;"
+                            onclick="location.href='<%=request.getContextPath()%>/member/reportFileDownload?fname=<%=rd.getReportFile()%>'">
+                                <%=rd.getReportFile() %>
+                            </div>
+                        <%}else{%>
+                            <div class="capsuleRight" style="width: 80%;">
+                                첨부한 파일이 없습니다.
+                            </div>
+                        <%}%>
                     </div>
+                    <%if(rd.getReportFile()!=null){%>
+                        <div class="fieldCapsule">
+                            <div class="capsuleLeft" style="width: 20%;">
+                                첨부파일 미리보기
+                            </div>
+                            <div class="capsuleRight" style="width: 80%;">
+                                <img src="<%=memberPic+rd.getReportFile()%>">
+                            </div>
+                        </div>
+                    <%}%>
                 </div>
                 <div class="item textField" style="margin-left: 1%;">
                     <div style="height: 20px;"> </div>
@@ -332,16 +349,27 @@
                         <div class="capsuleLeft" style="width: 20%;">
                             첨부한 파일
                         </div>
-                        <%if(rd.getReportFile()==null){%>
-                            <div class="capsuleRight" style="width: 80%;">
-                                첨부된 파일이 없습니다.
+                        <%if(rd.getReportFile()!=null){%>
+                            <div class="capsuleRight" style="width: 80%; cursor: pointer;"
+                            onclick="location.href='<%=request.getContextPath()%>/member/reportFileDownload?fname=<%=rd.getReportFile()%>'">
+                                <%=rd.getReportFile() %>
                             </div>
                         <%}else{%>
                             <div class="capsuleRight" style="width: 80%;">
-                                <%=rd.getReportFile() %>
+                                첨부한 파일이 없습니다.
                             </div>
                         <%}%>
                     </div>
+                    <%if(rd.getReportFile()!=null){%>
+                        <div class="fieldCapsule">
+                            <div class="capsuleLeft" style="width: 20%;">
+                                첨부파일 미리보기
+                            </div>
+                            <div class="capsuleRight" style="width: 80%;">
+                                <img src="<%=memberPic+rd.getReportFile()%>">
+                            </div>
+                        </div>
+                    <%}%>
                 </div>
                 <div class="item textField" style="margin-left: 1%;">
                     <div style="height: 20px;"> </div>
