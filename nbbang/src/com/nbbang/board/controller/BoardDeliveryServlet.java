@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.nbbang.board.model.service.BoardService;
 
 /**
- * Servlet implementation class BoardShippingServlet
+ * Servlet implementation class BoardDeliveryServlet
  */
-@WebServlet("/board/boardShip")
-public class BoardShippingServlet extends HttpServlet {
+@WebServlet("/board/boardDelivery")
+public class BoardDeliveryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardShippingServlet() {
+    public BoardDeliveryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +30,20 @@ public class BoardShippingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("머여??");
-		
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		int writerUsid = Integer.parseInt(request.getParameter("writerUsid"));
+		int buyerUsid = Integer.parseInt(request.getParameter("buyerUsid"));
 		
-		int result = new BoardService().boardShipping(boardId);
+		int result = new BoardService().boardDelivery(boardId, buyerUsid);
 		
-		if(result>0) {
-			request.setAttribute("msg", "배송을 시작합니다.");
-			request.setAttribute("loc", "/board/boardPage?boardId="+boardId+"&writerUsid="+writerUsid);
+		if(result < 1) {
+			request.setAttribute("msg", "수령확인에 실패했습니다. 관리자에게 문의하세요.");
+			request.setAttribute("loc", "/");
 		}else {
-			request.setAttribute("msg", "배송 시작에 실패했습니다. 관리자에게 문의하세요.");
-			request.setAttribute("loc", "/board/boardPage?boardId="+boardId+"&writerUsid="+writerUsid);
+			request.setAttribute("msg", "물품수령이 확인되었습니다.");
+			request.setAttribute("loc", "/board/boardPage?boardId="+boardId+"&writerUsid="+writerUsid+"&reply=delivery");
 		}
+		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
