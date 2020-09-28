@@ -304,4 +304,12 @@ private MemberDao dao=new MemberDao();
 		return r;
 	}
 
+	public int reportAnswer(String reportAnswer, int rboardId) {
+		Connection conn=getConnection();
+		int result=dao.reportAnswer(conn, reportAnswer, rboardId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
 }

@@ -245,16 +245,15 @@
                         </div>
                     </div>
                     <div class="fieldCapsule">
-                        <div class="capsuleLeft" style="width: 20%;">
-                            신고유형
+                        <%if(rd.getReportAnswer()==null){%>
+                        <div class="capsuleLeft" style="width: 100%;">
+                            아직 관리자로부터 받은 답변이 없습니다.
                         </div>
-                        <div class="capsuleRight" style="width: 80%;">
-                            <%if(rd.getReportAnswer()==null){%>
-                            	아직 관리자로부터 받은 답변이 없습니다.
-                            <%}else {
-                            	rd.getReportAnswer();	
-                            } %>
+                        <%}else {%>
+                        <div class="capsuleLeft" style="width: 100%;">
+                            <%=rd.getReportAnswer()%>	
                         </div>
+                        <%}%>
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 2%;">
@@ -356,7 +355,7 @@
                             <div class="capsuleLeft" style="width: 100%; text-align: center;">
                                 <textarea id="ranswer" name="ranswer" cols="30" rows="6" maxlength="500" placeholder="답변을 적어주세요."></textarea>
                                 <button type="button" class="button" style="margin-left: -5px;" onclick="fn_reportAnswer();">답변전송</button>
-                                <input type="hidden" name="rboardId" value="<%=rd.getReportBoardId()%>">
+                                <input type="hidden" name="rboardId" value="<%=rd.getReportId()%>">
                             </div>
                         </div>
                     </form>
