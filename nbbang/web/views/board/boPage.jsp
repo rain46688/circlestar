@@ -309,6 +309,11 @@
   		<button onclick="fn_deleteBoard();">삭제하기</button>
   	</div>
   	<%} %>
+  	<% if(loginnedMember.getUsid()==9999) {%>
+  	<div id="btnForWriter"> 
+  		<button onclick="fn_deleteBoard();">삭제하기</button>
+  	</div>
+  	<%} %>
   <div id="wrapper">
     <div id="imageWrapper">
       <div id="carouselField" name="carouselField" >
