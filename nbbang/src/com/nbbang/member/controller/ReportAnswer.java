@@ -33,11 +33,11 @@ public class ReportAnswer extends HttpServlet {
 		int result=new MemberService().reportAnswer(reportAnswer,rboardId);
 		if(result>0) {
 			request.setAttribute("msg", "답변 등록에 성공했습니다.");
-			request.setAttribute("loc", "/member/reportList?usid=9999");
+			request.setAttribute("loc", "/admin/adminReportList?a=0");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "답변 등록에 실패했습니다.");
-			request.setAttribute("loc", "/member/reportList?usid=9999");
+			request.setAttribute("loc", "/admin/adminReportList?a=0");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}

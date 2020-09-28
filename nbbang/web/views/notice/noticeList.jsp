@@ -223,7 +223,8 @@ div#myPageSideBar{
 					if(!list.isEmpty()){
 					for (Notice n : list) {
 				%>
-				<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer">
+				<div class="divRow shadow p-3 mb-5 bg-white rounded" style="cursor: pointer"
+				onclick="location.href=''">
 					<div class="divCell"><%=n.getNoticeId()%></div>
 					<div class="divCell"><%=n.getNoticeWriteNickname()%></div>
 					<div class="divCell"><%=n.getNoticeTitle()%></div>
@@ -231,7 +232,6 @@ div#myPageSideBar{
 				</div>
 				<div class="noti">
 					<div class="noContent"><%=n.getNoticeContent()%></div>
-
 				</div>
 
 				<%

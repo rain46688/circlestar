@@ -67,7 +67,7 @@
 				<%if(loginnedMember!=null) {%>
 					<%if(loginnedMember.getUsid()==9999) {%>
 					<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
-	   					onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>'">관리자페이지</button>
+	   					onclick="location.href='<%=request.getContextPath()%>/admin/adminPage?usid=<%=loginnedMember.getUsid()%>'">관리자페이지</button>
 					<%}else{ %>
 	   				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
 	   					onclick="location.href='<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>'">마이페이지</button>
@@ -78,7 +78,7 @@
 		<nav>
 			<ul class="nav justify-content-center">
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/boList?boardTitle=특가">특가</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/boSpecialList">특가</a>
 					<!-- 차후 게시판 분류대로 나눌 예정 -->
 				</li>
 				<li class="nav-item">
