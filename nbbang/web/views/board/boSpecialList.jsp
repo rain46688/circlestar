@@ -87,6 +87,12 @@
 	width: 3em;
 	font-size: 20px;
 }
+
+.time > *{
+font-size:2em;
+font-weight:bold;
+}
+
 </style>
 <section>
 	<div class="card-wrapper">
@@ -121,16 +127,11 @@
 				<input type="hidden" value="<%= bolist.get(i).getCardBoard().getBoardId()%>">
 				<h4 class="card-title"><p><%= bolist.get(i).getCardBoard().getBoardTitle() %></p></h4>
 				<p><%= bolist.get(i).getCardBoard().getTradeArea() %></p>
-				
-				
-				<div id="HourCountdown<%=i%>"></div> 남았습니다.<br>
-				
+				<div class="time">특가 마감까지 <p id="count<%=i%>"></p></div>
 						<script>
-						
 						$(function(){
-							CountDownTimer('<%=bolist.get(i).getCardBoard().getTime()%>', 'HourCountdown<%=i%>');	
+							Timer('<%=bolist.get(i).getCardBoard().getTime()%>', 'count<%=i%>');	
 						});
-						
 						</script>
 				<p id="interest"><%= bolist.get(i).getCardBoard().getLikeCount() %> 관심 <%= bolist.get(i).getCardBoard().getHit() %> 조회</p>
 				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= bolist.get(i).getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
@@ -175,24 +176,20 @@
 	
 	
 	
-	function CountDownTimer(dt, id) {
-
+	function Timer(dt, id) {
 	    var end = new Date(dt);
-
 	    var _second = 1000;
 	    var _minute = _second * 60;
 	    var _hour = _minute * 60;
 	    var _day = _hour * 24;
 	    var timer;
-
 	    function showRemaining() {
 	        var now = new Date();
 	        var distance = end - now;
 
-	        // 시간 종료 시 뜨는 문구
 	        if (distance < 0) {
 	            clearInterval(timer);
-	            document.getElementById(id).innerHTML = '카운트다운이 끝났습니다. 곧 오픈합니다!';
+	            document.getElementById(id).innerHTML = '특딜이 마감되었습니다!';
 	            return;
 	        }
 	        var days = Math.floor(distance / _day);
