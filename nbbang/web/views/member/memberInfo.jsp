@@ -40,7 +40,7 @@
         border-top: none;
     }
     .postList{
-        font-size: 1.3em;
+        font-size: 1.6em;
         text-align: left;
     }
     .postList:hover{
