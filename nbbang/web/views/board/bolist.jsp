@@ -114,6 +114,7 @@
 		</div>
 		<%
 			for (Card c : bolist) {
+			if(c.getCardBoard().getTradeStage()!=4) {
 		%>
 		<div class="card"
 			onclick="location.href='<%=request.getContextPath()%>/board/boardPage?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid() %>'"
@@ -137,6 +138,7 @@
 			<hr>
 		</div>
 		<%
+			}
 			}
 		%>
 	</div>
