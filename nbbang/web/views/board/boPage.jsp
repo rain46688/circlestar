@@ -495,7 +495,7 @@
             <%} %>
             <% if(c.getCardBoard().getTradeStage()==2) {%>
           	<% if(c.getCardBoard().getWriterUsid()==loginnedMember.getUsid()){ %>
-            <li><div id="openFuncBtn" onclick="fn_shipping();">
+            <li><div onclick="fn_shipping();">
             <img src="<%= request.getContextPath() %>/images/shipping.png" width="40px" height="40px">
             <p>배송시작하기</p></div></li>
             <%} %>
@@ -564,9 +564,9 @@ function fn_pay(){//결제기능
   }
 }
 
-function fn_shipping(){//결제기능
-  if(confirm('결제를 진행하시겠습니까?')) {
-    location.href="<%=request.getContextPath()%>/board/boardShipping?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
+function fn_shipping(){//배송시작기능
+  if(confirm('배송을 진행하시겠습니까?')) {
+    location.href="<%=request.getContextPath()%>/board/boardShipStart?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
   }
 }
 
@@ -611,6 +611,7 @@ $.ajax({
       if (data == 1) {
           //방의 상태를 바꿔야되니 ajax로 갔따오자 방의 상태를 2로 변경함
           alert('채팅방이 생성되었습니다.');
+          location.reload();
       } else {
           alert('N빵 인원이 다 체워지지 않았습니다.');
       }

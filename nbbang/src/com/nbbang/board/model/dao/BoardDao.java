@@ -746,7 +746,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			pstmt = conn.prepareStatement(prop.getProperty("commentDelete"));
+			pstmt = conn.prepareStatement(prop.getProperty("boardShipping"));
 			pstmt.setInt(1, boardId);
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
