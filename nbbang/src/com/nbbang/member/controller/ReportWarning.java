@@ -37,11 +37,11 @@ public class ReportWarning extends HttpServlet {
 		System.out.println(reportId);
 		if(result>0) {
 			request.setAttribute("msg", "해당 회원에게 경고를 주었습니다.");
-			request.setAttribute("loc", "/admin/reportDetail?reportId"+reportId);
+			request.setAttribute("loc", "/admin/reportDetail?reportId="+reportId);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "경고주기에 실패했습니다.");
-			request.setAttribute("loc", "/admin/reportDetail?reportId"+reportId);
+			request.setAttribute("loc", "/admin/reportDetail?reportId="+reportId);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}

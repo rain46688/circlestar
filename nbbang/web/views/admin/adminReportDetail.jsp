@@ -109,10 +109,12 @@
                     </div>
                     <div class="capsuleRight">
                         <%=boardData.getWriterNickname()%>
+                        <%if(rd.isReportIswarning()==false) {%>
                         <form id="warnFrm" action="<%=request.getContextPath()%>/warning">
                             <button type="button" class="button" id="warnBtn" onclick="fn_warning();" style="margin-left: 1%;">경고주기</button>
                             <input type="hidden" id="reboardId" name="reboardId" value="<%=rd.getReportId()%>">
                         </form>
+                        <%} %>
                     </div>
                 </div>
             </div> 
