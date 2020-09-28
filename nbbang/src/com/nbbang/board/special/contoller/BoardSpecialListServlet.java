@@ -1,6 +1,7 @@
 package com.nbbang.board.special.contoller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -38,16 +39,16 @@ public class BoardSpecialListServlet extends HttpServlet {
 		System.out.println("BoardSpecialListServlet");
 		String boardTitle = "특가";
 		int cPage;
+		SimpleDateFormat f = new SimpleDateFormat("MM/dd/yyyy HH:mm a");
+		
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
 		int numPerPage = 6;
-		System.out.println("zzz");
 		List<Card> blist = new BoardSpecialService().boardList(cPage, numPerPage, boardTitle);
 		for (Card c : blist) {
-			System.out.println("zzz");
 			String temp = c.getCardBoard().getTradeArea();
 			if (temp != null) {
 				if (temp.length() > 8) {
@@ -55,10 +56,19 @@ public class BoardSpecialListServlet extends HttpServlet {
 					c.getCardBoard().setTradeArea(newTemp);
 				}
 			}
+			String dd = f.format(c.getCardBoard().getLimitTime());
 			
-			System.out.println(c.getCardBoard().getLimitTime());
+			if(dd.contains("오전")) {
+					System.out.println("t");
+			}else {
+				System.out.println("f");
+			}
+			
+			System.out.println(dd);
 			
 		}
+		
+		
 		int totalData = new BoardService().boardListCount(boardTitle);
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
