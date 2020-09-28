@@ -60,7 +60,7 @@
 				<%} %>
 
 				<button type="button" class="btn btn-outline-primary" style="font-size: 20px;"
-					onclick="location.href='<%=request.getContextPath()%>/customerFaq'">고객센터</button>
+					onclick="location.href='<%=request.getContextPath()%>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>'">고객센터</button>
 
 				<%if(loginnedMember!=null) {%>
 					<%if(loginnedMember.getUsid()==9999) {%>

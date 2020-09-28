@@ -54,7 +54,7 @@ System.out.println("list: " + list);
   }
   div.answer-container{
     margin-top: 3em;
-    margin-bottom: 50em;
+    margin-bottom: 5em;
     width: 45em; 
     
    

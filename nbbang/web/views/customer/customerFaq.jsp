@@ -390,7 +390,7 @@
 
             <div class="main-content-kdh">
                 <p class="content1">그 외에 궁금한 점은 ?</p>
-                <a href="<%=request.getContextPath() %>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>"
+                <a href="<%=request.getContextPath() %>/customer/customerQnA"
                     class="content2">1:1 고객센터로 문의해주세요.</a>
             </div>
         </div>
