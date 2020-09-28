@@ -34,7 +34,6 @@
 	int stage1target = maxMems - requestCount;
 	int stage2target = maxMems - paidUsers.size();
 	int stage3target = maxMems - deliveryUsers.size();
-	System.out.println(paidUsers);
 %>
 <style>
   #wrapper {
@@ -374,7 +373,7 @@
           <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div>
         </div>
       <!-- 프로필 사진 + id -->
-      <h5 id="level">신뢰 level</h5>
+      <h5 id="level"></h5>
     </div>
     <div class="content">
       <hr>
@@ -384,9 +383,10 @@
       
       <div id="date"><%= newDate %> &nbsp&nbsp 관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %> 
       <p>
+      	<% if(c.getCardBoard().getTradeStage()==1||c.getCardBoard().getTradeStage()==2||c.getCardBoard().getTradeStage()==3) {%>
       	<% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
           	현재 참여중인 N빵입니다.
-            <% }else { %>
+            <% } %>
             <% } %>
       </p></div>
       <!-- 가격 -->
@@ -401,6 +401,8 @@
       <div class="chart chart2" data-percent="<%=stage2percent%>"><span class="title">결제 완료까지 <br><%= stage2target %>명!</span></div>
       <%}else if(c.getCardBoard().getTradeStage()==3) {%>
       <div class="chart chart3" data-percent="<%=stage3percent%>"><span class="title">물품수령 완료까지 <br><%= stage3target %>명!</span></div>
+      <%}else if(c.getCardBoard().getTradeStage()==4) {%>
+      <div class="chart chart4" data-percent="100"><span class="title">종료된 N빵입니다.<br></span></div>
       <%} %>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
       <script src="<%=request.getContextPath()%>/js/easy-pie/dist/easypiechart.js"></script>
@@ -439,6 +441,17 @@
         onStart: $.noop,
         onStop: $.noop
         });
+        $('.chart4').easyPieChart({
+          barColor: 'gray',
+          trackColor: '#ccc',
+          scaleColor: '#fff',
+          lineCap: 'butt',
+          lineWidth: 30,
+          size: 200,
+          animate: 1000,
+          onStart: $.noop,
+          onStop: $.noop
+         });
       </script>
       <div id="etcInfo"><a href="<%= request.getContextPath() %>/member/report?userId=<%= loginnedMember.getUsid() %>&boardId=<%= c.getCardBoard().getBoardId() %>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
       <hr>
@@ -469,14 +482,16 @@
             <img src="<%= request.getContextPath() %>/images/fullheart.png" width="40px" height="40px">
             <%} %>
             <p>찜하기</p></div></li>
+            <% if(c.getCardBoard().getTradeStage()==1) {%>
           	<% if(c.getCardBoard().getWriterUsid()!=loginnedMember.getUsid()) {%>
-          <li><div id="startFuncBtn" onclick="fun_decidebuy();">
+          	<li><div id="startFuncBtn" onclick="fun_decidebuy();">
             <% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
             <img src="<%= request.getContextPath() %>/images/cancel.png" width="40px" height="40px">
             <p>N빵취소</p></div></li>
             <% }else { %>
             <img src="<%= request.getContextPath() %>/images/onebyn.png" width="40px" height="40px">
             <p>N빵신청</p></div></li>
+            <% } %>
             <% } %>
             <% } %>
             <% if(tradeUserList.contains(loginnedMember.getUsid())&&c.getCardBoard().getTradeStage()>1) {%>
@@ -500,11 +515,25 @@
             <p>배송시작하기</p></div></li>
             <%} %>
             <%} %>
+            <% if(c.getCardBoard().getTradeStage()==3) {%>
+          	<% if(c.getCardBoard().getWriterUsid()!=loginnedMember.getUsid()&&!deliveryUsers.contains(loginnedMember.getUsid())){ %>
+            <li><div onclick="fn_delivery();">
+            <img src="<%= request.getContextPath() %>/images/box.png" width="40px" height="40px">
+            <p>수령확인</p></div></li>
+            <%} %>
+            <%} %>
           	<% if(c.getCardBoard().getTradeStage()==1) {%>
           	<% if(c.getCardBoard().getWriterUsid()==loginnedMember.getUsid()){ %>
-          <li><div id="openFuncBtn" onclick="fun_createroom();">
+          	<li><div id="openFuncBtn" onclick="fun_createroom();">
             <img src="<%= request.getContextPath() %>/images/open.png" width="40px" height="40px">
             <p>방열기</p></div></li>
+            <%} %>
+            <%} %>
+            <% if(c.getCardBoard().getTradeStage()==3) {%>
+          	<% if(c.getCardBoard().getWriterUsid()==loginnedMember.getUsid()){ %>
+          	<li><div onclick="fn_end();">
+            <img src="<%= request.getContextPath() %>/images/end.png" width="40px" height="40px">
+            <p>N빵종료하기</p></div></li>
             <%} %>
             <%} %>
         </ul>
@@ -533,6 +562,13 @@
 <% if(reply.equals("success")) { %>
   function autoReple() {
     $("#commentContent").val("<p class='confirm'>결제했습니다.</p>");
+    $("#commentInsertBtn").click();
+    $("#commentContent").val("");
+  }
+  <% } %>
+  <% if(reply.equals("delivery")) { %>
+  function autoReple() {
+    $("#commentContent").val("<p class='confirm'>물건받았습니다.</p>");
     $("#commentInsertBtn").click();
     $("#commentContent").val("");
   }
@@ -566,8 +602,28 @@ function fn_pay(){//결제기능
 
 function fn_shipping(){//배송시작기능
   if(confirm('배송을 진행하시겠습니까?')) {
-    location.href="<%=request.getContextPath()%>/board/boardShipStart?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
+		if("<%= paidUsers.size() %>"!="<%= maxMems %>") {
+			alert("결제 인원이 부족합니다.");
+		}else {
+	    location.href="<%=request.getContextPath()%>/board/boardShipStart?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
+		}
+	}
+}
+
+function fn_delivery(){
+	if(confirm('물품을 배송받으셨나요?')) {
+    	location.href="<%=request.getContextPath()%>/board/boardDelivery?buyerUsid=<%=loginnedMember.getUsid()%>&boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
   }
+}
+
+function fn_end(){
+	if(confirm('N빵을 끝내시겠습니까?')) {
+		if("<%= deliveryUsers.size() %>"!="<%= maxMems %>") {
+			alert("아직 배송 받지 못한 분이 있습니다.");
+		}else {
+	    	location.href="<%=request.getContextPath()%>/board/boardEnd?boardId=<%=c.getCardBoard().getBoardId()%>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>";
+		}
+	}
 }
 
 function fn_enterBtn(){
