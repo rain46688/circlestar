@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.board.model.service.BoardService;
 import com.nbbang.board.model.vo.Card;
+import com.nbbang.board.special.model.service.BoardSpecialService;
 
 /**
  * Servlet implementation class BoardListServlet
@@ -44,7 +45,7 @@ public class BoardSpecialListServlet extends HttpServlet {
 		}
 		int numPerPage = 6;
 
-		List<Card> blist = new BoardService().boardList(cPage, numPerPage, boardTitle);
+		List<Card> blist = new BoardSpecialService().boardList(cPage, numPerPage, boardTitle);
 		for (Card c : blist) {
 			String temp = c.getCardBoard().getTradeArea();
 			if (temp != null) {

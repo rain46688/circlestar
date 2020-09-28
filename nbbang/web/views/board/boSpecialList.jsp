@@ -123,6 +123,7 @@
 				<input type="hidden" value="<%= c.getCardBoard().getBoardId()%>">
 				<h4 class="card-title"><p><%= c.getCardBoard().getBoardTitle() %></p></h4>
 				<p><%= c.getCardBoard().getTradeArea() %></p>
+				<p><%= c.getCardBoard().getLimitTime() %></p>
 				<p id="interest"><%= c.getCardBoard().getLikeCount() %> 관심 <%= c.getCardBoard().getHit() %> 조회</p>
 				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= c.getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
 			</div>
