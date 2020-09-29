@@ -38,7 +38,7 @@ public class BoardDeleteServlet extends HttpServlet {
 		
 		if(result > 0) {
 			request.setAttribute("msg", "삭제되었습니다.");
-			request.setAttribute("loc", "/bolist?boardTitle="+category);
+			request.setAttribute("loc", "/boList?boardTitle="+category);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}else {
