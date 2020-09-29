@@ -3,16 +3,14 @@
 /* carousel */
 div#carouselField{
 	position: relative;
-	width:80%;
-	margin: 0 auto 200px;
-  	padding: 10px 45px 20px 45px;
+	width:100%;
 	text-align: center;
 }
 
 /* cardSection */
 div#hotContents{
 	position: relative;
-	max-width: 90%;
+	max-width: 100%;
 	margin: 0 auto 100px;
 	padding: 10px 45px 20px 45px;
 	text-align:center;
@@ -112,5 +110,19 @@ div#numPerpage-container {
 	float: right;
 }mPerpage-container {
 	float: right;
+}
+
+/* 마이페이지 사이드바 */
+div#myPageSideBar{
+	position: relative;
+	background: #FFFFFF;
+	text-align: center;
+	margin: 3%;
+	/* 세로정렬꽉차게 가운데:center */
+	align-items: stretch;
+	/* 가로정렬꽉차게 가운데:center */
+	justify-items: stretch;
+	width: 14%;
+	float: left;
 }
 

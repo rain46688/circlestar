@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* header 관련 css 추가할꺼 넣기*/
 
+#container {
+	width: 100%;
+}
+
 /* 헤더부분 폰트 설정 */
 header{
 	font-family: 'Do Hyeon', sans-serif;
@@ -16,13 +20,55 @@ header{
 	margin: 10px;
 	align-items: center;
 	position:relative;
+
+}
+/* 검색창 */
+#searchSection {
+	float: left;
+	margin-left: 0.75em;
+}
+
+#searchSection>input {
+	margin-top: 0.5em;
+	width: 16em;
+	height: 2.75em;
+	border-radius: 0%;
+	border: 2px black solid;
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	float: left;
+	border-bottom-left-radius: 4px;
+	border-top-left-radius: 4px;
+	padding-left: 5px;
+}
+
+#searchSection>input:focus {
+	outline: none;
+}
+
+#logoContainer {
+	width: 12em;
+}
+
+#searchImage {
+	margin-top: 0.5em;
+	padding: 0.25em;
+	border: 2px black solid;
+	border-left: none;
+	float: left;
+	background-color: #ecaf59;
+	width: 44px;
+	height: 44px;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	cursor: pointer;
 }
 
 /* 로고 크기 및 위치 */
 #logoContainer img{
-	width: 20%;
+	width: 100%;
     height: auto;
-    float: left;
+	float: left;
 }
 
 /* 상단 버튼 */
@@ -36,11 +82,15 @@ header{
 }
 div#topBtn>button{
 	background-color: #ecaf59;
-	margin-right: 5px;
-	color: white;
-	border: none;
+	margin-right: 0.25em;
+	color: black;
+	border: 2px black solid;
 }
 
+div#topBtn>button:hover{
+	color:white;
+}
+	
 /* 메뉴바 */
 .nav{
 	clear: both;
@@ -48,6 +98,9 @@ div#topBtn>button{
 	justify-content: center;
 	align-items: center;  
 	font-size: 30px;
+	border-top:2px black solid;
+	border-bottom:2px black solid;
+	width:100%;
 }
 
 .nav-link{
@@ -56,6 +109,25 @@ div#topBtn>button{
 
 header>nav>ul{
 	background-color: #FFC107;
+	width:100%;
+}
+
+header>nav>ul>li{
+	font-size: 26px;
+	width: 7em;
+	text-align:center;
+}
+header>nav>ul>li>a {
+
+	-webkit-transition: .15s all;   
+    -webkit-transition-delay: 0.15s; 
+    transition: .15s all;   
+    transition-delay: 0.15s;
+}
+header>nav>ul>li>a:hover {
+	color:white;
+	-webkit-transition-delay: 0s;
+    transition-delay: 0s;
 }
 
 
@@ -106,6 +178,7 @@ header>nav>ul{
 	font-size: 14px;
 	cursor: pointer;
 }
+
 #loginField img{
 	width: 40%;
 	height: auto;

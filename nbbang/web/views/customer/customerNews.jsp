@@ -12,7 +12,7 @@
         margin-right: auto;
         margin-top: 6%;
         margin-bottom: 10%;
-
+        
     }
 
     th {
@@ -39,7 +39,7 @@
         padding-left: 24px;
     }
 
-    button {
+    button.writeBtn {
         width: 100px;
         background-color:sandybrown;
         border: none;
@@ -56,28 +56,14 @@
 	
 	#fontBold{font-weight:bold;}
 </style>
-<section>
-			    <div id="kdh-container">
-      <div id="kdh-header">
-      </div>
-      <div id="kdh-sidebar-left">
-        <h2>사이드</h2>
-        <ul>
- 					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerMain">N빵 가이드</a></li>
-					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerQnA">N빵 문의</a></li>
-					<li class="cstmt-list" style="font-size:20px;"id="fontBold"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerNews">N빵 소식</a></li>
-					<li class="cstmt-list" style="font-size:16px;"><a class="main-a" href="<%=request.getContextPath() %>/customer/customerAsk">N빵 질문</a></li>
-        </ul>
-      </div>
-       </div>
-</section>
+<jsp:include page="maincss.jsp"></jsp:include>
 
 <!-- News테이블 -->
 
         <h1>각종 공지사항과 이벤트를 확인하세요.</h1>
 <section>
     <div class="coustomer-news">
-        <table class="tbl-news" style="">
+        <table class="tbl-news" >
             <colgroup>
                 <col width="15%">
                 <col width="15%">
@@ -163,7 +149,7 @@
     </div>
     <!-- 작성버튼 -->
     <div id="btn-news">
-        <button type="submit" id="btn-news-check">글작성</button>
+        <button type="submit" class="writeBtn" id="btn-news-check">글작성</button>
     </div>
 
 

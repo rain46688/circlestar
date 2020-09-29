@@ -11,6 +11,8 @@
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" type="text/css">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="<%=request.getContextPath()%>/images/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
 	/* 아이디 비번 찾기 */
@@ -55,10 +57,10 @@
 		position: relative;
 		width:50%;
 		text-align: center;
-		margin: 240px 50px 100px 150px;
+		margin: 240px 50px 100px 140px;
 	}
 	#resultField p{
-		font-size: 30px;
+		font-size: 24px;
 		font-family: 'Do Hyeon', sans-serif;
 	}
 </style>
@@ -80,7 +82,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="text" name="email" id="email" placeholder="이메일을 입력해주세요">
+					<input type="text" name="phone" id="phone" placeholder="휴대폰 번호를 입력해주세요">
 				</td>
 			</tr>
 			<tr>
@@ -95,8 +97,8 @@
 			</tr>
 		</table>
 		<%} else{%>
-		<div id="resultField">
-					<p>회원님의 비밀번호는<br>[<%=m.getMemberPwd() %>]입니다.</p>
+		<div id="resultField" style="width: 275px; word-break:normal; white-space:nowrap;">
+					<p style="width: 275px; word-break:normal; white-space:nowrap;">회원님의 임시 비밀번호는<br><%=m.getMemberPwd() %>입니다. <br> 로그인 후 비밀번호를 변경해주세요</p>
 				</div>
 		<%} %>
 		</form>
@@ -104,7 +106,7 @@
 	<script>
 		function fn_validate() {
 			let name=document.getElementById("memberName").value;
-			let email=document.getElementById("email").value;
+			let phone=document.getElementById("phone").value;
 			let memberId=document.getElementById("memberId").value;
 			if(name.trim().length<1){
 				alert("이름을 입력해주세요");
@@ -112,8 +114,8 @@
 				return false;
 			}
 			if(email.trim().length<1){
-				alert("이메일을 입력해주세요");
-				document.getElementById("email").focus();
+				alert("휴대폰 번호를 입력해주세요");
+				document.getElementById("phone").focus();
 				return false;
 			}
 			if(memberId.trim().length<1){

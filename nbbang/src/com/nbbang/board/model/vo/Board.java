@@ -6,65 +6,70 @@ import java.util.Date;
 public class Board {
 
 	private int boardId;
-	private String boardTitle;
 	private int writerUsid;
+	private String boardTitle;
 	private String writerNickname;
 	private String content;
 	private Date enrollDate;
 	private int hit;
-	private String[] files;
 	private String productCategory;
-	private String productName;
 	private String tradeArea;
-	private String maxMems;
-	private String[] curMemsList;
-	private String[] payMemsList;
-	private String[] deliveryMemsList;
-	private String limitTime;
+	private int maxMems;
+	private Date limitTime;
 	private	int tradeStage;
 	private int likeCount;
-	private int reportCount;
 	private boolean popularBoard;
 	private int productPrice;
 	private String ownStatus;
 	private String tradeKind;
 	private String productUrl;
+	private String time;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int boardId, String boardTitle, int writerUsid, String writerNickname, String content, Date enrollDate,
-			int hit, String[] files, String productCategory, String productName, String tradeArea, String maxMems,
-			String[] curMemsList, String[] payMemsList, String[] deliveryMemsList, String limitTime, int tradeStage,
-			int likeCount, int reportCount, boolean popularBoard, int productPrice, String ownStatus, String tradeKind,
-			String productUrl) {
+	
+
+	public String getTime() {
+		return time;
+	}
+
+
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+
+
+	public Board(int boardId, int writerUsid, String boardTitle, String writerNickname, String content, Date enrollDate,
+			int hit, String productCategory, String tradeArea, int maxMems, Date limitTime, int tradeStage,
+			int likeCount, boolean popularBoard, int productPrice, String ownStatus, String tradeKind,
+			String productUrl, String time) {
 		super();
 		this.boardId = boardId;
-		this.boardTitle = boardTitle;
 		this.writerUsid = writerUsid;
+		this.boardTitle = boardTitle;
 		this.writerNickname = writerNickname;
 		this.content = content;
 		this.enrollDate = enrollDate;
 		this.hit = hit;
-		this.files = files;
 		this.productCategory = productCategory;
-		this.productName = productName;
 		this.tradeArea = tradeArea;
 		this.maxMems = maxMems;
-		this.curMemsList = curMemsList;
-		this.payMemsList = payMemsList;
-		this.deliveryMemsList = deliveryMemsList;
 		this.limitTime = limitTime;
 		this.tradeStage = tradeStage;
 		this.likeCount = likeCount;
-		this.reportCount = reportCount;
 		this.popularBoard = popularBoard;
 		this.productPrice = productPrice;
 		this.ownStatus = ownStatus;
 		this.tradeKind = tradeKind;
 		this.productUrl = productUrl;
+		this.time = time;
 	}
+
+
 
 	public int getBoardId() {
 		return boardId;
@@ -74,20 +79,20 @@ public class Board {
 		this.boardId = boardId;
 	}
 
-	public String getBoardTitle() {
-		return boardTitle;
-	}
-
-	public void setBoardTitle(String boardTitle) {
-		this.boardTitle = boardTitle;
-	}
-
 	public int getWriterUsid() {
 		return writerUsid;
 	}
 
 	public void setWriterUsid(int writerUsid) {
 		this.writerUsid = writerUsid;
+	}
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
 
 	public String getWriterNickname() {
@@ -122,28 +127,12 @@ public class Board {
 		this.hit = hit;
 	}
 
-	public String[] getFiles() {
-		return files;
-	}
-
-	public void setFiles(String[] files) {
-		this.files = files;
-	}
-
 	public String getProductCategory() {
 		return productCategory;
 	}
 
 	public void setProductCategory(String productCategory) {
 		this.productCategory = productCategory;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
 	}
 
 	public String getTradeArea() {
@@ -154,43 +143,19 @@ public class Board {
 		this.tradeArea = tradeArea;
 	}
 
-	public String getMaxMems() {
+	public int getMaxMems() {
 		return maxMems;
 	}
 
-	public void setMaxMems(String maxMems) {
+	public void setMaxMems(int maxMems) {
 		this.maxMems = maxMems;
 	}
 
-	public String[] getCurMemsList() {
-		return curMemsList;
-	}
-
-	public void setCurMemsList(String[] curMemsList) {
-		this.curMemsList = curMemsList;
-	}
-
-	public String[] getPayMemsList() {
-		return payMemsList;
-	}
-
-	public void setPayMemsList(String[] payMemsList) {
-		this.payMemsList = payMemsList;
-	}
-
-	public String[] getDeliveryMemsList() {
-		return deliveryMemsList;
-	}
-
-	public void setDeliveryMemsList(String[] deliveryMemsList) {
-		this.deliveryMemsList = deliveryMemsList;
-	}
-
-	public String getLimitTime() {
+	public Date getLimitTime() {
 		return limitTime;
 	}
 
-	public void setLimitTime(String limitTime) {
+	public void setLimitTime(Date limitTime) {
 		this.limitTime = limitTime;
 	}
 
@@ -208,14 +173,6 @@ public class Board {
 
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
-	}
-
-	public int getReportCount() {
-		return reportCount;
-	}
-
-	public void setReportCount(int reportCount) {
-		this.reportCount = reportCount;
 	}
 
 	public boolean isPopularBoard() {
@@ -260,14 +217,11 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardId=" + boardId + ", boardTitle=" + boardTitle + ", writerUsid=" + writerUsid
+		return "Board [boardId=" + boardId + ", writerUsid=" + writerUsid + ", boardTitle=" + boardTitle
 				+ ", writerNickname=" + writerNickname + ", content=" + content + ", enrollDate=" + enrollDate
-				+ ", hit=" + hit + ", files=" + Arrays.toString(files) + ", productCategory=" + productCategory
-				+ ", productName=" + productName + ", tradeArea=" + tradeArea + ", maxMems=" + maxMems
-				+ ", curMemsList=" + Arrays.toString(curMemsList) + ", payMemsList=" + Arrays.toString(payMemsList)
-				+ ", deliveryMemsList=" + Arrays.toString(deliveryMemsList) + ", limitTime=" + limitTime
-				+ ", tradeStage=" + tradeStage + ", likeCount=" + likeCount + ", reportCount=" + reportCount
+				+ ", hit=" + hit + ", productCategory=" + productCategory + ", tradeArea=" + tradeArea + ", maxMems="
+				+ maxMems + ", limitTime=" + limitTime + ", tradeStage=" + tradeStage + ", likeCount=" + likeCount
 				+ ", popularBoard=" + popularBoard + ", productPrice=" + productPrice + ", ownStatus=" + ownStatus
-				+ ", tradeKind=" + tradeKind + ", productUrl=" + productUrl + "]";
+				+ ", tradeKind=" + tradeKind + ", productUrl=" + productUrl + ", time=" + time + "]";
 	}
 }

@@ -2,56 +2,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<%
 
-CustomerCenter c = (CustomerCenter) request.getAttribute("center");
-%>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/qnawriting.css" type="text/css">
+<%-- <jsp:include page="maincss.jsp"></jsp:include>  --%>
 <section>
-   
-    <div id='board-container'>
-		<h2>게시판 작성</h2>
-		<form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
-		enctype="multipart/form-data">
-			<table id='tbl-board'>
-                <tr>
-                    <th>문의유형</th>
-                    <td>
-                        <input type="radio" name="qnaType" id="type0" value="회원정보"
-                        <%=c.getCsType().equals("회원정보")?"checked":"" %>>
-                        <label for="type0">회원정보</label>
-                        
-                        <input type="radio" name="qnaType" id="type1" value="신고"
-                        <%=c.getCsType().equals("신고")?"checked":"" %>>
-                        <label for="type1">신고</label>
-                    </td>
-                </tr>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="title" id="title"></td>
-				</tr>
-<%-- 				<tr>
-					<th>작성자</th>
-					<td><input type="text" name="writer" value="<%=loginnedMember.getMemberId() %>" readonly></td>
-				</tr> --%>
-                <tr>
-                    <th>내용</th>
-                    <td><textarea name="content" cols="50" rows="3"></textarea></td>
-                </tr>
-				<tr>
-					<th>첨부파일</th>
-					<td><input type="file" name="csFile"></td>
-				</tr>
-								<tr>
-					<th colspan="2">
-						<input type="submit" value="문의등록">
-						<input type="reset" value="문의취소">
-					</th>
-				</tr>
-			</table>
-		</form>
-	</div>
+<div class="writing-container">
+  <div class="writing-wrap">
+    
+    <form action='<%=request.getContextPath() %>/customer/customerQnAWritingEnd' method="post"
+      enctype="multipart/form-data">
+      
 
+      <div class="type-wrap">
+          <select class="type-select  form-control mt-4 mb-2" name="csType" style="width:37em;">
+                <option value="" selected>문의유형을 선택하세요.</option>
+                <option value="회원정보">회원정보관련</option>
+                <option value="거래배송">거래배송관련</option>
+                <option value="불법거래">불법거래</option>
+                <option value="상품관련">상품관련</option>
+                <option value="쿠폰/포인트">쿠폰/포인트</option>
+           </select> 
+      </div>
+    
+     <div class="fix-writer">
 
+       <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
+       
+        <input value="<%=loginnedMember.getNickname()%>" class="writing-input  form-control mt-4 mb-2" name="csNickname" id="" readonly style="width:37em;" >
+
+    </div>
+      
+      <div class="write-title">
+        <input type="text" class="writing-input form-control mt-4 mb-2" name="csTitle" placeholder="제목을 입력하쇼." style="width:37em;">
+        
+      </div>
+      
+      <div class="write-content">
+        <textarea name="csContent" class="form-group  form-control mt-4 mb-2" style="width:37em; height: 25em;" placeholder="내용을 입력하쇼" ></textarea>
+      </div>
+     
+      <div class="file-upload">
+        <input type="file" name="csFile" multiple="true" >
+      </div>
+     
+  <div id="submitBtn-kdh">
+      <button type="button" class="btn-submit" onclick=" movingPage('<%=request.getContextPath()%>/customer/customerQnAWritingEnd')" style="font-family: 'Do Hyeon', sans-serif;"
+        >문의등록</button>
+   </div>
+    </form>
+  </div>
+</div>
 </section>
-<%@ include file="/views/common/footer.jsp"%>
 
+
+
+
+
+
+
+
+          
+
+
+  <script>
+    // $(".btn-submit").click(e => {
+
+      function movingPage(url){
+      var form=new FormData();
+      //일반파일 넣기
+      form.append("csNickname",$("[name=csNickname]").val());
+      form.append("csType",$("[name=csType]").val());
+      form.append("csWriterUsid",$("[name=csWriterUsid]").val());
+      form.append("csContent",$("[name=csContent]").val());
+      form.append("csTitle",$("[name=csTitle]").val());
+      var filesdata=$("[name=csFile]")[0];
+      console.log("print: "+filesdata)
+      for(let i=0;i<filesdata.files.length;i++){
+        form.append("test"+i, filesdata.files[i]);
+      } 
+      $.ajax({
+        // url:"<%=request.getContextPath() %>/customer/customerQnAWritingEnd",
+        url:url,
+        data:form,
+        type:"post",
+        processData:false,
+       
+        contentType:false,
+        success:data=>{
+        	//Ajax는 여기서 응답처리 해줘야함. 서블릿에서 하는게 아님.
+        
+			if(data>0){
+				alert("등록성공!");
+			      location.href ="<%=request.getContextPath()%>/customer/customerQnA?nick=<%=loginnedMember.getNickname()%>"; 		
+			}else{
+				alert("등록실패!");
+			}
+        }
+      
+      });
+    }
+
+
+  </script>
+
+<%@ include file="/views/common/footer.jsp"%>

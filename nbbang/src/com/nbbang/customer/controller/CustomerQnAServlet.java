@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.nbbang.customer.model.service.CustomerService;
 import com.nbbang.customer.model.vo.CustomerCenter;
+import com.nbbang.member.model.service.MemberService;
+import com.nbbang.member.model.vo.Member;
 
 /**
  * Servlet implementation class CustomerQnAServlet
@@ -33,19 +34,24 @@ public class CustomerQnAServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String nick=request.getParameter("nick");
 		
+//		int num = Integer.parseInt(request.getParameter("num"));
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=5;
+		
+		int numPerPage=7;
 		
 		
-		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage);
-		
-		int totalData=new CustomerService().qnACount();
+		List<CustomerCenter> list=new CustomerService().qnAList(cPage,numPerPage,nick);
+		for(CustomerCenter c : list) {
+			System.out.println("c : "+ c);
+		}
+		int totalData=new CustomerService().qnACount(nick);
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -53,24 +59,24 @@ public class CustomerQnAServlet extends HttpServlet {
 		
 		String pageBar="";
 		if(pageNo==1) {
-			pageBar="<span>[이전]</span>";
+			pageBar+="<span>&laquo;</span>";
 		}else {
-			pageBar="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo-1)+"&nick="+nick+"'>&laquo;</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"&nick="+nick+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
+			pageBar+="<span>&raquo;</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getContextPath()+"/customer/customerQnA?cPage="+(pageNo)+"&nick="+nick+"'>&raquo;</a>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);
@@ -78,8 +84,7 @@ public class CustomerQnAServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/views/customer/customerQnA.jsp").forward(request,response);
 		
-		
-//		request.getRequestDispatcher("/views/customer/customerQnA.jsp").forward(request, response);
+//		request.getRequestDispatcher("/views/customer/customerRead.jsp").forward(request, response);
 	}
 
 	/**
