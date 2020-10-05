@@ -275,7 +275,16 @@ h1 {
 <script>
 
 $(".divRow").click(e=>{
+	
+	if($(e.target).parent().children('div:eq(6)').html() == '특가'){
+	    location.assign('<%=request.getContextPath()%>/board/boardSpecialPage?boardId='+$(e.target).parent().children('div').html()+'&writerUsid='+$(e.target).parent().children('div:eq(1)').html());
+	}else{
     location.assign('<%=request.getContextPath()%>/board/boardPage?boardId='+$(e.target).parent().children('div').html()+'&writerUsid='+$(e.target).parent().children('div:eq(1)').html());
+	}
+	
+
+
+
 })
 
 
