@@ -37,8 +37,9 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
             href="<%=request.getContextPath() %>/customerFaq">FAQ</a></div>
             <div class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
             </div>
-
+     <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
             <div class="list-hiper"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;" href="<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>">마이페이지</a></div>
+           <%}%>
       <!-- </ul> -->
       <%}%>
       <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
@@ -69,8 +70,9 @@ Member loginnedMember=(Member)session.getAttribute("loginnedMember");
             href="<%=request.getContextPath() %>/customerFaq">FAQ</a></div>
             <div class="list-hiper"><a href="<%=request.getContextPath()%>/" class="hiper-tag" style="font-family: 'Do Hyeon', sans-serif;">홈</a>
             </div>
-
+     <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
              <div class="list-hiper"><a class="main-a" style="font-family: 'Do Hyeon', sans-serif;" href="<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>">마이페이지</a></div>
+               <%}%>
       <!-- </ul> -->
       <%} %>
 

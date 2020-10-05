@@ -196,8 +196,10 @@ div#myPageSideBar{
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>#">홈</a>
                 </div>
+                         <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/member/myPage?usid=<%=loginnedMember.getUsid()%>">마이페이지</a>
                 </div>
+                <%} %>
             </div>
         </div>
 
