@@ -44,6 +44,8 @@ public class CustomerReadFrm extends HttpServlet {
 		 * System.out.println("실행되나"); for(CustomerFile c : cc.getCf()) {
 		 * System.out.println(c); }
 		 */
+		
+		//System.out.println(cc.getCsIscheck());
 	
 		String view ="";
 		if(cc == null) {

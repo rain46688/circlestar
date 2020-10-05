@@ -61,11 +61,11 @@ div#myPageSideBar{
                 <p class="sideBarText">N빵은 고객님의<br><span>고민을</span><br>N빵해드립니다.</p>
             </div>
             <div id="sideBarLinkContainer">
-                  
+                             <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/customer/customerQnA">문의하기</a>
                 </div>
-                     
+                       <%} %>
                 <div>
                     <a class="nav-link postList" href="<%=request.getContextPath()%>/notice/noticeList">소식보기</a>
                 </div>

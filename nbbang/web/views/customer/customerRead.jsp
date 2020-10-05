@@ -73,6 +73,10 @@ h2 {
 		#BFBFBF;
 }
 
+#downpage{
+	font-size: 20px;
+}
+
 #noanswer {
 	float: center;
 	width: 100%;
@@ -107,6 +111,7 @@ h2 {
   #imageWrapper>img {
     border-radius: 1em;
   }
+  
 
 </style>
 
@@ -200,21 +205,81 @@ h2 {
 
 
 	</div>
-
+	<div class="form-group">
+		<h2>문의 답변</h2>
+	</div>
 
         <% if(c.getCsIscheck() == false) {%>
-	<div id="downpage" class="shadow p-3 mb-5 bg-white rounded">
-		<div id="noanswer">작성된 관리자 답변 없음</div>
-	</div>
-        <% }else { %>
-        	<div id="downpage" class="shadow p-3 mb-5 bg-white rounded">
-		<div id="noanswer"><%=c.getCsAnswer() %></div>
-	</div>
         
+        <%if (loginnedMember.getNickname().equals("ADMIN")) {%>
+					<div id="downpage" class="shadow p-3 mb-5 bg-white rounded admin" style="cursor: pointer"> 
+					<div id="noanswer">답변 클릭하여 작성하기</div>
+					</div>
+		        <% }else { %>      
+					<div id="downpage" class="shadow p-3 mb-5 bg-white rounded "> 
+					<div id="noanswer">작성된 관리자 답변 없음</div>
+					</div>
+		       <% } %>
+
+        <% }else { %>
+        
+	<%if (loginnedMember.getNickname().equals("ADMIN")) {%>
+		        	<div id="downpage" class="shadow p-3 mb-5 bg-white rounded admin" style="cursor: pointer">
+					<div id="noanswer"><%=c.getCsAnswer() %></div>
+					</div>
+		       <% }else { %>
+		             <div id="downpage" class="shadow p-3 mb-5 bg-white rounded">
+					<div id="noanswer"><%=c.getCsAnswer() %></div>
+					</div>
+		        <% } %>
+		              
                <% } %>
 </div>
 
 <script>
+
+$('.admin').hover(function(){
+    $(this).css('color','black');
+    $(this).removeClass( 'shadow p-3 mb-5 bg-white rounded' );
+}, function() {
+    $(this).css('color','black');
+    $(this).addClass( 'shadow p-3 mb-5 bg-white rounded' );
+});
+
+
+
+$(".admin").click(e=>{
+	let tmp = $(".admin").html();
+	let html=" <textarea class='admin-answer' cols='85' rows='10'></textarea><br><a onclick='wri();' class='btn btn-success'>등록</a> <button onclick='cancel();' class='btn btn-success'>취소</button>";
+	$(".admin").html(html);
+	$(".admin").removeClass( 'shadow p-3 mb-5 bg-white rounded admin' );
+});
+
+function wri(){
+	let st = $(".admin-answer").val();
+	console.log("st : "+st);
+	$.ajax({
+		type:"GET",
+		data:{"csId":<%= c.getCsId()%>,"admin-answer":st},
+		url:"<%=request.getContextPath()%>/customer/customerAnswerEnd",
+		success:function(data){
+			console.log("성공"+$("#downpage").html());
+			if (data == 1) {
+				$("#downpage").html("");
+				$("#downpage").html("<div id='noanswer'>"+st+"</div>");
+				alert("등록 성공");
+			}else{
+				alert("등록 실패");
+			}
+		}
+	})
+	
+};
+
+function cancel(){
+	 location.reload();
+};
+
 
 
 

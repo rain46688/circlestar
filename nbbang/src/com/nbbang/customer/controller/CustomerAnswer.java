@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.nbbang.customer.model.service.CustomerService;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
@@ -37,27 +38,12 @@ public class CustomerAnswer extends HttpServlet {
 		
 		
 		System.out.println(request.getParameter("admin-answer"));
+		System.out.println(request.getParameter("csId"));
 		
 		int result = new CustomerService().insertAnswer(c);
 		
-		String msg = "";
-		String loc ="/";
-		
-		if(result>0) {
-			
-			msg="완료";
-			loc = "/customer/customerReadFrm?num="+c.getCsId();
-			
-		
-			
-		}else {
-			msg="실패"; 
-			loc="/customer/customerReadFrm"; 
-					
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(result, response.getWriter());
 	}
 
 	/**
