@@ -111,7 +111,24 @@ h2 {
   #imageWrapper>img {
     border-radius: 1em;
   }
-  
+  /* 위 텍스트 영역 눌르면 옆에 테두리 생기는거 지우는 용도 */
+textarea:focus {
+	outline: none;
+}	
+.admin-answer{
+border: none;
+width:auto;
+padding:2em;
+}
+
+.bor{
+border:2px solid #FFC107;
+
+}
+
+#downpage > .btn{
+margin-bottom:2em;
+}
 
 </style>
 
@@ -241,38 +258,85 @@ h2 {
 $('.admin').hover(function(){
     $(this).css('color','black');
     $(this).removeClass( 'shadow p-3 mb-5 bg-white rounded' );
+    $(this).addClass( 'bor' );
 }, function() {
     $(this).css('color','black');
     $(this).addClass( 'shadow p-3 mb-5 bg-white rounded' );
+    $(this).removeClass( 'bor' );
 });
 
 
 
 $(".admin").click(e=>{
+	console.log(<%=c.getCsIscheck()%>);
+
 	let tmp = $(".admin").html();
-	let html=" <textarea class='admin-answer' cols='85' rows='10'></textarea><br><a onclick='wri();' class='btn btn-success'>등록</a> <button onclick='cancel();' class='btn btn-success'>취소</button>";
+	let html=" <textarea class='admin-answer' cols='45' rows='10' placeholder='답변을 입력해주세요'></textarea><br><a onclick='wri();' class='btn btn-success'>등록</a> <button onclick='cancel();' class='btn btn-success'>취소</button>";
 	$(".admin").html(html);
 	$(".admin").removeClass( 'shadow p-3 mb-5 bg-white rounded admin' );
+
 });
 
 function wri(){
-	let st = $(".admin-answer").val();
-	console.log("st : "+st);
-	$.ajax({
-		type:"GET",
-		data:{"csId":<%= c.getCsId()%>,"admin-answer":st},
-		url:"<%=request.getContextPath()%>/customer/customerAnswerEnd",
-		success:function(data){
-			console.log("성공"+$("#downpage").html());
-			if (data == 1) {
-				$("#downpage").html("");
-				$("#downpage").html("<div id='noanswer'>"+st+"</div>");
-				alert("등록 성공");
-			}else{
-				alert("등록 실패");
+	console.log($(".admin-answer").val());
+	if($(".admin-answer").val() == ""){
+		alert("입력창이 비어있습니다.");
+		return;
+	}
+	
+	if(<%=c.getCsIscheck()%> == true){
+	var result = confirm("이미 답변이 작성되었습니다. 수정하시겠습니까?");
+	if(result){
+			let st = $(".admin-answer").val();
+			console.log("st : "+st);
+			$.ajax({
+				type:"GET",
+				data:{"csId":<%= c.getCsId()%>,"admin-answer":st},
+				url:"<%=request.getContextPath()%>/customer/customerAnswerEnd",
+				success:function(data){
+					if (data == 1) {
+						$("#downpage").html("");
+						$("#downpage").html("<div id='noanswer'>"+st+"</div>");
+						if(<%=c.getCsIscheck()%> == true){
+							alert("수정 성공");
+						}else{
+							alert("등록 성공");
+						}
+					}else{
+						alert("답변 처리 실패");
+					}
+				}
+			})
+	}else{
+		 location.reload();
+	}
+	
+	}else{
+		let st = $(".admin-answer").val();
+		console.log("st : "+st);
+		$.ajax({
+			type:"GET",
+			data:{"csId":<%= c.getCsId()%>,"admin-answer":st},
+			url:"<%=request.getContextPath()%>/customer/customerAnswerEnd",
+			success:function(data){
+				console.log("성공"+$("#downpage").html());
+				if (data == 1) {
+					$("#downpage").html("");
+					$("#downpage").html("<div id='noanswer'>"+st+"</div>");
+					if(<%=c.getCsIscheck()%> == true){
+						alert("수정 성공");
+					}else{
+						alert("등록 성공");
+					}
+				}else{
+					alert("답변 처리 실패");
+				}
 			}
-		}
-	})
+		})
+	}
+	
+	
+	
 	
 };
 
