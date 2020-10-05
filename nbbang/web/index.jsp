@@ -12,7 +12,7 @@
 	#cards-nav {
 		width: 100%;
 		margin: 0 auto;
-		text-align: center;;
+		text-align: center;
 	}
 	#cards-nav>ul {
 		list-style: none;

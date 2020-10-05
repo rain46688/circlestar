@@ -195,12 +195,19 @@
         z-index: 0;
         border-radius: 0px 0px 3px 3px;
     }
+    #wrapper-1{
+    padding-top:2em;
+    }
+    
 </style>
 
 
 
 
-<jsp:include page="maincss.jsp"></jsp:include>
+<div>
+	<jsp:include page="/views/notice/sideBar.jsp"></jsp:include>
+</div>
+
 <section id="wrapper-1">
     <div class="container-kim">
         <ul class="accordion">

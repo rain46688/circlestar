@@ -1,285 +1,226 @@
 <%@page import="com.nbbang.customer.model.vo.CustomerFile"%>
 <%@page import="java.util.List"%>
 <%@page import="com.nbbang.customer.model.vo.CustomerCenter"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cstmcss/main.css" type="text/css">
-<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap"
-  rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600&family=Song+Myung&display=swap" rel="stylesheet">
 
 <%
-
- CustomerCenter c=(CustomerCenter)request.getAttribute("cc");
-List<CustomerCenter> list = (List) request.getAttribute("list");
-
-System.out.println("C: "+ c);
-System.out.println("list: " + list);
+	CustomerCenter c = (CustomerCenter) request.getAttribute("cc");
 %>
+
+
 <style>
-  section.answer-container-kdh{
-    margin-top:3em;
-    margin-bottom: 3em;
-    width: 45em; 
-    height: 40em;
-    margin-left: 33em;
-    
-    position: relative;
+div#writecontainer {
+	position: relative;
+	background: #FFFFFF;
+	text-align: center;
+	margin: 3% 21% 5% 2%;
+	/* 세로정렬꽉차게 가운데:center */
+	align-items: stretch;
+	/* 가로정렬꽉차게 가운데:center */
+	justify-items: stretch;
+	width: 40%;
+	float: left;
+}
+
+h2 {
+	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
+	margin: 15px 0 10px 0;
+}
+
+.divCell, .divTableHead {
+	border-bottom: 1px #DEE2E6 solid;
+	display: table-cell;
+	padding: 25px 10px;
+	width: 16.67%;
+	font-size: 15px;
+}
+
+.divListBody {
+	display: table-row-group;
+}
+
+.divList {
+	display: table;
+	width: 100%;
+	height: 150px;
+	text-align: center;
+}
+
+.divRow {
+	display: table-row;
+}
+
+.divRowTitle {
+	display: table-row;
+	font-size: 15px;
+	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
+	width: 100%;
+}
+
+#downpage, #uppage {
+	width: 100%;
+	height: auto;
+	font-size: 15px;
+	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
+}
+
+#noanswer {
+	float: center;
+	width: 100%;
+	height: 15em;
+}
+
+#date {
+	float: right;
+	font-size: 10px;
+	font-weight: bold;
+	text-shadow: -1px 0 #BFBFBF, 0 0.5px #BFBFBF, 0.5px 0 #BFBFBF, 0 -1px
+		#BFBFBF;
+	padding: 1em;
+}
+
+.cuscon>p {
+	width: 200%;
+	padding: 0 auto;
+	padding-top: 2em;
+
+}
+.cuscon>.cuscon2{
+	border-bottom: 1px #DEE2E6 solid;
+	padding-bottom:2em;
+}
+
+  #imageWrapper {
+    margin-bottom: 2em;
+    	width: 200%;
   }
 
-
-
-
-
-  div.writing-date {
-    
-    float: right;
-    
-    margin-top: 8em;
+  #imageWrapper>img {
+    border-radius: 1em;
   }
 
-
-
-  div.content-write p,
-  div.answer-content p {
-    text-align: center;
-  }
-
-  div.file-upload {
-    
-    margin-top: 26%;
-
-    width: 10em;
-  }
-  div.answer-container{
-    margin-top: 3em;
-    margin-bottom: 5em;
-    width: 45em; 
-    
-   
-  }
-  div.answer-date {
-    float: right;
-    margin-top: 8em;
-    
-  }
-
-  div.hr-line {
-    box-shadow: 1px 1px 1px 1px #f5f4f3;
-    color: white;
-    margin-bottom: 3em;
-
-    
-  }
-
-  div#submitBtn {
-    margin-top: 35%;
-  }
-  div.comment-container{
-    margin-left: 0em;
-  }
-
-
-  .imgList {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .imgC p {
-    text-align: center;
-  }
-
-  .modal {
-    display: none;
-    z-index: 500;
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .modal button {
-    position: absolute;
-    top: 3rem;
-    right: 3rem;
-    background: transparent;
-    border: 0;
-    color: #ffffff;
-    font-size: 3rem;
-  }
-
-  .modalBox {
-    position: relative;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    background-color: #ffffff;
-    width: 30em;
-    height: 20em;
-    text-align: center;
-  }
-
-  .modalBox img {
-    width: 20em;
-    height: 20em;
-  }
-
-
-
- .comment-container .comment-editor #btn-insert{
-    margin-bottom: 5em;
-  }
 </style>
-<jsp:include page="maincss.jsp"></jsp:include>
-<section class="answer-container-kdh">
-  <div id="QA-container">
-  <form action="'<%=request.getContextPath() %>/customer/customerAnswerEnd'" method="post"
-      enctype="multipart/form-data">
-      <!-- 클라이언트 창 -->
-      <div class="question-container">
-
-        <div class="write-content">
-
-          <img src="<%=request.getContextPath()%>/images/q.png" style="width: 20px; height: auto;">
-          <input type="hidden" name="csWriterUsid" value="<%=loginnedMember.getUsid()%>">
-
-          <div class="content-write" name="csContent">
-            <p><%=c.getCsContent() %></p>
-          </div>
-          <div class="writing-date">
-            <p><%=c.getCsDate() %></p>
-          </div>
-          <%for(CustomerFile cf : c.getCf()){ %>
-            <div class="file-upload">
-              
-              
-              <div class="imgList">
-                <img class="imgC" src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-                width="60" height="60">
-                <p><%=cf.getCsFileName() %> </p>
-              </div>
-          </div>
-
-          <!-- 팝업 될 곳 -->
-          <div class="modal">
-            <button>&times;</button>
-            <div class="modalBox">
-              <img src="<%=request.getContextPath() %>/upload/customerImages/<%=cf.getCsFileName() %>"
-                alt="<%=cf.getCsFileName() %>">
-              <p></p>
-            </div>
-          </div>
-          <%} %>
-          
-        </div>
-      </div>
-    </form>
-        <div class="hr-line">
-          <hr id="hr-line">
-        </div>
-        <%
-        if (c.getCsAnswer()==null && loginnedMember.getNickname().equals("ADMIN")){
-        %>
-          <div class="comment-container">
-            <div class="comment-editor">
-              <%-- <%if(c.getCsAnswer()==null){ %> --%>
-              <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
-                <div class="answer-content">
-                  <input type="hidden" name="csId" value="<%=c.getCsId()%>">
-                  <textarea name="admin-answer" cols="100" rows="10"></textarea>
-        
-                  <button type="submit" id="btn-insert">등록</button>
-                </div>
-                
-              </form>
-            </div>
-          </div>
-          <%}%> 
-        <%if(c.getCsAnswer()!=null){ %>
-      <div class="answer-container">
-        <img src="<%=request.getContextPath()%>/images/A.png" style="width: 15px; height: auto;">
-        
-        <div class="answer-content">
-          <p><%=c.getCsAnswer()%></p>
-          <div class="answer-date">
-            <%=c.getCsDate()%>
-          </div>
-        </div>
-        <%}%>
-      </div>
-       </div> 
-  </div>
-  <!-- <%
-if (c.getCsAnswer()==null && loginnedMember.getNickname().equals("ADMIN")){
-%>
-  <div class="comment-container">
-    <div class="comment-editor">
-      <%-- <%if(c.getCsAnswer()==null){ %> --%>
-      <form action="<%=request.getContextPath()%>/customer/customerAnswerEnd" method="post">
-        <div class="answer-content">
-          <input type="hidden" name="csId" value="<%=c.getCsId()%>">
-          <textarea name="admin-answer" cols="100" rows="10"></textarea>
-
-          <button type="submit" id="btn-insert">등록</button>
-        </div>
-        
-      </form>
-    </div>
-  </div>
-  <%}%> -->
-  </section>
 
 
+
+
+<div>
+	<jsp:include page="/views/notice/sideBar.jsp"></jsp:include>
+</div>
+
+<div id="writecontainer">
+
+	<div class="form-group">
+		<h2>문의 보기</h2>
+	</div>
+
+
+	<p id="date">
+		작성 날짜
+		<%=c.getCsDate()%></p>
+	<div id="uppage" class="shadow p-3 mb-5 bg-white rounded">
+		<div class="divList">
+			<div class="divListBody">
+
+				<div class="divRowTitle">
+					<div class="divCell">
+						문의 ID :
+						<%=c.getCsId()%></div>
+					<div class="divCell">
+						작성자 :
+						<%=c.getCsNickname()%></div>
+				</div>
+
+				<div class="divRowTitle">
+					<div class="divCell">
+						문의 제목 :
+						<%=c.getCsTitle()%></div>
+					<div class="divCell">
+						문의 타입 :
+						<%=c.getCsType()%></div>
+				</div>
+
+				<div class="divRowTitle cuscon">
+					<p class="cuscon2"><%=c.getCsContent()%></p>
+				</div>
+				
+					<div class="divRowTitle cuscon">
+					
+		    <div id="imageWrapper">
+					      <div id="carouselField" name="carouselField" >
+					        <div id="carouselNB" class="carousel slide " data-ride="carousel" data-interval="false">
+					          <ol class="carousel-indicators">
+					            <% for(int i = 0; i < c.getCf().size(); i++)  {%>
+					            <% if(i==0) { %>
+					              <li data-target="#carouselInhee" data-slide-to="<%= i %>" class="active"></li>
+					            <% }else { %>
+					              <li data-target="#carouselInhee" data-slide-to="<%= i %>"></li>
+					            <% }} %>
+					          </ol>
+					          <div class="carousel-inner" role="listbox">
+					            <% for(int i = 0; i < c.getCf().size(); i++)  {%>
+					              <% if(i==0) { %>
+					            <div class="carousel-item active">
+					              <img src="<%=request.getContextPath()%>/upload/customerImages/<%= c.getCf().get(i).getCsFileName() %>"
+					                class="d-block w-90 card-img-top" alt="..." width="100%" height="400em">
+					            </div>
+					            <% }else { %>
+					              <div class="carousel-item">
+					                <img src="<%=request.getContextPath()%>/upload/customerImages/<%= c.getCf().get(i).getCsFileName() %>"
+					                  class="d-block w-90 card-img-top" alt="..." width="100%" height="400em">
+					              </div>
+					            <% }} %>
+					          </div>
+					    
+					          <a class="carousel-control-prev" href="#carouselNB" role="button"
+					            data-slide="prev"> <span class="carousel-control-prev-icon"
+					            aria-hidden="true"></span> <span class="sr-only">Previous</span>
+					          </a> 
+					          <a class="carousel-control-next" href="#carouselNB" role="button"
+					            data-slide="next"> <span class="carousel-control-next-icon"
+					            aria-hidden="true"></span> <span class="sr-only">Next</span>
+					          </a>
+					        </div>
+					      </div>
+					    </div>
     
+				</div>
+
+			</div>
+		</div>
 
 
+	</div>
 
 
-			
+        <% if(c.getCsIscheck() == false) {%>
+	<div id="downpage" class="shadow p-3 mb-5 bg-white rounded">
+		<div id="noanswer">작성된 관리자 답변 없음</div>
+	</div>
+        <% }else { %>
+        	<div id="downpage" class="shadow p-3 mb-5 bg-white rounded">
+		<div id="noanswer"><%=c.getCsAnswer() %></div>
+	</div>
+        
+               <% } %>
+</div>
 
-    
-  
-
-    
-  
-      
 <script>
-  $(function () {
-    // 	이미지 클릭시 해당 이미지 모달
-    $(".imgC").click(function () {
-      $(".modal").show();
-      // 해당 이미지 가겨오기
-      var imgSrc = $(this).children("img").attr("src");
-      var imgAlt = $(this).children("img").attr("alt");
-      $(".modalBox img").attr("src", imgSrc);
-      $(".modalBox img").attr("alt", imgAlt);
 
 
 
-      // 해당 이미지에 alt값을 가져와 제목으로
-      $(".modalBox p").text(imgAlt);
-    });
-
-    //.modal안에 button을 클릭하면 .modal닫기
-    $(".modal button").click(function () {
-      $(".modal").hide();
-    });
-
-    //.modal밖에 클릭시 닫힘
-    $(".modal").click(function (e) {
-      if (e.target.className != "modal") {
-        return false;
-      } else {
-        $(".modal").hide();
-      }
-    });
-  });
 </script>
+
+
 
 
 

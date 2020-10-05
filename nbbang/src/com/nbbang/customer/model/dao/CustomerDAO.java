@@ -112,7 +112,6 @@ public class CustomerDAO {
 		return result;
 	}
 
-
 	public int viewDetailRead(Connection conn, CustomerCenter c) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -156,7 +155,7 @@ public class CustomerDAO {
 			pstmt = conn.prepareStatement(prop.getProperty("insertAnswer"));
 
 			pstmt.setString(1, c.getCsAnswer());
-			pstmt.setInt(2,c.getCsId());
+			pstmt.setInt(2, c.getCsId());
 
 			result = pstmt.executeUpdate();
 
@@ -165,8 +164,7 @@ public class CustomerDAO {
 		} finally {
 			close(pstmt);
 		}
-		
-		
+
 		return result;
 	}
 
@@ -174,16 +172,15 @@ public class CustomerDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		CustomerCenter cc = null;
-		
+
 		System.out.println("num in dao: " + num);
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("viewRead"));
 
-			pstmt.setInt(1,num);
+			pstmt.setInt(1, num);
 
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
-			
+			if (rs.next()) {
 				cc = new CustomerCenter();
 				cc.setCsId(rs.getInt("cs_id"));
 				cc.setCsWriterUsid(rs.getInt("cs_writer_usid"));
@@ -194,20 +191,6 @@ public class CustomerDAO {
 				cc.setCsIscheck(rs.getBoolean("cs_ischeck"));
 				cc.setCsNickname(rs.getString("cs_nickname"));
 				cc.setCsAnswer(rs.getString("cs_answer"));
-								
-				List<CustomerFile> files=new ArrayList();
-				CustomerFile cf = new CustomerFile();
-				cf.setCsFileId(rs.getInt(1));
-				cf.setCsFileName(rs.getString(2));//첫번째파일
-				files.add(cf);
-				while(rs.next()) {//기타파일
-					CustomerFile cfEx = new CustomerFile();
-					cf.setCsFileId(rs.getInt(1));
-					cf.setCsFileName(rs.getString(2));
-					files.add(cfEx);
-				}
-				cc.setCf(files);
-				
 			}
 
 		} catch (SQLException e) {
@@ -216,6 +199,29 @@ public class CustomerDAO {
 			close(pstmt);
 		}
 		return cc;
+	}
+
+	public List<CustomerFile> viewDetailFile(Connection conn, int num) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		List<CustomerFile> list = new ArrayList<CustomerFile>();
+		ResultSet rs = null;
+		CustomerFile cf = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("viewReadFile"));
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				cf = new CustomerFile();
+				cf.setCsFileId(rs.getInt("CS_FILE_ID"));
+				cf.setCsFileName(rs.getString("FILE_NAME"));
+				list.add(cf);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }
