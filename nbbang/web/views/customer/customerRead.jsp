@@ -288,7 +288,14 @@ function wri(){
 	var result = confirm("이미 답변이 작성되었습니다. 수정하시겠습니까?");
 	if(result){
 			let st = $(".admin-answer").val();
-			console.log("st : "+st);
+			//console.log("머야"+st.includes("\n"))
+		/* 	if(st.includes("\n")){
+				console.log("있");
+			}else{
+				console.log("없");
+			} */
+			st=st.replace("\n","<br>")
+			//console.log("st : "+st);
 			$.ajax({
 				type:"GET",
 				data:{"csId":<%= c.getCsId()%>,"admin-answer":st},
