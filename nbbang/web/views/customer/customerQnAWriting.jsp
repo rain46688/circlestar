@@ -37,12 +37,12 @@ pageEncoding="UTF-8"%>
     </div>
       
       <div class="write-title">
-        <input type="text" class="writing-input form-control mt-4 mb-2" name="csTitle" placeholder="제목을 입력하쇼." style="width:37em;">
+        <input type="text" class="writing-input form-control mt-4 mb-2" name="csTitle" placeholder="문의 제목을 입력해주세요." style="width:37em;">
         
       </div>
       
       <div class="write-content">
-        <textarea name="csContent" class="form-group  form-control mt-4 mb-2" style="width:37em; height: 25em;" placeholder="내용을 입력하쇼" ></textarea>
+        <textarea name="csContent" class="form-group  form-control mt-4 mb-2" style="width:37em; height: 25em;" placeholder="문의 내용을 입력해주세요." ></textarea>
       </div>
      
       <div class="file-upload">

@@ -16,6 +16,7 @@ import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.BoardFile;
 import com.nbbang.board.model.vo.Card;
 import com.nbbang.common.temp.AESCrypto;
+import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.LikeList;
 import com.nbbang.member.model.vo.Member;
@@ -876,6 +877,26 @@ private Properties prop=new Properties();
 		}
 		return totalData;
 	}
+	
+	public int customerListCount(Connection conn, int usid) {
+		int totalData=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("customerListCount"));
+			pstmt.setInt(1, usid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				totalData=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return totalData;
+	}
 
 	public List<Report> getReportListAll(Connection conn, int cPage, int numPerPage) {
 		List<Report> rlist=null;
@@ -1029,6 +1050,38 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public List<CustomerCenter> getCustomerList(Connection conn, int cPage, int numPerPage, int usid) {
+		List<CustomerCenter> list=new ArrayList<CustomerCenter>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getCustomerList"));
+			pstmt.setInt(1, usid);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				CustomerCenter cc = new CustomerCenter();
+				cc.setCsId(rs.getInt("cs_id"));
+				cc.setCsWriterUsid(rs.getInt("cs_writer_usid"));
+				cc.setCsType(rs.getString("cs_type"));
+				cc.setCsTitle(rs.getString("cs_title"));
+				cc.setCsContent(rs.getString("cs_content"));
+				cc.setCsDate(rs.getDate("cs_date"));
+				cc.setCsIscheck(rs.getBoolean("cs_ischeck"));
+				cc.setCsNickname(rs.getString("cs_nickname"));
+				cc.setCsAnswer(rs.getString("cs_answer"));
+				list.add(cc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
 
 

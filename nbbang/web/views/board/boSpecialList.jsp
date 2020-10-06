@@ -130,6 +130,7 @@ font-weight:bold;
 				<div class="time">특가 마감까지 <p id="count<%=i%>"></p></div>
 						<script>
 						$(function(){
+							//스크립트를 반복돌아서 함수를 실행함 id값에 i증가값을 넣어서 이름을 다르게 만들어주고 서로 매칭함
 							Timer('<%=bolist.get(i).getCardBoard().getTime()%>', 'count<%=i%>');	
 						});
 						</script>

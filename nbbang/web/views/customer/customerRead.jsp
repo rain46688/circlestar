@@ -12,17 +12,16 @@
 
 
 <style>
-div#writecontainer {
-	position: relative;
+#writecontainer {
+	/* position: relative; */
 	background: #FFFFFF;
 	text-align: center;
-	margin: 3% 21% 5% 2%;
-	/* 세로정렬꽉차게 가운데:center */
-	align-items: stretch;
-	/* 가로정렬꽉차게 가운데:center */
-	justify-items: stretch;
-	width: 40%;
-	float: left;
+	margin: 3% 21% auto;
+	/* align-items: stretch; */
+	/* justify-items: stretch; */
+	width:100%;
+	height:100em;
+	border:1px solid black;	
 }
 
 h2 {
@@ -135,11 +134,11 @@ margin-bottom:2em;
 
 
 
-<div>
+<%-- <div>
 	<jsp:include page="/views/notice/sideBar.jsp"></jsp:include>
-</div>
+</div> --%>
 
-<div id="writecontainer">
+<div class="container" id="writecontainer">
 
 	<div class="form-group">
 		<h2>문의 보기</h2>
@@ -230,11 +229,11 @@ margin-bottom:2em;
         
         <%if (loginnedMember.getNickname().equals("ADMIN")) {%>
 					<div id="downpage" class="shadow p-3 mb-5 bg-white rounded admin" style="cursor: pointer"> 
-					<div id="noanswer">답변 클릭하여 작성하기</div>
+					<div id="noanswer">클릭하여 답변 작성</div>
 					</div>
 		        <% }else { %>      
 					<div id="downpage" class="shadow p-3 mb-5 bg-white rounded "> 
-					<div id="noanswer">작성된 관리자 답변 없음</div>
+					<div id="noanswer">관리자 답변이 없음</div>
 					</div>
 		       <% } %>
 
@@ -287,13 +286,14 @@ function wri(){
 	if(<%=c.getCsIscheck()%> == true){
 	var result = confirm("이미 답변이 작성되었습니다. 수정하시겠습니까?");
 	if(result){
-			let st = $(".admin-answer").val();
+
 			//console.log("머야"+st.includes("\n"))
 		/* 	if(st.includes("\n")){
 				console.log("있");
 			}else{
 				console.log("없");
 			} */
+			let st = $(".admin-answer").val();
 			st=st.replace("\n","<br>")
 			//console.log("st : "+st);
 			$.ajax({
@@ -320,6 +320,7 @@ function wri(){
 	
 	}else{
 		let st = $(".admin-answer").val();
+		st=st.replace("\n","<br>")
 		console.log("st : "+st);
 		$.ajax({
 			type:"GET",

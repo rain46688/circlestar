@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.nbbang.admin.model.service.AdminService;
 import com.nbbang.admin.model.vo.AdminMem;
+import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
 /**
@@ -64,6 +65,19 @@ public class AdminMemberInfoSearchList extends HttpServlet {
 
 		list = new AdminService().memberInfoSearchList(cPage, numPerPage, ra, select, Search, c);
 
+		for (AdminMem a : list) {
+			String memberId;
+			try {
+				//System.out.println("?? : "+a.getMem().getMemberId());
+				memberId = AESCrypto.decrypt(a.getMem().getMemberId());
+				//System.out.println("gg : "+memberId);
+			} catch (Exception e) {
+				memberId = a.getMem().getMemberId();
+			}
+			a.getMem().setMemberId(memberId);
+		}
+		
+		
 		int totalData = new AdminService().memberInfoSearchListCount(ra, select, Search, c);
 		System.out.println("totalData : "+totalData);
 

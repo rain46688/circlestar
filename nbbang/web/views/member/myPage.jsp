@@ -169,6 +169,12 @@ p>button{
 			<p class="bottomBtn"><button type="button" class="realBtn"
 				onclick="location.href='<%=request.getContextPath()%>/member/reportList?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
 			</div>
+						<div class="item smallBox" id="customer">
+			<p class="title">내 문의 내역</p>
+			<p class="text">나의 문의 내용과 관리자의 답변을 확인할 수 있습니다.</p>
+			<p class="bottomBtn"><button type="button" class="realBtn"
+				onclick="location.href='<%=request.getContextPath()%>/member/customerList?usid=<%=loginnedMember.getUsid()%>'">확인하기</button></p>
+			</div>
 		<div></div>
 	</div>
    <script>

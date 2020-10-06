@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.nbbang.admin.model.service.AdminService;
 import com.nbbang.admin.model.vo.AdminBoard;
 import com.nbbang.admin.model.vo.AdminMem;
+import com.nbbang.common.temp.AESCrypto;
 import com.nbbang.customer.model.vo.CustomerCenter;
 
 /**
@@ -57,6 +58,17 @@ public class AdminBoardInfoSearchList extends HttpServlet {
 
 		list = new AdminService().boardInfoSearchList(cPage, numPerPage, ra, select, Search, select2,select3,p);
 
+		for (AdminBoard a : list) {
+			String tradearea;
+			try {
+				tradearea = AESCrypto.decrypt(a.getBo().getTradeArea());
+			} catch (Exception e) {
+				tradearea = a.getBo().getTradeArea();
+			}
+			a.getBo().setTradeArea(tradearea);
+		}
+		
+		
 		int totalData = new AdminService().boardInfoSearchListCount(ra, select, Search, select2,select3,p);
 		System.out.println("totalData : "+totalData);
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));

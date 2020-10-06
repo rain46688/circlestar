@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.nbbang.board.model.vo.Board;
 import com.nbbang.board.model.vo.Card;
+import com.nbbang.customer.model.vo.CustomerCenter;
 import com.nbbang.member.model.dao.MemberDao;
 import com.nbbang.member.model.vo.Grade;
 import com.nbbang.member.model.vo.LikeList;
@@ -269,6 +270,13 @@ private MemberDao dao=new MemberDao();
 		close(conn);
 		return rlist;
 	}
+	
+	public List<CustomerCenter> getCustomerList(int cPage, int numPerPage, int usid) {
+		Connection conn=getConnection();
+		List<CustomerCenter> list=dao.getCustomerList(conn, cPage, numPerPage, usid);
+		close(conn);
+		return list;
+	}
 
 	public int reportListCount(int usid) {
 		Connection conn=getConnection();
@@ -321,6 +329,13 @@ private MemberDao dao=new MemberDao();
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	public int customerListCount(int usid) {
+		Connection conn=getConnection();
+		int totalData=dao.customerListCount(conn,usid);
+		close(conn);
+		return totalData;
 	}
 
 }

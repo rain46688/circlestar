@@ -190,6 +190,14 @@ $(".divRow").click(e=>{
 
 })
 
+  $('.divRow').hover(function(){
+        $(this).css('color','#FFC107');
+        $(this).removeClass( 'shadow p-3 mb-5 bg-white rounded' );
+    }, function() {
+        $(this).css('color','black');
+        $(this).addClass( 'shadow p-3 mb-5 bg-white rounded' );
+    });
+
 </script>
 
 
