@@ -37,10 +37,17 @@ public class BoardDeleteServlet extends HttpServlet {
 		result = new BoardService().boardDelete(Integer.parseInt(boardId));
 		
 		if(result > 0) {
+			if(category.equals("특가")) {
+				request.setAttribute("msg", "삭제되었습니다.");
+				request.setAttribute("loc", "/boSpecialList");
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+				return;
+			}else {
 			request.setAttribute("msg", "삭제되었습니다.");
 			request.setAttribute("loc", "/boList?boardTitle="+category);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
+			}
 		}else {
 			request.setAttribute("msg", "삭제에 실패했습니다 관리자에게 문의하세요.");
 			request.setAttribute("loc", "/");

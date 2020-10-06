@@ -21,7 +21,7 @@
 	/* justify-items: stretch; */
 	width:100%;
 	height:100em;
-	border:1px solid black;	
+/* 	border:1px solid black;	 */
 }
 
 h2 {

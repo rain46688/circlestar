@@ -311,6 +311,11 @@
         height: 35vw;
         object-fit: cover;
     }
+    
+#urlh{
+text-decoration:none;
+color:darkgray;
+}
 
 </style>
 <section>
@@ -453,7 +458,7 @@
           onStop: $.noop
          });
       </script>
-      <div id="etcInfo"><a href="<%= request.getContextPath() %>/member/report?userId=<%= loginnedMember.getUsid() %>&boardId=<%= c.getCardBoard().getBoardId() %>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
+      <div id="etcInfo"><a href="<%= request.getContextPath() %>/member/report?userId=<%= loginnedMember.getUsid() %>&boardId=<%= c.getCardBoard().getBoardId() %>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a id="urlh" href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
       <hr>
       <div id="funcBtns">
         <ul>

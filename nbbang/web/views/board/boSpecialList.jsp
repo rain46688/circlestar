@@ -127,14 +127,14 @@ font-weight:bold;
 				<input type="hidden" value="<%= bolist.get(i).getCardBoard().getBoardId()%>">
 				<h4 class="card-title"><p><%= bolist.get(i).getCardBoard().getBoardTitle() %></p></h4>
 			<%-- 	<p><%= bolist.get(i).getCardBoard().getTradeArea() %></p> --%>
-				<div class="time">특가 마감까지 <p id="count<%=i%>"></p></div>
+				<div class="time">특가 현황 <p id="count<%=i%>"></p></div>
 						<script>
 						$(function(){
 							//스크립트를 반복돌아서 함수를 실행함 id값에 i증가값을 넣어서 이름을 다르게 만들어주고 서로 매칭함
 							Timer('<%=bolist.get(i).getCardBoard().getTime()%>', 'count<%=i%>');	
 						});
 						</script>
-				<p id="interest"><%= bolist.get(i).getCardBoard().getLikeCount() %> 관심 <%= bolist.get(i).getCardBoard().getHit() %> 조회</p>
+				<p id="interest"> <%= bolist.get(i).getCardBoard().getHit() %> 조회</p>
 				<h4 class="card-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="<%= bolist.get(i).getCardBoard().getProductPrice() %>"></fmt:formatNumber>원</h4>
 			</div>
 			<br>
@@ -179,7 +179,7 @@ font-weight:bold;
 
 	        if (distance < 0) {
 	            clearInterval(timer);
-	            document.getElementById(id).innerHTML = '특딜이 마감되었습니다!';
+	            document.getElementById(id).innerHTML = '현재 마감 되었습니다!';
 	            return;
 	        }
 	        var days = Math.floor(distance / _day);

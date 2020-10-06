@@ -306,14 +306,14 @@ font-size:2em;
 font-weight:bold;
 }
 
+#urlh{
+text-decoration:none;
+color:darkgray;
+}
+
 </style>
 <section>
-<%-- 	<% if(loginnedMember.getUsid()==c.getCardBoard().getWriterUsid()&&c.getCardBoard().getTradeStage()==1){ %>
-	<div id="btnForWriter"> 
-  		<button onclick="fn_modifyBoard();">수정하기</button>
-  		<button onclick="fn_deleteBoard();">삭제하기</button>
-  	</div>
-  	<%} %> --%>
+
   	
   	<% if(loginnedMember.getUsid()==9999) {%>
   	<div id="btnForWriter"> 
@@ -362,15 +362,10 @@ font-weight:bold;
     </div>
     <div id="userInfo">
     	<hr>
-  <%--     <div id="userThumb">
-        <img src="<%= memberPic + c.getWriterProfile() %>" alt="" width="40px" height="40px">
-      </div> --%>
         <div id="userIdAndAddress">
            <div id="userId">기업명 : <%= c.getCardBoard().getWriterNickname() %></div>
-     <%--      <div id="userAddress"><%= c.getCardBoard().getTradeArea()%></div> --%>
      	<div class="time"><p id="count"></p></div>
         </div>
-      <!-- 프로필 사진 + id -->
  
     </div>
     <div class="content">
@@ -380,20 +375,14 @@ font-weight:bold;
 
       </div>
       
-      <div id="date"><%= newDate %> &nbsp&nbsp 관심 <%= c.getCardBoard().getLikeCount() %>  조회수 <%= c.getCardBoard().getHit() %> 
-<%--       <p>
-      	<% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
-          	현재 참여중인 N빵입니다.
-            <% }else { %>
-            <% } %>
-      </p> --%>
+      <div id="date"><%= newDate %> &nbsp&nbsp 조회수 <%= c.getCardBoard().getHit() %> &nbsp&nbsp 
+<%if(c.getCardBoard().getProductUrl()!=null){ %><a id="urlh" href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %>
       </div>
-      <!-- 가격 -->
       <div id="priceAndLikeBtn">
           <h5><%= c.getCardBoard().getProductPrice() %>원</h5>
       </div>
       <div id="contentText"><%= c.getCardBoard().getContent() %></div>
-      <div class="chart chart1" data-percent="<%=percent%>"><span class="title">마감 까지 <%= target %>명!</span></div>
+      <div class="chart chart1" data-percent="<%=percent%>"><span class="title">특가 마감 <%= target %>명!</span></div>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
       <script src="<%=request.getContextPath()%>/js/easy-pie/dist/easypiechart.js"></script>
@@ -415,72 +404,14 @@ font-weight:bold;
             <div id="funcBtns">
         <ul>
         <li>
+         <% if(!loginnedMember.getNickname().equals("ADMIN")) {%>
       <div id="openFuncBtn" onclick="fn_pay();">
-            <img src="<%= request.getContextPath() %>/images/dollar.png" width="40px" height="40px">
-            <p>특가 결제하기</p></div>
+       
+            </div>
+             <%} %>
             </li>
             </ul>
             </div>
-            
-            
-   <%--    <div id="etcInfo"><a href="<%= request.getContextPath() %>/member/report?userId=<%= loginnedMember.getUsid() %>&boardId=<%= c.getCardBoard().getBoardId() %>&writerUsid=<%=c.getCardBoard().getWriterUsid()%>">신고하기</a> <%if(c.getCardBoard().getProductUrl()!=null){ %><a href="http://<%= c.getCardBoard().getProductUrl() %>" target="_blank">제품 페이지</a><%} else { %>제품 페이지<%} %></div>
-      <hr>
-      <div id="funcBtns">
-        <ul>
-          <form style="display: none;" name="form">
-            <!-- 디비에서 객체를 받아와서 다시 넣어야됨 일단은 리터럴로 넘김 -->
-              <!-- BOARD 컬럼의  BOARD_ID -->
-              <input type="hidden" name="boardId" value="${curCard.cardBoard.boardId}"> 
-              <!-- BOARD 컬럼의  MAX_MEMS -->
-              <input type="hidden" name="maxMems" value="${curCard.cardBoard.maxMems}"> 
-              <!-- BOARD 컬럼의  TRADE_STAGE -->
-              <input type="hidden" name="tradeStage" value="${curCard.cardBoard.tradeStage}"> 
-              <!-- BOARD 컬럼의  WRITER_USID -->
-              <input type="hidden" name="writerUsid" value="${loginnedMember.usid}">
-              <!-- MEMBER 컬럼의  MEMBER_PICTURE -->
-              <input type="hidden" name="memberPicture" value="${loginnedMember.memberPicture}">
-              <!-- <% if(c.getCardBoard().getTradeStage()>1) {%> -->
-                <input type="hidden" name="boardTitle" value="${curCard.cardBoard.boardTitle}">
-
-              <button id="hiddenEnterBtn" onclick="nbbang(this.form)" >채팅방 접속하기</button>	
-              <!-- <%}%> -->
-            </form>
-          <li><div id="likeFunc" >
-          <% if(!likelist.contains(c.getCardBoard().getBoardId())) {%>
-            <img src="<%= request.getContextPath() %>/images/heart.png" width="40px" height="40px">
-            <%}if(likelist.contains(c.getCardBoard().getBoardId())) { %>
-            <img src="<%= request.getContextPath() %>/images/fullheart.png" width="40px" height="40px">
-            <%} %>
-            <p>찜하기</p></div></li>
-          	<% if(c.getCardBoard().getWriterUsid()!=loginnedMember.getUsid()) {%>
-          <li><div id="startFuncBtn" onclick="fun_decidebuy();">
-            <% if(tradeUserList.contains(loginnedMember.getUsid())){ %>
-            <img src="<%= request.getContextPath() %>/images/cancel.png" width="40px" height="40px">
-            <p>N빵취소</p></div></li>
-            <% }else { %>
-            <img src="<%= request.getContextPath() %>/images/onebyn.png" width="40px" height="40px">
-            <p>N빵신청</p></div></li>
-            <% } %>
-            <% } %>
-            <% if(tradeUserList.contains(loginnedMember.getUsid())&&c.getCardBoard().getTradeStage()>1) {%>
-          <li><div id="enterFuncBtn" onclick="fn_enterBtn();">
-            <img src="<%= request.getContextPath() %>/images/enter.png" width="40px" height="40px">
-            <p>채팅방접속</p></div></li>
-            <%} %>
-            <%if(c.getCardBoard().getWriterUsid()!=loginnedMember.getUsid()){ %>
-            <%if(c.getCardBoard().getTradeStage()==2&&tradeUserList.contains(loginnedMember.getUsid())) {%>
-          <li><div id="openFuncBtn" onclick="fn_pay();">
-            <img src="<%= request.getContextPath() %>/images/dollar.png" width="40px" height="40px">
-            <p>결제하기</p></div></li>
-            <%} %>
-            <%} %>
-          <% if(c.getCardBoard().getWriterUsid()==loginnedMember.getUsid()){ %>
-          <li><div id="openFuncBtn" onclick="fun_createroom();">
-            <img src="<%= request.getContextPath() %>/images/open.png" width="40px" height="40px">
-            <p>방열기</p></div></li>
-            <%} %>
-        </ul>
-      </div> --%>
       
       <hr>
     </div>
@@ -496,7 +427,6 @@ font-weight:bold;
       </div>
     <div id="Comments">
       <ul class="comment_list">
-        <!-- 댓글이 들어갈 곳 -->
       </ul>
     </div>
     </div>
@@ -524,6 +454,9 @@ function Timer(dt, id) {
             $("#openFuncBtn").html("");
             return;
         }
+        
+        $("#openFuncBtn").html("<img src='<%= request.getContextPath() %>/images/dollar.png' width='40px' height='40px'><p>특가 결제하기</p>");
+        
         var days = Math.floor(distance / _day);
         var hours = Math.floor((distance % _day) / _hour);
         var minutes = Math.floor((distance % _hour) / _minute);
@@ -574,103 +507,6 @@ function fn_enterBtn(){
   $("#hiddenEnterBtn").click();
 }
 
-var pop;
-window.onunload = function() { 
-	pop.close(); 
-  
-}
-
-/*  채팅창 관련 로직  */
-function nbbang(f){
-	var x = 600;
-	var y = 800;
-	var cx = (window.screen.width / 2) - (x / 2);
-	var cy= (window.screen.height / 2) - (y / 2);
-
-	var url    ="<%=request.getContextPath()%>/chat/chatRoom";
-	  var title  = "chat";
-	  var status = "toolbar=no,directories=no,scrollbars=no,resizable=no,status=no,menubar=no,width="+x+", height="+y+", top="+cy+",left="+cx;
-	  pop =  window.open("", title,status);
-	  f.target = title;
-	  f.action = url;
-	  f.method = "post";
-	  f.submit();    
-}
-
-function fun_createroom() {
-	
-	$.ajax({
-		type: "GET",
-		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {"boardId":"${curCard.cardBoard.boardId}"},
-		dataType: "json",
-		url: "<%=request.getContextPath()%>/chat/createRoom",
-			success : function(data) {
-				if (data == 1) {
-					//방의 상태를 바꿔야되니 ajax로 갔따오자 방의 상태를 2로 변경함
-          alert('채팅방이 생성되었습니다.');
-				} else {
-					alert('N빵 인원이 다 체워지지 않았습니다.');
-				} 
-			}
-		})
-}
-
-function fun_decidebuy(){
-	/* 컨트롤 f주의 여기 틀어짐 컨텍스트 부분 */
-  if($("#startFuncBtn>img").attr("src")=="<%= request.getContextPath() %>/images/onebyn.png") {
-	$.ajax({
-		type: "GET",
-		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"${curCard.cardBoard.boardId}","flag":"1"},
-		url: "<%=request.getContextPath()%>/chat/decidebuy",
-			success : function(data) {
-        if(data == 0){
-         alert("현재 n빵 참여가 실패하였습니다.");
-        }else if(data == 1){
-         alert("현재 n빵에 참여하셨습니다.");
-        $("#startFuncBtn>img").attr("src","<%= request.getContextPath() %>/images/cancel.png");
-        $("#startFuncBtn>p").text("N빵취소");
-        $("#date p").text("현재 참여중인 N빵입니다.");
-        }else if(data == 2){
-         alert("현재 n빵에 이미 참여하셨습니다.");
-        }else{
-         //data 4 넘어옴
-         alert("현재 n빵 최대인원을 초과하였습니다.");
-        }
-      }
-		}) 	
-	}else {
-    $.ajax({
-		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"${curCard.cardBoard.boardId}","flag":"2"},
-		url: "<%=request.getContextPath()%>/chat/decidebuy",
-			success : function(data) {
-        if(data == 0){
-         alert("현재 n빵 취소에 실패하였습니다.");
-        }else{
-         //data 3 넘어옴
-         alert("현재 n빵 참여가 취소되었습니다.");
-         $("#startFuncBtn>img").attr("src","<%= request.getContextPath() %>/images/onebyn.png");
-        $("#startFuncBtn>p").text("N빵신청");
-        $("#date p").text("");
-        }
-			}
-		})
-  }
-}
-
-//취소할때
-function fun_cancelbuy() {
-	$.ajax({
-		/* "boardId":"2" 부분 게시판 id값을 객체로 받아와서 넣기로 변경해야됨 */
-		data: {usid : "${loginnedMember.usid}",nickname : "${loginnedMember.nickname}","boardId":"${curCard.cardBoard.boardId}","flag":"2"},
-		url: "<%=request.getContextPath()%>/chat/decidebuy",
-			success : function(data) {
-				location.reload();
-			}
-		})
-  }
 
   $(document).on('click', '.repleDelete', function(e){
     let comId = $(e.target).parent().parent().children('.comId').val();
