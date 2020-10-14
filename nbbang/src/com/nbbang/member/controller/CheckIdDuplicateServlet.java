@@ -49,10 +49,10 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 		Member m=null;
 		try {
 			m = new MemberService().selectMember(id);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
 		request.setAttribute("checkId", m);
 		request.getRequestDispatcher("/views/member/checkIdajax.jsp").forward(request, response);			
 	}

@@ -16,7 +16,7 @@
 <body>
 	<div id="checkId-container">
 		<%if(m==null) {%>
-			[<span><%=request.getParameter("userId") %></span>]은(는)<br>사용 가능한 이메일입니다.	
+			<span><%=request.getParameter("userId") %></span>]은(는)<br>사용 가능한 이메일입니다.	
 			<br><br>
 			<button type="button" onclick="setMemberId();">사용하기</button>
 		<%} else{%>

@@ -50,7 +50,6 @@ public class NoticeListServlet extends HttpServlet {
 			n.setTimestamp(s);
 		}
 		
-		
 		int totalData = new NoticeService().noticeListCount();
 		int totalPage = (int) (Math.ceil((double) totalData / numPerPage));
 		int pageBarSize = 5;
@@ -81,6 +80,7 @@ public class NoticeListServlet extends HttpServlet {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath()
 					+ "/notice/noticeList?cPage=" + pageNo + "'>다음</a></li>";
 		}
+		
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/notice/noticeList.jsp").forward(request, response);

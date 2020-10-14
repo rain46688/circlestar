@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 
 import com.nbbang.member.model.service.MemberService;
 
+
+
 /**
  * Servlet implementation class CertiEmailServlet
  */

@@ -1,49 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <style>
-   #loginField > form > button:nth-child(2){
-      width : 20%;
-   }
-   #loginField > form > button:nth-child(9){
-      width : 30%;
-   }
-   #loginField > form > button:nth-child(10){
-      width : 30%;
-   }
-   #loginField > form:nth-child(2) input.button{
-    outline: none;
-    background: #735020;
-    width: 20%;
-    border: none;
-    margin: 0 0 15px;
-    padding: 15px 0;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
-	text-align: center;
+#loginField>form>button:nth-child(2) {
+	width: 20%;
+}
 
-   }
-   div.dividedForm{
+#loginField>form>button:nth-child(9) {
+	width: 30%;
+}
+
+#loginField>form>button:nth-child(10) {
+	width: 30%;
+}
+
+#loginField>form:nth-child(2) input.button {
+	outline: none;
+	background: #735020;
+	width: 20%;
+	border: none;
+	margin: 0 0 15px;
+	padding: 15px 0;
+	color: #FFFFFF;
+	font-size: 14px;
+	cursor: pointer;
+	text-align: center;
+}
+
+div.dividedForm {
 	display: flex;
 	width: 80%;
 	margin: 0 15px 15px 56px;
 	padding: 0;
 	align-items: flex-start;
-   }
-   div.dividedTitle{
+}
+
+div.dividedTitle {
 	position: relative;
 	width: 20%;
 	float: left;
 	text-align: left;
-   }
-   div.dividedText{
+}
+
+div.dividedText {
 	position: relative;
 	width: 80%;
 	float: right;
 	text-align: left;
-   }
-   div.constrain{
+}
+
+div.constrain {
 	margin-top: -10px;
 	margin-bottom: 15px;
 	margin-left: 60px;
@@ -51,21 +56,21 @@
 	color: red;
 	display: none;
 	text-align: left;
-	}
-
+}
 </style>
 <section>
 	<div id="loginBox" style="padding-top: 50px;">
 		<div id="loginField">
 			<h2 style="margin-bottom: 50px;">회원가입</h2>
-			<form id="memberEnrollFrm" name="memberEnrollFrm" action="<%=request.getContextPath() %>/memberEnrollEnd" method="post">
+			<form id="memberEnrollFrm" name="memberEnrollFrm" action="<%=request.getContextPath()%>/memberEnrollEnd" method="post">
 				<input type="email" id="id" name="userId" class="input" placeholder="이메일" required style="width: 59%;">
-				<input type="button" class="button" id="certibtn" value="인증번호 전송" style="text-align: center;"><br>
+				<input type="button" class="button" id="certibtn" value="인증번호 전송" style="text-align: center;">
+				<br>
 				<div class="constrain" id="idConstrain"></div>
 				<div class="constrain" id="idDuplicateAjax"></div>
-				<div style="display:none;" id="certiDiv">
+				<div style="display: none;" id="certiDiv">
 					<input type="text" class="input" id="certiNum" name="certiNum" placeholder="인증번호를 입력해주세요." required>
-					<div style="display:none;" id="certiResult"></div>
+					<div style="display: none;" id="certiResult"></div>
 					<div class="constrain" id="certiDuplicate"></div>
 				</div>
 
@@ -73,7 +78,7 @@
 				<div class="constrain" id="pwConstrain"></div>
 				<input type="password" placeholder="비밀번호 확인" class="input" id="pw2">
 				<div class="constrain" id="pw2Constrain"></div>
-				
+
 				<input type="text" placeholder="닉네임" class="input" id="nickname" name="nick" maxlength="10" required>
 				<div class="constrain" id="nnConstrain"></div>
 				<div class="constrain" id="nickDuplicateAjax"></div>
@@ -83,21 +88,18 @@
 				<div class="constrain" id="nameConstrain"></div>
 
 				<div class="dividedForm">
-					<div class="dividedTitle">
-						성별
-					</div>
+					<div class="dividedTitle">성별</div>
 					<div class="dividedText">
-						<input type="radio" class="gender" name="gender" id="male" value="M"><label for="gender0">남</label>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" class="gender" name="gender" id="female" value="F"><label for="gender1">여</label>
+						<input type="radio" class="gender" name="gender" id="male" value="M">
+						<label for="gender0">남</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" class="gender" name="gender" id="female" value="F">
+						<label for="gender1">여</label>
 					</div>
 				</div>
 				<div class="constrain" id="gdConstrain"></div>
 
 				<div class="dividedForm" style="margin-bottom: 0;">
-					<div class="dividedTitle">
-						생년월일
-					</div>
+					<div class="dividedTitle">생년월일</div>
 					<div class="dividedText">
 						<input type="text" class="input birthdate" id="year" name="year" maxlength="4" placeholder="년(4자)" style="width: 33%;">
 						<select class="input birthdate" id="month" name="month" style="width: 32%;">
@@ -110,7 +112,7 @@
 							<option value="06">6</option>
 							<option value="07">7</option>
 							<option value="08">8</option>
-							<option value="09">9</option>                                    
+							<option value="09">9</option>
 							<option value="10">10</option>
 							<option value="11">11</option>
 							<option value="12">12</option>
@@ -123,20 +125,21 @@
 				<input type="tel" placeholder="휴대폰" class="input checkLength" id="phone" name="phone" maxlength="11">
 				<div class="constrain" id="pnConstrain"></div>
 				<div class="constrain" id="phoneDuplicateAjax"></div>
-				
+
 				<div style="text-align: left; margin: 0 15px 10px 56px;">주소</div>
-				<input type="text" class="input" id="sample4_postcode" placeholder="우편번호" style="width : 59%;" readonly>
-				<input type="button" class="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" class="input" id="sample4_postcode" placeholder="우편번호" style="width: 59%;" readonly>
+				<input type="button" class="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+				<br>
 				<input type="hidden" name="checked_ad" value="">
-				<input type="text" class="input" id="sample4_roadAddress" name="address1" placeholder="도로명주소" style="width : 40%;" readonly>
-				<input type="text" class="input" id="sample4_jibunAddress" placeholder="지번주소" style="width : 39%;" readonly>
-				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" class="input" id="sample4_detailAddress" name="address2" placeholder="상세주소" style="width : 40%;">
-				<input type="text" class="input" id="sample4_extraAddress" placeholder="참고항목" style="width : 39%;" readonly>
+				<input type="text" class="input" id="sample4_roadAddress" name="address1" placeholder="도로명주소" style="width: 40%;" readonly>
+				<input type="text" class="input" id="sample4_jibunAddress" placeholder="지번주소" style="width: 39%;" readonly>
+				<span id="guide" style="color: #999; display: none"></span>
+				<input type="text" class="input" id="sample4_detailAddress" name="address2" placeholder="상세주소" style="width: 40%;">
+				<input type="text" class="input" id="sample4_extraAddress" placeholder="참고항목" style="width: 39%;" readonly>
 				<div class="constrain" id="adConstrain"></div>
-				
-				<button class="bottombtns" type="button" style="width:40%; margin-top: 30px;" onclick="fn_enroll();">가입</button>
-				<button class="bottombtns" type="reset" style="width:40%; margin-top: 30px;">취소</button>
+
+				<button class="bottombtns" type="button" style="width: 40%; margin-top: 30px;" onclick="fn_enroll();">가입</button>
+				<button class="bottombtns" type="reset" style="width: 40%; margin-top: 30px;">취소</button>
 			</form>
 			<form action="" name="checkNNDuplicate">
 				<input type="hidden" name="nick">
@@ -640,11 +643,10 @@
 	</script>
 </section>
 <%@ include file="/views/common/footer.jsp"%>
- 
- 
- 
- 
- 
- 
- 
-  
+
+
+
+
+
+
+
