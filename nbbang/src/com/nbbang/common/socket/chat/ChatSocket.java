@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.EndpointConfig;
@@ -26,10 +27,10 @@ public class ChatSocket {
 	private static Map<Member, Session> user = new HashMap<Member, Session>();
 	// 메세지 중복값을 제거하기 위해서 Set 생성
 	private static Set<Message> set = null;
-	// HttpSession 객체 생성
-	public static HttpSession httpSession = null;
 	// 임시로 메세지를 담기 위해 List 생성
 	private static List<Message> list = new ArrayList<Message>();
+	// HttpSession 객체 생성
+	public static HttpSession httpSession = null;
 
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig con) {
@@ -55,14 +56,10 @@ public class ChatSocket {
 	public void onMessage(Message msg, Session session) {
 		//System.out.println(" === onMessage 메소드 실행 === ");
 		//printMember();
-		if (msg != null) {
+		if (msg != null && !session.isOpen()) {
 			String name = "";
 			try {
 				String boardId = msg.getBoardId();
-				String curMemsList = msg.getCurMemsList();
-				String day = msg.getChatTime();
-
-//				System.out.println("보낸사람 : " + msg.getSendNickName() + ", boardId : " + boardId + ", curMemsList : "+ curMemsList);
 
 				Iterator<Member> userIterator = user.keySet().iterator();
 				while (userIterator.hasNext()) {
@@ -75,7 +72,6 @@ public class ChatSocket {
 							//카운트 동안 분기 처리해서 넣음
 							if (list.size() != 20) {
 								//System.out.println(" === ChatSocket 리스트 안참 list.size() : " + list.size() + " === ");
-								//System.out.println("msg : " + msg);
 								if (!msg.getMsg().equals("SYS1") && !msg.getMsg().equals("SYS2")) {
 									//시스템 메세지는 제외해서 List에 카운트를 함
 									list.add(msg);
@@ -154,7 +150,7 @@ public class ChatSocket {
 			System.out.println(" === onClose 예외, name : " + name + " === ");
 		}
 	}
-
+	
 	public void printMember() {
 		System.out.println(" ---------------------- ");
 		Iterator<Member> it = user.keySet().iterator();

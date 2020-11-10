@@ -292,13 +292,13 @@ function fixedSize() {
 	
 	*/	
 		
- var socket=new WebSocket("ws://rclass.iptime.org:9999<%=request.getContextPath()%>/socket");
+ let socket=new WebSocket("ws://rclass.iptime.org:9999<%=request.getContextPath()%>/socket");
  <%-- var socket=new WebSocket("ws://localhost:9090<%=request.getContextPath()%>/socket"); --%>  
 	
 	//소켓 오픈,클로즈,에러,메세지 구현
 	socket.onopen = function(e) {
 		console.log('onopen 실행')
-	var _today = new Date();
+	let _today = new Date();
 	let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
 		console.log("day : "+day);
 		socket.send(JSON.stringify(new Message("${m.nickname}","SYS1","${curMemsList}","${boardId}","",day)));
@@ -366,8 +366,8 @@ function fixedSize() {
 		console.log("여기 실행됨?? 2");
 		let txt = $("#msgText");
 		if(txt.val().trim()!=""){
-		var user = "${m.nickname}";
-		var _today = new Date();
+		let user = "${m.nickname}";
+		let _today = new Date();
 		let day = _today.format('yyyy-MM-dd a/p hh:mm:ss');
 		console.log("${loginnedMember}");
 		socket.send(JSON.stringify(new Message(user,txt.val(),"${curMemsList}","${boardId}","${memberPicture}",day)));
@@ -416,7 +416,7 @@ function fixedSize() {
 				this.setSelectionRange(start, end);
 			}
 			else if(this.createTextRange) {
-				var range = this.createTextRange();
+				let range = this.createTextRange();
 				range.collapse(true);
 				range.moveEnd('character', end);
 				range.moveStart('character', start);
@@ -430,11 +430,11 @@ function fixedSize() {
 	//날짜 포멧용 함수
 	Date.prototype.format = function (f) {
 	    if (!this.valueOf()) return " ";
-	    var weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-	    var weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
-	    var weekEngName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-	    var weekEngShortName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	    var d = this;
+	    let weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+	    let weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
+	    let weekEngName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	    let weekEngShortName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	    let d = this;
 	    return f.replace(/(yyyy|yy|MM|dd|KS|KL|ES|EL|HH|hh|mm|ss|a\/p)/gi, function ($1) {
 	        switch ($1) {
 	            case "yyyy": return d.getFullYear(); // 년 (4자리)
@@ -455,7 +455,7 @@ function fixedSize() {
 	    });
 	};
 	String.prototype.string = function (len) {
-		var s = '', i = 0; while (i++ < len) { s += this; } return s; 
+		let s = '', i = 0; while (i++ < len) { s += this; } return s; 
 		};
 		
 	String.prototype.zf = function (len) {
